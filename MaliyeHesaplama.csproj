@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Building.png" />
+    <None Remove="Filter_1.png" />
+    <None Remove="Group of Projects.ico" />
+    <None Remove="Libre Office Calc.png" />
+    <None Remove="News.png" />
+    <None Remove="Purchase Order.png" />
+    <None Remove="Towel.png" />
+    <None Remove="userControls\new.ico" />
+    <None Remove="userControls\save.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Building.png" />
+    <Resource Include="Filter_1.png" />
+    <Resource Include="Group of Projects.ico" />
+    <Resource Include="Libre Office Calc.png" />
+    <Resource Include="News.png" />
+    <Resource Include="Purchase Order.png" />
+    <Resource Include="Towel.png" />
+    <Resource Include="userControls\new.ico" />
+    <Resource Include="userControls\save.ico" />
+  </ItemGroup>
+
+</Project>
