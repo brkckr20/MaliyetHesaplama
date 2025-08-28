@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="750" d:DesignWidth="1000">
     <StackPanel>
         <Border BorderThickness="0.5" BorderBrush="#ececec">
             <DockPanel HorizontalAlignment="Left" Margin="2">
@@ -22,7 +22,8 @@
                     </StackPanel>
                 </Button>
             </DockPanel>
-        </Border> <!-- buttonlar -->
+        </Border>
+        <!-- buttonlar -->
         <Grid Margin="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -74,91 +75,92 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <DockPanel Grid.Row="0">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Border>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border>
                                     <StackPanel>
                                         <!-- Üretim Bilgileri - İplik Bilgileri -->
                                         <TextBlock Text="İplik Bilgileri" Background="LightGray" Margin="0,0,0,2"/>
-                                    <DockPanel Margin="0,0,0,2">
-                                        <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                        <TextBlock Text="/"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                        <TextBox Width="30"/>
-                                    </DockPanel>
-                                    <DockPanel Margin="0,0,0,2">
-                                        <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                        <TextBlock Text="/"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                        <TextBox Width="30"/>
-                                    </DockPanel>
-                                    <DockPanel Margin="0,0,0,2">
-                                        <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                        <TextBlock Text="/"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                        <TextBox Width="30"/>
-                                    </DockPanel>
-                                    <DockPanel Margin="0,0,0,2">
-                                        <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                        <TextBlock Text="/"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                        <TextBox Width="30"/>
-                                    </DockPanel>
-                                    <DockPanel Margin="0,0,0,2">
-                                        <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                        <TextBlock Text="/"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                        <TextBox Width="30"/>
-                                    </DockPanel>
-                                    <DockPanel Margin="0,0,0,2">
-                                        <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                        <TextBlock Text="/"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                        <TextBox Width="30"/>
-                                    </DockPanel>
-                                </StackPanel>
-                            </Border>
-                            <Border Grid.Column="1" Margin="4,0">
-                                <StackPanel>
+                                        <DockPanel Tag="Divide" Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
+                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBlock Text="/"/>
+                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="40" IsEnabled="False"/>
+                                        </DockPanel>
+                                        <DockPanel Tag="Divide" Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
+                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBlock Text="/"/>
+                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                        </DockPanel>
+                                        <DockPanel Tag="Divide" Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
+                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBlock Text="/"/>
+                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                        </DockPanel>
+                                        <DockPanel Tag="Divide" Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
+                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBlock Text="/"/>
+                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                        </DockPanel>
+                                        <DockPanel Tag="Divide" Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
+                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBlock Text="/"/>
+                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                        </DockPanel>
+                                        <DockPanel Tag="Divide" Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
+                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBlock Text="/"/>
+                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Column="1" Margin="4,0">
+                                    <StackPanel>
                                         <!-- Üretim Bilgileri - Sıklıklar -->
                                         <TextBlock Text="Sıklıklar" Background="LightGray" Margin="0,0,0,2"/>
-                                    <DockPanel Margin="0,0,0,2">
-                                        <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                    </DockPanel>
-                                    <DockPanel Margin="0,0,0,2">
-                                        <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                    </DockPanel>
-                                    <DockPanel Margin="0,0,0,2">
-                                        <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                    </DockPanel>
-                                    <DockPanel Margin="0,0,0,2">
-                                        <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                    </DockPanel>
-                                    <DockPanel Margin="0,0,0,2">
-                                        <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                    </DockPanel>
-                                    <DockPanel Margin="0,0,0,2">
-                                        <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                        <TextBox Width="30" Margin="2,0"/>
-                                    </DockPanel>
-                                </StackPanel>
-                            </Border>                           
-                        </Grid>
-                    </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
+                                            <!-- Kopyalanacak hedefe Name ver -->
+                                            <TextBox Name="txtAtkiSiklik" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
+                                            <TextBox Name="txtAtkiSiklik1" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DockPanel>
                         <DockPanel Grid.Row="1">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -169,47 +171,50 @@
                                     <StackPanel>
                                         <!-- Üretim Bilgileri - Dokuma Bilgileri -->
                                         <TextBlock Text="Dokuma Bilgileri" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Margin="0,0,0,2">
+                                        <DockPanel Tag="Multiply" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="T.No 1 :"/>
-                                            <TextBox Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtTarak1" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                             <TextBlock Text="X"/>
-                                            <TextBox Width="30" Margin="2,0"/>
-                                            <TextBox Width="30"/>
+                                            <TextBox Name="txtFactor1" TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtResult1" Tag="txtAtkiSiklik" TextChanged="ValueTextBox_TextChanged" Width="40" IsEnabled="False"/>
                                         </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
+
+                                        <!-- İkinci satır -->
+                                        <DockPanel Tag="Multiply" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="T.No 2 :"/>
-                                            <TextBox Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtTarak2" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                             <TextBlock Text="X"/>
-                                            <TextBox Width="30" Margin="2,0"/>
-                                            <TextBox Width="30"/>
+                                            <TextBox Name="txtFactor2" TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtResult2" Tag="txtAtkiSiklik1" TextChanged="ValueTextBox_TextChanged" Width="40" IsEnabled="False"/>
                                         </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
+                                        <DockPanel Tag="Divide_1.05" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Tarak En :"/>
-                                            <TextBox Margin="2,0"/>
+                                            <TextBox Name="txtTarakEn" Tag="txtHamEn" FontSize="11" TextAlignment="Center" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Ham Boy :"/>
-                                            <TextBox Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Boy Saçak :"/>
-                                            <TextBox Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="En Saçak :"/>
-                                            <TextBox Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
+                                            <!--- yansıtma çalışmadı, devam et-->
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Ham En :"/>
-                                            <TextBox Margin="2,0"/>
+                                            <TextBox Name="txtHamEn" FontSize="11" TextAlignment="Center" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Mam. Boy :"/>
-                                            <TextBox Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Mam. En :"/>
-                                            <TextBox Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Margin="2,0"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
@@ -219,35 +224,32 @@
                                         <TextBlock Text="Tel Sayıları" Background="LightGray" Margin="0,0,0,2"/>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox Width="30" Margin="2,0"/>
+                                            <TextBox  FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
-                                
                             </Grid>
                         </DockPanel>
-                        
-                        
                     </Grid>
                 </GroupBox>
             </Border>
@@ -271,31 +273,31 @@
                                         <TextBlock Text="Gramaj Hesaplama" Background="LightGray" Margin="0,0,0,2"/>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox  Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox  Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Toplam :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="M.Tül/Gr"/>
                                         </DockPanel>
                                     </StackPanel>
@@ -306,37 +308,37 @@
                                         <TextBlock Text="İplik Boyamaları" Background="LightGray" Margin="0,0,0,2"/>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Gr/M2 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text=""/>
                                         </DockPanel>
                                     </StackPanel>
@@ -355,32 +357,32 @@
                                         <TextBlock Text="İplik Fiyatları" Background="LightGray" Margin="0,0,0,2" Width="146.703333333333"/>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text=""/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                     </StackPanel>
@@ -391,52 +393,264 @@
                                         <TextBlock Text="İplik Maliyet" Background="LightGray" Margin="0,0,0,2"/>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text=""/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Toplam:"/>
-                                            <TextBox Width="44" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
-
                             </Grid>
                         </DockPanel>
-
-
                     </Grid>
                 </GroupBox>
             </Border>
             <Border>
-                <Label Content="3"/>
+                <!-- Maliyet Hesaplama gropubox -->
+                <GroupBox Header="Maliyet Hesaplama">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border>
+                                    <StackPanel>
+                                        <!-- Maliyet Hesaplama - Üretim Fiyatları -->
+                                        <TextBlock Text="Üretim Fiyatları" Background="LightGray" Margin="0,0,0,2"/>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Atkı :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBlock Text="₺" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Çözgü :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBlock Text="$" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Parça Yıklama :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBlock Text="$" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Kumaş Boyama :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center"  Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBlock Text="€" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Dokuma Firesi :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center"  Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBlock Text="%" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Boyahane Firesi :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBlock Text="%" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Konfek. Maliyeti :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBlock Text="$" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="2. Kalite Maliyeti :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBlock Text="%" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Kâr :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBlock Text="%" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="KDV :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            <TextBlock Text="%" Margin="2,0"/>
+                                        </DockPanel>
+                                        <Border BorderBrush="Gray" BorderThickness=".2" Margin="0,2,0,2"/>
+                                        <!-- Divider -->
+                                        <DockPanel Margin="0,2,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Kur :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="60" HorizontalAlignment="Left" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Parite :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="60" HorizontalAlignment="Left" Margin="2,0"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Euro :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="60" HorizontalAlignment="Left" Margin="2,0"/>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Column="1" Margin="4,0">
+                                    <StackPanel>
+                                        <!-- Üretim Bilgileri - İplik Boyamaları -->
+                                        <TextBlock Text="Dokuma Maliyet" Background="LightGray" Margin="0,0,0,2"/>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Dokuma :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock  VerticalAlignment="Center" Width="100" Text="Çözgü :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="100" Text="İplik Maliyet :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                        </DockPanel>
+                                        <TextBlock Text="Üretim Maliyet" Background="LightGray" Margin="0,0,0,2"/>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Toplam :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Fireli :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                        </DockPanel>
+                                        <TextBlock Text="Ham Kumaş Maliyet" Background="LightGray" Margin="0,0,0,2"/>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Kârlı :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
+                                        </DockPanel>
+                                        <TextBlock Text="Yıkama ve Boyahane Maliyet" Background="LightGray" Margin="0,0,0,2"/>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Parça Yıkama :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Boyanmış Kumaş :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Fireli :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Kârlı :"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DockPanel>
+                        <DockPanel Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border>
+                                    <StackPanel>
+                                        <!-- Maliyet Hesaplama - Dikilmiş Ürün -->
+                                        <TextBlock Text="Dikilmiş Ürün" Background="LightGray" Margin="0,0,0,2" TextAlignment="Center"/>
+                                        <DockPanel>
+                                            <StackPanel>
+                                                <DockPanel Margin="0,0,0,2">
+                                                    <TextBlock VerticalAlignment="Center" Width="120" Text="Boyalı Kumaş :"/>
+                                                    <TextBox FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
+                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                                </DockPanel>
+                                                <DockPanel Margin="0,0,0,2">
+                                                    <TextBlock VerticalAlignment="Center" Width="120" Text="Konfeksiyon Maliyeti :"/>
+                                                    <TextBox FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
+                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                                </DockPanel>
+
+                                                <DockPanel Margin="0,0,0,2">
+                                                    <TextBlock VerticalAlignment="Center" Width="120" Text="2. Kalite Maliyeti :"/>
+                                                    <TextBox FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
+                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                                </DockPanel>
+                                            </StackPanel>
+                                            <StackPanel Margin="4,0,0,0">
+                                                <DockPanel Margin="0,0,0,2">
+                                                    <TextBlock VerticalAlignment="Center" Width="90" Text="Boyalı Kumaş :"/>
+                                                    <TextBox FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                                    <TextBox FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
+                                                </DockPanel>
+                                                <DockPanel Margin="0,0,0,2">
+                                                    <TextBlock VerticalAlignment="Center" Width="90" Text="KDV Dahil Fiyat :"/>
+                                                    <TextBox FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                                    <TextBox FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
+                                                </DockPanel>
+                                            </StackPanel>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DockPanel>
+                    </Grid>
+                </GroupBox>
             </Border>
+            <Border Margin="4,0,0,0" VerticalAlignment="Bottom">
+                <StackPanel>
+                    <DockPanel>
+                        <TextBlock Width="148" Text="Belirlenen Fiyat :" Background="Yellow"/>
+                        <TextBox FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                        <TextBox FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <TextBlock Width="148" Text="KDV Dahil Belirlenen Fiyat" Background="Yellow"/>
+                        <TextBox FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                        <TextBox FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
+                    </DockPanel>
+                </StackPanel>
+            </Border>
+            <Border/>
         </DockPanel>
         <!-- groupboxlar -->
     </StackPanel>
