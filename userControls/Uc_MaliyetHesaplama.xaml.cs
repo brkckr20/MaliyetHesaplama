@@ -11,6 +11,30 @@ namespace MaliyeHesaplama.userControls
         {
             InitializeComponent();
         }
+        private void YansitHamEn(object sender, EventArgs e)
+        {
+            if (sender is TextBox source && double.TryParse(source.Text, out double value))
+            {
+                // Hedef TextBox'ı Tag üzerinden al
+                string targetName = source.Tag?.ToString();
+                if (!string.IsNullOrEmpty(targetName))
+                {
+                    var target = this.FindName(targetName) as TextBox;
+                    if (target != null)
+                    {
+                        double result = value / 1.05; // sabit oran
+                        target.Text = result.ToString("0");
+                    }
+                }
+            }
+            else if (sender is TextBox src)
+            {
+                // Boş değer girilirse hedefi temizle
+                string targetName = src.Tag?.ToString();
+                var target = this.FindName(targetName) as TextBox;
+                target?.Clear();
+            }
+        }
         private void ValueTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (sender is TextBox tb)

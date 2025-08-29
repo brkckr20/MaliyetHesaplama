@@ -189,7 +189,7 @@
                                         </DockPanel>
                                         <DockPanel Tag="Divide_1.05" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Tarak En :"/>
-                                            <TextBox Name="txtTarakEn" Tag="txtHamEn" FontSize="11" TextAlignment="Center" Margin="2,0"/>
+                                            <TextBox Name="txtTarakEn" TextChanged="YansitHamEn" Tag="txtHamEn" FontSize="11" TextAlignment="Center" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Ham Boy :"/>
@@ -206,7 +206,7 @@
                                         <DockPanel Margin="0,0,0,2">
                                             <!--- yansıtma çalışmadı, devam et-->
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Ham En :"/>
-                                            <TextBox Name="txtHamEn" FontSize="11" TextAlignment="Center" Margin="2,0"/>
+                                            <TextBox x:Name="txtHamEn" FontSize="11" TextAlignment="Center" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Mam. Boy :"/>
