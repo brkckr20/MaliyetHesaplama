@@ -86,45 +86,45 @@
                                         <TextBlock Text="İplik Bilgileri" Background="LightGray" Margin="0,0,0,2"/>
                                         <DockPanel Tag="Divide" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtCozgu1IpBil1" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                             <TextBlock Text="/"/>
-                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="40" IsEnabled="False"/>
+                                            <TextBox Name="txtCozgu1IpBil2" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtCozgu1IpBil3" FontSize="11" TextAlignment="Center" Width="40" IsEnabled="False"/>
                                         </DockPanel>
                                         <DockPanel Tag="Divide" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtCozgu2IpBil1" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                             <TextBlock Text="/"/>
-                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            <TextBox Name="txtCozgu2IpBil2" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtCozgu2IpBil3" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
                                         </DockPanel>
                                         <DockPanel Tag="Divide" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtAtki1IpBil1" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                             <TextBlock Text="/"/>
-                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            <TextBox Name="txtAtki1IpBil2" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtAtki1IpBil3" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
                                         </DockPanel>
                                         <DockPanel Tag="Divide" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtAtki2IpBil1" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                             <TextBlock Text="/"/>
-                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            <TextBox Name="txtAtki2IpBil2" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtAtki2IpBil3" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
                                         </DockPanel>
                                         <DockPanel Tag="Divide" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtAtki3IpBil1" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                             <TextBlock Text="/"/>
-                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            <TextBox Name="txtAtki3IpBil2" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtAtki3IpBil3" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
                                         </DockPanel>
                                         <DockPanel Tag="Divide" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtAtki4IpBil1" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                             <TextBlock Text="/"/>
-                                            <TextBox TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            <TextBox Name="txtAtki4IpBil2" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtAtki4IpBil3" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
@@ -135,27 +135,27 @@
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
                                             <!-- Kopyalanacak hedefe Name ver -->
-                                            <TextBox Name="txtAtkiSiklik" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtCozguSiklik1" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox Name="txtAtkiSiklik1" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtCozguSiklik2" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
@@ -173,23 +173,23 @@
                                         <TextBlock Text="Dokuma Bilgileri" Background="LightGray" Margin="0,0,0,2"/>
                                         <DockPanel Tag="Multiply" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="T.No 1 :"/>
-                                            <TextBox Name="txtTarak1" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtTarak1DokBil1" TextChanged="MultipleOnChange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                             <TextBlock Text="X"/>
-                                            <TextBox Name="txtFactor1" TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox Name="txtResult1" Tag="txtAtkiSiklik" TextChanged="ValueTextBox_TextChanged" Width="40" IsEnabled="False"/>
+                                            <TextBox Name="txtTarak1DokBil2" TextChanged="MultipleOnChange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtTarak1DokBil3" TextChanged="MultipleOnChange" Width="40" IsEnabled="False"/>
                                         </DockPanel>
 
                                         <!-- İkinci satır -->
                                         <DockPanel Tag="Multiply" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="T.No 2 :"/>
-                                            <TextBox Name="txtTarak2" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtTarak2DokBil1" TextChanged="MultipleOnChange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
                                             <TextBlock Text="X"/>
-                                            <TextBox Name="txtFactor2" TextChanged="ValueTextBox_TextChanged" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox Name="txtResult2" Tag="txtAtkiSiklik1" TextChanged="ValueTextBox_TextChanged" Width="40" IsEnabled="False"/>
+                                            <TextBox Name="txtTarak2DokBil2" TextChanged="MultipleOnChange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Name="txtTarak2DokBil3" TextChanged="MultipleOnChange" Width="40" IsEnabled="False"/>
                                         </DockPanel>
                                         <DockPanel Tag="Divide_1.05" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Tarak En :"/>
-                                            <TextBox Name="txtTarakEn" TextChanged="YansitHamEn" Tag="txtHamEn" FontSize="11" TextAlignment="Center" Margin="2,0"/>
+                                            <TextBox Name="txtTarakEn" TextChanged="MultipleOnChange" FontSize="11" TextAlignment="Center" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Ham Boy :"/>
@@ -224,27 +224,27 @@
                                         <TextBlock Text="Tel Sayıları" Background="LightGray" Margin="0,0,0,2"/>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox  FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox x:Name="txtCozgu1TelSayisi" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox x:Name="txtCozgu2TelSayisi" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
