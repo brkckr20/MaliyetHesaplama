@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\usercontrols\\uc_maliyethesaplama.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_maliyethesaplama.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_maliyethesaplama.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_maliyethesaplama.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\mvvm\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:mvvm\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_maliyethesaplama.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_maliyethesaplama.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\mvvm\\iplikbilgisihesaplama.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:mvvm\\iplikbilgisihesaplama.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,27 +34,53 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "IplikBilgisiHesaplama.cs",
+              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\mvvm\\IplikBilgisiHesaplama.cs",
+              "RelativeDocumentMoniker": "mvvm\\IplikBilgisiHesaplama.cs",
+              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\mvvm\\IplikBilgisiHesaplama.cs",
+              "RelativeToolTip": "mvvm\\IplikBilgisiHesaplama.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-02T13:33:59.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Uc_MaliyetHesaplama.xaml.cs",
               "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\Uc_MaliyetHesaplama.xaml.cs",
               "RelativeDocumentMoniker": "userControls\\Uc_MaliyetHesaplama.xaml.cs",
               "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\Uc_MaliyetHesaplama.xaml.cs",
               "RelativeToolTip": "userControls\\Uc_MaliyetHesaplama.xaml.cs",
-              "ViewState": "AQIAACYAAAAAAAAAAAAjwEQAAABUAAAA",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAiwGEAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-28T13:59:59.791Z",
+              "WhenOpened": "2025-09-02T13:20:38.648Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Uc_MaliyetHesaplama.xaml",
               "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\Uc_MaliyetHesaplama.xaml",
               "RelativeDocumentMoniker": "userControls\\Uc_MaliyetHesaplama.xaml",
               "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\Uc_MaliyetHesaplama.xaml",
               "RelativeToolTip": "userControls\\Uc_MaliyetHesaplama.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-08-27T13:35:41.276Z",
+              "WhenOpened": "2025-09-02T13:18:43.765Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\mvvm\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "mvvm\\MainViewModel.cs",
+              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\mvvm\\MainViewModel.cs",
+              "RelativeToolTip": "mvvm\\MainViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-02T13:07:17.687Z",
               "EditorCaption": ""
             }
           ]

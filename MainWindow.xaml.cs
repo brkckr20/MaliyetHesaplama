@@ -73,10 +73,6 @@ namespace MaliyeHesaplama
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            /*
-             UControls.UC_TalepIslemleri uc = new UControls.UC_TalepIslemleri();
-            AddOrSelectTab("Talep İşlemleri", uc);
-             */
         }
                
 

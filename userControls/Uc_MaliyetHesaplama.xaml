@@ -3,9 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
+             xmlns:local="clr-namespace:MaliyeHesaplama.mvvm"
+             xmlns:helpers="clr-namespace:MaliyeHesaplama.helpers"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1000">
+    <UserControl.DataContext>
+        <local:MainViewModel/>
+    </UserControl.DataContext>
     <StackPanel>
         <Border BorderThickness="0.5" BorderBrush="#ececec">
             <DockPanel HorizontalAlignment="Left" Margin="2">
@@ -84,47 +88,47 @@
                                     <StackPanel>
                                         <!-- Üretim Bilgileri - İplik Bilgileri -->
                                         <TextBlock Text="İplik Bilgileri" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Tag="Divide" Margin="0,0,0,2">
+                                        <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox Name="txtCozgu1IpBil1" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Text="{Binding Cozgu1.BolunenSayi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True" />
                                             <TextBlock Text="/"/>
-                                            <TextBox Name="txtCozgu1IpBil2" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox Name="txtCozgu1IpBil3" FontSize="11" TextAlignment="Center" Width="40" IsEnabled="False"/>
+                                            <TextBox Text="{Binding Cozgu1.BolenSayi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            <TextBox Text="{Binding Cozgu1.Sonuc,Mode=OneWay}" FontSize="11" TextAlignment="Center" Width="40" IsEnabled="False"/>
                                         </DockPanel>
-                                        <DockPanel Tag="Divide" Margin="0,0,0,2">
+                                        <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox Name="txtCozgu2IpBil1" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Text="{Binding Cozgu2.BolunenSayi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
                                             <TextBlock Text="/"/>
-                                            <TextBox Name="txtCozgu2IpBil2" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox Name="txtCozgu2IpBil3" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            <TextBox Text="{Binding Cozgu2.BolenSayi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            <TextBox Text="{Binding Cozgu2.Sonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" IsEnabled="False" Width="40"/>
                                         </DockPanel>
                                         <DockPanel Tag="Divide" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox Name="txtAtki1IpBil1" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Text="{Binding Atki1.BolunenSayi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
                                             <TextBlock Text="/"/>
-                                            <TextBox Name="txtAtki1IpBil2" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox Name="txtAtki1IpBil3" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            <TextBox Text="{Binding Atki1.BolenSayi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            <TextBox Text="{Binding Atki1.Sonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
                                         </DockPanel>
                                         <DockPanel Tag="Divide" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox Name="txtAtki2IpBil1" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Text="{Binding Atki2.BolunenSayi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
                                             <TextBlock Text="/"/>
-                                            <TextBox Name="txtAtki2IpBil2" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox Name="txtAtki2IpBil3" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            <TextBox Text="{Binding Atki2.BolenSayi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            <TextBox Text="{Binding Atki2.Sonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
                                         </DockPanel>
                                         <DockPanel Tag="Divide" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox Name="txtAtki3IpBil1" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Text="{Binding Atki3.BolunenSayi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
                                             <TextBlock Text="/"/>
-                                            <TextBox Name="txtAtki3IpBil2" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox Name="txtAtki3IpBil3" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            <TextBox Text="{Binding Atki3.BolenSayi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            <TextBox Text="{Binding Atki3.Sonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
                                         </DockPanel>
                                         <DockPanel Tag="Divide" Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox Name="txtAtki4IpBil1" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
+                                            <TextBox Text="{Binding Atki4.BolunenSayi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
                                             <TextBlock Text="/"/>
-                                            <TextBox Name="txtAtki4IpBil2" TextChanged="DivideOnchange" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0"/>
-                                            <TextBox Name="txtAtki4IpBil3" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            <TextBox Text="{Binding Atki4.BolenSayi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            <TextBox Text="{Binding Atki4.Sonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
@@ -143,19 +147,19 @@
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            <TextBox TextChanged="MultipleOnChange" Name="txtAtki1Siklik" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            <TextBox TextChanged="MultipleOnChange" Name="txtAtki2Siklik" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            <TextBox TextChanged="MultipleOnChange" Name="txtAtki3Siklik" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            <TextBox TextChanged="MultipleOnChange" Name="txtAtki4Siklik" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
@@ -193,7 +197,7 @@
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Ham Boy :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Margin="2,0"/>
+                                            <TextBox TextChanged="MultipleOnChange" Name="txtHamBoy" FontSize="11" TextAlignment="Center" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Boy Saçak :"/>
@@ -232,19 +236,19 @@
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            <TextBox TextChanged="MultipleOnChange" Name="txtAtki1TelSay" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            <TextBox TextChanged="MultipleOnChange" Name="txtAtki2TelSay" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            <TextBox Name="txtAtki3TelSay" TextChanged="MultipleOnChange" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            <TextBox Name="txtAtki4TelSay" TextChanged="MultipleOnChange" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>

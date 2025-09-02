@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "X6MSVeBvDdDrGcERicoP/Y+NjraGrylCejW7qpHM7oUj3VHTQNxO8A2OT0ty7kwWfEuN+vGO8xfFmf6T5qnwsQ==",
+  "dgSpecHash": "tA8Ac86NslpTXmp14vTQKKoWUQB7MAkD73Izb7Sixe87Q+8XO7lCjWJtTlBH+Fgyw9r4yqkVLuSl2y1P2qDDJQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\casper\\Desktop\\Klasörler\\z\\MaliyeHesaplama\\MaliyeHesaplama.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\casper\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512"
+  ],
   "logs": []
 }

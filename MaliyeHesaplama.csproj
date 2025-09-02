@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Building.png" />
     <Resource Include="Filter_1.png" />
     <Resource Include="Group of Projects.ico" />

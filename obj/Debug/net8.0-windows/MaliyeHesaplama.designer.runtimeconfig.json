@@ -17,6 +17,7 @@
       "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages"
     ],
     "configProperties": {
+      "MVVMTOOLKIT_ENABLE_INOTIFYPROPERTYCHANGING_SUPPORT": true,
       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": true,
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true
     }
