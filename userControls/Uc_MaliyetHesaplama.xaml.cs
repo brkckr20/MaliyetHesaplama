@@ -8,13 +8,5 @@ namespace MaliyeHesaplama.userControls
         {
             InitializeComponent();
         }
-        private void MultipleOnChange(object sender, TextChangedEventArgs e)
-        {
-
-        }
-        private void DivideOnchange(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

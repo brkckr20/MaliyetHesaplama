@@ -27,7 +27,7 @@ namespace MaliyeHesaplama.mvvm
         partial void OnCozgu2IpBilBolunenChanged(double value) => Cozgu2IpBilSonuc = Cozgu2IpBilBolen / Cozgu2IpBilBolunen;
         partial void OnAtki1IpBilBolenChanged(double value) => Atki1IpBilSonuc = Atki1IpBilBolen / Atki1IpBilBolunen;
         partial void OnAtki1IpBilBolunenChanged(double value) => Atki1IpBilSonuc = Atki1IpBilBolen / Atki1IpBilBolunen;
-        partial void OnAtki1IpBilSonucChanged(double value) => Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak)/100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
+        partial void OnAtki1IpBilSonucChanged(double value) => Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak) / 100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
         partial void OnAtki2IpBilBolenChanged(double value) => Atki2IpBilSonuc = Atki2IpBilBolen / Atki2IpBilBolunen;
         partial void OnAtki2IpBilBolunenChanged(double value) => Atki2IpBilSonuc = Atki2IpBilBolen / Atki2IpBilBolunen;
         partial void OnAtki3IpBilBolenChanged(double value) => Atki3IpBilSonuc = Atki3IpBilBolen / Atki3IpBilBolunen;
@@ -53,17 +53,29 @@ namespace MaliyeHesaplama.mvvm
         partial void OnTarakEnChanged(double value)
         {
             HamEn = Math.Round(TarakEn / 1.05); Cozgu1TelSay = TarakEn * TarakNo1Sonuc; Cozgu2TelSay = TarakEn * TarakNo2Sonuc;
-            Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak)/100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
+            Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak) / 100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
+            Atki2Gramaj = (Atki2Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki2IpBilSonuc) * 1.05) / 1000;
+            Atki3Gramaj = (Atki3Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki3IpBilSonuc) * 1.05) / 1000;
+            Atki4Gramaj = (Atki4Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki4IpBilSonuc) * 1.05) / 1000;
         }
         partial void OnHamBoyChanged(double value)
         {
             Atki1TelSay = HamBoy * Atki1Siklik; Atki2TelSay = HamBoy * Atki2Siklik; Atki3TelSay = HamBoy * Atki3Siklik; Atki4TelSay = HamBoy * Atki4Siklik;
             Cozgu1Gramaj = ((HamBoy + BoySacak) * Cozgu1TelSay * (60 / Cozgu1IpBilSonuc) * 1.05 / 10000000);
             Cozgu2Gramaj = (HamBoy * Cozgu2TelSay * (60 / Cozgu2IpBilSonuc) * 1.05 / 10000000);
-            Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak)/100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
+            Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak) / 100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
+            Atki2Gramaj = (Atki2Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki2IpBilSonuc) * 1.05) / 1000;
+            Atki3Gramaj = (Atki3Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki3IpBilSonuc) * 1.05) / 1000;
+            Atki4Gramaj = (Atki4Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki4IpBilSonuc) * 1.05) / 1000;
         }
         partial void OnBoySacakChanged(double value) => Cozgu1Gramaj = ((HamBoy + BoySacak) * Cozgu1TelSay * (60 / Cozgu1IpBilSonuc) * 1.05 / 10000000);
-        partial void OnEnSacakChanged(double value) => Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak)/100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
+        partial void OnEnSacakChanged(double value)
+        {
+            Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak) / 100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
+            Atki2Gramaj = (Atki2Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki2IpBilSonuc) * 1.05) / 1000;
+            Atki3Gramaj = (Atki3Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki3IpBilSonuc) * 1.05) / 1000;
+            Atki4Gramaj = (Atki4Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki4IpBilSonuc) * 1.05) / 1000;
+        }
 
         /********************************* ÜRETİM BİLGİLERİ - SIKLIKLAR **********************************/
         [ObservableProperty] //değişkenler
@@ -71,11 +83,23 @@ namespace MaliyeHesaplama.mvvm
         partial void OnAtki1SiklikChanged(double value)
         {
             Atki1TelSay = HamBoy * Atki1Siklik;
-            Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak)/100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
+            Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak) / 100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
         }
-        partial void OnAtki2SiklikChanged(double value) => Atki2TelSay = HamBoy * Atki2Siklik;
-        partial void OnAtki3SiklikChanged(double value) => Atki3TelSay = HamBoy * Atki3Siklik;
-        partial void OnAtki4SiklikChanged(double value) => Atki4TelSay = HamBoy * Atki4Siklik;
+        partial void OnAtki2SiklikChanged(double value)
+        {
+            Atki2TelSay = HamBoy * Atki2Siklik;
+            Atki2Gramaj = (Atki2Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki2IpBilSonuc) * 1.05) / 1000;
+        }
+        partial void OnAtki3SiklikChanged(double value)
+        {
+            Atki3TelSay = HamBoy * Atki3Siklik;
+            Atki3Gramaj = (Atki3Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki3IpBilSonuc) * 1.05) / 1000;
+        }
+        partial void OnAtki4SiklikChanged(double value)
+        {
+            Atki4TelSay = HamBoy * Atki4Siklik;
+            Atki4Gramaj = (Atki4Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki4IpBilSonuc) * 1.05) / 1000;
+        }
 
         /********************************* ÜRETİM BİLGİLERİ - TEL SAYILARI **********************************/
         [ObservableProperty] //değişkenler
@@ -86,5 +110,60 @@ namespace MaliyeHesaplama.mvvm
         /********************************* ÜRETİM HESAPLAMA - GRAMAJ HESAPLAMA **********************************/
         [ObservableProperty]
         private double cozgu1Gramaj, cozgu2Gramaj, atki1Gramaj, atki2Gramaj, atki3Gramaj, atki4Gramaj, toplamGramaj;
+        partial void OnCozgu1GramajChanged(double value)
+        {
+            ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
+            Cozgu1IpMal = (Cozgu1IpBoy + Cozgu1IpFiy) * Cozgu1Gramaj;
+        }
+        partial void OnCozgu2GramajChanged(double value)
+        {
+            ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
+            Cozgu2IpMal = (Cozgu2IpBoy + Cozgu2IpFiy) * Cozgu2Gramaj;
+        }
+        partial void OnAtki1GramajChanged(double value)
+        {
+            ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
+            Atki1IpMal = (Atki1IpBoy + Atki1IpFiy) * Atki1Gramaj;
+        }
+        partial void OnAtki2GramajChanged(double value)
+        {
+            ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
+            Atki2IpMal = (Atki2IpBoy + Atki2IpFiy) * Atki2Gramaj;
+        }
+        partial void OnAtki3GramajChanged(double value)
+        {
+            ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
+            Atki3IpMal = (Atki3IpBoy + Atki3IpFiy) * Atki3Gramaj;
+        }
+        partial void OnAtki4GramajChanged(double value)
+        {
+            ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
+            Atki4IpMal = (Atki4IpBoy + Atki4IpFiy) * Atki4Gramaj;
+        }
+        partial void OnToplamGramajChanged(double value) => IpBoySonuc = ToplamGramaj / HamEn * 100;
+
+        /********************************* ÜRETİM HESAPLAMA - IPLIK FIYATLARI **********************************/
+        [ObservableProperty]
+        private double cozgu1IpFiy, cozgu2IpFiy, atki1IpFiy, atki2IpFiy, atki3IpFiy, atki4IpFiy;
+        partial void OnCozgu1IpFiyChanged(double value) => Cozgu1IpMal = (Cozgu1IpBoy + Cozgu1IpFiy) * Cozgu1Gramaj;
+        partial void OnCozgu2IpFiyChanged(double value) => Cozgu2IpMal = (Cozgu2IpBoy + Cozgu2IpFiy) * Cozgu2Gramaj;
+        partial void OnAtki1IpFiyChanged(double value) => Atki1IpMal = (Atki1IpBoy + Atki1IpFiy) * Atki1Gramaj;
+        partial void OnAtki2IpFiyChanged(double value) => Atki2IpMal = (Atki2IpBoy + Atki2IpFiy) * Atki2Gramaj;
+        partial void OnAtki3IpFiyChanged(double value) => Atki3IpMal = (Atki3IpBoy + Atki3IpFiy) * Atki3Gramaj;
+        partial void OnAtki4IpFiyChanged(double value) => Atki4IpMal = (Atki4IpBoy + Atki4IpFiy) * Atki4Gramaj;
+
+        /********************************* ÜRETİM HESAPLAMA - IPLIK BOYAMALARI **********************************/
+        [ObservableProperty]
+        private double cozgu1IpBoy, cozgu2IpBoy, atki1IpBoy, atki2IpBoy, atki3IpBoy, atki4IpBoy, ipBoySonuc;
+        partial void OnCozgu1IpBoyChanged(double value) => Cozgu1IpMal = (Cozgu1IpBoy + Cozgu1IpFiy) * Cozgu1Gramaj;
+        partial void OnCozgu2IpBoyChanged(double value) => Cozgu2IpMal = (Cozgu2IpBoy + Cozgu2IpFiy) * Cozgu2Gramaj;
+        partial void OnAtki1IpBoyChanged(double value) => Atki1IpMal = (Atki1IpBoy + Atki1IpFiy) * Atki1Gramaj;
+        partial void OnAtki2IpBoyChanged(double value) => Atki2IpMal = (Atki2IpBoy + Atki2IpFiy) * Atki2Gramaj;
+        partial void OnAtki3IpBoyChanged(double value) => Atki3IpMal = (Atki3IpBoy + Atki3IpFiy) * Atki3Gramaj;
+        partial void OnAtki4IpBoyChanged(double value) => Atki4IpMal = (Atki4IpBoy + Atki4IpFiy) * Atki4Gramaj;
+
+        /********************************* ÜRETİM HESAPLAMA - IPLIK MALİYET **********************************/ // bu alanlar çalışmadı hesaplamaları kontrol et. 04.09.2025
+        [ObservableProperty]
+        private double cozgu1IpMal, cozgu2IpMal, atki1IpMal, atki2IpMal, atki3IpMal, atki4IpMal, toplamIpMal;
     }
 }
