@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Windows;
 
 
 namespace MaliyeHesaplama.mvvm
@@ -67,8 +68,15 @@ namespace MaliyeHesaplama.mvvm
             Atki2Gramaj = (Atki2Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki2IpBilSonuc) * 1.05) / 1000;
             Atki3Gramaj = (Atki3Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki3IpBilSonuc) * 1.05) / 1000;
             Atki4Gramaj = (Atki4Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki4IpBilSonuc) * 1.05) / 1000;
+            DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
+            //=(B16/100)*Q7
+            CozguDokMal = (HamBoy / 100) * CozguUrFiy;
         }
-        partial void OnBoySacakChanged(double value) => Cozgu1Gramaj = ((HamBoy + BoySacak) * Cozgu1TelSay * (60 / Cozgu1IpBilSonuc) * 1.05 / 10000000);
+        partial void OnBoySacakChanged(double value)
+        {
+            Cozgu1Gramaj = ((HamBoy + BoySacak) * Cozgu1TelSay * (60 / Cozgu1IpBilSonuc) * 1.05 / 10000000);
+            DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
+        }
         partial void OnEnSacakChanged(double value)
         {
             Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak) / 100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
@@ -84,21 +92,25 @@ namespace MaliyeHesaplama.mvvm
         {
             Atki1TelSay = HamBoy * Atki1Siklik;
             Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak) / 100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
+            DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
         }
         partial void OnAtki2SiklikChanged(double value)
         {
             Atki2TelSay = HamBoy * Atki2Siklik;
             Atki2Gramaj = (Atki2Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki2IpBilSonuc) * 1.05) / 1000;
+            DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
         }
         partial void OnAtki3SiklikChanged(double value)
         {
             Atki3TelSay = HamBoy * Atki3Siklik;
             Atki3Gramaj = (Atki3Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki3IpBilSonuc) * 1.05) / 1000;
+            DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
         }
         partial void OnAtki4SiklikChanged(double value)
         {
             Atki4TelSay = HamBoy * Atki4Siklik;
             Atki4Gramaj = (Atki4Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki4IpBilSonuc) * 1.05) / 1000;
+            DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
         }
 
         /********************************* ÜRETİM BİLGİLERİ - TEL SAYILARI **********************************/
@@ -162,8 +174,34 @@ namespace MaliyeHesaplama.mvvm
         partial void OnAtki3IpBoyChanged(double value) => Atki3IpMal = (Atki3IpBoy + Atki3IpFiy) * Atki3Gramaj;
         partial void OnAtki4IpBoyChanged(double value) => Atki4IpMal = (Atki4IpBoy + Atki4IpFiy) * Atki4Gramaj;
 
-        /********************************* ÜRETİM HESAPLAMA - IPLIK MALİYET **********************************/ // bu alanlar çalışmadı hesaplamaları kontrol et. 04.09.2025
+        /********************************* ÜRETİM HESAPLAMA - IPLIK MALİYET **********************************/
         [ObservableProperty]
         private double cozgu1IpMal, cozgu2IpMal, atki1IpMal, atki2IpMal, atki3IpMal, atki4IpMal, toplamIpMal;
+        partial void OnToplamIpMalChanged(double value) => IplikMaliyetDokMal = ToplamIpMal;
+
+        /********************************* MALİYET HESAPLAMA - ÜRETİM FİYATLARI **********************************/
+        [ObservableProperty]
+        private double atkiUrFiy, cozguUrFiy, parcaYikamaUrFiy, kumasBoyamaUrFiy, dokumaFiresiUrFiy, boyaFiresiUrFiy, konfMaliyetiUrFiy, _ikinciKaliyeMaliyetiUrFiy, karUrFiy, kdvUrFiy, kurUrFiy, pariteUrFiy, eurUrFiy;
+        partial void OnAtkiUrFiyChanged(double value)
+        {
+            DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
+        }
+        partial void OnKurUrFiyChanged(double value)
+        {
+            DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
+        }
+        partial void OnCozguUrFiyChanged(double value) => CozguDokMal = (HamBoy / 100) * CozguUrFiy;
+
+        /********************************* MALİYET HESAPLAMA - DOKUMA MALİYETİ **********************************/
+        [ObservableProperty]
+        private double dokumaDokMal, cozguDokMal, iplikMaliyetDokMal;
+        partial void OnDokumaDokMalChanged(double value) => ToplamUrMal = DokumaDokMal + CozguDokMal + IplikMaliyetDokMal;
+        partial void OnCozguDokMalChanged(double value) => ToplamUrMal = DokumaDokMal + CozguDokMal + IplikMaliyetDokMal;
+        partial void OnIplikMaliyetDokMalChanged(double value) => ToplamUrMal = DokumaDokMal + CozguDokMal + IplikMaliyetDokMal;
+
+        /********************************* MALİYET HESAPLAMA - ÜRETİM MALİYET  **********************************/ // fireli üretim maliyeti hesaplamasından devam edilecek 05.09.2025
+        [ObservableProperty]
+        private double toplamUrMal, fireliUrMal;
+
     }
 }
