@@ -14,6 +14,7 @@ namespace MaliyeHesaplama.mvvm
             TarakNo1Carpan = 0; TarakNo1Carpim = 0; TarakNo2Carpan = 0; TarakNo2Carpim = 0;
             TarakEn = 0; HamBoy = 0; BoySacak = 0; EnSacak = 0; HamEn = 0; MamulBoy = 0; MamulEn = 0;
             Cozgu1Gramaj = 0.00; Cozgu2Gramaj = 0.00; Atki1Gramaj = 0.00; Atki2Gramaj = 0.00; Atki3Gramaj = 0.00; Atki4Gramaj = 0.00;
+            KurUrFiy = 36;
         }
 
         /********************************* ÜRETİM BİLGİLERİ - İPLİK BİLGİLERİ **********************************/
@@ -152,7 +153,12 @@ namespace MaliyeHesaplama.mvvm
             ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
             Atki4IpMal = (Atki4IpBoy + Atki4IpFiy) * Atki4Gramaj;
         }
-        partial void OnToplamGramajChanged(double value) => IpBoySonuc = ToplamGramaj / HamEn * 100;
+        partial void OnToplamGramajChanged(double value)
+        {
+            IpBoySonuc = ToplamGramaj / HamEn * 100;
+            ParcaYikamaYBM = ParcaYikamaUrFiy * ToplamGramaj;
+            BoyanmisKumasYBM = (EurUrFiy * ToplamGramaj) + FireliUrMal;
+        }
 
         /********************************* ÜRETİM HESAPLAMA - IPLIK FIYATLARI **********************************/
         [ObservableProperty]
@@ -178,6 +184,12 @@ namespace MaliyeHesaplama.mvvm
         [ObservableProperty]
         private double cozgu1IpMal, cozgu2IpMal, atki1IpMal, atki2IpMal, atki3IpMal, atki4IpMal, toplamIpMal;
         partial void OnToplamIpMalChanged(double value) => IplikMaliyetDokMal = ToplamIpMal;
+        partial void OnCozgu1IpMalChanged(double value) => ToplamIpMal = Cozgu1IpMal + Cozgu2IpMal + Atki1IpMal + Atki2IpMal + Atki3IpMal + Atki4IpMal;
+        partial void OnCozgu2IpMalChanged(double value) => ToplamIpMal = Cozgu1IpMal + Cozgu2IpMal + Atki1IpMal + Atki2IpMal + Atki3IpMal + Atki4IpMal;
+        partial void OnAtki1IpMalChanged(double value) => ToplamIpMal = Cozgu1IpMal + Cozgu2IpMal + Atki1IpMal + Atki2IpMal + Atki3IpMal + Atki4IpMal;
+        partial void OnAtki2IpMalChanged(double value) => ToplamIpMal = Cozgu1IpMal + Cozgu2IpMal + Atki1IpMal + Atki2IpMal + Atki3IpMal + Atki4IpMal;
+        partial void OnAtki3IpMalChanged(double value) => ToplamIpMal = Cozgu1IpMal + Cozgu2IpMal + Atki1IpMal + Atki2IpMal + Atki3IpMal + Atki4IpMal;
+        partial void OnAtki4IpMalChanged(double value) => ToplamIpMal = Cozgu1IpMal + Cozgu2IpMal + Atki1IpMal + Atki2IpMal + Atki3IpMal + Atki4IpMal;
 
         /********************************* MALİYET HESAPLAMA - ÜRETİM FİYATLARI **********************************/
         [ObservableProperty]
@@ -191,6 +203,21 @@ namespace MaliyeHesaplama.mvvm
             DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
         }
         partial void OnCozguUrFiyChanged(double value) => CozguDokMal = (HamBoy / 100) * CozguUrFiy;
+        partial void OnDokumaFiresiUrFiyChanged(double value) => FireliUrMal = (ToplamUrMal * (DokumaFiresiUrFiy / 100)) + ToplamUrMal;
+        partial void OnKarUrFiyChanged(double value) { 
+            KarliHamKumMal = (FireliUrMal * (KarUrFiy / 100)) + FireliUrMal;
+            KarliYBM = (FireliYBM * (KarUrFiy / 100)) + FireliYBM;
+        }
+        partial void OnParcaYikamaUrFiyChanged(double value) => ParcaYikamaYBM = ParcaYikamaUrFiy * ToplamGramaj;
+        partial void OnEurUrFiyChanged(double value)
+        {
+            BoyanmisKumasYBM = (EurUrFiy * ToplamGramaj) + FireliUrMal;
+            BoyanmisKumasTlYBM = BoyanmisKumasYBM * KurUrFiy;
+        }
+        partial void OnBoyaFiresiUrFiyChanged(double value)
+        {
+            FireliYBM = ((ParcaYikamaYBM + BoyanmisKumasYBM) * (BoyaFiresiUrFiy / 100)) + ParcaYikamaYBM + BoyanmisKumasYBM;
+        }
 
         /********************************* MALİYET HESAPLAMA - DOKUMA MALİYETİ **********************************/
         [ObservableProperty]
@@ -199,9 +226,40 @@ namespace MaliyeHesaplama.mvvm
         partial void OnCozguDokMalChanged(double value) => ToplamUrMal = DokumaDokMal + CozguDokMal + IplikMaliyetDokMal;
         partial void OnIplikMaliyetDokMalChanged(double value) => ToplamUrMal = DokumaDokMal + CozguDokMal + IplikMaliyetDokMal;
 
-        /********************************* MALİYET HESAPLAMA - ÜRETİM MALİYET  **********************************/ // fireli üretim maliyeti hesaplamasından devam edilecek 05.09.2025
+        /********************************* MALİYET HESAPLAMA - ÜRETİM MALİYET  **********************************/
         [ObservableProperty]
         private double toplamUrMal, fireliUrMal;
+        partial void OnToplamUrMalChanged(double value) => FireliUrMal = (ToplamUrMal * (DokumaFiresiUrFiy / 100)) + ToplamUrMal;
+        partial void OnFireliUrMalChanged(double value)
+        {
+            KarliHamKumMal = (FireliUrMal * (KarUrFiy / 100)) + FireliUrMal;
+            BoyanmisKumasYBM = (EurUrFiy * ToplamGramaj) + FireliUrMal;
+        }
+
+
+        /********************************* MALİYET HESAPLAMA - HAM KUMAŞ MALİYET  **********************************/
+        [ObservableProperty]
+        private double karliHamKumMal, karliHamKumMalTL;
+        partial void OnKarliHamKumMalChanged(double value) => KarliHamKumMalTL = KurUrFiy * KarliHamKumMal;
+
+        /********************************* MALİYET HESAPLAMA - YIKAMA VE BOYAMA MALİYET  **********************************/
+        [ObservableProperty]
+        private double parcaYikamaYBM, boyanmisKumasYBM, boyanmisKumasTlYBM, fireliYBM, karliYBM;
+        partial void OnBoyanmisKumasYBMChanged(double value)
+        {
+            BoyanmisKumasTlYBM = BoyanmisKumasYBM * KurUrFiy;
+            FireliYBM = ((ParcaYikamaYBM + BoyanmisKumasYBM) * (BoyaFiresiUrFiy / 100)) + ParcaYikamaYBM + BoyanmisKumasYBM;
+        }
+        partial void OnParcaYikamaYBMChanged(double value)
+        {
+            FireliYBM = ((ParcaYikamaYBM + BoyanmisKumasYBM) * (BoyaFiresiUrFiy / 100)) + ParcaYikamaYBM + BoyanmisKumasYBM;
+        }
+        partial void OnFireliYBMChanged(double value)
+        {
+            KarliYBM = (FireliYBM * (KarUrFiy / 100)) + FireliYBM;
+        }
+
+        //dikilmiş ürün kısmına başlanacak - 08.09.2025
 
     }
 }

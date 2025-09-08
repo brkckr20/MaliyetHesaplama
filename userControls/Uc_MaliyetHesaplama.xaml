@@ -395,37 +395,37 @@
                                         <TextBlock Text="İplik Maliyet" Background="LightGray" Margin="0,0,0,2"/>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox Text="{Binding Cozgu1IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                            <TextBox IsEnabled="False" Text="{Binding Cozgu1IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox Text="{Binding Cozgu2IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                            <TextBox IsEnabled="False" Text="{Binding Cozgu2IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox Text="{Binding Atki1IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                            <TextBox IsEnabled="False" Text="{Binding Atki1IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox Text="{Binding Atki2IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                            <TextBox IsEnabled="False" Text="{Binding Atki2IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox Text="{Binding Atki3IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                            <TextBox IsEnabled="False" Text="{Binding Atki3IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text=""/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox Text="{Binding Atki4IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                            <TextBox IsEnabled="False" Text="{Binding Atki4IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="60" Text="Toplam:"/>
-                                            <TextBox Text="{Binding ToplamIpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                            <TextBox IsEnabled="False" Text="{Binding ToplamIpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                     </StackPanel>
@@ -541,41 +541,43 @@
                                         <TextBlock Text="Üretim Maliyet" Background="LightGray" Margin="0,0,0,2"/>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="100" Text="Toplam :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBox Text="{Binding ToplamUrMal, Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="100" Text="Fireli :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBox Text="{Binding FireliUrMal, Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <TextBlock Text="Ham Kumaş Maliyet" Background="LightGray" Margin="0,0,0,2"/>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="100" Text="Kârlı :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBox Text="{Binding KarliHamKumMal,Mode=TwoWay, StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBox Text="{Binding KarliHamKumMalTL,Mode=TwoWay, StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
                                         </DockPanel>
                                         <TextBlock Text="Yıkama ve Boyahane Maliyet" Background="LightGray" Margin="0,0,0,2"/>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="100" Text="Parça Yıkama :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBox Text="{Binding ParcaYikamaYBM, Mode=TwoWay, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="100" Text="Boyanmış Kumaş :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBox  Text="{Binding BoyanmisKumasYBM, Mode=TwoWay, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            <TextBox Text="{Binding BoyanmisKumasTlYBM,Mode=TwoWay, StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="100" Text="Fireli :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBox Text="{Binding FireliYBM,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <TextBlock VerticalAlignment="Center" Width="100" Text="Kârlı :"/>
-                                            <TextBox FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                            <TextBox Text="{Binding KarliYBM,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
                                             <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                         </DockPanel>
                                     </StackPanel>
