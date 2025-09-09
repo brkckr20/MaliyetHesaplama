@@ -7,18 +7,18 @@ namespace MaliyeHesaplama.helpers
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double d)
-                return d.ToString("N2", CultureInfo.InvariantCulture);
-            return "0";
+            return value?.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var s = value as string ?? "0";
-            s = s.Replace(',', '.'); // hem , hem . kabul et
-            if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out var result))
+            if (value == null) return 0d;
+
+            string s = value.ToString().Replace(',', '.'); // Virgülü noktaya çevir
+            if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double result))
                 return result;
-            return 0;
+
+            return 0d; // Geçersiz girişte 0
         }
     }
 }

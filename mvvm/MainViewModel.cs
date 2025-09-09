@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Globalization;
 using System.Windows;
 
 
@@ -40,6 +41,20 @@ namespace MaliyeHesaplama.mvvm
         /********************************* ÜRETİM BİLGİLERİ - DOKUMA BİLGİLERİ **********************************/
         [ObservableProperty] //değişkenler
         private double tarakNo1Carpan, tarakNo1Carpim, tarakNo1Sonuc, tarakNo2Carpan, tarakNo2Carpim, tarakNo2Sonuc, tarakEn, hamEn, hamBoy, boySacak, enSacak, mamulBoy, mamulEn;
+        [ObservableProperty]
+        private string boySacakText;
+        partial void OnBoySacakTextChanged(string value)
+        {
+            // Virgül veya nokta ile gelen değeri double'a çevir
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    BoySacak = d;
+                }
+            }
+        }
         partial void OnTarakNo1CarpanChanged(double value) => TarakNo1Sonuc = TarakNo1Carpan * TarakNo1Carpim;
         partial void OnTarakNo1CarpimChanged(double value) => TarakNo1Sonuc = TarakNo1Carpan * TarakNo1Carpim;
         partial void OnTarakNo2CarpanChanged(double value) => TarakNo2Sonuc = TarakNo2Carpan * TarakNo2Carpim;
@@ -201,12 +216,18 @@ namespace MaliyeHesaplama.mvvm
         partial void OnKurUrFiyChanged(double value)
         {
             DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
+            KarliTLDikUr = KarliDikUr * (1 + (KarUrFiy / 100));
+            BelirlenenFiyatTL = BelirlenenFiyat * KurUrFiy;
+            KdvliBelirlenenFiyatTL = KdvliBelirlenFiyat + KurUrFiy;
         }
         partial void OnCozguUrFiyChanged(double value) => CozguDokMal = (HamBoy / 100) * CozguUrFiy;
         partial void OnDokumaFiresiUrFiyChanged(double value) => FireliUrMal = (ToplamUrMal * (DokumaFiresiUrFiy / 100)) + ToplamUrMal;
-        partial void OnKarUrFiyChanged(double value) { 
+        partial void OnKarUrFiyChanged(double value)
+        {
             KarliHamKumMal = (FireliUrMal * (KarUrFiy / 100)) + FireliUrMal;
             KarliYBM = (FireliYBM * (KarUrFiy / 100)) + FireliYBM;
+            KarliDikUr = (IkinciKaliteMaliyetDikUr * (KarUrFiy / 100)) + IkinciKaliteMaliyetDikUr;
+            KarliTLDikUr = KarliDikUr * KurUrFiy;
         }
         partial void OnParcaYikamaUrFiyChanged(double value) => ParcaYikamaYBM = ParcaYikamaUrFiy * ToplamGramaj;
         partial void OnEurUrFiyChanged(double value)
@@ -217,6 +238,13 @@ namespace MaliyeHesaplama.mvvm
         partial void OnBoyaFiresiUrFiyChanged(double value)
         {
             FireliYBM = ((ParcaYikamaYBM + BoyanmisKumasYBM) * (BoyaFiresiUrFiy / 100)) + ParcaYikamaYBM + BoyanmisKumasYBM;
+        }
+        partial void OnKonfMaliyetiUrFiyChanged(double value) => KonfMaliyetiDikUr = BoyaliKumasDikUr + KonfMaliyetiUrFiy;
+        partial void OnIkinciKaliyeMaliyetiUrFiyChanged(double value) => IkinciKaliteMaliyetDikUr = (KonfMaliyetiDikUr * (IkinciKaliyeMaliyetiUrFiy / 100)) + KonfMaliyetiDikUr;
+        partial void OnKdvUrFiyChanged(double value)
+        {
+            KdvliDikUr = (KarliDikUr * (KdvUrFiy / 100)) + KarliDikUr;
+            KdvliBelirlenFiyat = (BelirlenenFiyat * (KdvUrFiy / 100)) + BelirlenenFiyat;
         }
 
         /********************************* MALİYET HESAPLAMA - DOKUMA MALİYETİ **********************************/
@@ -257,9 +285,44 @@ namespace MaliyeHesaplama.mvvm
         partial void OnFireliYBMChanged(double value)
         {
             KarliYBM = (FireliYBM * (KarUrFiy / 100)) + FireliYBM;
+            BoyaliKumasDikUr = FireliYBM;
         }
 
-        //dikilmiş ürün kısmına başlanacak - 08.09.2025
+        /********************************* MALİYET HESAPLAMA - DİKİLMİŞ ÜRÜN  **********************************/
+        [ObservableProperty]
+        private double boyaliKumasDikUr, konfMaliyetiDikUr, ikinciKaliteMaliyetDikUr, karliDikUr, karliTLDikUr, kdvliDikUr, kdvliTLDikUr;
+        partial void OnBoyaliKumasDikUrChanged(double value) => KonfMaliyetiDikUr = BoyaliKumasDikUr + KonfMaliyetiUrFiy;
+
+        partial void OnKonfMaliyetiDikUrChanged(double value)
+        {
+            IkinciKaliteMaliyetDikUr = (KonfMaliyetiDikUr * (IkinciKaliyeMaliyetiUrFiy / 100)) + KonfMaliyetiDikUr;
+        }
+        partial void OnIkinciKaliteMaliyetDikUrChanged(double value)
+        {
+            KarliDikUr = (IkinciKaliteMaliyetDikUr * (KarUrFiy / 100)) + IkinciKaliteMaliyetDikUr;
+        }
+        partial void OnKarliDikUrChanged(double value)
+        {
+            KarliTLDikUr = KarliDikUr * KurUrFiy;
+            KdvliDikUr = (KarliDikUr * (KdvUrFiy / 100)) + KarliDikUr;
+        }
+        partial void OnKdvliDikUrChanged(double value)
+        {
+            KdvliTLDikUr = KdvliDikUr * KurUrFiy;
+        }
+
+        /********************************* BELİRLENMİŞ FİYATLAR  **********************************/
+        [ObservableProperty]
+        private double belirlenenFiyat, belirlenenFiyatTL, kdvliBelirlenFiyat, kdvliBelirlenenFiyatTL;
+        partial void OnBelirlenenFiyatChanged(double value)
+        {
+            BelirlenenFiyatTL = BelirlenenFiyat * KurUrFiy;
+            KdvliBelirlenFiyat = (BelirlenenFiyat * (KdvUrFiy / 100)) + BelirlenenFiyat;
+        }
+        partial void OnKdvliBelirlenFiyatChanged(double value)
+        {
+            KdvliBelirlenenFiyatTL = KdvliBelirlenFiyat * KurUrFiy;
+        }
 
     }
 }
