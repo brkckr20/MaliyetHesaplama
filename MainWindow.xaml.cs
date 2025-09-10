@@ -81,5 +81,11 @@ namespace MaliyeHesaplama
             userControls.Uc_MaliyetHesaplama uc = new userControls.Uc_MaliyetHesaplama();
             AddOrSelectTab("Maliyet Hesaplama", uc);
         }
+
+        private void btnFirmaKarti_Click(object sender, RoutedEventArgs e)
+        {
+            userControls.UC_FirmaKarti uc = new userControls.UC_FirmaKarti();
+            AddOrSelectTab("Firma Kartı", uc);
+        }
     }
 }

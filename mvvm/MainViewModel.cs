@@ -8,7 +8,6 @@ namespace MaliyeHesaplama.mvvm
 {
     public partial class MainViewModel : ObservableObject
     {
-        /* 09.09.2025 üretim hesaplama ekranındaki atki2 hesaplamasından devam edilecek */
         public MainViewModel()
         {
             Cozgu1IpBilBolen = 1; Cozgu1IpBilBolunen = 1; Cozgu2IpBilBolen = 1; Cozgu2IpBilBolunen = 1; Atki1IpBilBolen = 1; Atki1IpBilBolunen = 1; Atki2IpBilBolen = 1; Atki2IpBilBolunen = 1; Atki3IpBilBolen = 1; Atki3IpBilBolunen = 1; Atki4IpBilBolen = 1; Atki4IpBilBolunen = 1;
@@ -16,6 +15,11 @@ namespace MaliyeHesaplama.mvvm
             TarakEn = 0; HamBoy = 0; BoySacak = 0; EnSacak = 0; HamEn = 0; MamulBoy = 0; MamulEn = 0;
             Cozgu1Gramaj = 0.00; Cozgu2Gramaj = 0.00; Atki1Gramaj = 0.00; Atki2Gramaj = 0.00; Atki3Gramaj = 0.00; Atki4Gramaj = 0.00;
             KurUrFiy = 36;
+            BoySacakText = "0"; EnSacakText = "0";
+            Cozgu1IpFiyText = "0.00"; Cozgu2IpFiyText = "0.00"; Atki1IpFiyText = "0.00"; Atki2IpFiyText = "0.00"; Atki3IpFiyText = "0.00"; Atki4IpFiyText = "0.00";
+            Cozgu1IpBoyText = "0.00"; Cozgu2IpBoyText = "0.00"; Atki1IpBoyText = "0.00"; Atki2IpBoyText = "0.00"; Atki3IpBoyText = "0.00"; Atki4IpBoyText = "0.00";
+            atkiUrFiyText = "0.00"; CozguUrFiyText = "0.00"; ParcaYikamaUrFiyText = "0.00"; KumasBoyamaUrFiyText = "0.00"; DokumaFiresiUrFiyText = "0.00"; BoyaFiresiUrFiyText = "0.00"; KonfMaliyetiUrFiyText = "0.00"; IkinciKaliyeMaliyetiUrFiyText = "0.00"; KarUrFiyText = "0.00"; KdvUrFiyText = "0.00"; KurUrFiyText = "36.00"; PariteUrFiyText = "0.00"; EurUrFiyText = "0.00";
+            BelirlenenFiyatText = "0.00";
         }
 
         /********************************* ÜRETİM BİLGİLERİ - İPLİK BİLGİLERİ **********************************/
@@ -42,16 +46,26 @@ namespace MaliyeHesaplama.mvvm
         [ObservableProperty] //değişkenler
         private double tarakNo1Carpan, tarakNo1Carpim, tarakNo1Sonuc, tarakNo2Carpan, tarakNo2Carpim, tarakNo2Sonuc, tarakEn, hamEn, hamBoy, boySacak, enSacak, mamulBoy, mamulEn;
         [ObservableProperty]
-        private string boySacakText;
+        private string boySacakText, enSacakText;
         partial void OnBoySacakTextChanged(string value)
         {
-            // Virgül veya nokta ile gelen değeri double'a çevir
             if (!string.IsNullOrEmpty(value))
             {
                 string s = value.Replace(',', '.');
                 if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
                 {
                     BoySacak = d;
+                }
+            }
+        }
+        partial void OnEnSacakTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    EnSacak = d;
                 }
             }
         }
@@ -178,6 +192,74 @@ namespace MaliyeHesaplama.mvvm
         /********************************* ÜRETİM HESAPLAMA - IPLIK FIYATLARI **********************************/
         [ObservableProperty]
         private double cozgu1IpFiy, cozgu2IpFiy, atki1IpFiy, atki2IpFiy, atki3IpFiy, atki4IpFiy;
+        [ObservableProperty]
+        private string cozgu1IpFiyText, cozgu2IpFiyText, atki1IpFiyText, atki2IpFiyText, atki3IpFiyText, atki4IpFiyText;
+        partial void OnCozgu1IpFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    Cozgu1IpFiy = d;
+                }
+            }
+        }
+        partial void OnCozgu2IpFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    Cozgu2IpFiy = d;
+                }
+            }
+        }
+        partial void OnAtki1IpFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    Atki1IpFiy = d;
+                }
+            }
+        }
+        partial void OnAtki2IpFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    Atki2IpFiy = d;
+                }
+            }
+        }
+        partial void OnAtki3IpFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    Atki3IpFiy = d;
+                }
+            }
+        }
+        partial void OnAtki4IpFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    Atki4IpFiy = d;
+                }
+            }
+        }
         partial void OnCozgu1IpFiyChanged(double value) => Cozgu1IpMal = (Cozgu1IpBoy + Cozgu1IpFiy) * Cozgu1Gramaj;
         partial void OnCozgu2IpFiyChanged(double value) => Cozgu2IpMal = (Cozgu2IpBoy + Cozgu2IpFiy) * Cozgu2Gramaj;
         partial void OnAtki1IpFiyChanged(double value) => Atki1IpMal = (Atki1IpBoy + Atki1IpFiy) * Atki1Gramaj;
@@ -188,6 +270,74 @@ namespace MaliyeHesaplama.mvvm
         /********************************* ÜRETİM HESAPLAMA - IPLIK BOYAMALARI **********************************/
         [ObservableProperty]
         private double cozgu1IpBoy, cozgu2IpBoy, atki1IpBoy, atki2IpBoy, atki3IpBoy, atki4IpBoy, ipBoySonuc;
+        [ObservableProperty]
+        private string cozgu1IpBoyText, cozgu2IpBoyText, atki1IpBoyText, atki2IpBoyText, atki3IpBoyText, atki4IpBoyText, ipBoySonucText;
+        partial void OnCozgu1IpBoyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    Cozgu1IpBoy = d;
+                }
+            }
+        }
+        partial void OnCozgu2IpBoyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    Cozgu2IpBoy = d;
+                }
+            }
+        }
+        partial void OnAtki1IpBoyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    Atki1IpBoy = d;
+                }
+            }
+        }
+        partial void OnAtki2IpBoyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    Atki2IpBoy = d;
+                }
+            }
+        }
+        partial void OnAtki3IpBoyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    Atki3IpBoy = d;
+                }
+            }
+        }
+        partial void OnAtki4IpBoyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    Atki4IpBoy = d;
+                }
+            }
+        }
         partial void OnCozgu1IpBoyChanged(double value) => Cozgu1IpMal = (Cozgu1IpBoy + Cozgu1IpFiy) * Cozgu1Gramaj;
         partial void OnCozgu2IpBoyChanged(double value) => Cozgu2IpMal = (Cozgu2IpBoy + Cozgu2IpFiy) * Cozgu2Gramaj;
         partial void OnAtki1IpBoyChanged(double value) => Atki1IpMal = (Atki1IpBoy + Atki1IpFiy) * Atki1Gramaj;
@@ -209,6 +359,151 @@ namespace MaliyeHesaplama.mvvm
         /********************************* MALİYET HESAPLAMA - ÜRETİM FİYATLARI **********************************/
         [ObservableProperty]
         private double atkiUrFiy, cozguUrFiy, parcaYikamaUrFiy, kumasBoyamaUrFiy, dokumaFiresiUrFiy, boyaFiresiUrFiy, konfMaliyetiUrFiy, _ikinciKaliyeMaliyetiUrFiy, karUrFiy, kdvUrFiy, kurUrFiy, pariteUrFiy, eurUrFiy;
+        [ObservableProperty]
+        private string atkiUrFiyText, cozguUrFiyText, parcaYikamaUrFiyText, kumasBoyamaUrFiyText, dokumaFiresiUrFiyText, boyaFiresiUrFiyText, konfMaliyetiUrFiyText, _ikinciKaliyeMaliyetiUrFiyText, karUrFiyText, kdvUrFiyText, kurUrFiyText, pariteUrFiyText, eurUrFiyText;
+        partial void OnAtkiUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    AtkiUrFiy = d;
+                }
+            }
+        }
+        partial void OnCozguUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    CozguUrFiy = d;
+                }
+            }
+        }
+        partial void OnParcaYikamaUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    ParcaYikamaUrFiy= d;
+                }
+            }
+        }
+        partial void OnKumasBoyamaUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    KumasBoyamaUrFiy = d;
+                }
+            }
+        }
+        partial void OnDokumaFiresiUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    DokumaFiresiUrFiy = d;
+                }
+            }
+        }
+        partial void OnBoyaFiresiUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    BoyaFiresiUrFiy = d;
+                }
+            }
+        }
+        partial void OnKonfMaliyetiUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    KonfMaliyetiUrFiy = d;
+                }
+            }
+        }
+        partial void OnIkinciKaliyeMaliyetiUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    IkinciKaliyeMaliyetiUrFiy = d;
+                }
+            }
+        }
+        partial void OnKarUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    KarUrFiy= d;
+                }
+            }
+        }
+        partial void OnKdvUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    KdvUrFiy= d;
+                }
+            }
+        }
+        partial void OnKurUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    KurUrFiy = d;
+                }
+            }
+        }
+        partial void OnPariteUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    PariteUrFiy = d;
+                }
+            }
+        }
+        partial void OnEurUrFiyTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    EurUrFiy = d;
+                }
+            }
+        }
         partial void OnAtkiUrFiyChanged(double value)
         {
             DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
@@ -314,6 +609,19 @@ namespace MaliyeHesaplama.mvvm
         /********************************* BELİRLENMİŞ FİYATLAR  **********************************/
         [ObservableProperty]
         private double belirlenenFiyat, belirlenenFiyatTL, kdvliBelirlenFiyat, kdvliBelirlenenFiyatTL;
+        [ObservableProperty]
+        private string belirlenenFiyatText;
+        partial void OnBelirlenenFiyatTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    BelirlenenFiyat = d;
+                }
+            }
+        }
         partial void OnBelirlenenFiyatChanged(double value)
         {
             BelirlenenFiyatTL = BelirlenenFiyat * KurUrFiy;
@@ -323,6 +631,5 @@ namespace MaliyeHesaplama.mvvm
         {
             KdvliBelirlenenFiyatTL = KdvliBelirlenFiyat * KurUrFiy;
         }
-
     }
 }

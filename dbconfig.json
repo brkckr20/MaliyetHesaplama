@@ -1,0 +1,4 @@
+{
+  "DbType": "MSSQL",
+  "ConnectionString": "Server=.;Database=Hesap;Trusted_Connection=True;TrustServerCertificate=True;"
+}
