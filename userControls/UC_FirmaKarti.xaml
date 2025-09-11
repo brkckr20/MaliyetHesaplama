@@ -40,17 +40,21 @@
                         <Image Width="24" Height="24" Source="/userControls/next.ico" />
                         <TextBlock Text="Sonraki" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
-                </Button> 
-                <Button x:Name="btnSil" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                </Button>
+                <Button x:Name="btnSil" Click="btnSil_Click" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/trash.ico" />
                         <TextBlock Text="Sil" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
-                </Button>                 
+                </Button>
             </DockPanel>
         </Border>
-        <DockPanel>
-            <DockPanel Margin="0,0,5,0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Column="0" Margin="0,0,5,0">
                 <Border Width="250">
                     <StackPanel>
                         <DockPanel Margin="0,1">
@@ -77,10 +81,22 @@
                 </Border>
                 <Border Height="10"></Border>
             </DockPanel>
-            <DockPanel>
-                <syncfusion:SfDataGrid x:Name="sfDataGrid" AutoGenerateColumns="True" AllowFiltering="True" AllowSorting="True" AllowResizingColumns="True">
+            <DockPanel Grid.Column="1">
+                <syncfusion:SfDataGrid 
+                    x:Name="sfDataGrid" 
+                    AutoGenerateColumns="True" 
+                    AllowFiltering="True" 
+                    AllowSorting="True" 
+                    FilterRowPosition="Top"                    
+                    AllowResizingColumns="True"
+                    RowHeight="20"
+                    FontSize="11"
+                    RowSelectionBrush="Orange"
+                    SelectionForegroundBrush="White"
+                    SelectionChanged="sfDataGrid_SelectionChanged"
+                    >
                 </syncfusion:SfDataGrid>
             </DockPanel>
-        </DockPanel>
+        </Grid>
     </StackPanel>
 </UserControl>
