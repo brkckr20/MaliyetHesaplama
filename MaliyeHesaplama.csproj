@@ -14,6 +14,7 @@
     <None Remove="Group of Projects.ico" />
     <None Remove="Libre Office Calc.png" />
     <None Remove="News.png" />
+    <None Remove="numerator.ico" />
     <None Remove="Purchase Order.png" />
     <None Remove="Towel.png" />
     <None Remove="userControls\back.ico" />
@@ -22,6 +23,8 @@
     <None Remove="userControls\next.ico" />
     <None Remove="userControls\save.ico" />
     <None Remove="userControls\trash.ico" />
+    <None Remove="wins\Building.png" />
+    <None Remove="wins\News.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +41,7 @@
     <Resource Include="Group of Projects.ico" />
     <Resource Include="Libre Office Calc.png" />
     <Resource Include="News.png" />
+    <Resource Include="numerator.ico" />
     <Resource Include="Purchase Order.png" />
     <Resource Include="Towel.png" />
     <Resource Include="userControls\back.ico" />
@@ -46,6 +50,8 @@
     <Resource Include="userControls\next.ico" />
     <Resource Include="userControls\save.ico" />
     <Resource Include="userControls\trash.ico" />
+    <Resource Include="wins\Building.png" />
+    <Resource Include="wins\News.png" />
   </ItemGroup>
 
   <ItemGroup>

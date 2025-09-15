@@ -27,7 +27,10 @@
             </RibbonTab>
             <RibbonTab Header="Ayarlar">
                 <RibbonGroup Header="Parametreler">
-                    <RibbonButton Label="Üretim Yönetimi Parametreleri" LargeImageSource="/Filter_1.png" />
+                    <RibbonButton Label="Üretim Yönetimi Parametreleri" LargeImageSource="/Filter_1.png" />                    
+                </RibbonGroup>
+                <RibbonGroup Header="Diğer">
+                    <RibbonButton x:Name="btnNumarator" Click="btnNumarator_Click" Label="Numaratör" LargeImageSource="/numerator.ico" />
                 </RibbonGroup>
             </RibbonTab>
         </ribbon:Ribbon>

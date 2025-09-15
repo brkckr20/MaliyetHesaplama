@@ -16,6 +16,15 @@
     <Compile Update="userControls\Uc_MH2.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="userControls\UC_Numarator.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="wins\winFirmaListesi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="wins\winNumaratorListesi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
@@ -28,6 +37,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\Uc_MH2.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="userControls\UC_Numarator.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="wins\winFirmaListesi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="wins\winNumaratorListesi.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

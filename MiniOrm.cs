@@ -67,4 +67,14 @@ public class MiniOrm
         var sql = $"SELECT * FROM {tableName};";
         return _connection.Query<T>(sql);
     }
+    public T GetBeforeRecord<T>(string tableName, int Id)
+    {
+        var sql = $"SELECT TOP 1 * FROM {tableName} where Id < {Id} order by Id desc";
+        return _connection.Query<T>(sql).FirstOrDefault();
+    }
+    public T GetNextRecord<T>(string tableName, int Id)
+    {
+        var sql = $"SELECT TOP 1 * FROM {tableName} where Id > {Id} order by Id asc";
+        return _connection.Query<T>(sql).FirstOrDefault();
+    }
 }

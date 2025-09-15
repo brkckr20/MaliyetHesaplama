@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\App.xaml
-4983575297
+7-479591515
 
-18-972520990
+221226804342
 2271881812441
-MainWindow.xaml;userControls\UC_FirmaKarti.xaml;userControls\Uc_MaliyetHesaplama.xaml;userControls\Uc_MH2.xaml;
+MainWindow.xaml;userControls\UC_FirmaKarti.xaml;userControls\Uc_MaliyetHesaplama.xaml;userControls\Uc_MH2.xaml;userControls\UC_Numarator.xaml;wins\winFirmaListesi.xaml;wins\winNumaratorListesi.xaml;
 
-True
+False
 

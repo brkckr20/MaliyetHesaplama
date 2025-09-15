@@ -4,13 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
-             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <Border BorderThickness="0.5" BorderBrush="#ececec">
             <DockPanel HorizontalAlignment="Left" Margin="2">
-                <Button x:Name="btnYeni" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                <Button Click="btnYeni_Click" x:Name="btnYeni" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/new.ico" />
                         <TextBlock Text="Yeni" HorizontalAlignment="Center" Margin="0,4,0,0"/>
@@ -21,21 +20,20 @@
                         <Image Width="24" Height="24" Source="/userControls/save.ico" />
                         <TextBlock Text="Kaydet" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
-                </Button>
-                <!--
-                <Button x:Name="btnListe" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                </Button>                
+                <Button x:Name="btnListe" Click="btnListe_Click" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/list.ico" />
                         <TextBlock Text="Liste" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
-                </Button> -->
-                <Button x:Name="btnGeri" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                </Button> 
+                <Button Click="btnGeri_Click" x:Name="btnGeri" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/back.ico" />
                         <TextBlock Text="Önceki" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="btnIleri" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                <Button Click="btnIleri_Click" x:Name="btnIleri" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/next.ico" />
                         <TextBlock Text="Sonraki" HorizontalAlignment="Center" Margin="0,4,0,0"/>
@@ -51,11 +49,10 @@
         </Border>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="350"/>
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0" Margin="0,0,5,0">
-                <Border Width="250">
+                <Border Width="340">
                     <StackPanel>
                         <DockPanel Margin="0,1">
                             <Label Content="Firma Kodu :"  Width="83"/>
@@ -80,22 +77,6 @@
                     </StackPanel>
                 </Border>
                 <Border Height="10"></Border>
-            </DockPanel>
-            <DockPanel Grid.Column="1">
-                <syncfusion:SfDataGrid 
-                    x:Name="sfDataGrid" 
-                    AutoGenerateColumns="True" 
-                    AllowFiltering="True" 
-                    AllowSorting="True" 
-                    FilterRowPosition="Top"                    
-                    AllowResizingColumns="True"
-                    RowHeight="20"
-                    FontSize="11"
-                    RowSelectionBrush="Orange"
-                    SelectionForegroundBrush="White"
-                    SelectionChanged="sfDataGrid_SelectionChanged"
-                    >
-                </syncfusion:SfDataGrid>
             </DockPanel>
         </Grid>
     </StackPanel>

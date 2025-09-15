@@ -70,11 +70,7 @@ namespace MaliyeHesaplama
 
             mainTabControl.Items.Add(newTabItem);
             mainTabControl.SelectedItem = newTabItem;
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-        }
-               
+        }            
 
         private void btnMaliyetHesaplama_Click(object sender, RoutedEventArgs e)
         {
@@ -86,6 +82,12 @@ namespace MaliyeHesaplama
         {
             userControls.UC_FirmaKarti uc = new userControls.UC_FirmaKarti();
             AddOrSelectTab("Firma Kartı", uc);
+        }
+
+        private void btnNumarator_Click(object sender, RoutedEventArgs e)
+        {
+            userControls.UC_Numarator uc = new userControls.UC_Numarator();
+            AddOrSelectTab("Numaratör", uc);
         }
     }
 }
