@@ -89,5 +89,11 @@ namespace MaliyeHesaplama
             userControls.UC_Numarator uc = new userControls.UC_Numarator();
             AddOrSelectTab("Numaratör", uc);
         }
+
+        private void btnKumasKarti_Click(object sender, RoutedEventArgs e)
+        {
+            userControls.UC_KumasKarti uc = new userControls.UC_KumasKarti();
+            AddOrSelectTab("Kumaş Kartı", uc);
+        }
     }
 }

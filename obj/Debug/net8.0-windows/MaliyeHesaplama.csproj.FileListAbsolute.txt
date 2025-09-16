@@ -86,9 +86,9 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\Ma
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MainWindow.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_FirmaKarti.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\Uc_MaliyetHesaplama.g.cs
-C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\Uc_MH2.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_Numarator.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winFirmaListesi.g.cs
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winNumaratorListesi.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\App.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama_MarkupCompile.cache
@@ -96,9 +96,9 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\Ma
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MainWindow.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_FirmaKarti.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\Uc_MaliyetHesaplama.baml
-C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\Uc_MH2.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_Numarator.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winFirmaListesi.baml
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winNumaratorListesi.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama.g.resources
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama.AssemblyInfoInputs.cache
@@ -111,5 +111,5 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\re
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama.pdb
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama.genruntimeconfig.cache
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\ref\MaliyeHesaplama.dll
-C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winNumaratorListesi.g.cs
-C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winNumaratorListesi.baml
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_KumasKarti.g.cs
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_KumasKarti.baml

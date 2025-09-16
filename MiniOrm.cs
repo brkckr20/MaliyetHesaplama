@@ -3,6 +3,7 @@ using Microsoft.Data.Sqlite;
 using System.Data;
 using System.Windows;
 using Microsoft.Data.SqlClient;
+using MaliyeHesaplama.helpers;
 
 public class MiniOrm
 {
@@ -50,10 +51,24 @@ public class MiniOrm
         }
     }
 
-    public int Delete(string tableName, int id, string idColumn = "Id")
+    public int Delete(string tableName, int id, bool isConfirmed)
     {
-        var sql = $"DELETE FROM {tableName} WHERE {idColumn}=@Id;";
-        return _connection.Execute(sql, new { Id = id });
+        var sql = $"DELETE FROM {tableName} WHERE Id=@Id;";
+        if (isConfirmed)
+        {
+            if (Bildirim.SilmeOnayi())
+            {
+                return _connection.Execute(sql, new { Id = id });
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            return _connection.Execute(sql, new { Id = id });
+        }
     }
 
     public T GetById<T>(string tableName, int id, string idColumn = "Id")

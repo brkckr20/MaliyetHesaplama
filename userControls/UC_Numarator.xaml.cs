@@ -1,5 +1,4 @@
 ﻿using MaliyeHesaplama.helpers;
-using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -54,20 +53,16 @@ namespace MaliyeHesaplama.userControls
                 txtIsim.Text = win.Isim;
                 chckKullanimda.IsChecked = win.Kullanimda;
                 cmbTur.SelectedIndex = win.Tur;
+                this.Id = win.Id;
             }
         }
 
         private void btnSil_Click(object sender, RoutedEventArgs e)
         {
-            //kontrol et -- 15.09.2025
-            //if (Bildirim.SilmeOnayi())
-            //{
-            //    if (_orm.Delete("Numerator", Id) > 0)
-            //    {
-            //        Bildirim.SilmeBasarili();
-            //        Temizle();
-            //    }
-            //}
+            if (_orm.Delete("Numerator", Id, true) > 0)
+            {
+                Temizle();
+            }
         }
     }
 }

@@ -21,7 +21,7 @@
             </RibbonTab>
             <RibbonTab Header="Kartlar">
                 <RibbonGroup Header="Kart İşlemleri">
-                    <RibbonButton Label="Ürün Kartı" LargeImageSource="/Towel.png" />
+                    <RibbonButton x:Name="btnKumasKarti" Click="btnKumasKarti_Click" Label="Kumaş Kartı" LargeImageSource="/Towel.png" />
                     <RibbonButton x:Name="btnFirmaKarti" Click="btnFirmaKarti_Click" Label="Firma Kartı" LargeImageSource="/Building.png"  />
                 </RibbonGroup>
             </RibbonTab>

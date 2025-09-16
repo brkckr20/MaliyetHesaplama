@@ -32,13 +32,9 @@ namespace MaliyeHesaplama.userControls
 
         private void btnSil_Click(object sender, RoutedEventArgs e)
         {
-            if (Bildirim.SilmeOnayi())
+            if (_orm.Delete("Company", Id, true) > 0)
             {
-                if (_orm.Delete("Company", Id) > 0)
-                {
-                    Bildirim.SilmeBasarili();
-                    Temizle();
-                }
+                Temizle();
             }
         }
 

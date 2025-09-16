@@ -10,10 +10,10 @@
     <Compile Update="userControls\UC_FirmaKarti.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="userControls\Uc_MaliyetHesaplama.xaml.cs">
+    <Compile Update="userControls\UC_KumasKarti.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="userControls\Uc_MH2.xaml.cs">
+    <Compile Update="userControls\Uc_MaliyetHesaplama.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="userControls\UC_Numarator.xaml.cs">
@@ -33,10 +33,10 @@
     <Page Update="userControls\UC_FirmaKarti.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="userControls\Uc_MaliyetHesaplama.xaml">
+    <Page Update="userControls\UC_KumasKarti.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="userControls\Uc_MH2.xaml">
+    <Page Update="userControls\Uc_MaliyetHesaplama.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\UC_Numarator.xaml">
