@@ -1,18 +1,24 @@
 ﻿using MaliyeHesaplama.models;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    // gridcontrol üzerinde combobox olayını araştır. - 16.09.2025
+    // listelemeyi kontrol et. - 16.09.2025
     public partial class UC_KumasKarti : UserControl
     {
         public ObservableCollection<InventoryReceipt> InventoryReceipts { get; set; }
         public UC_KumasKarti()
         {
             InitializeComponent();
-            InventoryReceipts = new ObservableCollection<InventoryReceipt>();
+            InventoryReceipts = new ObservableCollection<InventoryReceipt>
+            {
+                new InventoryReceipt { Id = 1, Genus = "Kumaş", Quantity = 25 },
+                new InventoryReceipt { Id = 2, Genus = "İplik", Quantity = 25 },
+                new InventoryReceipt { Id = 3, Genus = "Aksesuar", Quantity = 25 },
+            };
             this.DataContext = this;
         }
 

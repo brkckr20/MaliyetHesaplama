@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[2.1.66, )"
             },
+            "DataGridExtensions": {
+              "target": "Package",
+              "version": "[2.7.0, )"
+            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[6.1.1, )"
