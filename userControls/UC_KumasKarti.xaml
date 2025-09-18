@@ -12,16 +12,10 @@
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="LightBlue" Offset="0"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Background" Value="Transparent"/>
         </Style>
     </UserControl.Resources>
+    
     <StackPanel>
         <Border BorderThickness="0.5" BorderBrush="#ececec">
             <DockPanel HorizontalAlignment="Left" Margin="2">
@@ -110,11 +104,18 @@
         <GroupBox Header="Üretim Bilgileri">
             <syncfusion:SfDataGrid
                 x:Name="myDataGrid"
-                AllowFiltering="True" AutoGenerateColumns="False" ItemsSource="{Binding InventoryReceipts}"
+                AllowFiltering="True" AutoGenerateColumns="False" ItemsSource="{Binding}" AllowResizingColumns="True" AllowEditing="True" AddNewRowPosition="Bottom" AddNewRowText="Yeni satır ekle"
                 >
                 <syncfusion:SfDataGrid.Columns>
-                    <syncfusion:GridTextColumn MappingName="Genus" HeaderText="Kalem İşlem" HeaderStyle="{StaticResource headerStyle}" />
-                    <syncfusion:GridTextColumn MappingName="Quantity" HeaderText="Miktar" HeaderStyle="{StaticResource headerStyle}" />
+                    <syncfusion:GridComboBoxColumn ItemsSource="{Binding OperasyonTipleri}" Width="100" MappingName="Operasyon" HeaderText="Kalem İşlem" HeaderStyle="{StaticResource headerStyle}" />
+                    <syncfusion:GridTextColumn Width="40" MappingName="InventoryId" HeaderText="Malzeme Id" IsHidden="True" HeaderStyle="{StaticResource headerStyle}" />
+                    <syncfusion:GridTextColumn Width="120" MappingName="InventoryCode" HeaderText="Malzeme Kodu" HeaderStyle="{StaticResource headerStyle}" />
+                    <syncfusion:GridTextColumn Width="100" MappingName="InventoryNane" HeaderText="Malzeme Adı" HeaderStyle="{StaticResource headerStyle}" />
+                    <syncfusion:GridTextColumn Width="90" MappingName="Quantity" HeaderText="Miktar" HeaderStyle="{StaticResource headerStyle}" />
+                    <syncfusion:GridTextColumn Width="80" MappingName="Unit" HeaderText="Birim" HeaderStyle="{StaticResource headerStyle}" />
+                    <syncfusion:GridTextColumn MappingName="UnitPrice" HeaderText="Birim Fiyat" HeaderStyle="{StaticResource headerStyle}" />
+                    <syncfusion:GridTextColumn MappingName="Forex" HeaderText="Döviz" HeaderStyle="{StaticResource headerStyle}" />
+                    <syncfusion:GridTextColumn MappingName="ForexPrice" HeaderText="Döviz Fiyat" HeaderStyle="{StaticResource headerStyle}" />
                 </syncfusion:SfDataGrid.Columns>
             </syncfusion:SfDataGrid>
         </GroupBox>

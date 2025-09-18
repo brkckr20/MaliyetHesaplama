@@ -19,6 +19,9 @@
     <Compile Update="userControls\UC_Numarator.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="userControls\UC_UretimYonetimiParametreleri.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="wins\winFirmaListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -40,6 +43,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\UC_Numarator.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="userControls\UC_UretimYonetimiParametreleri.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winFirmaListesi.xaml">

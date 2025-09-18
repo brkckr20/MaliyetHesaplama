@@ -95,5 +95,11 @@ namespace MaliyeHesaplama
             userControls.UC_KumasKarti uc = new userControls.UC_KumasKarti();
             AddOrSelectTab("Kumaş Kartı", uc);
         }
+
+        private void btnUretimYonetimiParametreleri_Click(object sender, RoutedEventArgs e)
+        {
+            userControls.UC_UretimYonetimiParametreleri uc = new userControls.UC_UretimYonetimiParametreleri();
+            AddOrSelectTab("Üretim Yönetimi Parametreleri", uc);
+        }
     }
 }

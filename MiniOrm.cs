@@ -71,9 +71,9 @@ public class MiniOrm
         }
     }
 
-    public T GetById<T>(string tableName, int id, string idColumn = "Id")
+    public T GetById<T>(string tableName, int id)
     {
-        var sql = $"SELECT * FROM {tableName} WHERE {idColumn}=@Id;";
+        var sql = $"SELECT * FROM {tableName} WHERE Id=@Id;";
         return _connection.Query<T>(sql, new { Id = id }).FirstOrDefault();
     }
 
