@@ -137,4 +137,3 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\re
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama.pdb
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama.genruntimeconfig.cache
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\ref\MaliyeHesaplama.dll
-C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\App.baml

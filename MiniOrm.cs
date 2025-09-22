@@ -56,7 +56,7 @@ public class MiniOrm
         var sql = $"DELETE FROM {tableName} WHERE Id=@Id;";
         if (isConfirmed)
         {
-            if (Bildirim.SilmeOnayi())
+            if (Bildirim.SilmeOnayi2())
             {
                 return _connection.Execute(sql, new { Id = id });
             }
@@ -91,5 +91,10 @@ public class MiniOrm
     {
         var sql = $"SELECT TOP 1 * FROM {tableName} where Id > {Id} order by Id asc";
         return _connection.Query<T>(sql).FirstOrDefault();
+    }
+    public string GetLastCompanyCode()
+    {
+        var sql = "Select Top 1 CompanyCode from Company order by Id Desc";
+        return _connection.QueryFirstOrDefault<string>(sql);
     }
 }

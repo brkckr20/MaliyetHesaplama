@@ -1,19 +1,59 @@
-﻿using System.Windows;
-using System.Windows.Media;
+﻿using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace MaliyeHesaplama.wins
 {
     public partial class winFirmaListesi : Window
     {
         MiniOrm _orm = new MiniOrm();
+        private ICollectionView _collectionView;
         public int Id;
         public string FirmaKodu, FirmaUnvan, Adres1, Adres2, Adres3;
 
-        private void sfDataGrid_CellDoubleTapped(object sender, Syncfusion.UI.Xaml.Grid.GridCellDoubleTappedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var record = e.Record as dynamic;
-            if (record != null)
+            var data = _orm.GetAll<dynamic>("Company");
+            _collectionView = CollectionViewSource.GetDefaultView(data);
+            sfDataGrid.ItemsSource = _collectionView;
+        }
+        void SearchWithTextboxValue(TextBox aranacakTextbox,string fieldAdi)
+        {
+            string filterText = aranacakTextbox.Text.ToLower();
+
+            if (_collectionView != null)
             {
+                _collectionView.Filter = item =>
+                {
+                    var dict = (IDictionary<string, object>)item;
+
+                    // Eğer "CompanyName" property’si varsa
+                    if (dict.ContainsKey(fieldAdi) && dict[fieldAdi] != null)
+                    {
+                        string companyName = dict[fieldAdi].ToString().ToLower();
+                        return companyName.Contains(filterText);
+                    }
+                    return false;
+                };
+                _collectionView.Refresh();
+            }
+        }
+        private void txtFirmaUnvan_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            SearchWithTextboxValue(txtFirmaUnvan,"CompanyName");
+        }
+
+        private void txtFirmaKodu_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SearchWithTextboxValue(txtFirmaKodu, "CompanyCode");
+        }
+
+        private void sfDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (sfDataGrid.SelectedItem != null)
+            {
+                dynamic record = sfDataGrid.SelectedItem;
                 Id = record.Id;
                 FirmaKodu = record.CompanyCode;
                 FirmaUnvan = record.CompanyName;
@@ -23,60 +63,10 @@ namespace MaliyeHesaplama.wins
                 this.Close();
             }
         }
-        /*
-         sfgrid calisan hali
-             <syncfusion:SfDataGrid 
-        x:Name="sfDataGrid" 
-        AutoGenerateColumns="True" 
-        AllowFiltering="True" 
-        AllowSorting="True" 
-        FilterRowPosition="Top"                    
-        AllowResizingColumns="True"
-        RowHeight="20"
-        FontSize="11"
-        RowSelectionBrush="Orange"
-        SelectionForegroundBrush="White"
-        CellDoubleTapped="sfDataGrid_CellDoubleTapped"
->
-    </syncfusion:SfDataGrid>
-         */
-        //Gridcontrole çift tıklama eventi ekle ve verileri bir önceki forma yansıt. ayrıca filtreleme özelliğini araştır. 
         public winFirmaListesi()
         {
             InitializeComponent();
-            sfDataGrid.ItemsSource = _orm.GetAll<dynamic>("Company"); // çift tıklama olayında edit moduna geçmesini engelle 22-09-2025
-            KolonlaraTurkceIsimVer();
-        }
-        void KolonlaraTurkceIsimVer()
-        {
-            //sfDataGrid.Loaded += (s, e) =>
-            //{
-            //    var idColumn = sfDataGrid.Columns.FirstOrDefault(c => c.MappingName == "Id");
-            //    if (idColumn != null)
-            //        idColumn.IsHidden = true;
-            //};
-            //sfDataGrid.AutoGeneratingColumn += (s, e) =>
-            //{
-            //    switch (e.Column.MappingName)
-            //    {
-            //        case "CompanyCode":
-            //            e.Column.HeaderText = "Firma Kodu";
-            //            break;
-            //        case "CompanyName":
-            //            e.Column.HeaderText = "Firma Adı";
-            //            break;
-            //        case "AdressLine1":
-            //            e.Column.HeaderText = "Adres 1";
-            //            break;
-            //        case "AdressLine2":
-            //            e.Column.HeaderText = "Adres 2";
-            //            break;
-            //        case "AdressLine3":
-            //            e.Column.HeaderText = "Adres 3";
-            //            break;
-            //    }
-            //};
-        }
-        
+            txtFirmaUnvan.Focus();
+        }               
     }
 }

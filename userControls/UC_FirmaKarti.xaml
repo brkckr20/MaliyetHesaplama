@@ -7,7 +7,12 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
+    <StackPanel Background="Transparent">
+        <StackPanel.ContextMenu>
+            <ContextMenu FontFamily="Bahnschrift">
+                <MenuItem x:Name="cmSonNoAktar" Click="cmSonNoAktar_Click" Header="Son numarayı yansıt"/>
+            </ContextMenu>
+        </StackPanel.ContextMenu>
         <Border BorderThickness="0.5" BorderBrush="#ececec">
             <DockPanel HorizontalAlignment="Left" Margin="2">
                 <Button Click="btnYeni_Click" x:Name="btnYeni" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
@@ -57,13 +62,7 @@
                     <StackPanel>
                         <DockPanel Margin="0,1">
                             <Label Content="Firma Kodu :"  Width="95"/>
-                            <TextBox x:Name="txtFirmaKodu">
-                                <TextBox.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Son numarayı aktar" x:Name="btnGetLastCode" Click="btnGetLastCode_Click"/>
-                                    </ContextMenu>
-                                </TextBox.ContextMenu>
-                            </TextBox>
+                            <TextBox x:Name="txtFirmaKodu"/>
                         </DockPanel>
                         <DockPanel Margin="0,0,0,1">
                             <Label Content="Firma Ünvan :" Width="95"/>

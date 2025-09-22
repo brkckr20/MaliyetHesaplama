@@ -5,7 +5,6 @@ using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    // malzeme kodu alanına button edit mantığını ekle. (Redux Toolkit ile Veri Güncelleme) burdan devam - 18.09.2025
     public partial class UC_KumasKarti : UserControl
     {
         MiniOrm _orm = new MiniOrm();
@@ -18,24 +17,19 @@ namespace MaliyeHesaplama.userControls
 
             this.DataContext = this;
         }
-        void BaslangicVerileri()
+        public class TransactionRow
         {
-            string raw = Convert.ToString(_orm.GetById<dynamic>("ProductionManagementParams", 1).ReceteOperasyonTipleri);
-
-            OperasyonTipleri = new ObservableCollection<string>(
-                raw.Split(',').Select(x => x.Trim()).ToList()
-            );
-
-            var data = new ObservableCollection<Kalem>
-            {
-                new Kalem()
-            };
-
-            myDataGrid.ItemsSource = data;
+            public int Id { get; set; }
+            public string SelectedTransaction { get; set; }
         }
-        public class Kalem
+        void BaslangicVerileri() // grid controlü kontrol et. verileri alt alta yazıyor olarak geldi
         {
-            public string Operasyon { get; set; }
+            var data = new List<TransactionRow>();
+            data.Add(new TransactionRow { Id = 1, SelectedTransaction = "Alım" });
+            data.Add(new TransactionRow { Id = 2, SelectedTransaction = "Satım" });
+            data.Add(new TransactionRow { Id = 3, SelectedTransaction = "Transfer" });
+
+            dataGrid.ItemsSource = data;
         }
 
         private void btnYeni_Click(object sender, RoutedEventArgs e)

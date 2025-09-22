@@ -103,22 +103,29 @@
             <Border Grid.Column="1"></Border>
         </Grid>
         <GroupBox Header="Üretim Bilgileri">
-            <syncfusion:SfDataGrid
-                x:Name="myDataGrid"
-                AllowFiltering="True" AutoGenerateColumns="False" ItemsSource="{Binding}" AllowResizingColumns="True" AllowEditing="True" AddNewRowPosition="Bottom" AddNewRowText="Yeni satır ekle"
-                >
-                <syncfusion:SfDataGrid.Columns>
-                    <syncfusion:GridComboBoxColumn ItemsSource="{Binding OperasyonTipleri}" Width="100" MappingName="Operasyon" HeaderText="Kalem İşlem" HeaderStyle="{StaticResource headerStyle}" />
-                    <local1:GridButtonEditColumn MappingName="{Binding Recete.InventoryCode}" HeaderText="Malzeme Kodu" HeaderStyle="{StaticResource headerStyle}"/>
-                    <syncfusion:GridTextColumn Width="120" MappingName="InventoryCode" HeaderText="Malzeme Kodu" HeaderStyle="{StaticResource headerStyle}" />
-                    <syncfusion:GridTextColumn Width="100" MappingName="InventoryNane" HeaderText="Malzeme Adı" HeaderStyle="{StaticResource headerStyle}" />
-                    <syncfusion:GridTextColumn Width="90" MappingName="Quantity" HeaderText="Miktar" HeaderStyle="{StaticResource headerStyle}" />
-                    <syncfusion:GridTextColumn Width="80" MappingName="Unit" HeaderText="Birim" HeaderStyle="{StaticResource headerStyle}" />
-                    <syncfusion:GridTextColumn MappingName="UnitPrice" HeaderText="Birim Fiyat" HeaderStyle="{StaticResource headerStyle}" />
-                    <syncfusion:GridTextColumn MappingName="Forex" HeaderText="Döviz" HeaderStyle="{StaticResource headerStyle}" />
-                    <syncfusion:GridTextColumn MappingName="ForexPrice" HeaderText="Döviz Fiyat" HeaderStyle="{StaticResource headerStyle}" />
-                </syncfusion:SfDataGrid.Columns>
-            </syncfusion:SfDataGrid>
+            <DataGrid x:Name="dataGrid"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          RowHeight="24"
+          FontSize="12">
+                <DataGrid.Columns>
+                    <!-- Id kolonunu gizli yaptık -->
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
+
+                    <!-- ComboBox kolon -->
+                    <DataGridComboBoxColumn Header="Kalem İşlem"
+                        SelectedItemBinding="{Binding SelectedTransaction}">
+                        <DataGridComboBoxColumn.ItemsSource>
+                            <x:Array Type="{x:Type sys:String}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                <sys:String>Alım</sys:String>
+                                <sys:String>Satım</sys:String>
+                                <sys:String>Transfer</sys:String>
+                            </x:Array>
+                        </DataGridComboBoxColumn.ItemsSource>
+                    </DataGridComboBoxColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
         </GroupBox>
     </StackPanel>
 </UserControl>

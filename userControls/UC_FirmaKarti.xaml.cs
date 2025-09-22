@@ -1,9 +1,6 @@
 ﻿using MaliyeHesaplama.helpers;
-using Syncfusion.UI.Xaml.Grid;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using HandyControl.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
@@ -18,17 +15,25 @@ namespace MaliyeHesaplama.userControls
         }
         private void btnKayit_Click(object sender, RoutedEventArgs e)
         {
-            var dict = new Dictionary<string, object>
+            if (txtFirmaKodu.Text != string.Empty)
             {
-                { "Id",Id },
-                {"CompanyCode", txtFirmaKodu.Text },
-                {"CompanyName", txtFirmaUnvan.Text },
-                {"AddressLine1", txtAdres1.Text },
-                {"AddressLine2", txtAdres2.Text },
-                {"AddressLine3", txtAdres3.Text },
-            };
-            Id = _orm.Save("Company", dict);
-            Bildirim.Bilgilendirme("Veri kayıt işlemi başarıyla gerçekleştirildi.");
+                var dict = new Dictionary<string, object>
+                {
+                    { "Id",Id },
+                    {"CompanyCode", txtFirmaKodu.Text },
+                    {"CompanyName", txtFirmaUnvan.Text },
+                    {"AddressLine1", txtAdres1.Text },
+                    {"AddressLine2", txtAdres2.Text },
+                    {"AddressLine3", txtAdres3.Text },
+                };
+                Id = _orm.Save("Company", dict);
+                Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi.");
+            }
+            else
+            {
+                Bildirim.Uyari2("Firma kodu boş bırakılamaz!");
+            }
+
         }
 
         private void btnSil_Click(object sender, RoutedEventArgs e)
@@ -81,7 +86,7 @@ namespace MaliyeHesaplama.userControls
             }
             else
             {
-                Bildirim.Bilgilendirme("Gösterilecek başka bir kayıt bulunamadı!");
+                Bildirim.Bilgilendirme2("Gösterilecek başka bir kayıt bulunamadı!");
             }
         }
 
@@ -105,9 +110,9 @@ namespace MaliyeHesaplama.userControls
             Temizle();
         }
 
-        private void btnGetLastCode_Click(object sender, RoutedEventArgs e)
+        private void cmSonNoAktar_Click(object sender, RoutedEventArgs e)
         {
-            
+            txtFirmaKodu.Text = _orm.GetLastCompanyCode();
         }
     }
 }
