@@ -10,7 +10,7 @@ namespace MaliyeHesaplama.userControls
     {
         MiniOrm _orm = new MiniOrm();
         public ObservableCollection<string> OperasyonTipleri { get; set; }
-        public ObservableCollection<InventoryReceipt> Kayitlar { get; set; }
+        public ObservableCollection<InventoryReceipt> Recete { get; set; }
         public UC_KumasKarti()
         {
             InitializeComponent();

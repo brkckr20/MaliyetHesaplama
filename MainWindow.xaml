@@ -16,7 +16,7 @@
             <RibbonTab Header="Üretim Yönetimi">
                 <RibbonGroup Header="Maliyet ve Sipariş">
                     <RibbonButton x:Name="btnMaliyetHesaplama" Click="btnMaliyetHesaplama_Click" Label="Maliyet Hesaplama" LargeImageSource="/Libre Office Calc.png"  />
-                    <RibbonButton Label="Sipariş Girişi" LargeImageSource="/Purchase Order.png" />
+                    <RibbonButton x:Name="btnSiparisGirisi" Click="btnSiparisGirisi_Click" Label="Sipariş Girişi" LargeImageSource="/Purchase Order.png" />
                 </RibbonGroup>
             </RibbonTab>
             <RibbonTab Header="Kartlar">

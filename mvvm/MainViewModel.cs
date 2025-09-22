@@ -2,12 +2,14 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Input;
 
 
 namespace MaliyeHesaplama.mvvm
 {
     public partial class MainViewModel : ObservableObject
     {
+        public ICommand AcButtonCommand { get; }
         public MainViewModel()
         {
             Cozgu1IpBilBolen = 1; Cozgu1IpBilBolunen = 1; Cozgu2IpBilBolen = 1; Cozgu2IpBilBolunen = 1; Atki1IpBilBolen = 1; Atki1IpBilBolunen = 1; Atki2IpBilBolen = 1; Atki2IpBilBolunen = 1; Atki3IpBilBolen = 1; Atki3IpBilBolunen = 1; Atki4IpBilBolen = 1; Atki4IpBilBolunen = 1;
@@ -20,6 +22,12 @@ namespace MaliyeHesaplama.mvvm
             Cozgu1IpBoyText = "0.00"; Cozgu2IpBoyText = "0.00"; Atki1IpBoyText = "0.00"; Atki2IpBoyText = "0.00"; Atki3IpBoyText = "0.00"; Atki4IpBoyText = "0.00";
             atkiUrFiyText = "0.00"; CozguUrFiyText = "0.00"; ParcaYikamaUrFiyText = "0.00"; KumasBoyamaUrFiyText = "0.00"; DokumaFiresiUrFiyText = "0.00"; BoyaFiresiUrFiyText = "0.00"; KonfMaliyetiUrFiyText = "0.00"; IkinciKaliyeMaliyetiUrFiyText = "0.00"; KarUrFiyText = "0.00"; KdvUrFiyText = "0.00"; KurUrFiyText = "36.00"; PariteUrFiyText = "0.00"; EurUrFiyText = "0.00";
             BelirlenenFiyatText = "0.00";
+            AcButtonCommand = new RelayCommand<object>(OnAcButon);
+        }
+        private void OnAcButon(object obj)
+        {
+            
+            MessageBox.Show($"Butona tıklandı: ");
         }
 
         /********************************* ÜRETİM BİLGİLERİ - İPLİK BİLGİLERİ **********************************/

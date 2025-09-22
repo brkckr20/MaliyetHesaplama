@@ -101,5 +101,11 @@ namespace MaliyeHesaplama
             userControls.UC_UretimYonetimiParametreleri uc = new userControls.UC_UretimYonetimiParametreleri();
             AddOrSelectTab("Üretim Yönetimi Parametreleri", uc);
         }
+
+        private void btnSiparisGirisi_Click(object sender, RoutedEventArgs e)
+        {
+            userControls.HandyTest uc = new userControls.HandyTest();
+            AddOrSelectTab("Sipariş Girişi", uc);
+        }
     }
 }

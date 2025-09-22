@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:local1="clr-namespace:MaliyeHesaplama.helpers.controller"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -108,7 +109,7 @@
                 >
                 <syncfusion:SfDataGrid.Columns>
                     <syncfusion:GridComboBoxColumn ItemsSource="{Binding OperasyonTipleri}" Width="100" MappingName="Operasyon" HeaderText="Kalem İşlem" HeaderStyle="{StaticResource headerStyle}" />
-                    <syncfusion:GridTextColumn Width="40" MappingName="InventoryId" HeaderText="Malzeme Id" IsHidden="True" HeaderStyle="{StaticResource headerStyle}" />
+                    <local1:GridButtonEditColumn MappingName="{Binding Recete.InventoryCode}" HeaderText="Malzeme Kodu" HeaderStyle="{StaticResource headerStyle}"/>
                     <syncfusion:GridTextColumn Width="120" MappingName="InventoryCode" HeaderText="Malzeme Kodu" HeaderStyle="{StaticResource headerStyle}" />
                     <syncfusion:GridTextColumn Width="100" MappingName="InventoryNane" HeaderText="Malzeme Adı" HeaderStyle="{StaticResource headerStyle}" />
                     <syncfusion:GridTextColumn Width="90" MappingName="Quantity" HeaderText="Miktar" HeaderStyle="{StaticResource headerStyle}" />

@@ -3,6 +3,7 @@ using Syncfusion.UI.Xaml.Grid;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using HandyControl.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
@@ -102,6 +103,11 @@ namespace MaliyeHesaplama.userControls
         private void btnYeni_Click(object sender, RoutedEventArgs e)
         {
             Temizle();
+        }
+
+        private void btnGetLastCode_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

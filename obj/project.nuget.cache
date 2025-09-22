@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0uqSluHMRj+9q+hASrihzO0IaJE0WIC2gFfRbFrDRUCTiTkcU59KVBSlbqgL74nsc0wkketyGkjWlL349kGTnQ==",
+  "dgSpecHash": "BpzMZxyAyKy8LHebNboNHVlAUnoGf3PHtdZIvkXUomx5v5OxTmVmp4MGcAw2lxkR71/hMmxnDQotUK7bvKtuew==",
   "success": true,
   "projectFilePath": "C:\\Users\\casper\\Desktop\\Klasörler\\z\\MaliyeHesaplama\\MaliyeHesaplama.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,8 @@
     "C:\\Users\\casper\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\datagridextensions\\2.7.0\\datagridextensions.2.7.0.nupkg.sha512",
+    "C:\\Users\\casper\\.nuget\\packages\\extended.wpf.toolkit\\5.0.0\\extended.wpf.toolkit.5.0.0.nupkg.sha512",
+    "C:\\Users\\casper\\.nuget\\packages\\handycontrol\\3.5.1\\handycontrol.3.5.1.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\microsoft.bcl.cryptography\\8.0.0\\microsoft.bcl.cryptography.8.0.0.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\microsoft.data.sqlclient\\6.1.1\\microsoft.data.sqlclient.6.1.1.nupkg.sha512",

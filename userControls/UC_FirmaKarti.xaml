@@ -4,42 +4,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <Border BorderThickness="0.5" BorderBrush="#ececec">
             <DockPanel HorizontalAlignment="Left" Margin="2">
-                <Button Click="btnYeni_Click" x:Name="btnYeni" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                <Button Click="btnYeni_Click" x:Name="btnYeni" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/new.ico" />
                         <TextBlock Text="Yeni" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="btnKayit" Click="btnKayit_Click" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                <Button x:Name="btnKayit" Click="btnKayit_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/save.ico" />
                         <TextBlock Text="Kaydet" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
-                </Button>                
-                <Button x:Name="btnListe" Click="btnListe_Click" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                </Button>
+                <Button x:Name="btnListe" Click="btnListe_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/list.ico" />
                         <TextBlock Text="Liste" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
-                </Button> 
-                <Button Click="btnGeri_Click" x:Name="btnGeri" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                </Button>
+                <Button Click="btnGeri_Click" x:Name="btnGeri" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/back.ico" />
                         <TextBlock Text="Önceki" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button Click="btnIleri_Click" x:Name="btnIleri" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                <Button Click="btnIleri_Click" x:Name="btnIleri" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/next.ico" />
                         <TextBlock Text="Sonraki" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="btnSil" Click="btnSil_Click" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                <Button x:Name="btnSil" Click="btnSil_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/trash.ico" />
                         <TextBlock Text="Sil" HorizontalAlignment="Center" Margin="0,4,0,0"/>
@@ -55,23 +56,29 @@
                 <Border Width="340">
                     <StackPanel>
                         <DockPanel Margin="0,1">
-                            <Label Content="Firma Kodu :"  Width="83"/>
-                            <TextBox x:Name="txtFirmaKodu"/>
+                            <Label Content="Firma Kodu :"  Width="95"/>
+                            <TextBox x:Name="txtFirmaKodu">
+                                <TextBox.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Son numarayı aktar" x:Name="btnGetLastCode" Click="btnGetLastCode_Click"/>
+                                    </ContextMenu>
+                                </TextBox.ContextMenu>
+                            </TextBox>
                         </DockPanel>
                         <DockPanel Margin="0,0,0,1">
-                            <Label Content="Firma Ünvan :" Width="83"/>
+                            <Label Content="Firma Ünvan :" Width="95"/>
                             <TextBox x:Name="txtFirmaUnvan"/>
                         </DockPanel>
                         <DockPanel Margin="0,0,0,1">
-                            <Label Content="Adres 1 :" Width="83"/>
+                            <Label Content="Adres 1 :" Width="95"/>
                             <TextBox x:Name="txtAdres1"/>
                         </DockPanel>
                         <DockPanel Margin="0,0,0,1">
-                            <Label Content="Adres 2 :" Width="83"/>
+                            <Label Content="Adres 2 :" Width="95"/>
                             <TextBox x:Name="txtAdres2"/>
                         </DockPanel>
                         <DockPanel Margin="0,0,0,1">
-                            <Label Content="Adres 3 :" Width="83"/>
+                            <Label Content="Adres 3 :" Width="95"/>
                             <TextBox x:Name="txtAdres3"/>
                         </DockPanel>
                     </StackPanel>
