@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaliyeHesaplama.helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,9 @@ namespace MaliyeHesaplama.userControls
 
         void GetDatas()
         {
-            txtOperasyonTipi.Text = _orm.GetById<dynamic>("ProductionManagementParams", 1).ReceteOperasyonTipleri;
+            var data = _orm.GetById<dynamic>("ProductionManagementParams", 1);
+            txtOperasyonTipi.Text = data.ReceteOperasyonTipleri;
+            chckReceteOlacak.IsChecked = Convert.ToBoolean(data.KumasRecetesiOlacak);
         }
         private void btnYeni_Click(object sender, RoutedEventArgs e)
         {
@@ -42,8 +45,10 @@ namespace MaliyeHesaplama.userControls
             {
                 { "Id", 1},
                 { "ReceteOperasyonTipleri", txtOperasyonTipi.Text },
+                { "KumasRecetesiOlacak", chckReceteOlacak.IsChecked },
             };
             _orm.Save("ProductionManagementParams", dict);
+            Bildirim.Bilgilendirme2("Kayıt işlemi başarıyla gerçekleştirildi.");
         }
 
         private void btnListe_Click(object sender, RoutedEventArgs e)

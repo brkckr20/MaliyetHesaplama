@@ -5,8 +5,8 @@ namespace MaliyeHesaplama.models
 {
     public class InventoryReceipt : INotifyPropertyChanged
     {
-        private int _id, _inventoryId, _ownerInventoryId;
-        private string _genus, _forex, _operationType;
+        private int _id, _inventoryId, _ownerInventoryId, _type;
+        private string _genus, _forex, _operationType, _inventoryCode, _inventoryName;
         private decimal _quantity, _quantityPrice, _forexPrice;
 
         public int Id
@@ -34,7 +34,7 @@ namespace MaliyeHesaplama.models
             get => _quantity;
             set { _quantity = value; OnPropertyChanged(); }
         }
-        public decimal QuantityPrice
+        public decimal UnitPrice
         {
             get => _quantityPrice;
             set { _quantityPrice = value; OnPropertyChanged(); }
@@ -54,6 +54,22 @@ namespace MaliyeHesaplama.models
         {
             get => _operationType;
             set { _operationType = value; OnPropertyChanged(); }
+        }
+
+        public string InventoryCode
+        {
+            get => _inventoryCode;
+            set { _inventoryCode = value; OnPropertyChanged(); }
+        }
+        public string InventoryName
+        {
+            get => _inventoryName;
+            set { _inventoryName = value; OnPropertyChanged(); }
+        }
+        public int Type
+        {
+            get => _type;
+            set { _type = value; OnPropertyChanged(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

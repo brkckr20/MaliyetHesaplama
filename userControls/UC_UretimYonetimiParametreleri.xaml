@@ -68,11 +68,16 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <GroupBox Header="Reçete" Foreground="Black">
-                            <DockPanel>
-                                <TextBlock VerticalAlignment="Center" Text="Operasyon Tipleri : "/>
-                                <TextBox x:Name="txtOperasyonTipi" VerticalContentAlignment="Center" Width="300" Height="22"/>
-                                <TextBlock Margin="4,0,0,0" VerticalAlignment="Center" Text="(Her bir tip arasında , (virgül) konulmalıdır)" Foreground="Gray"/>
-                            </DockPanel>
+                            <StackPanel>
+                                <DockPanel>
+                                    <TextBlock VerticalAlignment="Center" Text="Operasyon Tipleri : "/>
+                                    <TextBox x:Name="txtOperasyonTipi" VerticalContentAlignment="Center" Width="300" Height="22"/>
+                                    <TextBlock Margin="4,0,0,0" VerticalAlignment="Center" Text="(Her bir tip arasında , (virgül) konulmalıdır)" Foreground="Gray"/>
+                                </DockPanel>
+                                <DockPanel Margin="0,5,0,0">
+                                    <CheckBox x:Name="chckReceteOlacak" Content="Kumaş kartı oluşturulurken reçete girilecek"/>
+                                </DockPanel>
+                            </StackPanel>                           
                         </GroupBox>
                     </Grid>
                 </TabItem>

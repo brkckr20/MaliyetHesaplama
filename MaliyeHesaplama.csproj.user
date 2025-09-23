@@ -28,6 +28,9 @@
     <Compile Update="wins\winFirmaListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="wins\winMalzemeListesi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="wins\winNumaratorListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -55,6 +58,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winFirmaListesi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="wins\winMalzemeListesi.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winNumaratorListesi.xaml">

@@ -16,9 +16,14 @@
             <Setter Property="Background" Value="Transparent"/>
         </Style>
     </UserControl.Resources>
-    
-    <StackPanel>
-        <Border BorderThickness="0.5" BorderBrush="#ececec">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderThickness="0.5" BorderBrush="#ececec">
             <DockPanel HorizontalAlignment="Left" Margin="2">
                 <Button Click="btnYeni_Click" x:Name="btnYeni" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -58,7 +63,7 @@
                 </Button>
             </DockPanel>
         </Border>
-        <Grid>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -102,30 +107,55 @@
             </StackPanel>
             <Border Grid.Column="1"></Border>
         </Grid>
-        <GroupBox Header="Üretim Bilgileri">
+        <GroupBox x:Name="gbRecete" Grid.Row="2" Header="Üretim Bilgileri">
             <DataGrid x:Name="dataGrid"
           AutoGenerateColumns="False"
           CanUserAddRows="False"
+          CanUserDeleteRows="True"
           RowHeight="24"
-          FontSize="12">
+          FontSize="12"
+          PreviewKeyDown="dataGrid_PreviewKeyDown"
+          HorizontalGridLinesBrush="#ececec"
+          VerticalGridLinesBrush="#ececec"
+          AlternatingRowBackground="#ececec"
+                      >
                 <DataGrid.Columns>
-                    <!-- Id kolonunu gizli yaptık -->
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
-
-                    <!-- ComboBox kolon -->
                     <DataGridComboBoxColumn Header="Kalem İşlem"
-                        SelectedItemBinding="{Binding SelectedTransaction}">
+                        SelectedItemBinding="{Binding SelectedTransaction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <DataGridComboBoxColumn.ItemsSource>
                             <x:Array Type="{x:Type sys:String}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                <sys:String>Alım</sys:String>
-                                <sys:String>Satım</sys:String>
-                                <sys:String>Transfer</sys:String>
+                                <sys:String>Çözgü 1</sys:String>
+                                <sys:String>Çözgü 2</sys:String>
+                                <sys:String>Atkı 1</sys:String>
+                                <sys:String>Atkı 2</sys:String>
+                                <sys:String>Atkı 3</sys:String>
+                                <sys:String>Atkı 4</sys:String>
                             </x:Array>
                         </DataGridComboBoxColumn.ItemsSource>
                     </DataGridComboBoxColumn>
-
+                    <DataGridTemplateColumn Header="İplik Kodu" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="16"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" Text="{Binding InventoryCode, Mode=TwoWay}"/>
+                                    <Button x:Name="btnMalzemeKodu" Click="btnMalzemeKodu_Click" Grid.Column="1" Content="..." Background="Transparent" BorderThickness=".3"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Width="200" Header="İplik Adı" Binding="{Binding InventoryName}"/>
+                    <DataGridTextColumn Header="Miktar" Binding="{Binding Quantity}"/>
+                    <DataGridTextColumn Header="Birim" Binding="{Binding Unit}"/>
+                    <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice}"/>
+                    <DataGridTextColumn Header="Döviz" Binding="{Binding Forex}"/>
+                    <DataGridTextColumn Header="Döviz Fiyat" Binding="{Binding ForexPrice}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-    </StackPanel>
+    </Grid>
 </UserControl>
