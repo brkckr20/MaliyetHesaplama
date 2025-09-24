@@ -1,5 +1,4 @@
-﻿using MaliyeHesaplama.helpers;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
 
@@ -18,11 +17,7 @@ namespace MaliyeHesaplama.wins
             var data = _orm.GetAll<dynamic>("Inventory");
             txtAdi.Focus();
             collectionView = CollectionViewSource.GetDefaultView(data);
-            collectionView.Filter = obj =>
-            {
-                dynamic item = obj;
-                return item.Type == _inventoryType && item.IsPrefix == false;
-            };
+            collectionView.Filter = FilterItems;            
             sfDataGrid.ItemsSource = collectionView;
             switch (_inventoryType)
             {
@@ -33,15 +28,26 @@ namespace MaliyeHesaplama.wins
                     break;
             }
         }
+        private bool FilterItems(object obj)
+        {
+            dynamic item = obj;
+
+            if (item.Type != _inventoryType || item.IsPrefix)
+                return false;
+            bool matchesCode = string.IsNullOrEmpty(txtKodu.Text) || (item.InventoryCode?.ToLower().Contains(txtKodu.Text.ToLower()) ?? false);
+            bool matchesName = string.IsNullOrEmpty(txtAdi.Text) || (item.InventoryName?.ToLower().Contains(txtAdi.Text.ToLower()) ?? false);
+
+            return matchesCode && matchesName;
+        }
 
         private void txtKodu_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            DataGridSearchHelper.SearchWithTextboxValue(txtKodu, "InventoryCode", collectionView);
+            collectionView.Refresh();
         }
 
         private void txtAdi_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            DataGridSearchHelper.SearchWithTextboxValue(txtAdi, "InventoryName", collectionView);
+            collectionView.Refresh();
         }
 
         private void sfDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)

@@ -13,24 +13,25 @@ namespace MaliyeHesaplama.helpers
     {
         public static void SearchWithTextboxValue(TextBox aranacakTextbox, string fieldAdi, ICollectionView collectionView)
         {
-            string filterText = aranacakTextbox.Text.ToLower();
+            //string filterText = aranacakTextbox.Text.ToLower();
 
-            if (collectionView != null)
-            {
-                collectionView.Filter = item =>
-                {
-                    var dict = (IDictionary<string, object>)item;
+            //if (collectionView != null)
+            //{
+            //    collectionView.Filter = item =>
+            //    {
+            //        var dict = (IDictionary<string, object>)item;
 
-                    // Eğer "CompanyName" property’si varsa
-                    if (dict.ContainsKey(fieldAdi) && dict[fieldAdi] != null)
-                    {
-                        string companyName = dict[fieldAdi].ToString().ToLower();
-                        return companyName.Contains(filterText);
-                    }
-                    return false;
-                };
-                collectionView.Refresh();
-            }
+            //        if (dict.ContainsKey(fieldAdi) && dict[fieldAdi] != null)
+            //        {
+            //            string value = dict[fieldAdi].ToString().ToLower();
+            //            return value.Contains(filterText);
+            //        }
+            //        return false;
+            //    };
+
+            //    // Filter’i her CollectionChanged sonrası tekrar uygulat
+            //    collectionView.Refresh();
+            //}
         }
     }
 }

@@ -9,6 +9,7 @@ namespace MaliyeHesaplama.mvvm
 {
     public partial class MainViewModel : ObservableObject
     {
+        MiniOrm _orm = new MiniOrm();
         public ICommand AcButtonCommand { get; }
         public MainViewModel()
         {
@@ -20,7 +21,7 @@ namespace MaliyeHesaplama.mvvm
             BoySacakText = "0"; EnSacakText = "0";
             Cozgu1IpFiyText = "0.00"; Cozgu2IpFiyText = "0.00"; Atki1IpFiyText = "0.00"; Atki2IpFiyText = "0.00"; Atki3IpFiyText = "0.00"; Atki4IpFiyText = "0.00";
             Cozgu1IpBoyText = "0.00"; Cozgu2IpBoyText = "0.00"; Atki1IpBoyText = "0.00"; Atki2IpBoyText = "0.00"; Atki3IpBoyText = "0.00"; Atki4IpBoyText = "0.00";
-            atkiUrFiyText = "0.00"; CozguUrFiyText = "0.00"; ParcaYikamaUrFiyText = "0.00"; KumasBoyamaUrFiyText = "0.00"; DokumaFiresiUrFiyText = "0.00"; BoyaFiresiUrFiyText = "0.00"; KonfMaliyetiUrFiyText = "0.00"; IkinciKaliyeMaliyetiUrFiyText = "0.00"; KarUrFiyText = "0.00"; KdvUrFiyText = "0.00"; KurUrFiyText = "36.00"; PariteUrFiyText = "0.00"; EurUrFiyText = "0.00";
+            atkiUrFiyText = "0.00"; CozguUrFiyText = "0.00"; ParcaYikamaUrFiyText = "0.00"; KumasBoyamaUrFiyText = "0.00"; DokumaFiresiUrFiyText = "0.00"; BoyaFiresiUrFiyText = "0.00"; KonfMaliyetiUrFiyText = "0.00"; IkinciKaliyeMaliyetiUrFiyText = "0.00"; KarUrFiyText = "0.00"; KdvUrFiyText = "0.00"; KurUrFiyText = _orm.GetEURCurrency("EUR_ALIS"); PariteUrFiyText = "0.00"; EurUrFiyText = "0.00";
             BelirlenenFiyatText = "0.00";
             AcButtonCommand = new RelayCommand<object>(OnAcButon);
         }
