@@ -6,22 +6,44 @@
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
-        Title="Numaratör Listesi" Height="450" Width="400" WindowStartupLocation="CenterScreen" Icon="/wins/News.png">
-    <Grid>
-        <syncfusion:SfDataGrid 
-        x:Name="sfDataGrid" 
-        AutoGenerateColumns="True" 
-        AllowFiltering="True" 
-        AllowSorting="True" 
-        FilterRowPosition="Top"                    
-        AllowResizingColumns="True"
-        RowHeight="20"
-        FontSize="11"
-        RowSelectionBrush="Orange"
-        SelectionForegroundBrush="White"
-        CellDoubleTapped="sfDataGrid_CellDoubleTapped"
-
->
-        </syncfusion:SfDataGrid>
+        Title="Numaratör Listesi" Height="450" Width="650" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Icon="/wins/News.png">
+    <Grid Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="4">
+            <TextBlock Text="Filtreler" FontWeight="Bold" Margin="0,0,0,3"/>
+            <StackPanel>
+                <TextBlock Text="Kodu:"/>
+                <TextBox x:Name="txtKodu" TextChanged="txtKodu_TextChanged" TabIndex="2" FontSize="16" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Adı:"/>
+                <TextBox x:Name="txtAdi" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
+            </StackPanel>
+        </StackPanel>
+        <DataGrid Grid.Column="1" 
+          x:Name="sfDataGrid" 
+          CanUserAddRows="True" 
+          FontSize="11" RowHeight="24" 
+          VerticalContentAlignment="Center"
+          CanUserSortColumns="True"
+          IsReadOnly="True"
+          AutoGenerateColumns="False"
+          GridLinesVisibility="All"
+          HorizontalGridLinesBrush="#ececec"
+          VerticalGridLinesBrush="#ececec"
+              MouseDoubleClick="sfDataGrid_MouseDoubleClick"
+          >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Kodu" Binding="{Binding Prefix}"/>
+                <DataGridTextColumn Header="Son Numara" Binding="{Binding Number,StringFormat='D3'}"/>
+                <DataGridTextColumn Header="Adı" Binding="{Binding Name}"/>
+                <!--<DataGridTextColumn Header="Kullanımda?" Binding="{Binding IsActive}"/>
+                <DataGridTextColumn Header="Malzeme Türü" Binding="{Binding InventoryType}"/>-->
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

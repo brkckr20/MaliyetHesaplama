@@ -60,25 +60,42 @@ namespace MaliyeHesaplama.userControls
 
         }
 
-        private void btnKayit_Click(object sender, RoutedEventArgs e) // kayıt işlemi yapılırken combinedkod kısmını form uygulamasından kontrol et
+        private void btnKayit_Click(object sender, RoutedEventArgs e)
         {
+            string combinedCode = txtKodu.Text.Substring(0, 3) + txtHamEn.Text + txtHamBoy.Text + txtMamulEn.Text + txtMamulBoy.Text + txtHamGrm2.Text + txtMamulGrm2.Text + Convert.ToInt32(chckIpBoyali.IsChecked);
+            string _malzemeAdi = lblKumasAdi.Text + (txtHamEn.Text != string.Empty ? " H.En " + txtHamEn.Text : "") + (txtHamBoy.Text != string.Empty ? " H.Boy " + txtHamBoy.Text : "") + (txtMamulEn.Text != string.Empty ? " Mamul En " + txtMamulEn.Text : "") + (txtMamulBoy.Text != string.Empty ? " Mamul boy " + txtMamulBoy.Text : "") + (txtHamGrm2.Text != string.Empty ? " Ham Gr " + txtHamGrm2.Text : "") + (txtMamulGrm2.Text != string.Empty ? " Ham Gr " + txtMamulGrm2.Text : "") + (Convert.ToInt32(chckIpBoyali.IsChecked) == 0 ? "" : " İpliği Boyalı");
             var dict = new Dictionary<string, object>
             {
                 { "Id",Id },
-                { "InventoryCode",txtKodu.Text + " x" },
-                { "InventoryName",lblKumasAdi.Text + " y" },
+                { "InventoryCode",txtKodu.Text},
+                { "InventoryName",_malzemeAdi },
                 { "Unit","" },
-                { "Type",1 },
+                { "Type",Enums.Inventory.Kumas },
+                { "CombinedCode",combinedCode },
+                { "IsPrefix",Convert.ToInt32(chckIpBoyali.IsChecked)},
+                { "Explanation",txtAciklama.Text},
             };
-            Id = _orm.Save("Inventory", dict);
-            Bildirim.Bilgilendirme2("Kayıt edildi");
-        }
+            var inventoryCode = _orm.GetInventoryCodeByCombinedCode(combinedCode);
 
+            if (!string.IsNullOrEmpty(inventoryCode))
+            {
+                Bildirim.Uyari2($"Yukarıdaki özelliklere göre daha önceden bir kumaş kartı kayıt edilmiş.\nLütfen: {inventoryCode}' nolu kaydı kontrol ediniz!");
+                return;
+            }
+
+            else
+            {
+                Id = _orm.Save("Inventory", dict);
+                lblKumasAdi.Text = _malzemeAdi;
+                Bildirim.Bilgilendirme2("Kumaş kayıt işlemi başarılı bir şekilde gerçekleştirildi.");
+            }
+
+        }
         private void btnListe_Click(object sender, RoutedEventArgs e)
         {
 
         }
-        private void dataGrid_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void dataGrid_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (_recete == null) return;
             var grid = (DataGrid)sender;
@@ -94,23 +111,25 @@ namespace MaliyeHesaplama.userControls
 
         private void btnMalzemeKodu_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            if (button == null) return;
-            var row = button.DataContext as InventoryReceipt;
-            if (row == null) return;
-            wins.winMalzemeListesi win = new wins.winMalzemeListesi(2);
-            win.ShowDialog();
-            row.InventoryCode = win.Code;
-            row.InventoryName = win.Name;
+            //var button = sender as Button;
+            //if (button == null) return;
+            //var row = button.DataContext as InventoryReceipt;
+            //if (row == null) return;
+            //wins.winMalzemeListesi win = new wins.winMalzemeListesi(2);
+            //win.ShowDialog();
+            //row.InventoryCode = win.Code;
+            //row.InventoryName = win.Name;
+            //MessageBox.Show("");
 
         }
 
         private void btnKumasKodu_Click(object sender, RoutedEventArgs e)
         {
-            wins.winMalzemeListesi win = new wins.winMalzemeListesi(1);
+            wins.winNumaratorListesi win = new wins.winNumaratorListesi(Enums.Inventory.Kumas);
             win.ShowDialog();
-            txtKodu.Text = win.Code;
-            lblKumasAdi.Text = win.Name;
+            string number = (win.Number + 1).ToString("D3");
+            txtKodu.Text = win.Prefix + number;
+            lblKumasAdi.Text = win.NameX;
         }
     }
 }

@@ -102,4 +102,9 @@ public class MiniOrm
         var sql = $"select top 1 {kur} from Currency order by TARIH desc";
         return _connection.QueryFirstOrDefault<string>(sql);
     }
+    public string GetInventoryCodeByCombinedCode(string code)
+    {
+        var sql = "SELECT InventoryCode FROM Inventory WHERE CombinedCode = @Code";
+        return _connection.QueryFirstOrDefault<string>(sql, new { Code = code });
+    }
 }

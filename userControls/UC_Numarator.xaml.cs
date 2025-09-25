@@ -44,17 +44,17 @@ namespace MaliyeHesaplama.userControls
         }
         private void btnListe_Click(object sender, RoutedEventArgs e)
         {
-            wins.winNumaratorListesi win = new wins.winNumaratorListesi();
-            win.ShowDialog();
-            if (win.SatirSecildi)
-            {
-                txtOnEk.Text = win.OnEk;
-                txtNumara.Text = win.Numara.ToString();
-                txtIsim.Text = win.Isim;
-                chckKullanimda.IsChecked = win.Kullanimda;
-                cmbTur.SelectedIndex = win.Tur;
-                this.Id = win.Id;
-            }
+            //wins.winNumaratorListesi win = new wins.winNumaratorListesi();
+            //win.ShowDialog();
+            //if (win.SatirSecildi)
+            //{
+            //    txtOnEk.Text = win.OnEk;
+            //    txtNumara.Text = win.Numara.ToString();
+            //    txtIsim.Text = win.Isim;
+            //    chckKullanimda.IsChecked = win.Kullanimda;
+            //    cmbTur.SelectedIndex = win.Tur;
+            //    this.Id = win.Id;
+            //}
         }
 
         private void btnSil_Click(object sender, RoutedEventArgs e)
