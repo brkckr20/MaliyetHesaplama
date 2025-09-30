@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         mc:Ignorable="d"
-        Title="" Height="450" Width="650" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift">
+        Title="" Height="450" Width="750" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift">
     <Grid Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -20,6 +20,22 @@
             <StackPanel>
                 <TextBlock Text="Malzeme Adı:"/>
                 <TextBox x:Name="txtAdi" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Tag="KumasKartiItem">
+                <TextBlock Text="Ham En:"/>
+                <TextBox x:Name="txtHamEn" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Tag="KumasKartiItem">
+                <TextBlock Text="Ham Boy:"/>
+                <TextBox x:Name="txtHamBoy" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Tag="KumasKartiItem">
+                <TextBlock Text="Mamul En:"/>
+                <TextBox x:Name="txtMamulEn" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Tag="KumasKartiItem">
+                <TextBlock Text="Mamul Boy:"/>
+                <TextBox x:Name="txtMamulBoy" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
             </StackPanel>
         </StackPanel>
         <DataGrid Grid.Column="1" 
@@ -39,6 +55,10 @@
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Malzeme Kodu" Binding="{Binding InventoryCode}"/>
                 <DataGridTextColumn Header="Malzeme Adı" Binding="{Binding InventoryName}"/>
+                <DataGridTextColumn Header="Ham En" Binding="{Binding RawWidth}"/>
+                <DataGridTextColumn Header="Ham Boy" Binding="{Binding RawHeight}"/>
+                <DataGridTextColumn Header="Mamul En" Binding="{Binding ProdWidth}"/>
+                <DataGridTextColumn Header="Mamul Boy" Binding="{Binding ProdHeight}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
