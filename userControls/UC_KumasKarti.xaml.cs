@@ -44,15 +44,41 @@ namespace MaliyeHesaplama.userControls
         {
             Temizle();
         }
+        void KayitlariGetir(string tip)
+        {
+            dynamic record = null;
+            if (tip == "Önceki")
+            {
+                record = _orm.GetBeforeRecord<dynamic>("Inventory", Id);
+            }
+            else
+            {
+                record = _orm.GetNextRecord<dynamic>("Inventory", Id);
+            }
+
+            if (record != null)
+            {
+                Id = record.Id;
+                //txtFirmaKodu.Text = record.CompanyCode;
+                //txtFirmaUnvan.Text = record.CompanyName;
+                //txtAdres1.Text = record.AddressLine1;
+                //txtAdres2.Text = record.AddressLine2;
+                //txtAdres3.Text = record.AddressLine3;
+            }
+            else
+            {
+                Bildirim.Bilgilendirme2("Gösterilecek başka bir kayıt bulunamadı!");
+            }
+        }
 
         private void btnGeri_Click(object sender, RoutedEventArgs e)
         {
-
+            KayitlariGetir("Önceki");
         }
 
         private void btnIleri_Click(object sender, RoutedEventArgs e)
         {
-
+            KayitlariGetir("Sonraki");
         }
 
         private void btnSil_Click(object sender, RoutedEventArgs e)
@@ -66,13 +92,13 @@ namespace MaliyeHesaplama.userControls
         private void btnKayit_Click(object sender, RoutedEventArgs e)
         {
             string combinedCode = txtKodu.Text.Substring(0, 3) + txtHamEn.Text + txtHamBoy.Text + txtMamulEn.Text + txtMamulBoy.Text + txtHamGrm2.Text + txtMamulGrm2.Text + Convert.ToInt32(chckIpBoyali.IsChecked);
-            string _malzemeAdi = lblKumasAdi.Text + (txtHamEn.Text != string.Empty ? " H.En " + txtHamEn.Text : "") + (txtHamBoy.Text != string.Empty ? " H.Boy " + txtHamBoy.Text : "") + (txtMamulEn.Text != string.Empty ? " Mamul En " + txtMamulEn.Text : "") + (txtMamulBoy.Text != string.Empty ? " Mamul boy " + txtMamulBoy.Text : "") + (txtHamGrm2.Text != string.Empty ? " Ham Gr " + txtHamGrm2.Text : "") + (txtMamulGrm2.Text != string.Empty ? " Ham Gr " + txtMamulGrm2.Text : "") + (Convert.ToInt32(chckIpBoyali.IsChecked) == 0 ? "" : " İpliği Boyalı");
+            string _malzemeAdi = lblKumasAdi.Text + (txtHamEn.Text != string.Empty ? " H.En " + txtHamEn.Text : "") + (txtHamBoy.Text != string.Empty ? " H.Boy " + txtHamBoy.Text : "") + (txtMamulEn.Text != string.Empty ? " Mamul En " + txtMamulEn.Text : "") + (txtMamulBoy.Text != string.Empty ? " Mamul boy " + txtMamulBoy.Text : "") + (txtHamGrm2.Text != string.Empty ? " Ham Gr " + txtHamGrm2.Text : "") + (txtMamulGrm2.Text != string.Empty ? " Mamul Gr " + txtMamulGrm2.Text : "") + (Convert.ToInt32(chckIpBoyali.IsChecked) == 0 ? "" : " İpliği Boyalı");
             var dict = new Dictionary<string, object>
             {
                 { "Id",Id },
                 { "InventoryCode",txtKodu.Text}, { "InventoryName",_malzemeAdi },
                 { "Unit","" }, { "Type",Enums.Inventory.Kumas },
-                { "CombinedCode",combinedCode }, { "IsPrefix",Convert.ToInt32(chckIpBoyali.IsChecked)},
+                { "CombinedCode",combinedCode }, { "IsPrefix",false},
                 { "Explanation",txtAciklama.Text},{ "RawWidth",txtHamEn.Text }, {"RawHeight", txtHamBoy.Text},
                 {"ProdWidth", txtMamulEn.Text }, {"ProdHeight", txtMamulBoy.Text},
                 {"RawGrammage", txtHamGrm2.Text }, {"ProdGrammage",txtMamulGrm2.Text}, {"YarnDyed",chckIpBoyali.IsChecked}

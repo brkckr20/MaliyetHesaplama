@@ -107,4 +107,18 @@ public class MiniOrm
         var sql = "SELECT InventoryCode FROM Inventory WHERE CombinedCode = @Code";
         return _connection.QueryFirstOrDefault<string>(sql, new { Code = code });
     }
+    public string GetRecordNo(string tableName, string fieldName, string typeName, int typeNo)
+    {
+        var sql = $"select top 1 {fieldName} from {tableName} where {typeName} = {typeNo} order by {fieldName} desc";
+        var result = _connection.QueryFirstOrDefault<string>(sql);
+        if (result != null)
+        {
+            if (int.TryParse(result, out int currentValue))
+            {
+                currentValue++;
+                return currentValue.ToString("D8");
+            }
+        }
+        return "00000001";
+    }
 }

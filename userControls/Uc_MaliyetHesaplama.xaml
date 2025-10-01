@@ -21,7 +21,7 @@
                         <TextBlock Text="Yeni" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="btnKayit" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                <Button x:Name="btnKayit" Click="btnKayit_Click" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/save.ico" />
                         <TextBlock Text="Kaydet" HorizontalAlignment="Center" Margin="0,4,0,0"/>
@@ -37,6 +37,11 @@
             </Grid.ColumnDefinitions>
             <Border>
                 <StackPanel>
+                    <DockPanel Margin="0,2,0,2">
+                        <TextBlock Width="70" Text="Fiş No :" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtFisNo" IsEnabled="False" Width="148" Height="24" VerticalContentAlignment="Center"/>
+                        <TextBlock/>
+                    </DockPanel>
                     <DockPanel>
                         <TextBlock VerticalAlignment="Center" Width="70" Text="Tarih :"/>
                         <DatePicker x:Name="dpTarih" Width="148" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
@@ -49,11 +54,11 @@
                     </DockPanel>
                     <DockPanel Margin="0,2,0,0">
                         <TextBlock VerticalAlignment="Center" Width="70" Text="Ürün Kodu :"/>
-                        <TextBox Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
-                        <Button Margin="0,1,0,0" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
-                        <Label Content=""/>
+                        <TextBox x:Name="txtMalzemeKodu" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
+                        <Button Click="btnMalzemeListesi_Click" x:Name="btnMalzemeListesi" Margin="0,1,0,0" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
+                        <Label x:Name="lblMalzemeAdi" Content=""/>
                     </DockPanel>
-                    <DockPanel Margin="0,2,0,0">
+                    <DockPanel x:Name="dckRecete" Margin="0,2,0,0">
                         <TextBlock VerticalAlignment="Center" Width="70" Text="Reçete No :"/>
                         <TextBox Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
                         <Button Margin="0,.5,0,0" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
