@@ -28,7 +28,6 @@ namespace MaliyeHesaplama.wins
                 {
                     var dict = (IDictionary<string, object>)item;
 
-                    // Eğer "CompanyName" property’si varsa
                     if (dict.ContainsKey(fieldAdi) && dict[fieldAdi] != null)
                     {
                         string companyName = dict[fieldAdi].ToString().ToLower();

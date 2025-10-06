@@ -51,9 +51,14 @@ public class MiniOrm
         }
     }
 
-    public int Delete(string tableName, int id, bool isConfirmed)
+    public int Delete(string tableName, int id, bool isConfirmed, string Condition = "Id")
     {
-        var sql = $"DELETE FROM {tableName} WHERE Id=@Id;";
+        if (id == 0)
+        {
+            Bildirim.Uyari2("Kayıt silme işlemini gerçekleştirebilmek için lütfen bir kayıt seçiniz!!");
+            return 0;
+        }
+        var sql = $"DELETE FROM {tableName} WHERE {Condition}=@Id;";
         if (isConfirmed)
         {
             if (Bildirim.SilmeOnayi2())
@@ -120,5 +125,23 @@ public class MiniOrm
             }
         }
         return "00000001";
+    }
+    public IEnumerable<T> GetCostList<T>()
+    {
+        var sql = @"select 
+ISNULL(C.Id,'') [Id]
+,ISNULL(C.Date,'') [Date]
+,ISNULL(C.OrderNo,'') [OrderNo]
+,ISNULL(CO.Id,'') [CompanyId]
+,ISNULL(CO.CompanyCode,'') [CompanyCode]
+,ISNULL(CO.CompanyName,'') [CompanyName]
+,ISNULL(I.InventoryName,'') [InventoryName]
+,ISNULL(I.InventoryCode,'') [InventoryCode]
+,ISNULL(I.Id,'') [InventoryId]
+from Cost C 
+left join Company CO on C.CompanyId = CO.Id
+left join Inventory I on I.Id = C.InventoryId
+order by ISNULL(C.OrderNo,'')";
+        return _connection.Query<T>(sql);
     }
 }

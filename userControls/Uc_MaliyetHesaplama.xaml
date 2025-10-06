@@ -12,19 +12,36 @@
     <UserControl.Resources>
         <helpers:StringDotHelper x:Key="StringDotHelper"/>
     </UserControl.Resources>
+    <!--<UserControl.ContextMenu>
+        <ContextMenu FontFamily="Bahnschrift">
+                <MenuItem x:Name="cmRaporAc" Click="cmRaporAc_Click" Header="Maliyet Formu"/>
+            </ContextMenu> bu alan Stackpanele eklenecek
+    </UserControl.ContextMenu>-->
     <StackPanel Margin="0,0,0,0">
         <Border BorderThickness="0.5" BorderBrush="#ececec">
             <DockPanel HorizontalAlignment="Left" Margin="2">
-                <Button x:Name="btnYeni" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                <Button Click="btnYeni_Click" x:Name="btnYeni" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/new.ico" />
                         <TextBlock Text="Yeni" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="btnKayit" Click="btnKayit_Click" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                <Button x:Name="btnKayit" Click="btnKayit_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/save.ico" />
                         <TextBlock Text="Kaydet" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btnListe" Click="btnListe_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Width="24" Height="24" Source="/userControls/list.ico" />
+                        <TextBlock Text="Liste" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btnSil" Click="btnSil_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Width="24" Height="24" Source="/userControls/trash.ico" />
+                        <TextBlock Text="Sil" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
                 </Button>
             </DockPanel>
@@ -604,34 +621,34 @@
                                             <StackPanel>
                                                 <DockPanel Margin="0,0,0,2">
                                                     <TextBlock VerticalAlignment="Center" Width="120" Text="Boyalı Kumaş :"/>
-                                                    <TextBox IsEnabled="False" Text="{Binding BoyaliKumasDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
+                                                    <TextBox x:Name="txtBoyaliKumasDikUr" IsEnabled="False" Text="{Binding BoyaliKumasDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
                                                     <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                                 </DockPanel>
                                                 <DockPanel Margin="0,0,0,2">
                                                     <TextBlock VerticalAlignment="Center" Width="120" Text="Konfeksiyon Maliyeti :"/>
-                                                    <TextBox IsEnabled="False" Text="{Binding KonfMaliyetiDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
+                                                    <TextBox  x:Name="txtKonfMaliyetiDikUr" IsEnabled="False" Text="{Binding KonfMaliyetiDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
                                                     <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                                 </DockPanel>
 
                                                 <DockPanel Margin="0,0,0,2">
                                                     <TextBlock VerticalAlignment="Center" Width="120" Text="2. Kalite Maliyeti :"/>
-                                                    <TextBox IsEnabled="False" Text="{Binding IkinciKaliteMaliyetDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
+                                                    <TextBox x:Name="txtIkinciKaliteMaliyetDikUr" IsEnabled="False" Text="{Binding IkinciKaliteMaliyetDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
                                                     <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
                                                 </DockPanel>
                                             </StackPanel>
                                             <StackPanel Margin="4,0,0,0">
                                                 <DockPanel Margin="0,0,0,2">
                                                     <TextBlock VerticalAlignment="Center" Width="90" Text="Kârlı :"/>
-                                                    <TextBox IsEnabled="False" Text="{Binding  KarliDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                                                    <TextBox x:Name="txtKarliDikUr" IsEnabled="False" Text="{Binding  KarliDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
                                                     <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                                    <TextBox IsEnabled="False" Text="{Binding  KarliTLDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                                                    <TextBox  x:Name="txtKarliTLDikUr" IsEnabled="False" Text="{Binding  KarliTLDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
                                                     <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
                                                 </DockPanel>
                                                 <DockPanel Margin="0,0,0,2">
                                                     <TextBlock VerticalAlignment="Center" Width="90" Text="KDV Dahil Fiyat :"/>
-                                                    <TextBox IsEnabled="False" Text="{Binding KdvliDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                                                    <TextBox x:Name="txtKdvliDikUr" IsEnabled="False" Text="{Binding KdvliDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
                                                     <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                                    <TextBox IsEnabled="False" Text="{Binding KdvliTLDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                                                    <TextBox x:Name="txtKdvliTLDikUr" IsEnabled="False" Text="{Binding KdvliTLDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
                                                     <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
                                                 </DockPanel>
                                             </StackPanel>
@@ -647,16 +664,16 @@
                 <StackPanel>
                     <DockPanel>
                         <TextBlock Width="148" Text="Belirlenen Fiyat :" Background="Yellow"/>
-                        <TextBox Text="{Binding BelirlenenFiyatText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                        <TextBox x:Name="txtBelirlenenFiyatText" Text="{Binding BelirlenenFiyatText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
                         <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                        <TextBox IsEnabled="False" Text="{Binding BelirlenenFiyatTL,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                        <TextBox x:Name="txtBelirlenenFiyatTL" IsEnabled="False" Text="{Binding BelirlenenFiyatTL,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
                         <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
                     </DockPanel>
                     <DockPanel>
                         <TextBlock Width="148" Text="KDV Dahil Belirlenen Fiyat" Background="Yellow"/>
-                        <TextBox IsEnabled="False" Text="{Binding KdvliBelirlenFiyat,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                        <TextBox x:Name="txtKdvliBelirlenFiyat" IsEnabled="False" Text="{Binding KdvliBelirlenFiyat,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
                         <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                        <TextBox IsEnabled="False" Text="{Binding KdvliBelirlenenFiyatTL,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                        <TextBox x:Name="txtKdvliBelirlenenFiyatTL" IsEnabled="False" Text="{Binding KdvliBelirlenenFiyatTL,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
                         <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
                     </DockPanel>
                 </StackPanel>

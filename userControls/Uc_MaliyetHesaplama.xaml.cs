@@ -9,6 +9,43 @@ namespace MaliyeHesaplama.userControls
         int Id, InventoryId, CompanyId, CPIId, CPCId, CCCId;
         bool _receteOlacak = false;
         MiniOrm _orm = new MiniOrm();
+
+        private void btnListe_Click(object sender, RoutedEventArgs e)
+        {
+            wins.winMaliyetCalismasiListesi win = new wins.winMaliyetCalismasiListesi();
+            win.ShowDialog();
+            this.Id = win.Id;
+            txtFisNo.Text = win.OrderNo;
+            dpTarih.SelectedDate = win.Date;
+            this.CompanyId = win.CompanyId;
+            txtFirmaKodu.Text = win.CompanyCode;
+            txtFirmaUnvan.Content = win.CompanyName;
+            this.InventoryId = win.InventoryId;
+            txtMalzemeKodu.Text = win.InventoryCode;
+            lblMalzemeAdi.Content = win.InventoryName;
+        }
+
+        private void btnSil_Click(object sender, RoutedEventArgs e)
+        {
+            if (_orm.Delete("Cost",this.Id,true) > 0)
+            {
+                _orm.Delete("CostCostCalculate",Id,false,"CostId");
+                _orm.Delete("CostProductionCalculate",Id,false,"CostId");
+                _orm.Delete("CostProductionInformation",Id,false,"CostId");
+                txtFisNo.Text = _orm.GetRecordNo("Cost", "OrderNo", "Type", 1);
+            }
+        }
+
+        private void cmRaporAc_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnYeni_Click(object sender, RoutedEventArgs e)
+        {
+            // yeni işleminden devam edilecek - ilgili alanlar resetlenecek - 06.10.2025
+        }
+
         public Uc_MaliyetHesaplama()
         {
             InitializeComponent();
@@ -70,7 +107,7 @@ namespace MaliyeHesaplama.userControls
             CPCId = _orm.Save("CostProductionCalculate", dict3);
             var dict4 = new Dictionary<string, object>
             {
-                {"Id",CCCId },{"CostId",Id},{"PP_Scarf",R(txtAtkiUrFiyText)},{"PP_Warp",R(txtCozguUrFiyText)},{"PP_PartsWashing",R(txtParcaYikamaUrFiyText)},{"PP_FabricWashing",R(txtKumasBoyamaUrFiyText)},{"PP_WeavingWaste",R(txtDokumaFiresiUrFiyText)},{"PP_DyehouseWaster",R(txtBoyaFiresiUrFiyText)},{"PP_GarmentCost",R(txtKonfMaliyetiUrFiyText)},{"PP_2QualityCost",R(txtIkinciKaliyeMaliyetiUrFiyText)},{"PP_Profit",R(txtKarUrFiyText)},{"PP_Vat",R(txtKdvUrFiyText)},{"PP_Currency",R(txtKurUrFiyText)},{"PP_Parity",R(txtPariteUrFiyText)},{"PP_Euro",R(txtEurUrFiyText)},{"WC_Weaving",R(txtDokumaDokMal)},{"WC_Warp",R(txtCozguDokMal)},{"WC_YarnCost",R(txtIplikMaliyetDokMal)},{"WC_Total",R(txtToplamUrMal)},{"WC_Wasted",R(txtFireliUrMal)},{"WC_FRCProfitableForex",R(txtKarliHamKumMal)},{"WC_FRCProfitable",R(txtKarliHamKumMalTL)},{"WDC_PartsWashing",R(txtParcaYikamaYBM)},{"WDC_DyedFabric",R(txtBoyanmisKumasYBM)},{"WDC_DyedFabricTL",R(txtBoyanmisKumasTlYBM)} // dokuma maliyetine kayıt hatası verdi colon bulunamamadı gibi o kontrol edilecek - 03.10.2025
+                {"Id",CCCId },{"CostId",Id},{"PP_Scarf",R(txtAtkiUrFiyText)},{"PP_Warp",R(txtCozguUrFiyText)},{"PP_PartsWashing",R(txtParcaYikamaUrFiyText)},{"PP_FabricWashing",R(txtKumasBoyamaUrFiyText)},{"PP_WeavingWaste",R(txtDokumaFiresiUrFiyText)},{"PP_DyehouseWaster",R(txtBoyaFiresiUrFiyText)},{"PP_GarmentCost",R(txtKonfMaliyetiUrFiyText)},{"PP_2QualityCost",R(txtIkinciKaliyeMaliyetiUrFiyText)},{"PP_Profit",R(txtKarUrFiyText)},{"PP_Vat",R(txtKdvUrFiyText)},{"PP_Currency",R(txtKurUrFiyText)},{"PP_Parity",R(txtPariteUrFiyText)},{"PP_Euro",R(txtEurUrFiyText)},{"WC_Weaving",R(txtDokumaDokMal)},{"WC_Warp",R(txtCozguDokMal)},{"WC_YarnCost",R(txtIplikMaliyetDokMal)},{"PC_Total",R(txtToplamUrMal)},{"PC_Wasted",R(txtFireliUrMal)},{"RFC_ProfitableForex",R(txtKarliHamKumMal)},{"RFC_Profitable",R(txtKarliHamKumMalTL)},{"WDC_PartsWashing",R(txtParcaYikamaYBM)},{"WDC_DyedFabric",R(txtBoyanmisKumasYBM)},{"WDC_DyedFabricTL",R(txtBoyanmisKumasTlYBM)},{"WDC_Wasted",R(txtFireliYBM)},{"WDC_ProfitableForex",R(txtKarliYBM)},{"SP_DyedFabric",R(txtBoyaliKumasDikUr)},{"SP_GarmentCost",R(txtKonfMaliyetiDikUr)},{"SP_2QualityCost",R(txtIkinciKaliteMaliyetDikUr)},{"SP_ProfitableForex",R(txtKarliDikUr)},{"SP_Profitable",R(txtKarliTLDikUr)},{"SP_VatIncludeForex",R(txtKdvliDikUr)},{"SP_VatInclude",R(txtKdvliTLDikUr)},{"PriceDeterminedForex",R(txtBelirlenenFiyatText)},{"PriceDetermined",R(txtBelirlenenFiyatTL)},{"VatIncludedPriceForex",R(txtKdvliBelirlenFiyat)},{"VatIncluded",R(txtKdvliBelirlenenFiyatTL)}
             };
             CCCId = _orm.Save("CostCostCalculate", dict4);
             Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi");

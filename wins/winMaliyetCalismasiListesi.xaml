@@ -1,0 +1,59 @@
+﻿<Window x:Class="MaliyeHesaplama.wins.winMaliyetCalismasiListesi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaliyeHesaplama.wins"
+        mc:Ignorable="d"
+        Title="Maliyet Çalışmaları Listesi" Height="450" Width="800" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Loaded="Window_Loaded" Icon="/wins/News.png">
+    <Grid Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="4">
+            <TextBlock Text="Filtreler" FontWeight="Bold" Margin="0,0,0,3"/>
+            <StackPanel>
+                <TextBlock Text="Çalışma No:"/>
+                <TextBox x:Name="txtOrderNo" TabIndex="1" FontSize="16" TextChanged="txtOrderNo_TextChanged"/>
+            </StackPanel>            
+            <StackPanel>
+                <TextBlock Text="Ürün Kodu:"/>
+                <TextBox x:Name="txtUrunKodu" TabIndex="2" FontSize="16" TextChanged="txtUrunKodu_TextChanged"/>
+            </StackPanel>            
+            <StackPanel>
+                <TextBlock Text="Ürün Adı:"/>
+                <TextBox x:Name="txtUrunAdi" TabIndex="2" FontSize="16" TextChanged="txtUrunAdi_TextChanged"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Firma Unvan:"/>
+                <TextBox x:Name="txtFirmaUnvan" TabIndex="3" FontSize="16" TextChanged="txtFirmaUnvan_TextChanged"/>
+            </StackPanel>
+        </StackPanel>
+        <DataGrid Grid.Column="1" 
+              x:Name="sfDataGrid" 
+              CanUserAddRows="True" 
+              FontSize="11" RowHeight="24" 
+              VerticalContentAlignment="Center"
+              CanUserSortColumns="True"
+              IsReadOnly="True"
+              MouseDoubleClick="sfDataGrid_MouseDoubleClick"
+              AutoGenerateColumns="False"
+              GridLinesVisibility="All"
+              HorizontalGridLinesBrush="#ececec"
+              VerticalGridLinesBrush="#ececec"
+              >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Tarih" Binding="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
+                <DataGridTextColumn Header="Çalışma No" Binding="{Binding OrderNo}"/>
+                <DataGridTextColumn Header="Firma Ünvan" Binding="{Binding CompanyName}"/>
+                <DataGridTextColumn Header="Firma Kodu" Binding="{Binding CompanyCode}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Firma Id" Binding="{Binding CompanyId}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Ürün Kodu" Binding="{Binding InventoryCode}"/>
+                <DataGridTextColumn Header="Ürün Adı" Binding="{Binding InventoryName}"/>
+                <DataGridTextColumn Header="Ürün Id" Binding="{Binding InventoryId}" Visibility="Hidden"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
