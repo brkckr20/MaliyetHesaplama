@@ -33,6 +33,14 @@ namespace MaliyeHesaplama.userControls
             var data = _orm.GetById<dynamic>("ProductionManagementParams", 1);
             txtOperasyonTipi.Text = data.ReceteOperasyonTipleri;
             chckReceteOlacak.IsChecked = Convert.ToBoolean(data.KumasRecetesiOlacak);
+            foreach (ComboBoxItem item in cmbKurSecimi.Items)
+            {
+                if (item.Tag?.ToString() == data.BazAlinacakKur)
+                {
+                    cmbKurSecimi.SelectedItem = item;
+                    break;
+                }
+            }
         }
         private void btnYeni_Click(object sender, RoutedEventArgs e)
         {
@@ -46,6 +54,7 @@ namespace MaliyeHesaplama.userControls
                 { "Id", 1},
                 { "ReceteOperasyonTipleri", txtOperasyonTipi.Text },
                 { "KumasRecetesiOlacak", chckReceteOlacak.IsChecked },
+                { "BazAlinacakKur", (cmbKurSecimi.SelectedItem as ComboBoxItem)?.Tag?.ToString() },
             };
             _orm.Save("ProductionManagementParams", dict);
             Bildirim.Bilgilendirme2("Kayıt işlemi başarıyla gerçekleştirildi.");

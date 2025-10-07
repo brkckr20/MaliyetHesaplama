@@ -9,7 +9,7 @@ namespace MaliyeHesaplama.userControls
         int Id, InventoryId, CompanyId, CPIId, CPCId, CCCId;
         bool _receteOlacak = false;
         MiniOrm _orm = new MiniOrm();
-
+        // diğer alanların listeden seçildikten sonra ilgili controllere yansıtılması işlemini kontrol et - 07.10.2025
         private void btnListe_Click(object sender, RoutedEventArgs e)
         {
             wins.winMaliyetCalismasiListesi win = new wins.winMaliyetCalismasiListesi();
@@ -27,12 +27,13 @@ namespace MaliyeHesaplama.userControls
 
         private void btnSil_Click(object sender, RoutedEventArgs e)
         {
-            if (_orm.Delete("Cost",this.Id,true) > 0)
+            if (_orm.Delete("Cost", this.Id, true) > 0)
             {
-                _orm.Delete("CostCostCalculate",Id,false,"CostId");
-                _orm.Delete("CostProductionCalculate",Id,false,"CostId");
-                _orm.Delete("CostProductionInformation",Id,false,"CostId");
+                _orm.Delete("CostCostCalculate", Id, false, "CostId");
+                _orm.Delete("CostProductionCalculate", Id, false, "CostId");
+                _orm.Delete("CostProductionInformation", Id, false, "CostId");
                 txtFisNo.Text = _orm.GetRecordNo("Cost", "OrderNo", "Type", 1);
+                FormVerileriniTemizle();
             }
         }
 
@@ -40,10 +41,19 @@ namespace MaliyeHesaplama.userControls
         {
 
         }
-
+        void FormVerileriniTemizle()
+        {
+            MainHelper.SetControls(new Dictionary<Control, object>
+            {
+                { txtCozgu1IpBilBolen,"1" },{ txtCozgu1IpBilBolunen,"1" },{ txtCozgu2IpBilBolen,"1" },{ txtCozgu2IpBilBolunen,"1" },{ txtAtki1IpBilBolen,"1" },{ txtAtki1IpBilBolunen,"1" },{ txtAtki2IpBilBolen,"1" },{ txtAtki2IpBilBolunen,"1" },{ txtAtki3IpBilBolen,"1" },{ txtAtki3IpBilBolunen,"1" },{ txtAtki4IpBilBolen,"1" },{ txtAtki4IpBilBolunen,"1" },{txtAtki1Siklik,"0" },{txtAtki2Siklik,"0" },{txtAtki3Siklik,"0" },{txtAtki4Siklik,"0" },{txtTarakNo1Carpan,"0" },{txtTarakNo1Carpim,"0" },{txtTarakNo2Carpan,"0" },{txtTarakNo2Carpim,"0" },{txtTarakEn,"0" },{txtHamBoy,"0" },{txtBoySacakText,"0" }, {txtEnSacakText,"0" },{txtMamulBoy,"0" }, {txtMamulEn,"0" }, {txtCozgu1IpBoyText,"0" }, {txtCozgu2IpBoyText,"0" }, {txtAtki1IpBoyText,"0" }, {txtAtki2IpBoyText,"0" }, {txtAtki3IpBoyText,"0" }, {txtAtki4IpBoyText,"0" }, {txtCozgu1IpFiyText,"0" }, {txtCozgu2IpFiyText,"0" }, {txtAtki1IpFiyText,"0" }, {txtAtki2IpFiyText,"0" }, {txtAtki3IpFiyText,"0" }, {txtAtki4IpFiyText,"0" }, {txtAtkiUrFiyText,"0" }, {txtCozguUrFiyText,"0" }, {txtParcaYikamaUrFiyText,"0" }, {txtKumasBoyamaUrFiyText,"0" }, {txtDokumaFiresiUrFiyText,"0" }, {txtBoyaFiresiUrFiyText,"0" },{txtKonfMaliyetiUrFiyText,"0" },{txtIkinciKaliyeMaliyetiUrFiyText,"0" },{txtKarUrFiyText,"0" },{txtKdvUrFiyText,"0" },{txtKurUrFiyText,_orm.GetEURCurrency()},{txtPariteUrFiyText,"0" },{txtEurUrFiyText,"0" },{txtBelirlenenFiyatText,"0" },
+                {txtFirmaKodu,"" },{txtFirmaUnvan,"" },{txtMalzemeKodu,"" },{lblMalzemeAdi,"" },
+            });
+            Id = 0; InventoryId = 0; CompanyId = 0; CPIId = 0; CPCId = 0; CCCId = 0;
+            txtFisNo.Text = _orm.GetRecordNo("Cost", "OrderNo", "Type", 1);
+        }
         private void btnYeni_Click(object sender, RoutedEventArgs e)
         {
-            // yeni işleminden devam edilecek - ilgili alanlar resetlenecek - 06.10.2025
+            FormVerileriniTemizle();
         }
 
         public Uc_MaliyetHesaplama()

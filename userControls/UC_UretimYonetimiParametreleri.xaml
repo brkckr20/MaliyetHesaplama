@@ -66,8 +66,9 @@
                     <Grid Margin="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <GroupBox Header="Reçete" Foreground="Black">
+                        <GroupBox Grid.Row="0" Header="Reçete" Foreground="Black">
                             <StackPanel>
                                 <DockPanel>
                                     <TextBlock VerticalAlignment="Center" Text="Operasyon Tipleri : "/>
@@ -78,6 +79,17 @@
                                     <CheckBox x:Name="chckReceteOlacak" Content="Kumaş kartı oluşturulurken reçete girilecek"/>
                                 </DockPanel>
                             </StackPanel>                           
+                        </GroupBox>
+                        <GroupBox Grid.Row="1" Header="Kur Seçenekleri" Foreground="Black">
+                            <DockPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Label Content="Maliyet hesaplamada baz alınacak kur : "/>
+                                <ComboBox x:Name="cmbKurSecimi" Width="130" SelectedIndex="1">
+                                    <ComboBoxItem Content="USD Merkez Alış" Tag="USD_ALIS"/>
+                                    <ComboBoxItem Content="USD Merkez Satış" Tag="USD_SATIS"/>
+                                    <ComboBoxItem Content="EUR Merkez Alış" Tag="EUR_ALIS"/>
+                                    <ComboBoxItem Content="EUR Merkez Satış" Tag="EUR_SATIS"/>
+                                </ComboBox>
+                            </DockPanel>
                         </GroupBox>
                     </Grid>
                 </TabItem>

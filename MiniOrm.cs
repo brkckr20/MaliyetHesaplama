@@ -102,8 +102,9 @@ public class MiniOrm
         var sql = "Select Top 1 CompanyCode from Company order by Id Desc";
         return _connection.QueryFirstOrDefault<string>(sql);
     }
-    public string GetEURCurrency(string kur)
+    public string GetEURCurrency()
     {
+        var kur = GetById<dynamic>("ProductionManagementParams", 1).BazAlinacakKur;
         var sql = $"select top 1 {kur} from Currency order by TARIH desc";
         return _connection.QueryFirstOrDefault<string>(sql);
     }
