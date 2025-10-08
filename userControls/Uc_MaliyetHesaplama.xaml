@@ -12,11 +12,6 @@
     <UserControl.Resources>
         <helpers:StringDotHelper x:Key="StringDotHelper"/>
     </UserControl.Resources>
-    <!--<UserControl.ContextMenu>
-        <ContextMenu FontFamily="Bahnschrift">
-                <MenuItem x:Name="cmRaporAc" Click="cmRaporAc_Click" Header="Maliyet Formu"/>
-            </ContextMenu> bu alan Stackpanele eklenecek
-    </UserControl.ContextMenu>-->
     <StackPanel Margin="0,0,0,0">
         <Border BorderThickness="0.5" BorderBrush="#ececec">
             <DockPanel HorizontalAlignment="Left" Margin="2">
@@ -94,6 +89,11 @@
         </Grid>
         <!-- buttonlar -->
         <DockPanel>
+            <DockPanel.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Name="cmFormSecimi" Click="cmFormSecimi_Click" Header="Maliyet Çalışması Formu"/>
+                </ContextMenu>
+            </DockPanel.ContextMenu>
             <!-- Üretim bilgileri groupbox -->
             <Border>
                 <GroupBox Header="Üretim Bilgileri">

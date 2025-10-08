@@ -107,5 +107,10 @@ namespace MaliyeHesaplama
             //userControls.HandyTest uc = new userControls.HandyTest();
             //AddOrSelectTab("Sipariş Girişi", uc);
         }
+
+        private void appMenuClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

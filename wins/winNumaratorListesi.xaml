@@ -41,8 +41,8 @@
                 <DataGridTextColumn Header="Kodu" Binding="{Binding Prefix}"/>
                 <DataGridTextColumn Header="Son Numara" Binding="{Binding Number,StringFormat='D3'}"/>
                 <DataGridTextColumn Header="Adı" Binding="{Binding Name}"/>
-                <!--<DataGridTextColumn Header="Kullanımda?" Binding="{Binding IsActive}"/>
-                <DataGridTextColumn Header="Malzeme Türü" Binding="{Binding InventoryType}"/>-->
+                <DataGridCheckBoxColumn Header="Kullanımda?" Binding="{Binding IsActive}"/>
+                <DataGridTextColumn Visibility="Hidden" Header="Malzeme Türü" Binding="{Binding InventoryType}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

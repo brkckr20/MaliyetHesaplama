@@ -6,12 +6,20 @@ namespace MaliyeHesaplama.wins
     public partial class winNumaratorListesi : Window
     {
         MiniOrm _orm = new MiniOrm();
-        public int Id, Number;
+        public int Id, Number,InventoryType;
         public string NameX, Prefix;
+        public bool SatirSecildi,IsActive;
         public winNumaratorListesi(Enums.Inventory type)
         {
-            InitializeComponent(); // listeden kontrol ederken ki kısım için düzeltilecek - şartlar kalkacak
-            sfDataGrid.ItemsSource = _orm.GetAll<dynamic>("Numerator").Where(x => x.InventoryType == Convert.ToInt32(type) && x.IsActive == true).ToList();
+            InitializeComponent();
+            if (type == Enums.Inventory.Tumu)
+            {
+                sfDataGrid.ItemsSource = _orm.GetAll<dynamic>("Numerator").ToList();
+            }
+            else
+            {
+                sfDataGrid.ItemsSource = _orm.GetAll<dynamic>("Numerator").Where(x => x.InventoryType == Convert.ToInt32(type) && x.IsActive == true).ToList();
+            }
         }
 
         private void txtKodu_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -28,11 +36,14 @@ namespace MaliyeHesaplama.wins
         {
             if (sfDataGrid.SelectedItem != null)
             {
+                SatirSecildi = true;
                 dynamic record = sfDataGrid.SelectedItem;
                 Id = record.Id;
                 Prefix = record.Prefix;
                 NameX = record.Name;
                 Number = record.Number;
+                InventoryType = record.InventoryType;
+                IsActive = record.IsActive;
                 this.Close();
             }
         }

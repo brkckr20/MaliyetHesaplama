@@ -12,7 +12,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ribbon:Ribbon Grid.Row="0" Margin="0,-24,0,0" x:Name="mainRibbon" ShowQuickAccessToolBarOnTop="False" VerticalAlignment="Top">
+        <ribbon:Ribbon Grid.Row="0" Margin="0,-24,0,0" x:Name="mainRibbon" ShowQuickAccessToolBarOnTop="False" VerticalAlignment="Top" FontFamily="Bahnschrift">
+            <ribbon:Ribbon.ApplicationMenu>
+                <ribbon:RibbonApplicationMenu>
+                    <ribbon:RibbonMenuItem Header="Kapat" Name="appMenuClose" Click="appMenuClose_Click"/>
+                </ribbon:RibbonApplicationMenu>
+            </ribbon:Ribbon.ApplicationMenu>
             <RibbonTab Header="Üretim Yönetimi">
                 <RibbonGroup Header="Maliyet ve Sipariş">
                     <RibbonButton x:Name="btnMaliyetHesaplama" Click="btnMaliyetHesaplama_Click" Label="Maliyet Hesaplama" LargeImageSource="/Libre Office Calc.png"  />

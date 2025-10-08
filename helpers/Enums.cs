@@ -10,6 +10,7 @@ namespace MaliyeHesaplama.helpers
     {
         public enum Inventory
         {
+            Tumu = -1,
             Malzeme = 0,
             Kumas = 1,
             Iplik = 2,

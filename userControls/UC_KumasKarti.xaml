@@ -43,13 +43,13 @@
                         <TextBlock Text="Liste" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button Click="btnGeri_Click" x:Name="btnGeri" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                <Button IsEnabled="False" Click="btnGeri_Click" x:Name="btnGeri" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/back.ico" />
                         <TextBlock Text="Önceki" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button Click="btnIleri_Click" x:Name="btnIleri" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                <Button IsEnabled="False" Click="btnIleri_Click" x:Name="btnIleri" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Width="24" Height="24" Source="/userControls/next.ico" />
                         <TextBlock Text="Sonraki" HorizontalAlignment="Center" Margin="0,4,0,0"/>

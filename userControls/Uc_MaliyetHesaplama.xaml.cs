@@ -98,11 +98,6 @@ namespace MaliyeHesaplama.userControls
                 FormVerileriniTemizle();
             }
         }
-
-        private void cmRaporAc_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         void FormVerileriniTemizle()
         {
             MainHelper.SetControls(new Dictionary<Control, object>
@@ -128,6 +123,14 @@ namespace MaliyeHesaplama.userControls
                 imageBytes = File.ReadAllBytes(filePath);
                 BitmapImage bitmap = new BitmapImage(new Uri(filePath));
                 productImage.Source = bitmap;
+            }
+        }
+
+        private void cmFormSecimi_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Id == 0)
+            {
+                Bildirim.Uyari2("Form alabilmek için lütfen bir kayıt seçiniz!"); // burdan devam edilecek - 08.10.2025
             }
         }
 
