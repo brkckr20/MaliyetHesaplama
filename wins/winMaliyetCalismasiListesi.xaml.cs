@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace MaliyeHesaplama.wins
 {
@@ -12,8 +14,10 @@ namespace MaliyeHesaplama.wins
     public partial class winMaliyetCalismasiListesi : Window
     {
         public int Id, CompanyId, InventoryId;
-        public string CompanyName, InventoryName,OrderNo,CompanyCode,InventoryCode;
+        public string CompanyName, InventoryName, OrderNo, CompanyCode, InventoryCode;
         public DateTime Date;
+        public bool secimYapildi = false;
+        public byte[] ImageData;
         private ICollectionView _collectionView;
         MiniOrm _orm = new MiniOrm();
         public winMaliyetCalismasiListesi()
@@ -30,6 +34,7 @@ namespace MaliyeHesaplama.wins
         {
             if (sfDataGrid.SelectedItem != null)
             {
+                this.secimYapildi = true;
                 dynamic record = sfDataGrid.SelectedItem;
                 Id = record.Id;
                 CompanyId = record.CompanyId;
@@ -40,6 +45,7 @@ namespace MaliyeHesaplama.wins
                 Date = record.Date;
                 CompanyCode = record.CompanyCode;
                 InventoryCode = record.InventoryCode;
+                //ImageData = Convert.FromBase64String(record.ProductImage);
                 this.Close();
             }
         }

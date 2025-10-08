@@ -84,10 +84,10 @@
                 </StackPanel>
             </Border>
             <Border Grid.Column="1">
-                <GroupBox Header="Ürün Resmi" Width="164" HorizontalAlignment="Left">
+                <GroupBox Header="Ürün Resmi" Width="200" HorizontalAlignment="Left">
                     <DockPanel>
-                        <Button Content="Seç"/>
-                        <TextBlock Text="Seçilen resim gelecek"/>
+                        <Button Content="Seç" x:Name="selectImage" Click="selectImage_Click"/>
+                        <Image x:Name="productImage" Width="150" Height="100"/>
                     </DockPanel>
                 </GroupBox>
             </Border>

@@ -76,10 +76,10 @@ public class MiniOrm
         }
     }
 
-    public T GetById<T>(string tableName, int id)
+    public T GetById<T>(string tableName, int id, string fieldName = "Id")
     {
-        var sql = $"SELECT * FROM {tableName} WHERE Id=@Id;";
-        return _connection.Query<T>(sql, new { Id = id }).FirstOrDefault();
+        var sql = $"SELECT * FROM {tableName} WHERE {fieldName}={id};";
+        return _connection.Query<T>(sql).FirstOrDefault();
     }
 
     public IEnumerable<T> GetAll<T>(string tableName)
@@ -130,19 +130,20 @@ public class MiniOrm
     public IEnumerable<T> GetCostList<T>()
     {
         var sql = @"select 
-ISNULL(C.Id,'') [Id]
-,ISNULL(C.Date,'') [Date]
-,ISNULL(C.OrderNo,'') [OrderNo]
-,ISNULL(CO.Id,'') [CompanyId]
-,ISNULL(CO.CompanyCode,'') [CompanyCode]
-,ISNULL(CO.CompanyName,'') [CompanyName]
-,ISNULL(I.InventoryName,'') [InventoryName]
-,ISNULL(I.InventoryCode,'') [InventoryCode]
-,ISNULL(I.Id,'') [InventoryId]
-from Cost C 
-left join Company CO on C.CompanyId = CO.Id
-left join Inventory I on I.Id = C.InventoryId
-order by ISNULL(C.OrderNo,'')";
+                    ISNULL(C.Id,'') [Id]
+                    ,ISNULL(C.Date,'') [Date]
+                    ,ISNULL(C.OrderNo,'') [OrderNo]
+                    ,ISNULL(CO.Id,'') [CompanyId]
+                    ,ISNULL(CO.CompanyCode,'') [CompanyCode]
+                    ,ISNULL(CO.CompanyName,'') [CompanyName]
+                    ,ISNULL(I.InventoryName,'') [InventoryName]
+                    ,ISNULL(I.InventoryCode,'') [InventoryCode]
+                    ,ISNULL(I.Id,'') [InventoryId]
+					,ISNULL(CONVERT(varchar(max), C.ProductImage, 1), '') AS [ProductImage] 
+                    from Cost C 
+                    left join Company CO on C.CompanyId = CO.Id
+                    left join Inventory I on I.Id = C.InventoryId
+                    order by ISNULL(C.OrderNo,'')";
         return _connection.Query<T>(sql);
     }
 }

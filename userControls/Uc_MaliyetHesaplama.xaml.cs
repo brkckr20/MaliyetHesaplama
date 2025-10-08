@@ -1,37 +1,99 @@
 ﻿using MaliyeHesaplama.helpers;
 using System.Windows.Controls;
 using System.Windows;
+using System.Globalization;
+using Microsoft.Win32;
+using System.IO;
+using System.Windows.Media.Imaging;
+using System.Windows.Data;
 
 namespace MaliyeHesaplama.userControls
 {
     public partial class Uc_MaliyetHesaplama : UserControl
     {
-        int Id, InventoryId, CompanyId, CPIId, CPCId, CCCId;
+        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0;
         bool _receteOlacak = false;
+        private byte[] imageBytes;
         MiniOrm _orm = new MiniOrm();
-        // diğer alanların listeden seçildikten sonra ilgili controllere yansıtılması işlemini kontrol et - 07.10.2025
         private void btnListe_Click(object sender, RoutedEventArgs e)
         {
             wins.winMaliyetCalismasiListesi win = new wins.winMaliyetCalismasiListesi();
             win.ShowDialog();
-            this.Id = win.Id;
-            txtFisNo.Text = win.OrderNo;
-            dpTarih.SelectedDate = win.Date;
-            this.CompanyId = win.CompanyId;
-            txtFirmaKodu.Text = win.CompanyCode;
-            txtFirmaUnvan.Content = win.CompanyName;
-            this.InventoryId = win.InventoryId;
-            txtMalzemeKodu.Text = win.InventoryCode;
-            lblMalzemeAdi.Content = win.InventoryName;
-        }
+            if (win.secimYapildi)
+            {
+                this.Id = win.Id;
+                txtFisNo.Text = win.OrderNo;
+                dpTarih.SelectedDate = win.Date;
+                this.CompanyId = win.CompanyId;
+                txtFirmaKodu.Text = win.CompanyCode;
+                txtFirmaUnvan.Content = win.CompanyName;
+                this.InventoryId = win.InventoryId;
+                txtMalzemeKodu.Text = win.InventoryCode;
+                lblMalzemeAdi.Content = win.InventoryName;
+                //using (MemoryStream ms = new MemoryStream(win.ImageData)) // resim listelemede hata var kontrol edilmeli - 08.10.2025
+                //{
+                //    BitmapImage bitmapImage = new BitmapImage();
+                //    bitmapImage.BeginInit();
+                //    bitmapImage.StreamSource = ms;
+                //    bitmapImage.EndInit();
+                //    productImage.Source = bitmapImage;
+                //}
+            }
+            var urBil = _orm.GetById<dynamic>("CostProductionInformation", this.Id, "CostId");
+            CPIId = urBil != null ? urBil.Id : 0;
+            if (urBil != null)
+            {
+                CPIId = urBil.Id;
+                SetControllerValues(txtCozgu1IpBilBolen, urBil.YI_Warp1); SetControllerValues(txtCozgu1IpBilBolunen, urBil.YI_Warp1Divider);
+                SetControllerValues(txtCozgu2IpBilBolen, urBil.YI_Warp2); SetControllerValues(txtCozgu2IpBilBolunen, urBil.YI_Warp2Divider);
+                SetControllerValues(txtAtki1IpBilBolen, urBil.YI_Scarf1); SetControllerValues(txtAtki1IpBilBolunen, urBil.YI_Scarf1Divider);
+                SetControllerValues(txtAtki2IpBilBolen, urBil.YI_Scarf2); SetControllerValues(txtAtki2IpBilBolunen, urBil.YI_Scarf2Divider);
+                SetControllerValues(txtAtki3IpBilBolen, urBil.YI_Scarf3); SetControllerValues(txtAtki3IpBilBolunen, urBil.YI_Scarf3Divider);
+                SetControllerValues(txtAtki4IpBilBolen, urBil.YI_Scarf4); SetControllerValues(txtAtki4IpBilBolunen, urBil.YI_Scarf4Divider);
+                SetControllerValues(txtTarakNo1Carpan, urBil.WI_CombNo1); SetControllerValues(txtTarakNo1Carpim, urBil.WI_CombNo1Multiplier);
+                SetControllerValues(txtTarakNo2Carpan, urBil.WI_CombNo2); SetControllerValues(txtTarakNo2Carpim, urBil.WI_CombNo2Multiplier);
+                SetControllerValues(txtTarakEn, urBil.WI_CombWidth); SetControllerValues(txtHamBoy, urBil.WI_RawHeight); SetControllerValues(txtBoySacakText, urBil.WI_WidthEaves);
+                SetControllerValues(txtEnSacakText, urBil.WI_WidthEaves); SetControllerValues(txtHamEn, urBil.WI_RawWidth); SetControllerValues(txtMamulBoy, urBil.WI_ProductHeight);
+                SetControllerValues(txtMamulEn, urBil.WI_ProductWidth);
+                SetControllerValues(txtAtki1Siklik, urBil.D_Scarf1); SetControllerValues(txtAtki2Siklik, urBil.D_Scarf2); SetControllerValues(txtAtki3Siklik, urBil.D_Scarf3);
+                SetControllerValues(txtAtki4Siklik, urBil.D_Scarf4);
+            }
+            var urHes = _orm.GetById<dynamic>("CostProductionCalculate", this.Id, "CostId");
+            if (urHes != null)
+            {
+                CPCId = urHes.Id;
+                SetControllerValues(txtCozgu1IpFiyText, urHes.YP_Warp1); SetControllerValues(txtCozgu2IpFiyText, urHes.YP_Warp2);
+                SetControllerValues(txtAtki1IpFiyText, urHes.YP_Scarf1); SetControllerValues(txtAtki2IpFiyText, urHes.YP_Scarf2);
+                SetControllerValues(txtAtki3IpFiyText, urHes.YP_Scarf3); SetControllerValues(txtAtki4IpFiyText, urHes.YP_Scarf4);
+                SetControllerValues(txtCozgu1IpBoyText, urHes.YD_Warp1); SetControllerValues(txtCozgu2IpBoyText, urHes.YD_Warp2);
+                SetControllerValues(txtAtki1IpBoyText, urHes.YD_Scarf1); SetControllerValues(txtAtki2IpBoyText, urHes.YD_Scarf2);
+                SetControllerValues(txtAtki3IpBoyText, urHes.YD_Scarf3); SetControllerValues(txtAtki4IpBoyText, urHes.YD_Scarf4);
+            }
+            var malHes = _orm.GetById<dynamic>("CostCostCalculate", this.Id, "CostId");
+            if (malHes != null)
+            {
+                CCCId = malHes.Id;
+                SetControllerValues(txtAtkiUrFiyText, malHes.PP_Scarf); SetControllerValues(txtCozguUrFiyText, malHes.PP_Warp);
+                SetControllerValues(txtParcaYikamaUrFiyText, malHes.PP_PartsWashing); SetControllerValues(txtKumasBoyamaUrFiyText, malHes.PP_FabricWashing);
+                SetControllerValues(txtDokumaFiresiUrFiyText, malHes.PP_WeavingWaste); SetControllerValues(txtBoyaFiresiUrFiyText, malHes.PP_DyehouseWaster);
+                SetControllerValues(txtKonfMaliyetiUrFiyText, malHes.PP_GarmentCost); SetControllerValues(txtIkinciKaliyeMaliyetiUrFiyText, malHes.PP_2QualityCost);
+                SetControllerValues(txtKarUrFiyText, malHes.PP_Profit); SetControllerValues(txtKdvUrFiyText, malHes.PP_Vat);
+                SetControllerValues(txtKurUrFiyText, malHes.PP_Currency); SetControllerValues(txtPariteUrFiyText, malHes.PP_Parity); SetControllerValues(txtEurUrFiyText, malHes.PP_Euro);
+                SetControllerValues(txtBelirlenenFiyatText, malHes.PriceDeterminedForex);
 
+            }
+        }
+        void SetControllerValues(TextBox tb, decimal val)
+        {
+            tb.Text = val.ToString("0.00", CultureInfo.InvariantCulture);
+        }
         private void btnSil_Click(object sender, RoutedEventArgs e)
         {
             if (_orm.Delete("Cost", this.Id, true) > 0)
             {
                 _orm.Delete("CostCostCalculate", Id, false, "CostId");
-                _orm.Delete("CostProductionCalculate", Id, false, "CostId");
-                _orm.Delete("CostProductionInformation", Id, false, "CostId");
+                _orm.Delete("CostProductionCalculate", Id, false, "CostId"); // üretim hesaplama
+                _orm.Delete("CostProductionInformation", Id, false, "CostId"); // üretim bilgileri
                 txtFisNo.Text = _orm.GetRecordNo("Cost", "OrderNo", "Type", 1);
                 FormVerileriniTemizle();
             }
@@ -54,6 +116,19 @@ namespace MaliyeHesaplama.userControls
         private void btnYeni_Click(object sender, RoutedEventArgs e)
         {
             FormVerileriniTemizle();
+        }
+
+        private void selectImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tiff";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filePath = openFileDialog.FileName;
+                imageBytes = File.ReadAllBytes(filePath);
+                BitmapImage bitmap = new BitmapImage(new Uri(filePath));
+                productImage.Source = bitmap;
+            }
         }
 
         public Uc_MaliyetHesaplama()
@@ -94,7 +169,7 @@ namespace MaliyeHesaplama.userControls
         {
             var dict1 = new Dictionary<string, object>
             {
-                { "Id", Id }, {"CompanyId",CompanyId}, {"Date",dpTarih.SelectedDate.Value}, {"InventoryId",this.InventoryId},{"OrderNo",txtFisNo.Text }
+                { "Id", Id }, {"CompanyId",CompanyId}, {"Date",dpTarih.SelectedDate.Value}, {"InventoryId",this.InventoryId},{"OrderNo",txtFisNo.Text },{"ProductImage",imageBytes}
             };
             if (Id == 0) // bu alanlara kayıt eden güncelleyen vs diğer bilgiler eklenebilir
             {
@@ -126,6 +201,6 @@ namespace MaliyeHesaplama.userControls
         string R(TextBox tb) // kayıt esnasında hata alındığı için virgüllü değerler nokta ile değiştirildi. -- replace metodunu kullanıyor
         {
             return tb.Text.Replace(',', '.');
-        }
+        }        
     }
 }

@@ -53,6 +53,7 @@
                 <DataGridTextColumn Header="Ürün Kodu" Binding="{Binding InventoryCode}"/>
                 <DataGridTextColumn Header="Ürün Adı" Binding="{Binding InventoryName}"/>
                 <DataGridTextColumn Header="Ürün Id" Binding="{Binding InventoryId}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Ürün Resmi" Binding="{Binding ProductImage}" Visibility="Hidden"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
