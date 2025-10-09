@@ -36,6 +36,7 @@
                 </RibbonGroup>
                 <RibbonGroup Header="Diğer">
                     <RibbonButton x:Name="btnNumarator" Click="btnNumarator_Click" Label="Numaratör" LargeImageSource="/numerator.ico" />
+                    <RibbonButton x:Name="btnRapor" Click="btnRapor_Click" Label="Rapor Oluşturma" LargeImageSource="/report.ico" />
                 </RibbonGroup>
             </RibbonTab>
         </ribbon:Ribbon>

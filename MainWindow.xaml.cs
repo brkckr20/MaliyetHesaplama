@@ -112,5 +112,11 @@ namespace MaliyeHesaplama
         {
             Application.Current.Shutdown();
         }
+
+        private void btnRapor_Click(object sender, RoutedEventArgs e)
+        {
+            userControls.UC_RaporOlusturma uc = new userControls.UC_RaporOlusturma();
+            AddOrSelectTab("Rapor Oluşturma", uc);
+        }
     }
 }

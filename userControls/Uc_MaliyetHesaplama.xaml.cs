@@ -30,14 +30,18 @@ namespace MaliyeHesaplama.userControls
                 this.InventoryId = win.InventoryId;
                 txtMalzemeKodu.Text = win.InventoryCode;
                 lblMalzemeAdi.Content = win.InventoryName;
-                //using (MemoryStream ms = new MemoryStream(win.ImageData)) // resim listelemede hata var kontrol edilmeli - 08.10.2025
-                //{
-                //    BitmapImage bitmapImage = new BitmapImage();
-                //    bitmapImage.BeginInit();
-                //    bitmapImage.StreamSource = ms;
-                //    bitmapImage.EndInit();
-                //    productImage.Source = bitmapImage;
-                //}
+                if (win.ImageData != null)
+                {
+                    using (var stream = new MemoryStream(win.ImageData))
+                    {
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = stream;
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+                        productImage.Source = bitmap;
+                    }
+                }
             }
             var urBil = _orm.GetById<dynamic>("CostProductionInformation", this.Id, "CostId");
             CPIId = urBil != null ? urBil.Id : 0;
@@ -128,9 +132,25 @@ namespace MaliyeHesaplama.userControls
 
         private void cmFormSecimi_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
+
+        private void btnResmiBuyut_Click(object sender, RoutedEventArgs e)
+        {
+            wins.winBuyukResim win = new wins.winBuyukResim(this.Id, "Cost", "ProductImage");
+            win.Show();
+        }
+
+        private void btnRapor_Click(object sender, RoutedEventArgs e)
+        {
             if (this.Id == 0)
             {
                 Bildirim.Uyari2("Form alabilmek için lütfen bir kayıt seçiniz!"); // burdan devam edilecek - 08.10.2025
+            }
+            else
+            {
+                wins.winRaporSecimi win = new wins.winRaporSecimi();
+                win.ShowDialog();
             }
         }
 
@@ -204,6 +224,6 @@ namespace MaliyeHesaplama.userControls
         string R(TextBox tb) // kayıt esnasında hata alındığı için virgüllü değerler nokta ile değiştirildi. -- replace metodunu kullanıyor
         {
             return tb.Text.Replace(',', '.');
-        }        
+        }
     }
 }

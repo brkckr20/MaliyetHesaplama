@@ -32,6 +32,12 @@
                         <Image Width="24" Height="24" Source="/userControls/list.ico" />
                         <TextBlock Text="Liste" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
+                </Button>                
+                <Button x:Name="btnRapor" Click="btnRapor_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Width="24" Height="24" Source="/userControls/printer.ico" />
+                        <TextBlock Text="Yazdır" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                    </StackPanel>
                 </Button>
                 <Button x:Name="btnSil" Click="btnSil_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -42,644 +48,652 @@
             </DockPanel>
         </Border>
         <!-- buttonlar -->
-        <Grid Margin="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Border>
-                <StackPanel>
-                    <DockPanel Margin="0,2,0,2">
-                        <TextBlock Width="70" Text="Fiş No :" VerticalAlignment="Center"/>
-                        <TextBox x:Name="txtFisNo" IsEnabled="False" Width="148" Height="24" VerticalContentAlignment="Center"/>
-                        <TextBlock/>
-                    </DockPanel>
-                    <DockPanel>
-                        <TextBlock VerticalAlignment="Center" Width="70" Text="Tarih :"/>
-                        <DatePicker x:Name="dpTarih" Width="148" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
-                    </DockPanel>
-                    <DockPanel Margin="0,2,0,0">
-                        <TextBlock VerticalAlignment="Center" Width="70" Text="Firma Kodu :"/>
-                        <TextBox x:Name="txtFirmaKodu" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
-                        <Button Click="btnFirmaListesi_Click" x:Name="btnFirmaListesi" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
-                        <Label x:Name="txtFirmaUnvan" Content=""/>
-                    </DockPanel>
-                    <DockPanel Margin="0,2,0,0">
-                        <TextBlock VerticalAlignment="Center" Width="70" Text="Ürün Kodu :"/>
-                        <TextBox x:Name="txtMalzemeKodu" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
-                        <Button Click="btnMalzemeListesi_Click" x:Name="btnMalzemeListesi" Margin="0,1,0,0" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
-                        <Label x:Name="lblMalzemeAdi" Content=""/>
-                    </DockPanel>
-                    <DockPanel x:Name="dckRecete" Margin="0,2,0,0">
-                        <TextBlock VerticalAlignment="Center" Width="70" Text="Reçete No :"/>
-                        <TextBox Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
-                        <Button Margin="0,.5,0,0" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
-                        <Label Content=""/>
-                    </DockPanel>
-                </StackPanel>
-            </Border>
-            <Border Grid.Column="1">
-                <GroupBox Header="Ürün Resmi" Width="200" HorizontalAlignment="Left">
-                    <DockPanel>
-                        <Button Content="Seç" x:Name="selectImage" Click="selectImage_Click"/>
-                        <Image x:Name="productImage" Width="150" Height="100"/>
-                    </DockPanel>
-                </GroupBox>
-            </Border>
-        </Grid>
-        <!-- buttonlar -->
-        <DockPanel>
-            <DockPanel.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Name="cmFormSecimi" Click="cmFormSecimi_Click" Header="Maliyet Çalışması Formu"/>
-                </ContextMenu>
-            </DockPanel.ContextMenu>
-            <!-- Üretim bilgileri groupbox -->
-            <Border>
-                <GroupBox Header="Üretim Bilgileri">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <DockPanel Grid.Row="0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Border>
-                                    <StackPanel>
-                                        <!-- Üretim Bilgileri - İplik Bilgileri -->
-                                        <TextBlock Text="İplik Bilgileri" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox x:Name="txtCozgu1IpBilBolen" Text="{Binding Cozgu1IpBilBolen,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True" />
-                                            <TextBlock Text="/"/>
-                                            <TextBox x:Name="txtCozgu1IpBilBolunen" Text="{Binding Cozgu1IpBilBolunen,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBox x:Name="txtCozgu1IpBilSonuc" Text="{Binding Cozgu1IpBilSonuc,Mode=OneWay}" FontSize="11" TextAlignment="Center" Width="40" IsEnabled="False"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox x:Name="txtCozgu2IpBilBolen" Text="{Binding Cozgu2IpBilBolen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="/"/>
-                                            <TextBox x:Name="txtCozgu2IpBilBolunen" Text="{Binding Cozgu2IpBilBolunen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBox x:Name="txtCozgu2IpBilSonuc" Text="{Binding Cozgu2IpBilSonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" IsEnabled="False" Width="40"/>
-                                        </DockPanel>
-                                        <DockPanel Tag="Divide" Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox x:Name="txtAtki1IpBilBolen" Text="{Binding Atki1IpBilBolen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="/"/>
-                                            <TextBox x:Name="txtAtki1IpBilBolunen" Text="{Binding Atki1IpBilBolunen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBox x:Name="txtAtki1IpBilSonuc" Text="{Binding Atki1IpBilSonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
-                                        </DockPanel>
-                                        <DockPanel Tag="Divide" Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox x:Name="txtAtki2IpBilBolen" Text="{Binding Atki2IpBilBolen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="/"/>
-                                            <TextBox x:Name="txtAtki2IpBilBolunen" Text="{Binding Atki2IpBilBolunen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBox x:Name="txtAtki2IpBilSonuc" Text="{Binding Atki2IpBilSonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
-                                        </DockPanel>
-                                        <DockPanel Tag="Divide" Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox x:Name="txtAtki3IpBilBolen" Text="{Binding Atki3IpBilBolen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="/"/>
-                                            <TextBox x:Name="txtAtki3IpBilBolunen" Text="{Binding Atki3IpBilBolunen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBox x:Name="txtAtki3IpBilSonuc" Text="{Binding Atki3IpBilSonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
-                                        </DockPanel>
-                                        <DockPanel Tag="Divide" Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox x:Name="txtAtki4IpBilBolen" Text="{Binding Atki4IpBilBolen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="/"/>
-                                            <TextBox x:Name="txtAtki4IpBilBolunen" Text="{Binding Atki4IpBilBolunen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBox x:Name="txtAtki4IpBilSonuc" Text="{Binding Atki4IpBilSonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
-                                        </DockPanel>
-                                    </StackPanel>
-                                </Border>
-                                <Border Grid.Column="1" Margin="4,0">
-                                    <StackPanel>
-                                        <!-- Üretim Bilgileri - Sıklıklar -->
-                                        <TextBlock Text="Sıklıklar" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox x:Name="txtCozgu1Siklik" Text="{Binding Cozgu1Siklik,Mode=OneWay}" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0" IsEnabled="False"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox x:Name="txtCozgu2Siklik" Text="{Binding Cozgu2Siklik,Mode=OneWay}" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0" IsEnabled="False"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox x:Name="txtAtki1Siklik" Text="{Binding Atki1Siklik, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox x:Name="txtAtki2Siklik" Text="{Binding Atki2Siklik, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox x:Name="txtAtki3Siklik" Text="{Binding Atki3Siklik, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox x:Name="txtAtki4Siklik" Text="{Binding Atki4Siklik, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
+        <StackPanel>
+            <Grid Margin="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border>
+                    <StackPanel>
+                        <DockPanel Margin="0,2,0,2">
+                            <TextBlock Width="70" Text="Fiş No :" VerticalAlignment="Center"/>
+                            <TextBox x:Name="txtFisNo" IsEnabled="False" Width="148" Height="24" VerticalContentAlignment="Center"/>
+                            <TextBlock/>
                         </DockPanel>
-                        <DockPanel Grid.Row="1">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Border>
-                                    <StackPanel>
-                                        <!-- Üretim Bilgileri - Dokuma Bilgileri -->
-                                        <TextBlock Text="Dokuma Bilgileri" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Tag="Multiply" Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="T.No 1 :"/>
-                                            <TextBox x:Name="txtTarakNo1Carpan" Text="{Binding TarakNo1Carpan,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True" />
-                                            <TextBlock Text="X"/>
-                                            <TextBox x:Name="txtTarakNo1Carpim" Text="{Binding TarakNo1Carpim,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBox x:Name="txtTarakNo1Sonuc" Text="{Binding TarakNo1Sonuc, Mode=OneWay}" Width="40" IsEnabled="False"/>
-                                        </DockPanel>
+                        <DockPanel>
+                            <TextBlock VerticalAlignment="Center" Width="70" Text="Tarih :"/>
+                            <DatePicker x:Name="dpTarih" Width="148" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel Margin="0,2,0,0">
+                            <TextBlock VerticalAlignment="Center" Width="70" Text="Firma Kodu :"/>
+                            <TextBox x:Name="txtFirmaKodu" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
+                            <Button Click="btnFirmaListesi_Click" x:Name="btnFirmaListesi" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
+                            <Label x:Name="txtFirmaUnvan" Content=""/>
+                        </DockPanel>
+                        <DockPanel Margin="0,2,0,0">
+                            <TextBlock VerticalAlignment="Center" Width="70" Text="Ürün Kodu :"/>
+                            <TextBox x:Name="txtMalzemeKodu" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
+                            <Button Click="btnMalzemeListesi_Click" x:Name="btnMalzemeListesi" Margin="0,1,0,0" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
+                            <Label x:Name="lblMalzemeAdi" Content=""/>
+                        </DockPanel>
+                        <DockPanel x:Name="dckRecete" Margin="0,2,0,0">
+                            <TextBlock VerticalAlignment="Center" Width="70" Text="Reçete No :"/>
+                            <TextBox Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
+                            <Button Margin="0,.5,0,0" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
+                            <Label Content=""/>
+                        </DockPanel>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1">
+                    <GroupBox Header="Ürün Resmi" Width="200" HorizontalAlignment="Left">
+                        <DockPanel>
+                            <Button Background="Transparent" BorderThickness="0.4" Padding="2,0" Content="Seç" x:Name="selectImage" Click="selectImage_Click"/>
+                            <Image x:Name="productImage" Width="150" Height="100">
+                                <Image.ContextMenu>
+                                    <ContextMenu FontFamily="Bahnschrift">
+                                        <MenuItem Header="Resmi büyüt" x:Name="btnResmiBuyut" Click="btnResmiBuyut_Click"/>
+                                    </ContextMenu>
+                                </Image.ContextMenu>
+                            </Image>
+                        </DockPanel>
+                    </GroupBox>
+                </Border>
+            </Grid>
+            <!-- buttonlar -->
+            <DockPanel>
+                <DockPanel.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Name="cmFormSecimi" Click="cmFormSecimi_Click" Header="Maliyet Çalışması Formu"/>
+                    </ContextMenu>
+                </DockPanel.ContextMenu>
+                <!-- Üretim bilgileri groupbox -->
+                <Border>
+                    <GroupBox Header="Üretim Bilgileri">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <DockPanel Grid.Row="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border>
+                                        <StackPanel>
+                                            <!-- Üretim Bilgileri - İplik Bilgileri -->
+                                            <TextBlock Text="İplik Bilgileri" Background="LightGray" Margin="0,0,0,2"/>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
+                                                <TextBox x:Name="txtCozgu1IpBilBolen" Text="{Binding Cozgu1IpBilBolen,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True" />
+                                                <TextBlock Text="/"/>
+                                                <TextBox x:Name="txtCozgu1IpBilBolunen" Text="{Binding Cozgu1IpBilBolunen,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBox x:Name="txtCozgu1IpBilSonuc" Text="{Binding Cozgu1IpBilSonuc,Mode=OneWay}" FontSize="11" TextAlignment="Center" Width="40" IsEnabled="False"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
+                                                <TextBox x:Name="txtCozgu2IpBilBolen" Text="{Binding Cozgu2IpBilBolen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="/"/>
+                                                <TextBox x:Name="txtCozgu2IpBilBolunen" Text="{Binding Cozgu2IpBilBolunen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBox x:Name="txtCozgu2IpBilSonuc" Text="{Binding Cozgu2IpBilSonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            </DockPanel>
+                                            <DockPanel Tag="Divide" Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
+                                                <TextBox x:Name="txtAtki1IpBilBolen" Text="{Binding Atki1IpBilBolen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="/"/>
+                                                <TextBox x:Name="txtAtki1IpBilBolunen" Text="{Binding Atki1IpBilBolunen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBox x:Name="txtAtki1IpBilSonuc" Text="{Binding Atki1IpBilSonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            </DockPanel>
+                                            <DockPanel Tag="Divide" Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
+                                                <TextBox x:Name="txtAtki2IpBilBolen" Text="{Binding Atki2IpBilBolen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="/"/>
+                                                <TextBox x:Name="txtAtki2IpBilBolunen" Text="{Binding Atki2IpBilBolunen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBox x:Name="txtAtki2IpBilSonuc" Text="{Binding Atki2IpBilSonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            </DockPanel>
+                                            <DockPanel Tag="Divide" Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
+                                                <TextBox x:Name="txtAtki3IpBilBolen" Text="{Binding Atki3IpBilBolen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="/"/>
+                                                <TextBox x:Name="txtAtki3IpBilBolunen" Text="{Binding Atki3IpBilBolunen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBox x:Name="txtAtki3IpBilSonuc" Text="{Binding Atki3IpBilSonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            </DockPanel>
+                                            <DockPanel Tag="Divide" Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
+                                                <TextBox x:Name="txtAtki4IpBilBolen" Text="{Binding Atki4IpBilBolen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="/"/>
+                                                <TextBox x:Name="txtAtki4IpBilBolunen" Text="{Binding Atki4IpBilBolunen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBox x:Name="txtAtki4IpBilSonuc" Text="{Binding Atki4IpBilSonuc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="40"/>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="1" Margin="4,0">
+                                        <StackPanel>
+                                            <!-- Üretim Bilgileri - Sıklıklar -->
+                                            <TextBlock Text="Sıklıklar" Background="LightGray" Margin="0,0,0,2"/>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
+                                                <TextBox x:Name="txtCozgu1Siklik" Text="{Binding Cozgu1Siklik,Mode=OneWay}" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0" IsEnabled="False"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
+                                                <TextBox x:Name="txtCozgu2Siklik" Text="{Binding Cozgu2Siklik,Mode=OneWay}" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0" IsEnabled="False"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
+                                                <TextBox x:Name="txtAtki1Siklik" Text="{Binding Atki1Siklik, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
+                                                <TextBox x:Name="txtAtki2Siklik" Text="{Binding Atki2Siklik, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
+                                                <TextBox x:Name="txtAtki3Siklik" Text="{Binding Atki3Siklik, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
+                                                <TextBox x:Name="txtAtki4Siklik" Text="{Binding Atki4Siklik, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </DockPanel>
+                            <DockPanel Grid.Row="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border>
+                                        <StackPanel>
+                                            <!-- Üretim Bilgileri - Dokuma Bilgileri -->
+                                            <TextBlock Text="Dokuma Bilgileri" Background="LightGray" Margin="0,0,0,2"/>
+                                            <DockPanel Tag="Multiply" Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="T.No 1 :"/>
+                                                <TextBox x:Name="txtTarakNo1Carpan" Text="{Binding TarakNo1Carpan,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True" />
+                                                <TextBlock Text="X"/>
+                                                <TextBox x:Name="txtTarakNo1Carpim" Text="{Binding TarakNo1Carpim,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBox x:Name="txtTarakNo1Sonuc" Text="{Binding TarakNo1Sonuc, Mode=OneWay}" Width="40" IsEnabled="False"/>
+                                            </DockPanel>
 
-                                        <!-- İkinci satır -->
-                                        <DockPanel Tag="Multiply" Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="T.No 2 :"/>
-                                            <TextBox x:Name="txtTarakNo2Carpan" Text="{Binding TarakNo2Carpan,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="X"/>
-                                            <TextBox x:Name="txtTarakNo2Carpim" Text="{Binding TarakNo2Carpim,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBox x:Name="txtTarakNo2Sonuc" Text="{Binding TarakNo2Sonuc, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="40" IsEnabled="False"/>
-                                        </DockPanel>
-                                        <DockPanel Tag="Divide_1.05" Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Tarak En :"/>
-                                            <TextBox x:Name="txtTarakEn" Text="{Binding TarakEn, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Ham Boy :"/>
-                                            <TextBox x:Name="txtHamBoy" Text="{Binding HamBoy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Boy Saçak :"/>
-                                            <TextBox x:Name="txtBoySacakText" Text="{Binding BoySacakText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="En Saçak :"/>
-                                            <TextBox x:Name="txtEnSacakText" Text="{Binding EnSacakText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Ham En :"/>
-                                            <TextBox x:Name="txtHamEn" Text="{Binding HamEn,Mode=OneWay}" FontSize="11" TextAlignment="Center" Margin="2,0" IsEnabled="False"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Mam. Boy :"/>
-                                            <TextBox x:Name="txtMamulBoy" Text="{Binding MamulBoy,Mode=OneWay}" FontSize="11" TextAlignment="Center" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Mam. En :"/>
-                                            <TextBox x:Name="txtMamulEn" Text="{Binding MamulEn,Mode=OneWay}" FontSize="11" TextAlignment="Center" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                    </StackPanel>
-                                </Border>
-                                <Border Grid.Column="1" Margin="4,0">
-                                    <StackPanel>
-                                        <!-- Üretim Bilgileri - Tel Sayıları -->
-                                        <TextBlock Text="Tel Sayıları" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox x:Name="txtCozgu1TelSay" Text="{Binding Cozgu1TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox x:Name="txtCozgu2TelSay" Text="{Binding Cozgu2TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox x:Name="txtAtki1TelSay" Text="{Binding Atki1TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox x:Name="txtAtki2TelSay" Text="{Binding Atki2TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox x:Name="txtAtki3TelSay" Text="{Binding Atki3TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox x:Name="txtAtki4TelSay" Text="{Binding Atki4TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
-                                        </DockPanel>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-                        </DockPanel>
-                    </Grid>
-                </GroupBox>
-            </Border>
-            <!-- Üretim hesaplama groupbox -->
-            <Border>
-                <GroupBox Header="Üretim Hesaplama">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <DockPanel Grid.Row="0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Border>
-                                    <StackPanel>
-                                        <!-- Üretim Bilgileri - İplik Bilgileri -->
-                                        <TextBlock Text="Gramaj Hesaplama" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox x:Name="txtCozgu1Gramaj" Text="{Binding Cozgu1Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox x:Name="txtCozgu2Gramaj" Text="{Binding Cozgu2Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox x:Name="txtAtki1Gramaj" Text="{Binding Atki1Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox x:Name="txtAtki2Gramaj" Text="{Binding Atki2Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox x:Name="txtAtki3Gramaj" Text="{Binding Atki3Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox x:Name="txtAtki4Gramaj" Text="{Binding Atki4Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Toplam :"/>
-                                            <TextBox x:Name="txtToplamGramaj" Text="{Binding ToplamGramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="M.Tül/Gr"/>
-                                        </DockPanel>
-                                    </StackPanel>
-                                </Border>
-                                <Border Grid.Column="1" Margin="4,0">
-                                    <StackPanel>
-                                        <!-- Üretim Bilgileri - İplik Boyamaları -->
-                                        <TextBlock Text="İplik Boyamaları" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox x:Name="txtCozgu1IpBoyText" Text="{Binding Cozgu1IpBoyText,Mode=TwoWay}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox x:Name="txtCozgu2IpBoyText" Text="{Binding Cozgu2IpBoyText,Mode=TwoWay}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox x:Name="txtAtki1IpBoyText" Text="{Binding Atki1IpBoyText,Mode=TwoWay}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox x:Name="txtAtki2IpBoyText" Text="{Binding Atki2IpBoyText,Mode=TwoWay}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox x:Name="txtAtki3IpBoyText" Text="{Binding Atki3IpBoyText,Mode=TwoWay}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox x:Name="txtAtki4IpBoyText" Text="{Binding Atki4IpBoyText,Mode=TwoWay}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Gr/M2 :"/>
-                                            <TextBox x:Name="txtIpBoySonuc" IsEnabled="False" Text="{Binding IpBoySonuc,Mode=TwoWay,StringFormat=N3}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="gr"/>
-                                        </DockPanel>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-                        </DockPanel>
-                        <DockPanel Grid.Row="1">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Border>
-                                    <StackPanel>
-                                        <!-- Üretim Bilgileri - İplik Fiyatları -->
-                                        <TextBlock Text="İplik Fiyatları" Background="LightGray" Margin="0,0,0,2" Width="146.703333333333"/>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox x:Name="txtCozgu1IpFiyText" Text="{Binding Cozgu1IpFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat='0.00'}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"  helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox x:Name="txtCozgu2IpFiyText" Text="{Binding Cozgu2IpFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"  helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox x:Name="txtAtki1IpFiyText" Text="{Binding Atki1IpFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox x:Name="txtAtki2IpFiyText" Text="{Binding Atki2IpFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox x:Name="txtAtki3IpFiyText" Text="{Binding Atki3IpFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox x:Name="txtAtki4IpFiyText" Text="{Binding Atki4IpFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                    </StackPanel>
-                                </Border>
-                                <Border Grid.Column="1" Margin="4,0">
-                                    <StackPanel>
-                                        <!-- Üretim Bilgileri - İplik Maliyet -->
-                                        <TextBlock Text="İplik Maliyet" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                            <TextBox x:Name="txtCozgu1IpMal" IsEnabled="False" Text="{Binding Cozgu1IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                            <TextBox x:Name="txtCozgu2IpMal" IsEnabled="False" Text="{Binding Cozgu2IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
-                                            <TextBox x:Name="txtAtki1IpMal" IsEnabled="False" Text="{Binding Atki1IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                            <TextBox x:Name="txtAtki2IpMal" IsEnabled="False" Text="{Binding Atki2IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                            <TextBox x:Name="txtAtki3IpMal" IsEnabled="False" Text="{Binding Atki3IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text=""/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                            <TextBox x:Name="txtAtki4IpMal" IsEnabled="False" Text="{Binding Atki4IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="60" Text="Toplam:"/>
-                                            <TextBox x:Name="txtToplamIpMal" IsEnabled="False" Text="{Binding ToplamIpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-                        </DockPanel>
-                    </Grid>
-                </GroupBox>
-            </Border>
-            <Border>
-                <!-- Maliyet Hesaplama gropubox -->
-                <GroupBox Header="Maliyet Hesaplama">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <DockPanel Grid.Row="0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Border>
-                                    <StackPanel>
-                                        <!-- Maliyet Hesaplama - Üretim Fiyatları -->
-                                        <TextBlock Text="Üretim Fiyatları" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Atkı :"/>
-                                            <TextBox x:Name="txtAtkiUrFiyText" Text="{Binding AtkiUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="₺" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Çözgü :"/>
-                                            <TextBox x:Name="txtCozguUrFiyText" Text="{Binding CozguUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="$" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Parça Yıklama :"/>
-                                            <TextBox x:Name="txtParcaYikamaUrFiyText" Text="{Binding ParcaYikamaUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="$" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Kumaş Boyama :"/>
-                                            <TextBox x:Name="txtKumasBoyamaUrFiyText" Text="{Binding KumasBoyamaUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center"  Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="€" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Dokuma Firesi :"/>
-                                            <TextBox x:Name="txtDokumaFiresiUrFiyText" Text="{Binding DokumaFiresiUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center"  Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="%" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Boyahane Firesi :"/>
-                                            <TextBox x:Name="txtBoyaFiresiUrFiyText" Text="{Binding BoyaFiresiUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="%" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Konfek. Maliyeti :"/>
-                                            <TextBox x:Name="txtKonfMaliyetiUrFiyText" Text="{Binding KonfMaliyetiUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="$" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="2. Kalite Maliyeti :"/>
-                                            <TextBox x:Name="txtIkinciKaliyeMaliyetiUrFiyText" Text="{Binding IkinciKaliyeMaliyetiUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="%" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Kâr :"/>
-                                            <TextBox x:Name="txtKarUrFiyText" Text="{Binding KarUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="%" Margin="2,0"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="KDV :"/>
-                                            <TextBox x:Name="txtKdvUrFiyText" Text="{Binding KdvUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                            <TextBlock Text="%" Margin="2,0"/>
-                                        </DockPanel>
-                                        <Border BorderBrush="Gray" BorderThickness=".2" Margin="0,2,0,2"/>
-                                        <!-- Divider -->
-                                        <DockPanel Margin="0,2,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Kur :"/>
-                                            <TextBox x:Name="txtKurUrFiyText" Text="{Binding KurUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Parite :"/>
-                                            <TextBox x:Name="txtPariteUrFiyText" Text="{Binding PariteUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="92" Text="Euro :"/>
-                                            <TextBox x:Name="txtEurUrFiyText" Text="{Binding EurUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                                        </DockPanel>
-                                    </StackPanel>
-                                </Border>
-                                <Border Grid.Column="1" Margin="4,0">
-                                    <StackPanel>
-                                        <!-- Üretim Bilgileri - İplik Boyamaları -->
-                                        <TextBlock Text="Dokuma Maliyet" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Dokuma :"/>
-                                            <TextBox x:Name="txtDokumaDokMal" Text="{Binding DokumaDokMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Çözgü :"/>
-                                            <TextBox x:Name="txtCozguDokMal" Text="{Binding CozguDokMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="100" Text="İplik Maliyet :"/>
-                                            <TextBox x:Name="txtIplikMaliyetDokMal" Text="{Binding IplikMaliyetDokMal,Mode=TwoWay, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <TextBlock Text="Üretim Maliyet" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Toplam :"/>
-                                            <TextBox x:Name="txtToplamUrMal" Text="{Binding ToplamUrMal, Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Fireli :"/>
-                                            <TextBox x:Name="txtFireliUrMal" Text="{Binding FireliUrMal, Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <TextBlock Text="Ham Kumaş Maliyet" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Kârlı :"/>
-                                            <TextBox x:Name="txtKarliHamKumMal" Text="{Binding KarliHamKumMal,Mode=TwoWay, StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                            <TextBox x:Name="txtKarliHamKumMalTL" Text="{Binding KarliHamKumMalTL,Mode=TwoWay, StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
-                                        </DockPanel>
-                                        <TextBlock Text="Yıkama ve Boyahane Maliyet" Background="LightGray" Margin="0,0,0,2"/>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Parça Yıkama :"/>
-                                            <TextBox x:Name="txtParcaYikamaYBM" Text="{Binding ParcaYikamaYBM, Mode=TwoWay, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Boyanmış Kumaş :"/>
-                                            <TextBox x:Name="txtBoyanmisKumasYBM" Text="{Binding BoyanmisKumasYBM, Mode=TwoWay, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                            <TextBox x:Name="txtBoyanmisKumasTlYBM" Text="{Binding BoyanmisKumasTlYBM,Mode=TwoWay, StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Fireli :"/>
-                                            <TextBox x:Name="txtFireliYBM" Text="{Binding FireliYBM,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
-                                            <TextBlock VerticalAlignment="Center" Width="100" Text="Kârlı :"/>
-                                            <TextBox x:Name="txtKarliYBM" Text="{Binding KarliYBM,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
-                                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                        </DockPanel>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-                        </DockPanel>
-                        <DockPanel Grid.Row="1">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Border>
-                                    <StackPanel>
-                                        <!-- Maliyet Hesaplama - Dikilmiş Ürün -->
-                                        <TextBlock Text="Dikilmiş Ürün" Background="LightGray" Margin="0,0,0,2" TextAlignment="Center"/>
-                                        <DockPanel>
-                                            <StackPanel>
-                                                <DockPanel Margin="0,0,0,2">
-                                                    <TextBlock VerticalAlignment="Center" Width="120" Text="Boyalı Kumaş :"/>
-                                                    <TextBox x:Name="txtBoyaliKumasDikUr" IsEnabled="False" Text="{Binding BoyaliKumasDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
-                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                                </DockPanel>
-                                                <DockPanel Margin="0,0,0,2">
-                                                    <TextBlock VerticalAlignment="Center" Width="120" Text="Konfeksiyon Maliyeti :"/>
-                                                    <TextBox  x:Name="txtKonfMaliyetiDikUr" IsEnabled="False" Text="{Binding KonfMaliyetiDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
-                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                                </DockPanel>
+                                            <!-- İkinci satır -->
+                                            <DockPanel Tag="Multiply" Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="T.No 2 :"/>
+                                                <TextBox x:Name="txtTarakNo2Carpan" Text="{Binding TarakNo2Carpan,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="X"/>
+                                                <TextBox x:Name="txtTarakNo2Carpim" Text="{Binding TarakNo2Carpim,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="30" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBox x:Name="txtTarakNo2Sonuc" Text="{Binding TarakNo2Sonuc, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="40" IsEnabled="False"/>
+                                            </DockPanel>
+                                            <DockPanel Tag="Divide_1.05" Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Tarak En :"/>
+                                                <TextBox x:Name="txtTarakEn" Text="{Binding TarakEn, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Ham Boy :"/>
+                                                <TextBox x:Name="txtHamBoy" Text="{Binding HamBoy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Boy Saçak :"/>
+                                                <TextBox x:Name="txtBoySacakText" Text="{Binding BoySacakText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="En Saçak :"/>
+                                                <TextBox x:Name="txtEnSacakText" Text="{Binding EnSacakText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Ham En :"/>
+                                                <TextBox x:Name="txtHamEn" Text="{Binding HamEn,Mode=OneWay}" FontSize="11" TextAlignment="Center" Margin="2,0" IsEnabled="False"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Mam. Boy :"/>
+                                                <TextBox x:Name="txtMamulBoy" Text="{Binding MamulBoy,Mode=OneWay}" FontSize="11" TextAlignment="Center" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Mam. En :"/>
+                                                <TextBox x:Name="txtMamulEn" Text="{Binding MamulEn,Mode=OneWay}" FontSize="11" TextAlignment="Center" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="1" Margin="4,0">
+                                        <StackPanel>
+                                            <!-- Üretim Bilgileri - Tel Sayıları -->
+                                            <TextBlock Text="Tel Sayıları" Background="LightGray" Margin="0,0,0,2"/>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
+                                                <TextBox x:Name="txtCozgu1TelSay" Text="{Binding Cozgu1TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
+                                                <TextBox x:Name="txtCozgu2TelSay" Text="{Binding Cozgu2TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
+                                                <TextBox x:Name="txtAtki1TelSay" Text="{Binding Atki1TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
+                                                <TextBox x:Name="txtAtki2TelSay" Text="{Binding Atki2TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
+                                                <TextBox x:Name="txtAtki3TelSay" Text="{Binding Atki3TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
+                                                <TextBox x:Name="txtAtki4TelSay" Text="{Binding Atki4TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </DockPanel>
+                        </Grid>
+                    </GroupBox>
+                </Border>
+                <!-- Üretim hesaplama groupbox -->
+                <Border>
+                    <GroupBox Header="Üretim Hesaplama">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <DockPanel Grid.Row="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border>
+                                        <StackPanel>
+                                            <!-- Üretim Bilgileri - İplik Bilgileri -->
+                                            <TextBlock Text="Gramaj Hesaplama" Background="LightGray" Margin="0,0,0,2"/>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
+                                                <TextBox x:Name="txtCozgu1Gramaj" Text="{Binding Cozgu1Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
+                                                <TextBox x:Name="txtCozgu2Gramaj" Text="{Binding Cozgu2Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
+                                                <TextBox x:Name="txtAtki1Gramaj" Text="{Binding Atki1Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
+                                                <TextBox x:Name="txtAtki2Gramaj" Text="{Binding Atki2Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
+                                                <TextBox x:Name="txtAtki3Gramaj" Text="{Binding Atki3Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
+                                                <TextBox x:Name="txtAtki4Gramaj" Text="{Binding Atki4Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Toplam :"/>
+                                                <TextBox x:Name="txtToplamGramaj" Text="{Binding ToplamGramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="M.Tül/Gr"/>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="1" Margin="4,0">
+                                        <StackPanel>
+                                            <!-- Üretim Bilgileri - İplik Boyamaları -->
+                                            <TextBlock Text="İplik Boyamaları" Background="LightGray" Margin="0,0,0,2"/>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
+                                                <TextBox x:Name="txtCozgu1IpBoyText" Text="{Binding Cozgu1IpBoyText,Mode=TwoWay}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
+                                                <TextBox x:Name="txtCozgu2IpBoyText" Text="{Binding Cozgu2IpBoyText,Mode=TwoWay}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
+                                                <TextBox x:Name="txtAtki1IpBoyText" Text="{Binding Atki1IpBoyText,Mode=TwoWay}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
+                                                <TextBox x:Name="txtAtki2IpBoyText" Text="{Binding Atki2IpBoyText,Mode=TwoWay}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
+                                                <TextBox x:Name="txtAtki3IpBoyText" Text="{Binding Atki3IpBoyText,Mode=TwoWay}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
+                                                <TextBox x:Name="txtAtki4IpBoyText" Text="{Binding Atki4IpBoyText,Mode=TwoWay}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Gr/M2 :"/>
+                                                <TextBox x:Name="txtIpBoySonuc" IsEnabled="False" Text="{Binding IpBoySonuc,Mode=TwoWay,StringFormat=N3}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="gr"/>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </DockPanel>
+                            <DockPanel Grid.Row="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border>
+                                        <StackPanel>
+                                            <!-- Üretim Bilgileri - İplik Fiyatları -->
+                                            <TextBlock Text="İplik Fiyatları" Background="LightGray" Margin="0,0,0,2" Width="146.703333333333"/>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
+                                                <TextBox x:Name="txtCozgu1IpFiyText" Text="{Binding Cozgu1IpFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat='0.00'}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"  helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
+                                                <TextBox x:Name="txtCozgu2IpFiyText" Text="{Binding Cozgu2IpFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"  helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
+                                                <TextBox x:Name="txtAtki1IpFiyText" Text="{Binding Atki1IpFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
+                                                <TextBox x:Name="txtAtki2IpFiyText" Text="{Binding Atki2IpFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
+                                                <TextBox x:Name="txtAtki3IpFiyText" Text="{Binding Atki3IpFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
+                                                <TextBox x:Name="txtAtki4IpFiyText" Text="{Binding Atki4IpFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="1" Margin="4,0">
+                                        <StackPanel>
+                                            <!-- Üretim Bilgileri - İplik Maliyet -->
+                                            <TextBlock Text="İplik Maliyet" Background="LightGray" Margin="0,0,0,2"/>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
+                                                <TextBox x:Name="txtCozgu1IpMal" IsEnabled="False" Text="{Binding Cozgu1IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
+                                                <TextBox x:Name="txtCozgu2IpMal" IsEnabled="False" Text="{Binding Cozgu2IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
+                                                <TextBox x:Name="txtAtki1IpMal" IsEnabled="False" Text="{Binding Atki1IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
+                                                <TextBox x:Name="txtAtki2IpMal" IsEnabled="False" Text="{Binding Atki2IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
+                                                <TextBox x:Name="txtAtki3IpMal" IsEnabled="False" Text="{Binding Atki3IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text=""/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
+                                                <TextBox x:Name="txtAtki4IpMal" IsEnabled="False" Text="{Binding Atki4IpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="60" Text="Toplam:"/>
+                                                <TextBox x:Name="txtToplamIpMal" IsEnabled="False" Text="{Binding ToplamIpMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </DockPanel>
+                        </Grid>
+                    </GroupBox>
+                </Border>
+                <Border>
+                    <!-- Maliyet Hesaplama gropubox -->
+                    <GroupBox Header="Maliyet Hesaplama">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <DockPanel Grid.Row="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border>
+                                        <StackPanel>
+                                            <!-- Maliyet Hesaplama - Üretim Fiyatları -->
+                                            <TextBlock Text="Üretim Fiyatları" Background="LightGray" Margin="0,0,0,2"/>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="Atkı :"/>
+                                                <TextBox x:Name="txtAtkiUrFiyText" Text="{Binding AtkiUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="₺" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="Çözgü :"/>
+                                                <TextBox x:Name="txtCozguUrFiyText" Text="{Binding CozguUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="$" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="Parça Yıklama :"/>
+                                                <TextBox x:Name="txtParcaYikamaUrFiyText" Text="{Binding ParcaYikamaUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="$" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="Kumaş Boyama :"/>
+                                                <TextBox x:Name="txtKumasBoyamaUrFiyText" Text="{Binding KumasBoyamaUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center"  Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="€" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="Dokuma Firesi :"/>
+                                                <TextBox x:Name="txtDokumaFiresiUrFiyText" Text="{Binding DokumaFiresiUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center"  Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="%" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="Boyahane Firesi :"/>
+                                                <TextBox x:Name="txtBoyaFiresiUrFiyText" Text="{Binding BoyaFiresiUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="%" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="Konfek. Maliyeti :"/>
+                                                <TextBox x:Name="txtKonfMaliyetiUrFiyText" Text="{Binding KonfMaliyetiUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="$" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="2. Kalite Maliyeti :"/>
+                                                <TextBox x:Name="txtIkinciKaliyeMaliyetiUrFiyText" Text="{Binding IkinciKaliyeMaliyetiUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="%" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="Kâr :"/>
+                                                <TextBox x:Name="txtKarUrFiyText" Text="{Binding KarUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="%" Margin="2,0"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="KDV :"/>
+                                                <TextBox x:Name="txtKdvUrFiyText" Text="{Binding KdvUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                                <TextBlock Text="%" Margin="2,0"/>
+                                            </DockPanel>
+                                            <Border BorderBrush="Gray" BorderThickness=".2" Margin="0,2,0,2"/>
+                                            <!-- Divider -->
+                                            <DockPanel Margin="0,2,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="Kur :"/>
+                                                <TextBox x:Name="txtKurUrFiyText" Text="{Binding KurUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="Parite :"/>
+                                                <TextBox x:Name="txtPariteUrFiyText" Text="{Binding PariteUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="92" Text="Euro :"/>
+                                                <TextBox x:Name="txtEurUrFiyText" Text="{Binding EurUrFiyText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" HorizontalAlignment="Left" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="1" Margin="4,0">
+                                        <StackPanel>
+                                            <!-- Üretim Bilgileri - İplik Boyamaları -->
+                                            <TextBlock Text="Dokuma Maliyet" Background="LightGray" Margin="0,0,0,2"/>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="100" Text="Dokuma :"/>
+                                                <TextBox x:Name="txtDokumaDokMal" Text="{Binding DokumaDokMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="100" Text="Çözgü :"/>
+                                                <TextBox x:Name="txtCozguDokMal" Text="{Binding CozguDokMal,Mode=TwoWay,StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="100" Text="İplik Maliyet :"/>
+                                                <TextBox x:Name="txtIplikMaliyetDokMal" Text="{Binding IplikMaliyetDokMal,Mode=TwoWay, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <TextBlock Text="Üretim Maliyet" Background="LightGray" Margin="0,0,0,2"/>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="100" Text="Toplam :"/>
+                                                <TextBox x:Name="txtToplamUrMal" Text="{Binding ToplamUrMal, Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="100" Text="Fireli :"/>
+                                                <TextBox x:Name="txtFireliUrMal" Text="{Binding FireliUrMal, Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <TextBlock Text="Ham Kumaş Maliyet" Background="LightGray" Margin="0,0,0,2"/>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="100" Text="Kârlı :"/>
+                                                <TextBox x:Name="txtKarliHamKumMal" Text="{Binding KarliHamKumMal,Mode=TwoWay, StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                                <TextBox x:Name="txtKarliHamKumMalTL" Text="{Binding KarliHamKumMalTL,Mode=TwoWay, StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
+                                            </DockPanel>
+                                            <TextBlock Text="Yıkama ve Boyahane Maliyet" Background="LightGray" Margin="0,0,0,2"/>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="100" Text="Parça Yıkama :"/>
+                                                <TextBox x:Name="txtParcaYikamaYBM" Text="{Binding ParcaYikamaYBM, Mode=TwoWay, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="100" Text="Boyanmış Kumaş :"/>
+                                                <TextBox x:Name="txtBoyanmisKumasYBM" Text="{Binding BoyanmisKumasYBM, Mode=TwoWay, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                                <TextBox x:Name="txtBoyanmisKumasTlYBM" Text="{Binding BoyanmisKumasTlYBM,Mode=TwoWay, StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="100" Text="Fireli :"/>
+                                                <TextBox x:Name="txtFireliYBM" Text="{Binding FireliYBM,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                            <DockPanel Margin="0,0,0,2">
+                                                <TextBlock VerticalAlignment="Center" Width="100" Text="Kârlı :"/>
+                                                <TextBox x:Name="txtKarliYBM" Text="{Binding KarliYBM,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" IsEnabled="False" Width="44" Margin="2,0"/>
+                                                <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </DockPanel>
+                            <DockPanel Grid.Row="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border>
+                                        <StackPanel>
+                                            <!-- Maliyet Hesaplama - Dikilmiş Ürün -->
+                                            <TextBlock Text="Dikilmiş Ürün" Background="LightGray" Margin="0,0,0,2" TextAlignment="Center"/>
+                                            <DockPanel>
+                                                <StackPanel>
+                                                    <DockPanel Margin="0,0,0,2">
+                                                        <TextBlock VerticalAlignment="Center" Width="120" Text="Boyalı Kumaş :"/>
+                                                        <TextBox x:Name="txtBoyaliKumasDikUr" IsEnabled="False" Text="{Binding BoyaliKumasDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
+                                                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                                    </DockPanel>
+                                                    <DockPanel Margin="0,0,0,2">
+                                                        <TextBlock VerticalAlignment="Center" Width="120" Text="Konfeksiyon Maliyeti :"/>
+                                                        <TextBox  x:Name="txtKonfMaliyetiDikUr" IsEnabled="False" Text="{Binding KonfMaliyetiDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
+                                                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                                    </DockPanel>
 
-                                                <DockPanel Margin="0,0,0,2">
-                                                    <TextBlock VerticalAlignment="Center" Width="120" Text="2. Kalite Maliyeti :"/>
-                                                    <TextBox x:Name="txtIkinciKaliteMaliyetDikUr" IsEnabled="False" Text="{Binding IkinciKaliteMaliyetDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
-                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                                </DockPanel>
-                                            </StackPanel>
-                                            <StackPanel Margin="4,0,0,0">
-                                                <DockPanel Margin="0,0,0,2">
-                                                    <TextBlock VerticalAlignment="Center" Width="90" Text="Kârlı :"/>
-                                                    <TextBox x:Name="txtKarliDikUr" IsEnabled="False" Text="{Binding  KarliDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
-                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                                    <TextBox  x:Name="txtKarliTLDikUr" IsEnabled="False" Text="{Binding  KarliTLDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
-                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
-                                                </DockPanel>
-                                                <DockPanel Margin="0,0,0,2">
-                                                    <TextBlock VerticalAlignment="Center" Width="90" Text="KDV Dahil Fiyat :"/>
-                                                    <TextBox x:Name="txtKdvliDikUr" IsEnabled="False" Text="{Binding KdvliDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
-                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                                                    <TextBox x:Name="txtKdvliTLDikUr" IsEnabled="False" Text="{Binding KdvliTLDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
-                                                    <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
-                                                </DockPanel>
-                                            </StackPanel>
-                                        </DockPanel>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
+                                                    <DockPanel Margin="0,0,0,2">
+                                                        <TextBlock VerticalAlignment="Center" Width="120" Text="2. Kalite Maliyeti :"/>
+                                                        <TextBox x:Name="txtIkinciKaliteMaliyetDikUr" IsEnabled="False" Text="{Binding IkinciKaliteMaliyetDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="60" Margin="2,0"/>
+                                                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                                    </DockPanel>
+                                                </StackPanel>
+                                                <StackPanel Margin="4,0,0,0">
+                                                    <DockPanel Margin="0,0,0,2">
+                                                        <TextBlock VerticalAlignment="Center" Width="90" Text="Kârlı :"/>
+                                                        <TextBox x:Name="txtKarliDikUr" IsEnabled="False" Text="{Binding  KarliDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                                                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                                        <TextBox  x:Name="txtKarliTLDikUr" IsEnabled="False" Text="{Binding  KarliTLDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                                                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
+                                                    </DockPanel>
+                                                    <DockPanel Margin="0,0,0,2">
+                                                        <TextBlock VerticalAlignment="Center" Width="90" Text="KDV Dahil Fiyat :"/>
+                                                        <TextBox x:Name="txtKdvliDikUr" IsEnabled="False" Text="{Binding KdvliDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                                                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                                                        <TextBox x:Name="txtKdvliTLDikUr" IsEnabled="False" Text="{Binding KdvliTLDikUr,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                                                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
+                                                    </DockPanel>
+                                                </StackPanel>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </DockPanel>
+                        </Grid>
+                    </GroupBox>
+                </Border>
+                <Border Margin="4,0,0,0" VerticalAlignment="Bottom">
+                    <StackPanel>
+                        <DockPanel>
+                            <TextBlock Width="148" Text="Belirlenen Fiyat :" Background="Yellow"/>
+                            <TextBox x:Name="txtBelirlenenFiyatText" Text="{Binding BelirlenenFiyatText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
+                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                            <TextBox x:Name="txtBelirlenenFiyatTL" IsEnabled="False" Text="{Binding BelirlenenFiyatTL,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
                         </DockPanel>
-                    </Grid>
-                </GroupBox>
-            </Border>
-            <Border Margin="4,0,0,0" VerticalAlignment="Bottom">
-                <StackPanel>
-                    <DockPanel>
-                        <TextBlock Width="148" Text="Belirlenen Fiyat :" Background="Yellow"/>
-                        <TextBox x:Name="txtBelirlenenFiyatText" Text="{Binding BelirlenenFiyatText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0" helpers:FocusHelper.SelectAllTextOnFocus="True"/>
-                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                        <TextBox x:Name="txtBelirlenenFiyatTL" IsEnabled="False" Text="{Binding BelirlenenFiyatTL,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
-                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
-                    </DockPanel>
-                    <DockPanel>
-                        <TextBlock Width="148" Text="KDV Dahil Belirlenen Fiyat" Background="Yellow"/>
-                        <TextBox x:Name="txtKdvliBelirlenFiyat" IsEnabled="False" Text="{Binding KdvliBelirlenFiyat,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
-                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
-                        <TextBox x:Name="txtKdvliBelirlenenFiyatTL" IsEnabled="False" Text="{Binding KdvliBelirlenenFiyatTL,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
-                        <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
-                    </DockPanel>
-                </StackPanel>
-            </Border>
-            <Border/>
-        </DockPanel>
-        <!-- groupboxlar -->
+                        <DockPanel>
+                            <TextBlock Width="148" Text="KDV Dahil Belirlenen Fiyat" Background="Yellow"/>
+                            <TextBox x:Name="txtKdvliBelirlenFiyat" IsEnabled="False" Text="{Binding KdvliBelirlenFiyat,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="$"/>
+                            <TextBox x:Name="txtKdvliBelirlenenFiyatTL" IsEnabled="False" Text="{Binding KdvliBelirlenenFiyatTL,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Width="40" Margin="2,0"/>
+                            <TextBlock FontSize="10" VerticalAlignment="Center" Text="₺"/>
+                        </DockPanel>
+                    </StackPanel>
+                </Border>
+                <Border/>
+            </DockPanel>
+            <!-- groupboxlar -->
+        </StackPanel>
     </StackPanel>
 </UserControl>

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\App.xaml
-11-90739260
+14-34211663
 
-30-1550736432
+33-629592673
 235544398881
-MainWindow.xaml;userControls\HandyTest.xaml;userControls\UC_FirmaKarti.xaml;userControls\UC_KumasKarti.xaml;userControls\Uc_MaliyetHesaplama.xaml;userControls\UC_Numarator.xaml;userControls\UC_UretimYonetimiParametreleri.xaml;wins\winFirmaListesi.xaml;wins\winMaliyetCalismasiListesi.xaml;wins\winMalzemeListesi.xaml;wins\winNumaratorListesi.xaml;
+MainWindow.xaml;userControls\HandyTest.xaml;userControls\UC_FirmaKarti.xaml;userControls\UC_KumasKarti.xaml;userControls\Uc_MaliyetHesaplama.xaml;userControls\UC_Numarator.xaml;userControls\UC_RaporOlusturma.xaml;userControls\UC_UretimYonetimiParametreleri.xaml;wins\winBuyukResim.xaml;wins\winFirmaListesi.xaml;wins\winMaliyetCalismasiListesi.xaml;wins\winMalzemeListesi.xaml;wins\winNumaratorListesi.xaml;wins\winRaporSecimi.xaml;
 
-True
+False
 

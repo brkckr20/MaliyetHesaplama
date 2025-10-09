@@ -22,7 +22,13 @@
     <Compile Update="userControls\UC_Numarator.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="userControls\UC_RaporOlusturma.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="userControls\UC_UretimYonetimiParametreleri.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="wins\winBuyukResim.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="wins\winFirmaListesi.xaml.cs">
@@ -35,6 +41,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="wins\winNumaratorListesi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="wins\winRaporSecimi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -57,7 +66,13 @@
     <Page Update="userControls\UC_Numarator.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="userControls\UC_RaporOlusturma.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="userControls\UC_UretimYonetimiParametreleri.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="wins\winBuyukResim.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winFirmaListesi.xaml">
@@ -70,6 +85,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winNumaratorListesi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="wins\winRaporSecimi.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

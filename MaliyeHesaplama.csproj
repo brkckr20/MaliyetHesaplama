@@ -16,11 +16,13 @@
     <None Remove="News.png" />
     <None Remove="numerator.ico" />
     <None Remove="Purchase Order.png" />
+    <None Remove="report.ico" />
     <None Remove="Towel.png" />
     <None Remove="userControls\back.ico" />
     <None Remove="userControls\list.ico" />
     <None Remove="userControls\new.ico" />
     <None Remove="userControls\next.ico" />
+    <None Remove="userControls\printer.ico" />
     <None Remove="userControls\save.ico" />
     <None Remove="userControls\trash.ico" />
     <None Remove="wins\Building.png" />
@@ -46,11 +48,13 @@
     <Resource Include="News.png" />
     <Resource Include="numerator.ico" />
     <Resource Include="Purchase Order.png" />
+    <Resource Include="report.ico" />
     <Resource Include="Towel.png" />
     <Resource Include="userControls\back.ico" />
     <Resource Include="userControls\list.ico" />
     <Resource Include="userControls\new.ico" />
     <Resource Include="userControls\next.ico" />
+    <Resource Include="userControls\printer.ico" />
     <Resource Include="userControls\save.ico" />
     <Resource Include="userControls\trash.ico" />
     <Resource Include="wins\Building.png" />
@@ -59,6 +63,9 @@
 
   <ItemGroup>
     <None Update="dbconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="reports\blank.frx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

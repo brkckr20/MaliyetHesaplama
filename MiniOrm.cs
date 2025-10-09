@@ -146,4 +146,10 @@ public class MiniOrm
                     order by ISNULL(C.OrderNo,'')";
         return _connection.Query<T>(sql);
     }
+    public byte[] GetImage(string tableName, string fieldName, int id)
+    {
+        var sql = $"SELECT {fieldName} FROM {tableName} WHERE Id = @Id";
+        var imageBytes = _connection.QueryFirstOrDefault<byte[]>(sql, new { Id = id });
+        return imageBytes;
+    }
 }

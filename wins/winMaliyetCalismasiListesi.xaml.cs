@@ -45,7 +45,7 @@ namespace MaliyeHesaplama.wins
                 Date = record.Date;
                 CompanyCode = record.CompanyCode;
                 InventoryCode = record.InventoryCode;
-                //ImageData = Convert.FromBase64String(record.ProductImage);
+                ImageData = _orm.GetImage("Cost", "ProductImage", Id);
                 this.Close();
             }
         }
