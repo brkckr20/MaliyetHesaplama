@@ -15,7 +15,10 @@
           "HandyControl": "3.5.1",
           "Microsoft.Data.SqlClient": "6.1.1",
           "Microsoft.Data.Sqlite": "9.0.9",
-          "Syncfusion.SfGrid.WPF": "31.1.18"
+          "Syncfusion.SfGrid.WPF": "31.1.18",
+          "FastReport.Bars": "2013.3.9.0",
+          "FastReport": "2013.3.9.0",
+          "FastReport.Editor": "2013.3.9.0"
         },
         "runtime": {
           "MaliyeHesaplama.dll": {}
@@ -717,6 +720,30 @@
             "fileVersion": "8.0.1024.46610"
           }
         }
+      },
+      "FastReport.Bars/2013.3.9.0": {
+        "runtime": {
+          "FastReport.Bars.dll": {
+            "assemblyVersion": "2013.3.9.0",
+            "fileVersion": "2013.3.9.0"
+          }
+        }
+      },
+      "FastReport/2013.3.9.0": {
+        "runtime": {
+          "FastReport.dll": {
+            "assemblyVersion": "2013.3.9.0",
+            "fileVersion": "2013.3.9.0"
+          }
+        }
+      },
+      "FastReport.Editor/2013.3.9.0": {
+        "runtime": {
+          "FastReport.Editor.dll": {
+            "assemblyVersion": "2013.3.9.0",
+            "fileVersion": "2013.3.9.0"
+          }
+        }
       }
     }
   },
@@ -1061,6 +1088,21 @@
       "sha512": "sha512-0f1B50Ss7rqxXiaBJyzUu9bWFOO2/zSlifZ/UNMdiIpDYe4cY4LQQicP4nirK1OS31I43rn062UIJ1Q9bpmHpg==",
       "path": "system.text.json/8.0.5",
       "hashPath": "system.text.json.8.0.5.nupkg.sha512"
+    },
+    "FastReport.Bars/2013.3.9.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FastReport/2013.3.9.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FastReport.Editor/2013.3.9.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

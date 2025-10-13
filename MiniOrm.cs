@@ -152,4 +152,9 @@ public class MiniOrm
         var imageBytes = _connection.QueryFirstOrDefault<byte[]>(sql, new { Id = id });
         return imageBytes;
     }
+    public T GetReport<T>(string reportName)
+    {
+        var sql = $"SELECT * FROM Report WHERE ReportName={reportName};";
+        return _connection.Query<T>(sql).FirstOrDefault();
+    }
 }

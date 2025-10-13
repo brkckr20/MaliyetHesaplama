@@ -41,6 +41,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="FastReport">
+      <HintPath>bin\Debug\net8.0-windows\FastReport.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Bars">
+      <HintPath>bin\Debug\net8.0-windows\FastReport.Bars.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Editor">
+      <HintPath>bin\Debug\net8.0-windows\FastReport.Editor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Building.png" />
     <Resource Include="Filter_1.png" />
     <Resource Include="Group of Projects.ico" />
@@ -66,7 +78,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="reports\blank.frx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
