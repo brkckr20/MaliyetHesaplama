@@ -30,25 +30,66 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AvalonEdit" Version="6.3.1.120" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="DataGridExtensions" Version="2.7.0" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="5.0.0" />
+    <PackageReference Include="FastColoredTextBox.Net6" Version="1.0.0" />
     <PackageReference Include="HandyControl" Version="3.5.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="4.14.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.9" />
     <PackageReference Include="Syncfusion.SfGrid.WPF" Version="31.1.18" />
+    <PackageReference Include="System.Data.Odbc" Version="9.0.9" />
+    <PackageReference Include="System.Data.OleDb" Version="9.0.9" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="FastReport">
-      <HintPath>bin\Debug\net8.0-windows\FastReport.dll</HintPath>
+    <Reference Include="Stimulsoft.Base">
+      <HintPath>..\..\..\asada\Stimulsoft.Base.dll</HintPath>
     </Reference>
-    <Reference Include="FastReport.Bars">
-      <HintPath>bin\Debug\net8.0-windows\FastReport.Bars.dll</HintPath>
+    <Reference Include="Stimulsoft.Blockly">
+      <HintPath>..\..\..\asada\Stimulsoft.Blockly.dll</HintPath>
     </Reference>
-    <Reference Include="FastReport.Editor">
-      <HintPath>bin\Debug\net8.0-windows\FastReport.Editor.dll</HintPath>
+    <Reference Include="Stimulsoft.BlocklyEditor.Wpf">
+      <HintPath>..\..\..\asada\Stimulsoft.BlocklyEditor.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Client.Designer">
+      <HintPath>..\..\..\asada\Stimulsoft.Client.Designer.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Controls.Wpf">
+      <HintPath>..\..\..\asada\Stimulsoft.Controls.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Data">
+      <HintPath>..\..\..\asada\Stimulsoft.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Database.Wpf">
+      <HintPath>..\..\..\asada\Stimulsoft.Database.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Editor.Wpf">
+      <HintPath>..\..\..\asada\Stimulsoft.Editor.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Map">
+      <HintPath>..\..\..\asada\Stimulsoft.Map.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report">
+      <HintPath>..\..\..\asada\Stimulsoft.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Check">
+      <HintPath>..\..\..\asada\Stimulsoft.Report.Check.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Helper">
+      <HintPath>..\..\..\asada\Stimulsoft.Report.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Wpf">
+      <HintPath>..\..\..\asada\Stimulsoft.Report.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.WpfDesign">
+      <HintPath>..\..\..\asada\Stimulsoft.Report.WpfDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Svg">
+      <HintPath>..\..\..\asada\Stimulsoft.Svg.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -154,7 +154,7 @@ public class MiniOrm
     }
     public T GetReport<T>(string reportName)
     {
-        var sql = $"SELECT * FROM Report WHERE ReportName={reportName};";
+        var sql = $"SELECT * FROM Report WHERE ReportName='{reportName}';";
         return _connection.Query<T>(sql).FirstOrDefault();
     }
 }

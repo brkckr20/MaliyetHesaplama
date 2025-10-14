@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
+             xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -65,10 +67,23 @@
                     </DockPanel>
                 </StackPanel>
                 <Button x:Name="btnDizayn" Click="btnDizayn_Click" Content="Dizayn" Width="50" Background="Transparent"/>
+                <Button x:Name="btnOnizle" Click="btnOnizle_Click" Content="Önizleme deneme" Width="114" Background="Transparent"/>
             </DockPanel>
         </GroupBox>
         <GroupBox Grid.Row="2" Header="Rapor Sorguları" Padding="5">
-            
+            <TabControl>
+                <TabItem Header="Sorgu 1">
+                    <avalonedit:TextEditor
+                        x:Name="sorgu1edit"
+                        ShowLineNumbers="True"
+                        FontFamily="Consolas"
+                        FontSize="14"
+                        SyntaxHighlighting="SQL"
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Auto"
+                        />
+                </TabItem>
+            </TabControl>
         </GroupBox>
     </Grid>
 </UserControl>
