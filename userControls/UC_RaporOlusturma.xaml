@@ -83,6 +83,50 @@
                         HorizontalScrollBarVisibility="Auto"
                         />
                 </TabItem>
+                <TabItem Header="Sorgu 2">
+                    <avalonedit:TextEditor
+                        x:Name="sorgu2edit"
+                        ShowLineNumbers="True"
+                        FontFamily="Consolas"
+                        FontSize="14"
+                        SyntaxHighlighting="SQL"
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Auto"
+        />
+                </TabItem>
+                <TabItem Header="Sorgu 3">
+                    <avalonedit:TextEditor
+                        x:Name="sorgu3edit"
+                        ShowLineNumbers="True"
+                        FontFamily="Consolas"
+                        FontSize="14"
+                        SyntaxHighlighting="SQL"
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Auto"
+        />
+                </TabItem>
+                <TabItem Header="Sorgu 4">
+                    <avalonedit:TextEditor
+                        x:Name="sorgu4edit"
+                        ShowLineNumbers="True"
+                        FontFamily="Consolas"
+                        FontSize="14"
+                        SyntaxHighlighting="SQL"
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Auto"
+        />
+                </TabItem>
+                <TabItem Header="Sorgu 5">
+                    <avalonedit:TextEditor
+                        x:Name="sorgu5edit"
+                        ShowLineNumbers="True"
+                        FontFamily="Consolas"
+                        FontSize="14"
+                        SyntaxHighlighting="SQL"
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Auto"
+        />
+                </TabItem>
             </TabControl>
         </GroupBox>
     </Grid>
