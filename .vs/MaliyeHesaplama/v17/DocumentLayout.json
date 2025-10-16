@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "userControls\\UC_RaporOlusturma.xaml.cs",
               "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_RaporOlusturma.xaml.cs",
               "RelativeToolTip": "userControls\\UC_RaporOlusturma.xaml.cs",
-              "ViewState": "AQIAAE0AAAAAAAAAAAApwHAAAAB1AAAA",
+              "ViewState": "AQIAADEAAAAAAAAAAAAcwDwAAACMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-14T14:55:08.787Z",
               "EditorCaption": ""
@@ -61,9 +61,10 @@
               "RelativeDocumentMoniker": "MiniOrm.cs",
               "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\MiniOrm.cs",
               "RelativeToolTip": "MiniOrm.cs",
-              "ViewState": "AQIAAGAAAAAAAAAAAAArwJ4AAAAFAAAA",
+              "ViewState": "AQIAAFYAAAAAAAAAAAAwwJ4AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-13T13:02:36.879Z"
+              "WhenOpened": "2025-10-13T13:02:36.879Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -23,8 +23,7 @@ namespace MaliyeHesaplama.userControls
             InitializeComponent();
             RaporDosyasiOlustur();
         }
-        void RaporDosyasiOlustur() // rapor oluşturma işlemlerinden devam edilecek --
-                                   // listele ve ilgili sorguyu yeniden düzenleme adımlarına devam et. 14.10.2025
+        void RaporDosyasiOlustur()
         {
             string sourcedir = Path.Combine(Directory.GetCurrentDirectory(), "reports");
             string filepath = Path.Combine(sourcedir, "blank.frx");
@@ -58,7 +57,9 @@ namespace MaliyeHesaplama.userControls
         {
 
         }
-
+        /*
+         veri kaynağı isimlendirme işlemleri için database tarafında field açıldı. ui tarafından kayit işlemleri kontrol edilecek 16.10.2025
+         */
         private void btnListe_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             wins.winRaporListesi win = new wins.winRaporListesi();
@@ -135,11 +136,9 @@ namespace MaliyeHesaplama.userControls
                     return;
                 }
 
-                // ORM'den sorguyu al
                 var reports = _orm.GetReport<dynamic>(reportName);
                 string sqlQuery = reports.Query5;
 
-                // Veritabanı bağlantı ayarları
                 var config = DbConfig.Load();
                 string connectionString = config.ConnectionString;
                 DataSet dataSet = new DataSet();
@@ -150,18 +149,15 @@ namespace MaliyeHesaplama.userControls
                     adapter.Fill(dataSet, "MyData");
                 }
 
-                // Raporu yükle ve veriyi bağla
                 StiReport report = new StiReport();
                 report.Load(destPath);
                 report.RegData("MyData", dataSet);
                 report.Dictionary.Synchronize();
 
-                // Tasarımcı penceresini aç
                 var designer = new StiDesignerControl
                 {
                     Report = report
                 };
-
                 var designerWindow = new Window
                 {
                     Title = "Yeni Rapor Tasarımı",
@@ -170,11 +166,8 @@ namespace MaliyeHesaplama.userControls
                     Height = 700,
                     WindowState = WindowState.Maximized,
                 };
-
                 designerWindow.Closing += DesignerWindow_Closing;
                 designerWindow.ShowDialog();
-
-                // Kullanıcı düzenlediyse kaydet
                 report.Save(destPath);
             }
             else

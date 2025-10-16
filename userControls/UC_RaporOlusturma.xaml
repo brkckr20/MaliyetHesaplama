@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderThickness="0.5" BorderBrush="#ececec">
@@ -66,11 +67,37 @@
                         <TextBox x:Name="txtEkranAdi" Height="24" VerticalContentAlignment="Center"/>
                     </DockPanel>
                 </StackPanel>
-                <Button x:Name="btnDizayn" Click="btnDizayn_Click" Content="Dizayn" Width="50" Background="Transparent"/>
-                <Button x:Name="btnOnizle" Click="btnOnizle_Click" Content="Önizleme deneme" Width="114" Background="Transparent"/>
+                <DockPanel>
+                    <Button x:Name="btnDizayn" Click="btnDizayn_Click" Content="Dizayn" Width="50" Background="Transparent"/>
+                    <Button x:Name="btnOnizle" Click="btnOnizle_Click" Content="Önizleme deneme" Width="114" Background="Transparent"/>
+                </DockPanel>
             </DockPanel>
         </GroupBox>
-        <GroupBox Grid.Row="2" Header="Rapor Sorguları" Padding="5">
+        <GroupBox Header="Veri Kaynağı İsimleri" Grid.Row="2">
+            <StackPanel>
+                <DockPanel HorizontalAlignment="Left" Width="200" Margin="0,0,0,2">
+                    <TextBlock Text="Sorgu 1 : " Width="55"/>
+                    <TextBox x:Name="vkSorgu1" />
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Left" Width="200" Margin="0,0,0,2">
+                    <TextBlock Text="Sorgu 2 : " Width="55"/>
+                    <TextBox x:Name="vkSorgu2"/>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Left" Width="200" Margin="0,0,0,2">
+                    <TextBlock Text="Sorgu 3 : " Width="55"/>
+                    <TextBox x:Name="vkSorgu3"/>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Left" Width="200" Margin="0,0,0,2">
+                    <TextBlock Text="Sorgu 4 : " Width="55"/>
+                    <TextBox x:Name="vkSorgu4"/>
+                </DockPanel>
+                <DockPanel HorizontalAlignment="Left" Width="200" Margin="0,0,0,2">
+                    <TextBlock Text="Sorgu 5 : " Width="55"/>
+                    <TextBox x:Name="vkSorgu5"/>
+                </DockPanel>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="3" Header="Rapor Sorguları" Padding="5">
             <TabControl>
                 <TabItem Header="Sorgu 1">
                     <avalonedit:TextEditor
