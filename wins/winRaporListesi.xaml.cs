@@ -13,7 +13,7 @@ namespace MaliyeHesaplama.wins
     {
         MiniOrm _orm = new MiniOrm();
         private ICollectionView _collectionView;
-        public string ReportName, FormName, Query1, Query2, Query3, Query4, Query5;
+        public string ReportName, FormName, Query1, Query2, Query3, Query4, Query5, DataSource1, DataSource2, DataSource3, DataSource4, DataSource5;
         public int Id;
         public bool IsSelectRow = false;
         public winRaporListesi()
@@ -35,6 +35,11 @@ namespace MaliyeHesaplama.wins
                 Query3 = record.Query3;
                 Query4 = record.Query4;
                 Query5 = record.Query5;
+                DataSource1 = record.DataSource1;
+                DataSource2 = record.DataSource2;
+                DataSource3 = record.DataSource3;
+                DataSource4 = record.DataSource4;
+                DataSource5 = record.DataSource5;
                 this.Close();
             }
         }

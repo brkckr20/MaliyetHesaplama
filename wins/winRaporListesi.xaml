@@ -40,6 +40,11 @@
                 <DataGridTextColumn Visibility="Hidden" Header="Sorgu 3" Binding="{Binding Query3}"/>
                 <DataGridTextColumn Visibility="Hidden" Header="Sorgu 4" Binding="{Binding Query4}"/>
                 <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding Query5}"/>
+                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding DataSource1}"/>
+                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding DataSource2}"/>
+                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding DataSource3}"/>
+                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding DataSource4}"/>
+                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding DataSource5}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

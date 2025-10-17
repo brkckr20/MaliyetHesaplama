@@ -21,7 +21,7 @@ namespace MaliyeHesaplama.userControls
         public UC_RaporOlusturma()
         {
             InitializeComponent();
-            RaporDosyasiOlustur();
+            //RaporDosyasiOlustur();
         }
         void RaporDosyasiOlustur()
         {
@@ -33,34 +33,36 @@ namespace MaliyeHesaplama.userControls
             }
         }
 
-        private void btnYeni_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnYeni_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void btnGeri_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnGeri_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void btnIleri_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnIleri_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void btnSil_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnSil_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void btnKayit_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnKayit_Click(object sender, RoutedEventArgs e)
         {
-
+            var dict = new Dictionary<string, object>
+            {
+                {"Id",this.Id },{ "FormName", txtEkranAdi.Text },{"ReportName",txtRaporAdi.Text},{"DataSource1",vkSorgu1.Text},{"DataSource2",vkSorgu2.Text},{"DataSource3",vkSorgu3.Text},{"DataSource4",vkSorgu4.Text},{"DataSource5",vkSorgu5.Text},{"Query1",sorgu1edit.Text},{"Query2",sorgu2edit.Text},{"Query3",sorgu3edit.Text},{"Query4",sorgu4edit.Text},{"Query5",sorgu5edit.Text}
+            };
+            this.Id = _orm.Save("Report", dict);
+            Bildirim.Bilgilendirme2("Kayıt işlemi tamamlandı.");
         }
-        /*
-         veri kaynağı isimlendirme işlemleri için database tarafında field açıldı. ui tarafından kayit işlemleri kontrol edilecek 16.10.2025
-         */
-        private void btnListe_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnListe_Click(object sender, RoutedEventArgs e)
         {
             wins.winRaporListesi win = new wins.winRaporListesi();
             win.ShowDialog();
@@ -74,40 +76,12 @@ namespace MaliyeHesaplama.userControls
                 sorgu3edit.Text = win.Query3;
                 sorgu4edit.Text = win.Query4;
                 sorgu5edit.Text = win.Query5;
+                vkSorgu1.Text = win.DataSource1;
+                vkSorgu2.Text = win.DataSource2;
+                vkSorgu3.Text = win.DataSource3;
+                vkSorgu4.Text = win.DataSource4;
+                vkSorgu5.Text = win.DataSource5;
             }
-        }
-        public string TabloAdiniAl(string sorgu)
-        {
-            var match = System.Text.RegularExpressions.Regex.Match(sorgu, @"FROM\s+(\w+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-            return match.Success ? match.Groups[1].Value : null;
-        }
-        public void DizaynAc(string raporName, bool isDesing, int kayitNumarasi)
-        {
-            //try
-            //{
-            //    string dosyaYolu = Path.Combine(Directory.GetCurrentDirectory(), "reports");
-            //    string filepath = Path.Combine(dosyaYolu, raporName + ".frx");
-            //    report.Load(filepath);
-            //    //string Rapor1, Rapor2, Rapor3, Rapor4;
-            //    //var reports = _orm.GetReport<dynamic>(raporName);
-            //    //Rapor1 = reports.Query1;
-            //    //Rapor2 = reports.Query2;
-            //    //Rapor3 = reports.Query3;
-            //    //Rapor4 = reports.Query4;
-            //    if (isDesing)
-            //    {
-            //        //DesignerForm form = new DesignerForm();
-            //        //form.Designer
-            //    }
-            //    else
-            //    {
-            //        report.Show();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Bildirim.Uyari2("Hata : " + ex.Message);
-            //}
         }
         private void btnDizayn_Click(object sender, RoutedEventArgs e)
         {
