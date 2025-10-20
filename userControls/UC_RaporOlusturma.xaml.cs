@@ -23,15 +23,6 @@ namespace MaliyeHesaplama.userControls
             InitializeComponent();
             //RaporDosyasiOlustur();
         }
-        void RaporDosyasiOlustur()
-        {
-            string sourcedir = Path.Combine(Directory.GetCurrentDirectory(), "reports");
-            string filepath = Path.Combine(sourcedir, "blank.frx");
-            if (File.Exists(filepath))
-            {
-
-            }
-        }
 
         private void btnYeni_Click(object sender, RoutedEventArgs e)
         {
@@ -111,30 +102,54 @@ namespace MaliyeHesaplama.userControls
                 }
 
                 var reports = _orm.GetReport<dynamic>(reportName);
-                string sqlQuery = reports.Query5;
+                //string sqlQuery1 = reports.Query5;
 
                 var config = DbConfig.Load();
                 string connectionString = config.ConnectionString;
                 DataSet dataSet = new DataSet();
-
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    SqlDataAdapter adapter = new SqlDataAdapter(sqlQuery, connection);
-                    adapter.Fill(dataSet, "MyData");
+                    if (!string.IsNullOrWhiteSpace(reports.Query1))
+                        new SqlDataAdapter(reports.Query1, connection).Fill(dataSet, reports.DataSource1);
+
+                    if (!string.IsNullOrWhiteSpace(reports.Query2))
+                        new SqlDataAdapter(reports.Query2, connection).Fill(dataSet, reports.DataSource2);
+
+                    if (!string.IsNullOrWhiteSpace(reports.Query3))
+                        new SqlDataAdapter(reports.Query3, connection).Fill(dataSet, reports.DataSource3);
+
+                    if (!string.IsNullOrWhiteSpace(reports.Query4))
+                        new SqlDataAdapter(reports.Query4, connection).Fill(dataSet, reports.DataSource4);
+
+                    if (!string.IsNullOrWhiteSpace(reports.Query5))
+                        new SqlDataAdapter(reports.Query5, connection).Fill(dataSet, reports.DataSource5);
                 }
 
                 StiReport report = new StiReport();
                 report.Load(destPath);
-                report.RegData("MyData", dataSet);
+                if (!string.IsNullOrWhiteSpace(reports.DataSource1) && dataSet.Tables.Contains(reports.DataSource1))
+                    report.RegData(reports.DataSource1, dataSet.Tables[reports.DataSource1]);
+
+                if (!string.IsNullOrWhiteSpace(reports.DataSource2) && dataSet.Tables.Contains(reports.DataSource2))
+                    report.RegData(reports.DataSource2, dataSet.Tables[reports.DataSource2]);
+
+                if (!string.IsNullOrWhiteSpace(reports.DataSource3) && dataSet.Tables.Contains(reports.DataSource3))
+                    report.RegData(reports.DataSource3, dataSet.Tables[reports.DataSource3]);
+
+                if (!string.IsNullOrWhiteSpace(reports.DataSource4) && dataSet.Tables.Contains(reports.DataSource4))
+                    report.RegData(reports.DataSource4, dataSet.Tables[reports.DataSource4]);
+
+                if (!string.IsNullOrWhiteSpace(reports.DataSource5) && dataSet.Tables.Contains(reports.DataSource5))
+                    report.RegData(reports.DataSource5, dataSet.Tables[reports.DataSource5]);
                 report.Dictionary.Synchronize();
 
-                var designer = new StiDesignerControl
+                var designer = new StiDesignerControl // çalışmadı - 20.10.2025
                 {
                     Report = report
                 };
                 var designerWindow = new Window
                 {
-                    Title = "Yeni Rapor Tasarımı",
+                    Title = "Yeni Rapor Tasarımı 1",
                     Content = designer,
                     Width = 1000,
                     Height = 700,

@@ -2,9 +2,15 @@
 <StiSerializer version="1.02" type="Net" application="StiReport">
   <Dictionary Ref="1" type="Dictionary" isKey="true">
     <BusinessObjects isList="true" count="0" />
-    <Databases isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <MS_x0020_SQL Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>MS SQL</Alias>
+        <ConnectionStringEncrypted />
+        <Name>MS SQL</Name>
+      </MS_x0020_SQL>
+    </Databases>
     <DataSources isList="true" count="1">
-      <MyData Ref="2" type="DataTableSource" isKey="true">
+      <MyData Ref="3" type="DataTableSource" isKey="true">
         <Alias>MyData</Alias>
         <Columns isList="true" count="35">
           <value>Id,System.Int32</value>
@@ -60,23 +66,39 @@
   <Key>e13785e47b2d4288b474e7f7a1c6b7a0</Key>
   <MetaTags isList="true" count="0" />
   <Pages isList="true" count="1">
-    <Page1 Ref="3" type="Page" isKey="true">
+    <Page1 Ref="4" type="Page" isKey="true">
       <Border>None;Black;2;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <Components isList="true" count="1">
-        <Text1 Ref="4" type="Text" isKey="true">
+        <DataBand1 Ref="5" type="DataBand" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>0,0,2.2,0.6</ClientRectangle>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,19,0.4</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text1 Ref="6" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.2,0,1.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Name>Text1</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{MyData.CompanyId}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text1>
+          </Components>
           <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>MyData</DataSourceName>
           <Expressions isList="true" count="0" />
-          <Font>Arial,8</Font>
-          <Name>Text1</Name>
-          <Page isRef="3" />
-          <Parent isRef="3" />
-          <Text>deneme</Text>
-          <TextBrush>Black</TextBrush>
-          <Type>Expression</Type>
-        </Text1>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
       </Components>
       <Conditions isList="true" count="0" />
       <Expressions isList="true" count="0" />
@@ -99,10 +121,10 @@
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>10/15/2025 4:43:50 PM</ReportChanged>
+  <ReportChanged>10/20/2025 6:18:29 PM</ReportChanged>
   <ReportCreated>10/15/2025 4:38:55 PM</ReportCreated>
-  <ReportFile>reports/Maliyet Formu.mrt</ReportFile>
-  <ReportGuid>38bc57a8160d4df59cfa65097dd8c646</ReportGuid>
+  <ReportFile>C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\reports\Maliyet Formu.mrt</ReportFile>
+  <ReportGuid>856339364a834f69a8eadc398230a1c9</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2025.4.1.0</ReportVersion>
