@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="2">
+      <MyData Ref="2" type="DataTableSource" isKey="true">
+        <Alias>MyData</Alias>
+        <Columns isList="true" count="35">
+          <value>Id,System.Int32</value>
+          <value>InventoryCode,System.String</value>
+          <value>InventoryName,System.String</value>
+          <value>Unit,System.String</value>
+          <value>Type,System.Int32</value>
+          <value>SubType,System.String</value>
+          <value>IsUse,System.Boolean</value>
+          <value>IsPrefix,System.Boolean</value>
+          <value>CombinedCode,System.String</value>
+          <value>IsStock,System.Boolean</value>
+          <value>InventoryNo,System.Int32</value>
+          <value>InventoryCinsi,System.Int32</value>
+          <value>InventoryOriginalName,System.String</value>
+          <value>CompanyId,System.Int32</value>
+          <value>CategoryId,System.Int32</value>
+          <value>GenusId,System.Int32</value>
+          <value>SpecialCode,System.String</value>
+          <value>SpecialCode2,System.String</value>
+          <value>GrM2,System.Int32</value>
+          <value>UserId,System.Int32</value>
+          <value>FabricOK,System.Boolean</value>
+          <value>ColorOK,System.Boolean</value>
+          <value>EmbroideryOK,System.Boolean</value>
+          <value>YarnOK,System.Boolean</value>
+          <value>AccessoriesOK,System.Boolean</value>
+          <value>GTIPNo,System.String</value>
+          <value>Image,System.String</value>
+          <value>RawWidth,System.Decimal</value>
+          <value>RawHeight,System.Decimal</value>
+          <value>ProdWidth,System.Decimal</value>
+          <value>ProdHeight,System.Decimal</value>
+          <value>RawGrammage,System.Decimal</value>
+          <value>ProdGrammage,System.Decimal</value>
+          <value>YarnDyed,System.Boolean</value>
+          <value>Explanation,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>6f0075758898428983d3585af3362446</Key>
+        <Name>MyData</Name>
+        <NameInSource>MyData.MyData</NameInSource>
+      </MyData>
+      <İrsaliye Ref="3" type="DataTableSource" isKey="true">
+        <Alias>İrsaliye</Alias>
+        <Columns isList="true" count="25">
+          <value>Id,System.Int32</value>
+          <value>ReceiptNo,System.String</value>
+          <value>ReceiptType,System.Int32</value>
+          <value>ReceiptDate,System.DateTime</value>
+          <value>CompanyId,System.Int32</value>
+          <value>Explanation,System.String</value>
+          <value>WareHouseId,System.Int32</value>
+          <value>InvoiceNo,System.String</value>
+          <value>InvoiceDate,System.DateTime</value>
+          <value>DispatchNo,System.String</value>
+          <value>DispatchDate,System.DateTime</value>
+          <value>DuaDate,System.DateTime</value>
+          <value>Authorized,System.String</value>
+          <value>Approved,System.Boolean</value>
+          <value>IsFinished,System.Boolean</value>
+          <value>CustomerOrderNo,System.String</value>
+          <value>OrderNo,System.String</value>
+          <value>Maturity,System.Int32</value>
+          <value>PaymentType,System.String</value>
+          <value>SavedUser,System.Int32</value>
+          <value>SavedDate,System.DateTime</value>
+          <value>UpdatedUser,System.Int32</value>
+          <value>UpdatedDate,System.DateTime</value>
+          <value>CarrierId,System.Int32</value>
+          <value>TransporterId,System.Int32</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>fbc5f7fb222a4eaa91165f7cf876617a</Key>
+        <Name>İrsaliye</Name>
+        <NameInSource>İrsaliye</NameInSource>
+      </İrsaliye>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <UserFunctions isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>3c3e81124bcb45eba6c868461e01364e</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <Text1 Ref="5" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0,8.4,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,8</Font>
+          <Name>Text1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{İrsaliye.Explanation}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>DataColumn</Type>
+        </Text1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>340bae41e3ca4ba8a1766f83d59c86c8</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>10/22/2025 2:21:22 PM</ReportChanged>
+  <ReportCreated>10/15/2025 4:31:16 PM</ReportCreated>
+  <ReportGuid>0cb4c0e9ba3943bbb7eee04fcfc1526b</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2025.4.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+  <UsePlatformDependentScript>False</UsePlatformDependentScript>
+</StiSerializer>
