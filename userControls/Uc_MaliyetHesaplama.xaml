@@ -102,11 +102,6 @@
             </Grid>
             <!-- buttonlar -->
             <DockPanel>
-                <DockPanel.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Name="cmFormSecimi" Click="cmFormSecimi_Click" Header="Maliyet Çalışması Formu"/>
-                    </ContextMenu>
-                </DockPanel.ContextMenu>
                 <!-- Üretim bilgileri groupbox -->
                 <Border>
                     <GroupBox Header="Üretim Bilgileri">

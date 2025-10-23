@@ -437,7 +437,21 @@
     <Page1 Ref="10" type="Page" isKey="true">
       <Border>None;Black;2;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
-      <Components isList="true" count="0" />
+      <Components isList="true" count="1">
+        <Text1 Ref="11" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>-0,0,4.2,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,8</Font>
+          <Name>Text1</Name>
+          <Page isRef="10" />
+          <Parent isRef="10" />
+          <Text>{Üretim_Bilgileri.CompanyId}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>DataColumn</Type>
+        </Text1>
+      </Components>
       <Conditions isList="true" count="0" />
       <Expressions isList="true" count="0" />
       <Guid>f12b412aed604661a983a5fdccbd2518</Guid>
@@ -459,9 +473,9 @@
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>10/22/2025 2:08:35 PM</ReportChanged>
+  <ReportChanged>10/23/2025 5:37:38 PM</ReportChanged>
   <ReportCreated>10/15/2025 4:38:55 PM</ReportCreated>
-  <ReportGuid>92d6d7c0723b4a228ebb0159878ad0fb</ReportGuid>
+  <ReportGuid>e8eecb466e6f4374bebfb7a904e38c05</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2025.4.1.0</ReportVersion>

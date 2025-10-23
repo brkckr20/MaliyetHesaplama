@@ -12,9 +12,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0">
-            <ComboBox Width="285" Height="24" VerticalContentAlignment="Center">
+            <ComboBox x:Name="cmbRaporlar" Width="285" Height="24" VerticalContentAlignment="Center">
                 <ComboBoxItem Content="Rapor seçiniz" IsSelected="True" IsEnabled="False" Height="24"/>
-                <ComboBoxItem Content="Rapor adı" Height="24"/>
             </ComboBox>
         </Border>
         <Border Grid.Row="1" Padding="0,0,10,0">

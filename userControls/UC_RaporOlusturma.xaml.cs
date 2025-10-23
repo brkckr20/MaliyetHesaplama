@@ -163,7 +163,7 @@ namespace MaliyeHesaplama.userControls
                 {
                     SqlCommand command = new SqlCommand(query, connection);
                     if (this.Id != 0)
-                        command.Parameters.AddWithValue("@Id", 1);
+                        command.Parameters.AddWithValue("@Id", 21);
 
                     new SqlDataAdapter(command).Fill(dataSet, dataSource);
                 }
@@ -201,7 +201,6 @@ namespace MaliyeHesaplama.userControls
         {
             //string exePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             //string reportPath = Path.Combine(exePath, "reports", $"{txtRaporAdi.Text}.mrt");
-
             //if (!File.Exists(reportPath))
             //{
             //    MessageBox.Show("Rapor dosyası bulunamadı.");

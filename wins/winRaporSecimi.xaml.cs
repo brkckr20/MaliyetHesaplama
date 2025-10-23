@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace MaliyeHesaplama.wins
 {
-    /// <summary>
-    /// Interaction logic for winRaporSecimi.xaml
-    /// </summary>
     public partial class winRaporSecimi : Window
     {
-        public winRaporSecimi()
+        string _formName;
+        MiniOrm _orm = new MiniOrm();
+        public winRaporSecimi(string formName)
         {
             InitializeComponent();
+            this._formName = formName;
+            SetReportNamesToCombobox();
+        }
+        void SetReportNamesToCombobox()
+        {
+            var reports = _orm.GetReportsToUserControl<dynamic>(_formName); //23.10.2025 - buradan devam edilecek
+            foreach (var report in reports)
+            {
+                cmbRaporlar.Items.Add(report.ReportName);
+            }
         }
     }
 }

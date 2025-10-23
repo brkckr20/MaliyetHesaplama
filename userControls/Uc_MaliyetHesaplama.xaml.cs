@@ -1,11 +1,10 @@
 ﻿using MaliyeHesaplama.helpers;
-using System.Windows.Controls;
-using System.Windows;
-using System.Globalization;
 using Microsoft.Win32;
+using System.Globalization;
 using System.IO;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using System.Windows.Data;
 
 namespace MaliyeHesaplama.userControls
 {
@@ -129,12 +128,6 @@ namespace MaliyeHesaplama.userControls
                 productImage.Source = bitmap;
             }
         }
-
-        private void cmFormSecimi_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private void btnResmiBuyut_Click(object sender, RoutedEventArgs e)
         {
             wins.winBuyukResim win = new wins.winBuyukResim(this.Id, "Cost", "ProductImage");
@@ -149,7 +142,7 @@ namespace MaliyeHesaplama.userControls
             }
             else
             {
-                wins.winRaporSecimi win = new wins.winRaporSecimi();
+                wins.winRaporSecimi win = new wins.winRaporSecimi("Maliyet Hesaplama");
                 win.ShowDialog();
             }
         }

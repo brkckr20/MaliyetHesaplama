@@ -157,4 +157,9 @@ public class MiniOrm
         var sql = $"SELECT * FROM Report WHERE ReportName='{reportName}';";
         return _connection.Query<T>(sql).FirstOrDefault();
     }
+    public List<T> GetReportsToUserControl<T>(string formName)
+    {
+        var sql = $"SELECT * FROM Report WHERE FormName='{formName}';";
+        return _connection.Query<T>(sql).ToList();
+    }
 }
