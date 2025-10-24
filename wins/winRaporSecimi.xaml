@@ -18,8 +18,8 @@
         </Border>
         <Border Grid.Row="1" Padding="0,0,10,0">
             <DockPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button VerticalContentAlignment="Center" Background="Transparent" Width="50" Height="26" Margin="0,0,5,0" Content="Tamam"/>
-                <Button VerticalContentAlignment="Center" Background="Transparent" Width="50" Content="İptal"/>
+                <Button x:Name="btnTamam" Click="btnTamam_Click" VerticalContentAlignment="Center" Background="Transparent" Width="50" Height="26" Margin="0,0,5,0" Content="Tamam"/>
+                <Button x:Name="btnIptal" Click="btnIptal_Click" VerticalContentAlignment="Center" Background="Transparent" Width="50" Content="İptal"/>
             </DockPanel>
         </Border>
     </Grid>

@@ -93,7 +93,7 @@ namespace MaliyeHesaplama.userControls
             string reportName = txtRaporAdi.Text;
             string reportPath = $"reports/{reportName}.mrt";
             string destPath = $"reports/{reportName}.mrt";
-           
+
             var reports = _orm.GetReport<dynamic>(reportName);
             var config = DbConfig.Load();
             string connectionString = config.ConnectionString;
@@ -134,7 +134,7 @@ namespace MaliyeHesaplama.userControls
             designerWindow.Closing += DesignerWindow_Closing;
             designerWindow.ShowDialog();
         }
-        private void RegDataToReport(dynamic reports, DataSet dataSet, StiReport report)
+        public void RegDataToReport(dynamic reports, DataSet dataSet, StiReport report)
         {
             if (!string.IsNullOrWhiteSpace(reports.DataSource1) && dataSet.Tables.Contains(reports.DataSource1))
                 report.RegData(reports.DataSource1, dataSet.Tables[reports.DataSource1]);
@@ -154,21 +154,19 @@ namespace MaliyeHesaplama.userControls
             report.Dictionary.Synchronize();
         }
         bool IsDesign = true; // kayıt işlemi tamamlandı. command.Parameters.AddWithValue("@Id", 1); id alanı olmazsa hata verdi ve dizaynda default 1 verildi
-        //rapor oluşturma işlemlerine devam edilecek ve baska ekrandan ön izleme yapılabilmesi için çalışmalar yapılacak - 22.10.2025
-        private void FillDataSetWithQuery(string query, string dataSource, SqlConnection connection, DataSet dataSet)
+        // Maliyet hesaplama formu Dokuma bilgilerinden devam edilecek
+        public int GoruntulenecekId = 7;
+        public void FillDataSetWithQuery(string query, string dataSource, SqlConnection connection, DataSet dataSet)
         {
             if (IsDesign)
             {
                 if (!string.IsNullOrWhiteSpace(query))
                 {
                     SqlCommand command = new SqlCommand(query, connection);
-                    if (this.Id != 0)
-                        command.Parameters.AddWithValue("@Id", 21);
-
+                    command.Parameters.AddWithValue("@Id", 7);
                     new SqlDataAdapter(command).Fill(dataSet, dataSource);
                 }
             }
-            
         }
         private void DesignerWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -197,49 +195,6 @@ namespace MaliyeHesaplama.userControls
                 }
             }
         }
-        private void btnOnizle_Click(object sender, RoutedEventArgs e)
-        {
-            //string exePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            //string reportPath = Path.Combine(exePath, "reports", $"{txtRaporAdi.Text}.mrt");
-            //if (!File.Exists(reportPath))
-            //{
-            //    MessageBox.Show("Rapor dosyası bulunamadı.");
-            //    return;
-            //}
-
-            //StiReport report = new StiReport();
-            //report.Load(reportPath);
-            //var config = DbConfig.Load();
-            //string connectionString = config.ConnectionString;
-            //var reports = _orm.GetReport<dynamic>(txtRaporAdi.Text);
-            //DataSet dataSet = new DataSet();
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-            //    FillDataSetWithQuery(reports.Query1, reports.DataSource1, connection, dataSet);
-            //    FillDataSetWithQuery(reports.Query2, reports.DataSource2, connection, dataSet);
-            //    FillDataSetWithQuery(reports.Query3, reports.DataSource3, connection, dataSet);
-            //    FillDataSetWithQuery(reports.Query4, reports.DataSource4, connection, dataSet);
-            //    FillDataSetWithQuery(reports.Query5, reports.DataSource5, connection, dataSet);
-            //}
-
-            //RegDataToReport(reports, dataSet, report);
-            //report.Dictionary.Synchronize();
-            //report.Render();
-
-            //var viewer = new StiWpfViewerControl
-            //{
-            //    Report = report
-            //};
-
-            //var viewerWindow = new Window
-            //{
-            //    Title = "Rapor Önizleme [ " + txtRaporAdi.Text + " ]",
-            //    Content = viewer,
-            //    Width = 1000,
-            //    Height = 700
-            //};
-
-            //viewerWindow.ShowDialog();
-        }
+        
     }
 }

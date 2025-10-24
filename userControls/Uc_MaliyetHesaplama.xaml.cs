@@ -138,11 +138,11 @@ namespace MaliyeHesaplama.userControls
         {
             if (this.Id == 0)
             {
-                Bildirim.Uyari2("Form alabilmek için lütfen bir kayıt seçiniz!"); // burdan devam edilecek - 08.10.2025
+                Bildirim.Uyari2("Form alabilmek için lütfen bir kayıt seçiniz!");
             }
             else
             {
-                wins.winRaporSecimi win = new wins.winRaporSecimi("Maliyet Hesaplama");
+                wins.winRaporSecimi win = new wins.winRaporSecimi("Maliyet Hesaplama", this.Id);
                 win.ShowDialog();
             }
         }
