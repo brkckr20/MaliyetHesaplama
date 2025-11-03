@@ -11,6 +11,7 @@ namespace MaliyeHesaplama.wins
         private ICollectionView _collectionView;
         public int Id;
         public string FirmaKodu, FirmaUnvan, Adres1, Adres2, Adres3;
+        public bool SecimYapildi = false;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -52,6 +53,7 @@ namespace MaliyeHesaplama.wins
         {
             if (sfDataGrid.SelectedItem != null)
             {
+                this.SecimYapildi = true;
                 dynamic record = sfDataGrid.SelectedItem;
                 Id = record.Id;
                 FirmaKodu = record.CompanyCode;

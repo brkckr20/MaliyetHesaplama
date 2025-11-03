@@ -25,6 +25,9 @@
     <Compile Update="userControls\UC_RaporOlusturma.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="userControls\UC_SiparisGirisi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="userControls\UC_UretimYonetimiParametreleri.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -70,6 +73,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\UC_RaporOlusturma.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="userControls\UC_SiparisGirisi.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\UC_UretimYonetimiParametreleri.xaml">

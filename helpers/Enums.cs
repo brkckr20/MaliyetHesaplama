@@ -15,5 +15,10 @@ namespace MaliyeHesaplama.helpers
             Kumas = 1,
             Iplik = 2,
         }
+
+        public enum Receipt
+        {
+            Siparis = 10
+        }
     }
 }

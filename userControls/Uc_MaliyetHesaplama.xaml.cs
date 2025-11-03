@@ -82,7 +82,7 @@ namespace MaliyeHesaplama.userControls
                 SetControllerValues(txtKonfMaliyetiUrFiyText, malHes.PP_GarmentCost); SetControllerValues(txtIkinciKaliyeMaliyetiUrFiyText, malHes.PP_2QualityCost);
                 SetControllerValues(txtKarUrFiyText, malHes.PP_Profit); SetControllerValues(txtKdvUrFiyText, malHes.PP_Vat);
                 SetControllerValues(txtKurUrFiyText, malHes.PP_Currency); SetControllerValues(txtPariteUrFiyText, malHes.PP_Parity); SetControllerValues(txtEurUrFiyText, malHes.PP_Euro);
-                SetControllerValues(txtBelirlenenFiyatText, malHes.PriceDeterminedForex);
+                SetControllerValues(txtBelirlenenFiyatText, malHes.PriceDeterminedForex); SetControllerValues(txtKarliTLDikUr, malHes.SP_Profitable);
 
             }
         }
@@ -94,7 +94,7 @@ namespace MaliyeHesaplama.userControls
         {
             if (_orm.Delete("Cost", this.Id, true) > 0)
             {
-                _orm.Delete("CostCostCalculate", Id, false, "CostId");
+                _orm.Delete("CostCostCalculate", Id, false, "CostId");  // maliyet hesaplama
                 _orm.Delete("CostProductionCalculate", Id, false, "CostId"); // üretim hesaplama
                 _orm.Delete("CostProductionInformation", Id, false, "CostId"); // üretim bilgileri
                 txtFisNo.Text = _orm.GetRecordNo("Cost", "OrderNo", "Type", 1);
@@ -106,10 +106,11 @@ namespace MaliyeHesaplama.userControls
             MainHelper.SetControls(new Dictionary<Control, object>
             {
                 { txtCozgu1IpBilBolen,"1" },{ txtCozgu1IpBilBolunen,"1" },{ txtCozgu2IpBilBolen,"1" },{ txtCozgu2IpBilBolunen,"1" },{ txtAtki1IpBilBolen,"1" },{ txtAtki1IpBilBolunen,"1" },{ txtAtki2IpBilBolen,"1" },{ txtAtki2IpBilBolunen,"1" },{ txtAtki3IpBilBolen,"1" },{ txtAtki3IpBilBolunen,"1" },{ txtAtki4IpBilBolen,"1" },{ txtAtki4IpBilBolunen,"1" },{txtAtki1Siklik,"0" },{txtAtki2Siklik,"0" },{txtAtki3Siklik,"0" },{txtAtki4Siklik,"0" },{txtTarakNo1Carpan,"0" },{txtTarakNo1Carpim,"0" },{txtTarakNo2Carpan,"0" },{txtTarakNo2Carpim,"0" },{txtTarakEn,"0" },{txtHamBoy,"0" },{txtBoySacakText,"0" }, {txtEnSacakText,"0" },{txtMamulBoy,"0" }, {txtMamulEn,"0" }, {txtCozgu1IpBoyText,"0" }, {txtCozgu2IpBoyText,"0" }, {txtAtki1IpBoyText,"0" }, {txtAtki2IpBoyText,"0" }, {txtAtki3IpBoyText,"0" }, {txtAtki4IpBoyText,"0" }, {txtCozgu1IpFiyText,"0" }, {txtCozgu2IpFiyText,"0" }, {txtAtki1IpFiyText,"0" }, {txtAtki2IpFiyText,"0" }, {txtAtki3IpFiyText,"0" }, {txtAtki4IpFiyText,"0" }, {txtAtkiUrFiyText,"0" }, {txtCozguUrFiyText,"0" }, {txtParcaYikamaUrFiyText,"0" }, {txtKumasBoyamaUrFiyText,"0" }, {txtDokumaFiresiUrFiyText,"0" }, {txtBoyaFiresiUrFiyText,"0" },{txtKonfMaliyetiUrFiyText,"0" },{txtIkinciKaliyeMaliyetiUrFiyText,"0" },{txtKarUrFiyText,"0" },{txtKdvUrFiyText,"0" },{txtKurUrFiyText,_orm.GetEURCurrency()},{txtPariteUrFiyText,"0" },{txtEurUrFiyText,"0" },{txtBelirlenenFiyatText,"0" },
-                {txtFirmaKodu,"" },{txtFirmaUnvan,"" },{txtMalzemeKodu,"" },{lblMalzemeAdi,"" },
+                {txtFirmaKodu,"" },{txtFirmaUnvan,"" },{txtMalzemeKodu,"" },{lblMalzemeAdi,"" },{txtHamEn,"0"}
             });
             Id = 0; InventoryId = 0; CompanyId = 0; CPIId = 0; CPCId = 0; CCCId = 0;
             txtFisNo.Text = _orm.GetRecordNo("Cost", "OrderNo", "Type", 1);
+            productImage.Source = null;
         }
         private void btnYeni_Click(object sender, RoutedEventArgs e)
         {
@@ -185,8 +186,12 @@ namespace MaliyeHesaplama.userControls
         {
             var dict1 = new Dictionary<string, object>
             {
-                { "Id", Id }, {"CompanyId",CompanyId}, {"Date",dpTarih.SelectedDate.Value}, {"InventoryId",this.InventoryId},{"OrderNo",txtFisNo.Text },{"ProductImage",imageBytes}
+                { "Id", Id }, {"CompanyId",CompanyId}, {"Date",dpTarih.SelectedDate.Value}, {"InventoryId",this.InventoryId},{"OrderNo",txtFisNo.Text }
             };
+            if (imageBytes != null && imageBytes.Length > 0)
+            {
+                dict1.Add("ProductImage", imageBytes);
+            }
             if (Id == 0) // bu alanlara kayıt eden güncelleyen vs diğer bilgiler eklenebilir
             {
                 dict1.Add("InsertedDate", DateTime.Now);

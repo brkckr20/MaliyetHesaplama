@@ -154,7 +154,6 @@ namespace MaliyeHesaplama.userControls
             report.Dictionary.Synchronize();
         }
         bool IsDesign = true; // kayıt işlemi tamamlandı. command.Parameters.AddWithValue("@Id", 1); id alanı olmazsa hata verdi ve dizaynda default 1 verildi
-        // Yeni kayıt işlemi kontrol edilecek ve Dikilmiş Ürün --> Kârlı --> tl fiyat kısmında ilk kayıt için hatalı veri var yeni kayıtta kontrol edilecek - 30.10.2025
         public int GoruntulenecekId = 7;
         public void FillDataSetWithQuery(string query, string dataSource, SqlConnection connection, DataSet dataSet)
         {
@@ -163,7 +162,7 @@ namespace MaliyeHesaplama.userControls
                 if (!string.IsNullOrWhiteSpace(query))
                 {
                     SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@Id", 7);
+                    command.Parameters.AddWithValue("@Id", GoruntulenecekId);
                     new SqlDataAdapter(command).Fill(dataSet, dataSource);
                 }
             }
