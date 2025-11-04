@@ -1,16 +1,11 @@
 ﻿using System.ComponentModel;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace MaliyeHesaplama.wins
 {
-    /// <summary>
-    /// Interaction logic for winMaliyetCalismasiListesi.xaml
-    /// </summary>
     public partial class winMaliyetCalismasiListesi : Window
     {
         public int Id, CompanyId, InventoryId;

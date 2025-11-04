@@ -20,5 +20,10 @@ namespace MaliyeHesaplama.helpers
         {
             Siparis = 10
         }
+
+        public enum Depo
+        {
+            HamKumasDepo = 0,
+        }
     }
 }

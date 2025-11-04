@@ -7,9 +7,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="userControls\HandyTest.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="userControls\UC_FirmaKarti.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +34,9 @@
     <Compile Update="wins\winFirmaListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="wins\winFisHareketleriListesi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="wins\winMaliyetCalismasiListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -55,9 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="userControls\HandyTest.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\UC_FirmaKarti.xaml">
@@ -85,6 +82,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winFirmaListesi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="wins\winFisHareketleriListesi.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winMaliyetCalismasiListesi.xaml">

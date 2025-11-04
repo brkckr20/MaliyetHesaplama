@@ -73,7 +73,7 @@
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Left">
                             <TextBlock VerticalAlignment="Center" Text="Firma Ünvan :" Width="90" />
-                            <TextBox x:Name="txtFirmaUnvan" Width="200" VerticalContentAlignment="Center" Height="24"/>
+                            <TextBox x:Name="txtFirmaUnvan" Width="176" VerticalContentAlignment="Center" Height="24"/>
                             <Button Click="btnFirmaListesi_Click" x:Name="btnFirmaListesi" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Left" Margin="0,4">

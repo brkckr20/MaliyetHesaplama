@@ -146,6 +146,27 @@ public class MiniOrm
                     order by ISNULL(C.OrderNo,'')";
         return _connection.Query<T>(sql);
     }
+
+    public IEnumerable<T> GetMovementList<T>(int receiptType)
+    {
+        var sql = $@"
+                    select 
+                        ISNULL(R.Id,'') [Id],
+	                    ISNULL(R.ReceiptNo,'') [ReceiptNo],
+	                    ISNULL(R.ReceiptDate,'') [ReceiptDate],	
+	                    ISNULL(C.Id,'') [CompanyId],
+	                    ISNULL(C.CompanyName,'') [CompanyName],
+	                    ISNULL(R.Authorized,'') [Authorized],
+	                    ISNULL(R.DuaDate,'') [DuaDate],
+	                    ISNULL(R.Maturity,'') [Maturity]
+                    --	,
+                    --*
+                    from Receipt R
+                    left join Company C with(nolock) on C.Id = R.CompanyId
+                    where R.ReceiptType = {receiptType}
+";
+        return _connection.Query<T>(sql);
+    }
     public byte[] GetImage(string tableName, string fieldName, int id)
     {
         var sql = $"SELECT {fieldName} FROM {tableName} WHERE Id = @Id";
