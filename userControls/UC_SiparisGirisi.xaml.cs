@@ -1,6 +1,9 @@
 ﻿using MaliyeHesaplama.helpers;
+using MaliyeHesaplama.models;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace MaliyeHesaplama.userControls
 {
@@ -8,12 +11,14 @@ namespace MaliyeHesaplama.userControls
     {
         MiniOrm _orm = new MiniOrm();
         int Id = 0, CompanyId = 0, DepoId = Convert.ToInt32(Enums.Depo.HamKumasDepo);
+        public ObservableCollection<InventoryReceipt> Siparisler { get; set; }
         public UC_SiparisGirisi()
         {
             InitializeComponent();
             BaslangicVerileri();
+            Siparisler = new ObservableCollection<InventoryReceipt>();
+            this.DataContext = this;
         }
-
         void SetNewReceiptNo()
         {
             txtFisNo.Text = _orm.GetRecordNo("Receipt", "ReceiptNo", "ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis));
@@ -24,7 +29,6 @@ namespace MaliyeHesaplama.userControls
             dpTermin.SelectedDate = DateTime.Now;
             SetNewReceiptNo();
         }
-
         void Temizle()
         {
             dpTarih.SelectedDate = DateTime.Now;
@@ -36,7 +40,6 @@ namespace MaliyeHesaplama.userControls
         {
             Temizle();
         }
-
         private void btnKayit_Click(object sender, RoutedEventArgs e)
         {
             var dict1 = new Dictionary<string, object>
@@ -46,7 +49,6 @@ namespace MaliyeHesaplama.userControls
             this.Id = _orm.Save("Receipt", dict1);
             Bildirim.Bilgilendirme2("Kayıt işlemi başarılı bir şekilde gerçekleştirildi.");
         }
-
         private void btnListe_Click(object sender, RoutedEventArgs e)
         {
             wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(0, Enums.Receipt.Siparis);
@@ -54,30 +56,72 @@ namespace MaliyeHesaplama.userControls
             if (win.secimYapildi)
             {
                 this.Id = win.Id;
-                txtFisNo.Text = win.ReceiptNo; // diğer alanların eklenmesi yapılmalı - 04.11.2025
+                txtFisNo.Text = win.ReceiptNo;
+                dpTarih.SelectedDate = win._Date;
+                this.CompanyId = win.CompanyId;
+                txtFirmaUnvan.Text = win.CompanyName;
+                txtYetkili.Text = win.Authorized;
+                dpTermin.SelectedDate = win.DuaDate;
+                txtVade.Text = win.Maturity;
             }
         }
-
         private void btnGeri_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
         private void btnIleri_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
         private void btnSil_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        private static T FindVisualParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            while (child != null)
+            {
+                if (child is T parent)
+                    return parent;
+                child = VisualTreeHelper.GetParent(child);
+            }
+            return null;
+        }
+        // TIKLANAN HÜCREYE AİT BİLGİLERİN İLGİLİ SATIRLARA YAZDIRILMASINDAN DEVAM EDİLECEK - 05.11.2025
+        private void btnMalzemeListesi_Click(object sender, RoutedEventArgs e)
+        {
+            // 
+            //var button = sender as Button;
+            //if (button == null) return;
+
+            //// DataGridRow bul
+            //var row = FindVisualParent<DataGridRow>(button);
+            //if (row == null)
+            //{
+            //    MessageBox.Show("DataGridRow bulunamadı");
+            //    return;
+            //}
+
+            //var siparis = row.Item as InventoryReceipt;
+            //if (siparis == null)
+            //{
+            //    MessageBox.Show("InventoryReceipt null");
+            //    return;
+            //}
+
+            //// Malzeme listesi aç
+            //wins.winMalzemeListesi win = new wins.winMalzemeListesi(Convert.ToInt32(Enums.Inventory.Kumas));
+            //if (win.ShowDialog() == true)
+            //{
+            //    siparis.InventoryCode = win.Code;
+            //    siparis.InventoryName = win.Name;
+            //}
         }
 
         private void btnRapor_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
         private void btnFirmaListesi_Click(object sender, RoutedEventArgs e)
         {
             wins.winFirmaListesi win = new wins.winFirmaListesi();

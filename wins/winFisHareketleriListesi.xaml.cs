@@ -11,8 +11,9 @@ namespace MaliyeHesaplama.wins
         private int _receiptType;
         private ICollectionView _collectionView;
         public bool secimYapildi = false;
-        public int Id;
-        public string ReceiptNo;
+        public int Id, CompanyId;
+        public string ReceiptNo,CompanyName,Authorized,Maturity;
+        public DateTime _Date, DuaDate;
         public winFisHareketleriListesi(int depoId, Enums.Receipt receipt)
         {
             InitializeComponent();
@@ -34,26 +35,14 @@ namespace MaliyeHesaplama.wins
                 dynamic record = dgListe.SelectedItem;
                 Id = record.Id;
                 ReceiptNo = record.ReceiptNo;
-                Close();
-            }
-            /*
-             if (sfDataGrid.SelectedItem != null)
-            {
-                this.secimYapildi = true;
-                dynamic record = sfDataGrid.SelectedItem;
-                Id = record.Id;
+                _Date = record.ReceiptDate;
                 CompanyId = record.CompanyId;
                 CompanyName = record.CompanyName;
-                InventoryName = record.InventoryName;
-                InventoryId = record.InventoryId;
-                OrderNo = record.OrderNo;
-                Date = record.Date;
-                CompanyCode = record.CompanyCode;
-                InventoryCode = record.InventoryCode;
-                ImageData = _orm.GetImage("Cost", "ProductImage", Id);
-                this.Close();
+                Authorized = record.Authorized;
+                DuaDate = record.DuaDate;
+                Maturity = record.Maturity.ToString();
+                Close();
             }
-             */
         }
     }
 }
