@@ -77,30 +77,43 @@ namespace MaliyeHesaplama.userControls
         {
 
         }
-        private static T FindVisualParent<T>(DependencyObject child) where T : DependencyObject
+        private T FindParent<T>(DependencyObject child) where T : DependencyObject
         {
-            while (child != null)
-            {
-                if (child is T parent)
-                    return parent;
-                child = VisualTreeHelper.GetParent(child);
-            }
-            return null;
+            DependencyObject parent = VisualTreeHelper.GetParent(child);
+            while (parent != null && !(parent is T))
+                parent = VisualTreeHelper.GetParent(parent);
+            return parent as T;
         }
         // TIKLANAN HÜCREYE AİT BİLGİLERİN İLGİLİ SATIRLARA YAZDIRILMASINDAN DEVAM EDİLECEK - 05.11.2025
         private void btnMalzemeListesi_Click(object sender, RoutedEventArgs e)
         {
-            // 
-            //var button = sender as Button;
-            //if (button == null) return;
+            var button = sender as Button;
+            if (button == null)
+            {
 
-            //// DataGridRow bul
-            //var row = FindVisualParent<DataGridRow>(button);
-            //if (row == null)
-            //{
-            //    MessageBox.Show("DataGridRow bulunamadı");
-            //    return;
-            //}
+                MessageBox.Show("buton yok"); return;
+            }
+
+            var row = FindParent<DataGridRow>(button);
+            if (row == null)
+            {
+                MessageBox.Show("DataGridRow bulunamadı");
+                return;
+            }
+            var currentItem = row.Item as InventoryReceipt;
+            if (currentItem == null)
+            {
+                MessageBox.Show("current item yok");
+                return;
+            }
+
+            var win = new wins.winMalzemeListesi(Convert.ToInt32(Enums.Inventory.Kumas));
+            if (win.ShowDialog() == true)
+            {
+                string secilenKod = win.Code;
+                currentItem.InventoryCode = secilenKod;
+                dgMalzemeListesi.Items.Refresh();
+            }
 
             //var siparis = row.Item as InventoryReceipt;
             //if (siparis == null)

@@ -1,32 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_siparisgirisi.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_siparisgirisi.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_siparisgirisi.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_siparisgirisi.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_kumaskarti.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_kumaskarti.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_kumaskarti.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_kumaskarti.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\wins\\winfishareketlerilistesi.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:wins\\winfishareketlerilistesi.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\models\\inventoryreceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:models\\inventoryreceipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -34,87 +9,11 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{873151d0-cf2e-48cc-b4bf-ad0394f6a3c3}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UC_KumasKarti.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_KumasKarti.xaml.cs",
-              "RelativeDocumentMoniker": "userControls\\UC_KumasKarti.xaml.cs",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_KumasKarti.xaml.cs",
-              "RelativeToolTip": "userControls\\UC_KumasKarti.xaml.cs",
-              "ViewState": "AQIAAIYAAAAAAAAAAAAlwJ0AAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-05T14:55:40.464Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UC_KumasKarti.xaml",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_KumasKarti.xaml",
-              "RelativeDocumentMoniker": "userControls\\UC_KumasKarti.xaml",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_KumasKarti.xaml",
-              "RelativeToolTip": "userControls\\UC_KumasKarti.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-05T14:55:08.4Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "InventoryReceipt.cs",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\models\\InventoryReceipt.cs",
-              "RelativeDocumentMoniker": "models\\InventoryReceipt.cs",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\models\\InventoryReceipt.cs",
-              "RelativeToolTip": "models\\InventoryReceipt.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAmwDAAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-05T13:59:40.181Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UC_SiparisGirisi.xaml",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_SiparisGirisi.xaml",
-              "RelativeDocumentMoniker": "userControls\\UC_SiparisGirisi.xaml",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_SiparisGirisi.xaml",
-              "RelativeToolTip": "userControls\\UC_SiparisGirisi.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-05T13:53:08.513Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "winFisHareketleriListesi.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\wins\\winFisHareketleriListesi.xaml.cs",
-              "RelativeDocumentMoniker": "wins\\winFisHareketleriListesi.xaml.cs",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\wins\\winFisHareketleriListesi.xaml.cs",
-              "RelativeToolTip": "wins\\winFisHareketleriListesi.xaml.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAACwAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T13:36:22.872Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UC_SiparisGirisi.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_SiparisGirisi.xaml.cs",
-              "RelativeDocumentMoniker": "userControls\\UC_SiparisGirisi.xaml.cs",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_SiparisGirisi.xaml.cs",
-              "RelativeToolTip": "userControls\\UC_SiparisGirisi.xaml.cs",
-              "ViewState": "AQIAAFAAAAAAAAAAAADwv1kAAABoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-03T11:16:32.958Z",
-              "EditorCaption": ""
             }
           ]
         }

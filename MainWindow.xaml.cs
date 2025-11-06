@@ -118,5 +118,11 @@ namespace MaliyeHesaplama
             userControls.UC_RaporOlusturma uc = new userControls.UC_RaporOlusturma();
             AddOrSelectTab("Rapor Oluşturma", uc);
         }
+
+        private void btnSiparisGirisi1_Click(object sender, RoutedEventArgs e)
+        {
+            //userControls.UC_SiparisGirisi1 uc = new userControls.UC_SiparisGirisi1();
+            //AddOrSelectTab("Sipariş Girişi 1-1", uc);
+        }
     }
 }

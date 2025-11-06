@@ -90,6 +90,10 @@
               "target": "Package",
               "version": "[9.0.9, )"
             },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
             "Syncfusion.SfGrid.WPF": {
               "target": "Package",
               "version": "[31.1.18, )"

@@ -92,7 +92,9 @@
                 </GroupBox>
             </StackPanel>
         </Border>
-        <DataGrid BorderBrush="#ececec" BorderThickness=".5" RowHeight="24" Grid.Row="2" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True" ItemsSource="{Binding Siparisler}">
+        <DataGrid Grid.Row="2" x:Name="dgMalzemeListesi"
+          AutoGenerateColumns="False"
+          ItemsSource="{Binding Siparisler}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Malzeme Kodu">
                     <DataGridTemplateColumn.CellTemplate>
@@ -103,19 +105,25 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBox x:Name="txtMalzeme" VerticalContentAlignment="Center" 
-                                            Grid.Column="0" 
-                                            Text="{Binding InventoryCode, UpdateSourceTrigger=PropertyChanged}" 
-                                            BorderBrush="White"/>
-                                <Button x:Name="btnMalzemeListesi" Click="btnMalzemeListesi_Click" 
-                                        Grid.Column="1" Content="🔎" Background="White" 
-                                        BorderBrush="#cccccc" BorderThickness=".8,0,0,0">
+                                <TextBox x:Name="txtMalzeme"
+                                 VerticalContentAlignment="Center"
+                                 Grid.Column="0"
+                                 Text="{Binding InventoryCode, UpdateSourceTrigger=PropertyChanged}"
+                                 BorderBrush="White" />
+
+                                <Button x:Name="btnMalzemeListesi"
+                                Grid.Column="1"
+                                Content="🔎"
+                                Background="White"
+                                BorderBrush="#cccccc"
+                                BorderThickness=".8,0,0,0"
+                                Click="btnMalzemeListesi_Click">
                                     <Button.Style>
                                         <Style TargetType="Button">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsKeyboardFocusWithin, ElementName=gridMalzeme}" Value="True">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -125,9 +133,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Malzeme Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
+
         <Border Grid.Row="3">
             
         </Border>
