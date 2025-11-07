@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="MaliyeHesaplama.userControls.Common.ButtonBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaliyeHesaplama.userControls.Common"
+             mc:Ignorable="d" d:DesignWidth="800">
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+        <Button Click="Yeni_Click" x:Name="btnYeni" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Width="24" Height="24" Source="/userControls/new.ico" />
+                <TextBlock Text="Yeni" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="Kayit_Click" Click="Kaydet_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Width="24" Height="24" Source="/userControls/save.ico" />
+                <TextBlock Text="Kaydet" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="btnListele" Click="Listele_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Width="24" Height="24" Source="/userControls/list.ico" />
+                <TextBlock Text="Liste" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Button>
+        <Button Click="Geri_Click" x:Name="btnGeri" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Width="24" Height="24" Source="/userControls/back.ico" />
+                <TextBlock Text="Önceki" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Button>
+        <Button Click="Ileri_Click" x:Name="btnIleri" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Width="24" Height="24" Source="/userControls/next.ico" />
+                <TextBlock Text="Sonraki" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="btnYazdir" Click="Yazdir_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Width="24" Height="24" Source="/userControls/printer.ico" />
+                <TextBlock Text="Yazdır" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="btnSil" Click="Sil_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Width="24" Height="24" Source="/userControls/trash.ico" />
+                <TextBlock Text="Sil" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Button>
+    </StackPanel>
+</UserControl>

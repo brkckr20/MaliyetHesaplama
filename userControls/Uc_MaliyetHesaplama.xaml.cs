@@ -1,4 +1,5 @@
 ﻿using MaliyeHesaplama.helpers;
+using MaliyeHesaplama.Interfaces;
 using Microsoft.Win32;
 using System.Globalization;
 using System.IO;
@@ -6,9 +7,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
+
 namespace MaliyeHesaplama.userControls
 {
-    public partial class Uc_MaliyetHesaplama : UserControl
+    public partial class Uc_MaliyetHesaplama : UserControl, IPageCommands
     {
         int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0;
         bool _receteOlacak = false;
@@ -222,6 +224,41 @@ namespace MaliyeHesaplama.userControls
         string R(TextBox tb) // kayıt esnasında hata alındığı için virgüllü değerler nokta ile değiştirildi. -- replace metodunu kullanıyor
         {
             return tb.Text.Replace(',', '.');
+        }
+
+        public void Yeni()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Kaydet()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Sil()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Yazdir()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Ileri()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Geri()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Listele()
+        {
+            throw new NotImplementedException();
         }
     }
 }

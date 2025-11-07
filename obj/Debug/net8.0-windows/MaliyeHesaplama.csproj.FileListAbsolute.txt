@@ -1,9 +1,10 @@
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama.csproj.AssemblyReference.cache
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winFirmaListesi.baml
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\HomeScreen.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\Common\ButtonBar.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_FirmaKarti.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_KumasKarti.g.cs
-C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\Uc_MaliyetHesaplama.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_Numarator.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_RaporOlusturma.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_SiparisGirisi.g.cs
@@ -17,9 +18,10 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wi
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winRaporListesi.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winRaporSecimi.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\App.g.cs
-C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama_MarkupCompile.cache
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama_MarkupCompile.lref
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\Uc_MaliyetHesaplama.g.cs
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\dbconfig.json
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\MaliyeHesaplama.exe
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\MaliyeHesaplama.deps.json
@@ -282,7 +284,10 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\St
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\Stimulsoft.Report.WpfDesign.xml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\Stimulsoft.Svg.pdb
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\Stimulsoft.Svg.xml
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\App.baml
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\HomeScreen.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\Common\ButtonBar.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_FirmaKarti.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_KumasKarti.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\Uc_MaliyetHesaplama.baml

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaliyeHesaplama.mvvm"
              xmlns:helpers="clr-namespace:MaliyeHesaplama.helpers"
+             xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
              mc:Ignorable="d">
     <UserControl.DataContext>
         <local:MainViewModel/>
@@ -12,8 +13,11 @@
     <UserControl.Resources>
         <helpers:StringDotHelper x:Key="StringDotHelper"/>
     </UserControl.Resources>
-    <StackPanel Margin="0,0,0,0">
-        <Border BorderThickness="0.5" BorderBrush="#ececec">
+    <StackPanel Margin="0,4,0,0">
+        <Border Grid.Row="0">
+            <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
+        </Border>
+       <!--<Border BorderThickness="0.5" BorderBrush="#ececec">
             <DockPanel HorizontalAlignment="Left" Margin="2">
                 <Button Click="btnYeni_Click" x:Name="btnYeni" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -44,9 +48,9 @@
                         <Image Width="24" Height="24" Source="/userControls/trash.ico" />
                         <TextBlock Text="Sil" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
-                </Button>
-            </DockPanel>
-        </Border>
+                </Button>-->
+            <!--</DockPanel>-->
+        <!--</Border>-->
         <!-- buttonlar -->
         <StackPanel>
             <Grid Margin="2">

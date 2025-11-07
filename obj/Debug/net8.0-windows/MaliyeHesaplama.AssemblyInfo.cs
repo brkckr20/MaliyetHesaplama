@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MaliyeHesaplama")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74011ff9c618a1735e035c26c110848a8812c4f9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0ffa116569447d666357f55b781eff53b3b1415a")]
 [assembly: System.Reflection.AssemblyProductAttribute("MaliyeHesaplama")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MaliyeHesaplama")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
