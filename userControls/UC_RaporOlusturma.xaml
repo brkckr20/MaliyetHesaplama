@@ -97,7 +97,7 @@
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Row="3" Header="Rapor Sorguları" Padding="5">
-            <TabControl>
+            <TabControl x:Name="xxxx">
                 <TabItem Header="Sorgu 1">
                     <avalonedit:TextEditor
                         x:Name="sorgu1edit"

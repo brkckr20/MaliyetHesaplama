@@ -17,41 +17,6 @@
         <Border Grid.Row="0">
             <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
         </Border>
-       <!--<Border BorderThickness="0.5" BorderBrush="#ececec">
-            <DockPanel HorizontalAlignment="Left" Margin="2">
-                <Button Click="btnYeni_Click" x:Name="btnYeni" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Width="24" Height="24" Source="/userControls/new.ico" />
-                        <TextBlock Text="Yeni" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="btnKayit" Click="btnKayit_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Width="24" Height="24" Source="/userControls/save.ico" />
-                        <TextBlock Text="Kaydet" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="btnListe" Click="btnListe_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Width="24" Height="24" Source="/userControls/list.ico" />
-                        <TextBlock Text="Liste" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                    </StackPanel>
-                </Button>                
-                <Button x:Name="btnRapor" Click="btnRapor_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Width="24" Height="24" Source="/userControls/printer.ico" />
-                        <TextBlock Text="Yazdır" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="btnSil" Click="btnSil_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Width="24" Height="24" Source="/userControls/trash.ico" />
-                        <TextBlock Text="Sil" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                    </StackPanel>
-                </Button>-->
-            <!--</DockPanel>-->
-        <!--</Border>-->
-        <!-- buttonlar -->
         <StackPanel>
             <Grid Margin="2">
                 <Grid.ColumnDefinitions>

@@ -24,16 +24,24 @@ namespace MaliyeHesaplama
         private bool isMegaMenuVisible = false;
         private bool _isMegaMenuOpen = false;
         private string _currentMainMenu = null;
+        private bool _isDraggingFromMaximized = false;
+        private Point _restoreMousePosition;
         private void Kartlar_Click(object sender, RoutedEventArgs e)
         {
             string title = "Kart İşlemleri";
-            string[] items = { "Kumaş Kartı", "Firma Kartı" };
+            string[] items = { "Firma Kartı", "Kumaş Kartı" };
             ShowMegaMenu(title, items);
         }
         private void UretimYonetimi_Click(object sender, RoutedEventArgs e)
         {
             string title = "Üretim Yönetimi";
-            string[] items = { "Maliyet Hesaplama", "Sipariş Girişi" };
+            string[] items = { "Maliyet Hesaplama", "Sipariş Girişi", "Sipariş Girişi 2" };
+            ShowMegaMenu(title, items);
+        }
+        private void Ayarlar_Click(object sender, RoutedEventArgs e)
+        {
+            string title = "Ayarlar";
+            string[] items = { "Üretim Yönetimi Parametreleri", "Numaratör", "Rapor Oluşturma" };
             ShowMegaMenu(title, items);
         }
         private void MegaMenuItem_Click(object sender, RoutedEventArgs e)
@@ -41,13 +49,27 @@ namespace MaliyeHesaplama
             if (sender is Button btn)
             {
                 string menuName = btn.Content.ToString();
-
+                /*Üretim Yönetimi*/
                 if (menuName == "Maliyet Hesaplama")
                     OpenTab(menuName, new userControls.Uc_MaliyetHesaplama());
+                if (menuName == "Sipariş Girişi")
+                    OpenTab(menuName, new userControls.UC_SiparisGirisi());
+                if (menuName == "Sipariş Girişi 2")
+                    OpenTab(menuName, new userControls.UC_SiparisGirisi2());
+
+                /* Karlar */
                 if (menuName == "Kumaş Kartı")
                     OpenTab(menuName, new userControls.UC_KumasKarti());
                 if (menuName == "Firma Kartı")
                     OpenTab(menuName, new userControls.UC_FirmaKarti());
+
+                /* Ayarlar */
+                if (menuName == "Üretim Yönetimi Parametreleri")
+                    OpenTab(menuName, new userControls.UC_UretimYonetimiParametreleri());
+                if (menuName == "Numaratör")
+                    OpenTab(menuName, new userControls.UC_Numarator());
+                if (menuName == "Rapor Oluşturma")
+                    OpenTab(menuName, new userControls.UC_RaporOlusturma());
             }
         }
         private void OpenTab(string title, UserControl view)
@@ -126,6 +148,71 @@ namespace MaliyeHesaplama
             if (sender is Button btn && btn.TemplatedParent is TabItem tab)
             {
                 MainTabControl.Items.Remove(tab);
+            }
+        }
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                ToggleMaximize();
+                return;
+            }
+            if (this.WindowState == WindowState.Maximized)
+            {
+                _isDraggingFromMaximized = true;
+                _restoreMousePosition = e.GetPosition(this);
+                return;
+            }
+
+            // Normal durumda ise direkt taşı
+            this.DragMove();
+        }
+
+        private void btnAppClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAppMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void btnAppMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+                this.WindowState = WindowState.Normal;
+            else
+                this.WindowState = WindowState.Maximized;
+        }
+        private void ToggleMaximize()
+        {
+            if (this.WindowState == WindowState.Maximized)
+                this.WindowState = WindowState.Normal;
+            else
+                this.WindowState = WindowState.Maximized;
+        }
+        private void TitleBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_isDraggingFromMaximized && e.LeftButton == MouseButtonState.Pressed)
+            {
+                _isDraggingFromMaximized = false;
+
+                // Ekran koordinatını al
+                var mouseX = e.GetPosition(this).X;
+                var percentX = mouseX / this.ActualWidth;
+                var screen = System.Windows.Forms.Screen.FromHandle(new System.Windows.Interop.WindowInteropHelper(this).Handle);
+                var screenWidth = screen.WorkingArea.Width;
+                var screenHeight = screen.WorkingArea.Height;
+
+                // Yeni pencereyi normal moda al
+                this.WindowState = WindowState.Normal;
+
+                // Pencerenin pozisyonunu mouse oranına göre yeniden ayarla
+                this.Left = screen.WorkingArea.Left + (screenWidth * percentX) - (_restoreMousePosition.X);
+                this.Top = screen.WorkingArea.Top + 5; // küçük offset
+
+                this.DragMove(); // sürüklemeye devam et
             }
         }
     }

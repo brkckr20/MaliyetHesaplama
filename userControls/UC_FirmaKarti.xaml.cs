@@ -1,67 +1,37 @@
 ﻿using MaliyeHesaplama.helpers;
+using MaliyeHesaplama.Interfaces;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_FirmaKarti : UserControl
+    public partial class UC_FirmaKarti : UserControl, IPageCommands
     {
         private MiniOrm _orm;
         private int Id = 0;
         public UC_FirmaKarti()
         {
             InitializeComponent();
+            ButtonBar.CommandTarget = this;
             _orm = new MiniOrm();
         }
         private void btnKayit_Click(object sender, RoutedEventArgs e)
         {
-            if (txtFirmaKodu.Text != string.Empty)
-            {
-                var dict = new Dictionary<string, object>
-                {
-                    { "Id",Id },
-                    {"CompanyCode", txtFirmaKodu.Text },
-                    {"CompanyName", txtFirmaUnvan.Text },
-                    {"AddressLine1", txtAdres1.Text },
-                    {"AddressLine2", txtAdres2.Text },
-                    {"AddressLine3", txtAdres3.Text },
-                };
-                Id = _orm.Save("Company", dict);
-                Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi.");
-            }
-            else
-            {
-                Bildirim.Uyari2("Firma kodu boş bırakılamaz!");
-            }
-
         }
 
         private void btnSil_Click(object sender, RoutedEventArgs e)
         {
-            if (_orm.Delete("Company", Id, true) > 0)
-            {
-                Temizle();
-            }
+            
         }
 
         private void btnListe_Click(object sender, RoutedEventArgs e)
         {
-            wins.winFirmaListesi win = new wins.winFirmaListesi();
-            win.ShowDialog();
-            if (win.FirmaKodu != null)
-            {
-                Id = win.Id;
-                txtFirmaKodu.Text = win.FirmaKodu;
-                txtFirmaUnvan.Text = win.FirmaUnvan;
-                txtAdres1.Text = win.Adres1;
-                txtAdres2.Text = win.Adres2;
-                txtAdres3.Text = win.Adres3;
-            }
+            
         }
 
         private void btnGeri_Click(object sender, RoutedEventArgs e)
         {
-            KayitlariGetir("Önceki");
+           
         }
         void KayitlariGetir(string tip)
         {
@@ -92,7 +62,7 @@ namespace MaliyeHesaplama.userControls
 
         private void btnIleri_Click(object sender, RoutedEventArgs e)
         {
-            KayitlariGetir("Sonraki");
+            
         }
 
         void Temizle()
@@ -107,12 +77,77 @@ namespace MaliyeHesaplama.userControls
 
         private void btnYeni_Click(object sender, RoutedEventArgs e)
         {
-            Temizle();
+           
         }
 
         private void cmSonNoAktar_Click(object sender, RoutedEventArgs e)
         {
             txtFirmaKodu.Text = _orm.GetLastCompanyCode();
+        }
+
+        public void Yeni()
+        {
+            Temizle();
+        }
+
+        public void Kaydet()
+        {
+            if (txtFirmaKodu.Text != string.Empty)
+            {
+                var dict = new Dictionary<string, object>
+                {
+                    { "Id",Id },
+                    {"CompanyCode", txtFirmaKodu.Text },
+                    {"CompanyName", txtFirmaUnvan.Text },
+                    {"AddressLine1", txtAdres1.Text },
+                    {"AddressLine2", txtAdres2.Text },
+                    {"AddressLine3", txtAdres3.Text },
+                };
+                Id = _orm.Save("Company", dict);
+                Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi.");
+            }
+            else
+            {
+                Bildirim.Uyari2("Firma kodu boş bırakılamaz!");
+            }
+        }
+
+        public void Sil()
+        {
+            if (_orm.Delete("Company", Id, true) > 0)
+            {
+                Temizle();
+            }
+        }
+
+        public void Yazdir()
+        {
+            Bildirim.Bilgilendirme2("Rapor Ekranı açılacak");
+        }
+
+        public void Ileri()
+        {
+            KayitlariGetir("Sonraki");
+        }
+
+        public void Geri()
+        {
+            KayitlariGetir("Önceki");
+        }
+
+        public void Listele()
+        {
+            wins.winFirmaListesi win = new wins.winFirmaListesi();
+            win.ShowDialog();
+            if (win.FirmaKodu != null)
+            {
+                Id = win.Id;
+                txtFirmaKodu.Text = win.FirmaKodu;
+                txtFirmaUnvan.Text = win.FirmaUnvan;
+                txtAdres1.Text = win.Adres1;
+                txtAdres2.Text = win.Adres2;
+                txtAdres3.Text = win.Adres3;
+            }
         }
     }
 }

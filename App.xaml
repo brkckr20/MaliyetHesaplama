@@ -15,8 +15,8 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" 
-                    CornerRadius="6" 
-                    Padding="8">
+                                CornerRadius="6" 
+                                Padding="8">
                             <ContentPresenter VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>

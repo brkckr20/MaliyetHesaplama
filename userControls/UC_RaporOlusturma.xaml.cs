@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using Stimulsoft.Client.Designer;
 using Stimulsoft.Report;
+using Stimulsoft.Report.Components;
 using Stimulsoft.Report.Viewer;
 using System.Data;
 using System.IO;

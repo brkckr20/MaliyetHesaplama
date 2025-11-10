@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="5">
+      <Kumaş_x0020_Kartı Ref="2" type="DataTableSource" isKey="true">
+        <Alias>Kumaş Kartı</Alias>
+        <Columns isList="true" count="35">
+          <value>Id,System.Int32</value>
+          <value>InventoryCode,System.String</value>
+          <value>InventoryName,System.String</value>
+          <value>Unit,System.String</value>
+          <value>Type,System.Int32</value>
+          <value>SubType,System.String</value>
+          <value>IsUse,System.Boolean</value>
+          <value>IsPrefix,System.Boolean</value>
+          <value>CombinedCode,System.String</value>
+          <value>IsStock,System.Boolean</value>
+          <value>InventoryNo,System.Int32</value>
+          <value>InventoryCinsi,System.Int32</value>
+          <value>InventoryOriginalName,System.String</value>
+          <value>CompanyId,System.Int32</value>
+          <value>CategoryId,System.Int32</value>
+          <value>GenusId,System.Int32</value>
+          <value>SpecialCode,System.String</value>
+          <value>SpecialCode2,System.String</value>
+          <value>GrM2,System.Int32</value>
+          <value>UserId,System.Int32</value>
+          <value>FabricOK,System.Boolean</value>
+          <value>ColorOK,System.Boolean</value>
+          <value>EmbroideryOK,System.Boolean</value>
+          <value>YarnOK,System.Boolean</value>
+          <value>AccessoriesOK,System.Boolean</value>
+          <value>GTIPNo,System.String</value>
+          <value>Image,System.String</value>
+          <value>RawWidth,System.Decimal</value>
+          <value>RawHeight,System.Decimal</value>
+          <value>ProdWidth,System.Decimal</value>
+          <value>ProdHeight,System.Decimal</value>
+          <value>RawGrammage,System.Decimal</value>
+          <value>ProdGrammage,System.Decimal</value>
+          <value>YarnDyed,System.Boolean</value>
+          <value>Explanation,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>ba89ddef354047bfb890ba8cb4994817</Key>
+        <Name>Kumaş Kartı</Name>
+        <NameInSource>Kumaş Kartı</NameInSource>
+      </Kumaş_x0020_Kartı>
+      <Başlık_x0020_Bilgileri Ref="3" type="DataTableSource" isKey="true">
+        <Alias>Başlık Bilgileri</Alias>
+        <Columns isList="true" count="53">
+          <value>Id,System.Int32</value>
+          <value>CompanyId,System.Int32</value>
+          <value>Date,System.DateTime</value>
+          <value>InventoryId,System.Int32</value>
+          <value>RecipeId,System.Int32</value>
+          <value>OrderNo,System.String</value>
+          <value>ProductImage,System.Byte[]</value>
+          <value>InsertedBy,System.Int32</value>
+          <value>InsertedDate,System.DateTime</value>
+          <value>UpdatedBy,System.Int32</value>
+          <value>UpdatedDate,System.DateTime</value>
+          <value>Type,System.Int32</value>
+          <value>Id1,System.Int32</value>
+          <value>CompanyCode,System.String</value>
+          <value>CompanyName,System.String</value>
+          <value>AddressLine1,System.String</value>
+          <value>AddressLine2,System.String</value>
+          <value>AddressLine3,System.String</value>
+          <value>Id2,System.Int32</value>
+          <value>InventoryCode,System.String</value>
+          <value>InventoryName,System.String</value>
+          <value>Unit,System.String</value>
+          <value>Type1,System.Int32</value>
+          <value>SubType,System.String</value>
+          <value>IsUse,System.Boolean</value>
+          <value>IsPrefix,System.Boolean</value>
+          <value>CombinedCode,System.String</value>
+          <value>IsStock,System.Boolean</value>
+          <value>InventoryNo,System.Int32</value>
+          <value>InventoryCinsi,System.Int32</value>
+          <value>InventoryOriginalName,System.String</value>
+          <value>CompanyId1,System.Int32</value>
+          <value>CategoryId,System.Int32</value>
+          <value>GenusId,System.Int32</value>
+          <value>SpecialCode,System.String</value>
+          <value>SpecialCode2,System.String</value>
+          <value>GrM2,System.Int32</value>
+          <value>UserId,System.Int32</value>
+          <value>FabricOK,System.Boolean</value>
+          <value>ColorOK,System.Boolean</value>
+          <value>EmbroideryOK,System.Boolean</value>
+          <value>YarnOK,System.Boolean</value>
+          <value>AccessoriesOK,System.Boolean</value>
+          <value>GTIPNo,System.String</value>
+          <value>Image,System.String</value>
+          <value>RawWidth,System.Decimal</value>
+          <value>RawHeight,System.Decimal</value>
+          <value>ProdWidth,System.Decimal</value>
+          <value>ProdHeight,System.Decimal</value>
+          <value>RawGrammage,System.Decimal</value>
+          <value>ProdGrammage,System.Decimal</value>
+          <value>YarnDyed,System.Boolean</value>
+          <value>Explanation,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>6ece88095c034763b0390874366f3f5f</Key>
+        <Name>Başlık Bilgileri</Name>
+        <NameInSource>Başlık Bilgileri</NameInSource>
+      </Başlık_x0020_Bilgileri>
+      <Üretim_x0020_Bilgileri Ref="4" type="DataTableSource" isKey="true">
+        <Alias>Üretim Bilgileri</Alias>
+        <Columns isList="true" count="45">
+          <value>Id,System.Int32</value>
+          <value>CostId,System.Int32</value>
+          <value>YI_Warp1,System.Decimal</value>
+          <value>YI_Warp1Divider,System.Decimal</value>
+          <value>YI_Warp1Result,System.Decimal</value>
+          <value>YI_Warp2,System.Decimal</value>
+          <value>YI_Warp2Divider,System.Decimal</value>
+          <value>YI_Warp2Result,System.Decimal</value>
+          <value>YI_Scarf1,System.Decimal</value>
+          <value>YI_Scarf1Divider,System.Decimal</value>
+          <value>YI_Scarf1Result,System.Decimal</value>
+          <value>YI_Scarf2,System.Decimal</value>
+          <value>YI_Scarf2Divider,System.Decimal</value>
+          <value>YI_Scarf2Result,System.Decimal</value>
+          <value>YI_Scarf3,System.Decimal</value>
+          <value>YI_Scarf3Divider,System.Decimal</value>
+          <value>YI_Scarf3Result,System.Decimal</value>
+          <value>YI_Scarf4,System.Decimal</value>
+          <value>YI_Scarf4Divider,System.Decimal</value>
+          <value>YI_Scarf4Result,System.Decimal</value>
+          <value>WI_CombNo1,System.Decimal</value>
+          <value>WI_CombNo1Multiplier,System.Decimal</value>
+          <value>WI_CombNo1Result,System.Decimal</value>
+          <value>WI_CombNo2,System.Decimal</value>
+          <value>WI_CombNo2Multiplier,System.Decimal</value>
+          <value>WI_CombNo2Result,System.Decimal</value>
+          <value>WI_CombWidth,System.Decimal</value>
+          <value>WI_RawHeight,System.Decimal</value>
+          <value>WI_HeightEaves,System.Decimal</value>
+          <value>WI_WidthEaves,System.Decimal</value>
+          <value>WI_RawWidth,System.Decimal</value>
+          <value>WI_ProductHeight,System.Decimal</value>
+          <value>WI_ProductWidth,System.Decimal</value>
+          <value>D_Warp1,System.Decimal</value>
+          <value>D_Warp2,System.Decimal</value>
+          <value>D_Scarf1,System.Decimal</value>
+          <value>D_Scarf2,System.Decimal</value>
+          <value>D_Scarf3,System.Decimal</value>
+          <value>D_Scarf4,System.Decimal</value>
+          <value>NW_Warp1,System.Decimal</value>
+          <value>NW_Warp2,System.Decimal</value>
+          <value>NW_Scarf1,System.Decimal</value>
+          <value>NW_Scarf2,System.Decimal</value>
+          <value>NW_Scarf3,System.Decimal</value>
+          <value>NW_Scarf4,System.Decimal</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>719935c74e26492fa2e6ce8c3251c559</Key>
+        <Name>Üretim Bilgileri</Name>
+        <NameInSource>Üretim Bilgileri</NameInSource>
+      </Üretim_x0020_Bilgileri>
+      <Üretim_x0020_Hesaplama Ref="5" type="DataTableSource" isKey="true">
+        <Alias>Üretim Hesaplama</Alias>
+        <Columns isList="true" count="29">
+          <value>Id,System.Int32</value>
+          <value>CostId,System.Int32</value>
+          <value>WC_Warp1,System.Decimal</value>
+          <value>WC_Warp2,System.Decimal</value>
+          <value>WC_Scarf1,System.Decimal</value>
+          <value>WC_Scarf2,System.Decimal</value>
+          <value>WC_Scarf3,System.Decimal</value>
+          <value>WC_Scarf4,System.Decimal</value>
+          <value>WC_Total,System.Decimal</value>
+          <value>YP_Warp1,System.Decimal</value>
+          <value>YP_Warp2,System.Decimal</value>
+          <value>YP_Scarf1,System.Decimal</value>
+          <value>YP_Scarf2,System.Decimal</value>
+          <value>YP_Scarf3,System.Decimal</value>
+          <value>YP_Scarf4,System.Decimal</value>
+          <value>YD_Warp1,System.Decimal</value>
+          <value>YD_Warp2,System.Decimal</value>
+          <value>YD_Scarf1,System.Decimal</value>
+          <value>YD_Scarf2,System.Decimal</value>
+          <value>YD_Scarf3,System.Decimal</value>
+          <value>YD_Scarf4,System.Decimal</value>
+          <value>YD_Result,System.Decimal</value>
+          <value>YC_Warp1,System.Decimal</value>
+          <value>YC_Warp2,System.Decimal</value>
+          <value>YC_Scarf1,System.Decimal</value>
+          <value>YC_Scarf2,System.Decimal</value>
+          <value>YC_Scarf3,System.Decimal</value>
+          <value>YC_Scarf4,System.Decimal</value>
+          <value>YC_Result,System.Decimal</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>c733861bc5a14076a6caf0f70dfe9c4b</Key>
+        <Name>Üretim Hesaplama</Name>
+        <NameInSource>Üretim Hesaplama</NameInSource>
+      </Üretim_x0020_Hesaplama>
+      <Maliyet_x0020_Hesaplama Ref="6" type="DataTableSource" isKey="true">
+        <Alias>Maliyet Hesaplama</Alias>
+        <Columns isList="true" count="38">
+          <value>Id,System.Int32</value>
+          <value>CostId,System.Int32</value>
+          <value>PP_Scarf,System.Decimal</value>
+          <value>PP_Warp,System.Decimal</value>
+          <value>PP_PartsWashing,System.Decimal</value>
+          <value>PP_FabricWashing,System.Decimal</value>
+          <value>PP_WeavingWaste,System.Decimal</value>
+          <value>PP_DyehouseWaster,System.Decimal</value>
+          <value>PP_GarmentCost,System.Decimal</value>
+          <value>PP_2QualityCost,System.Decimal</value>
+          <value>PP_Profit,System.Decimal</value>
+          <value>PP_Vat,System.Decimal</value>
+          <value>PP_Currency,System.Decimal</value>
+          <value>PP_Parity,System.Decimal</value>
+          <value>PP_Euro,System.Decimal</value>
+          <value>WC_Weaving,System.Decimal</value>
+          <value>WC_Warp,System.Decimal</value>
+          <value>WC_YarnCost,System.Decimal</value>
+          <value>PC_Total,System.Decimal</value>
+          <value>PC_Wasted,System.Decimal</value>
+          <value>RFC_ProfitableForex,System.Decimal</value>
+          <value>RFC_Profitable,System.Decimal</value>
+          <value>WDC_PartsWashing,System.Decimal</value>
+          <value>WDC_DyedFabric,System.Decimal</value>
+          <value>WDC_Wasted,System.Decimal</value>
+          <value>WDC_ProfitableForex,System.Decimal</value>
+          <value>SP_DyedFabric,System.Decimal</value>
+          <value>SP_GarmentCost,System.Decimal</value>
+          <value>SP_2QualityCost,System.Decimal</value>
+          <value>SP_ProfitableForex,System.Decimal</value>
+          <value>SP_Profitable,System.Decimal</value>
+          <value>SP_VatIncludeForex,System.Decimal</value>
+          <value>SP_VatInclude,System.Decimal</value>
+          <value>PriceDeterminedForex,System.Decimal</value>
+          <value>PriceDetermined,System.Decimal</value>
+          <value>VatIncludedPriceForex,System.Decimal</value>
+          <value>VatIncluded,System.Decimal</value>
+          <value>WDC_DyedFabricTL,System.Decimal</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>8e73db0e763241daa2b06fc260483c1e</Key>
+        <Name>Maliyet Hesaplama</Name>
+        <NameInSource>Maliyet Hesaplama</NameInSource>
+      </Maliyet_x0020_Hesaplama>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <UserFunctions isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>0c6e66db526e4f8fbb00fe07888553df</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="7" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <Text1 Ref="8" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,-0,27.6,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,8</Font>
+          <Name>Text1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Text>MALİYET HESAPLAMA FORMUDUR. YENİDEN DÜZENLENECEK</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+        </Text1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>730b7221d1d34383b671ab1f496cabdd</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>21</PageHeight>
+      <PageWidth>29.7</PageWidth>
+      <Report isRef="0" />
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>11/10/2025 1:45:56 PM</ReportChanged>
+  <ReportCreated>11/10/2025 1:38:02 PM</ReportCreated>
+  <ReportFile>C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\reports\Maliyet Formu.mrt</ReportFile>
+  <ReportGuid>71c2a1edbd60491b802dec528564712e</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2025.4.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+  <UsePlatformDependentScript>False</UsePlatformDependentScript>
+</StiSerializer>
