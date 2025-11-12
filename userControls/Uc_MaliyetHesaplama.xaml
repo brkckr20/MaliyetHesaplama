@@ -13,7 +13,7 @@
     <UserControl.Resources>
         <helpers:StringDotHelper x:Key="StringDotHelper"/>
     </UserControl.Resources>
-    <StackPanel Margin="0,4,0,0">
+    <StackPanel >
         <Border Grid.Row="0">
             <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
         </Border>

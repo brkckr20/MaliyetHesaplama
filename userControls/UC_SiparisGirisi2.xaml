@@ -4,9 +4,79 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
+             xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" x:Name="RootControl">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
+        <Border Grid.Row="1">
+            <StackPanel>
+                <DockPanel>
+                    <TextBlock Text="fişno" Width="100"/>
+                    <TextBox Text="{Binding Receipt.ReceiptNo}"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock Text="tarih" Width="100"/>
+                    <DatePicker x:Name="dpTarih" SelectedDate="{Binding Receipt.ReceiptDate}"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock Text="cari" Width="100"/>
+                    <TextBox Text="{Binding Receipt.CompanyId}"/>
+                </DockPanel>
+            </StackPanel>
+        </Border>
+        <DataGrid CanUserAddRows="True" Grid.Row="2" ItemsSource="{Binding ReceiptItems}" AutoGenerateColumns="False">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderBrush" Value="LightGray"/>
+                    <Setter Property="BorderThickness" Value="0.5"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Orange"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Orange"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Kalem İşlem" Binding="{Binding OperationType}" />
+                <DataGridTextColumn Header="Kumaş Id" Binding="{Binding InventoryId}" />
+                <DataGridTemplateColumn Header="Malzeme Kodu">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding InventoryCode}" Width="100" BorderBrush="Transparent"/>
+                                <Button Content="🔎" Background="Transparent" BorderBrush="#ececec"
+                                Command="{Binding DataContext.SelectMaterialCommand, ElementName=RootControl}"
+                                CommandParameter="{Binding}" 
+                                Width="30"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Malzeme Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Miktar" Binding="{Binding GrossWeight}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </UserControl>

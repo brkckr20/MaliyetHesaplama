@@ -74,6 +74,7 @@ namespace MaliyeHesaplama.wins
                 ProdGrammage = record.ProdGrammage == null ? "" : record.ProdGrammage.ToString();
                 YarnDyed = Convert.ToBoolean(record.YarnDyed);
                 Explanation = record.Explanation == null ? "" : record.Explanation.ToString();
+                this.DialogResult = true;
                 this.Close();
             }
         }

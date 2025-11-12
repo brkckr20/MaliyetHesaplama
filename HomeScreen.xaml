@@ -12,31 +12,43 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">
                         <Grid Margin="-2">
-                            <Border Background="#ececec" CornerRadius="3" Padding="8,4">
+                            <Border x:Name="TabBorder" 
+                                Background="#ececec" 
+                                CornerRadius="3" 
+                                Padding="8,4">
                                 <DockPanel>
-                                    <TextBlock Text="{TemplateBinding Header}" 
-                                       FontWeight="Bold" 
-                                       Foreground="Black"
-                                       VerticalAlignment="Center"
-                                       Margin="0,0,8,0"/>
+                                    <TextBlock x:Name="HeaderText"
+                                           Text="{TemplateBinding Header}" 
+                                           FontWeight="Bold" 
+                                           Foreground="Black"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,8,0"/>
                                     <Button Content="❌" 
-                                    Width="20" 
-                                    Height="20"
-                                    VerticalAlignment="Center"
-                                    Click="CloseTab_Click"
-                                    Background="Transparent"
-                                    BorderThickness="0"
-                                    Foreground="Black"
-                                    FontWeight="Bold"
-                                    ToolTip="Sekmeyi kapat"/>
+                                        Width="20" 
+                                        Height="20"
+                                        VerticalAlignment="Center"
+                                        Click="CloseTab_Click"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Foreground="Black"
+                                        FontWeight="Bold"
+                                        ToolTip="Sekmeyi kapat"/>
                                 </DockPanel>
                             </Border>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <!-- Seçili Tab -->
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="TabBorder" Property="Background" Value="Orange"/>
+                                <Setter TargetName="HeaderText" Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Resources>
+
     <WindowChrome.WindowChrome>
         <WindowChrome 
             CaptionHeight="0"
@@ -109,7 +121,7 @@
             </StackPanel>
         </Border>
         <Grid Grid.Column="1" Background="#FDFDF8" MouseDown="ContentArea_MouseDown">
-            <TabControl x:Name="MainTabControl" Margin="0" Padding="0" BorderThickness="0" TabStripPlacement="Top"/>
+            <TabControl x:Name="MainTabControl" Margin="0" Padding="2,4,0,0" BorderThickness="0" TabStripPlacement="Top"/>
             <Border x:Name="MegaMenuPanel" Background="#191919" Width="220" VerticalAlignment="Stretch"
                     HorizontalAlignment="Left" Padding="5" Visibility="Collapsed" Panel.ZIndex="1"
                     RenderTransformOrigin="0,0">

@@ -1,28 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using MaliyeHesaplama.Interfaces;
+using MaliyeHesaplama.mvvm;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MaliyeHesaplama.userControls
 {
-    /// <summary>
-    /// Interaction logic for UC_SiparisGirisi2.xaml
-    /// </summary>
-    public partial class UC_SiparisGirisi2 : UserControl
+    public partial class UC_SiparisGirisi2 : UserControl, IPageCommands
     {
         public UC_SiparisGirisi2()
         {
             InitializeComponent();
+            var vm = new MVM();
+            this.DataContext = vm;
+            ButtonBar.CommandTarget = vm;
+        }
+
+        public void Geri()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Ileri()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Kaydet()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Listele()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Sil()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Yazdir()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Yeni()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -7,7 +7,7 @@
              xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White" Margin="0,4,0,0">
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -22,24 +22,24 @@
                 <GroupBox Header="Genel Bilgiler   ">
                     <StackPanel>
                         <DockPanel HorizontalAlignment="Left" >
-                            <TextBlock VerticalAlignment="Center" Text="Fiş / Sipariş No : " Width="90"/>
+                            <TextBlock VerticalAlignment="Center" Text="Fiş / Sipariş No :" Width="90"/>
                             <TextBox x:Name="txtFisNo" Width="200" Height="24" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Left" Margin="0,4">
-                            <TextBlock VerticalAlignment="Center" Text="Tarih : " Width="90" />
-                            <DatePicker x:Name="dpTarih" Width="200" VerticalContentAlignment="Center" />
+                            <TextBlock VerticalAlignment="Center" Text="Tarih :" Width="90"/>
+                            <DatePicker x:Name="dpTarih" Width="200" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Left">
-                            <TextBlock VerticalAlignment="Center" Text="Firma Ünvan :" Width="90" />
+                            <TextBlock VerticalAlignment="Center" Text="Firma Ünvan :" Width="90"/>
                             <TextBox x:Name="txtFirmaUnvan" Width="176" VerticalContentAlignment="Center" Height="24"/>
                             <Button Click="btnFirmaListesi_Click" x:Name="btnFirmaListesi" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Left" Margin="0,4">
-                            <TextBlock VerticalAlignment="Center" Text="Firma Yetkilisi :" Width="90" />
+                            <TextBlock VerticalAlignment="Center" Text="Firma Yetkilisi :" Width="90"/>
                             <TextBox x:Name="txtYetkili" Width="200" VerticalContentAlignment="Center" Height="24"/>
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Left">
-                            <TextBlock VerticalAlignment="Center" Text="Termin :" Width="90" />
+                            <TextBlock VerticalAlignment="Center" Text="Termin :" Width="90"/>
                             <DatePicker x:Name="dpTermin" Width="200" VerticalContentAlignment="Center" Height="24"/>
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Left" Margin="0,4">
