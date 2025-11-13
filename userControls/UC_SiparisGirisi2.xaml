@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
              xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" x:Name="RootControl">
+             d:DesignHeight="450" d:DesignWidth="800" x:Name="RootControl" FontFamily="Bahnschrift Light">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,69 +14,74 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
-        <Border Grid.Row="1">
-            <StackPanel>
-                <DockPanel>
-                    <TextBlock Text="fişno" Width="100"/>
-                    <TextBox Text="{Binding Receipt.ReceiptNo}"/>
-                </DockPanel>
-                <DockPanel>
-                    <TextBlock Text="tarih" Width="100"/>
-                    <DatePicker x:Name="dpTarih" SelectedDate="{Binding Receipt.ReceiptDate}"/>
-                </DockPanel>
-                <DockPanel>
-                    <TextBlock Text="cari" Width="100"/>
-                    <TextBox Text="{Binding Receipt.CompanyId}"/>
-                </DockPanel>
-            </StackPanel>
+        <Border Grid.Row="1" Background="White">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="2">
+                    <DockPanel HorizontalAlignment="Left" Height="24">
+                        <TextBlock VerticalAlignment="Center" Text="Fiş No : " Width="100"/>
+                        <TextBox VerticalContentAlignment="Center" Width="200" x:Name="txtFisNo"/>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Left" Margin="0,2">
+                        <TextBlock VerticalAlignment="Center" Text="Tarih : " Width="100"/>
+                        <DatePicker  Width="200" x:Name="dpTarih"/>
+                    </DockPanel>
+                    <DockPanel Height="24">
+                        <TextBlock VerticalAlignment="Center" Text="Firma Ünvanı : " Width="100"/>
+                        <TextBox VerticalContentAlignment="Center" x:Name="txtFirmaUnvan" Width="176"/>
+                        <Button x:Name="btnFirmaListesi" Click="btnFirmaListesi_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                    </DockPanel>
+                    <DockPanel Height="24" Margin="0,2">
+                        <TextBlock VerticalAlignment="Center" Text="Firma Yetkilisi : " Width="100"/>
+                        <TextBox x:Name="txtYetkili" VerticalContentAlignment="Center" Width="176" />
+                        <Button x:Name="btnYetkiliListesi" Click="btnYetkiliListesi_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="2">
+                    <DockPanel HorizontalAlignment="Left" Height="24">
+                        <TextBlock VerticalAlignment="Center" Text="Termin : " Width="100"/>
+                        <DatePicker  Width="200" x:Name="dpTermin"/>
+                    </DockPanel>
+                    <DockPanel Height="24" HorizontalAlignment="Left" Margin="0,2">
+                        <TextBlock VerticalAlignment="Center" Text="Vade Gün : " Width="100"/>
+                        <TextBox x:Name="txtVade" Width="200"/>
+                    </DockPanel>
+                    <DockPanel Height="24">
+                        <TextBlock VerticalAlignment="Center" Text="Müşteri Sip. No : " Width="100"/>
+                        <TextBox x:Name="txtMusteriOrderNo" Width="200"/>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
         </Border>
-        <DataGrid CanUserAddRows="True" Grid.Row="2" ItemsSource="{Binding ReceiptItems}" AutoGenerateColumns="False">
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell">
-                    <Setter Property="BorderBrush" Value="LightGray"/>
-                    <Setter Property="BorderThickness" Value="0.5"/>
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="Black"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="Orange"/>
-                            <Setter Property="Foreground" Value="White"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.CellStyle>
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="Black"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="Orange"/>
-                            <Setter Property="Foreground" Value="White"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
+        <DataGrid x:Name="dataGrid" CanUserAddRows="True" Grid.Row="2" AutoGenerateColumns="False"
+                  CellEditEnding="dataGrid_CellEditEnding" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Kalem İşlem" Binding="{Binding OperationType}" />
-                <DataGridTextColumn Header="Kumaş Id" Binding="{Binding InventoryId}" />
-                <DataGridTemplateColumn Header="Malzeme Kodu">
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType}">
+                    <DataGridComboBoxColumn.ItemsSource>
+                        <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                            <sys:String>Sipariş</sys:String>
+                            <sys:String>Satın Alma</sys:String>
+                            <sys:String>Satış</sys:String>
+                        </x:Array>
+                    </DataGridComboBoxColumn.ItemsSource>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn Header="Kumaş Id" Binding="{Binding InventoryId}" IsReadOnly="True" Visibility="Hidden" />
+                <DataGridTemplateColumn Header="Kumaş Kodu">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBox Text="{Binding InventoryCode}" Width="100" BorderBrush="Transparent"/>
-                                <Button Content="🔎" Background="Transparent" BorderBrush="#ececec"
-                                Command="{Binding DataContext.SelectMaterialCommand, ElementName=RootControl}"
-                                CommandParameter="{Binding}" 
-                                Width="30"/>
+                                <Button x:Name="btnKumasListe" Click="btnKumasListe_Click" Content="🔎"  Background="Transparent" BorderBrush="Transparent"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Malzeme Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Miktar" Binding="{Binding GrossWeight}" />
+                <DataGridTextColumn Header="Kumaş Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-
     </Grid>
 </UserControl>

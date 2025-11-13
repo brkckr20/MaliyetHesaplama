@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MaliyeHesaplama
 {
@@ -35,7 +26,7 @@ namespace MaliyeHesaplama
         private void UretimYonetimi_Click(object sender, RoutedEventArgs e)
         {
             string title = "Üretim Yönetimi";
-            string[] items = { "Maliyet Hesaplama", "Sipariş Girişi", "Sipariş Girişi 2" };
+            string[] items = { "Maliyet Hesaplama", "Sipariş Girişi" };
             ShowMegaMenu(title, items);
         }
         private void Ayarlar_Click(object sender, RoutedEventArgs e)
@@ -53,8 +44,6 @@ namespace MaliyeHesaplama
                 if (menuName == "Maliyet Hesaplama")
                     OpenTab(menuName, new userControls.Uc_MaliyetHesaplama());
                 if (menuName == "Sipariş Girişi")
-                    OpenTab(menuName, new userControls.UC_SiparisGirisi());
-                if (menuName == "Sipariş Girişi 2")
                     OpenTab(menuName, new userControls.UC_SiparisGirisi2());
 
                 /* Karlar */

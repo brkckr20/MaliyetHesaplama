@@ -8,43 +8,43 @@
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
         <Button Click="Yeni_Click" x:Name="btnYeni" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Width="24" Height="24" Source="/userControls/new.ico" />
+                <Image Width="24" Height="24" Source="/userControls/Common/new.png" />
                 <TextBlock Text="Yeni" HorizontalAlignment="Center" Margin="0,4,0,0"/>
             </StackPanel>
         </Button>
         <Button x:Name="Kayit_Click" Click="Kaydet_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Width="24" Height="24" Source="/userControls/save.ico" />
+                <Image Width="24" Height="24" Source="/userControls/Common/save1.png"  />
                 <TextBlock Text="Kaydet" HorizontalAlignment="Center" Margin="0,4,0,0"/>
             </StackPanel>
         </Button>
         <Button x:Name="btnListele" Click="Listele_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Width="24" Height="24" Source="/userControls/list.ico" />
+                <Image Width="24" Height="24" Source="/userControls/Common/list.png" />
                 <TextBlock Text="Liste" HorizontalAlignment="Center" Margin="0,4,0,0"/>
             </StackPanel>
         </Button>
         <Button Click="Geri_Click" x:Name="btnGeri" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Width="24" Height="24" Source="/userControls/back.ico" />
+                <Image Width="24" Height="24" Source="/userControls/Common/back.png" />
                 <TextBlock Text="Önceki" HorizontalAlignment="Center" Margin="0,4,0,0"/>
             </StackPanel>
         </Button>
         <Button Click="Ileri_Click" x:Name="btnIleri" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Width="24" Height="24" Source="/userControls/next.ico" />
+                <Image Width="24" Height="24" Source="/userControls/Common/nexr.png" />
                 <TextBlock Text="Sonraki" HorizontalAlignment="Center" Margin="0,4,0,0"/>
             </StackPanel>
         </Button>
         <Button x:Name="btnYazdir" Click="Yazdir_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Width="24" Height="24" Source="/userControls/printer.ico" />
+                <Image Width="24" Height="24" Source="/userControls/Common/print.png" />
                 <TextBlock Text="Yazdır" HorizontalAlignment="Center" Margin="0,4,0,0"/>
             </StackPanel>
         </Button>
         <Button x:Name="btnSil" Click="Sil_Click" Width="60" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Width="24" Height="24" Source="/userControls/trash.ico" />
+                <Image Width="24" Height="24" Source="/userControls/Common/remove.png" />
                 <TextBlock Text="Sil" HorizontalAlignment="Center" Margin="0,4,0,0"/>
             </StackPanel>
         </Button>

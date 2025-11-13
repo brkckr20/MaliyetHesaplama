@@ -18,6 +18,7 @@ namespace MaliyeHesaplama.models
         public int WareHouseId { get; set; }
         public string InvoiceNo { get; set; }
         public DateTime InvoiceDate { get; set; }
+        public string Authorized { get; set; }
         //public ObservableCollection<ReceiptItem> Items = new ObservableCollection<ReceiptItem>();
     }
 }

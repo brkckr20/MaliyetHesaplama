@@ -46,15 +46,17 @@ namespace MaliyeHesaplama.mvvm
             using var tran = conn.BeginTransaction();
             try
             {
-                var insertReceipt = @"INSERT INTO Receipt (ReceiptNo, ReceiptDate, CompanyId)
+                var insertReceipt = @"INSERT INTO Receipt (ReceiptNo, ReceiptDate, CompanyId,ReceiptType,Authorized)
                                       OUTPUT INSERTED.Id
-                                      VALUES (@ReceiptNo, @ReceiptDate, @CompanyId);";
+                                      VALUES (@ReceiptNo, @ReceiptDate, @CompanyId,@ReceiptType,@Authorized);";
                 var receiptId = conn.ExecuteScalar<long>(insertReceipt, 
                     new
                     {
                         Receipt.ReceiptNo,
                         Receipt.ReceiptDate,
-                        Receipt.CompanyId
+                        Receipt.CompanyId,
+                        Receipt.ReceiptType,
+                        Receipt.Authorized,
                     },transaction:tran
                 );
                 var insertItem = @"INSERT INTO ReceiptItem (ReceiptId, OperationType, InventoryId, GrossWeight)

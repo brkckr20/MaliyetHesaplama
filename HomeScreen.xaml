@@ -59,7 +59,7 @@
     </WindowChrome.WindowChrome>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="36"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="DarkRed" MouseLeftButtonDown="Border_MouseLeftButtonDown" MouseMove="TitleBar_MouseMove">
@@ -75,7 +75,6 @@
                     <Button x:Name="btnAppClose"
                             Click="btnAppClose_Click"
                             Width="32"
-                            Height="32"
                             Content="✖"
                             Foreground="White"
                             BorderThickness="0"

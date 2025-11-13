@@ -183,4 +183,5 @@ public class MiniOrm
         var sql = $"SELECT * FROM Report WHERE FormName='{formName}';";
         return _connection.Query<T>(sql).ToList();
     }
+      
 }

@@ -19,6 +19,13 @@
     <None Remove="report.ico" />
     <None Remove="Towel.png" />
     <None Remove="userControls\back.ico" />
+    <None Remove="userControls\Common\back.png" />
+    <None Remove="userControls\Common\list.png" />
+    <None Remove="userControls\Common\new.png" />
+    <None Remove="userControls\Common\nexr.png" />
+    <None Remove="userControls\Common\print.png" />
+    <None Remove="userControls\Common\remove.png" />
+    <None Remove="userControls\Common\save1.png" />
     <None Remove="userControls\list.ico" />
     <None Remove="userControls\new.ico" />
     <None Remove="userControls\next.ico" />
@@ -105,6 +112,13 @@
     <Resource Include="report.ico" />
     <Resource Include="Towel.png" />
     <Resource Include="userControls\back.ico" />
+    <Resource Include="userControls\Common\back.png" />
+    <Resource Include="userControls\Common\list.png" />
+    <Resource Include="userControls\Common\new.png" />
+    <Resource Include="userControls\Common\nexr.png" />
+    <Resource Include="userControls\Common\print.png" />
+    <Resource Include="userControls\Common\remove.png" />
+    <Resource Include="userControls\Common\save1.png" />
     <Resource Include="userControls\list.ico" />
     <Resource Include="userControls\new.ico" />
     <Resource Include="userControls\next.ico" />
@@ -119,10 +133,6 @@
     <None Update="dbconfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>
