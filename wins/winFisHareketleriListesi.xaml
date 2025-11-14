@@ -8,7 +8,7 @@
         Title="İşlem Listesi" Height="450" Width="800" WindowStartupLocation="CenterScreen" Icon="/wins/News.png" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="1"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0"></Border>
@@ -29,10 +29,18 @@
                     <DataGridTextColumn Header="Yetkili" Binding="{Binding Authorized}"/>
                     <DataGridTextColumn Header="Termin" Binding="{Binding DuaDate, StringFormat='dd.MM.yyyy'}"/>
                     <DataGridTextColumn Header="Vade (Gün)"  Binding="{Binding Maturity}"/>
-                    <DataGridTextColumn Header="Vade (Gün) 1"  Binding="{Binding Maturity}"/>
+                    <DataGridTextColumn Header="Kalem Kayıt No"  Binding="{Binding ReceiptItemId}" Visibility="Collapsed"/>
+                    <DataGridTextColumn Header="Kalem İşlem"  Binding="{Binding OperationType}"/>
+                    <DataGridTextColumn Header="Malzeme Id"  Binding="{Binding InventoryId}" Visibility="Collapsed"/>
+                    <DataGridTextColumn Header="Malzeme Kodu"  Binding="{Binding InventoryCode}"/>
+                    <DataGridTextColumn Header="Malzeme Adı"  Binding="{Binding InventoryName}"/>
+                    <DataGridTextColumn Header="Varyant"  Binding="{Binding Variant}"/>
+                    <DataGridTextColumn Header="Net Metre" Binding="{Binding NetMeter}"/>
+                    <DataGridTextColumn Header="Döviz Cinsi" Binding="{Binding Forex}"/>
+                    <DataGridTextColumn Header="Peşin Ödeme" Binding="{Binding CashPayment}"/>
+                    <DataGridTextColumn Header="Vadeli Ödeme" Binding="{Binding DeferredPayment}"/>
                 </DataGrid.Columns>
             </DataGrid>
-
         </Border>
     </Grid>
 </Window>

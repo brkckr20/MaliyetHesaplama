@@ -15,7 +15,7 @@
         }
         public enum Depo
         {
-            HamKumasDepo = 0,
+            HamKumasDepo = 4,
         }
         public enum ColorAndPatternType
         {

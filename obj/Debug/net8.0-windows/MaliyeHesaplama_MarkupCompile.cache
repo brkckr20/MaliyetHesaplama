@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\App.xaml
-211972774028
+201928769884
 
-46-2124261275
+45-2110574626
 283-1692603513
-HomeScreen.xaml;MainWindow.xaml;userControls\Common\ButtonBar.xaml;userControls\UC_FirmaKarti.xaml;userControls\UC_KumasKarti.xaml;userControls\Uc_MaliyetHesaplama.xaml;userControls\UC_Numarator.xaml;userControls\UC_RaporOlusturma.xaml;userControls\UC_RenkKarti.xaml;userControls\UC_SiparisGirisi.xaml;userControls\UC_SiparisGirisi2.xaml;userControls\UC_UretimYonetimiParametreleri.xaml;wins\winBuyukResim.xaml;wins\winFirmaListesi.xaml;wins\winFisHareketleriListesi.xaml;wins\winMaliyetCalismasiListesi.xaml;wins\winMalzemeListesi.xaml;wins\winNumaratorListesi.xaml;wins\winRaporListesi.xaml;wins\winRaporSecimi.xaml;wins\winYetkiliListesi.xaml;
+HomeScreen.xaml;MainWindow.xaml;userControls\Common\ButtonBar.xaml;userControls\UC_FirmaKarti.xaml;userControls\UC_KumasKarti.xaml;userControls\Uc_MaliyetHesaplama.xaml;userControls\UC_Numarator.xaml;userControls\UC_RaporOlusturma.xaml;userControls\UC_RenkKarti.xaml;userControls\UC_SiparisGirisi2.xaml;userControls\UC_UretimYonetimiParametreleri.xaml;wins\winBuyukResim.xaml;wins\winFirmaListesi.xaml;wins\winFisHareketleriListesi.xaml;wins\winMaliyetCalismasiListesi.xaml;wins\winMalzemeListesi.xaml;wins\winNumaratorListesi.xaml;wins\winRaporListesi.xaml;wins\winRaporSecimi.xaml;wins\winYetkiliListesi.xaml;
 
 False
 

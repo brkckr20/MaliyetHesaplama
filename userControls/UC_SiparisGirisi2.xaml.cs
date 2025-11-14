@@ -34,7 +34,7 @@ namespace MaliyeHesaplama.userControls
         {
             var dict0 = new Dictionary<string, object>()
             {
-                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"DuaDate",dpTermin.SelectedDate.Value},{"Maturity",txtVade.Text},{"CustomerOrderNo",txtMusteriOrderNo.Text},{"Authorized",txtYetkili.Text}
+                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"DuaDate",dpTermin.SelectedDate.Value},{"Maturity",txtVade.Text},{"CustomerOrderNo",txtMusteriOrderNo.Text},{"Authorized",txtYetkili.Text},{"WareHouseId",Convert.ToInt32(Enums.Depo.HamKumasDepo)}
             };
             var _receiptId = _orm.Save("Receipt", dict0);
             var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Variant", "NetMeter", "CashPayment", "DeferredPayment", "Forex" }; // dbye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
@@ -70,6 +70,23 @@ namespace MaliyeHesaplama.userControls
                 dpTermin.SelectedDate = win.DuaDate;
                 txtVade.Text = win.Maturity;
                 txtMusteriOrderNo.Text = win.CustomerOrderNo;
+                table.Clear();
+                foreach (var h in win.HareketlerListesi)
+                {
+                    DataRow row = table.NewRow();
+                    row["Id"] = h.ReceiptItemId; // kalem kayıt no
+                    row["InventoryId"] = h.InventoryId;
+                    row["OperationType"] = h.OperationType;
+                    row["InventoryCode"] = h.InventoryCode;
+                    row["InventoryName"] = h.InventoryName;
+                    row["Variant"] = h.Variant;
+                    row["NetMeter"] = h.NetMeter;
+                    row["CashPayment"] = h.CashPayment;
+                    row["DeferredPayment"] = h.DeferredPayment;
+                    row["Forex"] = h.Forex;
+                    table.Rows.Add(row);
+                }
+                dataGrid.ItemsSource = table.DefaultView;
             }
         }
 
@@ -80,6 +97,8 @@ namespace MaliyeHesaplama.userControls
 
         public void Yazdir()
         {
+            wins.winRaporSecimi win = new wins.winRaporSecimi("Sipariş Girişi",Id);
+            win.ShowDialog();
 
         }
 

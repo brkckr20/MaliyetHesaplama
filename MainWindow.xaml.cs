@@ -104,8 +104,8 @@ namespace MaliyeHesaplama
 
         private void btnSiparisGirisi_Click(object sender, RoutedEventArgs e)
         {
-            userControls.UC_SiparisGirisi uc = new userControls.UC_SiparisGirisi();
-            AddOrSelectTab("Sipariş Girişi", uc);
+            //userControls.UC_SiparisGirisi uc = new userControls.UC_SiparisGirisi();
+            //AddOrSelectTab("Sipariş Girişi", uc);
         }
 
         private void appMenuClose_Click(object sender, RoutedEventArgs e)

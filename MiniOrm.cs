@@ -170,20 +170,30 @@ public class MiniOrm
     public IEnumerable<T> GetMovementList<T>(int DepoId,int receiptType)
     {
         var sql = $@"
-                    select 
+                        select 
                         ISNULL(R.Id,0) [Id],
-	                    ISNULL(R.ReceiptNo,'') [ReceiptNo],
-	                    ISNULL(R.ReceiptDate,'') [ReceiptDate],	
-	                    ISNULL(C.Id,'') [CompanyId],
-	                    ISNULL(C.CompanyName,'') [CompanyName],
-	                    ISNULL(R.Authorized,'') [Authorized],
-	                    ISNULL(R.DuaDate,'') [DuaDate],
-	                    ISNULL(R.Maturity,'') [Maturity],
-                        ISNULL(R.CustomerOrderNo,'') [CustomerOrderNo]
-                    --	,
-                    --*
+                        ISNULL(R.ReceiptNo,'') [ReceiptNo],
+                        ISNULL(R.ReceiptDate,'') [ReceiptDate],	
+                        ISNULL(C.Id,'') [CompanyId],
+                        ISNULL(C.CompanyName,'') [CompanyName],
+                        ISNULL(R.Authorized,'') [Authorized],
+                        ISNULL(R.DuaDate,'') [DuaDate],
+                        ISNULL(R.Maturity,'') [Maturity],
+                        ISNULL(R.CustomerOrderNo,'') [CustomerOrderNo],
+                        ISNULL(RI.Id,'') [ReceiptItemId],
+	                    ISNULL(RI.OperationType,'') [OperationType],
+	                    ISNULL(RI.InventoryId,'') [InventoryId],
+	                    ISNULL(I.InventoryCode,'') [InventoryCode],
+	                    ISNULL(I.InventoryName,'') [InventoryName],
+	                    ISNULL(RI.Variant,'') [Variant],
+	                    ISNULL(RI.NetMeter,0) [NetMeter],
+	                    ISNULL(RI.CashPayment,0) [CashPayment],
+	                    ISNULL(RI.DeferredPayment,0) [DeferredPayment],
+	                    ISNULL(RI.Forex,'') [Forex]
                     from Receipt R
                     left join Company C with(nolock) on C.Id = R.CompanyId
+                    left join ReceiptItem RI with(nolock) on RI.ReceiptId = R.Id
+                    left join Inventory I with(nolock) on I.Id = RI.InventoryId
                     where R.ReceiptType = {receiptType} and R.WareHouseId = {DepoId}
 ";
         return _connection.Query<T>(sql);
