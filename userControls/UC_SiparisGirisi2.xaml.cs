@@ -2,6 +2,7 @@
 using MaliyeHesaplama.Interfaces;
 using MaliyeHesaplama.mvvm;
 using System.Data;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -21,7 +22,7 @@ namespace MaliyeHesaplama.userControls
         }
         public void Geri()
         {
-            Bildirim.Bilgilendirme2("Yeni implementasyon");
+            
         }
 
         public void Ileri()
@@ -36,7 +37,7 @@ namespace MaliyeHesaplama.userControls
                 {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"DuaDate",dpTermin.SelectedDate.Value},{"Maturity",txtVade.Text},{"CustomerOrderNo",txtMusteriOrderNo.Text},{"Authorized",txtYetkili.Text}
             };
             var _receiptId = _orm.Save("Receipt", dict0);
-            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId" }; // dbye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
+            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Variant", "NetMeter", "CashPayment", "DeferredPayment", "Forex" }; // dbye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
             foreach (DataRow row in table.Rows)
             {
                 if (row.RowState == DataRowState.Deleted) continue;
@@ -56,7 +57,20 @@ namespace MaliyeHesaplama.userControls
 
         public void Listele()
         {
-
+            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(4,Enums.Receipt.Siparis);
+            win.ShowDialog();
+            if (win.secimYapildi)
+            {
+                this.Id = win.Id;
+                txtFisNo.Text = win.ReceiptNo;
+                dpTarih.SelectedDate = win._Date;
+                this.CompanyId = win.CompanyId;
+                txtFirmaUnvan.Text = win.CompanyName;
+                txtYetkili.Text = win.Authorized;
+                dpTermin.SelectedDate = win.DuaDate;
+                txtVade.Text = win.Maturity;
+                txtMusteriOrderNo.Text = win.CustomerOrderNo;
+            }
         }
 
         public void Sil()
@@ -71,7 +85,6 @@ namespace MaliyeHesaplama.userControls
 
         public void Yeni()
         {
-            Bildirim.Bilgilendirme2("Yeni implementasyon");
         }// kayıt işlemi tamamlandı. listeleme ve diğer crud işlemlerinden devam edilecek
         void LoadData()
         {
@@ -84,6 +97,11 @@ namespace MaliyeHesaplama.userControls
             table.Columns.Add("OperationType", typeof(string));
             table.Columns.Add("InventoryCode", typeof(string));
             table.Columns.Add("InventoryName", typeof(string));
+            table.Columns.Add("Variant", typeof(string));
+            table.Columns.Add("NetMeter", typeof(decimal));
+            table.Columns.Add("CashPayment", typeof(decimal));
+            table.Columns.Add("DeferredPayment", typeof(decimal));
+            table.Columns.Add("Forex", typeof(string));
             dataGrid.ItemsSource = table.DefaultView;
         }
         private void btnFirmaListesi_Click(object sender, RoutedEventArgs e)
@@ -92,7 +110,7 @@ namespace MaliyeHesaplama.userControls
             win.ShowDialog();
             if (win.SecimYapildi)
             {
-                vm.Receipt.CompanyId = win.Id;
+                CompanyId = win.Id;
                 txtFirmaUnvan.Text = win.FirmaUnvan;
             }
         }
@@ -120,7 +138,6 @@ namespace MaliyeHesaplama.userControls
                 rowView["InventoryCode"] = win.Code;
                 rowView["InventoryName"] = win.Name;
             }
-
         }
 
         private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -135,6 +152,30 @@ namespace MaliyeHesaplama.userControls
                 {
                     dataGrid.CommitEdit(DataGridEditingUnit.Row, true);
                 }), System.Windows.Threading.DispatcherPriority.Background);
+            }
+            if (e.Column.Header.ToString() == "Metre" || e.Column.Header.ToString() == "Peşin Ödeme" || e.Column.Header.ToString() == "Vadeli Ödeme")
+            {
+                if (e.EditAction == DataGridEditAction.Commit)
+                {
+                    var editedCell = e.EditingElement as TextBox;
+                    if (editedCell != null)
+                    {
+                        string text = editedCell.Text;
+                        text = text.Replace('.', ',');
+
+                        if (decimal.TryParse(text,
+                                             System.Globalization.NumberStyles.Any,
+                                             new CultureInfo("tr-TR"),
+                                             out decimal result))
+                        {
+                            var rowView = e.Row.Item as DataRowView;
+                            if (rowView != null)
+                            {
+                                rowView["NetMeter"] = result;
+                            }
+                        }
+                    }
+                }
             }
         }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaliyeHesaplama"
         mc:Ignorable="d"
-        Title="Maliyet Hesaplama" ResizeMode="CanResize" FontFamily="Bahnschrift" Height="450" Width="800" WindowState="Maximized" Icon="/Purchase Order.png" WindowStyle="None">
+        Title="Maliyet Hesaplama" ResizeMode="CanResize" FontFamily="Bahnschrift Light" Height="450" Width="800" WindowState="Maximized" Icon="/Purchase Order.png" WindowStyle="None">
     <Window.Resources>
         <Style TargetType="TabItem">
             <Setter Property="Template">

@@ -29,6 +29,7 @@
                     <DataGridTextColumn Header="Yetkili" Binding="{Binding Authorized}"/>
                     <DataGridTextColumn Header="Termin" Binding="{Binding DuaDate, StringFormat='dd.MM.yyyy'}"/>
                     <DataGridTextColumn Header="Vade (Gün)"  Binding="{Binding Maturity}"/>
+                    <DataGridTextColumn Header="Vade (Gün) 1"  Binding="{Binding Maturity}"/>
                 </DataGrid.Columns>
             </DataGrid>
 

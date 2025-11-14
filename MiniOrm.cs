@@ -151,7 +151,7 @@ public class MiniOrm
     {
         var sql = $@"
                     select 
-                        ISNULL(R.Id,'') [Id],
+                        ISNULL(R.Id,0) [Id],
 	                    ISNULL(R.ReceiptNo,'') [ReceiptNo],
 	                    ISNULL(R.ReceiptDate,'') [ReceiptDate],	
 	                    ISNULL(C.Id,'') [CompanyId],
@@ -164,6 +164,27 @@ public class MiniOrm
                     from Receipt R
                     left join Company C with(nolock) on C.Id = R.CompanyId
                     where R.ReceiptType = {receiptType}
+";
+        return _connection.Query<T>(sql);
+    }
+    public IEnumerable<T> GetMovementList<T>(int DepoId,int receiptType)
+    {
+        var sql = $@"
+                    select 
+                        ISNULL(R.Id,0) [Id],
+	                    ISNULL(R.ReceiptNo,'') [ReceiptNo],
+	                    ISNULL(R.ReceiptDate,'') [ReceiptDate],	
+	                    ISNULL(C.Id,'') [CompanyId],
+	                    ISNULL(C.CompanyName,'') [CompanyName],
+	                    ISNULL(R.Authorized,'') [Authorized],
+	                    ISNULL(R.DuaDate,'') [DuaDate],
+	                    ISNULL(R.Maturity,'') [Maturity],
+                        ISNULL(R.CustomerOrderNo,'') [CustomerOrderNo]
+                    --	,
+                    --*
+                    from Receipt R
+                    left join Company C with(nolock) on C.Id = R.CompanyId
+                    where R.ReceiptType = {receiptType} and R.WareHouseId = {DepoId}
 ";
         return _connection.Query<T>(sql);
     }

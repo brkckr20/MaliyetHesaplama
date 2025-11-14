@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MaliyeHesaplama.helpers
+﻿namespace MaliyeHesaplama.helpers
 {
     public static class Enums
     {
@@ -15,15 +9,20 @@ namespace MaliyeHesaplama.helpers
             Kumas = 1,
             Iplik = 2,
         }
-
         public enum Receipt
         {
             Siparis = 10
         }
-
         public enum Depo
         {
             HamKumasDepo = 0,
+        }
+        public enum ColorAndPatternType
+        {
+            Kumas = 1,
+            Iplik = 2,
+            Desen = 3,
+            Musteri = 4,
         }
     }
 }

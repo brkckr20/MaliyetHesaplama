@@ -81,6 +81,21 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Kumaş Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Varyant" Binding="{Binding Variant}"/>
+                <DataGridTextColumn Header="Metre" Binding="{Binding NetMeter, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                <DataGridComboBoxColumn Header="Döviz Cinsi" SelectedItemBinding="{Binding Forex}">
+                    <DataGridComboBoxColumn.ItemsSource>
+                        <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                            <sys:String>TL</sys:String>
+                            <sys:String>USD</sys:String>
+                            <sys:String>EUR</sys:String>
+                            <sys:String>GBP</sys:String>
+                            <sys:String>CAD</sys:String>
+                        </x:Array>
+                    </DataGridComboBoxColumn.ItemsSource>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn Header="Peşin Ödeme" Binding="{Binding CashPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                <DataGridTextColumn Header="Vadeli Ödeme" Binding="{Binding DeferredPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

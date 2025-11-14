@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
+using static MaliyeHesaplama.helpers.Enums;
 
 namespace MaliyeHesaplama.wins
 {
@@ -11,18 +12,20 @@ namespace MaliyeHesaplama.wins
         private int _receiptType;
         private ICollectionView _collectionView;
         public bool secimYapildi = false;
-        public int Id, CompanyId;
-        public string ReceiptNo,CompanyName,Authorized,Maturity;
+        public int Id, CompanyId, _depoId;
+        public string ReceiptNo, CompanyName, Authorized, Maturity, CustomerOrderNo;
         public DateTime _Date, DuaDate;
         public winFisHareketleriListesi(int depoId, Enums.Receipt receipt)
         {
             InitializeComponent();
             this._receiptType = Convert.ToInt32(receipt);
+            this._depoId = depoId;
+            dgListe.Columns[8].Visibility = Visibility.Collapsed; // diğer alanlarında kontrolü yapılacak
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var data = _orm.GetMovementList<dynamic>(_receiptType);
+            var data = _orm.GetMovementList<dynamic>(_depoId, _receiptType);
             _collectionView = CollectionViewSource.GetDefaultView(data);
             dgListe.ItemsSource = _collectionView;
         }
@@ -41,6 +44,7 @@ namespace MaliyeHesaplama.wins
                 Authorized = record.Authorized;
                 DuaDate = record.DuaDate;
                 Maturity = record.Maturity.ToString();
+                CustomerOrderNo = record.CustomerOrderNo.ToString();
                 Close();
             }
         }
