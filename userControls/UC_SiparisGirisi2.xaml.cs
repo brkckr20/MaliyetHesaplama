@@ -20,7 +20,7 @@ namespace MaliyeHesaplama.userControls
             ButtonBar.PageCommands = this;
             LoadData();
         }
-        public void KayitlariGetir(string KayitTipi) // ileri yada geri işleminde null reference hatası veriyor. Giderilmelidir. - 17.11.2025
+        public void KayitlariGetir(string KayitTipi)
         {
             try
             {
@@ -33,8 +33,8 @@ namespace MaliyeHesaplama.userControls
                 }
 
                 string query = $@"SELECT 
-                    ISNULL(R.Id,0) Id, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,
-					ISNULL(R.DispatchDate,'') DispatchDate,
+                    ISNULL(R.Id,0) Id, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,ISNULL(R.Authorized,'') Authorized,ISNULL(R.CustomerOrderNo,'') CustomerOrderNo,
+					ISNULL(R.DuaDate,'') DuaDate,
                     ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,
                     ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.NetMeter,0) NetMeter, ISNULL(RI.CashPayment,0) CashPayment,ISNULL(RI.DeferredPayment,0) DeferredPayment,
                     ISNULL(R.Maturity,0) Maturity, ISNULL(RI.Explanation,'') Explanation,
@@ -54,15 +54,15 @@ namespace MaliyeHesaplama.userControls
                     var item = liste[0];
                     this.Id = Convert.ToInt32(item.Id);
                     this.CompanyId = Convert.ToInt32(item.CompanyId);
-                    dpTarih.SelectedDate= Convert.ToDateTime(item.ReceiptNo);
-                    dpTermin.SelectedDate = Convert.ToDateTime(item.InvoiceDate);
+                    dpTarih.SelectedDate = Convert.ToDateTime(item.ReceiptDate);
+                    dpTermin.SelectedDate = Convert.ToDateTime(item.DuaDate);
                     //txtFirmaKodu.Text = item.CompanyCode.ToString();
                     txtFirmaUnvan.Text = item.CompanyName.ToString();
                     txtYetkili.Text = item.Authorized.ToString();
                     //dateIrsaliyeTarihi.Text = item.DispatchDate.ToString();
                     txtVade.Text = item.Maturity.ToString();
                     txtMusteriOrderNo.Text = item.CustomerOrderNo.ToString();
-                    //gridControl1.DataSource = liste;
+                    dataGrid.ItemsSource = liste;
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace MaliyeHesaplama.userControls
             {
                 {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"DuaDate",dpTermin.SelectedDate.Value},{"Maturity",txtVade.Text},{"CustomerOrderNo",txtMusteriOrderNo.Text},{"Authorized",txtYetkili.Text},{"WareHouseId",Convert.ToInt32(Enums.Depo.HamKumasDepo)}
             };
-            var _receiptId = _orm.Save("Receipt", dict0);
+            Id = _orm.Save("Receipt", dict0);
             var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Variant", "NetMeter", "CashPayment", "DeferredPayment", "Forex" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
             foreach (DataRow row in table.Rows)
             {
@@ -100,7 +100,7 @@ namespace MaliyeHesaplama.userControls
                 {
                     dict[colName] = row[colName];
                 }
-                dict["ReceiptId"] = _receiptId;
+                dict["ReceiptId"] = Id;
                 int newId = _orm.Save("ReceiptItem", dict, "Id");
 
                 if (Convert.ToInt32(dict["Id"]) == 0)

@@ -17,7 +17,7 @@
             <Setter Property="Background" Value="Transparent"/>
         </Style>
     </UserControl.Resources>
-    <Grid Margin="0,4,0,0">
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -29,7 +29,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Margin="4,0,0,0">
+            <StackPanel Grid.Column="0">
                 <DockPanel>
                     <TextBlock VerticalAlignment="Center" Width="110" Text="Kumaş Kodu :"/>
                     <TextBox IsEnabled="False" x:Name="txtKodu" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>

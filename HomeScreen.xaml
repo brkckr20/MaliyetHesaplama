@@ -39,7 +39,7 @@
                         <ControlTemplate.Triggers>
                             <!-- Seçili Tab -->
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="TabBorder" Property="Background" Value="Orange"/>
+                                <Setter TargetName="TabBorder" Property="Background" Value="#FFBF00"/>
                                 <Setter TargetName="HeaderText" Property="Foreground" Value="White"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -62,14 +62,14 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="DarkRed" MouseLeftButtonDown="Border_MouseLeftButtonDown" MouseMove="TitleBar_MouseMove">
+        <Border Grid.Row="0" Background="#1E90FF" MouseLeftButtonDown="Border_MouseLeftButtonDown" MouseMove="TitleBar_MouseMove">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Maliyet Hesaplama" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="20"/>
-                <DockPanel Grid.Column="1">
+                <DockPanel Grid.Column="1" Margin="7,0">
                     <Button x:Name="btnAppMinimize" Click="btnAppMinimize_Click" FontSize="20" Foreground="White" Content="━" Background="Transparent" Width="28" BorderBrush="Transparent" BorderThickness="0"/>
                     <Button x:Name="btnAppMaximize" Click="btnAppMaximize_Click" Foreground="White" Content="🗖" Background="Transparent" Width="28" BorderBrush="Transparent" BorderThickness="0"/>
                     <Button x:Name="btnAppClose"

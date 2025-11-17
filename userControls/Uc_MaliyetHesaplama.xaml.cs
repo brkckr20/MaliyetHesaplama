@@ -55,7 +55,7 @@ namespace MaliyeHesaplama.userControls
         public Uc_MaliyetHesaplama()
         {
             InitializeComponent();
-            ButtonBar.CommandTarget = this;
+            ButtonBar.PageCommands = this;
             dpTarih.SelectedDate = DateTime.Now;
             var _parametreler = _orm.GetById<dynamic>("ProductionManagementParams", 1);
             _receteOlacak = _parametreler.KumasRecetesiOlacak;

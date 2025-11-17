@@ -11,9 +11,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
+        <common:ButtonBar Grid.Row="0" x:Name="ButtonBar" DockPanel.Dock="Top" />
         <Border Grid.Row="1" Background="White">
             <Grid>
                 <Grid.ColumnDefinitions>
