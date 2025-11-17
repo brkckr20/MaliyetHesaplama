@@ -214,5 +214,17 @@ public class MiniOrm
         var sql = $"SELECT * FROM Report WHERE FormName='{formName}';";
         return _connection.Query<T>(sql).ToList();
     }
-      
+    public List<dynamic> GetAfterOrBeforeRecord(string query, int id)
+    {
+        return _connection.Query(query, new { Id = id }).ToList();
+    }
+    public int? GetIdForAfterOrBeforeRecord(string KayitTipi, string TableName, int id, string TableName2, string TableName2Ref, int ReceiptType)
+    {
+        string sql = KayitTipi == "Önceki"
+            ? $"SELECT MAX(t1.Id) FROM {TableName} t1 inner join {TableName2} t2 on t1.Id=t2.{TableName2Ref} WHERE t1.Id < @Id and ReceiptType = {ReceiptType}"
+            : $"SELECT MIN(t1.Id) FROM {TableName} t1 inner join {TableName2} t2 on t1.Id=t2.{TableName2Ref} WHERE t1.Id > @Id and ReceiptType = {ReceiptType}";
+
+        return _connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
+    }
+
 }

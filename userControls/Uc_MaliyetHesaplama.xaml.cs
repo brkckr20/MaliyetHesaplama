@@ -16,18 +16,12 @@ namespace MaliyeHesaplama.userControls
         bool _receteOlacak = false;
         private byte[] imageBytes;
         MiniOrm _orm = new MiniOrm();
-        private void btnListe_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
         void SetControllerValues(TextBox tb, decimal val)
         {
             tb.Text = val.ToString("0.00", CultureInfo.InvariantCulture);
         }
-        private void btnSil_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
         void FormVerileriniTemizle()
         {
             MainHelper.SetControls(new Dictionary<Control, object>
@@ -38,10 +32,6 @@ namespace MaliyeHesaplama.userControls
             Id = 0; InventoryId = 0; CompanyId = 0; CPIId = 0; CPCId = 0; CCCId = 0;
             txtFisNo.Text = _orm.GetRecordNo("Cost", "OrderNo", "Type", 1);
             productImage.Source = null;
-        }
-        private void btnYeni_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void selectImage_Click(object sender, RoutedEventArgs e)
@@ -60,11 +50,6 @@ namespace MaliyeHesaplama.userControls
         {
             wins.winBuyukResim win = new wins.winBuyukResim(this.Id, "Cost", "ProductImage");
             win.Show();
-        }
-
-        private void btnRapor_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         public Uc_MaliyetHesaplama()
@@ -100,11 +85,6 @@ namespace MaliyeHesaplama.userControls
                 txtMalzemeKodu.Text = win.Code;
                 lblMalzemeAdi.Content = win.Name;
             }
-        }
-
-        private void btnKayit_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         string R(TextBox tb) // kayıt esnasında hata alındığı için virgüllü değerler nokta ile değiştirildi. -- replace metodunu kullanıyor
@@ -181,12 +161,12 @@ namespace MaliyeHesaplama.userControls
 
         public void Ileri()
         {
-            throw new NotImplementedException();
+            //
         }
 
         public void Geri()
         {
-            throw new NotImplementedException();
+            //
         }
         public void Listele()
         {

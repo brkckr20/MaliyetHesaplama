@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HqU1RsfVwYPalyZGyEqNUItqECf8ujz8li4U5tqQuPI1hk3z0cBRD1qF/N+2EaauaBpE75NBZXPcl5WM88BayQ==",
+  "dgSpecHash": "MZYYOaO3Eqh9RRU+qLuZWgiZTj84Eu7AbwQTwlQOJG1OldQVKKZZ07bopdVDczOk80aPJxQrWR0AzEzecuFF6Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\casper\\Desktop\\Klasörler\\z\\MaliyeHesaplama\\MaliyeHesaplama.csproj",
   "expectedPackageFiles": [
@@ -9,7 +9,6 @@
     "C:\\Users\\casper\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
-    "C:\\Users\\casper\\.nuget\\packages\\datagridextensions\\2.7.0\\datagridextensions.2.7.0.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\extended.wpf.toolkit\\5.0.0\\extended.wpf.toolkit.5.0.0.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\fastcoloredtextbox.net6\\1.0.0\\fastcoloredtextbox.net6.1.0.0.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\handycontrol\\3.5.1\\handycontrol.3.5.1.nupkg.sha512",
@@ -50,7 +49,6 @@
     "C:\\Users\\casper\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\7.7.1\\microsoft.identitymodel.protocols.openidconnect.7.7.1.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.7.1\\microsoft.identitymodel.tokens.7.7.1.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
-    "C:\\Users\\casper\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.135\\microsoft.xaml.behaviors.wpf.1.1.135.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.10\\sqlitepclraw.bundle_e_sqlite3.2.1.10.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\sqlitepclraw.core\\2.1.10\\sqlitepclraw.core.2.1.10.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.10\\sqlitepclraw.lib.e_sqlite3.2.1.10.nupkg.sha512",

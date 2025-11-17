@@ -57,9 +57,10 @@
             </Grid>
         </Border>
         <DataGrid x:Name="dataGrid" CanUserAddRows="True" Grid.Row="2" AutoGenerateColumns="False"
-                  CellEditEnding="dataGrid_CellEditEnding" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
+                  CellEditEnding="dataGrid_CellEditEnding" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                  >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True"/>
                 <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType}">
                     <DataGridComboBoxColumn.ItemsSource>
                         <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">

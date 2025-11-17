@@ -62,10 +62,6 @@
               "target": "Package",
               "version": "[2.1.66, )"
             },
-            "DataGridExtensions": {
-              "target": "Package",
-              "version": "[2.7.0, )"
-            },
             "Extended.Wpf.Toolkit": {
               "target": "Package",
               "version": "[5.0.0, )"

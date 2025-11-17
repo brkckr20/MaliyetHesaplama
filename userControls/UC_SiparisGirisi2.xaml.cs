@@ -20,14 +20,68 @@ namespace MaliyeHesaplama.userControls
             ButtonBar.PageCommands = this;
             LoadData();
         }
+        public void KayitlariGetir(string KayitTipi) // ileri yada geri işleminde null reference hatası veriyor. Giderilmelidir. - 17.11.2025
+        {
+            try
+            {
+                int id = this.Id;
+                int? istenenId = _orm.GetIdForAfterOrBeforeRecord(KayitTipi, "Receipt", id, "ReceiptItem", "ReceiptId", Convert.ToInt32(Enums.Receipt.Siparis));
+                if (istenenId == null)
+                {
+                    Bildirim.Uyari2("Başka bir kayıt bulunamadı!");
+                    return;
+                }
+
+                string query = $@"SELECT 
+                    ISNULL(R.Id,0) Id, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,
+					ISNULL(R.DispatchDate,'') DispatchDate,
+                    ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,
+                    ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.NetMeter,0) NetMeter, ISNULL(RI.CashPayment,0) CashPayment,ISNULL(RI.DeferredPayment,0) DeferredPayment,
+                    ISNULL(R.Maturity,0) Maturity, ISNULL(RI.Explanation,'') Explanation,
+                    ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
+                    ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName
+                    FROM Receipt R
+                    INNER JOIN ReceiptItem RI ON R.Id = RI.ReceiptId
+                    LEFT JOIN Company C ON C.Id = R.CompanyId
+                    LEFT JOIN Inventory I ON I.Id = RI.InventoryId
+                    WHERE R.ReceiptType = {Convert.ToInt32(Enums.Receipt.Siparis)} AND R.Id = @Id";
+
+                var liste = _orm.GetAfterOrBeforeRecord(query, istenenId.Value);
+
+                if (liste != null && liste.Count > 0)
+                {
+                    table.Clear();
+                    var item = liste[0];
+                    this.Id = Convert.ToInt32(item.Id);
+                    this.CompanyId = Convert.ToInt32(item.CompanyId);
+                    dpTarih.SelectedDate= Convert.ToDateTime(item.ReceiptNo);
+                    dpTermin.SelectedDate = Convert.ToDateTime(item.InvoiceDate);
+                    //txtFirmaKodu.Text = item.CompanyCode.ToString();
+                    txtFirmaUnvan.Text = item.CompanyName.ToString();
+                    txtYetkili.Text = item.Authorized.ToString();
+                    //dateIrsaliyeTarihi.Text = item.DispatchDate.ToString();
+                    txtVade.Text = item.Maturity.ToString();
+                    txtMusteriOrderNo.Text = item.CustomerOrderNo.ToString();
+                    //gridControl1.DataSource = liste;
+                }
+                else
+                {
+                    Bildirim.Uyari2("Başka bir kayıt bulunamadı.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Bildirim.Uyari2("Hata: " + ex.Message);
+            }
+        }
         public void Geri()
         {
-            
+            KayitlariGetir("Önceki");
         }
 
         public void Ileri()
         {
-
+            KayitlariGetir("");
         }
 
         public void Kaydet()
@@ -37,7 +91,7 @@ namespace MaliyeHesaplama.userControls
                 {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"DuaDate",dpTermin.SelectedDate.Value},{"Maturity",txtVade.Text},{"CustomerOrderNo",txtMusteriOrderNo.Text},{"Authorized",txtYetkili.Text},{"WareHouseId",Convert.ToInt32(Enums.Depo.HamKumasDepo)}
             };
             var _receiptId = _orm.Save("Receipt", dict0);
-            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Variant", "NetMeter", "CashPayment", "DeferredPayment", "Forex" }; // dbye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
+            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Variant", "NetMeter", "CashPayment", "DeferredPayment", "Forex" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
             foreach (DataRow row in table.Rows)
             {
                 if (row.RowState == DataRowState.Deleted) continue;
@@ -57,7 +111,7 @@ namespace MaliyeHesaplama.userControls
 
         public void Listele()
         {
-            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(4,Enums.Receipt.Siparis);
+            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(4, Enums.Receipt.Siparis);
             win.ShowDialog();
             if (win.secimYapildi)
             {
@@ -92,19 +146,36 @@ namespace MaliyeHesaplama.userControls
 
         public void Sil()
         {
-
+            if (_orm.Delete("Receipt", Id, true) > 0)
+            {
+                _orm.Delete("ReceiptItem", Id, false, "ReceiptId"); 
+                Temizle();
+            }
         }
 
         public void Yazdir()
         {
-            wins.winRaporSecimi win = new wins.winRaporSecimi("Sipariş Girişi",Id);
+            wins.winRaporSecimi win = new wins.winRaporSecimi("Sipariş Girişi", Id);
             win.ShowDialog();
 
         }
+        void Temizle()
+        {
+            this.Id = 0; this.CompanyId = 0;
+            txtFisNo.Text = _orm.GetRecordNo("Receipt", "ReceiptNo", "ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis));
+            dpTarih.SelectedDate = DateTime.Now;
+            dpTermin.SelectedDate = DateTime.Now;
+            txtFirmaUnvan.Text = string.Empty;
+            txtYetkili.Text = string.Empty;
+            txtVade.Text = string.Empty;
+            txtMusteriOrderNo.Text = string.Empty;
+            table.Clear();
 
+        }
         public void Yeni()
         {
-        }// kayıt işlemi tamamlandı. listeleme ve diğer crud işlemlerinden devam edilecek
+            Temizle();
+        }
         void LoadData()
         {
             dpTarih.SelectedDate = DateTime.Now;
@@ -158,7 +229,6 @@ namespace MaliyeHesaplama.userControls
                 rowView["InventoryName"] = win.Name;
             }
         }
-
         private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             if (e.Column.Header.ToString() == "Kalem İşlem")
