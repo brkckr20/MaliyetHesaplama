@@ -4,6 +4,8 @@ using System.Data;
 using System.Windows;
 using Microsoft.Data.SqlClient;
 using MaliyeHesaplama.helpers;
+using System.Windows.Forms;
+using System.Windows.Controls;
 
 public class MiniOrm
 {
@@ -189,7 +191,8 @@ public class MiniOrm
 	                    ISNULL(RI.NetMeter,0) [NetMeter],
 	                    ISNULL(RI.CashPayment,0) [CashPayment],
 	                    ISNULL(RI.DeferredPayment,0) [DeferredPayment],
-	                    ISNULL(RI.Forex,'') [Forex]
+	                    ISNULL(RI.Forex,'') [Forex],
+	                    ISNULL(RI.Explanation,'') [Explanation]
                     from Receipt R
                     left join Company C with(nolock) on C.Id = R.CompanyId
                     left join ReceiptItem RI with(nolock) on RI.ReceiptId = R.Id
@@ -225,6 +228,16 @@ public class MiniOrm
             : $"SELECT MIN(t1.Id) FROM {TableName} t1 inner join {TableName2} t2 on t1.Id=t2.{TableName2Ref} WHERE t1.Id > @Id and ReceiptType = {ReceiptType}";
 
         return _connection.QueryFirstOrDefault<int?>(sql, new { Id = id });
+    }
+    public void LoadCurrenciesFromDbToCombobox(System.Windows.Controls.ComboBox cmbDoviz)
+    { // normal combobox için
+        var data = GetById<dynamic>("ProductionManagementParams", 1);
+        string list = data.DovizKurlari;
+        cmbDoviz.Items.Clear();
+        foreach (var item in list.Split(','))
+        {
+            cmbDoviz.Items.Add(item.Trim());
+        }
     }
 
 }

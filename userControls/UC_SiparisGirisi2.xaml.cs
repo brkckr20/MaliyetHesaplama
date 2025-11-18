@@ -1,6 +1,7 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
 using MaliyeHesaplama.mvvm;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Globalization;
 using System.Windows;
@@ -14,10 +15,12 @@ namespace MaliyeHesaplama.userControls
         public int CompanyId = 0, Id;
         MVM vm = new MVM();
         private DataTable table;
+        public ObservableCollection<string> Currencies { get; set; }
         public UC_SiparisGirisi2()
         {
             InitializeComponent();
             ButtonBar.PageCommands = this;
+            Currencies = new ObservableCollection<string>();
             LoadData();
         }
         public void KayitlariGetir(string KayitTipi)
@@ -91,7 +94,7 @@ namespace MaliyeHesaplama.userControls
                 {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"DuaDate",dpTermin.SelectedDate.Value},{"Maturity",txtVade.Text},{"CustomerOrderNo",txtMusteriOrderNo.Text},{"Authorized",txtYetkili.Text},{"WareHouseId",Convert.ToInt32(Enums.Depo.HamKumasDepo)}
             };
             Id = _orm.Save("Receipt", dict0);
-            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Variant", "NetMeter", "CashPayment", "DeferredPayment", "Forex" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
+            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Variant", "NetMeter", "CashPayment", "DeferredPayment", "Forex", "Explanation" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
             foreach (DataRow row in table.Rows)
             {
                 if (row.RowState == DataRowState.Deleted) continue;
@@ -138,6 +141,7 @@ namespace MaliyeHesaplama.userControls
                     row["CashPayment"] = h.CashPayment;
                     row["DeferredPayment"] = h.DeferredPayment;
                     row["Forex"] = h.Forex;
+                    row["Explanation"] = h.Explanation;
                     table.Rows.Add(row);
                 }
                 dataGrid.ItemsSource = table.DefaultView;
@@ -176,6 +180,12 @@ namespace MaliyeHesaplama.userControls
         {
             Temizle();
         }
+        private void LoadCurrenciesFromDb()
+        {
+            var data = _orm.GetById<dynamic>("ProductionManagementParams", 1);
+            string list = data.DovizKurlari;
+            cmbDoviz.ItemsSource = list.Split(',').ToList();
+        }
         void LoadData()
         {
             dpTarih.SelectedDate = DateTime.Now;
@@ -192,7 +202,9 @@ namespace MaliyeHesaplama.userControls
             table.Columns.Add("CashPayment", typeof(decimal));
             table.Columns.Add("DeferredPayment", typeof(decimal));
             table.Columns.Add("Forex", typeof(string));
+            table.Columns.Add("Explanation", typeof(string));
             dataGrid.ItemsSource = table.DefaultView;
+            LoadCurrenciesFromDb();
         }
         private void btnFirmaListesi_Click(object sender, RoutedEventArgs e)
         {
@@ -229,6 +241,12 @@ namespace MaliyeHesaplama.userControls
                 rowView["InventoryName"] = win.Name;
             }
         }
+
+        private void btnVariantListe_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             if (e.Column.Header.ToString() == "Kalem İşlem")
@@ -267,6 +285,5 @@ namespace MaliyeHesaplama.userControls
                 }
             }
         }
-
     }
 }

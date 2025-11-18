@@ -52,7 +52,7 @@ namespace MaliyeHesaplama
                 if (menuName == "Firma Kartı")
                     OpenTab(menuName, new userControls.UC_FirmaKarti());
                 if (menuName == "Renk Kartı")
-                    OpenTab(menuName, new userControls.UC_RenkKarti());
+                    OpenTab(menuName, new userControls.UC_RenkKarti(false));
 
                 /* Ayarlar */
                 if (menuName == "Üretim Yönetimi Parametreleri")

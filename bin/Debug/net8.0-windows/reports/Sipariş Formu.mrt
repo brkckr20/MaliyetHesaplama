@@ -1486,9 +1486,9 @@ rkJggg==</ImageBytes>
               <Name>Text27</Name>
               <Page isRef="5" />
               <Parent isRef="35" />
-              <Text>{Kalemler.CashPayment}</Text>
+              <Text>{Kalemler.CashPayment} {Kalemler.Forex}</Text>
               <TextBrush>Black</TextBrush>
-              <Type>DataColumn</Type>
+              <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text27>
             <Text29 Ref="41" type="Text" isKey="true">
@@ -1502,9 +1502,9 @@ rkJggg==</ImageBytes>
               <Name>Text29</Name>
               <Page isRef="5" />
               <Parent isRef="35" />
-              <Text>{Kalemler.DeferredPayment}</Text>
+              <Text>{Kalemler.DeferredPayment} {Kalemler.Forex}</Text>
               <TextBrush>Black</TextBrush>
-              <Type>DataColumn</Type>
+              <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text29>
           </Components>
@@ -1540,10 +1540,10 @@ rkJggg==</ImageBytes>
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>11/17/2025 12:33:06 PM</ReportChanged>
+  <ReportChanged>11/18/2025 12:42:36 PM</ReportChanged>
   <ReportCreated>11/10/2025 1:38:02 PM</ReportCreated>
   <ReportFile>C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\reports\Sipariş Formu.mrt</ReportFile>
-  <ReportGuid>296bceca94ba4652abc97b1d3399b08d</ReportGuid>
+  <ReportGuid>f3fe80e54289479091ced239a85baae0</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2025.4.1.0</ReportVersion>

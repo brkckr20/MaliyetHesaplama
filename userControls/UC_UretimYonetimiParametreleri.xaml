@@ -73,23 +73,30 @@
                                 <DockPanel>
                                     <TextBlock VerticalAlignment="Center" Text="Operasyon Tipleri : "/>
                                     <TextBox x:Name="txtOperasyonTipi" VerticalContentAlignment="Center" Width="300" Height="22"/>
-                                    <TextBlock Margin="4,0,0,0" VerticalAlignment="Center" Text="(Her bir tip arasında , (virgül) konulmalıdır)" Foreground="Gray"/>
+                                    <TextBlock Margin="4,0,0,0" VerticalAlignment="Center" Text="*(Her bir tip arasında , (virgül) konulmalıdır)" Foreground="Gray"/>
                                 </DockPanel>
                                 <DockPanel Margin="0,5,0,0">
                                     <CheckBox x:Name="chckReceteOlacak" Content="Kumaş kartı oluşturulurken reçete girilecek"/>
                                 </DockPanel>
-                            </StackPanel>                           
+                            </StackPanel>
                         </GroupBox>
                         <GroupBox Grid.Row="1" Header="Kur Seçenekleri" Foreground="Black">
-                            <DockPanel HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <Label Content="Maliyet hesaplamada baz alınacak kur : "/>
-                                <ComboBox x:Name="cmbKurSecimi" Width="130" SelectedIndex="1">
-                                    <ComboBoxItem Content="USD Merkez Alış" Tag="USD_ALIS"/>
-                                    <ComboBoxItem Content="USD Merkez Satış" Tag="USD_SATIS"/>
-                                    <ComboBoxItem Content="EUR Merkez Alış" Tag="EUR_ALIS"/>
-                                    <ComboBoxItem Content="EUR Merkez Satış" Tag="EUR_SATIS"/>
-                                </ComboBox>
-                            </DockPanel>
+                            <StackPanel>
+                                <DockPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <Label Content="Maliyet hesaplamada baz alınacak kur : "/>
+                                    <ComboBox x:Name="cmbKurSecimi" Width="130" SelectedIndex="1">
+                                        <ComboBoxItem Content="USD Merkez Alış" Tag="USD_ALIS"/>
+                                        <ComboBoxItem Content="USD Merkez Satış" Tag="USD_SATIS"/>
+                                        <ComboBoxItem Content="EUR Merkez Alış" Tag="EUR_ALIS"/>
+                                        <ComboBoxItem Content="EUR Merkez Satış" Tag="EUR_SATIS"/>
+                                    </ComboBox>
+                                </DockPanel>
+                                <DockPanel HorizontalAlignment="Left" Margin="0,4,0,0">
+                                    <Label Content="Döviz Kurları : "/>
+                                    <TextBox x:Name="txtDovizKurlari" Width="265" VerticalContentAlignment="Center"/>
+                                    <TextBlock Margin="4,0,0,0" VerticalAlignment="Center" Text="*(Her bir döviz arasına , (virgül) konulmalıdır)" Foreground="Gray"/>
+                                </DockPanel>
+                            </StackPanel>
                         </GroupBox>
                     </Grid>
                 </TabItem>

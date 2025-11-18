@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
              xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" x:Name="RootControl" FontFamily="Bahnschrift Light">
+             d:DesignHeight="450" d:DesignWidth="800" x:Name="RootControl" FontFamily="Bahnschrift Light"
+             >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -60,7 +61,7 @@
                   CellEditEnding="dataGrid_CellEditEnding" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
                   >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Visibility="Hidden"/>
                 <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType}">
                     <DataGridComboBoxColumn.ItemsSource>
                         <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
@@ -82,21 +83,23 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Kumaş Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Varyant" Binding="{Binding Variant}"/>
+                <DataGridTextColumn Header="Varyant Id" Binding="{Binding VariantId}" IsReadOnly="True" Visibility="Hidden" />
+                <DataGridTemplateColumn Header="Varyant Kodu">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding VariantCode}" Width="100" BorderBrush="Transparent"/>
+                                <Button x:Name="btnVariantListe" Click="btnVariantListe_Click" Content="🔎" Background="Transparent" BorderBrush="Transparent"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Varyant" Binding="{Binding Variant}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Metre" Binding="{Binding NetMeter, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
-                <DataGridComboBoxColumn Header="Döviz Cinsi" SelectedItemBinding="{Binding Forex}">
-                    <DataGridComboBoxColumn.ItemsSource>
-                        <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                            <sys:String>TL</sys:String>
-                            <sys:String>USD</sys:String>
-                            <sys:String>EUR</sys:String>
-                            <sys:String>GBP</sys:String>
-                            <sys:String>CAD</sys:String>
-                        </x:Array>
-                    </DataGridComboBoxColumn.ItemsSource>
-                </DataGridComboBoxColumn>
+                <DataGridComboBoxColumn Header="Döviz Cinsi" SelectedItemBinding="{Binding Forex}" x:Name="cmbDoviz"/>
                 <DataGridTextColumn Header="Peşin Ödeme" Binding="{Binding CashPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
                 <DataGridTextColumn Header="Vadeli Ödeme" Binding="{Binding DeferredPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                <DataGridTextColumn Header="Açıklama" Binding="{Binding Explanation}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
