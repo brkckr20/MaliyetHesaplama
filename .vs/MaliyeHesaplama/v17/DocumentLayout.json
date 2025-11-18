@@ -3,28 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_renkkarti.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_renkkarti.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_renkkarti.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_renkkarti.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_renkkarti.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_renkkarti.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_firmakarti.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_firmakarti.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\wins\\winrenklistesi.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:wins\\winrenklistesi.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_firmakarti.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_firmakarti.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_siparisgirisi2.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_siparisgirisi2.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_siparisgirisi2.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_siparisgirisi2.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\wins\\winrenklistesi.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:wins\\winrenklistesi.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,74 +26,11 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{873151d0-cf2e-48cc-b4bf-ad0394f6a3c3}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UC_FirmaKarti.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_FirmaKarti.xaml.cs",
-              "RelativeDocumentMoniker": "userControls\\UC_FirmaKarti.xaml.cs",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_FirmaKarti.xaml.cs",
-              "RelativeToolTip": "userControls\\UC_FirmaKarti.xaml.cs",
-              "ViewState": "AQIAAFIAAAAAAAAAAAAYwG4AAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T10:45:29.059Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UC_FirmaKarti.xaml",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_FirmaKarti.xaml",
-              "RelativeDocumentMoniker": "userControls\\UC_FirmaKarti.xaml",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_FirmaKarti.xaml",
-              "RelativeToolTip": "userControls\\UC_FirmaKarti.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-18T10:45:26.207Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UC_RenkKarti.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_RenkKarti.xaml.cs",
-              "RelativeDocumentMoniker": "userControls\\UC_RenkKarti.xaml.cs",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_RenkKarti.xaml.cs",
-              "RelativeToolTip": "userControls\\UC_RenkKarti.xaml.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAwAAAB0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T10:40:00.613Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UC_SiparisGirisi2.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_SiparisGirisi2.xaml.cs",
-              "RelativeDocumentMoniker": "userControls\\UC_SiparisGirisi2.xaml.cs",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_SiparisGirisi2.xaml.cs",
-              "RelativeToolTip": "userControls\\UC_SiparisGirisi2.xaml.cs",
-              "ViewState": "AQIAAKAAAAAAAAAAAIAwwLwAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T10:34:29.655Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UC_SiparisGirisi2.xaml",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_SiparisGirisi2.xaml",
-              "RelativeDocumentMoniker": "userControls\\UC_SiparisGirisi2.xaml",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_SiparisGirisi2.xaml",
-              "RelativeToolTip": "userControls\\UC_SiparisGirisi2.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-18T10:34:17.86Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -112,7 +41,45 @@
               "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_RenkKarti.xaml",
               "RelativeToolTip": "userControls\\UC_RenkKarti.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-18T10:15:24.496Z",
+              "WhenOpened": "2025-11-18T14:19:12.491Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UC_RenkKarti.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_RenkKarti.xaml.cs",
+              "RelativeDocumentMoniker": "userControls\\UC_RenkKarti.xaml.cs",
+              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_RenkKarti.xaml.cs",
+              "RelativeToolTip": "userControls\\UC_RenkKarti.xaml.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAgwCsAAAArAgAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-18T13:54:43.144Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "winRenkListesi.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\wins\\winRenkListesi.xaml.cs",
+              "RelativeDocumentMoniker": "wins\\winRenkListesi.xaml.cs",
+              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\wins\\winRenkListesi.xaml.cs",
+              "RelativeToolTip": "wins\\winRenkListesi.xaml.cs",
+              "ViewState": "AQIAADQAAAAAAAAAAAAgwE8AAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-18T13:45:25.918Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "winRenkListesi.xaml",
+              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\wins\\winRenkListesi.xaml",
+              "RelativeDocumentMoniker": "wins\\winRenkListesi.xaml",
+              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\wins\\winRenkListesi.xaml",
+              "RelativeToolTip": "wins\\winRenkListesi.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-18T13:43:32.431Z",
               "EditorCaption": ""
             }
           ]

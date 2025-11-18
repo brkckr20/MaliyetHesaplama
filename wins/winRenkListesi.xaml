@@ -1,0 +1,66 @@
+﻿<Window x:Class="MaliyeHesaplama.wins.winRenkListesi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaliyeHesaplama.wins"
+        mc:Ignorable="d"
+        Title="" Height="450" Width="900" Icon="/wins/News.png" Loaded="Window_Loaded" FontFamily="Bahnschrift" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid Background="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="4">
+                <TextBlock Text="Filtreler" FontWeight="Bold" Margin="0,0,0,3"/>
+                <StackPanel>
+                    <TextBlock Text="Kodu:"/>
+                    <TextBox x:Name="txtKodu" TabIndex="0" FontSize="16" TextChanged="txtKodu_TextChanged"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Adı :"/>
+                    <TextBox x:Name="txtAdi" TabIndex="1" FontSize="16" TextChanged="txtAdi_TextChanged"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Pantone :"/>
+                    <TextBox x:Name="txtPantoneNo" TabIndex="2" FontSize="16" TextChanged="txtPantoneNo_TextChanged"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Firma :"/>
+                    <TextBox x:Name="txtFirma" TabIndex="3" FontSize="16" TextChanged="txtFirma_TextChanged"/>
+                </StackPanel>
+            </StackPanel>
+            <DataGrid Grid.Column="1" 
+                  x:Name="sfDataGrid" 
+                  CanUserAddRows="True" 
+                  FontSize="11" RowHeight="24" 
+                  VerticalContentAlignment="Center"
+                  CanUserSortColumns="True"
+                  IsReadOnly="True"
+                  MouseDoubleClick="sfDataGrid_MouseDoubleClick"
+                  AutoGenerateColumns="False"
+                  GridLinesVisibility="All"
+                  HorizontalGridLinesBrush="#ececec"
+                  VerticalGridLinesBrush="#ececec"
+              >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
+                    <DataGridTextColumn Header="Renk Türü Id" Binding="{Binding Type}" Visibility="Hidden"/>
+                    <DataGridTextColumn Header="Renk Türü" Binding="{Binding TypeName}"/>
+                    <DataGridTextColumn Header="Kodu" Binding="{Binding Code}"/>
+                    <DataGridTextColumn Header="Adı" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Pantone" Binding="{Binding PantoneNo}"/>
+                    <DataGridTextColumn Header="Firma Id" Visibility="Hidden" Binding="{Binding CompanyId}"/>
+                    <DataGridTextColumn Header="Firma Ünvan" Binding="{Binding CompanyName}"/>
+                    <DataGridTextColumn Header="ParentId" Binding="{Binding ParentId}"/>
+                    <DataGridTextColumn Header="Talep Tarihi" Binding="{Binding RequestDate,StringFormat='dd.MM.yyyy'}"/>
+                    <DataGridTextColumn Header="Okey Tarihi" Binding="{Binding ConfirmDate,StringFormat='dd.MM.yyyy'}"/>
+                    <DataGridTextColumn Header="Fiyat" Binding="{Binding Price}"/>
+                    <DataGridTextColumn Header="Döviz" Binding="{Binding Forex}"/>
+                    <DataGridCheckBoxColumn Header="Kullanımda" Visibility="Hidden" Binding="{Binding IsUse}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

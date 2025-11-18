@@ -6,6 +6,7 @@ using Microsoft.Data.SqlClient;
 using MaliyeHesaplama.helpers;
 using System.Windows.Forms;
 using System.Windows.Controls;
+using static MaliyeHesaplama.helpers.Enums;
 
 public class MiniOrm
 {
@@ -169,7 +170,7 @@ public class MiniOrm
 ";
         return _connection.Query<T>(sql);
     }
-    public IEnumerable<T> GetMovementList<T>(int DepoId,int receiptType)
+    public IEnumerable<T> GetMovementList<T>(int DepoId, int receiptType)
     {
         var sql = $@"
                         select 
@@ -238,6 +239,39 @@ public class MiniOrm
         {
             cmbDoviz.Items.Add(item.Trim());
         }
+    }
+    public IEnumerable<T> GetColorList<T>(bool isParent)
+    {
+        string parent = "0";
+        if (isParent)
+        {
+            parent = "1";
+        }
+        string sql;
+        if (true)
+        {
+            sql = $@"Select 
+                    ISNULL(C.Id,0) [Id],
+                    ISNULL(C.Type,0) [Type],
+                    case 
+                    when ISNULL(C.Type,0) = 1 then 'Kumaş'
+                    when ISNULL(C.Type,0) = 2 then 'İplik'
+                    end as [TypeName],
+                    ISNULL(C.Code,'') [Code],
+                    ISNULL(C.Name,'') [Name],
+                    ISNULL(C.CompanyId,0) [CompanyId],
+                    ISNULL(C.ParentId,0) [ParentId],
+                    ISNULL(C.RequestDate,'') [RequestDate],
+                    ISNULL(C.ConfirmDate,'') [ConfirmDate],
+                    ISNULL(C.PantoneNo,'') [PantoneNo],
+                    ISNULL(C.Price,0) [Price],
+                    ISNULL(C.Forex,'') [Forex],
+                    ISNULL(C.IsUse,0) [IsUse],
+                    ISNULL(C.Explanation,0) [Explanation] from Color C
+                    left join Company CO on C.CompanyId = CO.Id
+                    where C.IsParent = '{parent}'";
+        }
+        return _connection.Query<T>(sql);
     }
 
 }

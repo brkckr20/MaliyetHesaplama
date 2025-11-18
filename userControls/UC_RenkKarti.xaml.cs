@@ -23,15 +23,16 @@ namespace MaliyeHesaplama.userControls
             _orm.LoadCurrenciesFromDbToCombobox(cmbDovizListesi);
             dpOkeyTarihi.SelectedDate = DateTime.Now;
             dpTalepTarihi.SelectedDate = DateTime.Now;
+            rbKumas.IsChecked = true;
         }
         public void Geri()
         {
-            throw new NotImplementedException();
+
         }
 
         public void Ileri()
         {
-            throw new NotImplementedException();
+
         }
 
         public void Kaydet()
@@ -40,7 +41,7 @@ namespace MaliyeHesaplama.userControls
             {
                 var dict = new Dictionary<string, object>
                 {
-                    {"Id",Id },{"Type",_colorType},{"Code",txtKodu.Text},{"Name", txtAdi.Text},{"CompanyId", CompanyId}, {"ParentId",0}, {"Date", DateTime.Now},{"RequestDate", dpTalepTarihi.SelectedDate.Value},{"ConfirmDate", dpOkeyTarihi.SelectedDate.Value},{"Price",txtFiyat.Text},{"Forex", cmbDovizListesi.SelectedItem.ToString()},{"PantoneNo", string.Empty},{"IsParent",_isVariant},{"IsUse",chckKullanimda.IsChecked},{"Explanation",txtAciklama.Text},{"EmployeeId",0}
+                    {"Id",Id },{"Type",_colorType},{"Code",txtKodu.Text},{"Name", txtAdi.Text},{"CompanyId", CompanyId}, {"ParentId",0}, {"Date", DateTime.Now},{"RequestDate", dpTalepTarihi.SelectedDate.Value},{"ConfirmDate", dpOkeyTarihi.SelectedDate.Value},{"Price",txtFiyat.Text},{"Forex", cmbDovizListesi.SelectedItem.ToString()},{"IsParent",_isVariant},{"IsUse",Convert.ToBoolean(chckKullanimda.IsChecked)},{"Explanation",txtAciklama.Text},{"EmployeeId",0},{"PantoneNo",txtPantoneNo.Text} // kayit işleminde hata verdi - kontrol edilecek - 18.11.2025
                 };
                 Id = _orm.Save("Color", dict);
                 Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi.");
@@ -53,22 +54,91 @@ namespace MaliyeHesaplama.userControls
 
         public void Listele()
         {
-            throw new NotImplementedException();
+            wins.winRenkListesi win = new wins.winRenkListesi(_isVariant);
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                this.Id = win.Id;
+                this.CompanyId = win.CompanyId;
+                SetColorType(win.Type);
+                chckKullanimda.IsChecked = win.IsUse;
+                txtKodu.Text = win.Kodu;
+                txtAdi.Text = win.Adi;
+                txtAciklama.Text = win.Explanation;
+                txtRenk.Text = string.Empty;
+                txtPantoneNo.Text = win.Pantone;
+                dpTalepTarihi.SelectedDate = win.TalepTarihi;
+                dpOkeyTarihi.SelectedDate = win.OkeyTarihi;
+                txtFiyat.Text = win.Fiyat.ToString();
+                cmbDovizListesi.Text = win.Doviz;
+            }
+        }
+        void SetColorType(int type)
+        {
+            switch (type)
+            {
+                case 1:
+                    rbKumas.IsChecked = true;
+                    break;
+                case 2:
+                    rbKumas.IsChecked = true;
+                    break;
+            }
         }
 
         public void Sil()
         {
-            throw new NotImplementedException();
+            if (_orm.Delete("Color", Id, true)>0)
+            {
+                Temizle();
+            };            
         }
 
         public void Yazdir()
         {
-            throw new NotImplementedException();
+            if (Id != 0)
+            {
+                wins.winRaporSecimi win = new wins.winRaporSecimi("Renk Kartı", Id);
+                win.ShowDialog();
+            }
+            else
+            {
+                Bildirim.Uyari2("Rapor görüntüleyebilmek için lütfen bir kayır seçiniz!");
+            }
         }
 
         public void Yeni()
         {
-            MessageBox.Show("renk");
+            Temizle();
+        }
+
+        private void btnFirmaListesi_Click(object sender, RoutedEventArgs e)
+        {
+            wins.winFirmaListesi win = new wins.winFirmaListesi();
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                this.CompanyId = win.Id;
+                txtFirmaUnvan.Text = win.FirmaUnvan;
+            }
+        }
+
+        void Temizle()
+        {
+            this.Id = 0;
+            this.CompanyId = 0;
+            rbKumas.IsChecked = true;
+            chckKullanimda.IsChecked = true;
+            txtKodu.Text = string.Empty;
+            txtAdi.Text = string.Empty;
+            txtAciklama.Text = string.Empty;
+            txtRenk.Text = string.Empty;
+            txtPantoneNo.Text = string.Empty;
+            txtFirmaUnvan.Text = string.Empty;
+            dpTalepTarihi.SelectedDate = DateTime.Now;
+            dpOkeyTarihi.SelectedDate = DateTime.Now;
+            txtFiyat.Text = string.Empty;
+            cmbDovizListesi.SelectedIndex = -1;
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)

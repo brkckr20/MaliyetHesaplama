@@ -13,7 +13,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" Grid.Row="0"/>
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="1" Background="White">
             <DockPanel>
                 <GroupBox Header="Renk Türü" Width="225">
                     <DockPanel>
@@ -21,7 +21,7 @@
                         <RadioButton Name="rbIplik" Content="İplik" Checked="RadioButton_Checked"/>
                     </DockPanel>                   
                 </GroupBox>
-                <CheckBox x:Name="chckKullanimda" Content="Kullanımda" Margin="5,14,0,0"/>
+                <CheckBox x:Name="chckKullanimda" Content="Kullanımda" Margin="5,14,0,0" IsChecked="True"/>
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" Margin="0,4,0,0">
                 <TextBlock Text="Kodu : " Width="80" VerticalAlignment="Center"/>
@@ -40,9 +40,13 @@
                 <TextBox x:Name="txtRenk" Width="163" VerticalContentAlignment="Center" Height="20"/>
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" Margin="0,4,0,0" >
+                <TextBlock Text="Pantone No : " Width="80" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtPantoneNo" Width="163" VerticalContentAlignment="Center" Height="20"/>
+            </DockPanel>
+            <DockPanel HorizontalAlignment="Left" Margin="0,4,0,0" >
                 <TextBlock Text="Firma : " Width="80" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtFirmaUnvan" Width="143" VerticalContentAlignment="Center" Height="20"/>
-                <Button Width="20" Content="🔎" Background="Transparent" Foreground="Gray" BorderBrush="Gray" BorderThickness=".4" VerticalContentAlignment="Center"/>
+                <Button x:Name="btnFirmaListesi" Click="btnFirmaListesi_Click" Width="20" Content="🔎" Background="Transparent" Foreground="Gray" BorderBrush="Gray" BorderThickness=".4" VerticalContentAlignment="Center"/>
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" Margin="0,4,0,0" >
                 <TextBlock Text="Talep Tarihi : " Width="80" VerticalAlignment="Center"/>
