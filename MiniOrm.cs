@@ -1,12 +1,8 @@
 ﻿using Dapper;
+using MaliyeHesaplama.helpers;
+using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
 using System.Data;
-using System.Windows;
-using Microsoft.Data.SqlClient;
-using MaliyeHesaplama.helpers;
-using System.Windows.Forms;
-using System.Windows.Controls;
-using static MaliyeHesaplama.helpers.Enums;
 
 public class MiniOrm
 {
@@ -90,14 +86,23 @@ public class MiniOrm
         var sql = $"SELECT * FROM {tableName};";
         return _connection.Query<T>(sql);
     }
-    public T GetBeforeRecord<T>(string tableName, int Id)
+    public T GetBeforeRecord<T>(string tableName, int Id, string filter = "")
     {
-        var sql = $"SELECT TOP 1 * FROM {tableName} where Id < {Id} order by Id desc";
+        string where = $"Id < {Id}";
+        if (!string.IsNullOrWhiteSpace(filter))
+            where += $" AND {filter}";
+
+        var sql = $"SELECT TOP 1 * FROM {tableName} WHERE {where} ORDER BY Id DESC";
         return _connection.Query<T>(sql).FirstOrDefault();
     }
-    public T GetNextRecord<T>(string tableName, int Id)
+
+    public T GetNextRecord<T>(string tableName, int Id, string filter = "")
     {
-        var sql = $"SELECT TOP 1 * FROM {tableName} where Id > {Id} order by Id asc";
+        string where = $"Id > {Id}";
+        if (!string.IsNullOrWhiteSpace(filter))
+            where += $" AND {filter}";
+
+        var sql = $"SELECT TOP 1 * FROM {tableName} WHERE {where} ORDER BY Id ASC";
         return _connection.Query<T>(sql).FirstOrDefault();
     }
     public string GetLastCompanyCode()
@@ -173,31 +178,33 @@ public class MiniOrm
     public IEnumerable<T> GetMovementList<T>(int DepoId, int receiptType)
     {
         var sql = $@"
-                        select 
-                        ISNULL(R.Id,0) [Id],
-                        ISNULL(R.ReceiptNo,'') [ReceiptNo],
-                        ISNULL(R.ReceiptDate,'') [ReceiptDate],	
-                        ISNULL(C.Id,'') [CompanyId],
-                        ISNULL(C.CompanyName,'') [CompanyName],
-                        ISNULL(R.Authorized,'') [Authorized],
-                        ISNULL(R.DuaDate,'') [DuaDate],
-                        ISNULL(R.Maturity,'') [Maturity],
-                        ISNULL(R.CustomerOrderNo,'') [CustomerOrderNo],
-                        ISNULL(RI.Id,'') [ReceiptItemId],
-	                    ISNULL(RI.OperationType,'') [OperationType],
-	                    ISNULL(RI.InventoryId,'') [InventoryId],
-	                    ISNULL(I.InventoryCode,'') [InventoryCode],
-	                    ISNULL(I.InventoryName,'') [InventoryName],
-	                    ISNULL(RI.Variant,'') [Variant],
-	                    ISNULL(RI.NetMeter,0) [NetMeter],
-	                    ISNULL(RI.CashPayment,0) [CashPayment],
-	                    ISNULL(RI.DeferredPayment,0) [DeferredPayment],
-	                    ISNULL(RI.Forex,'') [Forex],
-	                    ISNULL(RI.Explanation,'') [Explanation]
-                    from Receipt R
-                    left join Company C with(nolock) on C.Id = R.CompanyId
-                    left join ReceiptItem RI with(nolock) on RI.ReceiptId = R.Id
-                    left join Inventory I with(nolock) on I.Id = RI.InventoryId
+                            select 
+                            ISNULL(R.Id,0) [Id],
+                            ISNULL(R.ReceiptNo,'') [ReceiptNo],
+                            ISNULL(R.ReceiptDate,'') [ReceiptDate],	
+                            ISNULL(C.Id,'') [CompanyId],
+                            ISNULL(C.CompanyName,'') [CompanyName],
+                            ISNULL(R.Authorized,'') [Authorized],
+                            ISNULL(R.DuaDate,'') [DuaDate],
+                            ISNULL(R.Maturity,'') [Maturity],
+                            ISNULL(R.CustomerOrderNo,'') [CustomerOrderNo],
+                            ISNULL(RI.Id,'') [ReceiptItemId],
+                            ISNULL(RI.OperationType,'') [OperationType],
+                            ISNULL(RI.InventoryId,'') [InventoryId],
+                            ISNULL(I.InventoryCode,'') [InventoryCode],
+                            ISNULL(I.InventoryName,'') [InventoryName],
+                            ISNULL(RI.NetMeter,0) [NetMeter],
+                            ISNULL(RI.CashPayment,0) [CashPayment],
+                            ISNULL(RI.DeferredPayment,0) [DeferredPayment],
+                            ISNULL(RI.Forex,'') [Forex],
+                            ISNULL(RI.VariantId,'') [VariantId],
+                            ISNULL(CO.Code,'') [VariantCode],
+                            ISNULL(CO.Name,'') [Variant]
+                        from Receipt R
+                        left join Company C with(nolock) on C.Id = R.CompanyId
+                        left join ReceiptItem RI with(nolock) on RI.ReceiptId = R.Id
+                        left join Inventory I with(nolock) on I.Id = RI.InventoryId
+                        LEFT JOIN Color CO with(nolock) on CO.Id = RI.VariantId
                     where R.ReceiptType = {receiptType} and R.WareHouseId = {DepoId}
 ";
         return _connection.Query<T>(sql);

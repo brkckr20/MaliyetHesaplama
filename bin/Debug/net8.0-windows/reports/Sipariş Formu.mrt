@@ -91,7 +91,7 @@
       </Başlık_x0020_Bilgileri>
       <Kalemler Ref="4" type="DataTableSource" isKey="true">
         <Alias>Kalemler</Alias>
-        <Columns isList="true" count="66">
+        <Columns isList="true" count="82">
           <value>Id,System.Int32</value>
           <value>ReceiptId,System.Int32</value>
           <value>OperationType,System.String</value>
@@ -158,6 +158,22 @@
           <value>ProdGrammage,System.Decimal</value>
           <value>YarnDyed,System.Boolean</value>
           <value>Explanation1,System.String</value>
+          <value>Id2,System.Int32</value>
+          <value>Type1,System.Int32</value>
+          <value>Code,System.String</value>
+          <value>Name,System.String</value>
+          <value>CompanyId1,System.Int32</value>
+          <value>ParentId,System.Int32</value>
+          <value>Date,System.DateTime</value>
+          <value>RequestDate,System.DateTime</value>
+          <value>ConfirmDate,System.DateTime</value>
+          <value>PantoneNo,System.String</value>
+          <value>Price,System.Decimal</value>
+          <value>Forex1,System.String</value>
+          <value>IsParent,System.Boolean</value>
+          <value>IsUse1,System.Boolean</value>
+          <value>Explanation2,System.String</value>
+          <value>EmployeeId,System.Int32</value>
         </Columns>
         <Dictionary isRef="1" />
         <Key>7c9a9c50eeda4728adb04177055cc29c</Key>
@@ -1454,7 +1470,7 @@ rkJggg==</ImageBytes>
               <Name>Text23</Name>
               <Page isRef="5" />
               <Parent isRef="35" />
-              <Text>{Kalemler.Variant}</Text>
+              <Text>{Kalemler.Name}</Text>
               <TextBrush>Black</TextBrush>
               <Type>DataColumn</Type>
               <VertAlignment>Center</VertAlignment>
@@ -1540,10 +1556,10 @@ rkJggg==</ImageBytes>
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>11/18/2025 12:42:36 PM</ReportChanged>
+  <ReportChanged>11/19/2025 10:36:26 AM</ReportChanged>
   <ReportCreated>11/10/2025 1:38:02 PM</ReportCreated>
   <ReportFile>C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\reports\Sipariş Formu.mrt</ReportFile>
-  <ReportGuid>f3fe80e54289479091ced239a85baae0</ReportGuid>
+  <ReportGuid>d18d8d9bced747bea001dc777c6e97b9</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2025.4.1.0</ReportVersion>

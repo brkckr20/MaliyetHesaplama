@@ -34,7 +34,9 @@
                     <DataGridTextColumn Header="Malzeme Id"  Binding="{Binding InventoryId}" Visibility="Collapsed"/>
                     <DataGridTextColumn Header="Malzeme Kodu"  Binding="{Binding InventoryCode}"/>
                     <DataGridTextColumn Header="Malzeme Adı"  Binding="{Binding InventoryName}"/>
-                    <DataGridTextColumn Header="Varyant"  Binding="{Binding Variant}"/>
+                    <DataGridTextColumn Header="Varyant Id"  Binding="{Binding VariantId}" Visibility="Hidden" />
+                    <DataGridTextColumn Header="Varyant Kodu"  Binding="{Binding VariantCode}"/>
+                    <DataGridTextColumn Header="Varyant Adı"  Binding="{Binding Variant}"/>
                     <DataGridTextColumn Header="Net Metre" Binding="{Binding NetMeter}"/>
                     <DataGridTextColumn Header="Döviz Cinsi" Binding="{Binding Forex}"/>
                     <DataGridTextColumn Header="Peşin Ödeme" Binding="{Binding CashPayment}"/>

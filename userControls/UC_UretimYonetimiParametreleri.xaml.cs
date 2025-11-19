@@ -1,15 +1,17 @@
 ﻿using MaliyeHesaplama.helpers;
+using MaliyeHesaplama.Interfaces;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_UretimYonetimiParametreleri : UserControl
+    public partial class UC_UretimYonetimiParametreleri : UserControl, IPageCommands
     {
         MiniOrm _orm = new MiniOrm();
         public UC_UretimYonetimiParametreleri()
         {
             InitializeComponent();
+            ButtonBar.PageCommands = this;
             GetDatas();
         }
 
@@ -28,12 +30,13 @@ namespace MaliyeHesaplama.userControls
             }
             txtDovizKurlari.Text = data.DovizKurlari;
         }
-        private void btnYeni_Click(object sender, RoutedEventArgs e)
+
+        public void Yeni()
         {
 
         }
 
-        private void btnKayit_Click(object sender, RoutedEventArgs e)
+        public void Kaydet()
         {
             var dict = new Dictionary<string, object>()
             {
@@ -47,24 +50,29 @@ namespace MaliyeHesaplama.userControls
             Bildirim.Bilgilendirme2("Kayıt işlemi başarıyla gerçekleştirildi.");
         }
 
-        private void btnListe_Click(object sender, RoutedEventArgs e)
+        public void Sil()
         {
-
+            
         }
 
-        private void btnGeri_Click(object sender, RoutedEventArgs e)
+        public void Yazdir()
         {
-
+            
         }
 
-        private void btnIleri_Click(object sender, RoutedEventArgs e)
+        public void Ileri()
         {
-
+            
         }
 
-        private void btnSil_Click(object sender, RoutedEventArgs e)
+        public void Geri()
         {
+            
+        }
 
+        public void Listele()
+        {
+            
         }
     }
 }

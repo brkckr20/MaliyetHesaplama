@@ -42,11 +42,13 @@ namespace MaliyeHesaplama.userControls
                     ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.NetMeter,0) NetMeter, ISNULL(RI.CashPayment,0) CashPayment,ISNULL(RI.DeferredPayment,0) DeferredPayment,
                     ISNULL(R.Maturity,0) Maturity, ISNULL(RI.Explanation,'') Explanation,
                     ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
-                    ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName
+                    ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName,
+					ISNULL(CO.Id,0) VariantId,ISNULL(CO.Code,'') VariantCode,ISNULL(CO.Name,'') Variant
                     FROM Receipt R
                     INNER JOIN ReceiptItem RI ON R.Id = RI.ReceiptId
                     LEFT JOIN Company C ON C.Id = R.CompanyId
                     LEFT JOIN Inventory I ON I.Id = RI.InventoryId
+					left join Color CO on RI.VariantId = CO.Id
                     WHERE R.ReceiptType = {Convert.ToInt32(Enums.Receipt.Siparis)} AND R.Id = @Id";
 
                 var liste = _orm.GetAfterOrBeforeRecord(query, istenenId.Value);
@@ -94,7 +96,7 @@ namespace MaliyeHesaplama.userControls
                 {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"DuaDate",dpTermin.SelectedDate.Value},{"Maturity",txtVade.Text},{"CustomerOrderNo",txtMusteriOrderNo.Text},{"Authorized",txtYetkili.Text},{"WareHouseId",Convert.ToInt32(Enums.Depo.HamKumasDepo)}
             };
             Id = _orm.Save("Receipt", dict0);
-            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Variant", "NetMeter", "CashPayment", "DeferredPayment", "Forex", "Explanation" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
+            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "NetMeter", "CashPayment", "DeferredPayment", "Forex", "Explanation","VariantId" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
             foreach (DataRow row in table.Rows)
             {
                 if (row.RowState == DataRowState.Deleted) continue;
@@ -142,6 +144,8 @@ namespace MaliyeHesaplama.userControls
                     row["DeferredPayment"] = h.DeferredPayment;
                     row["Forex"] = h.Forex;
                     row["Explanation"] = h.Explanation;
+                    row["VariantId"] = h.VariantId;
+                    row["VariantCode"] = h.VariantCode;
                     table.Rows.Add(row);
                 }
                 dataGrid.ItemsSource = table.DefaultView;
@@ -203,6 +207,8 @@ namespace MaliyeHesaplama.userControls
             table.Columns.Add("DeferredPayment", typeof(decimal));
             table.Columns.Add("Forex", typeof(string));
             table.Columns.Add("Explanation", typeof(string));
+            table.Columns.Add("VariantId", typeof(int));
+            table.Columns.Add("VariantCode", typeof(string));
             dataGrid.ItemsSource = table.DefaultView;
             LoadCurrenciesFromDb();
         }
@@ -244,7 +250,19 @@ namespace MaliyeHesaplama.userControls
 
         private void btnVariantListe_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = sender as Button;
+            if (btn == null) return;
 
+            DataRowView rowView = btn.DataContext as DataRowView;
+            if (rowView == null) return;
+
+            wins.winRenkListesi win = new wins.winRenkListesi(false);
+            if (win.ShowDialog() == true)
+            {
+                rowView["VariantId"] = win.Id;
+                rowView["VariantCode"] = win.Kodu;
+                rowView["Variant"] = win.Adi;
+            }
         }
 
         private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)

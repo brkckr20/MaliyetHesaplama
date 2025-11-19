@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
+             xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -12,44 +13,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderThickness="0.5" BorderBrush="#ececec">
-            <DockPanel HorizontalAlignment="Left" Margin="2">
-                <Button IsEnabled="False" Click="btnYeni_Click" x:Name="btnYeni" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Width="24" Height="24" Source="/userControls/new.ico" />
-                        <TextBlock Text="Yeni" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="btnKayit" Click="btnKayit_Click" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Width="24" Height="24" Source="/userControls/save.ico" />
-                        <TextBlock Text="Kaydet" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Button IsEnabled="False" x:Name="btnListe" Click="btnListe_Click" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Width="24" Height="24" Source="/userControls/list.ico" />
-                        <TextBlock Text="Liste" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Button IsEnabled="False" Click="btnGeri_Click" x:Name="btnGeri" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Width="24" Height="24" Source="/userControls/back.ico" />
-                        <TextBlock Text="Önceki" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Button IsEnabled="False" Click="btnIleri_Click" x:Name="btnIleri" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Width="24" Height="24" Source="/userControls/next.ico" />
-                        <TextBlock Text="Sonraki" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Button IsEnabled="False" x:Name="btnSil" Click="btnSil_Click" Width="50" Height="55" Background="Transparent" BorderThickness="0.32" BorderBrush="Gray" Margin="0,0,2,0" Cursor="Hand">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Width="24" Height="24" Source="/userControls/trash.ico" />
-                        <TextBlock Text="Sil" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                    </StackPanel>
-                </Button>
-            </DockPanel>
+            <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
         </Border>
         <Border Grid.Row="1">
             <TabControl>

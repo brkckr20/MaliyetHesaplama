@@ -26,9 +26,6 @@ namespace MaliyeHesaplama.wins
         private IEnumerable<dynamic> _tumHareketler;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //var data = _orm.GetMovementList<dynamic>(_depoId, _receiptType);
-            //_collectionView = CollectionViewSource.GetDefaultView(data);
-            //dgListe.ItemsSource = _collectionView;
             _tumHareketler = _orm.GetMovementList<dynamic>(_depoId, _receiptType);
             _collectionView = CollectionViewSource.GetDefaultView(_tumHareketler);
             dgListe.ItemsSource = _collectionView;

@@ -125,7 +125,7 @@
           <Name>Text3</Name>
           <Page isRef="4" />
           <Parent isRef="4" />
-          <Text>Renk Kodu :</Text>
+          <Text>Renk Adı :</Text>
           <TextBrush>Black</TextBrush>
           <Type>Expression</Type>
         </Text3>
@@ -177,10 +177,10 @@
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>11/18/2025 5:33:02 PM</ReportChanged>
+  <ReportChanged>11/19/2025 10:29:56 AM</ReportChanged>
   <ReportCreated>11/10/2025 1:38:02 PM</ReportCreated>
-  <ReportFile>reports/Renk Kartı Formu.mrt</ReportFile>
-  <ReportGuid>a396cb7148394008b4e75a1debd9d218</ReportGuid>
+  <ReportFile>C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\reports\Renk Kartı Formu.mrt</ReportFile>
+  <ReportGuid>ebadefd5dc684afe8d04f9762feffb31</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2025.4.1.0</ReportVersion>

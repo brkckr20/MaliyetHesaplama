@@ -15,24 +15,6 @@ namespace MaliyeHesaplama.userControls
             ButtonBar.CommandTarget = this;
             _orm = new MiniOrm();
         }
-        private void btnKayit_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void btnSil_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void btnListe_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void btnGeri_Click(object sender, RoutedEventArgs e)
-        {
-           
-        }
         void KayitlariGetir(string tip)
         {
             dynamic record = null;
@@ -60,11 +42,6 @@ namespace MaliyeHesaplama.userControls
             }
         }
 
-        private void btnIleri_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         void Temizle()
         {
             Id = 0;
@@ -73,11 +50,6 @@ namespace MaliyeHesaplama.userControls
             txtAdres1.Text = string.Empty;
             txtAdres2.Text = string.Empty;
             txtAdres3.Text = string.Empty;
-        }
-
-        private void btnYeni_Click(object sender, RoutedEventArgs e)
-        {
-           
         }
 
         private void cmSonNoAktar_Click(object sender, RoutedEventArgs e)

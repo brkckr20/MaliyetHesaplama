@@ -1,5 +1,6 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,8 +10,8 @@ namespace MaliyeHesaplama.userControls
     {
         MiniOrm _orm = new MiniOrm();
         int _colorType, Id = 0, CompanyId = 0;
-        bool _isVariant; // boya renk mi - varyant mı?
-        //İLK KAYIT BAŞARILI BİR ŞEKİLDE YAPILDI, DİĞER ALANLARIN KAYDI KONTROL EDİLEREK KAYIT EDİLECEK - 18-11-2025
+        bool _isVariant; // boyahane renk mi - varyant mı?
+
         public UC_RenkKarti(bool isVariant)
         {
             InitializeComponent();
@@ -27,12 +28,12 @@ namespace MaliyeHesaplama.userControls
         }
         public void Geri()
         {
-
+            KayitlariGetir("Önceki");
         }
 
         public void Ileri()
         {
-
+            KayitlariGetir("");
         }
 
         public void Kaydet()
@@ -41,7 +42,7 @@ namespace MaliyeHesaplama.userControls
             {
                 var dict = new Dictionary<string, object>
                 {
-                    {"Id",Id },{"Type",_colorType},{"Code",txtKodu.Text},{"Name", txtAdi.Text},{"CompanyId", CompanyId}, {"ParentId",0}, {"Date", DateTime.Now},{"RequestDate", dpTalepTarihi.SelectedDate.Value},{"ConfirmDate", dpOkeyTarihi.SelectedDate.Value},{"Price",txtFiyat.Text},{"Forex", cmbDovizListesi.SelectedItem.ToString()},{"IsParent",_isVariant},{"IsUse",Convert.ToBoolean(chckKullanimda.IsChecked)},{"Explanation",txtAciklama.Text},{"EmployeeId",0},{"PantoneNo",txtPantoneNo.Text} // kayit işleminde hata verdi - kontrol edilecek - 18.11.2025
+                    {"Id",Id },{"Type",_colorType},{"Code",txtKodu.Text},{"Name", txtAdi.Text},{"CompanyId", CompanyId}, {"ParentId",0}, {"Date", DateTime.Now},{"RequestDate", dpTalepTarihi.SelectedDate.Value},{"ConfirmDate", dpOkeyTarihi.SelectedDate.Value},{"Price", Convert.ToDecimal(txtFiyat.Text.Replace(",", "."), CultureInfo.InvariantCulture)},{"Forex", cmbDovizListesi.SelectedItem.ToString()},{"IsParent",_isVariant},{"IsUse",Convert.ToBoolean(chckKullanimda.IsChecked)},{"Explanation",txtAciklama.Text},{"EmployeeId",0},{"PantoneNo",txtPantoneNo.Text}
                 };
                 Id = _orm.Save("Color", dict);
                 Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi.");
@@ -73,6 +74,40 @@ namespace MaliyeHesaplama.userControls
                 cmbDovizListesi.Text = win.Doviz;
             }
         }
+        void KayitlariGetir(string tip)
+        {
+            dynamic record = null;
+            if (tip == "Önceki")
+            {
+                record = _orm.GetBeforeRecord<dynamic>("Color", Id, "IsParent = 0");
+            }
+            else
+            {
+                record = _orm.GetNextRecord<dynamic>("Color", Id, "IsParent = 0");
+            }
+
+            if (record != null)
+            {
+                Id = record.Id;
+                CompanyId = record.CompanyId;
+                SetColorType(Convert.ToInt32(record.Type));
+                chckKullanimda.IsChecked = record.IsUse;
+                txtKodu.Text = record.Code;
+                txtAdi.Text = record.Name;
+                dynamic c = _orm.GetById<dynamic>("Company", record.CompanyId);
+                txtFirmaUnvan.Text = c != null ? c.CompanyName : "";
+                dpTalepTarihi.SelectedDate = record.RequestDate;
+                dpOkeyTarihi.SelectedDate = record.RequestDate;
+                txtPantoneNo.Text = record.PantoneNo;
+                txtFiyat.Text = record.Price != null ? record.Price.ToString() : "0";
+                cmbDovizListesi.SelectedItem = record.Forex;
+                txtAciklama.Text = record.Explanation;
+            }
+            else
+            {
+                Bildirim.Bilgilendirme2("Gösterilecek başka bir kayıt bulunamadı!");
+            }
+        }
         void SetColorType(int type)
         {
             switch (type)
@@ -88,10 +123,10 @@ namespace MaliyeHesaplama.userControls
 
         public void Sil()
         {
-            if (_orm.Delete("Color", Id, true)>0)
+            if (_orm.Delete("Color", Id, true) > 0)
             {
                 Temizle();
-            };            
+            };
         }
 
         public void Yazdir()
@@ -103,7 +138,7 @@ namespace MaliyeHesaplama.userControls
             }
             else
             {
-                Bildirim.Uyari2("Rapor görüntüleyebilmek için lütfen bir kayır seçiniz!");
+                Bildirim.Uyari2("Rapor görüntüleyebilmek için lütfen bir kayıt seçiniz!");
             }
         }
 

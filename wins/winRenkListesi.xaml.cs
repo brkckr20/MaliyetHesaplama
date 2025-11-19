@@ -79,6 +79,7 @@ namespace MaliyeHesaplama.wins
                 Type = record.Type;
                 IsUse = record.IsUse;
                 Explanation = record.Explanation;
+                this.DialogResult = true;
                 this.Close();
             }
         }
