@@ -16,6 +16,9 @@
     <Compile Update="userControls\UC_FirmaKarti.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="userControls\UC_IplikKarti.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="userControls\UC_KumasKarti.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -79,6 +82,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\UC_FirmaKarti.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="userControls\UC_IplikKarti.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\UC_KumasKarti.xaml">

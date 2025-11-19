@@ -37,10 +37,10 @@ namespace MaliyeHesaplama.userControls
 
                 string query = $@"SELECT 
                     ISNULL(R.Id,0) Id, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,ISNULL(R.Authorized,'') Authorized,ISNULL(R.CustomerOrderNo,'') CustomerOrderNo,
-					ISNULL(R.DuaDate,'') DuaDate,
+					ISNULL(R.DuaDate,'') DuaDate,ISNULL(R.Explanation,'') Explanation,
                     ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,
                     ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.NetMeter,0) NetMeter, ISNULL(RI.CashPayment,0) CashPayment,ISNULL(RI.DeferredPayment,0) DeferredPayment,
-                    ISNULL(R.Maturity,0) Maturity, ISNULL(RI.Explanation,'') Explanation,
+                    ISNULL(R.Maturity,0) Maturity, ISNULL(RI.Explanation,'') RowExplanation,
                     ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
                     ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName,
 					ISNULL(CO.Id,0) VariantId,ISNULL(CO.Code,'') VariantCode,ISNULL(CO.Name,'') Variant
@@ -67,6 +67,7 @@ namespace MaliyeHesaplama.userControls
                     //dateIrsaliyeTarihi.Text = item.DispatchDate.ToString();
                     txtVade.Text = item.Maturity.ToString();
                     txtMusteriOrderNo.Text = item.CustomerOrderNo.ToString();
+                    txtAciklama.Text = item.Explanation;
                     dataGrid.ItemsSource = liste;
                 }
                 else
@@ -93,17 +94,18 @@ namespace MaliyeHesaplama.userControls
         {
             var dict0 = new Dictionary<string, object>()
             {
-                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"DuaDate",dpTermin.SelectedDate.Value},{"Maturity",txtVade.Text},{"CustomerOrderNo",txtMusteriOrderNo.Text},{"Authorized",txtYetkili.Text},{"WareHouseId",Convert.ToInt32(Enums.Depo.HamKumasDepo)}
+                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"DuaDate",dpTermin.SelectedDate.Value},{"Maturity",txtVade.Text},{"CustomerOrderNo",txtMusteriOrderNo.Text},{"Authorized",txtYetkili.Text},{"WareHouseId",Convert.ToInt32(Enums.Depo.HamKumasDepo)},{"Explanation",txtAciklama.Text}
             };
             Id = _orm.Save("Receipt", dict0);
-            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "NetMeter", "CashPayment", "DeferredPayment", "Forex", "Explanation","VariantId" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
+            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "NetMeter", "CashPayment", "DeferredPayment", "Forex", "RowExplanation", "VariantId" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
             foreach (DataRow row in table.Rows)
             {
                 if (row.RowState == DataRowState.Deleted) continue;
                 var dict = new Dictionary<string, object>();
                 foreach (var colName in dbColumns)
                 {
-                    dict[colName] = row[colName];
+                    var value = row[colName];
+                    dict[colName] = value == DBNull.Value ? null : value;
                 }
                 dict["ReceiptId"] = Id;
                 int newId = _orm.Save("ReceiptItem", dict, "Id");
@@ -129,6 +131,7 @@ namespace MaliyeHesaplama.userControls
                 dpTermin.SelectedDate = win.DuaDate;
                 txtVade.Text = win.Maturity;
                 txtMusteriOrderNo.Text = win.CustomerOrderNo;
+                txtAciklama.Text = win.Explanation;
                 table.Clear();
                 foreach (var h in win.HareketlerListesi)
                 {
@@ -143,7 +146,7 @@ namespace MaliyeHesaplama.userControls
                     row["CashPayment"] = h.CashPayment;
                     row["DeferredPayment"] = h.DeferredPayment;
                     row["Forex"] = h.Forex;
-                    row["Explanation"] = h.Explanation;
+                    row["RowExplanation"] = h.RowExplanation;
                     row["VariantId"] = h.VariantId;
                     row["VariantCode"] = h.VariantCode;
                     table.Rows.Add(row);
@@ -177,6 +180,7 @@ namespace MaliyeHesaplama.userControls
             txtYetkili.Text = string.Empty;
             txtVade.Text = string.Empty;
             txtMusteriOrderNo.Text = string.Empty;
+            txtAciklama.Text = string.Empty;
             table.Clear();
 
         }
@@ -206,7 +210,7 @@ namespace MaliyeHesaplama.userControls
             table.Columns.Add("CashPayment", typeof(decimal));
             table.Columns.Add("DeferredPayment", typeof(decimal));
             table.Columns.Add("Forex", typeof(string));
-            table.Columns.Add("Explanation", typeof(string));
+            table.Columns.Add("RowExplanation", typeof(string));
             table.Columns.Add("VariantId", typeof(int));
             table.Columns.Add("VariantCode", typeof(string));
             dataGrid.ItemsSource = table.DefaultView;

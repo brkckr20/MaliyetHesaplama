@@ -54,6 +54,10 @@
                         <TextBlock VerticalAlignment="Center" Text="Müşteri Sip. No : " Width="100"/>
                         <TextBox x:Name="txtMusteriOrderNo" Width="200"/>
                     </DockPanel>
+                    <DockPanel Height="24" Margin="0,2,0,0">
+                        <TextBlock VerticalAlignment="Center" Text="Açıklama : " Width="100"/>
+                        <TextBox x:Name="txtAciklama" Width="200"/>
+                    </DockPanel>
                 </StackPanel>
             </Grid>
         </Border>
@@ -99,7 +103,7 @@
                 <DataGridComboBoxColumn Header="Döviz Cinsi" SelectedItemBinding="{Binding Forex}" x:Name="cmbDoviz"/>
                 <DataGridTextColumn Header="Peşin Ödeme" Binding="{Binding CashPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
                 <DataGridTextColumn Header="Vadeli Ödeme" Binding="{Binding DeferredPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
-                <DataGridTextColumn Header="Açıklama" Binding="{Binding Explanation}"/>
+                <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

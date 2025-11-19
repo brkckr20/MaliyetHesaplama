@@ -188,6 +188,7 @@ public class MiniOrm
                             ISNULL(R.DuaDate,'') [DuaDate],
                             ISNULL(R.Maturity,'') [Maturity],
                             ISNULL(R.CustomerOrderNo,'') [CustomerOrderNo],
+                            ISNULL(R.Explanation,'') [Explanation],
                             ISNULL(RI.Id,'') [ReceiptItemId],
                             ISNULL(RI.OperationType,'') [OperationType],
                             ISNULL(RI.InventoryId,'') [InventoryId],

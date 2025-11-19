@@ -13,7 +13,7 @@ namespace MaliyeHesaplama.wins
         private ICollectionView _collectionView;
         public bool secimYapildi = false;
         public int Id, CompanyId, _depoId;
-        public string ReceiptNo, CompanyName, Authorized, Maturity, CustomerOrderNo;
+        public string ReceiptNo, CompanyName, Authorized, Maturity, CustomerOrderNo,Explanation;
         public DateTime _Date, DuaDate;
         public List<dynamic> HareketlerListesi { get; set; } = new List<dynamic>();
         public winFisHareketleriListesi(int depoId, Enums.Receipt receipt)
@@ -46,6 +46,7 @@ namespace MaliyeHesaplama.wins
                 DuaDate = record.DuaDate;
                 Maturity = record.Maturity.ToString();
                 CustomerOrderNo = record.CustomerOrderNo.ToString();
+                Explanation = record.Explanation.ToString();
                 HareketlerListesi = _tumHareketler.Where(x => x.Id == Id).ToList();
                 Close();
             }
