@@ -1,0 +1,35 @@
+﻿<Window x:Class="MaliyeHesaplama.wins.winOzellikSecimi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaliyeHesaplama.wins"
+        mc:Ignorable="d"
+        Title="Özellik Seçimi" Height="450" Width="400" Icon="/wins/News.png" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Margin="0,5">
+            <DockPanel LastChildFill="True">
+                <TextBlock Text="Özellik :" Width="60" VerticalAlignment="Center" DockPanel.Dock="Left"/>
+                <Button Margin="3,0,0,0" x:Name="btnKaydet" Click="btnKaydet_Click" Content="Kaydet" Width="100" DockPanel.Dock="Right"/>
+                <TextBox VerticalContentAlignment="Center" x:Name="txtAciklama"/>
+            </DockPanel>
+        </Border>
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0.6" >
+            <DataGrid x:Name="dgOzellik" MouseDoubleClick="dgOzellik_MouseDoubleClick" AutoGenerateColumns="False" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" RowHeight="20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
+                    <DataGridTextColumn Header="Açıklama" Width="100" Binding="{Binding Explanation}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Visibility="Hidden" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Border Grid.Row="2" Margin="0,5,0,0" HorizontalAlignment="Right">
+            <Button x:Name="btnSil" Content="Sil" Width="100" Background="Transparent"/>
+        </Border>
+    </Grid>
+</Window>

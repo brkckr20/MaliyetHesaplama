@@ -58,6 +58,9 @@
     <Compile Update="wins\winNumaratorListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="wins\winOzellikSecimi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="wins\winRaporListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -124,6 +127,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winNumaratorListesi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="wins\winOzellikSecimi.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winRaporListesi.xaml">

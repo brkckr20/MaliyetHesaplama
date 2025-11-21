@@ -12,7 +12,7 @@ namespace MaliyeHesaplama.userControls
             ButtonBar.PageCommands = this;
         }
         int Id = 0, PrefixId;
-        // buradan devam edilecek - 19.11.2025
+        // ÖZELLİK KODLAMALAR TAMAMLANDI - KARTIN KAYIT İŞLEMLERİ VE KONTROLLER DEVAM EDİLECEK 21.11.2025
 
         public void Geri()
         {
@@ -47,6 +47,36 @@ namespace MaliyeHesaplama.userControls
         public void Yeni()
         {
 
+        }
+
+        private void btnIplikNo_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            wins.winOzellikSecimi win = new wins.winOzellikSecimi("İplik No", Convert.ToInt32(Enums.Inventory.Iplik));
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                txtIpNo.Text = win.Explanation;
+            }
+        }
+
+        private void btnIplikCinsi_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            wins.winOzellikSecimi win = new wins.winOzellikSecimi("İplik Cinsi", Convert.ToInt32(Enums.Inventory.Iplik));
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                txtIpCinsi.Text = win.Explanation;
+            }
+        }
+
+        private void btnIplikKompozisyon_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            wins.winOzellikSecimi win = new wins.winOzellikSecimi("İplik Kompozisyon", Convert.ToInt32(Enums.Inventory.Iplik));
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                txtKompozisyon.Text = win.Explanation;
+            }
         }
 
         private void btnKodu_Click(object sender, System.Windows.RoutedEventArgs e)

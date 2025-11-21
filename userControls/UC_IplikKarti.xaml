@@ -13,42 +13,39 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <common:ButtonBar Grid.Row="0" x:Name="ButtonBar" DockPanel.Dock="Top" />
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="1" Background="White" Margin="0,4,0,0">
             <DockPanel>
-                <TextBlock VerticalAlignment="Center" Width="110" Text="Kumaş Kodu :"/>
-                <TextBox IsEnabled="False" x:Name="txtKodu" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
+                <TextBlock VerticalAlignment="Center" Width="110" Text="İplik Kodu :"/>
+                <TextBox IsEnabled="False" x:Name="txtKodu" Width="100" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
                 <Button Click="btnKodu_Click" x:Name="btnKodu" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left" BorderBrush="#ececec"/>
                 <TextBlock x:Name="lblKumasAdi" VerticalAlignment="Center" Margin="4,0"/>
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
-                <TextBlock VerticalAlignment="Center" Width="110" Text="Ham En / Boy :"/>
-                <TextBox x:Name="txtHamEn" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="60" Height="24"/>
-                <TextBlock Text="_" Width="4"/>
-                <TextBox x:Name="txtHamBoy" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="60"/>
+                <TextBlock VerticalAlignment="Center" Width="110" Text="İplik No :"/>
+                <TextBox x:Name="txtIpNo" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24"/>
+                <Button Click="btnIplikNo_Click" x:Name="btnIplikNo" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left" BorderBrush="#ececec"/>
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
-                <TextBlock VerticalAlignment="Center" Width="110" Text="Mamül En / Boy :"/>
-                <TextBox x:Name="txtMamulEn" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="60" Height="24"/>
-                <TextBlock Text="_" Width="4"/>
-                <TextBox x:Name="txtMamulBoy" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="60"/>
+                <TextBlock VerticalAlignment="Center" Width="110" Text="İplik Cinsi :"/>
+                <TextBox x:Name="txtIpCinsi" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24"/>
+                <Button Click="btnIplikCinsi_Click" x:Name="btnIplikCinsi" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left" BorderBrush="#ececec"/>
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
-                <TextBlock VerticalAlignment="Center" Width="110" Text="Ham / Mamül Grm²:"/>
-                <TextBox x:Name="txtHamGrm2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="60" Height="24"/>
-                <TextBlock Text="_" Width="4"/>
-                <TextBox x:Name="txtMamulGrm2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="60"/>
+                <TextBlock VerticalAlignment="Center" Width="110" Text="İplik Kompozisyon :"/>
+                <TextBox x:Name="txtKompozisyon" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24"/>
+                <Button Click="btnIplikKompozisyon_Click" x:Name="btnIplikKompozisyon" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left" BorderBrush="#ececec"/>
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
-                <TextBlock VerticalAlignment="Center" Width="110" Text="İpliği Boyalı ?:"/>
+                <TextBlock VerticalAlignment="Center" Width="110" Text="Organik ?:"/>
                 <CheckBox x:Name="chckIpBoyali" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                     </CheckBox.LayoutTransform>
                 </CheckBox>
             </DockPanel>
-            <DockPanel Margin="0,1,0,0">
+            <DockPanel Margin="0,1,0,0" HorizontalAlignment="Left">
                 <TextBlock VerticalAlignment="Center" Width="110" Text="Açıklama :"/>
-                <TextBox x:Name="txtAciklama" VerticalContentAlignment="Center" Width="auto" Height="24"/>
+                <TextBox x:Name="txtAciklama" VerticalContentAlignment="Center" Width="500" Height="24"/>
             </DockPanel>
         </StackPanel>
     </Grid>
