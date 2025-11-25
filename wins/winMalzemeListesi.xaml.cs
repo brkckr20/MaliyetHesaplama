@@ -8,6 +8,12 @@ namespace MaliyeHesaplama.wins
     {
         public int _inventoryType, Id;
         public string Code, Name, RawWidth, RawHeight, ProdWidth, ProdHeight, RawGrammage, ProdGrammage,  Explanation;
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            HiddenFields();
+        }
+
         public bool YarnDyed;
         private ICollectionView collectionView;
         MiniOrm _orm = new MiniOrm();
@@ -26,7 +32,7 @@ namespace MaliyeHesaplama.wins
                     Title = "Kumaş Kartı Listesi";
                     break;
                 case 2:
-                    Title = "İplik Kartı Listesi";
+                    Title = "İplik Kartı Listesi";                    
                     break;
                 default:
                     break;
@@ -76,6 +82,20 @@ namespace MaliyeHesaplama.wins
                 Explanation = record.Explanation == null ? "" : record.Explanation.ToString();
                 this.DialogResult = true;
                 this.Close();
+            }
+        }
+        private void HiddenFields()
+        {
+            if (_inventoryType == 2)
+            {
+                colHamBoy.Visibility = Visibility.Hidden;
+                colMamulBoy.Visibility = Visibility.Hidden;
+                colMamulEn.Visibility = Visibility.Hidden;
+                colHamEn.Visibility = Visibility.Hidden;
+                spHamBoy.Visibility = Visibility.Hidden;
+                spMamulBoy.Visibility = Visibility.Hidden;
+                spMamulEn.Visibility = Visibility.Hidden;
+                spHamEn.Visibility = Visibility.Hidden;
             }
         }
     }

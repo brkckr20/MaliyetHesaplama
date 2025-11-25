@@ -29,7 +29,7 @@
             </DataGrid>
         </Border>
         <Border Grid.Row="2" Margin="0,5,0,0" HorizontalAlignment="Right">
-            <Button x:Name="btnSil" Content="Sil" Width="100" Background="Transparent"/>
+            <Button x:Name="btnSil" Click="btnSil_Click" Content="Sil" Width="100" Background="Transparent"/>
         </Border>
     </Grid>
 </Window>

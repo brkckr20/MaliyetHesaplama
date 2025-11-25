@@ -281,9 +281,9 @@ public class MiniOrm
         }
         return _connection.Query<T>(sql);
     }
-    public int IfExistRecord(string tableName, string columnName, string columnValue)
+    public int IfExistRecord(string tableName, string columnName, string columnValue,string Type)
     {
-        string checkQuery = $"SELECT COUNT(1) FROM {tableName} WHERE {columnName} = @Value";
+        string checkQuery = $"SELECT COUNT(1) FROM {tableName} WHERE {columnName} = @Value and Type = '{Type}'" ;
         return _connection.ExecuteScalar<int>(checkQuery, new { Value = columnValue });
     }
 

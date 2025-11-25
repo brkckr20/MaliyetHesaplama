@@ -8,7 +8,7 @@ namespace MaliyeHesaplama.wins
     {
         public string _type, Explanation;
         MiniOrm _orm = new MiniOrm();
-        int Id = 0,_inventoryType;
+        public int Id = 0, _inventoryType;
         public bool SecimYapildi = false;
         public winOzellikSecimi(string type, int inventoryType)
         {
@@ -17,6 +17,20 @@ namespace MaliyeHesaplama.wins
             _inventoryType = inventoryType;
             Title += " [ " + _type + " ]";
             dgOzellik.ItemsSource = _orm.GetAll<dynamic>("FeatureCoding").Where(x => x.Type == _type).ToList();
+        }
+
+        private void btnSil_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgOzellik.SelectedItem != null)
+            {
+                dynamic r = dgOzellik.SelectedItem;
+                _orm.Delete("FeatureCoding", r.Id, false);
+                dgOzellik.ItemsSource = _orm.GetAll<dynamic>("FeatureCoding").Where(x => x.Type == _type).ToList();
+            }
+            else
+            {
+                Bildirim.Uyari2("Silme işlemini gerçekleştirebilmek için lütfen bir kayıt seçiniz!");
+            }
         }
 
         private void dgOzellik_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -37,7 +51,7 @@ namespace MaliyeHesaplama.wins
             {
                 {"Id",Id },{"Type", _type },{"Explanation", txtAciklama.Text},{"InventoryType", _inventoryType}
             };
-            bool exist = _orm.IfExistRecord("FeatureCoding", "Explanation", txtAciklama.Text) > 0;
+            bool exist = _orm.IfExistRecord("FeatureCoding", "Explanation", txtAciklama.Text, _type) > 0;
             if (exist)
             {
                 Bildirim.Bilgilendirme2($"{txtAciklama.Text} daha önce kayıt edilmiş, mükerrer kayıt olmaması için kayıt yapılamaz!");
@@ -45,7 +59,6 @@ namespace MaliyeHesaplama.wins
             else
             {
                 _orm.Save("FeatureCoding", dict);
-                Bildirim.Bilgilendirme2("Kayıt işlemi başarıyla gerçekleştirildi.");
                 dgOzellik.ItemsSource = _orm.GetAll<dynamic>("FeatureCoding").Where(x => x.Type == _type).ToList();
             }
         }

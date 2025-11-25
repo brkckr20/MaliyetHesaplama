@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         mc:Ignorable="d"
-        Title="" Height="450" Width="750" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift">
+        Title="" Height="450" Width="750" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Loaded="Window_Loaded">
     <Grid Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -21,19 +21,19 @@
                 <TextBlock Text="Malzeme Adı:"/>
                 <TextBox x:Name="txtAdi" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
             </StackPanel>
-            <StackPanel Tag="KumasKartiItem">
+            <StackPanel x:Name="spHamEn">
                 <TextBlock Text="Ham En:"/>
                 <TextBox x:Name="txtHamEn" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
             </StackPanel>
-            <StackPanel Tag="KumasKartiItem">
+            <StackPanel x:Name="spHamBoy">
                 <TextBlock Text="Ham Boy:"/>
                 <TextBox x:Name="txtHamBoy" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
             </StackPanel>
-            <StackPanel Tag="KumasKartiItem">
+            <StackPanel x:Name="spMamulEn">
                 <TextBlock Text="Mamul En:"/>
                 <TextBox x:Name="txtMamulEn" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
             </StackPanel>
-            <StackPanel Tag="KumasKartiItem">
+            <StackPanel x:Name="spMamulBoy">
                 <TextBlock Text="Mamul Boy:"/>
                 <TextBox x:Name="txtMamulBoy" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
             </StackPanel>
@@ -53,12 +53,12 @@
               >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
-                <DataGridTextColumn Header="Malzeme Kodu" Binding="{Binding InventoryCode}"/>
-                <DataGridTextColumn Header="Malzeme Adı" Binding="{Binding InventoryName}"/>
-                <DataGridTextColumn Header="Ham En" Binding="{Binding RawWidth}"/>
-                <DataGridTextColumn Header="Ham Boy" Binding="{Binding RawHeight}"/>
-                <DataGridTextColumn Header="Mamul En" Binding="{Binding ProdWidth}"/>
-                <DataGridTextColumn Header="Mamul Boy" Binding="{Binding ProdHeight}"/>
+                <DataGridTextColumn x:Name="colCode" Header="Malzeme Kodu" Binding="{Binding InventoryCode}"/>
+                <DataGridTextColumn x:Name="colName" Header="Malzeme Adı" Binding="{Binding InventoryName}"/>
+                <DataGridTextColumn x:Name="colHamEn" Header="Ham En" Binding="{Binding RawWidth}"/>
+                <DataGridTextColumn x:Name="colHamBoy" Header="Ham Boy" Binding="{Binding RawHeight}"/>
+                <DataGridTextColumn x:Name="colMamulEn" Header="Mamul En" Binding="{Binding ProdWidth}"/>
+                <DataGridTextColumn x:Name="colMamulBoy" Header="Mamul Boy" Binding="{Binding ProdHeight}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

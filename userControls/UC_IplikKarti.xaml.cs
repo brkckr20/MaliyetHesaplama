@@ -1,18 +1,27 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
     public partial class UC_IplikKarti : UserControl, IPageCommands
     {
+        int Id = 0, PrefixId, FCYarnNoId, FCYarnCinsiId, FCYarnCompositionId, CodeId;
+        string YarnNo, YarnCinsi, YarnComposition, YarnName, CombinedCode;
+        MiniOrm _orm = new MiniOrm();
         public UC_IplikKarti()
         {
             InitializeComponent();
             ButtonBar.PageCommands = this;
+            UpdateYarnName();
         }
-        int Id = 0, PrefixId;
-        // ÖZELLİK KODLAMALAR TAMAMLANDI - KARTIN KAYIT İŞLEMLERİ VE KONTROLLER DEVAM EDİLECEK 21.11.2025
+        private void UpdateYarnName()
+        {
+            string organik = chckIpBoyali.IsChecked == true ? "Organik" : "";
+            YarnName = $"{YarnNo} {YarnCinsi} {YarnComposition} {organik}";
+            CombinedCode = $"{FCYarnNoId}{FCYarnCinsiId}{FCYarnCompositionId}{(organik == "Organik" ? "1" : "0")}";
+        }
 
         public void Geri()
         {
@@ -26,17 +35,58 @@ namespace MaliyeHesaplama.userControls
 
         public void Kaydet()
         {
-
+            var dict = new Dictionary<string, object>
+            {
+                {"Id", Id },{"InventoryName",YarnName},{"InventoryCode", txtKodu.Text},{"Unit",string.Empty},{"Type", Convert.ToInt32(Enums.Inventory.Iplik)}, {"SubType","İplik"},{"IsUse",chckKullanimda.IsChecked},{"IsPrefix", false}, {"CombinedCode", CombinedCode},{"IsStock", true},{"InventoryNo", FCYarnNoId},{"InventoryCinsi", FCYarnCinsiId},{"InventoryComposition", FCYarnCompositionId},{"IsOrganic",chckIpBoyali.IsChecked},{"Explanation",txtAciklama.Text}
+            };
+            if (txtKodu.Text.Trim() == string.Empty || FCYarnNoId == 0 || FCYarnCinsiId == 0 || FCYarnCompositionId == 0)
+            {
+                Bildirim.Uyari2("Kırmızı ile yazılmış alanlar boş bırakılamaz!");
+                return;
+            }
+            var inventoryCode = _orm.GetInventoryCodeByCombinedCode(CombinedCode);
+            if (!string.IsNullOrEmpty(inventoryCode) && this.Id != 0)
+            {
+                Bildirim.Uyari2($"Belirtmiş olduğunuz özelliklere göre daha önceden bir iplik kartı tanımlaması yapılmış.\nLütfen : {inventoryCode}' nolu kaydı kontrol ediniz.");
+                return;
+            }
+            Id = _orm.Save("Inventory", dict);
+            Bildirim.Bilgilendirme2("Kayıt işlemi başarılı");
+            lblIplikAdi.Text += $" {YarnName}";
+            _orm.Save("Numerator", new Dictionary<string, object> { { "Id", PrefixId }, { "Number", Convert.ToInt32(txtKodu.Text.Substring(3, 3)) } }); // kayıt güncellemeler kontrol edilecek - 25.11.2025
         }
 
         public void Listele()
         {
-
+            wins.winMalzemeListesi win = new wins.winMalzemeListesi(Convert.ToInt32(Enums.Inventory.Iplik));
+            win.ShowDialog();
+            if (win.DialogResult == true)
+            {
+                this.Id = win.Id;
+                txtKodu.Text = win.Code;
+                lblIplikAdi.Text = win.Name;
+                YarnName = win.Name;
+                var _inventoryFields = _orm.GetById<dynamic>("Inventory", Id);
+                var _yarnNo = _orm.GetById<dynamic>("FeatureCoding", _inventoryFields.InventoryNo);
+                txtIpNo.Text = _yarnNo.Explanation.ToString();
+                FCYarnNoId = _yarnNo.Id;
+                var _yarnCinsi = _orm.GetById<dynamic>("FeatureCoding", _inventoryFields.InventoryCinsi);
+                txtIpCinsi.Text = _yarnCinsi.Explanation.ToString();
+                FCYarnCinsiId = _yarnCinsi.Id;
+                var _yarnComposition = _orm.GetById<dynamic>("FeatureCoding", _inventoryFields.InventoryComposition);
+                txtKompozisyon.Text = _yarnComposition.Explanation.ToString();
+                FCYarnCompositionId = _yarnComposition.Id;
+                UpdateYarnName();
+                btnKodu.IsEnabled = false;
+            }
         }
 
         public void Sil()
         {
-
+            if (_orm.Delete("Inventory", Id, true) >0)
+            {
+                Bildirim.Bilgilendirme2("Kayıt silme işlemi başarılı!");
+            }
         }
 
         public void Yazdir()
@@ -49,13 +99,21 @@ namespace MaliyeHesaplama.userControls
 
         }
 
+        private void chckIpBoyali_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateYarnName();
+        }
+
         private void btnIplikNo_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             wins.winOzellikSecimi win = new wins.winOzellikSecimi("İplik No", Convert.ToInt32(Enums.Inventory.Iplik));
             win.ShowDialog();
             if (win.SecimYapildi)
             {
+                FCYarnNoId = win.Id;
                 txtIpNo.Text = win.Explanation;
+                YarnNo = win.Explanation;
+                UpdateYarnName();
             }
         }
 
@@ -65,7 +123,10 @@ namespace MaliyeHesaplama.userControls
             win.ShowDialog();
             if (win.SecimYapildi)
             {
+                FCYarnCinsiId = win.Id;
                 txtIpCinsi.Text = win.Explanation;
+                YarnCinsi = win.Explanation;
+                UpdateYarnName();
             }
         }
 
@@ -75,7 +136,10 @@ namespace MaliyeHesaplama.userControls
             win.ShowDialog();
             if (win.SecimYapildi)
             {
+                FCYarnCompositionId = win.Id;
                 txtKompozisyon.Text = win.Explanation;
+                YarnComposition = win.Explanation;
+                UpdateYarnName();
             }
         }
 
@@ -85,9 +149,10 @@ namespace MaliyeHesaplama.userControls
             win.ShowDialog();
             if (win.SatirSecildi)
             {
+                this.CodeId = win.Id;
                 string number = (win.Number + 1).ToString("D3");
                 txtKodu.Text = win.Prefix + number;
-                lblKumasAdi.Text = win.NameX;
+                lblIplikAdi.Text = win.NameX;
                 PrefixId = win.Id;
             }
         }

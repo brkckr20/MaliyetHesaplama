@@ -15,29 +15,29 @@
         <common:ButtonBar Grid.Row="0" x:Name="ButtonBar" DockPanel.Dock="Top" />
         <StackPanel Grid.Row="1" Background="White" Margin="0,4,0,0">
             <DockPanel>
-                <TextBlock VerticalAlignment="Center" Width="110" Text="İplik Kodu :"/>
+                <TextBlock Foreground="Red" VerticalAlignment="Center" Width="110" Text="İplik Kodu :"/>
                 <TextBox IsEnabled="False" x:Name="txtKodu" Width="100" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
                 <Button Click="btnKodu_Click" x:Name="btnKodu" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left" BorderBrush="#ececec"/>
-                <TextBlock x:Name="lblKumasAdi" VerticalAlignment="Center" Margin="4,0"/>
+                <TextBlock x:Name="lblIplikAdi" VerticalAlignment="Center" Margin="4,0"/>
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
-                <TextBlock VerticalAlignment="Center" Width="110" Text="İplik No :"/>
+                <TextBlock Foreground="Red" VerticalAlignment="Center" Width="110" Text="İplik No :"/>
                 <TextBox x:Name="txtIpNo" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24"/>
                 <Button Click="btnIplikNo_Click" x:Name="btnIplikNo" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left" BorderBrush="#ececec"/>
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
-                <TextBlock VerticalAlignment="Center" Width="110" Text="İplik Cinsi :"/>
+                <TextBlock Foreground="Red" VerticalAlignment="Center" Width="110" Text="İplik Cinsi :"/>
                 <TextBox x:Name="txtIpCinsi" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24"/>
                 <Button Click="btnIplikCinsi_Click" x:Name="btnIplikCinsi" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left" BorderBrush="#ececec"/>
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
-                <TextBlock VerticalAlignment="Center" Width="110" Text="İplik Kompozisyon :"/>
+                <TextBlock Foreground="Red" VerticalAlignment="Center" Width="110" Text="İplik Kompozisyon :"/>
                 <TextBox x:Name="txtKompozisyon" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24"/>
                 <Button Click="btnIplikKompozisyon_Click" x:Name="btnIplikKompozisyon" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left" BorderBrush="#ececec"/>
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
                 <TextBlock VerticalAlignment="Center" Width="110" Text="Organik ?:"/>
-                <CheckBox x:Name="chckIpBoyali" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <CheckBox x:Name="chckIpBoyali" Unchecked="chckIpBoyali_Checked" Checked="chckIpBoyali_Checked" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                     </CheckBox.LayoutTransform>
@@ -46,6 +46,14 @@
             <DockPanel Margin="0,1,0,0" HorizontalAlignment="Left">
                 <TextBlock VerticalAlignment="Center" Width="110" Text="Açıklama :"/>
                 <TextBox x:Name="txtAciklama" VerticalContentAlignment="Center" Width="500" Height="24"/>
+            </DockPanel>
+            <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
+                <TextBlock VerticalAlignment="Center" Width="110" Text="Kullanımda :"/>
+                <CheckBox x:Name="chckKullanimda" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
             </DockPanel>
         </StackPanel>
     </Grid>
