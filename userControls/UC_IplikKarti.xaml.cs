@@ -19,18 +19,48 @@ namespace MaliyeHesaplama.userControls
         private void UpdateYarnName()
         {
             string organik = chckIpBoyali.IsChecked == true ? "Organik" : "";
-            YarnName = $"{YarnNo} {YarnCinsi} {YarnComposition} {organik}";
+            YarnName = $"{lblIplikAdi.Text} {YarnNo} {YarnCinsi} {YarnComposition} {organik}";
             CombinedCode = $"{FCYarnNoId}{FCYarnCinsiId}{FCYarnCompositionId}{(organik == "Organik" ? "1" : "0")}";
         }
+        void KayitlariGetir(string tip)
+        {
+            dynamic record = null;
+            if (tip == "Önceki")
+            {
+                record = _orm.GetBeforeRecord<dynamic>("Inventory", Id, "Type = 2");
+            }
+            else
+            {
+                record = _orm.GetNextRecord<dynamic>("Inventory", Id, "Type = 2");
+            }
 
+            if (record != null)
+            {
+                Id = record.Id;
+                txtKodu.Text = record.InventoryCode;
+                lblIplikAdi.Text = record.InventoryName;
+                FCYarnNoId = record.InventoryNo;
+                txtIpNo.Text = _orm.GetById<dynamic>("FeatureCoding", FCYarnNoId).Explanation.ToString();
+                FCYarnCinsiId = record.InventoryCinsi;
+                txtIpCinsi.Text = _orm.GetById<dynamic>("FeatureCoding", FCYarnCinsiId).Explanation.ToString();
+                FCYarnCompositionId = record.InventoryComposition;
+                txtKompozisyon.Text = _orm.GetById<dynamic>("FeatureCoding", FCYarnCompositionId).Explanation.ToString();
+                chckIpBoyali.IsChecked = record.IsOrganic;
+                chckKullanimda.IsChecked = record.IsUse;
+            }
+            else
+            {
+                Bildirim.Uyari2("Gösterilecek başka bir kayıt bulunamadı!");
+            }
+        }
         public void Geri()
         {
-
+            KayitlariGetir("Önceki");
         }
 
         public void Ileri()
         {
-
+            KayitlariGetir("");
         }
 
         public void Kaydet()
@@ -45,15 +75,15 @@ namespace MaliyeHesaplama.userControls
                 return;
             }
             var inventoryCode = _orm.GetInventoryCodeByCombinedCode(CombinedCode);
-            if (!string.IsNullOrEmpty(inventoryCode) && this.Id != 0)
+            if (!string.IsNullOrEmpty(inventoryCode) && this.Id == 0)
             {
                 Bildirim.Uyari2($"Belirtmiş olduğunuz özelliklere göre daha önceden bir iplik kartı tanımlaması yapılmış.\nLütfen : {inventoryCode}' nolu kaydı kontrol ediniz.");
                 return;
             }
             Id = _orm.Save("Inventory", dict);
             Bildirim.Bilgilendirme2("Kayıt işlemi başarılı");
-            lblIplikAdi.Text += $" {YarnName}";
-            _orm.Save("Numerator", new Dictionary<string, object> { { "Id", PrefixId }, { "Number", Convert.ToInt32(txtKodu.Text.Substring(3, 3)) } }); // kayıt güncellemeler kontrol edilecek - 25.11.2025
+            //lblIplikAdi.Text = this.Id != 0 ? YarnName : ""; - bu alan detaylıca incelenmelidir. - aynı adı arka arkaya yazdırabiliyor.
+            _orm.Save("Numerator", new Dictionary<string, object> { { "Id", PrefixId }, { "Number", Convert.ToInt32(txtKodu.Text.Substring(3, 3)) } });
         }
 
         public void Listele()
@@ -69,12 +99,15 @@ namespace MaliyeHesaplama.userControls
                 var _inventoryFields = _orm.GetById<dynamic>("Inventory", Id);
                 var _yarnNo = _orm.GetById<dynamic>("FeatureCoding", _inventoryFields.InventoryNo);
                 txtIpNo.Text = _yarnNo.Explanation.ToString();
+                YarnNo = _yarnNo.Explanation.ToString();
                 FCYarnNoId = _yarnNo.Id;
                 var _yarnCinsi = _orm.GetById<dynamic>("FeatureCoding", _inventoryFields.InventoryCinsi);
                 txtIpCinsi.Text = _yarnCinsi.Explanation.ToString();
+                YarnCinsi = _yarnCinsi.Explanation.ToString();
                 FCYarnCinsiId = _yarnCinsi.Id;
                 var _yarnComposition = _orm.GetById<dynamic>("FeatureCoding", _inventoryFields.InventoryComposition);
                 txtKompozisyon.Text = _yarnComposition.Explanation.ToString();
+                YarnComposition = _yarnComposition.Explanation.ToString();
                 FCYarnCompositionId = _yarnComposition.Id;
                 UpdateYarnName();
                 btnKodu.IsEnabled = false;
@@ -83,20 +116,27 @@ namespace MaliyeHesaplama.userControls
 
         public void Sil()
         {
-            if (_orm.Delete("Inventory", Id, true) >0)
+            if (_orm.Delete("Inventory", Id, true) > 0)
             {
                 Bildirim.Bilgilendirme2("Kayıt silme işlemi başarılı!");
+                Temizle();
             }
         }
 
         public void Yazdir()
         {
-
+            if (Id == 0)
+            {
+                Bildirim.Uyari2("Rapor görüntüleyebilmek için lütfen bir kayıt seçiniz!");
+                return;
+            }
+            wins.winRaporSecimi win = new wins.winRaporSecimi("İplik Kartı", Id);
+            win.ShowDialog();
         }
 
         public void Yeni()
         {
-
+            Temizle();
         }
 
         private void chckIpBoyali_Checked(object sender, RoutedEventArgs e)
@@ -155,6 +195,27 @@ namespace MaliyeHesaplama.userControls
                 lblIplikAdi.Text = win.NameX;
                 PrefixId = win.Id;
             }
+        }
+        void Temizle()
+        {
+            Id = 0;
+            txtKodu.Text = string.Empty;
+            lblIplikAdi.Text = string.Empty;
+            txtIpNo.Text = string.Empty;
+            txtIpCinsi.Text = string.Empty;
+            txtKompozisyon.Text = string.Empty;
+            chckIpBoyali.IsChecked= false;
+            txtAciklama.Text = string.Empty;
+            chckKullanimda.IsChecked = true;
+            PrefixId = 0;
+            FCYarnNoId = 0;
+            FCYarnCinsiId = 0;
+            FCYarnCompositionId = 0;
+            YarnCinsi = string.Empty;
+            YarnName = string.Empty;
+            YarnComposition = string.Empty;
+            CombinedCode = string.Empty;
+            YarnNo = string.Empty;
         }
     }
 }

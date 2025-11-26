@@ -49,7 +49,7 @@
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
                 <TextBlock VerticalAlignment="Center" Width="110" Text="Kullanımda :"/>
-                <CheckBox x:Name="chckKullanimda" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <CheckBox IsChecked="True" x:Name="chckKullanimda" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                     </CheckBox.LayoutTransform>
