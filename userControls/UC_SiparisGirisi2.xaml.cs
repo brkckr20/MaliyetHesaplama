@@ -84,12 +84,10 @@ namespace MaliyeHesaplama.userControls
         {
             KayitlariGetir("Önceki");
         }
-
         public void Ileri()
         {
             KayitlariGetir("");
         }
-
         public void Kaydet()
         {
             var dict0 = new Dictionary<string, object>()

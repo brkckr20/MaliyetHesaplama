@@ -31,6 +31,9 @@
     <Compile Update="userControls\UC_RaporOlusturma.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="userControls\UC_ReceteTanimlama.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="userControls\UC_RenkKarti.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -78,9 +81,6 @@
     <Page Update="HomeScreen.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="userControls\Common\ButtonBar.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -100,6 +100,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\UC_RaporOlusturma.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="userControls\UC_ReceteTanimlama.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\UC_RenkKarti.xaml">

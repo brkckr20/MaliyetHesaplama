@@ -11,9 +11,8 @@ namespace MaliyeHesaplama
         public HomeScreen()
         {
             InitializeComponent();
+
         }
-        private bool isMegaMenuVisible = false;
-        private bool _isMegaMenuOpen = false;
         private string _currentMainMenu = null;
         private bool _isDraggingFromMaximized = false;
         private Point _restoreMousePosition;
@@ -22,6 +21,7 @@ namespace MaliyeHesaplama
             string title = "Kart İşlemleri";
             string[] items = { "Firma Kartı", "Kumaş Kartı", "İplik Kartı", "Renk Kartı" };
             ShowMegaMenu(title, items);
+
         }
         private void UretimYonetimi_Click(object sender, RoutedEventArgs e)
         {
@@ -35,6 +35,12 @@ namespace MaliyeHesaplama
             string[] items = { "Üretim Yönetimi Parametreleri", "Numaratör", "Rapor Oluşturma" };
             ShowMegaMenu(title, items);
         }
+        private void ReceteTanimlamalari_Click(object sender, RoutedEventArgs e)
+        {
+            string title = "Reçete";
+            string[] items = { "Kumaş Reçetesi Tanımlama" };
+            ShowMegaMenu(title, items);
+        }
         private void MegaMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn)
@@ -46,7 +52,7 @@ namespace MaliyeHesaplama
                 if (menuName == "Sipariş Girişi")
                     OpenTab(menuName, new userControls.UC_SiparisGirisi2());
 
-                /* Karlar */
+                /* Kartlar */
                 if (menuName == "Kumaş Kartı")
                     OpenTab(menuName, new userControls.UC_KumasKarti());
                 if (menuName == "Firma Kartı")
@@ -56,6 +62,10 @@ namespace MaliyeHesaplama
                 if (menuName == "Renk Kartı")
                     OpenTab(menuName, new userControls.UC_RenkKarti(false));
 
+                /* Reçete */
+                if (menuName == "Kumaş Reçetesi Tanımlama")
+                    OpenTab(menuName, new userControls.UC_ReceteTanimlama(1)); // burdan devam edilecek 27-11-2025
+
                 /* Ayarlar */
                 if (menuName == "Üretim Yönetimi Parametreleri")
                     OpenTab(menuName, new userControls.UC_UretimYonetimiParametreleri());
@@ -64,6 +74,7 @@ namespace MaliyeHesaplama
                 if (menuName == "Rapor Oluşturma")
                     OpenTab(menuName, new userControls.UC_RaporOlusturma());
             }
+
         }
         private void OpenTab(string title, UserControl view)
         {

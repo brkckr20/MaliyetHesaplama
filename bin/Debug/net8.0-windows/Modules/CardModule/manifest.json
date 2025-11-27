@@ -1,0 +1,13 @@
+{
+  "moduleName": "CardModule",
+  "menus": [
+    {
+      "title": "Firma Kartı",
+      "entryControl": "CardModule.Views.UC_FirmaKarti"
+    },
+    {
+      "title": "Renk Kartı",
+      "entryControl": "CardModule.Views.UC_RenkKarti"
+    }
+  ]
+}

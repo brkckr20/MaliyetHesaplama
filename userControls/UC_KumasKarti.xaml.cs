@@ -2,6 +2,7 @@
 using MaliyeHesaplama.Interfaces;
 using MaliyeHesaplama.models;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,8 +15,8 @@ namespace MaliyeHesaplama.userControls
         bool _receteOlacak = false;
         string _iplikTurleri;
         int Id = 0, PrefixId;
-
-        public ObservableCollection<InventoryReceipt> _recete { get; set; } = new ObservableCollection<InventoryReceipt>();
+        private DataTable table;
+        //public ObservableCollection<InventoryReceipt> _recete { get; set; } = new ObservableCollection<InventoryReceipt>();
         public List<string> KalemIslemler { get; set; }
 
         public UC_KumasKarti()
@@ -35,10 +36,10 @@ namespace MaliyeHesaplama.userControls
             .Select(s => s.Trim())
             .ToList();
             gbRecete.Visibility = _receteOlacak ? Visibility.Visible : Visibility.Collapsed;
-            dataGrid.ItemsSource = _recete;
+            //dataGrid.ItemsSource = _recete;
             var firstRow = new InventoryReceipt();
-            _recete.Add(firstRow);
-            dataGrid.SelectedItem = firstRow;
+            //_recete.Add(firstRow);
+            //dataGrid.SelectedItem = firstRow;
             dataGrid.Language = System.Windows.Markup.XmlLanguage.GetLanguage("tr-TR");
         }
         void KayitlariGetir(string tip)
@@ -69,16 +70,16 @@ namespace MaliyeHesaplama.userControls
         }
         private void dataGrid_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (_recete == null) return;
-            var grid = (DataGrid)sender;
-            if (e.Key == Key.Enter || e.Key == Key.Down)
-            {
-                var newRow = new InventoryReceipt();
-                _recete.Add(newRow);
-                grid.SelectedItem = newRow;
-                grid.ScrollIntoView(newRow);
-                e.Handled = true;
-            }
+            //if (_recete == null) return;
+            //var grid = (DataGrid)sender;
+            //if (e.Key == Key.Enter || e.Key == Key.Down)
+            //{
+            //    var newRow = new InventoryReceipt();
+            //    _recete.Add(newRow);
+            //    grid.SelectedItem = newRow;
+            //    grid.ScrollIntoView(newRow);
+            //    e.Handled = true;
+            //}
         }
 
         private void btnMalzemeKodu_Click(object sender, RoutedEventArgs e)

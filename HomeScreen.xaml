@@ -116,6 +116,7 @@
                 <TextBlock Text="Menü" Foreground="White" FontSize="16" Margin="0,8,0,4"/>
                 <Button Content="🧣 Üretim Yönetimi" Style="{StaticResource MenuButtonStyle}" Click="UretimYonetimi_Click"/>
                 <Button Content="📇 Kartlar" Style="{StaticResource MenuButtonStyle}" Click="Kartlar_Click"/>
+                    <Button Content="🧾 Reçete Tanımlamaları" Style="{StaticResource MenuButtonStyle}" Click="ReceteTanimlamalari_Click"/>
                 <Button Content="⚙️ Ayarlar" Style="{StaticResource MenuButtonStyle}" Click="Ayarlar_Click"/>
             </StackPanel>
         </Border>
