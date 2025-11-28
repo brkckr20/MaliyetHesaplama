@@ -21,10 +21,10 @@ namespace MaliyeHesaplama.userControls
     public partial class UC_ReceteTanimlama : UserControl
     {
         int _InventoryTypes;
-        public UC_ReceteTanimlama(int ınventoryTypes)
+        public UC_ReceteTanimlama(int inventoryTypes)
         {
             InitializeComponent();
-            _InventoryTypes = ınventoryTypes;ssa.Content += _InventoryTypes.ToString();
+            _InventoryTypes = inventoryTypes;
         }
         
     }

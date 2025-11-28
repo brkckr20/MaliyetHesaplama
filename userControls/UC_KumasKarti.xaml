@@ -21,119 +21,51 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <common:ButtonBar Grid.Row="0" x:Name="ButtonBar" DockPanel.Dock="Top" />        
+        <common:ButtonBar Grid.Row="0" x:Name="ButtonBar" DockPanel.Dock="Top" />
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
+            <StackPanel Grid.Column="0" Margin="0,2,0,0">
                 <DockPanel>
                     <TextBlock VerticalAlignment="Center" Width="110" Text="Kumaş Kodu :"/>
                     <TextBox IsEnabled="False" x:Name="txtKodu" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
                     <Button Click="btnKumasKodu_Click" x:Name="btnKumasKodu" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left" BorderBrush="#ececec"/>
                     <TextBlock x:Name="lblKumasAdi" VerticalAlignment="Center" Margin="4,0"/>
                 </DockPanel>
-                <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
-                    <TextBlock VerticalAlignment="Center" Width="110" Text="Ham En / Boy :"/>
-                    <TextBox x:Name="txtHamEn" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="60" Height="24"/>
-                    <TextBlock Text="_" Width="4"/>
-                    <TextBox x:Name="txtHamBoy" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="60"/>
+                <DockPanel Margin="0,2">
+                    <TextBlock VerticalAlignment="Center" Width="110" Text="Dokuma Cinsi :"/>
+                    <TextBox IsEnabled="False" x:Name="txtDokumaCinsi" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
+                    <Button x:Name="btnDokumaCinsi" Click="btnDokumaCinsi_Click" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left" BorderBrush="#ececec"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock VerticalAlignment="Center" Width="110" Text="Desen :"/>
+                    <TextBox IsEnabled="False" x:Name="txtKumasDesen" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
+                    <Button x:Name="btnDesen" Click="btnDesen_Click" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left" BorderBrush="#ececec"/>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
-                    <TextBlock VerticalAlignment="Center" Width="110" Text="Mamül En / Boy :"/>
-                    <TextBox x:Name="txtMamulEn" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="60" Height="24"/>
-                    <TextBlock Text="_" Width="4"/>
-                    <TextBox x:Name="txtMamulBoy" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="60"/>
-                </DockPanel>
-                <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
-                    <TextBlock VerticalAlignment="Center" Width="110" Text="Ham / Mamül Grm²:"/>
-                    <TextBox x:Name="txtHamGrm2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="60" Height="24"/>
-                    <TextBlock Text="_" Width="4"/>
-                    <TextBox x:Name="txtMamulGrm2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="60"/>
-                </DockPanel>
-                <DockPanel HorizontalAlignment="Left" Margin="0,1,0,0">
-                    <TextBlock VerticalAlignment="Center" Width="110" Text="İpliği Boyalı ?:"/>
+                    <TextBlock VerticalAlignment="Center" Width="108" Text="İpliği Boyalı ?:"/>
                     <CheckBox x:Name="chckIpBoyali" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <CheckBox.LayoutTransform>
                             <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                         </CheckBox.LayoutTransform>
                     </CheckBox>
                 </DockPanel>
-                <DockPanel Margin="0,1,0,0">
+                <DockPanel Margin="0,1,0,2">
                     <TextBlock VerticalAlignment="Center" Width="110" Text="Açıklama :"/>
                     <TextBox x:Name="txtAciklama" VerticalContentAlignment="Center" Width="auto" Height="24"/>
                 </DockPanel>
+                <DockPanel>
+                    <TextBlock Text="Kullanımda :" VerticalAlignment="Center" Width="108"/>
+                    <CheckBox x:Name="chckKullanimda">
+                        <CheckBox.LayoutTransform>
+                            <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                        </CheckBox.LayoutTransform>
+                    </CheckBox>
+                </DockPanel>
             </StackPanel>
-            <Border Grid.Column="1"></Border>
         </Grid>
-        <GroupBox x:Name="gbRecete" Grid.Row="2" Header="Üretim Bilgileri">
-            <DataGrid x:Name="dataGrid"
-          AutoGenerateColumns="False"
-          CanUserAddRows="False"
-          CanUserDeleteRows="True"
-          RowHeight="24"
-          FontSize="12"
-          PreviewKeyDown="dataGrid_PreviewKeyDown"
-          HorizontalGridLinesBrush="#ececec"
-          VerticalGridLinesBrush="#ececec"
-          AlternatingRowBackground="#ececec"
-                      >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
-                    <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        <DataGridComboBoxColumn.ItemsSource>
-                            <x:Array Type="{x:Type sys:String}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                <sys:String>Çözgü 1</sys:String>
-                                <sys:String>Çözgü 2</sys:String>
-                                <sys:String>Atkı 1</sys:String>
-                                <sys:String>Atkı 2</sys:String>
-                                <sys:String>Atkı 3</sys:String>
-                                <sys:String>Atkı 4</sys:String>
-                            </x:Array>
-                        </DataGridComboBoxColumn.ItemsSource>
-                    </DataGridComboBoxColumn>
-                    <DataGridTemplateColumn Header="İplik Kodu" Width="100">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="16"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox IsReadOnly="True" Grid.Column="0" Text="{Binding InventoryCode, Mode=TwoWay}"/>
-                                    <Button x:Name="btnMalzemeKodu" Click="btnMalzemeKodu_Click" Grid.Column="1" Content="..." Background="Transparent" BorderThickness=".3"/>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn IsReadOnly="True" Width="200" Header="İplik Adı" Binding="{Binding InventoryName}"/>
-                    <DataGridTextColumn Header="Miktar" Binding="{Binding Quantity, Mode=TwoWay,StringFormat=N4}"/>
-                    <DataGridComboBoxColumn Header="Birim" SelectedItemBinding="{Binding Unit,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        <DataGridComboBoxColumn.ItemsSource>
-                            <x:Array Type="{x:Type sys:String}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                <sys:String>Kg</sys:String>
-                                <sys:String>Gr</sys:String>
-                            </x:Array>
-                        </DataGridComboBoxColumn.ItemsSource>
-                    </DataGridComboBoxColumn>
-                    <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice, Mode=TwoWay,StringFormat=N4}"/>
-                    <DataGridComboBoxColumn Header="Döviz" SelectedItemBinding="{Binding Forex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        <DataGridComboBoxColumn.ItemsSource>
-                            <x:Array Type="{x:Type sys:String}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                <sys:String>TL</sys:String>
-                                <sys:String>EUR</sys:String>
-                                <sys:String>USD</sys:String>
-                                <sys:String>GBP</sys:String>
-                                <sys:String>CAD</sys:String>
-                            </x:Array>
-                        </DataGridComboBoxColumn.ItemsSource>
-                    </DataGridComboBoxColumn>
-                    <DataGridTextColumn Header="Döviz Fiyat" Binding="{Binding ForexPrice, Mode=TwoWay,StringFormat=N4}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
     </Grid>
 </UserControl>
