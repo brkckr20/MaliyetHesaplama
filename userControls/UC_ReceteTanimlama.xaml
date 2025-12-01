@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
              xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" d:DesignWidth="800" Height="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,22 +13,90 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <common:ButtonBar Grid.Row="0" x:Name="ButtonBar" DockPanel.Dock="Top" />
-        <Border Grid.Row="1">
-            <StackPanel>
-                <DockPanel HorizontalAlignment="Left">
-                    <Label Content="Reçete No :" Width="100"/>
-                    <TextBox Width="150" IsEnabled="False"/>
-                </DockPanel>
-                <DockPanel HorizontalAlignment="Left" Margin="0,2">
-                    <Label Content="Kumaş Kodu :" Width="100"/>
-                    <TextBox Width="126"/>
-                    <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
-                </DockPanel>
-                <DockPanel HorizontalAlignment="Left">
-                    <Label Content="Açıklama :" Width="100"/>
-                    <TextBox Width="250"/>
-                </DockPanel>                
-            </StackPanel>
+        <Border Grid.Row="1" Margin="0,4,0,0">
+            <TabControl>
+                <TabItem Header="Genel">
+                    <StackPanel>
+                        <DockPanel HorizontalAlignment="Left">
+                            <Label Content="Reçete No :" Width="100"/>
+                            <TextBox x:Name="txtFisNo" Width="150" IsEnabled="False" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Left" Margin="0,2">
+                            <Label Content="Kumaş Kodu :" Width="100"/>
+                            <TextBox x:Name="txtKumasKodu" Width="126" VerticalContentAlignment="Center"/>
+                            <Button x:Name="btnKumasKodu" Click="btnKumasKodu_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                            <Label x:Name="lblKumasAdi" Width="Auto"/>
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Left">
+                            <Label Content="Ham En :" Width="100"/>
+                            <TextBox x:Name="txtHamEn" Width="150" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Left" Margin="0,2">
+                            <Label Content="Ham Boy :" Width="100"/>
+                            <TextBox x:Name="txtHamBoy" Width="150" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Left">
+                            <Label Content="Mamül En :" Width="100"/>
+                            <TextBox x:Name="txtMamulEn" Width="150" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Left" Margin="0,2">
+                            <Label Content="Mamül Boy :" Width="100"/>
+                            <TextBox x:Name="txtMamulBoy" Width="150" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Left">
+                            <Label Content="Ham Gramaj :" Width="100"/>
+                            <TextBox x:Name="txtHamGramaj" Width="150" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Left" Margin="0,2">
+                            <Label Content="Mamül Gramaj :" Width="100"/>
+                            <TextBox x:Name="txtMamulGramaj" Width="150" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Left" Margin="0,2">
+                            <Label Content="Açıklama :" Width="100"/>
+                            <TextBox x:Name="txtAciklama" Width="250" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Resim">
+                    <Label Content="Resim alanı eklenecek"/>
+                </TabItem>
+            </TabControl>
         </Border>
+        <DataGrid x:Name="dataGrid" CanUserAddRows="True" Grid.Row="2" AutoGenerateColumns="False"
+          CellEditEnding="dataGrid_CellEditEnding" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+          >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType}" x:Name="cmbOperasyonTipleri"/>
+                <DataGridTextColumn Header="Iplik Id" Binding="{Binding InventoryId}" IsReadOnly="True" Visibility="Hidden" />
+                <DataGridTemplateColumn Header="İplik Kodu">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding InventoryCode}" Width="100" BorderBrush="Transparent"/>
+                                <Button x:Name="btnKumasListe" Click="btnKumasListe_Click" Content="🔎"  Background="Transparent" BorderBrush="Transparent"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="İplik Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Varyant Id" Binding="{Binding VariantId}" IsReadOnly="True" Visibility="Hidden" />
+                <DataGridTemplateColumn Header="Varyant Kodu">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding VariantCode}" Width="100" BorderBrush="Transparent"/>
+                                <Button x:Name="btnVariantListe" Click="btnVariantListe_Click" Content="🔎" Background="Transparent" BorderBrush="Transparent"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Varyant" Binding="{Binding Variant}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Miktar (Kg)" Binding="{Binding NetMeter, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                <DataGridComboBoxColumn Header="Döviz Cinsi" SelectedItemBinding="{Binding Forex}" x:Name="cmbDoviz"/>
+                <DataGridTextColumn Header="Fiyat" Binding="{Binding CashPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

@@ -11,7 +11,8 @@
         }
         public enum Receipt
         {
-            Siparis = 10
+            Siparis = 10,
+            KumasRecetesi = 11,
         }
         public enum Depo
         {

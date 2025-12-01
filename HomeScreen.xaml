@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Maliyet Hesaplama" ResizeMode="CanResize" FontFamily="Bahnschrift Light" Height="450" Width="800" WindowState="Maximized" Icon="/Purchase Order.png" WindowStyle="None">
     <Window.Resources>
-        <Style TargetType="TabItem">
+        <Style x:Key="HeaderMenuTabStyle" TargetType="TabItem">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">
@@ -121,8 +121,12 @@
             </StackPanel>
         </Border>
         <Grid Grid.Column="1" Background="#FDFDF8" MouseDown="ContentArea_MouseDown">
-            <TabControl x:Name="MainTabControl" Margin="0" Padding="2,4,0,0" BorderThickness="0" TabStripPlacement="Top"/>
-            <Border x:Name="MegaMenuPanel" Background="#191919" Width="220" VerticalAlignment="Stretch"
+                <TabControl x:Name="MainTabControl" Margin="0" Padding="2,4,0,0" BorderThickness="0" TabStripPlacement="Top">
+                    <TabControl.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource HeaderMenuTabStyle}" TargetType="TabItem"/>
+                    </TabControl.ItemContainerStyle>
+                </TabControl>
+                <Border x:Name="MegaMenuPanel" Background="#191919" Width="220" VerticalAlignment="Stretch"
                     HorizontalAlignment="Left" Padding="5" Visibility="Collapsed" Panel.ZIndex="1"
                     RenderTransformOrigin="0,0">
                 <Border.RenderTransform>
