@@ -70,6 +70,9 @@
     <Compile Update="wins\winRaporSecimi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="wins\winReceteListesi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="wins\winRenkListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -139,6 +142,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winRaporSecimi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="wins\winReceteListesi.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winRenkListesi.xaml">

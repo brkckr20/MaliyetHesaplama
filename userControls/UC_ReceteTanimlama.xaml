@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
              xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
-             mc:Ignorable="d" d:DesignWidth="800" Height="500">
+             mc:Ignorable="d" d:DesignWidth="800" Height="700" VerticalAlignment="Top">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -62,41 +62,43 @@
                 </TabItem>
             </TabControl>
         </Border>
-        <DataGrid x:Name="dataGrid" CanUserAddRows="True" Grid.Row="2" AutoGenerateColumns="False"
-          CellEditEnding="dataGrid_CellEditEnding" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-          >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Visibility="Hidden"/>
-                <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType}" x:Name="cmbOperasyonTipleri"/>
-                <DataGridTextColumn Header="Iplik Id" Binding="{Binding InventoryId}" IsReadOnly="True" Visibility="Hidden" />
-                <DataGridTemplateColumn Header="İplik Kodu">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBox Text="{Binding InventoryCode}" Width="100" BorderBrush="Transparent"/>
-                                <Button x:Name="btnKumasListe" Click="btnKumasListe_Click" Content="🔎"  Background="Transparent" BorderBrush="Transparent"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="İplik Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Varyant Id" Binding="{Binding VariantId}" IsReadOnly="True" Visibility="Hidden" />
-                <DataGridTemplateColumn Header="Varyant Kodu">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBox Text="{Binding VariantCode}" Width="100" BorderBrush="Transparent"/>
-                                <Button x:Name="btnVariantListe" Click="btnVariantListe_Click" Content="🔎" Background="Transparent" BorderBrush="Transparent"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Varyant" Binding="{Binding Variant}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Miktar (Kg)" Binding="{Binding NetMeter, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
-                <DataGridComboBoxColumn Header="Döviz Cinsi" SelectedItemBinding="{Binding Forex}" x:Name="cmbDoviz"/>
-                <DataGridTextColumn Header="Fiyat" Binding="{Binding CashPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
-                <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Border Grid.Row="2">
+            <DataGrid x:Name="dataGrid" CanUserAddRows="True" Grid.Row="2" AutoGenerateColumns="False"
+  CellEditEnding="dataGrid_CellEditEnding" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+  >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Visibility="Hidden"/>
+                    <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType}" x:Name="cmbOperasyonTipleri"/>
+                    <DataGridTextColumn Header="Iplik Id" Binding="{Binding InventoryId}" IsReadOnly="True" Visibility="Hidden" />
+                    <DataGridTemplateColumn Header="İplik Kodu">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding InventoryCode}" Width="100" BorderBrush="Transparent"/>
+                                    <Button x:Name="btnKumasListe" Click="btnKumasListe_Click" Content="🔎"  Background="Transparent" BorderBrush="Transparent"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="İplik Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Varyant Id" Binding="{Binding VariantId}" IsReadOnly="True" Visibility="Hidden" />
+                    <DataGridTemplateColumn Header="Varyant Kodu">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding VariantCode}" Width="100" BorderBrush="Transparent"/>
+                                    <Button x:Name="btnVariantListe" Click="btnVariantListe_Click" Content="🔎" Background="Transparent" BorderBrush="Transparent"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Varyant" Binding="{Binding Variant}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Miktar (Kg)" Binding="{Binding Quantity, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                    <DataGridComboBoxColumn Header="Döviz Cinsi" SelectedItemBinding="{Binding Forex}" x:Name="cmbDoviz"/>
+                    <DataGridTextColumn Header="Fiyat" Binding="{Binding Price, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                    <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
     </Grid>
 </UserControl>

@@ -12,7 +12,7 @@ namespace MaliyeHesaplama.userControls
 {
     public partial class Uc_MaliyetHesaplama : UserControl, IPageCommands
     {
-        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0;
+        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0,InventoryReceiptId;
         bool _receteOlacak = false;
         private byte[] imageBytes;
         MiniOrm _orm = new MiniOrm();
@@ -132,6 +132,17 @@ namespace MaliyeHesaplama.userControls
             };
             CCCId = _orm.Save("CostCostCalculate", dict4);
             Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi");
+        }
+
+        private void btnReceteListesi_Click(object sender, RoutedEventArgs e)
+        {
+            wins.winReceteListesi win = new wins.winReceteListesi(InventoryId);
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                InventoryReceiptId = win.Id;
+                txtReceteNo.Text = win.ReceiptNo;
+            }
         }
 
         public void Sil()

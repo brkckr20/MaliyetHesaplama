@@ -1,0 +1,70 @@
+﻿<Window x:Class="MaliyeHesaplama.wins.winReceteListesi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaliyeHesaplama.wins"
+        mc:Ignorable="d"
+        Title="Reçete Listesi" Height="450" Width="800" FontFamily="Bahnschrift" Icon="/wins/News.png" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="4">
+            <TextBlock Text="Filtreler" FontWeight="Bold" Margin="0,0,0,3"/>
+            <StackPanel>
+                <TextBlock Text="Reçete No :"/>
+                <TextBox x:Name="txtFirmaKodu" TabIndex="2" FontSize="16" TextChanged="txtFirmaKodu_TextChanged"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Ham En :"/>
+                <TextBox x:Name="txtFirmaUnvan" TabIndex="1" FontSize="16" TextChanged="txtFirmaUnvan_TextChanged"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Ham Boy :"/>
+                <TextBox x:Name="txtHamBoy" TextChanged="txtHamBoy_TextChanged" TabIndex="1" FontSize="16"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Mamül En :"/>
+                <TextBox x:Name="txtMamulEn" TabIndex="1" FontSize="16" TextChanged="txtMamulEn_TextChanged"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Mamül Boy :"/>
+                <TextBox x:Name="txtMamülBoy" TextChanged="txtMamülBoy_TextChanged" TabIndex="1" FontSize="16"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Ham Gramaj :"/>
+                <TextBox x:Name="txtHamGramaj" TabIndex="1" FontSize="16" TextChanged="txtHamGramaj_TextChanged"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Mamül Gramaj :"/>
+                <TextBox x:Name="txtMamulGramaj" TextChanged="txtMamulGramaj_TextChanged" TabIndex="1" FontSize="16"/>
+            </StackPanel>
+        </StackPanel>
+        <DataGrid Grid.Column="1" 
+              x:Name="sfDataGrid" 
+              CanUserAddRows="True" 
+              FontSize="11" RowHeight="24" 
+              VerticalContentAlignment="Center"
+              CanUserSortColumns="True"
+              IsReadOnly="True"
+              MouseDoubleClick="sfDataGrid_MouseDoubleClick"
+              AutoGenerateColumns="False"
+              GridLinesVisibility="All"
+              HorizontalGridLinesBrush="#ececec"
+              VerticalGridLinesBrush="#ececec"
+              >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Reçete No" Binding="{Binding ReceiptNo}"/>
+                <DataGridTextColumn Header="Ham En" Binding="{Binding RawWidth}"/>
+                <DataGridTextColumn Header="Ham Boy" Binding="{Binding RawHeight}"/>
+                <DataGridTextColumn Header="Mamül En" Binding="{Binding ProductWidth}"/>
+                <DataGridTextColumn Header="Mamül Boy" Binding="{Binding ProductHeight}"/>
+                <DataGridTextColumn Header="Ham Gramaj" Binding="{Binding RawGrammage}"/>
+                <DataGridTextColumn Header="Mamül Gramaj" Binding="{Binding ProductGrammage}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
