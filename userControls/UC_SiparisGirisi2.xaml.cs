@@ -79,6 +79,7 @@ namespace MaliyeHesaplama.userControls
             {
                 Bildirim.Uyari2("Hata: " + ex.Message);
             }
+            GetSumOrCount();
         }
         public void Geri()
         {
@@ -151,13 +152,14 @@ namespace MaliyeHesaplama.userControls
                 }
                 dataGrid.ItemsSource = table.DefaultView;
             }
+            GetSumOrCount();
         }
 
         public void Sil()
         {
             if (_orm.Delete("Receipt", Id, true) > 0)
             {
-                _orm.Delete("ReceiptItem", Id, false, "ReceiptId"); 
+                _orm.Delete("ReceiptItem", Id, false, "ReceiptId");
                 Temizle();
             }
         }
@@ -265,6 +267,33 @@ namespace MaliyeHesaplama.userControls
                 rowView["VariantCode"] = win.Kodu;
                 rowView["Variant"] = win.Adi;
             }
+        }
+
+        private void srcKalemIslem_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var tb = sender as TextBox;
+            MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, "OperationType",lblRecordCount,lblSumMeter);
+        }
+
+        private void srcCode_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var tb = sender as TextBox;
+            MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table,"InventoryCode", lblRecordCount, lblSumMeter);
+        }
+
+        private void srcName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var tb = sender as TextBox;
+            MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, "InventoryName",lblRecordCount,lblSumMeter);
+        }
+        void GetSumOrCount()
+        {
+            lblRecordCount.Content = MainHelper.SetFieldsSum(table, "OperationType", lblRecordCount);
+            lblSumMeter.Content = MainHelper.SetFieldsSum(table, "NetMeter", lblSumMeter);
+        }
+        private void RootControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            GetSumOrCount();
         }
 
         private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)

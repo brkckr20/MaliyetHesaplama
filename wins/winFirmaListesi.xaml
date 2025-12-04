@@ -5,23 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Firma Listesi" Height="450" Width="700" Icon="/wins/Building.png" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Loaded="Window_Loaded">
-    <Grid Background="LightGray">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Margin="4">
-            <TextBlock Text="Filtreler" FontWeight="Bold" Margin="0,0,0,3"/>
-            <StackPanel>
-                <TextBlock Text="Firma Kodu:"/>
-                <TextBox x:Name="txtFirmaKodu" TabIndex="2" FontSize="16" TextChanged="txtFirmaKodu_TextChanged"/>
-            </StackPanel>
-            <StackPanel>
-                <TextBlock Text="Firma Unvan:"/>
-                <TextBox x:Name="txtFirmaUnvan" TabIndex="1" FontSize="16" TextChanged="txtFirmaUnvan_TextChanged"/>
-            </StackPanel>
-        </StackPanel>
-        <DataGrid Grid.Column="1" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Column="0" 
                   x:Name="sfDataGrid" 
                   CanUserAddRows="True" 
                   FontSize="11" RowHeight="24" 
@@ -34,14 +23,49 @@
                   HorizontalGridLinesBrush="#ececec"
                   VerticalGridLinesBrush="#ececec"
                   >
+            <DataGrid.Resources>
+                <DataTemplate x:Key="CompanyCodeHeader">
+                    <StackPanel>
+                        <Label Content=" Firma Kodu"/>
+                        <TextBox Width="105" Height="20" x:Name="srcCode" TextChanged="srcCode_TextChanged" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate x:Key="CompanyNameHeader">
+                    <StackPanel>
+                        <Label Content=" Firma Ünvanı"/>
+                        <TextBox Width="105" Height="20" x:Name="srcName" TextChanged="srcName_TextChanged" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate x:Key="CompanyAdres1Header">
+                    <StackPanel>
+                        <Label Content=" Adres 1"/>
+                        <TextBox Width="105" Height="20" x:Name="srcAdres1" TextChanged="srcAdres1_TextChanged" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate x:Key="CompanyAdres2Header">
+                    <StackPanel>
+                        <Label Content=" Adres 2"/>
+                        <TextBox Width="105" Height="20" x:Name="srcAdres2" TextChanged="srcAdres2_TextChanged" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate x:Key="CompanyAdres3Header">
+                    <StackPanel>
+                        <Label Content=" Adres 3"/>
+                        <TextBox Width="105" Height="20" x:Name="srcAdres3" TextChanged="srcAdres3_TextChanged" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
-                <DataGridTextColumn Header="Firma Kodu" Binding="{Binding CompanyCode}"/>
-                <DataGridTextColumn Header="Firma Ünvan" Binding="{Binding CompanyName}"/>
-                <DataGridTextColumn Header="Adres 1" Binding="{Binding AddressLine1}"/>
-                <DataGridTextColumn Header="Adres 2" Binding="{Binding AddressLine2}"/>
-                <DataGridTextColumn Header="Adres 3" Binding="{Binding AddressLine3}"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource CompanyCodeHeader}" Header="Firma Kodu" Binding="{Binding CompanyCode}"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource CompanyNameHeader}" Header="Firma Ünvan" Binding="{Binding CompanyName}"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource CompanyAdres1Header}" Header="Adres 1" Binding="{Binding AddressLine1}"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource CompanyAdres2Header}" Header="Adres 2" Binding="{Binding AddressLine2}"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource CompanyAdres3Header}" Header="Adres 3" Binding="{Binding AddressLine3}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <DockPanel Grid.Row="1">
+            <Label x:Name="lblRecordCount" Content=""/>
+        </DockPanel>
     </Grid>
 </Window>

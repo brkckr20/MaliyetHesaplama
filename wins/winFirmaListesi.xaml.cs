@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using MaliyeHesaplama.helpers;
+using System.ComponentModel;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -18,37 +20,37 @@ namespace MaliyeHesaplama.wins
             var data = _orm.GetAll<dynamic>("Company");
             _collectionView = CollectionViewSource.GetDefaultView(data);
             sfDataGrid.ItemsSource = _collectionView;
+            MainHelper.SetRecordCount(_collectionView,lblRecordCount);
         }
-        void SearchWithTextboxValue(TextBox aranacakTextbox,string fieldAdi)
+        private void srcCode_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string filterText = aranacakTextbox.Text.ToLower();
-
-            if (_collectionView != null)
-            {
-                _collectionView.Filter = item =>
-                {
-                    var dict = (IDictionary<string, object>)item;
-
-                    if (dict.ContainsKey(fieldAdi) && dict[fieldAdi] != null)
-                    {
-                        string companyName = dict[fieldAdi].ToString().ToLower();
-                        return companyName.Contains(filterText);
-                    }
-                    return false;
-                };
-                _collectionView.Refresh();
-            }
+            var textBox = sender as TextBox;
+            MainHelper.SearchWithColumnHeader(textBox,"CompanyCode",_collectionView,lblRecordCount);
         }
-        private void txtFirmaUnvan_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+
+        private void srcName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SearchWithTextboxValue(txtFirmaUnvan,"CompanyName");
+            var textBox = sender as TextBox;
+            MainHelper.SearchWithColumnHeader(textBox, "CompanyName", _collectionView, lblRecordCount);
         }
 
-        private void txtFirmaKodu_TextChanged(object sender, TextChangedEventArgs e)
+        private void srcAdres1_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SearchWithTextboxValue(txtFirmaKodu, "CompanyCode");
+            var textBox = sender as TextBox;
+            MainHelper.SearchWithColumnHeader(textBox, "AddressLine1", _collectionView, lblRecordCount);
         }
 
+        private void srcAdres2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            MainHelper.SearchWithColumnHeader(textBox, "AddressLine2", _collectionView, lblRecordCount);
+        }
+
+        private void srcAdres3_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            MainHelper.SearchWithColumnHeader(textBox, "AddressLine3", _collectionView, lblRecordCount);
+        }
         private void sfDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (sfDataGrid.SelectedItem != null)
@@ -67,7 +69,6 @@ namespace MaliyeHesaplama.wins
         public winFirmaListesi()
         {
             InitializeComponent();
-            txtFirmaUnvan.Focus();
-        }               
+        }
     }
 }
