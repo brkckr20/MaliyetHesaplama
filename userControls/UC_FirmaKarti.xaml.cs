@@ -12,7 +12,7 @@ namespace MaliyeHesaplama.userControls
         public UC_FirmaKarti()
         {
             InitializeComponent();
-            ButtonBar.CommandTarget = this;
+            ButtonBar.PageCommands = this;
             _orm = new MiniOrm();
         }
         void KayitlariGetir(string tip)
@@ -94,7 +94,15 @@ namespace MaliyeHesaplama.userControls
 
         public void Yazdir()
         {
-            Bildirim.Bilgilendirme2("Rapor Ekranı açılacak");
+            if (this.Id == 0)
+            {
+                Bildirim.Uyari2("Rapor alabilmek için lütfen bir kayıt seçiniz!");
+            }
+            else
+            {
+                wins.winRaporSecimi win = new wins.winRaporSecimi("Firma Kartı",Id);
+                win.ShowDialog();
+            }
         }
 
         public void Ileri()

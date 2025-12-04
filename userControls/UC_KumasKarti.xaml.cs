@@ -129,8 +129,16 @@ namespace MaliyeHesaplama.userControls
 
         public void Yazdir()
         {
-            wins.winRaporSecimi win = new wins.winRaporSecimi("Kumaş Kartı", Id);
-            win.ShowDialog();
+            if (this.Id == 0)
+            {
+                Bildirim.Uyari2("Form görüntüleyebilmek için bir kayıt seçiniz!");
+            }
+            else
+            {
+                wins.winRaporSecimi win = new wins.winRaporSecimi("Kumaş Kartı", Id);
+                win.ShowDialog();
+            }
+
         }
 
         public void Ileri()
