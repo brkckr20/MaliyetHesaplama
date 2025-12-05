@@ -27,31 +27,31 @@
                 <DataTemplate x:Key="Tarih">
                     <StackPanel>
                         <Label Content="Tarih"/>
-                        <TextBox x:Name="_tarih" Width="80" Height="20" TextChanged="_tarih_TextChanged"/>
+                        <TextBox x:Name="_tarih" Width="80" Height="20" TextChanged="_tarih_TextChanged" VerticalContentAlignment="Center"/>
                     </StackPanel>                    
                 </DataTemplate>
                 <DataTemplate x:Key="CalismaNo">
                     <StackPanel>
                         <Label Content="Çalışma No"/>
-                        <TextBox x:Name="_calismaNo" Width="80" Height="20" TextChanged="_calismaNo_TextChanged"/>
+                        <TextBox x:Name="_calismaNo" Width="80" Height="20" TextChanged="_calismaNo_TextChanged" VerticalContentAlignment="Center"/>
                     </StackPanel>                    
                 </DataTemplate>
                 <DataTemplate x:Key="Firma">
                     <StackPanel>
                         <Label Content="Firma Ünvan"/>
-                        <TextBox x:Name="_firmaUnvan" Width="80" Height="20" TextChanged="_firmaUnvan_TextChanged"/>
+                        <TextBox x:Name="_firmaUnvan" Width="80" Height="20" TextChanged="_firmaUnvan_TextChanged" VerticalContentAlignment="Center"/>
                     </StackPanel>                    
                 </DataTemplate>
                 <DataTemplate x:Key="UrunKodu">
                     <StackPanel>
                         <Label Content="Ürün Kodu"/>
-                        <TextBox x:Name="_urunKodu" Width="80" Height="20" TextChanged="_urunKodu_TextChanged"/>
+                        <TextBox x:Name="_urunKodu" Width="80" Height="20" TextChanged="_urunKodu_TextChanged" VerticalContentAlignment="Center"/>
                     </StackPanel>                    
                 </DataTemplate>
                 <DataTemplate x:Key="UrunAdi">
                     <StackPanel>
                         <Label Content="Ürün Adı"/>
-                        <TextBox x:Name="_urunAdi" Width="80" Height="20" TextChanged="_urunAdi_TextChanged"/>
+                        <TextBox x:Name="_urunAdi" Width="80" Height="20" TextChanged="_urunAdi_TextChanged" VerticalContentAlignment="Center"/>
                     </StackPanel>                    
                 </DataTemplate>
             </DataGrid.Resources>
@@ -69,7 +69,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Border Grid.Row="1">
-            <Label Content=""/>
+            <Label x:Name="lblRecordCount" Content=""/>
         </Border>
     </Grid>
 </Window>

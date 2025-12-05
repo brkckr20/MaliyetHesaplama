@@ -7,38 +7,11 @@
         mc:Ignorable="d"
         Title="" Height="450" Width="750" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Loaded="Window_Loaded" Icon="/wins/News.png">
     <Grid Background="LightGray">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Margin="4">
-            <TextBlock Text="Filtreler" FontWeight="Bold" Margin="0,0,0,3"/>
-            <StackPanel>
-                <TextBlock Text="Malzeme Kodu:"/>
-                <TextBox x:Name="txtKodu" TextChanged="txtKodu_TextChanged" TabIndex="2" FontSize="16" />
-            </StackPanel>
-            <StackPanel>
-                <TextBlock Text="Malzeme Adı:"/>
-                <TextBox x:Name="txtAdi" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
-            </StackPanel>
-            <StackPanel x:Name="spHamEn">
-                <TextBlock Text="Ham En:"/>
-                <TextBox x:Name="txtHamEn" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
-            </StackPanel>
-            <StackPanel x:Name="spHamBoy">
-                <TextBlock Text="Ham Boy:"/>
-                <TextBox x:Name="txtHamBoy" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
-            </StackPanel>
-            <StackPanel x:Name="spMamulEn">
-                <TextBlock Text="Mamul En:"/>
-                <TextBox x:Name="txtMamulEn" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
-            </StackPanel>
-            <StackPanel x:Name="spMamulBoy">
-                <TextBlock Text="Mamul Boy:"/>
-                <TextBox x:Name="txtMamulBoy" TextChanged="txtAdi_TextChanged" TabIndex="1" FontSize="16"/>
-            </StackPanel>
-        </StackPanel>
-        <DataGrid Grid.Column="1" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" 
               x:Name="sfDataGrid" 
               CanUserAddRows="True" 
               FontSize="11" RowHeight="24" 
@@ -51,15 +24,32 @@
               VerticalGridLinesBrush="#ececec"
                   MouseDoubleClick="sfDataGrid_MouseDoubleClick"
               >
+            <DataGrid.Resources>
+                <DataTemplate x:Key="MalzemeKodu">
+                    <StackPanel>
+                        <Label Content="Malzeme Kodu"/>
+                        <TextBox x:Name="_malzemeKodu" Width="80" Height="20" TextChanged="_malzemeKodu_TextChanged" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate x:Key="MalzemeAdi">
+                    <StackPanel>
+                        <Label Content="Malzeme Adı"/>
+                        <TextBox x:Name="_malzemeAdi" Width="180" Height="20" TextChanged="_malzemeAdi_TextChanged" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
-                <DataGridTextColumn x:Name="colCode" Header="Malzeme Kodu" Binding="{Binding InventoryCode}"/>
-                <DataGridTextColumn x:Name="colName" Header="Malzeme Adı" Binding="{Binding InventoryName}"/>
-                <DataGridTextColumn x:Name="colHamEn" Header="Ham En" Binding="{Binding RawWidth}"/>
-                <DataGridTextColumn x:Name="colHamBoy" Header="Ham Boy" Binding="{Binding RawHeight}"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource MalzemeKodu}" x:Name="colCode" Header="Malzeme Kodu" Binding="{Binding InventoryCode}"/>
+                <DataGridTextColumn Width="300" HeaderTemplate="{StaticResource MalzemeAdi}" x:Name="colName" Header="Malzeme Adı" Binding="{Binding InventoryName}"/>
+                <!--<DataGridTextColumn x:Name="colHamEn" Header="Ham En" Binding="{Binding RawWidth}"/>-->
+                <!--<DataGridTextColumn x:Name="colHamBoy" Header="Ham Boy" Binding="{Binding RawHeight}"/>
                 <DataGridTextColumn x:Name="colMamulEn" Header="Mamul En" Binding="{Binding ProdWidth}"/>
-                <DataGridTextColumn x:Name="colMamulBoy" Header="Mamul Boy" Binding="{Binding ProdHeight}"/>
+                <DataGridTextColumn x:Name="colMamulBoy" Header="Mamul Boy" Binding="{Binding ProdHeight}"/>-->
             </DataGrid.Columns>
         </DataGrid>
+        <Border Grid.Row="1">
+            <Label x:Name="lblRecordCount" Content=""/>
+        </Border>
     </Grid>
 </Window>

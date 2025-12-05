@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using MaliyeHesaplama.helpers;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,39 +20,35 @@ namespace MaliyeHesaplama.wins
         {
             InitializeComponent();
         }
-
-        private void txtUrunKodu_TextChanged(object sender, TextChangedEventArgs e)
+        void Search(object sender, string fieldName)
         {
-            //SearchWithTextboxValue(txtUrunKodu, "InventoryCode");
-        }// burdan devam edilecek 05-12-2025
-        private void _tarih_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            var tb = sender as TextBox;
+            MainHelper.SearchWithColumnHeader(tb, fieldName, _collectionView, lblRecordCount);
         }
 
         private void _tarih_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            Search(sender, "Date");
         }
 
         private void _calismaNo_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            Search(sender, "OrderNo");
         }
 
         private void _firmaUnvan_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            Search(sender, "CompanyName");
         }
 
         private void _urunKodu_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            Search(sender, "InventoryCode");
         }
 
         private void _urunAdi_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            Search(sender, "InventoryName");
         }
 
         private void sfDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -79,7 +76,6 @@ namespace MaliyeHesaplama.wins
             var data = _orm.GetCostList<dynamic>();
             _collectionView = CollectionViewSource.GetDefaultView(data);
             sfDataGrid.ItemsSource = _collectionView;
-            //txtUrunAdi.Focus();
         }
         void SearchWithTextboxValue(TextBox aranacakTextbox, string fieldAdi)
         {
@@ -100,20 +96,6 @@ namespace MaliyeHesaplama.wins
                 };
                 _collectionView.Refresh();
             }
-        }
-        private void txtUrunAdi_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //SearchWithTextboxValue(txtUrunAdi, "InventoryName");
-        }
-
-        private void txtFirmaUnvan_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //SearchWithTextboxValue(txtFirmaUnvan, "CompanyName");
-        }
-
-        private void txtOrderNo_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //SearchWithTextboxValue(txtOrderNo, "OrderNo");
         }
     }
 }
