@@ -5128,7 +5128,7 @@ rkJggg==</ImageBytes>
   <ReportAlias>Report</ReportAlias>
   <ReportChanged>12/4/2025 10:26:44 AM</ReportChanged>
   <ReportCreated>11/10/2025 1:38:02 PM</ReportCreated>
-  <ReportFile>C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\reports\Maliyet Formu.mrt</ReportFile>
+  <ReportFile>reports/Maliyet Formu.mrt</ReportFile>
   <ReportGuid>529b2c3147644ad2b28adba99e8c810e</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>

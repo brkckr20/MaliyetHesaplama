@@ -200,7 +200,8 @@ public class MiniOrm
                             ISNULL(RI.Forex,'') [Forex],
                             ISNULL(RI.VariantId,'') [VariantId],
                             ISNULL(CO.Code,'') [VariantCode],
-                            ISNULL(CO.Name,'') [Variant]
+                            ISNULL(CO.Name,'') [Variant],
+                            ISNULL(RI.RowExplanation,'') [RowExplanation]
                         from Receipt R
                         left join Company C with(nolock) on C.Id = R.CompanyId
                         left join ReceiptItem RI with(nolock) on RI.ReceiptId = R.Id

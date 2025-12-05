@@ -36,39 +36,60 @@ namespace MaliyeHesaplama.userControls
                 }
 
                 string query = $@"SELECT 
-                    ISNULL(R.Id,0) Id, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,ISNULL(R.Authorized,'') Authorized,ISNULL(R.CustomerOrderNo,'') CustomerOrderNo,
-					ISNULL(R.DuaDate,'') DuaDate,ISNULL(R.Explanation,'') Explanation,
-                    ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,
-                    ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.NetMeter,0) NetMeter, ISNULL(RI.CashPayment,0) CashPayment,ISNULL(RI.DeferredPayment,0) DeferredPayment,
-                    ISNULL(R.Maturity,0) Maturity, ISNULL(RI.Explanation,'') RowExplanation,
-                    ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
-                    ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName,
-					ISNULL(CO.Id,0) VariantId,ISNULL(CO.Code,'') VariantCode,ISNULL(CO.Name,'') Variant
-                    FROM Receipt R
-                    INNER JOIN ReceiptItem RI ON R.Id = RI.ReceiptId
-                    LEFT JOIN Company C ON C.Id = R.CompanyId
-                    LEFT JOIN Inventory I ON I.Id = RI.InventoryId
-					left join Color CO on RI.VariantId = CO.Id
-                    WHERE R.ReceiptType = {Convert.ToInt32(Enums.Receipt.Siparis)} AND R.Id = @Id";
+            ISNULL(R.Id,0) Id,ISNULL(R.ReceiptNo,'') ReceiptNo, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,ISNULL(R.Authorized,'') Authorized,ISNULL(R.CustomerOrderNo,'') CustomerOrderNo,
+            ISNULL(R.DuaDate,'') DuaDate,ISNULL(R.Explanation,'') Explanation,
+            ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,
+            ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.NetMeter,0) NetMeter, ISNULL(RI.CashPayment,0) CashPayment, ISNULL(RI.DeferredPayment,0) DeferredPayment,
+            ISNULL(R.Maturity,0) Maturity, ISNULL(RI.RowExplanation,'') RowExplanation,
+            ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
+            ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName,
+            ISNULL(CO.Id,0) VariantId,ISNULL(CO.Code,'') VariantCode,ISNULL(CO.Name,'') Variant,ISNULL(RI.Forex,'') Forex
+            FROM Receipt R
+            INNER JOIN ReceiptItem RI ON R.Id = RI.ReceiptId
+            LEFT JOIN Company C ON C.Id = R.CompanyId
+            LEFT JOIN Inventory I ON I.Id = RI.InventoryId
+            LEFT JOIN Color CO on RI.VariantId = CO.Id
+            WHERE R.ReceiptType = {Convert.ToInt32(Enums.Receipt.Siparis)} AND R.Id = @Id";
 
                 var liste = _orm.GetAfterOrBeforeRecord(query, istenenId.Value);
 
                 if (liste != null && liste.Count > 0)
                 {
-                    table.Clear();
+                    // Üst bilgileri doldur
                     var item = liste[0];
                     this.Id = Convert.ToInt32(item.Id);
                     this.CompanyId = Convert.ToInt32(item.CompanyId);
                     dpTarih.SelectedDate = Convert.ToDateTime(item.ReceiptDate);
                     dpTermin.SelectedDate = Convert.ToDateTime(item.DuaDate);
-                    //txtFirmaKodu.Text = item.CompanyCode.ToString();
                     txtFirmaUnvan.Text = item.CompanyName.ToString();
                     txtYetkili.Text = item.Authorized.ToString();
-                    //dateIrsaliyeTarihi.Text = item.DispatchDate.ToString();
                     txtVade.Text = item.Maturity.ToString();
                     txtMusteriOrderNo.Text = item.CustomerOrderNo.ToString();
                     txtAciklama.Text = item.Explanation;
-                    dataGrid.ItemsSource = liste;
+                    txtFisNo.Text = item.ReceiptNo;
+
+                    table.Clear();
+                    foreach (var i in liste)
+                    {
+                        DataRow row = table.NewRow();
+                        row["Id"] = i.ReceiptItemId;
+                        row["OperationType"] = i.OperationType;
+                        row["InventoryId"] = i.InventoryId;
+                        row["NetMeter"] = i.NetMeter;
+                        row["CashPayment"] = i.CashPayment;
+                        row["DeferredPayment"] = i.DeferredPayment;
+                        row["RowExplanation"] = i.RowExplanation;
+                        row["Forex"] = i.Forex;
+                        row["InventoryCode"] = i.InventoryCode;
+                        row["InventoryName"] = i.InventoryName;
+                        row["VariantId"] = i.VariantId;
+                        row["VariantCode"] = i.VariantCode;
+                        row["Variant"] = i.Variant;
+                        table.Rows.Add(row);
+                    }
+
+                    // DataGrid artık DataTable üzerinden çalışıyor
+                    dataGrid.ItemsSource = table.DefaultView;
                 }
                 else
                 {
@@ -81,6 +102,7 @@ namespace MaliyeHesaplama.userControls
             }
             GetSumOrCount();
         }
+
         public void Geri()
         {
             KayitlariGetir("Önceki");
@@ -113,11 +135,12 @@ namespace MaliyeHesaplama.userControls
                     row["Id"] = newId;
             }
             Bildirim.Bilgilendirme2("Kayıt işlemi başarılı bir şekilde gerçekleştirildi");
+            GetSumOrCount();
         }
 
         public void Listele()
         {
-            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(4, Enums.Receipt.Siparis);
+            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.Siparis);
             win.ShowDialog();
             if (win.secimYapildi)
             {
@@ -288,12 +311,53 @@ namespace MaliyeHesaplama.userControls
         }
         void GetSumOrCount()
         {
-            lblRecordCount.Content = MainHelper.SetFieldsSum(table, "OperationType", lblRecordCount);
-            lblSumMeter.Content = MainHelper.SetFieldsSum(table, "NetMeter", lblSumMeter);
+            MainHelper.SetFieldsSum(table, "NetMeter", lblSumMeter);
+            MainHelper.SetFieldsSum(table, "KayıtNo", lblRecordCount);
         }
         private void RootControl_Loaded(object sender, RoutedEventArgs e)
         {
             GetSumOrCount();
+        }
+
+        void Search(object sender,string fieldName)
+        {
+            var tb = sender as TextBox;
+            MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, fieldName, lblRecordCount, lblSumMeter);
+        }
+
+        private void srcVariantCode_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Search(sender,"VariantCode");
+        }
+
+        private void srcVariantName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Search(sender, "Variant");
+        }
+
+        private void srcMeter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Search(sender, "NetMeter");
+        }
+
+        private void srcForex_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Search(sender, "Forex");
+        }
+
+        private void srcCash_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Search(sender, "CashPayment");
+        }
+
+        private void srcDeferred_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Search(sender, "DeferredPayment");
+        }
+
+        private void srcRowExplanation_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Search(sender, "RowExplanation");
         }
 
         private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -333,6 +397,7 @@ namespace MaliyeHesaplama.userControls
                     }
                 }
             }
+            GetSumOrCount();
         }
     }
 }

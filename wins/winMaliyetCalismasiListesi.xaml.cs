@@ -22,7 +22,36 @@ namespace MaliyeHesaplama.wins
 
         private void txtUrunKodu_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SearchWithTextboxValue(txtUrunKodu, "InventoryCode");
+            //SearchWithTextboxValue(txtUrunKodu, "InventoryCode");
+        }// burdan devam edilecek 05-12-2025
+        private void _tarih_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void _tarih_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void _calismaNo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void _firmaUnvan_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void _urunKodu_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void _urunAdi_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
 
         private void sfDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -50,7 +79,7 @@ namespace MaliyeHesaplama.wins
             var data = _orm.GetCostList<dynamic>();
             _collectionView = CollectionViewSource.GetDefaultView(data);
             sfDataGrid.ItemsSource = _collectionView;
-            txtUrunAdi.Focus();
+            //txtUrunAdi.Focus();
         }
         void SearchWithTextboxValue(TextBox aranacakTextbox, string fieldAdi)
         {
@@ -74,17 +103,17 @@ namespace MaliyeHesaplama.wins
         }
         private void txtUrunAdi_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SearchWithTextboxValue(txtUrunAdi, "InventoryName");
+            //SearchWithTextboxValue(txtUrunAdi, "InventoryName");
         }
 
         private void txtFirmaUnvan_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SearchWithTextboxValue(txtFirmaUnvan, "CompanyName");
+            //SearchWithTextboxValue(txtFirmaUnvan, "CompanyName");
         }
 
         private void txtOrderNo_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SearchWithTextboxValue(txtOrderNo, "OrderNo");
+            //SearchWithTextboxValue(txtOrderNo, "OrderNo");
         }
     }
 }

@@ -91,7 +91,7 @@
       </Başlık_x0020_Bilgileri>
       <Kalemler Ref="4" type="DataTableSource" isKey="true">
         <Alias>Kalemler</Alias>
-        <Columns isList="true" count="82">
+        <Columns isList="true" count="85">
           <value>Id,System.Int32</value>
           <value>ReceiptId,System.Int32</value>
           <value>OperationType,System.String</value>
@@ -174,6 +174,9 @@
           <value>IsUse1,System.Boolean</value>
           <value>Explanation2,System.String</value>
           <value>EmployeeId,System.Int32</value>
+          <value>RowExplanation,System.String</value>
+          <value>InventoryComposition,System.Int32</value>
+          <value>IsOrganic,System.Boolean</value>
         </Columns>
         <Dictionary isRef="1" />
         <Key>7c9a9c50eeda4728adb04177055cc29c</Key>
@@ -195,7 +198,7 @@
     <Page1 Ref="5" type="Page" isKey="true">
       <Border>None;Black;2;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
-      <Components isList="true" count="3">
+      <Components isList="true" count="4">
         <HeaderBand1 Ref="6" type="HeaderBand" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>0,0.4,19,6.4</ClientRectangle>
@@ -1326,7 +1329,7 @@ rkJggg==</ImageBytes>
               <ClientRectangle>0,0,1.2,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Bahnschrift,10</Font>
+              <Font>Bahnschrift,9</Font>
               <HorAlignment>Center</HorAlignment>
               <Name>Text20</Name>
               <Page isRef="5" />
@@ -1342,7 +1345,7 @@ rkJggg==</ImageBytes>
               <ClientRectangle>1.2,0,10.2,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Bahnschrift,10</Font>
+              <Font>Bahnschrift,9</Font>
               <HorAlignment>Center</HorAlignment>
               <Name>Text21</Name>
               <Page isRef="5" />
@@ -1358,7 +1361,7 @@ rkJggg==</ImageBytes>
               <ClientRectangle>11.4,0,1.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Bahnschrift,10</Font>
+              <Font>Bahnschrift,9</Font>
               <HorAlignment>Center</HorAlignment>
               <Name>Text22</Name>
               <Page isRef="5" />
@@ -1374,7 +1377,7 @@ rkJggg==</ImageBytes>
               <ClientRectangle>13,0,1.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Bahnschrift,10</Font>
+              <Font>Bahnschrift,9</Font>
               <HorAlignment>Center</HorAlignment>
               <Name>Text24</Name>
               <Page isRef="5" />
@@ -1390,7 +1393,7 @@ rkJggg==</ImageBytes>
               <ClientRectangle>14.6,0,2.2,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Bahnschrift,10</Font>
+              <Font>Bahnschrift,9</Font>
               <HorAlignment>Center</HorAlignment>
               <Name>Text26</Name>
               <Page isRef="5" />
@@ -1406,7 +1409,7 @@ rkJggg==</ImageBytes>
               <ClientRectangle>16.8,0,2.2,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Bahnschrift,10</Font>
+              <Font>Bahnschrift,9</Font>
               <HorAlignment>Center</HorAlignment>
               <Name>Text28</Name>
               <Page isRef="5" />
@@ -1434,7 +1437,7 @@ rkJggg==</ImageBytes>
               <ClientRectangle>0,0,1.2,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Bahnschrift,10</Font>
+              <Font>Bahnschrift Light,7</Font>
               <HorAlignment>Center</HorAlignment>
               <Name>Text18</Name>
               <Page isRef="5" />
@@ -1450,7 +1453,7 @@ rkJggg==</ImageBytes>
               <ClientRectangle>1.2,0,10.2,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Bahnschrift,10</Font>
+              <Font>Bahnschrift Light,7</Font>
               <Name>Text19</Name>
               <Page isRef="5" />
               <Parent isRef="35" />
@@ -1465,7 +1468,7 @@ rkJggg==</ImageBytes>
               <ClientRectangle>11.4,0,1.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Bahnschrift,10</Font>
+              <Font>Bahnschrift Light,7</Font>
               <HorAlignment>Center</HorAlignment>
               <Name>Text23</Name>
               <Page isRef="5" />
@@ -1481,7 +1484,7 @@ rkJggg==</ImageBytes>
               <ClientRectangle>13,0,1.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Bahnschrift,10</Font>
+              <Font>Bahnschrift Light,7</Font>
               <HorAlignment>Center</HorAlignment>
               <Name>Text25</Name>
               <Page isRef="5" />
@@ -1497,7 +1500,7 @@ rkJggg==</ImageBytes>
               <ClientRectangle>14.6,0,2.2,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Bahnschrift,10</Font>
+              <Font>Bahnschrift Light,7</Font>
               <HorAlignment>Center</HorAlignment>
               <Name>Text27</Name>
               <Page isRef="5" />
@@ -1513,7 +1516,7 @@ rkJggg==</ImageBytes>
               <ClientRectangle>16.8,0,2.2,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Bahnschrift,10</Font>
+              <Font>Bahnschrift Light,7</Font>
               <HorAlignment>Center</HorAlignment>
               <Name>Text29</Name>
               <Page isRef="5" />
@@ -1534,6 +1537,49 @@ rkJggg==</ImageBytes>
           <Parent isRef="5" />
           <Sort isList="true" count="0" />
         </DataBand1>
+        <FooterBand1 Ref="42" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,10.4,19,0.6</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text31 Ref="43" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.4,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Name>Text31</Name>
+              <Page isRef="5" />
+              <Parent isRef="42" />
+              <Text>Toplam :</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text31>
+            <Text32 Ref="44" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Name>Text32</Name>
+              <Page isRef="5" />
+              <Parent isRef="42" />
+              <Text>{Sum(DataBand1,Kalemler.NetMeter)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Totals</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text32>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>FooterBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </FooterBand1>
       </Components>
       <Conditions isList="true" count="0" />
       <Expressions isList="true" count="0" />
@@ -1556,10 +1602,10 @@ rkJggg==</ImageBytes>
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>11/19/2025 10:36:26 AM</ReportChanged>
+  <ReportChanged>12/5/2025 11:05:26 AM</ReportChanged>
   <ReportCreated>11/10/2025 1:38:02 PM</ReportCreated>
   <ReportFile>C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\reports\Sipariş Formu.mrt</ReportFile>
-  <ReportGuid>d18d8d9bced747bea001dc777c6e97b9</ReportGuid>
+  <ReportGuid>6a5f6e94b9f14884952e574ada556634</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2025.4.1.0</ReportVersion>

@@ -60,7 +60,7 @@ namespace MaliyeHesaplama.helpers
         public static void SetRecordCount(ICollectionView _collectionView,Label count)
         {
             int visibleCount = _collectionView.Cast<dynamic>().Count();
-            count.Content = $"Toplam Kayıt: {visibleCount}";
+            count.Content = $"Satır Sayısı: {visibleCount}";
         }
 
         public static void SearchWithColumnHeaderNoCollectionView(TextBox tb, DataTable table,string fieldName,Label lblCount,Label lblSumMeter)
@@ -85,28 +85,21 @@ namespace MaliyeHesaplama.helpers
         }
         public static decimal SetFieldsSum(DataTable table,string field,Label lbl)
         {
+            if (field == "KayıtNo")
+            {
+                int count = table.DefaultView.Count;
+                lbl.Content = $"Toplam Kayıt: {count}";
+                return count; // SAYIYI DÖN
+            }
+
             decimal sum = 0;
-            if (field== "KayıtNo")
+            foreach (DataRowView rowView in table.DefaultView)
             {
-                lbl.Content = $"Toplam Kayıt: {table.DefaultView.Count}";
+                sum += rowView[field] != DBNull.Value ? Convert.ToDecimal(rowView[field]) : 0;
             }
-            else
-            {
-                foreach (DataRowView rowView in table.DefaultView)
-                {
-                    sum += rowView[field] != DBNull.Value ? Convert.ToDecimal(rowView[field]) : 0; // hata verdi
-                }
-                if (lbl.Content == "NetMeter")
-                {
-                    lbl.Content = $"Toplam Metre: {sum}";
-                }
-                //else if (true)
-                //{
 
-                //}             
-            }
+            lbl.Content = $"Toplam Metre: {sum}";
             return sum;
-
         }
 
     }
