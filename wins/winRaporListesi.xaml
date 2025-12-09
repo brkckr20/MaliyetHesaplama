@@ -7,18 +7,11 @@
         mc:Ignorable="d"
         Title="Rapor Listesi" Height="450" Width="500" Icon="/wins/News.png" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Loaded="Window_Loaded">
     <Grid Background="LightGray">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Margin="4">
-            <TextBlock Text="Filtreler" FontWeight="Bold" Margin="0,0,0,3"/>
-            <StackPanel>
-                <TextBlock Text="Rapor Adı :"/>
-                <TextBox x:Name="txtFirmaKodu" TabIndex="2" FontSize="16" TextChanged="txtFirmaKodu_TextChanged"/>
-            </StackPanel>
-        </StackPanel>
-        <DataGrid Grid.Column="1" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0"
               x:Name="sfDataGrid" 
               CanUserAddRows="True" 
               FontSize="11" RowHeight="24" 
@@ -31,10 +24,24 @@
               HorizontalGridLinesBrush="#ececec"
               VerticalGridLinesBrush="#ececec"
               >
+            <DataGrid.Resources>
+                <DataTemplate x:Key="RName">
+                    <StackPanel>
+                        <Label Content="Rapor Adı"/>
+                        <TextBox Width="105" Height="20" x:Name="rName" TextChanged="rName_TextChanged" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate x:Key="RSName">
+                    <StackPanel>
+                        <Label Content="Ekran Adı"/>
+                        <TextBox Width="105" Height="20" x:Name="rsName" TextChanged="rsName_TextChanged" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
-                <DataGridTextColumn Header="Rapor Adı" Binding="{Binding ReportName}"/>
-                <DataGridTextColumn Header="Ekran Adı" Binding="{Binding FormName}"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource RName}" Header="Rapor Adı" Binding="{Binding ReportName}"/>
+                <DataGridTextColumn HeaderTemplate="{StaticResource RSName}" Header="Ekran Adı" Binding="{Binding FormName}"/>
                 <DataGridTextColumn Visibility="Hidden" Header="Sorgu 1" Binding="{Binding Query1}"/>
                 <DataGridTextColumn Visibility="Hidden" Header="Sorgu 2" Binding="{Binding Query2}"/>
                 <DataGridTextColumn Visibility="Hidden" Header="Sorgu 3" Binding="{Binding Query3}"/>
@@ -47,5 +54,8 @@
                 <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding DataSource5}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <DockPanel Grid.Row="1">
+            <Label x:Name="lblRecordCount" Content=""/>
+        </DockPanel>
     </Grid>
 </Window>

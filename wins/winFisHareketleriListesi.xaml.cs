@@ -21,7 +21,6 @@ namespace MaliyeHesaplama.wins
             InitializeComponent();
             this._receiptType = Convert.ToInt32(receipt);
             this._depoId = depoId;
-            //dgListe.Columns[8].Visibility = Visibility.Collapsed; // diğer alanlarında kontrolü yapılacak
         }
         private IEnumerable<dynamic> _tumHareketler;
         private void Window_Loaded(object sender, RoutedEventArgs e)

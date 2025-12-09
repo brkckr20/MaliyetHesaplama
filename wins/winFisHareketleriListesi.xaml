@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="İşlem Listesi" Height="450" Width="800" WindowStartupLocation="CenterScreen" Icon="/wins/News.png" Loaded="Window_Loaded">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Border Grid.Column="0"></Border>
-        <Border Grid.Column="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0">
             <DataGrid   x:Name="dgListe"
                         HorizontalGridLinesBrush="#ececec"
                         VerticalGridLinesBrush="#ececec"
@@ -43,6 +43,9 @@
                     <DataGridTextColumn Header="Vadeli Ödeme" Binding="{Binding DeferredPayment}"/>
                 </DataGrid.Columns>
             </DataGrid>
+        </Border>
+        <Border Grid.Row="1">
+            <Label x:Name="lblRecordCount"/>
         </Border>
     </Grid>
 </Window>

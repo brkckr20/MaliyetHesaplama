@@ -47,6 +47,35 @@ namespace MaliyeHesaplama.userControls.Common
         {
             PageCommands?.Sil();
         }
+        public bool YeniEnabled
+        {
+            get => btnYeni.IsEnabled;
+            set => btnYeni.IsEnabled = value;
+        }
+
+        public bool KaydetEnabled
+        {
+            get => Kayit_Click.IsEnabled;
+            set => Kayit_Click.IsEnabled = value;
+        }
+
+        public bool ListeEnabled
+        {
+            get => btnListele.IsEnabled;
+            set => btnListele.IsEnabled = value;
+        }
+
+        public bool SilEnabled
+        {
+            get => btnSil.IsEnabled;
+            set => btnSil.IsEnabled = value;
+        }
+
+        public bool YazdirEnabled
+        {
+            get => btnYazdir.IsEnabled;
+            set => btnYazdir.IsEnabled = value;
+        }
         //private void Yeni_Click(object sender, RoutedEventArgs e) => CommandTarget?.Yeni();
         //private void Kaydet_Click(object sender, RoutedEventArgs e) => CommandTarget?.Kaydet();
         //private void Sil_Click(object sender, RoutedEventArgs e) => CommandTarget?.Sil();

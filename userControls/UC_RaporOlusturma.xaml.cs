@@ -11,7 +11,7 @@ using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_RaporOlusturma : UserControl,IPageCommands
+    public partial class UC_RaporOlusturma : UserControl, IPageCommands
     {
         int Id = 0;
         MiniOrm _orm = new MiniOrm();
@@ -128,10 +128,25 @@ namespace MaliyeHesaplama.userControls
                 }
             }
         }
-
+        void Temizle()
+        {
+            txtRaporAdi.Text = string.Empty;
+            txtEkranAdi.Text = string.Empty;
+            this.Id = 0;
+            vkSorgu1.Text = string.Empty;
+            vkSorgu2.Text = string.Empty;
+            vkSorgu3.Text = string.Empty;
+            vkSorgu4.Text = string.Empty;
+            vkSorgu5.Text = string.Empty;
+            sorgu1edit.Text = string.Empty;
+            sorgu2edit.Text = string.Empty;
+            sorgu3edit.Text = string.Empty;
+            sorgu4edit.Text = string.Empty;
+            sorgu5edit.Text = string.Empty;
+        }
         public void Yeni()
         {
-           
+            Temizle();
         }
 
         public void Kaydet()
@@ -162,22 +177,31 @@ namespace MaliyeHesaplama.userControls
 
         public void Sil()
         {
-            
+            if (_orm.Delete("Report", Id, true) > 0)
+            {
+                string reportName = txtRaporAdi.Text;
+                string destPath = $"reports/{reportName}.mrt";
+                if (File.Exists(destPath))
+                {
+                    File.Delete(destPath);
+                    Temizle();
+                }
+            }
         }
 
         public void Yazdir()
         {
-            
+
         }
 
         public void Ileri()
         {
-            
+
         }
 
         public void Geri()
         {
-            
+
         }
 
         public void Listele()

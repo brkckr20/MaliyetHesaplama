@@ -36,20 +36,20 @@ namespace MaliyeHesaplama.userControls
                 }
 
                 string query = $@"SELECT 
-            ISNULL(R.Id,0) Id,ISNULL(R.ReceiptNo,'') ReceiptNo, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,ISNULL(R.Authorized,'') Authorized,ISNULL(R.CustomerOrderNo,'') CustomerOrderNo,
-            ISNULL(R.DuaDate,'') DuaDate,ISNULL(R.Explanation,'') Explanation,
-            ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,
-            ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.NetMeter,0) NetMeter, ISNULL(RI.CashPayment,0) CashPayment, ISNULL(RI.DeferredPayment,0) DeferredPayment,
-            ISNULL(R.Maturity,0) Maturity, ISNULL(RI.RowExplanation,'') RowExplanation,
-            ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
-            ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName,
-            ISNULL(CO.Id,0) VariantId,ISNULL(CO.Code,'') VariantCode,ISNULL(CO.Name,'') Variant,ISNULL(RI.Forex,'') Forex
-            FROM Receipt R
-            INNER JOIN ReceiptItem RI ON R.Id = RI.ReceiptId
-            LEFT JOIN Company C ON C.Id = R.CompanyId
-            LEFT JOIN Inventory I ON I.Id = RI.InventoryId
-            LEFT JOIN Color CO on RI.VariantId = CO.Id
-            WHERE R.ReceiptType = {Convert.ToInt32(Enums.Receipt.Siparis)} AND R.Id = @Id";
+                                ISNULL(R.Id,0) Id,ISNULL(R.ReceiptNo,'') ReceiptNo, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,ISNULL(R.Authorized,'') Authorized,ISNULL(R.CustomerOrderNo,'') CustomerOrderNo,
+                                ISNULL(R.DuaDate,'') DuaDate,ISNULL(R.Explanation,'') Explanation,
+                                ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,
+                                ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.NetMeter,0) NetMeter, ISNULL(RI.CashPayment,0) CashPayment, ISNULL(RI.DeferredPayment,0) DeferredPayment,
+                                ISNULL(R.Maturity,0) Maturity, ISNULL(RI.RowExplanation,'') RowExplanation,
+                                ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
+                                ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName,
+                                ISNULL(CO.Id,0) VariantId,ISNULL(CO.Code,'') VariantCode,ISNULL(CO.Name,'') Variant,ISNULL(RI.Forex,'') Forex
+                                FROM Receipt R
+                                INNER JOIN ReceiptItem RI ON R.Id = RI.ReceiptId
+                                LEFT JOIN Company C ON C.Id = R.CompanyId
+                                LEFT JOIN Inventory I ON I.Id = RI.InventoryId
+                                LEFT JOIN Color CO on RI.VariantId = CO.Id
+                                WHERE R.ReceiptType = {Convert.ToInt32(Enums.Receipt.Siparis)} AND R.Id = @Id";
 
                 var liste = _orm.GetAfterOrBeforeRecord(query, istenenId.Value);
 

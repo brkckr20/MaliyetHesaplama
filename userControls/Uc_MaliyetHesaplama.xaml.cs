@@ -61,6 +61,8 @@ namespace MaliyeHesaplama.userControls
             _receteOlacak = _parametreler.KumasRecetesiOlacak;
             dckRecete.Visibility = _receteOlacak ? Visibility.Visible : Visibility.Collapsed;
             txtFisNo.Text = _orm.GetRecordNo("Cost", "OrderNo", "Type", 1);
+            ButtonBar.btnIleri.IsEnabled = false;
+            ButtonBar.btnGeri.IsEnabled = false;
         }
 
         private void btnFirmaListesi_Click(object sender, RoutedEventArgs e)
