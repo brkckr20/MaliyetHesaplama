@@ -101,6 +101,11 @@ namespace MaliyeHesaplama.helpers
             lbl.Content = $"Toplam Metre: {sum}";
             return sum;
         }
+        public static void SearchWithCW(object sender,string fieldName, ICollectionView _collectionView, Label lblRecordCount)
+        {
+            var tb = sender as TextBox;
+            SearchWithColumnHeader(tb, fieldName, _collectionView, lblRecordCount);
+        }
 
     }
 }

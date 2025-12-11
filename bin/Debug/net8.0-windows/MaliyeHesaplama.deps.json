@@ -21,6 +21,7 @@
           "Syncfusion.SfGrid.WPF": "31.1.18",
           "System.Data.Odbc": "9.0.9",
           "System.Data.OleDb": "9.0.9",
+          "Xceed.Products.Wpf.DataGrid.Full": "7.3.25458.6675",
           "Stimulsoft.Base": "2025.4.1.0",
           "Stimulsoft.Blockly": "2025.4.1.0",
           "Stimulsoft.BlocklyEditor.Wpf": "2025.4.1.0",
@@ -89,6 +90,25 @@
           "lib/net8.0/Dapper.dll": {
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "2.1.66.48463"
+          }
+        }
+      },
+      "EntityFramework/6.3.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.6.0",
+          "System.CodeDom": "4.6.0",
+          "System.ComponentModel.Annotations": "4.6.0",
+          "System.Configuration.ConfigurationManager": "9.0.9",
+          "System.Data.SqlClient": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/EntityFramework.SqlServer.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.300.19.46401"
+          },
+          "lib/netstandard2.1/EntityFramework.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.300.19.46401"
           }
         }
       },
@@ -560,6 +580,7 @@
           }
         }
       },
+      "Microsoft.CSharp/4.6.0": {},
       "Microsoft.Data.SqlClient/6.1.1": {
         "dependencies": {
           "Azure.Core": "1.47.1",
@@ -911,11 +932,57 @@
           }
         }
       },
+      "Microsoft.NETCore.Platforms/5.0.0": {},
       "Microsoft.SqlServer.Server/1.0.0": {
         "runtime": {
           "lib/netstandard2.0/Microsoft.SqlServer.Server.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Microsoft.Win32.Registry/4.6.0": {
+        "dependencies": {
+          "System.Security.AccessControl": "4.6.0",
+          "System.Security.Principal.Windows": "4.6.0"
+        }
+      },
+      "Microsoft.Win32.SystemEvents/5.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "5.0.0"
+        }
+      },
+      "runtime.native.System.Data.SqlClient.sni/4.6.0": {
+        "dependencies": {
+          "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni": "4.4.0",
+          "runtime.win-x64.runtime.native.System.Data.SqlClient.sni": "4.4.0",
+          "runtime.win-x86.runtime.native.System.Data.SqlClient.sni": "4.4.0"
+        }
+      },
+      "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni/4.4.0": {
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/sni.dll": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "4.6.25512.1"
+          }
+        }
+      },
+      "runtime.win-x64.runtime.native.System.Data.SqlClient.sni/4.4.0": {
+        "runtimeTargets": {
+          "runtimes/win-x64/native/sni.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "4.6.25512.1"
+          }
+        }
+      },
+      "runtime.win-x86.runtime.native.System.Data.SqlClient.sni/4.4.0": {
+        "runtimeTargets": {
+          "runtimes/win-x86/native/sni.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "4.6.25512.1"
           }
         }
       },
@@ -1115,6 +1182,7 @@
           }
         }
       },
+      "System.CodeDom/4.6.0": {},
       "System.Collections.Immutable/9.0.0": {
         "runtime": {
           "lib/net8.0/System.Collections.Immutable.dll": {
@@ -1123,6 +1191,7 @@
           }
         }
       },
+      "System.ComponentModel.Annotations/4.6.0": {},
       "System.Composition/9.0.0": {
         "dependencies": {
           "System.Composition.AttributedModel": "9.0.0",
@@ -1237,6 +1306,33 @@
           }
         }
       },
+      "System.Data.SqlClient/4.7.0": {
+        "dependencies": {
+          "Microsoft.Win32.Registry": "4.6.0",
+          "System.Security.Principal.Windows": "4.6.0",
+          "runtime.native.System.Data.SqlClient.sni": "4.6.0"
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/System.Data.SqlClient.dll": {
+            "assemblyVersion": "4.6.0.0",
+            "fileVersion": "4.700.19.46214"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll": {
+            "rid": "unix",
+            "assetType": "runtime",
+            "assemblyVersion": "4.6.0.0",
+            "fileVersion": "4.700.19.46214"
+          },
+          "runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "4.6.0.0",
+            "fileVersion": "4.700.19.46214"
+          }
+        }
+      },
       "System.Diagnostics.DiagnosticSource/6.0.1": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -1283,6 +1379,11 @@
           }
         }
       },
+      "System.Drawing.Common/5.0.1": {
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "5.0.0"
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/7.7.1": {
         "dependencies": {
           "Microsoft.IdentityModel.JsonWebTokens": "7.7.1",
@@ -1325,6 +1426,12 @@
         }
       },
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
+      "System.Security.AccessControl/4.6.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "5.0.0",
+          "System.Security.Principal.Windows": "4.6.0"
+        }
+      },
       "System.Security.Cryptography.Pkcs/8.0.1": {
         "runtime": {
           "lib/net8.0/System.Security.Cryptography.Pkcs.dll": {
@@ -1349,6 +1456,7 @@
           }
         }
       },
+      "System.Security.Principal.Windows/4.6.0": {},
       "System.Text.Encoding.CodePages/7.0.0": {},
       "System.Text.Encodings.Web/9.0.10": {
         "runtime": {
@@ -1380,6 +1488,157 @@
       },
       "System.Threading.Channels/7.0.0": {},
       "System.Threading.Tasks.Extensions/4.5.4": {},
+      "Xceed.Products.Wpf.DataGrid.Full/7.3.25458.6675": {
+        "dependencies": {
+          "Xceed.Wpf.Controls": "7.3.25458.6675",
+          "Xceed.Wpf.DataGrid": "7.3.25458.6675",
+          "Xceed.Wpf.DataGrid.ThemePack.1": "7.3.25458.6675",
+          "Xceed.Wpf.DataGrid.ThemePack.2": "7.3.25458.6675",
+          "Xceed.Wpf.DataGrid.ThemePack.3": "7.3.25458.6675",
+          "Xceed.Wpf.DataGrid.ThemePack.4": "7.3.25458.6675",
+          "Xceed.Wpf.DataGrid.ThemePack.5": "7.3.25458.6675",
+          "Xceed.Wpf.DataGrid.ThemePack.6": "7.3.25458.6675",
+          "Xceed.Wpf.DataGrid.ThemePack.7": "7.3.25458.6675",
+          "Xceed.Wpf.DataGrid.Views3D": "7.3.25458.6675",
+          "Xceed.Wpf.DataGrid.Workbooks": "7.3.25458.6675"
+        }
+      },
+      "Xceed.Wpf.Controls/7.3.25458.6675": {
+        "runtime": {
+          "lib/net5.0/Xceed.Wpf.Controls.XmlSerializers.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          },
+          "lib/net5.0/Xceed.Wpf.Controls.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          }
+        }
+      },
+      "Xceed.Wpf.DataGrid/7.3.25458.6675": {
+        "dependencies": {
+          "EntityFramework": "6.3.0",
+          "System.Drawing.Common": "5.0.1",
+          "Xceed.Wpf.Controls": "7.3.25458.6675"
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Wpf.DataGrid.XmlSerializers.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          },
+          "lib/net5.0/Xceed.Wpf.DataGrid.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          }
+        }
+      },
+      "Xceed.Wpf.DataGrid.ThemePack.1/7.3.25458.6675": {
+        "dependencies": {
+          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.1.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          }
+        }
+      },
+      "Xceed.Wpf.DataGrid.ThemePack.2/7.3.25458.6675": {
+        "dependencies": {
+          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.2.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          }
+        }
+      },
+      "Xceed.Wpf.DataGrid.ThemePack.3/7.3.25458.6675": {
+        "dependencies": {
+          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.3.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          }
+        }
+      },
+      "Xceed.Wpf.DataGrid.ThemePack.4/7.3.25458.6675": {
+        "dependencies": {
+          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.4.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          }
+        }
+      },
+      "Xceed.Wpf.DataGrid.ThemePack.5/7.3.25458.6675": {
+        "dependencies": {
+          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.5.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          }
+        }
+      },
+      "Xceed.Wpf.DataGrid.ThemePack.6/7.3.25458.6675": {
+        "dependencies": {
+          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.6.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          }
+        }
+      },
+      "Xceed.Wpf.DataGrid.ThemePack.7/7.3.25458.6675": {
+        "dependencies": {
+          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.7.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          }
+        }
+      },
+      "Xceed.Wpf.DataGrid.Views3D/7.3.25458.6675": {
+        "dependencies": {
+          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Wpf.DataGrid.Views3D.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          }
+        }
+      },
+      "Xceed.Wpf.DataGrid.Workbooks/7.3.25458.6675": {
+        "dependencies": {
+          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.SystemDrawingCommon.Fonts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          },
+          "lib/net5.0/Xceed.SystemDrawingCommon.Images.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          },
+          "lib/net5.0/Xceed.Wpf.DataGrid.Workbooks.dll": {
+            "assemblyVersion": "7.3.25458.6675",
+            "fileVersion": "7.3.25458.6675"
+          }
+        }
+      },
       "Stimulsoft.Base/2025.4.1.0": {
         "runtime": {
           "Stimulsoft.Base.dll": {
@@ -1543,6 +1802,13 @@
       "path": "dapper/2.1.66",
       "hashPath": "dapper.2.1.66.nupkg.sha512"
     },
+    "EntityFramework/6.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mEvhoXscTyLFMcnbLzKlbWdx6N8fCY2IMe4drjUTMFqOqI4KThnTPXr1m50oXDJAn5PvCy2e90IcwN/OxkJUjg==",
+      "path": "entityframework/6.3.0",
+      "hashPath": "entityframework.6.3.0.nupkg.sha512"
+    },
     "Extended.Wpf.Toolkit/5.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1640,6 +1906,13 @@
       "sha512": "sha512-wNVK9JrqjqDC/WgBUFV6henDfrW87NPfo98nzah/+M/G1D6sBOPtXwqce3UQNn+6AjTnmkHYN1WV9XmTlPemTw==",
       "path": "microsoft.codeanalysis.workspaces.common/4.14.0",
       "hashPath": "microsoft.codeanalysis.workspaces.common.4.14.0.nupkg.sha512"
+    },
+    "Microsoft.CSharp/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kxn3M2rnAGy5N5DgcIwcE8QTePWU/XiYcQVzn9HqTls2NKluVzVSmVWRjK7OUPWbljCXuZxHyhEz9kPRIQeXow==",
+      "path": "microsoft.csharp/4.6.0",
+      "hashPath": "microsoft.csharp.4.6.0.nupkg.sha512"
     },
     "Microsoft.Data.SqlClient/6.1.1": {
       "type": "package",
@@ -1816,12 +2089,61 @@
       "path": "microsoft.identitymodel.tokens/7.7.1",
       "hashPath": "microsoft.identitymodel.tokens.7.7.1.nupkg.sha512"
     },
+    "Microsoft.NETCore.Platforms/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VyPlqzH2wavqquTcYpkIIAQ6WdenuKoFN0BdYBbCWsclXacSOHNQn66Gt4z5NBqEYW0FAPm5rlvki9ZiCij5xQ==",
+      "path": "microsoft.netcore.platforms/5.0.0",
+      "hashPath": "microsoft.netcore.platforms.5.0.0.nupkg.sha512"
+    },
     "Microsoft.SqlServer.Server/1.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-N4KeF3cpcm1PUHym1RmakkzfkEv3GRMyofVv40uXsQhCQeglr2OHNcUk2WOG51AKpGO8ynGpo9M/kFXSzghwug==",
       "path": "microsoft.sqlserver.server/1.0.0",
       "hashPath": "microsoft.sqlserver.server.1.0.0.nupkg.sha512"
+    },
+    "Microsoft.Win32.Registry/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Xuqo5Lf5h1eUAbT8sJwNSEgusyEcQQQcza1R8dxJ6q/1vLSU1SG/WxtgiCPAth14dz/IjBXCxWT/+6E9glX33w==",
+      "path": "microsoft.win32.registry/4.6.0",
+      "hashPath": "microsoft.win32.registry.4.6.0.nupkg.sha512"
+    },
+    "Microsoft.Win32.SystemEvents/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Bh6blKG8VAKvXiLe2L+sEsn62nc1Ij34MrNxepD2OCrS5cpCwQa9MeLyhVQPQ/R4Wlzwuy6wMK8hLb11QPDRsQ==",
+      "path": "microsoft.win32.systemevents/5.0.0",
+      "hashPath": "microsoft.win32.systemevents.5.0.0.nupkg.sha512"
+    },
+    "runtime.native.System.Data.SqlClient.sni/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WRq11dBcJYyAbrUVguvv3BqNGl5ub60mZxUd+xaxNsSOb7tMLQxjbiyD/hF6FSl1akiom7GMttPDa3TW+UmnAQ==",
+      "path": "runtime.native.system.data.sqlclient.sni/4.6.0",
+      "hashPath": "runtime.native.system.data.sqlclient.sni.4.6.0.nupkg.sha512"
+    },
+    "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LbrynESTp3bm5O/+jGL8v0Qg5SJlTV08lpIpFesXjF6uGNMWqFnUQbYBJwZTeua6E/Y7FIM1C54Ey1btLWupdg==",
+      "path": "runtime.win-arm64.runtime.native.system.data.sqlclient.sni/4.4.0",
+      "hashPath": "runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "runtime.win-x64.runtime.native.System.Data.SqlClient.sni/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-38ugOfkYJqJoX9g6EYRlZB5U2ZJH51UP8ptxZgdpS07FgOEToV+lS11ouNK2PM12Pr6X/PpT5jK82G3DwH/SxQ==",
+      "path": "runtime.win-x64.runtime.native.system.data.sqlclient.sni/4.4.0",
+      "hashPath": "runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "runtime.win-x86.runtime.native.System.Data.SqlClient.sni/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
+      "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
+      "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.1.10": {
       "type": "package",
@@ -1893,12 +2215,26 @@
       "path": "system.clientmodel/1.5.1",
       "hashPath": "system.clientmodel.1.5.1.nupkg.sha512"
     },
+    "System.CodeDom/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ArWGZOxPhOaJUd4YgvbTxGZDbVDJHPAOQNiJIpbRDPW6v2NT5xkallQv1zpu8Rwwb5Z3iZ1jwWA4gSQuWgR+jw==",
+      "path": "system.codedom/4.6.0",
+      "hashPath": "system.codedom.4.6.0.nupkg.sha512"
+    },
     "System.Collections.Immutable/9.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-QhkXUl2gNrQtvPmtBTQHb0YsUrDiDQ2QS09YbtTTiSjGcf7NBqtYbrG/BE06zcBPCKEwQGzIv13IVdXNOSub2w==",
       "path": "system.collections.immutable/9.0.0",
       "hashPath": "system.collections.immutable.9.0.0.nupkg.sha512"
+    },
+    "System.ComponentModel.Annotations/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pOd+UhZ3X8xfwKDlgAzowUJNjp8VYVmOHZm++vCd0kq1HZ0zK3mNo2yRXjYgv7Ik/Xi43fmJfND2PLEsQSALCg==",
+      "path": "system.componentmodel.annotations/4.6.0",
+      "hashPath": "system.componentmodel.annotations.4.6.0.nupkg.sha512"
     },
     "System.Composition/9.0.0": {
       "type": "package",
@@ -1963,6 +2299,13 @@
       "path": "system.data.oledb/9.0.9",
       "hashPath": "system.data.oledb.9.0.9.nupkg.sha512"
     },
+    "System.Data.SqlClient/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lV3ljZeFc01DYyjcEBSxK3sy8Ow2R6AWa6o+g0t7B4hoDcA6Kzv4bTB4E4T7C/pKuZzHeBFLxe6fD4Am4q939Q==",
+      "path": "system.data.sqlclient/4.7.0",
+      "hashPath": "system.data.sqlclient.4.7.0.nupkg.sha512"
+    },
     "System.Diagnostics.DiagnosticSource/6.0.1": {
       "type": "package",
       "serviceable": true,
@@ -1983,6 +2326,13 @@
       "sha512": "sha512-7MSbJ7xSqwAs3dQmZ2mIkJMpLkGVcAcPZ4Txw2q3As82QjZwm/PQGh33Od9PYCyiTPeXMmuIp3BQB7cXkTlRgA==",
       "path": "system.diagnostics.performancecounter/9.0.9",
       "hashPath": "system.diagnostics.performancecounter.9.0.9.nupkg.sha512"
+    },
+    "System.Drawing.Common/5.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3IN8zWk395Qu+7wnoTbebEjdP3izZBBKAahgWuC0jp9tCgTdUFN6KsrqQl0I3L+ptZD/LvwKjgFp1u+x3+p+DA==",
+      "path": "system.drawing.common/5.0.1",
+      "hashPath": "system.drawing.common.5.0.1.nupkg.sha512"
     },
     "System.IdentityModel.Tokens.Jwt/7.7.1": {
       "type": "package",
@@ -2033,6 +2383,13 @@
       "path": "system.runtime.compilerservices.unsafe/6.0.0",
       "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
     },
+    "System.Security.AccessControl/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gmlk6khICtVhiUnVBBtlsH0H/5QFDqhTZgtpp3AX14wWE6OIE+BX95NLD+X4AolXnIy/oXpNNmXYnsNfW1KuDQ==",
+      "path": "system.security.accesscontrol/4.6.0",
+      "hashPath": "system.security.accesscontrol.4.6.0.nupkg.sha512"
+    },
     "System.Security.Cryptography.Pkcs/8.0.1": {
       "type": "package",
       "serviceable": true,
@@ -2046,6 +2403,13 @@
       "sha512": "sha512-XN37933FTzEkqGJoOTunvnvzAv/4VO/9wQ0QwsGcrR5KyQpYT0z4Ssm+f+fpY9bea6srypFp3JjNPHHC26xzLw==",
       "path": "system.security.cryptography.protecteddata/9.0.9",
       "hashPath": "system.security.cryptography.protecteddata.9.0.9.nupkg.sha512"
+    },
+    "System.Security.Principal.Windows/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Mdukseovp0YIGaz16FMH6nbfgZkrCFOJbtXQptv0aeBO9h775Ilb9+TDwLVTKikoW7y7CY7lpoXl9zmZ5G3ndA==",
+      "path": "system.security.principal.windows/4.6.0",
+      "hashPath": "system.security.principal.windows.4.6.0.nupkg.sha512"
     },
     "System.Text.Encoding.CodePages/7.0.0": {
       "type": "package",
@@ -2081,6 +2445,90 @@
       "sha512": "sha512-zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg==",
       "path": "system.threading.tasks.extensions/4.5.4",
       "hashPath": "system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    },
+    "Xceed.Products.Wpf.DataGrid.Full/7.3.25458.6675": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oaU6SEN/zfS37RlSnlZQf6RsNks2+vRnbzxJh6cwykDsd6V68d4V0TfIH8oEaMHl39cs8my7Gx7vYk/Ha3NIdQ==",
+      "path": "xceed.products.wpf.datagrid.full/7.3.25458.6675",
+      "hashPath": "xceed.products.wpf.datagrid.full.7.3.25458.6675.nupkg.sha512"
+    },
+    "Xceed.Wpf.Controls/7.3.25458.6675": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-02u5SZRWrl/yXNikqgb98seFGg7QPWFgncykx8+P1NkGND3qHWi8f20MDKkZuPUfFrAL6Wl7Y6oM57TLNSXmtw==",
+      "path": "xceed.wpf.controls/7.3.25458.6675",
+      "hashPath": "xceed.wpf.controls.7.3.25458.6675.nupkg.sha512"
+    },
+    "Xceed.Wpf.DataGrid/7.3.25458.6675": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sEYar9GvKyDnzSz4QdOl5TMZN3LRXafqeWvVMYMTVIX9jeyb5QleC4DvaKdDjOubnvW3Pm+Bmjwz419Ulk6n+w==",
+      "path": "xceed.wpf.datagrid/7.3.25458.6675",
+      "hashPath": "xceed.wpf.datagrid.7.3.25458.6675.nupkg.sha512"
+    },
+    "Xceed.Wpf.DataGrid.ThemePack.1/7.3.25458.6675": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9h2WOLtTZtMjQh+sVOoNjzVk/YORN+0E0s/pD3xo+xhPgOnPdJUowigJQhaeqiUuSTrJQm1zIAhvKa4Mp+8urg==",
+      "path": "xceed.wpf.datagrid.themepack.1/7.3.25458.6675",
+      "hashPath": "xceed.wpf.datagrid.themepack.1.7.3.25458.6675.nupkg.sha512"
+    },
+    "Xceed.Wpf.DataGrid.ThemePack.2/7.3.25458.6675": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mQQt3hffw8BpkHXaZ149+eL7dx3qcivLl20Uin7gN/v3DcQI4rMEZydRz5nqwt+2ubNw7dV1qtBr6LIuZ40m/w==",
+      "path": "xceed.wpf.datagrid.themepack.2/7.3.25458.6675",
+      "hashPath": "xceed.wpf.datagrid.themepack.2.7.3.25458.6675.nupkg.sha512"
+    },
+    "Xceed.Wpf.DataGrid.ThemePack.3/7.3.25458.6675": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/Zo+TAPuaMAGCzBHrDNuV+crzC6tamnFxnSMg7/qpYbjpOxn3ZlkVUGMHjem9vDumcYfxYpCz+f3jP5ZcFAmiw==",
+      "path": "xceed.wpf.datagrid.themepack.3/7.3.25458.6675",
+      "hashPath": "xceed.wpf.datagrid.themepack.3.7.3.25458.6675.nupkg.sha512"
+    },
+    "Xceed.Wpf.DataGrid.ThemePack.4/7.3.25458.6675": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-o8B3SoCBWFdBOp2aUoGGZLj49K46uie1R3iubaGQgSP5R4OJrKAlM2NQrQ+lM7MSuD2sDRYlnGn5mI4n4YWhKQ==",
+      "path": "xceed.wpf.datagrid.themepack.4/7.3.25458.6675",
+      "hashPath": "xceed.wpf.datagrid.themepack.4.7.3.25458.6675.nupkg.sha512"
+    },
+    "Xceed.Wpf.DataGrid.ThemePack.5/7.3.25458.6675": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Iqyw8QOxSj2ENgEyY4FaBDtsGQuNbHobOUuycJLx/tt7bfI1e5exZ+gtDms4czWgTfGsjZqysHxymKXzaRYlxg==",
+      "path": "xceed.wpf.datagrid.themepack.5/7.3.25458.6675",
+      "hashPath": "xceed.wpf.datagrid.themepack.5.7.3.25458.6675.nupkg.sha512"
+    },
+    "Xceed.Wpf.DataGrid.ThemePack.6/7.3.25458.6675": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-w51CAxaTL+H/gNQ2TuUvIJITvu3J091WsSs5lPSkS3R6O12/GjMXWAVugqdqJ4EUA9S9MAamLXjGnRSwpy2F7Q==",
+      "path": "xceed.wpf.datagrid.themepack.6/7.3.25458.6675",
+      "hashPath": "xceed.wpf.datagrid.themepack.6.7.3.25458.6675.nupkg.sha512"
+    },
+    "Xceed.Wpf.DataGrid.ThemePack.7/7.3.25458.6675": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+MSjPWrT11Ia/xJtDAypglMvmTvuJagTzkZJ0/4RLOD2hxPS3QjzoYpgfez1wqkO47VIFlLTFkZekBp+RCRBuA==",
+      "path": "xceed.wpf.datagrid.themepack.7/7.3.25458.6675",
+      "hashPath": "xceed.wpf.datagrid.themepack.7.7.3.25458.6675.nupkg.sha512"
+    },
+    "Xceed.Wpf.DataGrid.Views3D/7.3.25458.6675": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rX04wLjcY2zl9dDFeCOWqcmY873cKKFiRVU1AyiZxzCClPPAvT35bEMij0pY1gZkuDX1igmDPvZfg1AqKAKT9w==",
+      "path": "xceed.wpf.datagrid.views3d/7.3.25458.6675",
+      "hashPath": "xceed.wpf.datagrid.views3d.7.3.25458.6675.nupkg.sha512"
+    },
+    "Xceed.Wpf.DataGrid.Workbooks/7.3.25458.6675": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xbPiqMBqjlmptFO88lR5PMvrmMM7ms4D+Y+O9gPTxXOiA720Km2dL8mYdLWUckQtaGn+AhOMigNFyLqBqWsG3g==",
+      "path": "xceed.wpf.datagrid.workbooks/7.3.25458.6675",
+      "hashPath": "xceed.wpf.datagrid.workbooks.7.3.25458.6675.nupkg.sha512"
     },
     "Stimulsoft.Base/2025.4.1.0": {
       "type": "reference",

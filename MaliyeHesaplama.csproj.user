@@ -46,6 +46,9 @@
     <Compile Update="wins\winBuyukResim.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="wins\winDeneme.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="wins\winFirmaListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -118,6 +121,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winBuyukResim.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="wins\winDeneme.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winFirmaListesi.xaml">

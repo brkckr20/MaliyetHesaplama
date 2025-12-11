@@ -140,42 +140,44 @@ namespace MaliyeHesaplama.userControls
 
         public void Listele()
         {
-            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.Siparis);
+            wins.winDeneme win = new wins.winDeneme();
             win.ShowDialog();
-            if (win.secimYapildi)
-            {
-                this.Id = win.Id;
-                txtFisNo.Text = win.ReceiptNo;
-                dpTarih.SelectedDate = win._Date;
-                this.CompanyId = win.CompanyId;
-                txtFirmaUnvan.Text = win.CompanyName;
-                txtYetkili.Text = win.Authorized;
-                dpTermin.SelectedDate = win.DuaDate;
-                txtVade.Text = win.Maturity;
-                txtMusteriOrderNo.Text = win.CustomerOrderNo;
-                txtAciklama.Text = win.Explanation;
-                table.Clear();
-                foreach (var h in win.HareketlerListesi)
-                {
-                    DataRow row = table.NewRow();
-                    row["Id"] = h.ReceiptItemId; // kalem kayıt no
-                    row["InventoryId"] = h.InventoryId;
-                    row["OperationType"] = h.OperationType;
-                    row["InventoryCode"] = h.InventoryCode;
-                    row["InventoryName"] = h.InventoryName;
-                    row["Variant"] = h.Variant;
-                    row["NetMeter"] = h.NetMeter;
-                    row["CashPayment"] = h.CashPayment;
-                    row["DeferredPayment"] = h.DeferredPayment;
-                    row["Forex"] = h.Forex;
-                    row["RowExplanation"] = h.RowExplanation;
-                    row["VariantId"] = h.VariantId;
-                    row["VariantCode"] = h.VariantCode;
-                    table.Rows.Add(row);
-                }
-                dataGrid.ItemsSource = table.DefaultView;
-            }
-            GetSumOrCount();
+            //wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.Siparis);
+            //win.ShowDialog();
+            //if (win.secimYapildi)
+            //{
+            //    this.Id = win.Id;
+            //    txtFisNo.Text = win.ReceiptNo;
+            //    dpTarih.SelectedDate = win._Date;
+            //    this.CompanyId = win.CompanyId;
+            //    txtFirmaUnvan.Text = win.CompanyName;
+            //    txtYetkili.Text = win.Authorized;
+            //    dpTermin.SelectedDate = win.DuaDate;
+            //    txtVade.Text = win.Maturity;
+            //    txtMusteriOrderNo.Text = win.CustomerOrderNo;
+            //    txtAciklama.Text = win.Explanation;
+            //    table.Clear();
+            //    foreach (var h in win.HareketlerListesi)
+            //    {
+            //        DataRow row = table.NewRow();
+            //        row["Id"] = h.ReceiptItemId; // kalem kayıt no
+            //        row["InventoryId"] = h.InventoryId;
+            //        row["OperationType"] = h.OperationType;
+            //        row["InventoryCode"] = h.InventoryCode;
+            //        row["InventoryName"] = h.InventoryName;
+            //        row["Variant"] = h.Variant;
+            //        row["NetMeter"] = h.NetMeter;
+            //        row["CashPayment"] = h.CashPayment;
+            //        row["DeferredPayment"] = h.DeferredPayment;
+            //        row["Forex"] = h.Forex;
+            //        row["RowExplanation"] = h.RowExplanation;
+            //        row["VariantId"] = h.VariantId;
+            //        row["VariantCode"] = h.VariantCode;
+            //        table.Rows.Add(row);
+            //    }
+            //    dataGrid.ItemsSource = table.DefaultView;
+            //}
+            //GetSumOrCount();
         }
 
         public void Sil()

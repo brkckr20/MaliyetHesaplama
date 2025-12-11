@@ -43,6 +43,7 @@
     <PackageReference Include="Syncfusion.SfGrid.WPF" Version="31.1.18" />
     <PackageReference Include="System.Data.Odbc" Version="9.0.9" />
     <PackageReference Include="System.Data.OleDb" Version="9.0.9" />
+    <PackageReference Include="Xceed.Products.Wpf.DataGrid.Full" Version="7.3.25458.6675" />
   </ItemGroup>
 
   <ItemGroup>
