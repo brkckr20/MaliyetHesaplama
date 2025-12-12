@@ -174,6 +174,7 @@ namespace MaliyeHesaplama
         private void btnAppClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            Application.Current.Shutdown();
         }
 
         private void btnAppMinimize_Click(object sender, RoutedEventArgs e)

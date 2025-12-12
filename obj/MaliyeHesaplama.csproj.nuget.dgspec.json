@@ -70,6 +70,10 @@
               "target": "Package",
               "version": "[1.0.0, )"
             },
+            "FilterDataGrid": {
+              "target": "Package",
+              "version": "[1.2.9, )"
+            },
             "HandyControl": {
               "target": "Package",
               "version": "[3.5.1, )"

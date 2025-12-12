@@ -35,6 +35,7 @@
     <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="5.0.0" />
     <PackageReference Include="FastColoredTextBox.Net6" Version="1.0.0" />
+    <PackageReference Include="FilterDataGrid" Version="1.2.9" />
     <PackageReference Include="HandyControl" Version="3.5.1" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="4.14.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />

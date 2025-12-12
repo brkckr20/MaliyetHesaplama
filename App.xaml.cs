@@ -1,22 +1,33 @@
-﻿using System.Windows;
-using System.Globalization;
-using System.Threading;
+﻿using MaliyeHesaplama.wins;
+using System.Windows;
 
 namespace MaliyeHesaplama
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
-            //Xceed.Wpf.DataGrid.Licenser.LicenseKey = "DGPXX-XXXXX-XXXXX-XXXX";
             base.OnStartup(e);
-            //CultureInfo culture = new CultureInfo("tr-TR");
-            //Thread.CurrentThread.CurrentCulture = culture;
-            //Thread.CurrentThread.CurrentUICulture = culture;
-            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1JFaF5cXGRCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdmWXZfcHVVRWRZVEZ3XkNWYEg=");
+            Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+            // Splash
+            var splash = new winSplashScreen();
+            splash.ShowSplash(2000);
+
+            // Login
+            var login = new winLogin();
+            bool loginSuccess = login.ShowDialog() == true;
+
+            if (!loginSuccess)
+            {
+                Shutdown();
+                return;
+            }
+
+            // Home
+            var main = new HomeScreen();
+            Current.MainWindow = main;
+            main.Show();
+            
         }
     }
 

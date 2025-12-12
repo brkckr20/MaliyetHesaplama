@@ -140,7 +140,7 @@ namespace MaliyeHesaplama.userControls
 
         public void Listele()
         {
-            wins.winDeneme win = new wins.winDeneme();
+            wins.winDemo win = new wins.winDemo();
             win.ShowDialog();
             //wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.Siparis);
             //win.ShowDialog();

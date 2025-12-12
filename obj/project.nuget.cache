@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Bl453qff6aGqDxlverCjvhQIAqJ0DXhEb/e5Qr1exj4+FFJs6nLNkP6Ae0aTsIuzTXVdyJsqLnK1doqUX6sEHg==",
+  "dgSpecHash": "6rNmdVzUulxSp46MXHQn7G9Xnpu6jAwQLfI/fLgqDZ48afDXCi07pVd6a81rYIjk8pYEqITexx2/Upa+1p+Tsg==",
   "success": true,
   "projectFilePath": "C:\\Users\\casper\\Desktop\\Klasörler\\z\\MaliyeHesaplama\\MaliyeHesaplama.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\casper\\.nuget\\packages\\entityframework\\6.3.0\\entityframework.6.3.0.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\extended.wpf.toolkit\\5.0.0\\extended.wpf.toolkit.5.0.0.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\fastcoloredtextbox.net6\\1.0.0\\fastcoloredtextbox.net6.1.0.0.nupkg.sha512",
+    "C:\\Users\\casper\\.nuget\\packages\\filterdatagrid\\1.2.9\\filterdatagrid.1.2.9.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\handycontrol\\3.5.1\\handycontrol.3.5.1.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\casper\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\9.0.0\\microsoft.bcl.asyncinterfaces.9.0.0.nupkg.sha512",

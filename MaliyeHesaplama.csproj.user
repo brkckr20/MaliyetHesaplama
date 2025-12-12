@@ -46,13 +46,16 @@
     <Compile Update="wins\winBuyukResim.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="wins\winDeneme.xaml.cs">
+    <Compile Update="wins\winDemo.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="wins\winFirmaListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="wins\winFisHareketleriListesi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="wins\winLogin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="wins\winMaliyetCalismasiListesi.xaml.cs">
@@ -79,12 +82,18 @@
     <Compile Update="wins\winRenkListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="wins\winSplashScreen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="wins\winYetkiliListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="HomeScreen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="styles\MenuButtonStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\Common\ButtonBar.xaml">
@@ -123,13 +132,16 @@
     <Page Update="wins\winBuyukResim.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="wins\winDeneme.xaml">
+    <Page Update="wins\winDemo.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winFirmaListesi.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winFisHareketleriListesi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="wins\winLogin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winMaliyetCalismasiListesi.xaml">
@@ -154,6 +166,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winRenkListesi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="wins\winSplashScreen.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winYetkiliListesi.xaml">

@@ -181,6 +181,18 @@
           "Microsoft.WindowsDesktop.App.WindowsForms"
         ]
       },
+      "FilterDataGrid/1.2.9": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows7.0/FilterDataGrid.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0-windows7.0/FilterDataGrid.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "HandyControl/3.5.1": {
         "type": "package",
         "compile": {
@@ -2536,6 +2548,26 @@
         "fastcoloredtextbox.net6.1.0.0.nupkg.sha512",
         "fastcoloredtextbox.net6.nuspec",
         "lib/net6.0-windows7.0/FastColoredTextBox.dll"
+      ]
+    },
+    "FilterDataGrid/1.2.9": {
+      "sha512": "X69Q+VlTFkm5aWzI5SAcwMnDvBsWAbrlVIllxWCrDUtPvHD9FSuIwZdWgJPTgL46xBPIM8NzHDGSquChcYc/Ug==",
+      "type": "package",
+      "path": "filterdatagrid/1.2.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "Readme.txt",
+        "filterdatagrid.1.2.9.nupkg.sha512",
+        "filterdatagrid.nuspec",
+        "icon.png",
+        "lib/net48/FilterDataGrid.dll",
+        "lib/net6.0-windows7.0/FilterDataGrid.dll",
+        "lib/net7.0-windows7.0/FilterDataGrid.dll",
+        "lib/net8.0-windows7.0/FilterDataGrid.dll",
+        "lib/netcoreapp3.1/FilterDataGrid.dll"
       ]
     },
     "HandyControl/3.5.1": {
@@ -6382,6 +6414,7 @@
       "Dapper >= 2.1.66",
       "Extended.Wpf.Toolkit >= 5.0.0",
       "FastColoredTextBox.Net6 >= 1.0.0",
+      "FilterDataGrid >= 1.2.9",
       "HandyControl >= 3.5.1",
       "Microsoft.CodeAnalysis >= 4.14.0",
       "Microsoft.Data.SqlClient >= 6.1.1",
@@ -6462,6 +6495,10 @@
           "FastColoredTextBox.Net6": {
             "target": "Package",
             "version": "[1.0.0, )"
+          },
+          "FilterDataGrid": {
+            "target": "Package",
+            "version": "[1.2.9, )"
           },
           "HandyControl": {
             "target": "Package",

@@ -3,14 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
         mc:Ignorable="d"
-        Title="Firma Listesi" Height="450" Width="700" Icon="/wins/Building.png" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Loaded="Window_Loaded">
+        Title="Firma Listesi" Height="450" Width="700" Icon="/wins/Building.png" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Column="0" 
+        <control:FilterDataGrid Grid.Column="0" FontSize="12"
+                                VerticalContentAlignment="Center" IsReadOnly="True" GridLinesVisibility="All"
+                                HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
+                                FilterLanguage="Turkish" ShowStatusBar="True" ShowRowsCount="True" ShowElapsedTime="True"
+                                AutoGenerateColumns="True" AutoGeneratingColumn="FilterDataGrid_AutoGeneratingColumn"
+                                x:Name="grid" MouseDoubleClick="sfDataGrid_MouseDoubleClick"
+                                />
+        <!--<DataGrid Grid.Column="0" 
                   x:Name="sfDataGrid" 
                   CanUserAddRows="True" 
                   FontSize="11" RowHeight="24" 
@@ -63,9 +71,6 @@
                 <DataGridTextColumn HeaderTemplate="{StaticResource CompanyAdres2Header}" Header="Adres 2" Binding="{Binding AddressLine2}"/>
                 <DataGridTextColumn HeaderTemplate="{StaticResource CompanyAdres3Header}" Header="Adres 3" Binding="{Binding AddressLine3}"/>
             </DataGrid.Columns>
-        </DataGrid>
-        <DockPanel Grid.Row="1">
-            <Label x:Name="lblRecordCount" Content=""/>
-        </DockPanel>
+        </DataGrid>-->
     </Grid>
 </Window>
