@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Controls;
+using MaliyeHesaplama.models;
 
 namespace MaliyeHesaplama.wins
 {
@@ -10,55 +11,26 @@ namespace MaliyeHesaplama.wins
     {
         public int _inventoryType, Id;
         public string Code, Name, RawWidth, RawHeight, ProdWidth, ProdHeight, RawGrammage, ProdGrammage,  Explanation;
+        string ScreenName;
 
-        
+        private void mColChooser_Click(object sender, RoutedEventArgs e)
+        {
+            winKolonSecici win = new winKolonSecici(ScreenName, Properties.Settings.Default.RememberUserId);
+            win.Show();
+        }
+
         public bool YarnDyed;
-        private ICollectionView collectionView;
-        MiniOrm _orm = new MiniOrm();
-        public winMalzemeListesi(int InventoryType)
+
+        private void FilterDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            InitializeComponent();
-            _inventoryType = InventoryType;
-            var data = _orm.GetAll<dynamic>("Inventory").Where(x => x.Type == InventoryType && x.IsPrefix == false).ToList();
-            collectionView = CollectionViewSource.GetDefaultView(data);
-            sfDataGrid.ItemsSource = collectionView;
-            switch (_inventoryType)
+            e.Column.Header = e.PropertyName;
+        }
+
+        private void grid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (grid.SelectedItem != null)
             {
-                case 1:
-                    Title = "Kumaş Kartı Listesi";
-                    break;
-                case 2:
-                    Title = "İplik Kartı Listesi";                    
-                    break;
-                default:
-                    break;
-            }
-        }
-        void Search(object sender, string fieldName)
-        {
-            var tb = sender as TextBox;
-            MainHelper.SearchWithColumnHeader(tb, fieldName, collectionView, lblRecordCount);
-        }
-        private void _malzemeAdi_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Search(sender,"InventoryName");
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            HiddenFields();
-        }
-
-        private void _malzemeKodu_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Search(sender, "InventoryCode");
-        }
-
-        private void sfDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (sfDataGrid.SelectedItem != null)
-            {
-                dynamic record = sfDataGrid.SelectedItem;
+                dynamic record = grid.SelectedItem;
                 Id = record.Id;
                 Code = record.InventoryCode;
                 Name = record.InventoryName;
@@ -74,6 +46,36 @@ namespace MaliyeHesaplama.wins
                 this.Close();
             }
         }
+
+        private ICollectionView collectionView;
+        MiniOrm _orm = new MiniOrm();
+        public winMalzemeListesi(int InventoryType)
+        {
+            InitializeComponent();
+            _inventoryType = InventoryType;
+            var data = _orm.GetAll<Inventory>("Inventory").Where(x => x.Type == InventoryType && x.IsPrefix == false).ToList();
+            collectionView = CollectionViewSource.GetDefaultView(data);
+            grid.ItemsSource = collectionView;
+            switch (_inventoryType)
+            {
+                case 1:
+                    Title = "Kumaş Kartı Listesi";
+                    this.ScreenName = "Kumaş Kartı Listesi";
+                    break;
+                case 2:
+                    Title = "İplik Kartı Listesi";
+                    this.ScreenName = "İplik Kartı Listesi";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            HiddenFields();
+        }
+
         private void HiddenFields()
         {
             //if (_inventoryType == 2)

@@ -5,51 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         mc:Ignorable="d"
-        Title="" Height="450" Width="750" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Loaded="Window_Loaded" Icon="/wins/News.png">
+        xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
+        Title="" Height="450" Width="750" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" Loaded="Window_Loaded" Icon="/wins/News.png">
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" 
-              x:Name="sfDataGrid" 
-              CanUserAddRows="True" 
-              FontSize="11" RowHeight="24" 
-              VerticalContentAlignment="Center"
-              CanUserSortColumns="True"
-              IsReadOnly="True"
-              AutoGenerateColumns="False"
-              GridLinesVisibility="All"
-              HorizontalGridLinesBrush="#ececec"
-              VerticalGridLinesBrush="#ececec"
-                  MouseDoubleClick="sfDataGrid_MouseDoubleClick"
-              >
-            <DataGrid.Resources>
-                <DataTemplate x:Key="MalzemeKodu">
-                    <StackPanel>
-                        <Label Content="Malzeme Kodu"/>
-                        <TextBox x:Name="_malzemeKodu" Width="80" Height="20" TextChanged="_malzemeKodu_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="MalzemeAdi">
-                    <StackPanel>
-                        <Label Content="Malzeme Adı"/>
-                        <TextBox x:Name="_malzemeAdi" Width="180" Height="20" TextChanged="_malzemeAdi_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource MalzemeKodu}" x:Name="colCode" Header="Malzeme Kodu" Binding="{Binding InventoryCode}"/>
-                <DataGridTextColumn Width="300" HeaderTemplate="{StaticResource MalzemeAdi}" x:Name="colName" Header="Malzeme Adı" Binding="{Binding InventoryName}"/>
-                <!--<DataGridTextColumn x:Name="colHamEn" Header="Ham En" Binding="{Binding RawWidth}"/>-->
-                <!--<DataGridTextColumn x:Name="colHamBoy" Header="Ham Boy" Binding="{Binding RawHeight}"/>
-                <DataGridTextColumn x:Name="colMamulEn" Header="Mamul En" Binding="{Binding ProdWidth}"/>
-                <DataGridTextColumn x:Name="colMamulBoy" Header="Mamul Boy" Binding="{Binding ProdHeight}"/>-->
-            </DataGrid.Columns>
-        </DataGrid>
-        <Border Grid.Row="1">
-            <Label x:Name="lblRecordCount" Content=""/>
-        </Border>
+        <control:FilterDataGrid
+            Grid.Row="0" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"
+            GridLinesVisibility="All" HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
+            FilterLanguage="Turkish" ShowStatusBar="True" ShowRowsCount="True" ShowElapsedTime="True"
+            AutoGenerateColumns="True" AutoGeneratingColumn="FilterDataGrid_AutoGeneratingColumn" x:Name="grid"
+            MouseDoubleClick="grid_MouseDoubleClick"
+            >
+            <control:FilterDataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="mColChooser" Header="Kolon Seçicisini Aç" Click="mColChooser_Click"/>
+                </ContextMenu>
+            </control:FilterDataGrid.ContextMenu>
+        </control:FilterDataGrid>
     </Grid>
 </Window>

@@ -283,6 +283,7 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\St
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\Stimulsoft.Svg.pdb
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\Stimulsoft.Svg.xml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama.csproj.AssemblyReference.cache
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\styles\MenuButtonStyle.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winFirmaListesi.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winLogin.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winSplashScreen.baml
@@ -317,6 +318,7 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\Ap
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama_MarkupCompile.cache
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama_MarkupCompile.lref
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\App.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\HomeScreen.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\Common\ButtonBar.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_FirmaKarti.baml
@@ -353,5 +355,6 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\re
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama.pdb
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\MaliyeHesaplama.genruntimeconfig.cache
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\ref\MaliyeHesaplama.dll
-C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\styles\MenuButtonStyle.baml
-C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\App.baml
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\MaliyeHesaplama.dll.config
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winKolonSecici.g.cs
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winKolonSecici.baml
