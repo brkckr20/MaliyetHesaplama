@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MaliyeHesaplama.models
 {
@@ -22,6 +17,6 @@ namespace MaliyeHesaplama.models
         [Display(Name = "Alt Tipi")]
         public string SubType { get; set; }
         [Display(Name = "Ön Ek?")]
-        public bool IsPrefix{ get; set; } // kolon seçiciden devam et 15.12.2025
+        public bool IsPrefix{ get; set; }
     }
 }

@@ -55,6 +55,9 @@
     <Compile Update="wins\winFisHareketleriListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="wins\winKolonAyarlari.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="wins\winKolonSecici.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -142,6 +145,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winFisHareketleriListesi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="wins\winKolonAyarlari.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winKolonSecici.xaml">

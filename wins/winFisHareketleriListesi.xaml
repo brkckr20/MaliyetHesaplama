@@ -4,140 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
+                xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
         mc:Ignorable="d"
         Title="İşlem Listesi" Height="450" Width="800" WindowStartupLocation="CenterScreen" Icon="/wins/News.png" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <Border Grid.Row="0">
-            <DataGrid   x:Name="dgListe"
-                        HorizontalGridLinesBrush="#ececec"
-                        VerticalGridLinesBrush="#ececec"
-                        CanUserAddRows="False" MouseDoubleClick="dgListe_MouseDoubleClick"
-                        FontSize="11" RowHeight="24"
-                        CanUserSortColumns="True" IsReadOnly="True" AutoGenerateColumns="False" GridLinesVisibility="All"
-                >
-                <DataGrid.Resources>
-                    <DataTemplate x:Key="Tarih">
-                        <StackPanel>
-                            <Label Content="Tarih"/>
-                            <TextBox Width="75" Height="20" x:Name="sTarih" TextChanged="sTarih_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="FisNo">
-                        <StackPanel>
-                            <Label Content="Fiş No"/>
-                            <TextBox Width="75" Height="20" x:Name="sFisNo" TextChanged="sFisNo_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="FirmaAdi">
-                        <StackPanel>
-                            <Label Content="Firma Adı"/>
-                            <TextBox Width="75" Height="20" x:Name="sFirmaAdi" TextChanged="sFirmaAdi_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="Yetkili">
-                        <StackPanel>
-                            <Label Content="Yetkili"/>
-                            <TextBox Width="75" Height="20" x:Name="sYetkili" TextChanged="sYetkili_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="Termin">
-                        <StackPanel>
-                            <Label Content="Termin"/>
-                            <TextBox Width="75" Height="20" x:Name="sTermin" TextChanged="sTermin_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="Vade">
-                        <StackPanel>
-                            <Label Content="Vade (Gün)"/>
-                            <TextBox Width="75" Height="20" x:Name="sVade" TextChanged="sVade_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="KalemIslem">
-                        <StackPanel>
-                            <Label Content="Kalem İşlem"/>
-                            <TextBox Width="75" Height="20" x:Name="sKalemIslem" TextChanged="sKalemIslem_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="MalzemeKodu">
-                        <StackPanel>
-                            <Label Content="Malzeme Kodu"/>
-                            <TextBox Width="75" Height="20" x:Name="sMalzemeKodu" TextChanged="sMalzemeKodu_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="MalzemeAdi">
-                        <StackPanel>
-                            <Label Content="Malzeme Adı"/>
-                            <TextBox Width="75" Height="20" x:Name="sMalzemeAdi" TextChanged="sMalzemeAdi_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="VaryantKodu">
-                        <StackPanel>
-                            <Label Content="Varyant Kodu"/>
-                            <TextBox Width="75" Height="20" x:Name="sVaryantKodu" TextChanged="sVaryantKodu_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="Varyant">
-                        <StackPanel>
-                            <Label Content="Varyant Adı"/>
-                            <TextBox Width="75" Height="20" x:Name="sVaryant" TextChanged="sVaryant_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="Metre">
-                        <StackPanel>
-                            <Label Content="Metre"/>
-                            <TextBox Width="75" Height="20" x:Name="sMetre" TextChanged="sMetre_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="Döviz">
-                        <StackPanel>
-                            <Label Content="Döviz Cinsi"/>
-                            <TextBox Width="75" Height="20" x:Name="sForex" TextChanged="sForex_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="Pesin">
-                        <StackPanel>
-                            <Label Content="Peşin Ödeme"/>
-                            <TextBox Width="75" Height="20" x:Name="sPesin" TextChanged="sPesin_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="Vadeli">
-                        <StackPanel>
-                            <Label Content="Vadeli Ödeme"/>
-                            <TextBox Width="75" Height="20" x:Name="sVadeli" TextChanged="sVadeli_TextChanged" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </DataGrid.Resources>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource Tarih}" Header="Tarih" Binding="{Binding ReceiptDate, StringFormat='dd.MM.yyyy'}"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource FisNo}" Header="Fiş No" Binding="{Binding ReceiptNo}"/>
-                    <DataGridTextColumn Header="Firma Id" Binding="{Binding CompanyId}" Visibility="Hidden"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource FirmaAdi}" Header="Firma Adı" Binding="{Binding CompanyName}"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource Yetkili}" Header="Yetkili" Binding="{Binding Authorized}"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource Termin}" Header="Termin" Binding="{Binding DuaDate, StringFormat='dd.MM.yyyy'}"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource Vade}" Header="Vade (Gün)"  Binding="{Binding Maturity}"/>
-                    <DataGridTextColumn Header="Kalem Kayıt No"  Binding="{Binding ReceiptItemId}" Visibility="Collapsed"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource KalemIslem}" Header="Kalem İşlem"  Binding="{Binding OperationType}"/>
-                    <DataGridTextColumn Header="Malzeme Id"  Binding="{Binding InventoryId}" Visibility="Collapsed"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource MalzemeKodu}" Header="Malzeme Kodu"  Binding="{Binding InventoryCode}"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource MalzemeAdi}" Header="Malzeme Adı"  Binding="{Binding InventoryName}"/>
-                    <DataGridTextColumn Header="Varyant Id"  Binding="{Binding VariantId}" Visibility="Hidden" />
-                    <DataGridTextColumn HeaderTemplate="{StaticResource VaryantKodu}" Header="Varyant Kodu"  Binding="{Binding VariantCode}"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource Varyant}" Header="Varyant Adı"  Binding="{Binding Variant}"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource Metre}" Header="Net Metre" Binding="{Binding NetMeter}"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource Döviz}" Header="Döviz Cinsi" Binding="{Binding Forex}"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource Pesin}" Header="Peşin Ödeme" Binding="{Binding CashPayment}"/>
-                    <DataGridTextColumn HeaderTemplate="{StaticResource Vadeli}" Header="Vadeli Ödeme" Binding="{Binding DeferredPayment}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Border>
-        <Border Grid.Row="1">
-            <Label x:Name="lblRecordCount" Content="asda"/>
-        </Border>
+        <control:FilterDataGrid
+            x:Name="grid" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"
+            GridLinesVisibility="All" HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
+            FilterLanguage="Turkish" ShowStatusBar="True" AutoGenerateColumns="True"
+            AutoGeneratingColumn="grid_AutoGeneratingColumn" MouseDoubleClick="dgListe_MouseDoubleClick"
+            ColumnReordered="grid_ColumnReordered"
+    >
+            <control:FilterDataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Kolon Seçicisi" Click="MenuItem_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Excel'e Aktar" Click="ExportToExcel_Click"/>
+                </ContextMenu>
+            </control:FilterDataGrid.ContextMenu>
+        </control:FilterDataGrid>
     </Grid>
 </Window>

@@ -17,60 +17,12 @@
                                 FilterLanguage="Turkish" ShowStatusBar="True" ShowRowsCount="True" ShowElapsedTime="True"
                                 AutoGenerateColumns="True" AutoGeneratingColumn="FilterDataGrid_AutoGeneratingColumn"
                                 x:Name="grid" MouseDoubleClick="sfDataGrid_MouseDoubleClick"
-                                />
-        <!--<DataGrid Grid.Column="0" 
-                  x:Name="sfDataGrid" 
-                  CanUserAddRows="True" 
-                  FontSize="11" RowHeight="24" 
-                  VerticalContentAlignment="Center"
-                  CanUserSortColumns="True"
-                  IsReadOnly="True"
-                  MouseDoubleClick="sfDataGrid_MouseDoubleClick"
-                  AutoGenerateColumns="False"
-                  GridLinesVisibility="All"
-                  HorizontalGridLinesBrush="#ececec"
-                  VerticalGridLinesBrush="#ececec"
-                  >
-            <DataGrid.Resources>
-                <DataTemplate x:Key="CompanyCodeHeader">
-                    <StackPanel>
-                        <Label Content=" Firma Kodu"/>
-                        <TextBox Width="105" Height="20" x:Name="srcCode" TextChanged="srcCode_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="CompanyNameHeader">
-                    <StackPanel>
-                        <Label Content=" Firma Ünvanı"/>
-                        <TextBox Width="105" Height="20" x:Name="srcName" TextChanged="srcName_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="CompanyAdres1Header">
-                    <StackPanel>
-                        <Label Content=" Adres 1"/>
-                        <TextBox Width="105" Height="20" x:Name="srcAdres1" TextChanged="srcAdres1_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="CompanyAdres2Header">
-                    <StackPanel>
-                        <Label Content=" Adres 2"/>
-                        <TextBox Width="105" Height="20" x:Name="srcAdres2" TextChanged="srcAdres2_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="CompanyAdres3Header">
-                    <StackPanel>
-                        <Label Content=" Adres 3"/>
-                        <TextBox Width="105" Height="20" x:Name="srcAdres3" TextChanged="srcAdres3_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource CompanyCodeHeader}" Header="Firma Kodu" Binding="{Binding CompanyCode}"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource CompanyNameHeader}" Header="Firma Ünvan" Binding="{Binding CompanyName}"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource CompanyAdres1Header}" Header="Adres 1" Binding="{Binding AddressLine1}"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource CompanyAdres2Header}" Header="Adres 2" Binding="{Binding AddressLine2}"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource CompanyAdres3Header}" Header="Adres 3" Binding="{Binding AddressLine3}"/>
-            </DataGrid.Columns>
-        </DataGrid>-->
+                                >
+            <control:FilterDataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Kolon Seçicisi" Click="MenuItem_Click"/>
+                </ContextMenu>
+            </control:FilterDataGrid.ContextMenu>
+        </control:FilterDataGrid>
     </Grid>
 </Window>

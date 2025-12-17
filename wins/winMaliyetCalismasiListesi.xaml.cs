@@ -1,4 +1,5 @@
 ﻿using MaliyeHesaplama.helpers;
+using MaliyeHesaplama.models;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,47 +17,40 @@ namespace MaliyeHesaplama.wins
         public byte[] ImageData;
         private ICollectionView _collectionView;
         MiniOrm _orm = new MiniOrm();
+        private List<ColumnSetting> columnSettings;
+        private winKolonAyarlari ayarlarWindow;
+
+        FilterGridHelpers fgh;
         public winMaliyetCalismasiListesi()
         {
             InitializeComponent();
+            fgh = new FilterGridHelpers(grid, "Maliyet Çalışması Listesi", "grid");
         }
-        void Search(object sender, string fieldName)
+        private void grid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            var tb = sender as TextBox;
-            MainHelper.SearchWithColumnHeader(tb, fieldName, _collectionView, lblRecordCount);
+            var hiddenColumns = new[] { "InsertedBy", "InsertedDate", "UpdatedBy", "UpdatedDate", "RecipeId", "Type", "ProductImage", "CompanyId", "InventoryId" };
+            fgh.GridGeneratingColumn(e, grid, hiddenColumns);
         }
 
-        private void _tarih_TextChanged(object sender, TextChangedEventArgs e)
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Search(sender, "Date");
+            fgh.OpenColumnsForm(this);
         }
 
-        private void _calismaNo_TextChanged(object sender, TextChangedEventArgs e)
+        private void ExportToExcel_Click(object sender, RoutedEventArgs e)
         {
-            Search(sender, "OrderNo");
+            fgh.ExportToExcel();
         }
-
-        private void _firmaUnvan_TextChanged(object sender, TextChangedEventArgs e)
+        private void grid_ColumnReordered(object sender, DataGridColumnEventArgs e)
         {
-            Search(sender, "CompanyName");
+            fgh.GridReOrdered(sender,e);
         }
-
-        private void _urunKodu_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Search(sender, "InventoryCode");
-        }
-
-        private void _urunAdi_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Search(sender, "InventoryName");
-        }
-
         private void sfDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (sfDataGrid.SelectedItem != null)
+            if (grid.SelectedItem != null)
             {
                 this.secimYapildi = true;
-                dynamic record = sfDataGrid.SelectedItem;
+                dynamic record = grid.SelectedItem;
                 Id = record.Id;
                 CompanyId = record.CompanyId;
                 CompanyName = record.CompanyName;
@@ -73,29 +67,15 @@ namespace MaliyeHesaplama.wins
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var data = _orm.GetCostList<dynamic>();
+            var data = _orm.GetCostList<Cost>();
             _collectionView = CollectionViewSource.GetDefaultView(data);
-            sfDataGrid.ItemsSource = _collectionView;
-        }
-        void SearchWithTextboxValue(TextBox aranacakTextbox, string fieldAdi)
-        {
-            string filterText = aranacakTextbox.Text.ToLower();
+            grid.ItemsSource = _collectionView;
 
-            if (_collectionView != null)
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                _collectionView.Filter = item =>
-                {
-                    var dict = (IDictionary<string, object>)item;
-
-                    if (dict.ContainsKey(fieldAdi) && dict[fieldAdi] != null)
-                    {
-                        string companyName = dict[fieldAdi].ToString().ToLower();
-                        return companyName.Contains(filterText);
-                    }
-                    return false;
-                };
-                _collectionView.Refresh();
-            }
+                fgh.InitializeColumnSettings();
+                fgh.LoadColumnSettingsFromDatabase();
+            }), System.Windows.Threading.DispatcherPriority.Loaded);
         }
     }
 }

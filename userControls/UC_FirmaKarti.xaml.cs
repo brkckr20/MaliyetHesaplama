@@ -38,10 +38,9 @@ namespace MaliyeHesaplama.userControls
             }
             else
             {
-                Bildirim.Bilgilendirme2("Gösterilecek başka bir kayıt bulunamadı!");
+                Bildirim.Uyari2("Gösterilecek başka bir kayıt bulunamadı!");
             }
         }
-
         void Temizle()
         {
             Id = 0;
@@ -51,17 +50,14 @@ namespace MaliyeHesaplama.userControls
             txtAdres2.Text = string.Empty;
             txtAdres3.Text = string.Empty;
         }
-
         private void cmSonNoAktar_Click(object sender, RoutedEventArgs e)
         {
             txtFirmaKodu.Text = _orm.GetLastCompanyCode();
         }
-
         public void Yeni()
         {
             Temizle();
         }
-
         public void Kaydet()
         {
             if (txtFirmaKodu.Text != string.Empty)
@@ -83,7 +79,6 @@ namespace MaliyeHesaplama.userControls
                 Bildirim.Uyari2("Firma kodu boş bırakılamaz!");
             }
         }
-
         public void Sil()
         {
             if (_orm.Delete("Company", Id, true) > 0)
@@ -91,7 +86,6 @@ namespace MaliyeHesaplama.userControls
                 Temizle();
             }
         }
-
         public void Yazdir()
         {
             if (this.Id == 0)

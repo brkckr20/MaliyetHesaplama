@@ -1,0 +1,6 @@
+Id|False
+Firma Kodu|False
+Firma Ünvan|True
+Adres 1|True
+Adres 2|False
+Adres 3|False

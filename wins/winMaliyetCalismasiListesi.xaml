@@ -4,72 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
+        xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
         mc:Ignorable="d"
-        Title="Maliyet Çalışmaları Listesi" Height="450" Width="800" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Loaded="Window_Loaded" Icon="/wins/News.png">
+        Title="Maliyet Çalışmaları Listesi" Height="450" Width="800" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" Loaded="Window_Loaded" Icon="/wins/News.png">
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" 
-              x:Name="sfDataGrid" 
-              FontSize="11" RowHeight="24" 
-              VerticalContentAlignment="Center"
-              CanUserSortColumns="True"
-              IsReadOnly="True"
-              MouseDoubleClick="sfDataGrid_MouseDoubleClick"
-              AutoGenerateColumns="False"
-              GridLinesVisibility="All"
-              HorizontalGridLinesBrush="#ececec"
-              VerticalGridLinesBrush="#ececec"
-              >
-            <DataGrid.Resources>
-                <DataTemplate x:Key="Tarih">
-                    <StackPanel>
-                        <Label Content="Tarih"/>
-                        <TextBox x:Name="_tarih" Width="80" Height="20" TextChanged="_tarih_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>                    
-                </DataTemplate>
-                <DataTemplate x:Key="CalismaNo">
-                    <StackPanel>
-                        <Label Content="Çalışma No"/>
-                        <TextBox x:Name="_calismaNo" Width="80" Height="20" TextChanged="_calismaNo_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>                    
-                </DataTemplate>
-                <DataTemplate x:Key="Firma">
-                    <StackPanel>
-                        <Label Content="Firma Ünvan"/>
-                        <TextBox x:Name="_firmaUnvan" Width="80" Height="20" TextChanged="_firmaUnvan_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>                    
-                </DataTemplate>
-                <DataTemplate x:Key="UrunKodu">
-                    <StackPanel>
-                        <Label Content="Ürün Kodu"/>
-                        <TextBox x:Name="_urunKodu" Width="80" Height="20" TextChanged="_urunKodu_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>                    
-                </DataTemplate>
-                <DataTemplate x:Key="UrunAdi">
-                    <StackPanel>
-                        <Label Content="Ürün Adı"/>
-                        <TextBox x:Name="_urunAdi" Width="80" Height="20" TextChanged="_urunAdi_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>                    
-                </DataTemplate>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource Tarih}" Header="Tarih" Binding="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource CalismaNo}" Header="Çalışma No" Binding="{Binding OrderNo}"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource Firma}" Header="Firma Ünvan" Binding="{Binding CompanyName}"/>
-                <DataGridTextColumn Header="Firma Kodu" Binding="{Binding CompanyCode}" Visibility="Hidden"/>
-                <DataGridTextColumn Header="Firma Id" Binding="{Binding CompanyId}" Visibility="Hidden"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource UrunKodu}" Header="Ürün Kodu" Binding="{Binding InventoryCode}"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource UrunAdi}" Header="Ürün Adı" Binding="{Binding InventoryName}"/>
-                <DataGridTextColumn Header="Ürün Id" Binding="{Binding InventoryId}" Visibility="Hidden"/>
-                <DataGridTextColumn Header="Ürün Resmi" Binding="{Binding ProductImage}" Visibility="Hidden"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Border Grid.Row="1">
-            <Label x:Name="lblRecordCount" Content=""/>
-        </Border>
+        <control:FilterDataGrid
+            x:Name="grid" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"
+            GridLinesVisibility="All" HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
+            FilterLanguage="Turkish" ShowStatusBar="True" AutoGenerateColumns="True"
+            AutoGeneratingColumn="grid_AutoGeneratingColumn" MouseDoubleClick="sfDataGrid_MouseDoubleClick"
+            ColumnReordered="grid_ColumnReordered"
+            >
+            <control:FilterDataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Kolon Seçicisi" Click="MenuItem_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Excel'e Aktar" Click="ExportToExcel_Click"/>
+                </ContextMenu>
+            </control:FilterDataGrid.ContextMenu>
+        </control:FilterDataGrid>
     </Grid>
 </Window>

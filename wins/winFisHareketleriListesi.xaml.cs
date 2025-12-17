@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Controls;
+using Stimulsoft.Report.Helpers;
 
 namespace MaliyeHesaplama.wins
 {
@@ -14,103 +15,59 @@ namespace MaliyeHesaplama.wins
         public bool secimYapildi = false;
         public int Id, CompanyId, _depoId;
         public string ReceiptNo, CompanyName, Authorized, Maturity, CustomerOrderNo, Explanation;
-        private void sFisNo_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "ReceiptNo", _collectionView, lblRecordCount);
-        }
+        FilterGridHelpers fgh;
 
-        private void sFirmaAdi_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "CompanyName", _collectionView, lblRecordCount);
-        }
-
-        private void sYetkili_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "Authorized", _collectionView, lblRecordCount);
-        }
-
-        private void sTermin_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "DuaDate", _collectionView, lblRecordCount);
-        }
-
-        private void sVade_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "Maturity", _collectionView, lblRecordCount);
-        }
-
-        private void sKalemIslem_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "OperationType", _collectionView, lblRecordCount);
-        }
-
-        private void sMalzemeKodu_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "InventoryCode", _collectionView, lblRecordCount);
-        }
-
-        private void sMalzemeAdi_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "InventoryName", _collectionView, lblRecordCount);
-        }
-
-        private void sVaryantKodu_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "VariantCode", _collectionView, lblRecordCount);
-        }
-
-        private void sVaryant_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "Variant", _collectionView, lblRecordCount);
-        }
-
-        private void sMetre_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "NetMeter", _collectionView, lblRecordCount);
-        }
-
-        private void sForex_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "Forex", _collectionView, lblRecordCount);
-        }
-
-        private void sPesin_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "CashPayment", _collectionView, lblRecordCount);
-        }
-
-        private void sVadeli_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender, "DeferredPayment", _collectionView, lblRecordCount);
-        }
-
-        private void sTarih_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            MainHelper.SearchWithCW(sender,"ReceiptDate", _collectionView, lblRecordCount);
-        }
-
-        public DateTime _Date, DuaDate;
-        public List<dynamic> HareketlerListesi { get; set; } = new List<dynamic>();
         public winFisHareketleriListesi(int depoId, Enums.Receipt receipt)
         {
             InitializeComponent();
             this._receiptType = Convert.ToInt32(receipt);
             this._depoId = depoId;
+            fgh = new FilterGridHelpers(grid, "Sipariş Listesi", "grid");
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            fgh.OpenColumnsForm(this);
+        }
+        private void ExportToExcel_Click(object sender, RoutedEventArgs e)
+        {
+            fgh.ExportToExcel();
+        }
+        // bu ekranda dataannotation yapılacak ve listeleme işlemi kontrol edilecek - 17.12.2025
+        private void grid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            var hiddenColumns = new[] { "InsertedBy", "InsertedDate", "UpdatedBy", "UpdatedDate", "RecipeId", "Type", "ProductImage", "CompanyId", "InventoryId" };
+            fgh.GridGeneratingColumn(e, grid, hiddenColumns);
+        }
+
+        private void grid_ColumnReordered(object sender, DataGridColumnEventArgs e)
+        {
+            fgh.GridReOrdered(sender, e);
+        }
+
+        public DateTime _Date, DuaDate;
+        public List<dynamic> HareketlerListesi { get; set; } = new List<dynamic>();
+        
         private IEnumerable<dynamic> _tumHareketler;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _tumHareketler = _orm.GetMovementList<dynamic>(_depoId, _receiptType);
             _collectionView = CollectionViewSource.GetDefaultView(_tumHareketler);
-            dgListe.ItemsSource = _collectionView;
+            grid.ItemsSource = _collectionView;
+
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                fgh.InitializeColumnSettings();
+                fgh.LoadColumnSettingsFromDatabase();
+            }), System.Windows.Threading.DispatcherPriority.Loaded);
         }
 
         private void dgListe_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (dgListe.SelectedItem != null)
+            if (grid.SelectedItem != null)
             {
                 this.secimYapildi = true;
-                dynamic record = dgListe.SelectedItem;
+                dynamic record = grid.SelectedItem;
                 Id = record.Id;
                 ReceiptNo = record.ReceiptNo;
                 _Date = record.ReceiptDate;

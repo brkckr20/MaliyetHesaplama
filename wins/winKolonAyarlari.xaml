@@ -1,0 +1,36 @@
+﻿<Window x:Class="MaliyeHesaplama.wins.winKolonAyarlari"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kolon Ayarları" Height="400" Width="398" 
+        WindowStartupLocation="CenterScreen" 
+        FontFamily="Bahnschrift Light"
+        ResizeMode="NoResize">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Gösterilecek Kolonları Seçin:" 
+                   FontSize="14" FontWeight="SemiBold" Margin="0,0,0,10"/>
+        <Border Grid.Row="1" BorderBrush="#CCCCCC" BorderThickness="1" 
+                Background="White" CornerRadius="3">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="ColumnListPanel" Margin="10"/>
+            </ScrollViewer>
+        </Border>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" 
+                    HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button Content="Tümünü Seç" Width="90" Height="30" 
+                    Margin="0,0,5,0" Click="TumunuSec_Click"/>
+            <Button Content="Tümünü Kaldır" Width="90" Height="30" 
+                    Margin="0,0,10,0" Click="TumunuKaldir_Click"/>
+            <Button Content="Kaydet" Width="80" Height="30" 
+                    Margin="0,0,5,0" Click="Kaydet_Click" 
+                    Background="#4CAF50" Foreground="White" 
+                    FontWeight="SemiBold" IsDefault="True"/>
+            <Button Content="İptal" Width="80" Height="30" 
+                    Click="Iptal_Click" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

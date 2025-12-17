@@ -138,7 +138,7 @@ public class MiniOrm
     public IEnumerable<T> GetCostList<T>()
     {
         var sql = @"select 
-                    ISNULL(C.Id,'') [Id]
+                    ISNULL(C.Id,0) [Id]
                     ,ISNULL(C.Date,'') [Date]
                     ,ISNULL(C.OrderNo,'') [OrderNo]
                     ,ISNULL(CO.Id,'') [CompanyId]
@@ -147,7 +147,7 @@ public class MiniOrm
                     ,ISNULL(I.InventoryName,'') [InventoryName]
                     ,ISNULL(I.InventoryCode,'') [InventoryCode]
                     ,ISNULL(I.Id,'') [InventoryId]
-					,ISNULL(CONVERT(varchar(max), C.ProductImage, 1), '') AS [ProductImage] 
+					--,ISNULL(CONVERT(varchar(max), C.ProductImage, 1), '') AS [ProductImage] 
                     from Cost C 
                     left join Company CO on C.CompanyId = CO.Id
                     left join Inventory I on I.Id = C.InventoryId
