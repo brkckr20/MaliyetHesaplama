@@ -1,28 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using MaliyeHesaplama.Interfaces;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using MaliyeHesaplama.helpers;
 
 namespace MaliyeHesaplama.userControls
 {
-    /// <summary>
-    /// Interaction logic for UC_UretimGirisi.xaml
-    /// </summary>
-    public partial class UC_UretimGirisi : UserControl
+    public partial class UC_UretimGirisi : UserControl, IPageCommands
     {
         public UC_UretimGirisi()
         {
             InitializeComponent();
+            ButtonBar.PageCommands = this;
+        }
+
+        public void Geri()
+        {
+            //
+        }
+
+        public void Ileri()
+        {
+            //
+        }
+
+        public void Kaydet()
+        {
+            //
+        }
+
+        public void Listele()
+        {
+            //
+        }
+
+        public void Sil()
+        {
+            //
+        }
+
+        public void Yazdir()
+        {
+            //
+        }
+
+        public void Yeni()
+        {
+            
+        }
+
+        private void btnFirmaListesi_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnYetkiliListesi_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDepoListesi_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+
+        }
+
+        private void btnVariantListe_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnKumasListe_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
         }
     }
 }

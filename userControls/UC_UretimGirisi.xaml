@@ -4,9 +4,124 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
+             xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" FontFamily="Bahnschrift Light"
+             VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+             >
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Açık Siparişler"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
     <Grid>
-        <Label Content="adasdlfgms"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="#ececec" BorderThickness="1" Margin="0,0,0,2">
+            <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
+        </Border>
+        <Border Grid.Row="1" Background="White" BorderBrush="#ececec" BorderThickness="1">
+            <Grid Margin="0,2,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,4,0">
+                    <DockPanel HorizontalAlignment="Left" Height="24">
+                        <TextBlock VerticalAlignment="Center" Text="Fiş No : " Width="100"/>
+                        <TextBox VerticalContentAlignment="Center" Width="200" x:Name="txtFisNo"/>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Left" Margin="0,2">
+                        <TextBlock VerticalAlignment="Center" Text="Tarih : " Width="100"/>
+                        <DatePicker  Width="200" x:Name="dpTarih"/>
+                    </DockPanel>
+                    <DockPanel Height="24">
+                        <TextBlock VerticalAlignment="Center" Text="Firma Ünvanı : " Width="100"/>
+                        <TextBox VerticalContentAlignment="Center" x:Name="txtFirmaUnvan" Width="176"/>
+                        <Button x:Name="btnFirmaListesi" Click="btnFirmaListesi_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Left" Height="24" Margin="0,2">
+                        <TextBlock VerticalAlignment="Center" Text="Belge No : " Width="100"/>
+                        <TextBox VerticalContentAlignment="Center" Width="200" x:Name="txtBelgeNo"/>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="2">
+                    <DockPanel Height="24">
+                        <TextBlock VerticalAlignment="Center" Text="Depo : " Width="100"/>
+                        <TextBox VerticalContentAlignment="Center" x:Name="txtDepo" Width="176"/>
+                        <Button x:Name="btnDepoListesi" Click="btnDepoListesi_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                    </DockPanel>
+                    <DockPanel Height="24" Margin="0,2,0,0">
+                        <TextBlock VerticalAlignment="Center" Text="Açıklama : " Width="100"/>
+                        <TextBox x:Name="txtAciklama" Width="200"/>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <DataGrid x:Name="dataGrid" Grid.Row="0"
+                CanUserAddRows="True"
+                AutoGenerateColumns="False"
+                CellEditEnding="dataGrid_CellEditEnding" 
+                HorizontalGridLinesBrush="LightGray" 
+                VerticalGridLinesBrush="LightGray"
+                AlternationCount="2"
+                AlternatingRowBackground="#FFF7F7F7"
+                RowBackground="White">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Visibility="Hidden" Binding="{Binding Id}" IsReadOnly="True"/>
+                    <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType}">
+                        <DataGridComboBoxColumn.ItemsSource>
+                            <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                <sys:String>Üretim</sys:String>
+                            </x:Array>
+                        </DataGridComboBoxColumn.ItemsSource>
+                    </DataGridComboBoxColumn>
+                    <DataGridTextColumn Header="Kumaş Id" Binding="{Binding InventoryId}" IsReadOnly="True" Visibility="Hidden" />
+                    <DataGridTemplateColumn Header="Malzeme Kodu">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding InventoryCode}" Width="100" BorderBrush="Transparent"/>
+                                    <Button x:Name="btnKumasListe" Click="btnKumasListe_Click" Content="🔎"  Background="Transparent" BorderBrush="Transparent"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Width="200" Header="Malzeme Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Varyant Id" Binding="{Binding VariantId}" IsReadOnly="True" Visibility="Hidden" />
+                    <DataGridTemplateColumn  Header="Varyant Kodu" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding VariantCode}" Width="100" BorderBrush="Transparent"/>
+                                    <Button x:Name="btnVariantListe" Click="btnVariantListe_Click" Content="🔎" Background="Transparent" BorderBrush="Transparent"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Varyant" Binding="{Binding Variant}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Net Metre" Binding="{Binding NetMeter, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                    <DataGridComboBoxColumn  Header="Döviz" SelectedItemBinding="{Binding Forex}" x:Name="cmbDoviz"/>
+                    <DataGridTextColumn Header="Peşin Ödeme" Binding="{Binding CashPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                    <DataGridTextColumn Header="Vadeli Ödeme" Binding="{Binding DeferredPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                    <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Grid.Row="1" Margin="0,2,0,0">
+                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,0" Text="Toplam Adet: 0   Toplam Miktar: 0,00"/>
+                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,0" Text="Toplam Adet: 0   Toplam Miktar: 0,00"/>
+                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,0" Text="Toplam Adet: 0   Toplam Miktar: 0,00"/>
+            </StackPanel>
+        </Grid>
+        <!--Bu ekrandan devam edilecek - 18.12.2025-->
     </Grid>
 </UserControl>
