@@ -26,7 +26,7 @@ namespace MaliyeHesaplama
         private void UretimYonetimi_Click(object sender, RoutedEventArgs e)
         {
             string title = "Üretim Yönetimi";
-            string[] items = { "Maliyet Hesaplama", "Sipariş Girişi" };
+            string[] items = { "Maliyet Hesaplama", "Sipariş Girişi", "Üretim Girişi" };
             ShowMegaMenu(title, items);
         }
         private void Ayarlar_Click(object sender, RoutedEventArgs e)
@@ -51,6 +51,8 @@ namespace MaliyeHesaplama
                     OpenTab(menuName, new userControls.Uc_MaliyetHesaplama());
                 if (menuName == "Sipariş Girişi")
                     OpenTab(menuName, new userControls.UC_SiparisGirisi2());
+                if (menuName == "Üretim Girişi")
+                    OpenTab(menuName, new userControls.UC_UretimGirisi()); // bu ekrandan devam edilecek 18-11-2025
 
                 /* Kartlar */
                 if (menuName == "Kumaş Kartı")

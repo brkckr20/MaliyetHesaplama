@@ -376,7 +376,7 @@ namespace MaliyeHesaplama.helpers
                         worksheet.Columns().AdjustToContents();
                         workbook.SaveAs(saveFileDialog.FileName);
                         
-                        System.Windows.MessageBox.Show("Excel'e aktarım başarıyla tamamlandı.", "Bilgi", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Bildirim.Bilgilendirme2("Excel'e aktarım başarıyla tamamlandı.");
                     }
                 }
             }

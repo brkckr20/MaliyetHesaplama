@@ -301,7 +301,6 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\us
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_SiparisGirisi2.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_UretimYonetimiParametreleri.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winBuyukResim.g.cs
-C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winDemo.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winFirmaListesi.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winFisHareketleriListesi.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winKolonSecici.g.cs
@@ -334,7 +333,6 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\us
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_SiparisGirisi2.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_UretimYonetimiParametreleri.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winBuyukResim.baml
-C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winDemo.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winFisHareketleriListesi.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winKolonSecici.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winMaliyetCalismasiListesi.baml
@@ -368,3 +366,5 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\Ex
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\RBush.dll
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\SixLabors.Fonts.dll
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\System.IO.Packaging.dll
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_UretimGirisi.g.cs
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_UretimGirisi.baml

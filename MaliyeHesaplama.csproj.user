@@ -40,13 +40,13 @@
     <Compile Update="userControls\UC_SiparisGirisi2.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="userControls\UC_UretimGirisi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="userControls\UC_UretimYonetimiParametreleri.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="wins\winBuyukResim.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="wins\winDemo.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="wins\winFirmaListesi.xaml.cs">
@@ -136,9 +136,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winBuyukResim.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="wins\winDemo.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winFirmaListesi.xaml">

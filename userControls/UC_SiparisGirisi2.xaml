@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaliyeHesaplama.userControls"
              xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
+             xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" x:Name="RootControl" FontFamily="Bahnschrift Light" Loaded="RootControl_Loaded"
              >
@@ -62,74 +63,21 @@
                 </StackPanel>
             </Grid>
         </Border>
-        <DataGrid x:Name="dataGrid" CanUserAddRows="True" Grid.Row="2" AutoGenerateColumns="False"
-                  CellEditEnding="dataGrid_CellEditEnding" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                  >
-            <DataGrid.Resources>
-                <DataTemplate x:Key="OperationCodeHeader">
-                    <StackPanel>
-                        <Label Content="Kalem İşlem"/>
-                        <TextBox Width="100" Height="20" x:Name="srcKalemIslem" TextChanged="srcKalemIslem_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="InventoryCodeHeader">
-                    <StackPanel>
-                        <Label Content="Malzeme Kodu"/>
-                        <TextBox Width="105" Height="20" x:Name="srcCode" TextChanged="srcCode_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="InventoryNameHeader">
-                    <StackPanel>
-                        <Label Content="Malzeme Adı"/>
-                        <TextBox Width="105" Height="20" x:Name="srcName" TextChanged="srcName_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="VariantCodeHeader">
-                    <StackPanel>
-                        <Label Content="Varyant Kodu"/>
-                        <TextBox Width="105" Height="20" x:Name="srcVariantCode" TextChanged="srcVariantCode_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="VariantNameHeader">
-                    <StackPanel>
-                        <Label Content="Varyant"/>
-                        <TextBox Width="105" Height="20" x:Name="srcVariantName" TextChanged="srcVariantName_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="MeterHeader">
-                    <StackPanel>
-                        <Label Content="Metre"/>
-                        <TextBox Width="105" Height="20" x:Name="srcMeter" TextChanged="srcMeter_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="ForexHeader">
-                    <StackPanel>
-                        <Label Content="Döviz Cinsi"/>
-                        <TextBox Width="105" Height="20" x:Name="srcForex" TextChanged="srcForex_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="CashHeader">
-                    <StackPanel>
-                        <Label Content="Peşin Ödeme"/>
-                        <TextBox Width="105" Height="20" x:Name="srcCash" TextChanged="srcCash_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="DeferredHeader">
-                    <StackPanel>
-                        <Label Content="Vadeli Ödeme"/>
-                        <TextBox Width="105" Height="20" x:Name="srcDeferred" TextChanged="srcDeferred_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="RowExplanationHeader">
-                    <StackPanel>
-                        <Label Content="Açıklama"/>
-                        <TextBox Width="105" Height="20" x:Name="srcRowExplanation" TextChanged="srcRowExplanation_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
+        <control:FilterDataGrid x:Name="dataGrid" 
+                CanUserAddRows="True" 
+                Grid.Row="2" 
+                AutoGenerateColumns="False"
+                CellEditEnding="dataGrid_CellEditEnding" 
+                HorizontalGridLinesBrush="LightGray" 
+                VerticalGridLinesBrush="LightGray"
+                FilterLanguage="Turkish" 
+                ColumnReordered="dataGrid_ColumnReordered"
+                AlternationCount="2"
+                AlternatingRowBackground="#FFF7F7F7"
+                RowBackground="White">
+            <control:FilterDataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Visibility="Hidden"/>
-                <DataGridComboBoxColumn Header="Kalem İşlem" HeaderTemplate="{StaticResource OperationCodeHeader}" SelectedItemBinding="{Binding OperationType}">
+                <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType}">
                     <DataGridComboBoxColumn.ItemsSource>
                         <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                             <sys:String>Sipariş</sys:String>
@@ -139,7 +87,7 @@
                     </DataGridComboBoxColumn.ItemsSource>
                 </DataGridComboBoxColumn>
                 <DataGridTextColumn Header="Kumaş Id" Binding="{Binding InventoryId}" IsReadOnly="True" Visibility="Hidden" />
-                <DataGridTemplateColumn Header="Malzeme Kodu" HeaderTemplate="{StaticResource InventoryCodeHeader}">
+                <DataGridTemplateColumn Header="Malzeme Kodu">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -149,9 +97,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Width="200" HeaderTemplate="{StaticResource InventoryNameHeader}" Header="Kumaş Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
+                <DataGridTextColumn Width="200" Header="Kumaş Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Varyant Id" Binding="{Binding VariantId}" IsReadOnly="True" Visibility="Hidden" />
-                <DataGridTemplateColumn  Header="Varyant Kodu" HeaderTemplate="{StaticResource VariantCodeHeader}">
+                <DataGridTemplateColumn  Header="Varyant Kodu" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -161,14 +109,14 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Varyant" HeaderTemplate="{StaticResource VariantNameHeader}" Binding="{Binding Variant}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Net Metre" HeaderTemplate="{StaticResource MeterHeader}" Binding="{Binding NetMeter, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
-                <DataGridComboBoxColumn  Header="Döviz" HeaderTemplate="{StaticResource ForexHeader}" SelectedItemBinding="{Binding Forex}" x:Name="cmbDoviz"/>
-                <DataGridTextColumn Header="Peşin Ödeme" HeaderTemplate="{StaticResource CashHeader}" Binding="{Binding CashPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
-                <DataGridTextColumn Header="Vadeli Ödeme" HeaderTemplate="{StaticResource DeferredHeader}" Binding="{Binding DeferredPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
-                <DataGridTextColumn Header="Açıklama" HeaderTemplate="{StaticResource RowExplanationHeader}" Binding="{Binding RowExplanation}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                <DataGridTextColumn Header="Varyant" Binding="{Binding Variant}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Net Metre" Binding="{Binding NetMeter, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                <DataGridComboBoxColumn  Header="Döviz" SelectedItemBinding="{Binding Forex}" x:Name="cmbDoviz"/>
+                <DataGridTextColumn Header="Peşin Ödeme" Binding="{Binding CashPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                <DataGridTextColumn Header="Vadeli Ödeme" Binding="{Binding DeferredPayment, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
+                <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}"/>
+            </control:FilterDataGrid.Columns>
+        </control:FilterDataGrid>
         <StackPanel Grid.Row="3" Background="White">
             <DockPanel>
                 <Label x:Name="lblRecordCount"/>

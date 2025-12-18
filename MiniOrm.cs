@@ -268,6 +268,7 @@ public class MiniOrm
                     end as [TypeName],
                     ISNULL(C.Code,'') [Code],
                     ISNULL(C.Name,'') [Name],
+                    ISNULL(C.Date,'') [Date],
                     ISNULL(C.CompanyId,0) [CompanyId],
                     ISNULL(C.ParentId,0) [ParentId],
                     ISNULL(C.RequestDate,'') [RequestDate],

@@ -1326,7 +1326,7 @@ rkJggg==</ImageBytes>
             <Text20 Ref="29" type="Text" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>0,0,1.2,0.6</ClientRectangle>
+              <ClientRectangle>0,0,0.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Bahnschrift,9</Font>
@@ -1334,7 +1334,7 @@ rkJggg==</ImageBytes>
               <Name>Text20</Name>
               <Page isRef="5" />
               <Parent isRef="28" />
-              <Text>Sıra No</Text>
+              <Text>S.N.</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
@@ -1342,7 +1342,7 @@ rkJggg==</ImageBytes>
             <Text21 Ref="30" type="Text" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>1.2,0,10.2,0.6</ClientRectangle>
+              <ClientRectangle>0.6,0,10.8,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Bahnschrift,9</Font>
@@ -1434,7 +1434,7 @@ rkJggg==</ImageBytes>
             <Text18 Ref="36" type="Text" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>0,0,1.2,0.6</ClientRectangle>
+              <ClientRectangle>0,0,0.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Bahnschrift Light,7</Font>
@@ -1450,7 +1450,7 @@ rkJggg==</ImageBytes>
             <Text19 Ref="37" type="Text" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>1.2,0,10.2,0.6</ClientRectangle>
+              <ClientRectangle>0.6,0,10.8,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Bahnschrift Light,7</Font>
@@ -1602,10 +1602,10 @@ rkJggg==</ImageBytes>
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>12/5/2025 11:05:26 AM</ReportChanged>
+  <ReportChanged>12/18/2025 9:56:28 AM</ReportChanged>
   <ReportCreated>11/10/2025 1:38:02 PM</ReportCreated>
   <ReportFile>C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\reports\Sipariş Formu.mrt</ReportFile>
-  <ReportGuid>6a5f6e94b9f14884952e574ada556634</ReportGuid>
+  <ReportGuid>8a4926f39e4f4311bc7eae4889b6f85e</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2025.4.1.0</ReportVersion>

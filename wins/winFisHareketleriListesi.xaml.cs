@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Controls;
 using Stimulsoft.Report.Helpers;
+using MaliyeHesaplama.models;
 
 namespace MaliyeHesaplama.wins
 {
@@ -33,10 +34,9 @@ namespace MaliyeHesaplama.wins
         {
             fgh.ExportToExcel();
         }
-        // bu ekranda dataannotation yapılacak ve listeleme işlemi kontrol edilecek - 17.12.2025
         private void grid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            var hiddenColumns = new[] { "InsertedBy", "InsertedDate", "UpdatedBy", "UpdatedDate", "RecipeId", "Type", "ProductImage", "CompanyId", "InventoryId" };
+            var hiddenColumns = new[] { "CompanyId" };
             fgh.GridGeneratingColumn(e, grid, hiddenColumns);
         }
 
@@ -46,12 +46,12 @@ namespace MaliyeHesaplama.wins
         }
 
         public DateTime _Date, DuaDate;
-        public List<dynamic> HareketlerListesi { get; set; } = new List<dynamic>();
+        public List<Receipt> HareketlerListesi { get; set; } = new List<Receipt>();
         
-        private IEnumerable<dynamic> _tumHareketler;
+        private IEnumerable<Receipt> _tumHareketler;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _tumHareketler = _orm.GetMovementList<dynamic>(_depoId, _receiptType);
+            _tumHareketler = _orm.GetMovementList<Receipt>(_depoId, _receiptType);
             _collectionView = CollectionViewSource.GetDefaultView(_tumHareketler);
             grid.ItemsSource = _collectionView;
 

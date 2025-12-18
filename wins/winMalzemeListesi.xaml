@@ -14,15 +14,17 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <control:FilterDataGrid
-            Grid.Row="0" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"
-            GridLinesVisibility="All" HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
-            FilterLanguage="Turkish" ShowStatusBar="True" ShowRowsCount="True" ShowElapsedTime="True"
-            AutoGenerateColumns="True" AutoGeneratingColumn="FilterDataGrid_AutoGeneratingColumn" x:Name="grid"
-            MouseDoubleClick="grid_MouseDoubleClick"
-            >
+    x:Name="grid" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"
+    GridLinesVisibility="All" HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
+    FilterLanguage="Turkish" ShowStatusBar="True" AutoGenerateColumns="True"
+    AutoGeneratingColumn="FilterDataGrid_AutoGeneratingColumn" MouseDoubleClick="grid_MouseDoubleClick"
+    ColumnReordered="grid_ColumnReordered"
+    >
             <control:FilterDataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem x:Name="mColChooser" Header="Kolon Seçicisini Aç" Click="mColChooser_Click"/>
+                    <MenuItem Header="Kolon Seçicisi" Click="MenuItem_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Excel'e Aktar" Click="ExportToExcel_Click"/>
                 </ContextMenu>
             </control:FilterDataGrid.ContextMenu>
         </control:FilterDataGrid>

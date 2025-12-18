@@ -1,7 +1,7 @@
 ﻿<Window x:Class="MaliyeHesaplama.wins.winKolonAyarlari"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Kolon Ayarları" Height="400" Width="398" 
+        Title="Kolon Ayarları" Height="400" Width="410" 
         WindowStartupLocation="CenterScreen" 
         FontFamily="Bahnschrift Light"
         ResizeMode="NoResize">

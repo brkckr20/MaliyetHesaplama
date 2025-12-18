@@ -69,6 +69,76 @@ namespace MaliyeHesaplama.models
             set => SetProperty(ref _netWeight, value);
         }
 
+        private decimal _netMeter;
+        public decimal NetMeter
+        {
+            get => _netMeter;
+            set => SetProperty(ref _netMeter, value);
+        }
+
+        private decimal _cashPayment;
+        public decimal CashPayment
+        {
+            get => _cashPayment;
+            set => SetProperty(ref _cashPayment, value);
+        }
+
+        private decimal _deferredPayment;
+        public decimal DeferredPayment
+        {
+            get => _deferredPayment;
+            set => SetProperty(ref _deferredPayment, value);
+        }
+
+        private string _forex = string.Empty;
+        public string Forex
+        {
+            get => _forex;
+            set => SetProperty(ref _forex, value);
+        }
+
+        private string _rowExplanation = string.Empty;
+        public string RowExplanation
+        {
+            get => _rowExplanation;
+            set => SetProperty(ref _rowExplanation, value);
+        }
+
+        private int _variantId;
+        public int VariantId
+        {
+            get => _variantId;
+            set => SetProperty(ref _variantId, value);
+        }
+
+        private string _variantCode = string.Empty;
+        public string VariantCode
+        {
+            get => _variantCode;
+            set
+            {
+                if (_variantCode != value)
+                {
+                    _variantCode = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _variant = string.Empty;
+        public string Variant
+        {
+            get => _variant;
+            set
+            {
+                if (_variant != value)
+                {
+                    _variant = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
