@@ -289,4 +289,214 @@ public class MiniOrm
         return _connection.ExecuteScalar<int>(checkQuery, new { Value = columnValue });
     }
 
+
+    /*-----------------------------------------------------------*/
+    public int UpdateStockQuantity(int inventoryId, int wareHouseId,
+        decimal deltaKg, decimal deltaMeter, int deltaPiece,
+        int? variantId = null, string batchNo = null, string orderNo = null, IDbTransaction tx = null)
+    {
+        var p = new
+        {
+            InventoryId = inventoryId,
+            WareHouseId = wareHouseId,
+            VariantId = variantId,
+            BatchNo = batchNo,
+            OrderNo = orderNo,
+            DeltaKg = deltaKg,
+            DeltaMeter = deltaMeter,
+            DeltaPiece = deltaPiece
+        };
+
+        var updateSql = @"
+UPDATE Stock SET 
+    QuantityKg = ISNULL(QuantityKg,0) + @DeltaKg,
+    QuantityMeter = ISNULL(QuantityMeter,0) + @DeltaMeter,
+    QuantityPiece = ISNULL(QuantityPiece,0) + @DeltaPiece
+WHERE InventoryId = @InventoryId AND WareHouseId = @WareHouseId
+  AND (VariantId = @VariantId OR (VariantId IS NULL AND @VariantId IS NULL))
+  AND (BatchNo = @BatchNo OR (BatchNo IS NULL AND @BatchNo IS NULL))
+  AND (OrderNo = @OrderNo OR (OrderNo IS NULL AND @OrderNo IS NULL));";
+
+        int affected = tx == null ? _connection.Execute(updateSql, p) : _connection.Execute(updateSql, p, tx);
+
+        if (affected == 0)
+        {
+            var insertSql = @"
+INSERT INTO Stock (InventoryId, WareHouseId, VariantId, BatchNo, OrderNo, QuantityKg, QuantityMeter, QuantityPiece)
+VALUES (@InventoryId, @WareHouseId, @VariantId, @BatchNo, @OrderNo, @DeltaKg, @DeltaMeter, @DeltaPiece);";
+            if (_dbType == "MSSQL") insertSql += " SELECT CAST(SCOPE_IDENTITY() as int);";
+            else if (_dbType == "SQLite") insertSql += " SELECT last_insert_rowid();";
+
+            if (tx == null)
+                return _connection.Query<int>(insertSql, p).Single();
+            else
+                return _connection.Query<int>(insertSql, p, tx).Single();
+        }
+
+        return affected;
+    }
+    public void InsertStockMovement(int? stockId, int receiptId, int receiptItemId, int inventoryId, int wareHouseId,
+        int? variantId, string batchNo, string orderNo,
+        decimal deltaKg, decimal deltaMeter, int deltaPiece,
+        decimal beforeKg, decimal beforeMeter, int beforePiece,
+        int? userId = null, IDbTransaction tx = null)
+    {
+        var mv = new
+        {
+            StockId = stockId,
+            ReceiptId = receiptId,
+            ReceiptItemId = receiptItemId,
+            InventoryId = inventoryId,
+            WareHouseId = wareHouseId,
+            VariantId = variantId,
+            BatchNo = batchNo,
+            OrderNo = orderNo,
+            DeltaKg = deltaKg,
+            DeltaMeter = deltaMeter,
+            DeltaPiece = deltaPiece,
+            BeforeKg = beforeKg,
+            AfterKg = beforeKg + deltaKg,
+            BeforeMeter = beforeMeter,
+            AfterMeter = beforeMeter + deltaMeter,
+            BeforePiece = beforePiece,
+            AfterPiece = beforePiece + deltaPiece,
+            UserId = userId,
+            ReceiptNo = "" // optional, eklenmek istenirse parametre alabilirS
+        };
+
+        var insertMv = @"
+INSERT INTO StockMovement (StockId, ReceiptId, ReceiptItemId, InventoryId, WareHouseId, VariantId, BatchNo, OrderNo,
+    DeltaKg, DeltaMeter, DeltaPiece, BeforeKg, AfterKg, BeforeMeter, AfterMeter, BeforePiece, AfterPiece, UserId, CreatedAt)
+VALUES (@StockId, @ReceiptId, @ReceiptItemId, @InventoryId, @WareHouseId, @VariantId, @BatchNo, @OrderNo,
+    @DeltaKg, @DeltaMeter, @DeltaPiece, @BeforeKg, @AfterKg, @BeforeMeter, @AfterMeter, @BeforePiece, @AfterPiece, @UserId, GETDATE());";
+
+        if (tx == null)
+            _connection.Execute(insertMv, mv);
+        else
+            _connection.Execute(insertMv, mv, tx);
+    }
+    public int SaveReceiptWithStock(Dictionary<string, object> receiptDict, List<Dictionary<string, object>> items, int wareHouseId, int? userId = null)
+    {
+        using var tran = _connection.BeginTransaction();
+        try
+        {
+            // 1) Receipt save (insert/update) within transaction
+            if (!receiptDict.ContainsKey("Id"))
+                throw new ArgumentException("Receipt dict must contain Id key.");
+
+            int receiptId = Convert.ToInt32(receiptDict["Id"]);
+            if (receiptId == 0)
+            {
+                var insertCols = receiptDict.Keys.Where(k => k != "Id").ToList();
+                var insertVals = insertCols.Select(k => "@" + k);
+                var insertSql = $"INSERT INTO Receipt ({string.Join(",", insertCols)}) VALUES ({string.Join(",", insertVals)});";
+                if (_dbType == "MSSQL") insertSql += " SELECT CAST(SCOPE_IDENTITY() as int);";
+                else if (_dbType == "SQLite") insertSql += " SELECT last_insert_rowid();";
+
+                receiptId = _connection.Query<int>(insertSql, receiptDict, tran).Single();
+            }
+            else
+            {
+                var updateCols = receiptDict.Keys.Where(k => k != "Id").Select(k => $"{k}=@{k}");
+                var updateSql = $"UPDATE Receipt SET {string.Join(",", updateCols)} WHERE Id=@Id; SELECT @Id;";
+                receiptId = _connection.Query<int>(updateSql, receiptDict, tran).Single();
+            }
+            foreach (var item in items)
+            {
+                if (!item.ContainsKey("Id"))
+                    throw new ArgumentException("Item dict must contain Id key.");
+
+                int itemId = Convert.ToInt32(item["Id"]);
+                dynamic prev = null;
+                if (itemId != 0)
+                {
+                    prev = _connection.QueryFirstOrDefault<dynamic>("SELECT Id, InventoryId, NetMeter, NetWeight, Piece, VariantId, BatchNo, OrderNo FROM ReceiptItem WHERE Id = @Id", new { Id = itemId }, tran);
+                }
+
+                // ensure ReceiptId
+                item["ReceiptId"] = receiptId;
+
+                if (itemId == 0)
+                {
+                    var insertCols = item.Keys.Where(k => k != "Id").ToList();
+                    var insertVals = insertCols.Select(k => "@" + k);
+                    var insertSql = $"INSERT INTO ReceiptItem ({string.Join(",", insertCols)}) VALUES ({string.Join(",", insertVals)});";
+                    if (_dbType == "MSSQL") insertSql += " SELECT CAST(SCOPE_IDENTITY() as int);";
+                    else if (_dbType == "SQLite") insertSql += " SELECT last_insert_rowid();";
+
+                    int newItemId = _connection.Query<int>(insertSql, item, tran).Single();
+                    item["Id"] = newItemId;
+                    itemId = newItemId;
+                }
+                else
+                {
+                    var updateCols = item.Keys.Where(k => k != "Id").Select(k => $"{k}=@{k}");
+                    var updateSql = $"UPDATE ReceiptItem SET {string.Join(",", updateCols)} WHERE Id=@Id; SELECT @Id;";
+                    _connection.Query<int>(updateSql, item, tran).Single();
+                }
+
+                // compute deltas
+                decimal newMeter = item.ContainsKey("NetMeter") && item["NetMeter"] != null ? Convert.ToDecimal(item["NetMeter"]) : 0m;
+                decimal newWeight = item.ContainsKey("NetWeight") && item["NetWeight"] != null ? Convert.ToDecimal(item["NetWeight"]) : 0m;
+                int newPiece = item.ContainsKey("Piece") && item["Piece"] != null ? Convert.ToInt32(item["Piece"]) : 0;
+
+                decimal oldMeter = 0m; decimal oldWeight = 0m; int oldPiece = 0;
+                if (prev != null)
+                {
+                    oldMeter = prev.NetMeter != null ? Convert.ToDecimal(prev.NetMeter) : 0m;
+                    oldWeight = prev.NetWeight != null ? Convert.ToDecimal(prev.NetWeight) : 0m;
+                    oldPiece = prev.Piece != null ? Convert.ToInt32(prev.Piece) : 0;
+                }
+
+                var deltaMeter = newMeter - oldMeter;
+                var deltaWeight = newWeight - oldWeight;
+                var deltaPiece = newPiece - oldPiece;
+
+                int invId = item.ContainsKey("InventoryId") && item["InventoryId"] != null ? Convert.ToInt32(item["InventoryId"]) : 0;
+                int? variantId = item.ContainsKey("VariantId") && item["VariantId"] != null ? (int?)Convert.ToInt32(item["VariantId"]) : null;
+                string batchNo = item.ContainsKey("BatchNo") ? (item["BatchNo"]?.ToString()) : null;
+                string orderNo = item.ContainsKey("OrderNo") ? (item["OrderNo"]?.ToString()) : null;
+
+                if (invId != 0 && (deltaMeter != 0m || deltaWeight != 0m || deltaPiece != 0))
+                {
+                    // before values read
+                    var selSql = @"
+SELECT ISNULL(QuantityKg,0) AS QuantityKg, ISNULL(QuantityMeter,0) AS QuantityMeter, ISNULL(QuantityPiece,0) AS QuantityPiece, Id
+FROM Stock
+WHERE InventoryId = @InventoryId AND WareHouseId = @WareHouseId
+  AND (VariantId = @VariantId OR (VariantId IS NULL AND @VariantId IS NULL))
+  AND (BatchNo = @BatchNo OR (BatchNo IS NULL AND @BatchNo IS NULL))
+  AND (OrderNo = @OrderNo OR (OrderNo IS NULL AND @OrderNo IS NULL));";
+
+                    var before = _connection.QueryFirstOrDefault<dynamic>(selSql, new { InventoryId = invId, WareHouseId = wareHouseId, VariantId = variantId, BatchNo = batchNo, OrderNo = orderNo }, tran);
+                    decimal beforeKg = 0m; decimal beforeMeter = 0m; int beforePiece = 0; int? stockId = null;
+                    if (before != null)
+                    {
+                        beforeKg = Convert.ToDecimal(before.QuantityKg);
+                        beforeMeter = Convert.ToDecimal(before.QuantityMeter);
+                        beforePiece = Convert.ToInt32(before.QuantityPiece);
+                        stockId = Convert.ToInt32(before.Id);
+                    }
+
+                    // apply to stock (update or insert)
+                    UpdateStockQuantity(invId, wareHouseId, deltaWeight, deltaMeter, deltaPiece, variantId, batchNo, orderNo, tran);
+
+                    // insert movement log
+                    InsertStockMovement(stockId, receiptId, itemId, invId, wareHouseId, variantId, batchNo, orderNo,
+                        deltaWeight, deltaMeter, deltaPiece,
+                        beforeKg, beforeMeter, beforePiece,
+                        userId, tran);
+                }
+            }
+
+            tran.Commit();
+            return receiptId;
+        }
+        catch
+        {
+            tran.Rollback();
+            throw;
+        }
+    }
+
 }

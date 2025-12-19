@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using MaliyeHesaplama.wins;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -57,13 +58,13 @@ namespace MaliyeHesaplama.helpers
                 lblRecordCount.Content = $"Toplam Kayıt: {visibleCount}";
             }
         }
-        public static void SetRecordCount(ICollectionView _collectionView,Label count)
+        public static void SetRecordCount(ICollectionView _collectionView, Label count)
         {
             int visibleCount = _collectionView.Cast<dynamic>().Count();
             count.Content = $"Satır Sayısı: {visibleCount}";
         }
 
-        public static void SearchWithColumnHeaderNoCollectionView(TextBox tb, DataTable table,string fieldName,Label lblCount,Label lblSumMeter)
+        public static void SearchWithColumnHeaderNoCollectionView(TextBox tb, DataTable table, string fieldName, Label lblCount, Label lblSumMeter)
         {
             string filterText = tb.Text.Replace("'", "''");
 
@@ -83,7 +84,7 @@ namespace MaliyeHesaplama.helpers
             }
             lblSumMeter.Content = $"Toplam Metre: {sum}";
         }
-        public static decimal SetFieldsSum(DataTable table,string field,Label lbl)
+        public static decimal SetFieldsSum(DataTable table, string field, Label lbl)
         {
             if (field == "KayıtNo")
             {
@@ -101,10 +102,45 @@ namespace MaliyeHesaplama.helpers
             lbl.Content = $"Toplam Metre: {sum}";
             return sum;
         }
-        public static void SearchWithCW(object sender,string fieldName, ICollectionView _collectionView, Label lblRecordCount)
+        public static void SearchWithCW(object sender, string fieldName, ICollectionView _collectionView, Label lblRecordCount)
         {
             var tb = sender as TextBox;
             SearchWithColumnHeader(tb, fieldName, _collectionView, lblRecordCount);
+        }
+        public static void SetCompanyInformation(ref int CompanyId, TextBox textBox)
+        {
+            wins.winFirmaListesi win = new wins.winFirmaListesi();
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                CompanyId = win.Id;
+                textBox.Text = win.FirmaUnvan;
+            }
+        }
+        public static void SetWareHouseInformation(ref int CompanyId, TextBox textBox)
+        {
+            winDepoListesi win = new winDepoListesi();
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                CompanyId = win.Id;
+                textBox.Text = win.Kodu.ToString() + " - " + win.Adi;
+            }
+        }
+
+        public static void SetInventoryInformation(object sender, Enums.Inventory _inventory)
+        {
+            Button btn = sender as Button;
+            if (btn == null) return;
+            DataRowView rowView = btn.DataContext as DataRowView;
+            if (rowView == null) return;
+            winMalzemeListesi win = new winMalzemeListesi(Convert.ToInt32(_inventory));
+            if (win.ShowDialog() == true)
+            {
+                rowView["InventoryId"] = win.Id;
+                rowView["InventoryCode"] = win.Code;
+                rowView["InventoryName"] = win.Name;
+            }
         }
 
     }

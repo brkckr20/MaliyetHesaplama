@@ -13,6 +13,7 @@
         {
             Siparis = 10,
             KumasRecetesi = 11,
+            UretimGirisi = 12,
         }
         public enum Depo
         {

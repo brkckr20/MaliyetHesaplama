@@ -47,7 +47,7 @@ namespace MaliyeHesaplama.helpers
         public void GridGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e, FilterDataGrid.FilterDataGrid grid, string[] hiddenCols)
         {
             var hiddenColumns = new[] { "InsertedBy", "InsertedDate", "UpdatedBy", "UpdatedDate", "RecipeId", "Type", "ProductImage", "CompanyId", "InventoryId" };
-            if (hiddenColumns.Contains(e.PropertyName))
+            if (hiddenCols.Contains(e.PropertyName))
             {
                 e.Cancel = true;
             }
@@ -246,8 +246,7 @@ namespace MaliyeHesaplama.helpers
             {
                 if (showMessage)
                 {
-                    //MessageBox.Show($"Ayarlar kaydedilirken hata oluştu: {ex.Message}",
-                    //    "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Bildirim.Uyari2($"Ayarlar kaydedilirken hata oluştu: {ex.Message}");
                 }
             }
         }

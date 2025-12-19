@@ -19,7 +19,7 @@ namespace MaliyeHesaplama
         private void Kartlar_Click(object sender, RoutedEventArgs e)
         {
             string title = "Kart İşlemleri";
-            string[] items = { "Firma Kartı", "Kumaş Kartı", "İplik Kartı", "Renk Kartı" };
+            string[] items = { "Firma Kartı", "Kumaş Kartı", "İplik Kartı", "Renk Kartı", "Depo Kartı" };
             ShowMegaMenu(title, items);
 
         }
@@ -63,6 +63,8 @@ namespace MaliyeHesaplama
                     OpenTab(menuName, new userControls.UC_IplikKarti());
                 if (menuName == "Renk Kartı")
                     OpenTab(menuName, new userControls.UC_RenkKarti(false));
+                if (menuName == "Depo Kartı")
+                    OpenTab(menuName, new userControls.UC_DepoKarti());
 
                 /* Reçete */
                 if (menuName == "Kumaş Reçetesi Tanımlama")
