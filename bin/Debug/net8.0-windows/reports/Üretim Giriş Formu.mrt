@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <CalculationMode>Interpretation</CalculationMode>
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="1">
+      <Başlıklar Ref="2" type="DataTableSource" isKey="true">
+        <Alias>Başlıklar</Alias>
+        <Columns isList="true" count="25">
+          <value>Id,System.Int32</value>
+          <value>ReceiptNo,System.String</value>
+          <value>ReceiptType,System.Int32</value>
+          <value>ReceiptDate,System.DateTime</value>
+          <value>CompanyId,System.Int32</value>
+          <value>Explanation,System.String</value>
+          <value>WareHouseId,System.Int32</value>
+          <value>InvoiceNo,System.String</value>
+          <value>InvoiceDate,System.DateTime</value>
+          <value>DispatchNo,System.String</value>
+          <value>DispatchDate,System.DateTime</value>
+          <value>DuaDate,System.DateTime</value>
+          <value>Authorized,System.String</value>
+          <value>Approved,System.Boolean</value>
+          <value>IsFinished,System.Boolean</value>
+          <value>CustomerOrderNo,System.String</value>
+          <value>OrderNo,System.String</value>
+          <value>Maturity,System.Int32</value>
+          <value>PaymentType,System.String</value>
+          <value>SavedUser,System.Int32</value>
+          <value>SavedDate,System.DateTime</value>
+          <value>UpdatedUser,System.Int32</value>
+          <value>UpdatedDate,System.DateTime</value>
+          <value>CarrierId,System.Int32</value>
+          <value>TransporterId,System.Int32</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>5f26ed4fdb1547ec80c1f29c62dd8a8e</Key>
+        <Name>Başlıklar</Name>
+        <NameInSource>Başlıklar</NameInSource>
+      </Başlıklar>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <UserFunctions isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>0c6e66db526e4f8fbb00fe07888553df</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="3" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <Text1 Ref="4" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0,1.6,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,8</Font>
+          <Name>Text1</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+          <Text>Fiş No :</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text1>
+        <Text2 Ref="5" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>1.6,0,4.4,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,8</Font>
+          <Name>Text2</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+          <Text>{Başlıklar.ReceiptNo}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>DataColumn</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text2>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>730b7221d1d34383b671ab1f496cabdd</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>12/22/2025 11:35:01 AM</ReportChanged>
+  <ReportCreated>11/10/2025 1:38:02 PM</ReportCreated>
+  <ReportFile>C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\reports\Üretim Giriş Formu.mrt</ReportFile>
+  <ReportGuid>807673bd376041f58c9d27907c79df81</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2025.4.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+  <UsePlatformDependentScript>False</UsePlatformDependentScript>
+</StiSerializer>

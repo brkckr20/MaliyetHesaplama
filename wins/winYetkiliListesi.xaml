@@ -5,29 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         mc:Ignorable="d"
-        Title="Firma Yetkilisi Listesi" FontFamily="Bahnschrift" Height="450" Width="450" Icon="/wins/News.png" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
+        xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
+        Title="Yetkilisi Listesi" FontFamily="Bahnschrift" Height="450" Width="450" Icon="/wins/News.png" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Background="LightGray">
-            <TextBlock Padding="3,0,0,0" Text="Filtreler" FontWeight="Bold" Margin="0,0,0,3"/>
-            <StackPanel>
-                <TextBlock Padding="3,0,0,0" Text="Yetkili :" Margin="0,0,0,2"/>
-                <TextBox Margin="3,0" x:Name="txtYetkili" TabIndex="2" FontSize="16" TextChanged="txtYetkili_TextChanged"/>
-            </StackPanel>
-        </StackPanel>
-        <DataGrid Grid.Column="1"
-                  FontSize="11" RowHeight="24" VerticalContentAlignment="Center"
-                  CanUserSortColumns="True" IsReadOnly="True" AutoGenerateColumns="False"
-                  GridLinesVisibility="All" HorizontalGridLinesBrush="#ececec"
-                  VerticalGridLinesBrush="#ececec"
-                  x:Name="mygrid" MouseDoubleClick="mygrid_MouseDoubleClick"
-                  >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Yetkili" Width="120" Binding="{Binding Authorized}" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <control:FilterDataGrid
+    x:Name="mygrid" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"
+    GridLinesVisibility="All" HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
+    FilterLanguage="Turkish" ShowStatusBar="True" AutoGenerateColumns="True"
+    AutoGeneratingColumn="mygrid_AutoGeneratingColumn" MouseDoubleClick="mygrid_MouseDoubleClick"
+    />
     </Grid>
 </Window>

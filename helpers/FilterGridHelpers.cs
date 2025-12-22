@@ -1,16 +1,12 @@
-﻿using MaliyeHesaplama.models;
+﻿using ClosedXML.Excel;
+using MaliyeHesaplama.models;
 using MaliyeHesaplama.wins;
-using Microsoft.VisualBasic.ApplicationServices;
-using Stimulsoft.Report.Helpers;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using Xceed.Wpf.DataGrid.Settings;
-using ClosedXML.Excel;
-using System.IO;
 
 namespace MaliyeHesaplama.helpers
 {

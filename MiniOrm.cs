@@ -154,28 +154,7 @@ public class MiniOrm
                     order by ISNULL(C.OrderNo,'')";
         return _connection.Query<T>(sql);
     }
-
-    public IEnumerable<T> GetMovementList<T>(int receiptType)
-    {
-        var sql = $@"
-                    select 
-                        ISNULL(R.Id,0) [Id],
-	                    ISNULL(R.ReceiptNo,'') [ReceiptNo],
-	                    ISNULL(R.ReceiptDate,'') [ReceiptDate],	
-	                    ISNULL(C.Id,'') [CompanyId],
-	                    ISNULL(C.CompanyName,'') [CompanyName],
-	                    ISNULL(R.Authorized,'') [Authorized],
-	                    ISNULL(R.DuaDate,'') [DuaDate],
-	                    ISNULL(R.Maturity,'') [Maturity]
-                    --	,
-                    --*
-                    from Receipt R
-                    left join Company C with(nolock) on C.Id = R.CompanyId
-                    where R.ReceiptType = {receiptType}
-";
-        return _connection.Query<T>(sql);
-    }
-    public IEnumerable<T> GetMovementList<T>(int DepoId, int receiptType)
+    public IEnumerable<T> GetMovementList<T>(string contition)
     {
         var sql = $@"
                             select 
@@ -195,6 +174,8 @@ public class MiniOrm
                             ISNULL(I.InventoryCode,'') [InventoryCode],
                             ISNULL(I.InventoryName,'') [InventoryName],
                             ISNULL(RI.NetMeter,0) [NetMeter],
+                            ISNULL(RI.NetWeight,0) [NetWeight],
+		                    ISNULL(RI.Piece,0) [Piece],
                             ISNULL(RI.CashPayment,0) [CashPayment],
                             ISNULL(RI.DeferredPayment,0) [DeferredPayment],
                             ISNULL(RI.Forex,'') [Forex],
@@ -207,7 +188,92 @@ public class MiniOrm
                         left join ReceiptItem RI with(nolock) on RI.ReceiptId = R.Id
                         left join Inventory I with(nolock) on I.Id = RI.InventoryId
                         LEFT JOIN Color CO with(nolock) on CO.Id = RI.VariantId
-                    where R.ReceiptType = {receiptType} and R.WareHouseId = {DepoId}
+                        where {contition}";
+        return _connection.Query<T>(sql);
+    }
+    public IEnumerable<T> GetMovementListWithQuantities<T>(string contition)
+    {
+        var sql = $@"	WITH UsedNetMeter AS
+	(
+		SELECT
+			RI1.TrackingNumber,
+			SUM(ISNULL(RI1.NetMeter, 0)) AS UsedMeter
+		FROM ReceiptItem RI1
+		GROUP BY RI1.TrackingNumber
+	)
+	SELECT 
+		R.Id                                   AS Id,
+		ISNULL(R.ReceiptNo,'')                AS ReceiptNo,
+		R.ReceiptDate                         AS ReceiptDate,
+		C.Id                                  AS CompanyId,
+		ISNULL(C.CompanyName,'')              AS CompanyName,
+		ISNULL(R.Authorized,'')               AS Authorized,
+		R.DuaDate                             AS DuaDate,
+		R.Maturity                            AS Maturity,
+		ISNULL(R.CustomerOrderNo,'')          AS CustomerOrderNo,
+		ISNULL(R.Explanation,'')              AS Explanation,
+
+		RI.Id                                 AS ReceiptItemId,
+		ISNULL(RI.OperationType,'')           AS OperationType,
+		RI.InventoryId                        AS InventoryId,
+		ISNULL(I.InventoryCode,'')            AS InventoryCode,
+		ISNULL(I.InventoryName,'')            AS InventoryName,
+
+		SUM(ISNULL(RI.NetMeter,0)) 
+			- ISNULL(UNM.UsedMeter,0)          AS NetMeter,
+
+		ISNULL(RI.NetWeight,0)                AS NetWeight,
+		ISNULL(RI.Piece,0)                    AS Piece,
+		ISNULL(RI.CashPayment,0)              AS CashPayment,
+		ISNULL(RI.DeferredPayment,0)          AS DeferredPayment,
+		ISNULL(RI.Forex,'')                   AS Forex,
+
+		RI.VariantId                          AS VariantId,
+		ISNULL(CO.Code,'')                    AS VariantCode,
+		ISNULL(CO.Name,'')                    AS Variant,
+
+		ISNULL(RI.RowExplanation,'')          AS RowExplanation,
+		ISNULL(RI.TrackingNumber,'')          AS TrackingNumber
+
+	FROM Receipt R
+	LEFT JOIN Company C        WITH (NOLOCK) ON C.Id = R.CompanyId
+	LEFT JOIN ReceiptItem RI   WITH (NOLOCK) ON RI.ReceiptId = R.Id
+	LEFT JOIN Inventory I      WITH (NOLOCK) ON I.Id = RI.InventoryId
+	LEFT JOIN Color CO         WITH (NOLOCK) ON CO.Id = RI.VariantId
+	LEFT JOIN UsedNetMeter UNM                ON UNM.TrackingNumber = RI.Id
+
+	WHERE {contition}
+
+	GROUP BY
+		R.Id,
+		R.ReceiptNo,
+		R.ReceiptDate,
+		C.Id,
+		C.CompanyName,
+		R.Authorized,
+		R.DuaDate,
+		R.Maturity,
+		R.CustomerOrderNo,
+		R.Explanation,
+		RI.Id,
+		RI.OperationType,
+		RI.InventoryId,
+		I.InventoryCode,
+		I.InventoryName,
+		RI.NetWeight,
+		RI.Piece,
+		RI.CashPayment,
+		RI.DeferredPayment,
+		RI.Forex,
+		RI.VariantId,
+		CO.Code,
+		CO.Name,
+		RI.RowExplanation,
+		RI.TrackingNumber,
+		UNM.UsedMeter
+        having 
+		        SUM(ISNULL(RI.NetMeter,0)) 
+			        - ISNULL(UNM.UsedMeter,0) <>0
 ";
         return _connection.Query<T>(sql);
     }
@@ -283,9 +349,9 @@ public class MiniOrm
         }
         return _connection.Query<T>(sql);
     }
-    public int IfExistRecord(string tableName, string columnName, string columnValue,string Type)
+    public int IfExistRecord(string tableName, string columnName, string columnValue, string Type)
     {
-        string checkQuery = $"SELECT COUNT(1) FROM {tableName} WHERE {columnName} = @Value and Type = '{Type}'" ;
+        string checkQuery = $"SELECT COUNT(1) FROM {tableName} WHERE {columnName} = @Value and Type = '{Type}'";
         return _connection.ExecuteScalar<int>(checkQuery, new { Value = columnValue });
     }
 
@@ -308,22 +374,22 @@ public class MiniOrm
         };
 
         var updateSql = @"
-UPDATE Stock SET 
-    QuantityKg = ISNULL(QuantityKg,0) + @DeltaKg,
-    QuantityMeter = ISNULL(QuantityMeter,0) + @DeltaMeter,
-    QuantityPiece = ISNULL(QuantityPiece,0) + @DeltaPiece
-WHERE InventoryId = @InventoryId AND WareHouseId = @WareHouseId
-  AND (VariantId = @VariantId OR (VariantId IS NULL AND @VariantId IS NULL))
-  AND (BatchNo = @BatchNo OR (BatchNo IS NULL AND @BatchNo IS NULL))
-  AND (OrderNo = @OrderNo OR (OrderNo IS NULL AND @OrderNo IS NULL));";
+                        UPDATE Stock SET 
+                            QuantityKg = ISNULL(QuantityKg,0) + @DeltaKg,
+                            QuantityMeter = ISNULL(QuantityMeter,0) + @DeltaMeter,
+                            QuantityPiece = ISNULL(QuantityPiece,0) + @DeltaPiece
+                        WHERE InventoryId = @InventoryId AND WareHouseId = @WareHouseId
+                          AND (VariantId = @VariantId OR (VariantId IS NULL AND @VariantId IS NULL))
+                          AND (BatchNo = @BatchNo OR (BatchNo IS NULL AND @BatchNo IS NULL))
+                          AND (OrderNo = @OrderNo OR (OrderNo IS NULL AND @OrderNo IS NULL));";
 
         int affected = tx == null ? _connection.Execute(updateSql, p) : _connection.Execute(updateSql, p, tx);
 
         if (affected == 0)
         {
             var insertSql = @"
-INSERT INTO Stock (InventoryId, WareHouseId, VariantId, BatchNo, OrderNo, QuantityKg, QuantityMeter, QuantityPiece)
-VALUES (@InventoryId, @WareHouseId, @VariantId, @BatchNo, @OrderNo, @DeltaKg, @DeltaMeter, @DeltaPiece);";
+                            INSERT INTO Stock (InventoryId, WareHouseId, VariantId, BatchNo, OrderNo, QuantityKg, QuantityMeter, QuantityPiece)
+                            VALUES (@InventoryId, @WareHouseId, @VariantId, @BatchNo, @OrderNo, @DeltaKg, @DeltaMeter, @DeltaPiece);";
             if (_dbType == "MSSQL") insertSql += " SELECT CAST(SCOPE_IDENTITY() as int);";
             else if (_dbType == "SQLite") insertSql += " SELECT last_insert_rowid();";
 
@@ -375,21 +441,21 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @InventoryId, @WareHouseId, @Varia
         else
             _connection.Execute(insertMv, mv, tx);
     }
-    public int SaveReceiptWithStock(Dictionary<string, object> receiptDict, List<Dictionary<string, object>> items, int wareHouseId, int? userId = null)
+    public int SaveReceiptWithStock(Dictionary<string, object> receiptDict, List<Dictionary<string, object>> items, int wareHouseId, int? userId = null, string tblName1 = null, string tblName2 = null)
     {
         using var tran = _connection.BeginTransaction();
         try
         {
             // 1) Receipt save (insert/update) within transaction
             if (!receiptDict.ContainsKey("Id"))
-                throw new ArgumentException("Receipt dict must contain Id key.");
+                throw new ArgumentException("Fiş bir Id anahtarı içermelidir.");
 
             int receiptId = Convert.ToInt32(receiptDict["Id"]);
             if (receiptId == 0)
             {
                 var insertCols = receiptDict.Keys.Where(k => k != "Id").ToList();
                 var insertVals = insertCols.Select(k => "@" + k);
-                var insertSql = $"INSERT INTO Receipt ({string.Join(",", insertCols)}) VALUES ({string.Join(",", insertVals)});";
+                var insertSql = $"INSERT INTO {tblName1} ({string.Join(",", insertCols)}) VALUES ({string.Join(",", insertVals)});";
                 if (_dbType == "MSSQL") insertSql += " SELECT CAST(SCOPE_IDENTITY() as int);";
                 else if (_dbType == "SQLite") insertSql += " SELECT last_insert_rowid();";
 
@@ -398,19 +464,19 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @InventoryId, @WareHouseId, @Varia
             else
             {
                 var updateCols = receiptDict.Keys.Where(k => k != "Id").Select(k => $"{k}=@{k}");
-                var updateSql = $"UPDATE Receipt SET {string.Join(",", updateCols)} WHERE Id=@Id; SELECT @Id;";
+                var updateSql = $"UPDATE {tblName1} SET {string.Join(",", updateCols)} WHERE Id=@Id; SELECT @Id;";
                 receiptId = _connection.Query<int>(updateSql, receiptDict, tran).Single();
             }
             foreach (var item in items)
             {
                 if (!item.ContainsKey("Id"))
-                    throw new ArgumentException("Item dict must contain Id key.");
+                    throw new ArgumentException("Kalemler bir Id anahtarı içermelidir.");
 
                 int itemId = Convert.ToInt32(item["Id"]);
                 dynamic prev = null;
                 if (itemId != 0)
                 {
-                    prev = _connection.QueryFirstOrDefault<dynamic>("SELECT Id, InventoryId, NetMeter, NetWeight, Piece, VariantId, BatchNo, OrderNo FROM ReceiptItem WHERE Id = @Id", new { Id = itemId }, tran);
+                    prev = _connection.QueryFirstOrDefault<dynamic>($"SELECT Id, InventoryId, NetMeter, NetWeight, Piece, VariantId, BatchNo, OrderNo FROM {tblName2} WHERE Id = @Id", new { Id = itemId }, tran);
                 }
 
                 // ensure ReceiptId
@@ -420,7 +486,7 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @InventoryId, @WareHouseId, @Varia
                 {
                     var insertCols = item.Keys.Where(k => k != "Id").ToList();
                     var insertVals = insertCols.Select(k => "@" + k);
-                    var insertSql = $"INSERT INTO ReceiptItem ({string.Join(",", insertCols)}) VALUES ({string.Join(",", insertVals)});";
+                    var insertSql = $"INSERT INTO {tblName2} ({string.Join(",", insertCols)}) VALUES ({string.Join(",", insertVals)});";
                     if (_dbType == "MSSQL") insertSql += " SELECT CAST(SCOPE_IDENTITY() as int);";
                     else if (_dbType == "SQLite") insertSql += " SELECT last_insert_rowid();";
 
@@ -431,7 +497,7 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @InventoryId, @WareHouseId, @Varia
                 else
                 {
                     var updateCols = item.Keys.Where(k => k != "Id").Select(k => $"{k}=@{k}");
-                    var updateSql = $"UPDATE ReceiptItem SET {string.Join(",", updateCols)} WHERE Id=@Id; SELECT @Id;";
+                    var updateSql = $"UPDATE {tblName2} SET {string.Join(",", updateCols)} WHERE Id=@Id; SELECT @Id;";
                     _connection.Query<int>(updateSql, item, tran).Single();
                 }
 
@@ -461,12 +527,12 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @InventoryId, @WareHouseId, @Varia
                 {
                     // before values read
                     var selSql = @"
-SELECT ISNULL(QuantityKg,0) AS QuantityKg, ISNULL(QuantityMeter,0) AS QuantityMeter, ISNULL(QuantityPiece,0) AS QuantityPiece, Id
-FROM Stock
-WHERE InventoryId = @InventoryId AND WareHouseId = @WareHouseId
-  AND (VariantId = @VariantId OR (VariantId IS NULL AND @VariantId IS NULL))
-  AND (BatchNo = @BatchNo OR (BatchNo IS NULL AND @BatchNo IS NULL))
-  AND (OrderNo = @OrderNo OR (OrderNo IS NULL AND @OrderNo IS NULL));";
+                                SELECT ISNULL(QuantityKg,0) AS QuantityKg, ISNULL(QuantityMeter,0) AS QuantityMeter, ISNULL(QuantityPiece,0) AS QuantityPiece, Id
+                                FROM Stock
+                                WHERE InventoryId = @InventoryId AND WareHouseId = @WareHouseId
+                                  AND (VariantId = @VariantId OR (VariantId IS NULL AND @VariantId IS NULL))
+                                  AND (BatchNo = @BatchNo OR (BatchNo IS NULL AND @BatchNo IS NULL))
+                                  AND (OrderNo = @OrderNo OR (OrderNo IS NULL AND @OrderNo IS NULL));";
 
                     var before = _connection.QueryFirstOrDefault<dynamic>(selSql, new { InventoryId = invId, WareHouseId = wareHouseId, VariantId = variantId, BatchNo = batchNo, OrderNo = orderNo }, tran);
                     decimal beforeKg = 0m; decimal beforeMeter = 0m; int beforePiece = 0; int? stockId = null;

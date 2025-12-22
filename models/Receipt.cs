@@ -89,5 +89,14 @@ namespace MaliyeHesaplama.models
         [NotMapped]
         [Display(Name = "Varyant Kodu")]
         public string VariantCode { get; set; }
+        [NotMapped]
+        [Display(Name = "KG")]
+        public decimal NetWeight { get; set; }
+        [NotMapped]
+        [Display(Name = "Adet")]
+        public decimal Piece { get; set; }
+        [NotMapped]
+        [Display(Name = "Takip No")]
+        public string TrackingNumber { get; set; }
     }
 }

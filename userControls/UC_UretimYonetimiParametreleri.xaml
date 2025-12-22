@@ -31,6 +31,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <GroupBox Grid.Row="0" Header="Reçete" Foreground="Black">
                             <StackPanel>
@@ -59,6 +60,13 @@
                                     <Label Content="Döviz Kurları : "/>
                                     <TextBox x:Name="txtDovizKurlari" Width="265" VerticalContentAlignment="Center"/>
                                     <TextBlock Margin="4,0,0,0" VerticalAlignment="Center" Text="*(Her bir döviz arasına , (virgül) konulmalıdır)" Foreground="Gray"/>
+                                </DockPanel>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Grid.Row="2" Header="Üretim Sipariş ve Girişleri" Foreground="Black">
+                            <StackPanel>
+                                <DockPanel>
+                                    <CheckBox x:Name="chckUretimGirisiDepoZorunlu" Content="Sipariş aktarımında depo seçimi zorunlu olsun"/>
                                 </DockPanel>
                             </StackPanel>
                         </GroupBox>

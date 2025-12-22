@@ -9,16 +9,16 @@ namespace MaliyeHesaplama.wins
 {
     public partial class winAcikSiparisler : Window
     {
-        int _companyId;
+        string _condition;
         private IEnumerable<Receipt> _tumHareketler;
         MiniOrm _orm = new MiniOrm();
         private ICollectionView _collectionView;
         FilterGridHelpers fgh;
         public List<Receipt> SelectedReceipts { get; private set; } = new();
-        public winAcikSiparisler(int companyId)
+        public winAcikSiparisler(string condition)
         {
             InitializeComponent();
-            _companyId = companyId;
+            _condition= condition;
             fgh = new FilterGridHelpers(grid, "Açık Siparişler", "gridAcikSiparisler");
         }
         private void grid_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
@@ -44,7 +44,7 @@ namespace MaliyeHesaplama.wins
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _tumHareketler = _orm.GetMovementList<Receipt>(4, 10);
+            _tumHareketler = _orm.GetMovementListWithQuantities<Receipt>(_condition);
             _collectionView = CollectionViewSource.GetDefaultView(_tumHareketler);
             grid.ItemsSource = _collectionView;
 

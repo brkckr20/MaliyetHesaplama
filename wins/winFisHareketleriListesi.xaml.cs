@@ -13,16 +13,17 @@ namespace MaliyeHesaplama.wins
         MiniOrm _orm = new MiniOrm();
         private int _receiptType;
         private ICollectionView _collectionView;
-        public bool secimYapildi = false;
+        public bool secimYapildi = false, _withWareHouse;
         public int Id, CompanyId, _depoId;
         public string ReceiptNo, CompanyName, Authorized, Maturity, CustomerOrderNo, Explanation;
         FilterGridHelpers fgh;
 
-        public winFisHareketleriListesi(int depoId, Enums.Receipt receipt)
+        public winFisHareketleriListesi(int depoId, Enums.Receipt receipt, bool withWarehouse = true)
         {
             InitializeComponent();
             this._receiptType = Convert.ToInt32(receipt);
             this._depoId = depoId;
+            this._withWareHouse = withWarehouse;
             fgh = new FilterGridHelpers(grid, "Sipariş Listesi", "grid");
         }
 
@@ -47,11 +48,12 @@ namespace MaliyeHesaplama.wins
 
         public DateTime _Date, DuaDate;
         public List<Receipt> HareketlerListesi { get; set; } = new List<Receipt>();
-        
+
         private IEnumerable<Receipt> _tumHareketler;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _tumHareketler = _orm.GetMovementList<Receipt>(_depoId, _receiptType);
+
+            _tumHareketler = _orm.GetMovementList<Receipt>($"R.ReceiptType = {_receiptType}");
             _collectionView = CollectionViewSource.GetDefaultView(_tumHareketler);
             grid.ItemsSource = _collectionView;
 

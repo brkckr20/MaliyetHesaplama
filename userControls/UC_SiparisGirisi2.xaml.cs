@@ -254,7 +254,7 @@ namespace MaliyeHesaplama.userControls
         }
         private void btnYetkiliListesi_Click(object sender, RoutedEventArgs e)
         {
-            wins.winYetkiliListesi win = new wins.winYetkiliListesi(vm.Receipt.CompanyId);
+            wins.winYetkiliListesi win = new wins.winYetkiliListesi(CompanyId);
             win.ShowDialog();
             if (win.SecimYapildi)
             {
@@ -298,19 +298,19 @@ namespace MaliyeHesaplama.userControls
         private void srcKalemIslem_TextChanged(object sender, TextChangedEventArgs e)
         {
             var tb = sender as TextBox;
-            MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, "OperationType",lblRecordCount,lblSumMeter);
+            MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, "OperationType", lblRecordCount, lblSumMeter);
         }
 
         private void srcCode_TextChanged(object sender, TextChangedEventArgs e)
         {
             var tb = sender as TextBox;
-            MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table,"InventoryCode", lblRecordCount, lblSumMeter);
+            MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, "InventoryCode", lblRecordCount, lblSumMeter);
         }
 
         private void srcName_TextChanged(object sender, TextChangedEventArgs e)
         {
             var tb = sender as TextBox;
-            MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, "InventoryName",lblRecordCount,lblSumMeter);
+            MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, "InventoryName", lblRecordCount, lblSumMeter);
         }
         void GetSumOrCount()
         {
@@ -321,10 +321,10 @@ namespace MaliyeHesaplama.userControls
         {
             fgh.InitializeColumnSettings();
             fgh.LoadColumnSettingsFromDatabase();
-            GetSumOrCount();            
+            GetSumOrCount();
         }
 
-        void Search(object sender,string fieldName)
+        void Search(object sender, string fieldName)
         {
             var tb = sender as TextBox;
             MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, fieldName, lblRecordCount, lblSumMeter);
@@ -332,7 +332,7 @@ namespace MaliyeHesaplama.userControls
 
         private void srcVariantCode_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Search(sender,"VariantCode");
+            Search(sender, "VariantCode");
         }
 
         private void srcVariantName_TextChanged(object sender, TextChangedEventArgs e)

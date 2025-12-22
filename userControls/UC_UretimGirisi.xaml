@@ -22,7 +22,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" BorderBrush="#ececec" BorderThickness="1" Margin="0,0,0,2">
+        <Border Grid.Row="0" Margin="0,0,0,2">
             <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
         </Border>
         <Border Grid.Row="1" Background="White" BorderBrush="#ececec" BorderThickness="1">
@@ -104,6 +104,7 @@
                     <DataGridTextColumn Header="Sipariş No" Binding="{Binding ReceiptNo}"/>
                     <DataGridTextColumn Header="Müşteri Sip. No." Binding="{Binding CustomerOrderNo}"/>
                     <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}"/>
+                    <DataGridTextColumn Header="Takip No" Binding="{Binding TrackingNumber}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Grid.Row="1" Margin="0,2,0,0">

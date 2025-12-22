@@ -1,4 +1,5 @@
-﻿using MaliyeHesaplama.wins;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using MaliyeHesaplama.wins;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Controls;
@@ -140,6 +141,18 @@ namespace MaliyeHesaplama.helpers
                 rowView["InventoryId"] = win.Id;
                 rowView["InventoryCode"] = win.Code;
                 rowView["InventoryName"] = win.Name;
+            }
+        }
+        public static void OpenReportWindow(string screenName, int recordId)
+        {
+            if (recordId == 0)
+            {
+                Bildirim.Uyari2("Rapor alabilmek için lütfen bir kayıt seçiniz!");
+            }
+            else
+            {
+                wins.winRaporSecimi win = new winRaporSecimi(screenName, recordId);
+                win.ShowDialog();
             }
         }
 

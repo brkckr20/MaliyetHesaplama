@@ -1,4 +1,5 @@
-﻿using MaliyeHesaplama.helpers;
+﻿using DocumentFormat.OpenXml.Drawing;
+using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
 using System.Data;
 using System.Windows.Controls;
@@ -8,7 +9,7 @@ namespace MaliyeHesaplama.userControls
     public partial class UC_UretimGirisi : UserControl, IPageCommands
     {
         MiniOrm _orm = new MiniOrm();
-        public int CompanyId = 0, Id,WareHouseId;
+        public int CompanyId = 0, Id, WareHouseId;
         private DataTable table;
         FilterGridHelpers fgh;
         public UC_UretimGirisi()
@@ -20,99 +21,241 @@ namespace MaliyeHesaplama.userControls
 
         public void Geri()
         {
-            //
+            KayitlariGetir("Önceki");
         }
 
         public void Ileri()
         {
-            //
+            KayitlariGetir("Sonraki");
         }
 
-        public void Kaydet()
+        public void Kaydet() // KAYIT İŞLEMLERİNE DEVAM EDİLDİ, DİĞER İŞLEMLERE DEVAM EDİLECEK
         {
-            var dict0 = new Dictionary<string, object>()
-            {
-                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.UretimGirisi)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text}
-            };
-
-            // DataGrid'den gelen satırları item dictionary listesine çevir
-            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "NetMeter", "NetWeight", "Piece", "RowExplanation", "VariantId", "BatchNo", "OrderNo" };
-            var items = new List<Dictionary<string, object>>();
-            foreach (DataRow row in table.Rows)
-            {
-                if (row.RowState == DataRowState.Deleted) continue;
-                var dict = new Dictionary<string, object>();
-                foreach (var colName in dbColumns)
-                {
-                    if (table.Columns.Contains(colName))
-                    {
-                        var value = row[colName];
-                        dict[colName] = value == DBNull.Value ? null : value;
-                    }
-                    else
-                    {
-                        dict[colName] = null;
-                    }
-                }
-                // garanti: Id null ise 0 yap
-                dict["Id"] = dict["Id"] ?? 0;
-                items.Add(dict);
-            }
-
-            try
-            {
-                Id = _orm.SaveReceiptWithStock(dict0, items, WareHouseId, Properties.Settings.Default.RememberUserId);
-                Bildirim.Bilgilendirme2("Kayıt ve stok güncelleme başarıyla tamamlandı.");
-            }
-            catch (Exception ex)
-            {
-                Bildirim.Uyari2("Kayıt sırasında hata: " + ex.Message);
-            }
-            #region Eski Kod
+            #region kontrol edilecek - ai verdi
             //var dict0 = new Dictionary<string, object>()
             //{
             //    {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.UretimGirisi)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text}
             //};
-            //Id = _orm.Save("Receipt", dict0);
-            //var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "NetMeter", "NetWeight", "Piece","RowExplanation"}; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
+
+            //// DataGrid'den gelen satırları item dictionary listesine çevir
+            //var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "NetMeter", "NetWeight", "Piece", "RowExplanation", "VariantId", "BatchNo", "OrderNo" };
+            //var items = new List<Dictionary<string, object>>();
             //foreach (DataRow row in table.Rows)
             //{
             //    if (row.RowState == DataRowState.Deleted) continue;
             //    var dict = new Dictionary<string, object>();
             //    foreach (var colName in dbColumns)
             //    {
-            //        var value = row[colName];
-            //        dict[colName] = value == DBNull.Value ? null : value;
+            //        if (table.Columns.Contains(colName))
+            //        {
+            //            var value = row[colName];
+            //            dict[colName] = value == DBNull.Value ? null : value;
+            //        }
+            //        else
+            //        {
+            //            dict[colName] = null;
+            //        }
             //    }
-            //    dict["ReceiptId"] = Id;
-            //    int newId = _orm.Save("ReceiptItem", dict, "Id");
-
-            //    if (Convert.ToInt32(dict["Id"]) == 0)
-            //        row["Id"] = newId;
+            //    // garanti: Id null ise 0 yap
+            //    dict["Id"] = dict["Id"] ?? 0;
+            //    items.Add(dict);
             //}
-            //Bildirim.Bilgilendirme2("Kayıt işlemi başarılı bir şekilde gerçekleştirildi");
-            ////GetSumOrCount();
-            #endregion;
+
+            //try
+            //{
+            //    if (CompanyId == 0)
+            //    {
+            //        Bildirim.Uyari2("Kayıt sırasında hata:\nFirma seçilmeden kayıt işlemi yapılamaz!");
+            //        return;
+            //    }
+            //    int _userId = Properties.Settings.Default.RememberUserId;
+            //    Id = _orm.SaveReceiptWithStock(dict0, items, WareHouseId, _userId, "Receipt", "ReceiptItem");
+            //    Bildirim.Bilgilendirme2("Kayıt işlemi başarıyla gerçekleştirildi.");
+            //}
+            //catch (Exception ex)
+            //{
+            //    Bildirim.Uyari2("Kayıt sırasında hata: " + ex.Message);
+            //}
+            #endregion
+            var dict0 = new Dictionary<string, object>()
+            {
+                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.UretimGirisi)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text}
+            };
+            Id = _orm.Save("Receipt", dict0);
+            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "NetMeter", "NetWeight", "Piece", "RowExplanation", "TrackingNumber" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
+            foreach (DataRow row in table.Rows)
+            {
+                if (row.RowState == DataRowState.Deleted) continue;
+                var dict = new Dictionary<string, object>();
+                foreach (var colName in dbColumns)
+                {
+                    var value = row[colName];
+                    dict[colName] = value == DBNull.Value ? null : value;
+                }
+                dict["ReceiptId"] = Id;
+                int newId = _orm.Save("ReceiptItem", dict, "Id");
+
+                if (Convert.ToInt32(dict["Id"]) == 0)
+                    row["Id"] = newId;
+            }
+            Bildirim.Bilgilendirme2("Kayıt işlemi başarılı bir şekilde gerçekleştirildi");
+            //GetSumOrCount();
         }
 
         public void Listele()
         {
-            //
+            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.UretimGirisi, false);
+            win.ShowDialog();
+            if (win.secimYapildi)
+            {
+                this.Id = win.Id;
+                txtFisNo.Text = win.ReceiptNo;
+                dpTarih.SelectedDate = win._Date;
+                this.CompanyId = win.CompanyId;
+                txtFirmaUnvan.Text = win.CompanyName;
+                //txtYetkili.Text = win.Authorized;
+                //dpTermin.SelectedDate = win.DuaDate;
+                //txtVade.Text = win.Maturity;
+                //txtMusteriOrderNo.Text = win.CustomerOrderNo;
+                txtAciklama.Text = win.Explanation;
+                table.Clear();
+                foreach (var h in win.HareketlerListesi)
+                {
+                    DataRow row = table.NewRow();
+                    row["Id"] = h.ReceiptItemId; // kalem kayıt no
+                    row["InventoryId"] = h.InventoryId;
+                    row["OperationType"] = h.OperationType;
+                    row["InventoryCode"] = h.InventoryCode;
+                    row["InventoryName"] = h.InventoryName;
+                    //row["Variant"] = h.Variant;
+                    row["NetMeter"] = h.NetMeter;
+                    row["NetWeight"] = h.NetWeight;
+                    row["Piece"] = h.Piece;
+                    //row["CashPayment"] = h.CashPayment;
+                    //row["DeferredPayment"] = h.DeferredPayment;
+                    //row["Forex"] = h.Forex;
+                    row["RowExplanation"] = h.RowExplanation;
+                    //row["VariantId"] = h.VariantId;
+                    //row["VariantCode"] = h.VariantCode;
+                    table.Rows.Add(row);
+                }
+                dataGrid.ItemsSource = table.DefaultView;
+            }
+            //GetSumOrCount();
         }
 
         public void Sil()
         {
-            //
+            if (_orm.Delete("Receipt", Id, true) > 0)
+            {
+                _orm.Delete("ReceiptItem", Id, false, "ReceiptId");
+                Temizle();
+            }
         }
 
         public void Yazdir()
         {
-            //
+            MainHelper.OpenReportWindow("Üretim Girişi", Id);
         }
 
         public void Yeni()
         {
-            
+            Temizle();
+        }
+        void Temizle()
+        {
+            this.Id = 0; this.CompanyId = 0;
+            txtFisNo.Text = _orm.GetRecordNo("Receipt", "ReceiptNo", "ReceiptType", Convert.ToInt32(Enums.Receipt.UretimGirisi));
+            dpTarih.SelectedDate = DateTime.Now;
+            //dpTermin.SelectedDate = DateTime.Now;
+            txtFirmaUnvan.Text = string.Empty;
+            txtBelgeNo.Text = string.Empty;
+            WareHouseId = 0;
+            txtDepo.Text = string.Empty;
+            //txtVade.Text = string.Empty;
+            //txtMusteriOrderNo.Text = string.Empty;
+            txtAciklama.Text = string.Empty;
+            table.Clear();
+
+        }
+        public void KayitlariGetir(string KayitTipi)
+        {
+            try
+            {
+                int id = this.Id;
+                int? istenenId = _orm.GetIdForAfterOrBeforeRecord(KayitTipi, "Receipt", id, "ReceiptItem", "ReceiptId", Convert.ToInt32(Enums.Receipt.Siparis));
+                if (istenenId == null)
+                {
+                    Bildirim.Uyari2("Başka bir kayıt bulunamadı!");
+                    return;
+                }
+
+                string query = $@"SELECT 
+                                ISNULL(R.Id,0) Id,ISNULL(R.ReceiptNo,'') ReceiptNo, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,ISNULL(R.Authorized,'') Authorized,ISNULL(R.CustomerOrderNo,'') CustomerOrderNo,
+                                ISNULL(R.DuaDate,'') DuaDate,ISNULL(R.Explanation,'') Explanation,
+                                ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,
+                                ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.NetMeter,0) NetMeter, ISNULL(RI.CashPayment,0) CashPayment, ISNULL(RI.DeferredPayment,0) DeferredPayment,
+                                ISNULL(R.Maturity,0) Maturity, ISNULL(RI.RowExplanation,'') RowExplanation,
+                                ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
+                                ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName,
+                                ISNULL(CO.Id,0) VariantId,ISNULL(CO.Code,'') VariantCode,ISNULL(CO.Name,'') Variant,ISNULL(RI.Forex,'') Forex
+                                FROM Receipt R
+                                INNER JOIN ReceiptItem RI ON R.Id = RI.ReceiptId
+                                LEFT JOIN Company C ON C.Id = R.CompanyId
+                                LEFT JOIN Inventory I ON I.Id = RI.InventoryId
+                                LEFT JOIN Color CO on RI.VariantId = CO.Id
+                                WHERE R.ReceiptType = {Convert.ToInt32(Enums.Receipt.Siparis)} AND R.Id = @Id";
+
+                var liste = _orm.GetAfterOrBeforeRecord(query, istenenId.Value);
+
+                if (liste != null && liste.Count > 0)
+                {
+                    // Üst bilgileri doldur
+                    var item = liste[0];
+                    this.Id = Convert.ToInt32(item.Id);
+                    this.CompanyId = Convert.ToInt32(item.CompanyId);
+                    dpTarih.SelectedDate = Convert.ToDateTime(item.ReceiptDate);
+                    //dpTermin.SelectedDate = Convert.ToDateTime(item.DuaDate);
+                    txtFirmaUnvan.Text = item.CompanyName.ToString();
+                    //txtYetkili.Text = item.Authorized.ToString();
+                    //txtVade.Text = item.Maturity.ToString();
+                    //txtMusteriOrderNo.Text = item.CustomerOrderNo.ToString();
+                    txtAciklama.Text = item.Explanation;
+                    txtFisNo.Text = item.ReceiptNo;
+
+                    table.Clear();
+                    foreach (var i in liste)
+                    {
+                        DataRow row = table.NewRow();
+                        row["Id"] = i.ReceiptItemId;
+                        row["OperationType"] = i.OperationType;
+                        row["InventoryId"] = i.InventoryId;
+                        row["NetMeter"] = i.NetMeter;
+                        row["CashPayment"] = i.CashPayment;
+                        row["DeferredPayment"] = i.DeferredPayment;
+                        row["RowExplanation"] = i.RowExplanation;
+                        row["Forex"] = i.Forex;
+                        row["InventoryCode"] = i.InventoryCode;
+                        row["InventoryName"] = i.InventoryName;
+                        row["VariantId"] = i.VariantId;
+                        row["VariantCode"] = i.VariantCode;
+                        row["Variant"] = i.Variant;
+                        table.Rows.Add(row);
+                    }
+
+                    // DataGrid artık DataTable üzerinden çalışıyor
+                    dataGrid.ItemsSource = table.DefaultView;
+                }
+                else
+                {
+                    Bildirim.Uyari2("Başka bir kayıt bulunamadı.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Bildirim.Uyari2("Hata: " + ex.Message);
+            }
+            //GetSumOrCount();
         }
 
         private void btnFirmaListesi_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -142,7 +285,20 @@ namespace MaliyeHesaplama.userControls
 
         private void MI_AcikSiparisler_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            wins.winAcikSiparisler win = new wins.winAcikSiparisler(12);
+            string condition = $"R.ReceiptType = {Convert.ToInt32(Enums.Receipt.Siparis)}";
+            var data = _orm.GetById<dynamic>("ProductionManagementParams", 1);
+            if (Convert.ToBoolean(data.UretimGirisiDepoZorunlu) && WareHouseId == 0)
+            {
+                condition += $" AND WareHouseId = {WareHouseId}";
+                Bildirim.Uyari2("Lütfen bir depo seçimi yapınız.");
+                return;
+            }
+            if (Convert.ToBoolean(data.UretimGirisiDepoZorunlu))
+            {
+                condition += $" AND WareHouseId = {WareHouseId}";
+            }
+
+            wins.winAcikSiparisler win = new wins.winAcikSiparisler(condition);
             var result = win.ShowDialog();
             if (result == true)
             {
@@ -156,11 +312,12 @@ namespace MaliyeHesaplama.userControls
                     row["InventoryCode"] = r.InventoryCode ?? string.Empty;
                     row["InventoryName"] = r.InventoryName ?? string.Empty;
                     row["NetMeter"] = r.NetMeter;
-                    row["NetWeight"] = 0m; // GetMovementList sorgusunda NetWeight yoksa 0 atandı
+                    row["NetWeight"] = 0m;
                     row["Piece"] = 0m;
                     row["RowExplanation"] = r.RowExplanation ?? string.Empty;
                     row["CustomerOrderNo"] = r.CustomerOrderNo ?? string.Empty;
                     row["ReceiptNo"] = r.ReceiptNo ?? string.Empty;
+                    row["TrackingNumber"] = r.ReceiptItemId;
                     table.Rows.Add(row);
                 }
             }
@@ -193,6 +350,7 @@ namespace MaliyeHesaplama.userControls
             table.Columns.Add("ReceiptNo", typeof(string));
             //table.Columns.Add("VariantId", typeof(int));
             //table.Columns.Add("VariantCode", typeof(string));
+            table.Columns.Add("TrackingNumber", typeof(int));
             dataGrid.ItemsSource = table.DefaultView;
             //LoadCurrenciesFromDb();
         }
