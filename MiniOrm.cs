@@ -156,8 +156,7 @@ public class MiniOrm
     }
     public IEnumerable<T> GetMovementList<T>(string contition)
     {
-        var sql = $@"
-                            select 
+        var sql = $@"    select 
                             ISNULL(R.Id,0) [Id],
                             ISNULL(R.ReceiptNo,'') [ReceiptNo],
                             ISNULL(R.ReceiptDate,'') [ReceiptDate],	
@@ -175,19 +174,25 @@ public class MiniOrm
                             ISNULL(I.InventoryName,'') [InventoryName],
                             ISNULL(RI.NetMeter,0) [NetMeter],
                             ISNULL(RI.NetWeight,0) [NetWeight],
-		                    ISNULL(RI.Piece,0) [Piece],
+                            ISNULL(RI.Piece,0) [Piece],
                             ISNULL(RI.CashPayment,0) [CashPayment],
                             ISNULL(RI.DeferredPayment,0) [DeferredPayment],
                             ISNULL(RI.Forex,'') [Forex],
                             ISNULL(RI.VariantId,'') [VariantId],
                             ISNULL(CO.Code,'') [VariantCode],
                             ISNULL(CO.Name,'') [Variant],
-                            ISNULL(RI.RowExplanation,'') [RowExplanation]
+                            ISNULL(RI.RowExplanation,'') [RowExplanation],	
+                            ISNULL(W.Id,'') [WareHouseId],
+                            ISNULL(W.Code,'') [WareHouseCode],
+                            ISNULL(W.Name,'') [WareHouseName],
+                            ISNULL(RI.CustomerOrderNo,'') [CustomerOrderNo],
+                            ISNULL(RI.OrderNo,'') [OrderNo]
                         from Receipt R
                         left join Company C with(nolock) on C.Id = R.CompanyId
                         left join ReceiptItem RI with(nolock) on RI.ReceiptId = R.Id
                         left join Inventory I with(nolock) on I.Id = RI.InventoryId
                         LEFT JOIN Color CO with(nolock) on CO.Id = RI.VariantId
+                        left join WareHouse W on R.WareHouseId = W.Id
                         where {contition}";
         return _connection.Query<T>(sql);
     }

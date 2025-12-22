@@ -15,7 +15,7 @@ namespace MaliyeHesaplama.wins
         private ICollectionView _collectionView;
         public bool secimYapildi = false, _withWareHouse;
         public int Id, CompanyId, _depoId;
-        public string ReceiptNo, CompanyName, Authorized, Maturity, CustomerOrderNo, Explanation;
+        public string ReceiptNo, CompanyName, Authorized, Maturity, CustomerOrderNo, Explanation,WareHouseCode,WareHouseName,OrderNo;
         FilterGridHelpers fgh;
 
         public winFisHareketleriListesi(int depoId, Enums.Receipt receipt, bool withWarehouse = true)
@@ -80,6 +80,10 @@ namespace MaliyeHesaplama.wins
                 Maturity = record.Maturity.ToString();
                 CustomerOrderNo = record.CustomerOrderNo.ToString();
                 Explanation = record.Explanation.ToString();
+                _depoId = record.WareHouseId;
+                WareHouseCode = record.WareHouseCode;
+                WareHouseName = record.WareHouseName;
+                OrderNo = record.OrderNo;
                 HareketlerListesi = _tumHareketler.Where(x => x.Id == Id).ToList();
                 Close();
             }

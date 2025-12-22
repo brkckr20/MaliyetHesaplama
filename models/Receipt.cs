@@ -98,5 +98,14 @@ namespace MaliyeHesaplama.models
         [NotMapped]
         [Display(Name = "Takip No")]
         public string TrackingNumber { get; set; }
+        [NotMapped]
+        [Display(Name = "Depo Kodu")]
+        public string WareHouseCode { get; set; }
+        [NotMapped]
+        [Display(Name = "Depo Adı")]
+        public string WareHouseName { get; set; }
+        [NotMapped]
+        [Display(Name = "Sipariş No Satır")]
+        public string OrderNo { get; set; }
     }
 }

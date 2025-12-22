@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Drawing;
 using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
+using MaliyeHesaplama.models;
 using System.Data;
 using System.Windows.Controls;
 
@@ -82,7 +83,7 @@ namespace MaliyeHesaplama.userControls
                 {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.UretimGirisi)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text}
             };
             Id = _orm.Save("Receipt", dict0);
-            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "NetMeter", "NetWeight", "Piece", "RowExplanation", "TrackingNumber" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
+            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "NetMeter", "NetWeight", "Piece", "RowExplanation", "TrackingNumber", "CustomerOrderNo", "OrderNo" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
             foreach (DataRow row in table.Rows)
             {
                 if (row.RowState == DataRowState.Deleted) continue;
@@ -104,7 +105,7 @@ namespace MaliyeHesaplama.userControls
 
         public void Listele()
         {
-            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.UretimGirisi, false);
+            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(WareHouseId, Enums.Receipt.UretimGirisi, false);
             win.ShowDialog();
             if (win.secimYapildi)
             {
@@ -113,7 +114,8 @@ namespace MaliyeHesaplama.userControls
                 dpTarih.SelectedDate = win._Date;
                 this.CompanyId = win.CompanyId;
                 txtFirmaUnvan.Text = win.CompanyName;
-                //txtYetkili.Text = win.Authorized;
+                WareHouseId = win._depoId;
+                txtDepo.Text = win.WareHouseCode + " - " + win.WareHouseName;
                 //dpTermin.SelectedDate = win.DuaDate;
                 //txtVade.Text = win.Maturity;
                 //txtMusteriOrderNo.Text = win.CustomerOrderNo;
@@ -137,6 +139,8 @@ namespace MaliyeHesaplama.userControls
                     row["RowExplanation"] = h.RowExplanation;
                     //row["VariantId"] = h.VariantId;
                     //row["VariantCode"] = h.VariantCode;
+                    row["CustomerOrderNo"] = h.CustomerOrderNo;
+                    row["OrderNo"] = h.OrderNo;
                     table.Rows.Add(row);
                 }
                 dataGrid.ItemsSource = table.DefaultView;
@@ -318,11 +322,11 @@ namespace MaliyeHesaplama.userControls
                     row["CustomerOrderNo"] = r.CustomerOrderNo ?? string.Empty;
                     row["ReceiptNo"] = r.ReceiptNo ?? string.Empty;
                     row["TrackingNumber"] = r.ReceiptItemId;
+                    row["OrderNo"] = r.OrderNo;
                     table.Rows.Add(row);
                 }
             }
         }
-
         private void btnKumasListe_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             MainHelper.SetInventoryInformation(sender, Enums.Inventory.Kumas);
@@ -347,6 +351,7 @@ namespace MaliyeHesaplama.userControls
             //table.Columns.Add("Forex", typeof(string));
             table.Columns.Add("RowExplanation", typeof(string));
             table.Columns.Add("CustomerOrderNo", typeof(string));
+            table.Columns.Add("OrderNo", typeof(string));
             table.Columns.Add("ReceiptNo", typeof(string));
             //table.Columns.Add("VariantId", typeof(int));
             //table.Columns.Add("VariantCode", typeof(string));

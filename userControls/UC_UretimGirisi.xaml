@@ -70,14 +70,16 @@
             </Grid.RowDefinitions>
             <DataGrid x:Name="dataGrid" Grid.Row="0"
                 CanUserAddRows="True"
+                CanUserDeleteRows="True"
                 AutoGenerateColumns="False"
                 CellEditEnding="dataGrid_CellEditEnding" 
                 HorizontalGridLinesBrush="LightGray" 
                 VerticalGridLinesBrush="LightGray"
                 AlternationCount="2"
                 AlternatingRowBackground="#FFF7F7F7"
-                RowBackground="White">
-                <DataGrid.Columns>
+                RowBackground="White"
+                      >
+                <DataGrid.Columns>                    
                     <DataGridTextColumn Header="Id" Visibility="Hidden" Binding="{Binding Id}" IsReadOnly="True"/>
                     <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType}">
                         <DataGridComboBoxColumn.ItemsSource>
