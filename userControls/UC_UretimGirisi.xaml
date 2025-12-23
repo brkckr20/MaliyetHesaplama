@@ -79,6 +79,13 @@
                 AlternatingRowBackground="#FFF7F7F7"
                 RowBackground="White"
                       >
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Satır Sil" x:Name="MI_SatirSil" Click="MI_SatirSil_Click"/>
+                        <Separator/>
+                        <MenuItem Header="Açık Siparişler" Click="MI_AcikSiparisler_Click"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
                 <DataGrid.Columns>                    
                     <DataGridTextColumn Header="Id" Visibility="Hidden" Binding="{Binding Id}" IsReadOnly="True"/>
                     <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType}">
@@ -106,7 +113,7 @@
                     <DataGridTextColumn Header="Sipariş No" Binding="{Binding ReceiptNo}"/>
                     <DataGridTextColumn Header="Müşteri Sip. No." Binding="{Binding CustomerOrderNo}"/>
                     <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}"/>
-                    <DataGridTextColumn Header="Takip No" Binding="{Binding TrackingNumber}"/>
+                    <DataGridTextColumn Header="Takip No" Binding="{Binding TrackingNumber}" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Grid.Row="1" Margin="0,2,0,0">

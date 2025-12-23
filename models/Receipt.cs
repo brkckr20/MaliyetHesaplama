@@ -46,6 +46,9 @@ namespace MaliyeHesaplama.models
         [Display(Name = "Müşteri Sipariş No")]
         public string CustomerOrderNo { get; set; }
 
+        [Display(Name = "Onaylı Mı?")]
+        public bool Approved { get; set; }
+
         /*****************************/
         [NotMapped]
         [Display(Name = "Firma Adı")]

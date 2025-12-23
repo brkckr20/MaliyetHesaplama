@@ -1,8 +1,7 @@
-﻿using DocumentFormat.OpenXml.Drawing;
-using MaliyeHesaplama.helpers;
+﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
-using MaliyeHesaplama.models;
 using System.Data;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
@@ -13,6 +12,7 @@ namespace MaliyeHesaplama.userControls
         public int CompanyId = 0, Id, WareHouseId;
         private DataTable table;
         FilterGridHelpers fgh;
+        int _receiptType = Convert.ToInt32(Enums.Receipt.UretimGirisi);
         public UC_UretimGirisi()
         {
             InitializeComponent();
@@ -141,6 +141,7 @@ namespace MaliyeHesaplama.userControls
                     //row["VariantCode"] = h.VariantCode;
                     row["CustomerOrderNo"] = h.CustomerOrderNo;
                     row["OrderNo"] = h.OrderNo;
+                    row["TrackingNumber"] = h.TrackingNumber != null ? h.TrackingNumber : 0;
                     table.Rows.Add(row);
                 }
                 dataGrid.ItemsSource = table.DefaultView;
@@ -187,28 +188,14 @@ namespace MaliyeHesaplama.userControls
             try
             {
                 int id = this.Id;
-                int? istenenId = _orm.GetIdForAfterOrBeforeRecord(KayitTipi, "Receipt", id, "ReceiptItem", "ReceiptId", Convert.ToInt32(Enums.Receipt.Siparis));
+                int? istenenId = _orm.GetIdForAfterOrBeforeRecord(KayitTipi, "Receipt", id, "ReceiptItem", "ReceiptId", _receiptType);
                 if (istenenId == null)
                 {
                     Bildirim.Uyari2("Başka bir kayıt bulunamadı!");
                     return;
                 }
 
-                string query = $@"SELECT 
-                                ISNULL(R.Id,0) Id,ISNULL(R.ReceiptNo,'') ReceiptNo, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,ISNULL(R.Authorized,'') Authorized,ISNULL(R.CustomerOrderNo,'') CustomerOrderNo,
-                                ISNULL(R.DuaDate,'') DuaDate,ISNULL(R.Explanation,'') Explanation,
-                                ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,
-                                ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.NetMeter,0) NetMeter, ISNULL(RI.CashPayment,0) CashPayment, ISNULL(RI.DeferredPayment,0) DeferredPayment,
-                                ISNULL(R.Maturity,0) Maturity, ISNULL(RI.RowExplanation,'') RowExplanation,
-                                ISNULL(C.CompanyCode,'') CompanyCode, ISNULL(C.CompanyName,'') CompanyName,
-                                ISNULL(I.InventoryCode,'') InventoryCode, ISNULL(I.InventoryName,'') InventoryName,
-                                ISNULL(CO.Id,0) VariantId,ISNULL(CO.Code,'') VariantCode,ISNULL(CO.Name,'') Variant,ISNULL(RI.Forex,'') Forex
-                                FROM Receipt R
-                                INNER JOIN ReceiptItem RI ON R.Id = RI.ReceiptId
-                                LEFT JOIN Company C ON C.Id = R.CompanyId
-                                LEFT JOIN Inventory I ON I.Id = RI.InventoryId
-                                LEFT JOIN Color CO on RI.VariantId = CO.Id
-                                WHERE R.ReceiptType = {Convert.ToInt32(Enums.Receipt.Siparis)} AND R.Id = @Id";
+                string query = MainHelper.GetRecordStringQuery(_receiptType);
 
                 var liste = _orm.GetAfterOrBeforeRecord(query, istenenId.Value);
 
@@ -226,6 +213,7 @@ namespace MaliyeHesaplama.userControls
                     //txtMusteriOrderNo.Text = item.CustomerOrderNo.ToString();
                     txtAciklama.Text = item.Explanation;
                     txtFisNo.Text = item.ReceiptNo;
+                    txtBelgeNo.Text = item.InvoiceNo;
 
                     table.Clear();
                     foreach (var i in liste)
@@ -235,15 +223,20 @@ namespace MaliyeHesaplama.userControls
                         row["OperationType"] = i.OperationType;
                         row["InventoryId"] = i.InventoryId;
                         row["NetMeter"] = i.NetMeter;
-                        row["CashPayment"] = i.CashPayment;
-                        row["DeferredPayment"] = i.DeferredPayment;
+                        //row["CashPayment"] = i.CashPayment;
+                        //row["DeferredPayment"] = i.DeferredPayment;
                         row["RowExplanation"] = i.RowExplanation;
-                        row["Forex"] = i.Forex;
+                        //row["Forex"] = i.Forex;
                         row["InventoryCode"] = i.InventoryCode;
                         row["InventoryName"] = i.InventoryName;
-                        row["VariantId"] = i.VariantId;
-                        row["VariantCode"] = i.VariantCode;
-                        row["Variant"] = i.Variant;
+                        //row["VariantId"] = i.VariantId;
+                        //row["VariantCode"] = i.VariantCode;
+                        //row["Variant"] = i.Variant;
+                        row["CustomerOrderNo"] = i.CustomerOrderNo_; // alt çizgi eklendi çünkü çakışma vardı - ReceiptItem ve Receipt tablosunda aynı isimde alan var
+                        row["OrderNo"] = i.OrderNo_;
+                        row["TrackingNumber"] = i.TrackingNumber;
+                        row["NetWeight"] = i.NetWeight;
+                        row["Piece"] = i.Piece;
                         table.Rows.Add(row);
                     }
 
@@ -327,6 +320,24 @@ namespace MaliyeHesaplama.userControls
                 }
             }
         }
+
+        private void MI_SatirSil_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGrid.SelectedItem == null)
+            {
+                e.Handled = true;
+                Bildirim.Uyari2("Lütfen silinecek satırı seçiniz!");
+            }
+            if (dataGrid.SelectedItem is DataRowView drv)
+            {
+                int id = Convert.ToInt32(drv["Id"]);
+                if (_orm.Delete("ReceiptItem", id, true) > 0)
+                {
+                    drv.Row.Delete();
+                }
+            }
+        }
+
         private void btnKumasListe_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             MainHelper.SetInventoryInformation(sender, Enums.Inventory.Kumas);

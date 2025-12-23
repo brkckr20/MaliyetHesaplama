@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WİNDOWS7_0_OR_GREATER
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\App.xaml
-331545522008
+341404743110
 
-65-761151037
+661829270965
 3071127805675
-HomeScreen.xaml;styles\MenuButtonStyle.xaml;userControls\Common\ButtonBar.xaml;userControls\UC_DepoKarti.xaml;userControls\UC_FirmaKarti.xaml;userControls\UC_IplikKarti.xaml;userControls\UC_KumasKarti.xaml;userControls\Uc_MaliyetHesaplama.xaml;userControls\UC_Numarator.xaml;userControls\UC_RaporOlusturma.xaml;userControls\UC_ReceteTanimlama.xaml;userControls\UC_RenkKarti.xaml;userControls\UC_SiparisGirisi2.xaml;userControls\UC_UretimGirisi.xaml;userControls\UC_UretimYonetimiParametreleri.xaml;wins\winAcikSiparisler.xaml;wins\winBuyukResim.xaml;wins\winDepoListesi.xaml;wins\winFirmaListesi.xaml;wins\winFisHareketleriListesi.xaml;wins\winKolonAyarlari.xaml;wins\winKolonSecici.xaml;wins\winLogin.xaml;wins\winMaliyetCalismasiListesi.xaml;wins\winMalzemeListesi.xaml;wins\winNumaratorListesi.xaml;wins\winOzellikSecimi.xaml;wins\winRaporListesi.xaml;wins\winRaporSecimi.xaml;wins\winReceteListesi.xaml;wins\winRenkListesi.xaml;wins\winSplashScreen.xaml;wins\winYetkiliListesi.xaml;
+HomeScreen.xaml;styles\MenuButtonStyle.xaml;userControls\Common\ButtonBar.xaml;userControls\UC_DepoKarti.xaml;userControls\UC_FirmaKarti.xaml;userControls\UC_IplikKarti.xaml;userControls\UC_KumasKarti.xaml;userControls\Uc_MaliyetHesaplama.xaml;userControls\UC_Numarator.xaml;userControls\UC_OnaylamaIslemleri.xaml;userControls\UC_RaporOlusturma.xaml;userControls\UC_ReceteTanimlama.xaml;userControls\UC_RenkKarti.xaml;userControls\UC_SiparisGirisi2.xaml;userControls\UC_UretimGirisi.xaml;userControls\UC_UretimYonetimiParametreleri.xaml;wins\winAcikSiparisler.xaml;wins\winBuyukResim.xaml;wins\winDepoListesi.xaml;wins\winFirmaListesi.xaml;wins\winFisHareketleriListesi.xaml;wins\winKolonAyarlari.xaml;wins\winKolonSecici.xaml;wins\winLogin.xaml;wins\winMaliyetCalismasiListesi.xaml;wins\winMalzemeListesi.xaml;wins\winNumaratorListesi.xaml;wins\winOzellikSecimi.xaml;wins\winRaporListesi.xaml;wins\winRaporSecimi.xaml;wins\winReceteListesi.xaml;wins\winRenkListesi.xaml;wins\winSplashScreen.xaml;wins\winYetkiliListesi.xaml;
 
 False
 

@@ -120,6 +120,10 @@ namespace MaliyeHesaplama.userControls
             {
                 {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"DuaDate",dpTermin.SelectedDate.Value},{"Maturity",txtVade.Text},{"CustomerOrderNo",txtMusteriOrderNo.Text},{"Authorized",txtYetkili.Text},{"WareHouseId",Convert.ToInt32(Enums.Depo.HamKumasDepo)},{"Explanation",txtAciklama.Text}
             };
+            if (Id == 0)
+            {
+                dict0.Add("Approved", false);
+            }
             Id = _orm.Save("Receipt", dict0);
             var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "NetMeter", "CashPayment", "DeferredPayment", "Forex", "RowExplanation", "VariantId" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
             foreach (DataRow row in table.Rows)

@@ -374,3 +374,5 @@ C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wi
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winDepoListesi.baml
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winAcikSiparisler.g.cs
 C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\wins\winAcikSiparisler.baml
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_OnaylamaIslemleri.g.cs
+C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\obj\Debug\net8.0-windows\userControls\UC_OnaylamaIslemleri.baml

@@ -31,6 +31,7 @@ public class MiniOrm
 
         if (id == 0)
         {
+            
             var insertColumns = data.Keys.Where(k => k != idColumn).ToList();
             var insertValues = insertColumns.Select(k => $"@{k}");
             string sql = $"INSERT INTO {tableName} ({string.Join(",", insertColumns)}) VALUES ({string.Join(",", insertValues)});";
@@ -186,7 +187,8 @@ public class MiniOrm
                             ISNULL(W.Code,'') [WareHouseCode],
                             ISNULL(W.Name,'') [WareHouseName],
                             ISNULL(RI.CustomerOrderNo,'') [CustomerOrderNo],
-                            ISNULL(RI.OrderNo,'') [OrderNo]
+                            ISNULL(RI.OrderNo,'') [OrderNo],
+                            ISNULL(RI.TrackingNumber,'') [TrackingNumber]
                         from Receipt R
                         left join Company C with(nolock) on C.Id = R.CompanyId
                         left join ReceiptItem RI with(nolock) on RI.ReceiptId = R.Id
