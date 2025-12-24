@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using MaliyeHesaplama.helpers;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -41,6 +42,12 @@ namespace MaliyeHesaplama
             string[] items = { "Kumaş Reçetesi Tanımlama" };
             ShowMegaMenu(title, items);
         }
+        private void MalzemeYonetimi_Click(object sender, RoutedEventArgs e)
+        {
+            string title = "Malzeme Yönetimi";
+            string[] items = { "Mazeme Giriş İşlemleri" };
+            ShowMegaMenu(title, items);
+        }
         private void MegaMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn)
@@ -71,6 +78,10 @@ namespace MaliyeHesaplama
                 /* Reçete */
                 if (menuName == "Kumaş Reçetesi Tanımlama")
                     OpenTab(menuName, new userControls.UC_ReceteTanimlama(1));
+
+                /* Malzeme Yönetimi */
+                if (menuName == "Mazeme Giriş İşlemleri")
+                    OpenTab(menuName, new userControls.UC_MalzemeGirisCikis(Enums.Receipt.MalzemeGiris));
 
                 /* Ayarlar */
                 if (menuName == "Üretim Yönetimi Parametreleri")

@@ -19,6 +19,8 @@ namespace MaliyeHesaplama.helpers
             KumasRecetesi = 11,
             [Display(Name = "Üretim Girişi")]
             UretimGirisi = 12,
+            [Display(Name = "Malzeme Girişi")]
+            MalzemeGiris = 13,
         }
         public enum Depo
         {
