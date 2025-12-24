@@ -1,4 +1,6 @@
-﻿namespace MaliyeHesaplama.helpers
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MaliyeHesaplama.helpers
 {
     public static class Enums
     {
@@ -11,8 +13,11 @@
         }
         public enum Receipt
         {
+            [Display(Name = "Sipariş")]
             Siparis = 10,
+            [Display(Name = "Kumaş Reçetesi")]
             KumasRecetesi = 11,
+            [Display(Name = "Üretim Girişi")]
             UretimGirisi = 12,
         }
         public enum Depo

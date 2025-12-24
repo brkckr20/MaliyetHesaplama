@@ -13,7 +13,7 @@ namespace MaliyeHesaplama.wins
         MiniOrm _orm = new MiniOrm();
         private int _receiptType;
         private ICollectionView _collectionView;
-        public bool secimYapildi = false, _withWareHouse;
+        public bool secimYapildi = false, _withWareHouse, _onayli;
         public int Id, CompanyId, _depoId;
         public string ReceiptNo, CompanyName, Authorized, Maturity, CustomerOrderNo, Explanation,WareHouseCode,WareHouseName,OrderNo;
         FilterGridHelpers fgh;
@@ -84,6 +84,7 @@ namespace MaliyeHesaplama.wins
                 WareHouseCode = record.WareHouseCode;
                 WareHouseName = record.WareHouseName;
                 OrderNo = record.OrderNo;
+                _onayli = record.Approved;
                 HareketlerListesi = _tumHareketler.Where(x => x.Id == Id).ToList();
                 Close();
             }

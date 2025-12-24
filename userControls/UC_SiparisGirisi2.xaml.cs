@@ -13,10 +13,11 @@ namespace MaliyeHesaplama.userControls
     public partial class UC_SiparisGirisi2 : UserControl, IPageCommands
     {
         MiniOrm _orm = new MiniOrm();
-        public int CompanyId = 0, Id;
+        public int CompanyId = 0, Id, WareHouseId = 0;
         MVM vm = new MVM();
         private DataTable table;
         FilterGridHelpers fgh;
+        private bool _isApproved, _onayliSiparsDegisiklik;
         public ObservableCollection<string> Currencies { get; set; }
         public UC_SiparisGirisi2()
         {
@@ -25,6 +26,8 @@ namespace MaliyeHesaplama.userControls
             Currencies = new ObservableCollection<string>();
             LoadData();
             fgh = new FilterGridHelpers(dataGrid, "Sipariş Girişi", "gridSiparisGirisi");
+            var data = _orm.GetById<dynamic>("ProductionManagementParams", 1);
+            _onayliSiparsDegisiklik = Convert.ToBoolean(data.OnayliSiparisDegisiklik);
         }
         public void KayitlariGetir(string KayitTipi)
         {
@@ -39,7 +42,7 @@ namespace MaliyeHesaplama.userControls
                 }
 
                 string query = $@"SELECT 
-                                ISNULL(R.Id,0) Id,ISNULL(R.ReceiptNo,'') ReceiptNo, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,ISNULL(R.Authorized,'') Authorized,ISNULL(R.CustomerOrderNo,'') CustomerOrderNo,
+                                ISNULL(R.Id,0) Id,ISNULL(R.ReceiptNo,'') ReceiptNo, ISNULL(R.ReceiptDate,'') ReceiptDate, ISNULL(R.CompanyId,0) CompanyId,ISNULL(R.Authorized,'') Authorized,ISNULL(R.CustomerOrderNo,'') CustomerOrderNo,ISNULL(R.Approved,0) Approved,
                                 ISNULL(R.DuaDate,'') DuaDate,ISNULL(R.Explanation,'') Explanation,
                                 ISNULL(RI.Id,0) [ReceiptItemId], ISNULL(RI.OperationType,'') OperationType,
                                 ISNULL(RI.InventoryId,0) InventoryId, ISNULL(RI.NetMeter,0) NetMeter, ISNULL(RI.CashPayment,0) CashPayment, ISNULL(RI.DeferredPayment,0) DeferredPayment,
@@ -70,6 +73,8 @@ namespace MaliyeHesaplama.userControls
                     txtMusteriOrderNo.Text = item.CustomerOrderNo.ToString();
                     txtAciklama.Text = item.Explanation;
                     txtFisNo.Text = item.ReceiptNo;
+                    _isApproved = Convert.ToBoolean(item.Approved);
+                    chkOnayli.IsChecked = _isApproved;
 
                     table.Clear();
                     foreach (var i in liste)
@@ -114,15 +119,20 @@ namespace MaliyeHesaplama.userControls
         {
             KayitlariGetir("");
         }
-        public void Kaydet()
+        public void Kaydet() // METRE GİRİLİP DAHA SONRA VADELİ FİYAT GİRİLDİĞİNDE METRE İLE VADELİ FİYAT EŞİTLENİYOR - DÜZELTİLECEK - 24.12.2025
         {
             var dict0 = new Dictionary<string, object>()
             {
-                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"DuaDate",dpTermin.SelectedDate.Value},{"Maturity",txtVade.Text},{"CustomerOrderNo",txtMusteriOrderNo.Text},{"Authorized",txtYetkili.Text},{"WareHouseId",Convert.ToInt32(Enums.Depo.HamKumasDepo)},{"Explanation",txtAciklama.Text}
+                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.Siparis)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"DuaDate",dpTermin.SelectedDate.Value},{"Maturity",txtVade.Text},{"CustomerOrderNo",txtMusteriOrderNo.Text},{"Authorized",txtYetkili.Text},{"Explanation",txtAciklama.Text},{"WareHouseId",WareHouseId}
             };
             if (Id == 0)
             {
                 dict0.Add("Approved", false);
+            }
+            if (_isApproved && !_onayliSiparsDegisiklik)
+            {
+                Bildirim.Uyari2("Onaylanmış sipariş üzerinde değişiklik yapamazsınız.\nDeğişiklik yapabilmek için lütfen yetkili ile iletişime geçiniz!");
+                return;
             }
             Id = _orm.Save("Receipt", dict0);
             var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "NetMeter", "CashPayment", "DeferredPayment", "Forex", "RowExplanation", "VariantId" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
@@ -161,6 +171,8 @@ namespace MaliyeHesaplama.userControls
                 txtVade.Text = win.Maturity;
                 txtMusteriOrderNo.Text = win.CustomerOrderNo;
                 txtAciklama.Text = win.Explanation;
+                _isApproved = win._onayli;
+                chkOnayli.IsChecked = _isApproved;
                 table.Clear();
                 foreach (var h in win.HareketlerListesi)
                 {
@@ -328,45 +340,9 @@ namespace MaliyeHesaplama.userControls
             GetSumOrCount();
         }
 
-        void Search(object sender, string fieldName)
+        private void btnDepoListesi_Click(object sender, RoutedEventArgs e)
         {
-            var tb = sender as TextBox;
-            MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, fieldName, lblRecordCount, lblSumMeter);
-        }
-
-        private void srcVariantCode_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Search(sender, "VariantCode");
-        }
-
-        private void srcVariantName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Search(sender, "Variant");
-        }
-
-        private void srcMeter_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Search(sender, "NetMeter");
-        }
-
-        private void srcForex_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Search(sender, "Forex");
-        }
-
-        private void srcCash_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Search(sender, "CashPayment");
-        }
-
-        private void srcDeferred_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Search(sender, "DeferredPayment");
-        }
-
-        private void srcRowExplanation_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Search(sender, "RowExplanation");
+            MainHelper.SetWareHouseInformation(ref WareHouseId, txtDepo);
         }
 
         private void dataGrid_ColumnReordered(object sender, DataGridColumnEventArgs e)

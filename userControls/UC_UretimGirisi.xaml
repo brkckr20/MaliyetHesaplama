@@ -110,10 +110,10 @@
                     <DataGridTextColumn Header="Metre" Binding="{Binding NetMeter, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
                     <DataGridTextColumn Header="Kilogram" Binding="{Binding NetWeight, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
                     <DataGridTextColumn Header="Adet" Binding="{Binding Piece, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
-                    <DataGridTextColumn Header="Sipariş No" Binding="{Binding ReceiptNo}"/>
+                    <DataGridTextColumn Header="Sipariş No" Binding="{Binding OrderNo}"/>
                     <DataGridTextColumn Header="Müşteri Sip. No." Binding="{Binding CustomerOrderNo}"/>
                     <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}"/>
-                    <DataGridTextColumn Header="Takip No" Binding="{Binding TrackingNumber}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Takip No" Binding="{Binding TrackingNumber}" IsReadOnly="True" Visibility="Hidden"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Grid.Row="1" Margin="0,2,0,0">

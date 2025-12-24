@@ -22,6 +22,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Margin="2">
                     <DockPanel HorizontalAlignment="Left" Height="24">
@@ -59,6 +60,16 @@
                     <DockPanel Height="24" Margin="0,2,0,0">
                         <TextBlock VerticalAlignment="Center" Text="Açıklama : " Width="100"/>
                         <TextBox x:Name="txtAciklama" Width="200"/>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Margin="2">
+                    <DockPanel Height="24">
+                        <TextBlock VerticalAlignment="Center" Text="Depo : " Width="100"/>
+                        <TextBox VerticalContentAlignment="Center" x:Name="txtDepo" Width="176"/>
+                        <Button x:Name="btnDepoListesi" Click="btnDepoListesi_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Left" Height="24">
+                        <CheckBox x:Name="chkOnayli" Content="Onaylı Mı?" VerticalContentAlignment="Center"/>
                     </DockPanel>
                 </StackPanel>
             </Grid>

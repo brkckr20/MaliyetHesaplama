@@ -1,7 +1,9 @@
 ﻿using DocumentFormat.OpenXml.Office2010.Excel;
 using MaliyeHesaplama.wins;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -174,6 +176,12 @@ namespace MaliyeHesaplama.helpers
                                 LEFT JOIN Inventory I ON I.Id = RI.InventoryId
                                 LEFT JOIN Color CO on RI.VariantId = CO.Id
                                 WHERE R.ReceiptType = {_receiptType} AND R.Id = @Id";
+        }
+        public static string GetEnumDisplayName(Enum value)
+        {
+            var field = value.GetType().GetField(value.ToString());
+            var attr = field.GetCustomAttribute<DisplayAttribute>();
+            return attr?.Name ?? value.ToString();
         }
 
     }

@@ -24,6 +24,8 @@ namespace MaliyeHesaplama.userControls
         public string WarehouseName { get; set; }
         [Display(Name = "Metre")]
         public decimal NetMeter { get; set; }
+        [Display(Name = "Fiş Tipi Adı")]
+        public string ReceiptTypeName { get; set; }
     }
     public partial class UC_OnaylamaIslemleri : UserControl
     {
@@ -113,7 +115,8 @@ namespace MaliyeHesaplama.userControls
                             CompanyName = companies.ContainsKey(r.CompanyId) ? companies[r.CompanyId] : "",
                             WarehouseName = wh.ContainsKey(r.WareHouseId) ? wh[r.WareHouseId] : "",
                             Approved = r.Approved ? "Evet" : "Hayır",
-                            NetMeter = receiptItems.Sum(x => x.NetMeter)
+                            NetMeter = receiptItems.Sum(x => x.NetMeter),
+                            ReceiptTypeName = MainHelper.GetEnumDisplayName((Enums.Receipt)r.ReceiptType)
                         }).ToList();
 
             _collectionView = CollectionViewSource.GetDefaultView(data);

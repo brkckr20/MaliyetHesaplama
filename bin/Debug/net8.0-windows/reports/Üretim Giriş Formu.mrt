@@ -7,7 +7,7 @@
     <DataSources isList="true" count="2">
       <Başlıklar Ref="2" type="DataTableSource" isKey="true">
         <Alias>Başlıklar</Alias>
-        <Columns isList="true" count="25">
+        <Columns isList="true" count="31">
           <value>Id,System.Int32</value>
           <value>ReceiptNo,System.String</value>
           <value>ReceiptType,System.Int32</value>
@@ -33,6 +33,12 @@
           <value>UpdatedDate,System.DateTime</value>
           <value>CarrierId,System.Int32</value>
           <value>TransporterId,System.Int32</value>
+          <value>Id1,System.Int32</value>
+          <value>CompanyCode,System.String</value>
+          <value>CompanyName,System.String</value>
+          <value>AddressLine1,System.String</value>
+          <value>AddressLine2,System.String</value>
+          <value>AddressLine3,System.String</value>
         </Columns>
         <Dictionary isRef="1" />
         <Key>5f26ed4fdb1547ec80c1f29c62dd8a8e</Key>
@@ -98,7 +104,7 @@
     <Page1 Ref="4" type="Page" isKey="true">
       <Border>None;Black;2;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
-      <Components isList="true" count="5">
+      <Components isList="true" count="9">
         <Image1 Ref="5" type="Image" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>7,0,5.2,2.2</ClientRectangle>
@@ -993,6 +999,64 @@ rkJggg==</ImageBytes>
           <Type>DataColumn</Type>
           <VertAlignment>Center</VertAlignment>
         </Text4>
+        <Text5 Ref="11" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,3.4,3,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Bahnschrift Light,10</Font>
+          <Name>Text5</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>Firma :</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text5>
+        <Text6 Ref="12" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>3,3.4,6.8,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Bahnschrift Light,10</Font>
+          <Name>Text6</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{Başlıklar.CompanyName}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextFormat Ref="13" type="DateFormat" isKey="true" />
+          <Type>DataColumn</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text6>
+        <Text7 Ref="14" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,4,3,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Bahnschrift Light,10</Font>
+          <Name>Text7</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>Açıklama :</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text7>
+        <Text8 Ref="15" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>3,4,6.8,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Bahnschrift Light,10</Font>
+          <Name>Text8</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{Başlıklar.Explanation}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextFormat Ref="16" type="DateFormat" isKey="true" />
+          <Type>DataColumn</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text8>
       </Components>
       <Conditions isList="true" count="0" />
       <Expressions isList="true" count="0" />
@@ -1015,10 +1079,10 @@ rkJggg==</ImageBytes>
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>12/23/2025 9:50:46 AM</ReportChanged>
+  <ReportChanged>12/24/2025 10:04:10 AM</ReportChanged>
   <ReportCreated>11/10/2025 1:38:02 PM</ReportCreated>
   <ReportFile>C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\reports\Üretim Giriş Formu.mrt</ReportFile>
-  <ReportGuid>0e2f75b50ce54ebf8ff54b7297df0bf1</ReportGuid>
+  <ReportGuid>5b21e13ab09b4f78bac09fadab88ecc9</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2025.4.1.0</ReportVersion>

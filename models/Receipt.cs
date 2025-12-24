@@ -45,7 +45,6 @@ namespace MaliyeHesaplama.models
         public int Maturity { get; set; }
         [Display(Name = "Müşteri Sipariş No")]
         public string CustomerOrderNo { get; set; }
-
         [Display(Name = "Onaylı Mı?")]
         public bool Approved { get; set; }
 

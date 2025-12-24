@@ -255,12 +255,12 @@ namespace MaliyeHesaplama.userControls
             //GetSumOrCount();
         }
 
-        private void btnFirmaListesi_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnFirmaListesi_Click(object sender, RoutedEventArgs e)
         {
             MainHelper.SetCompanyInformation(ref CompanyId, txtFirmaUnvan);
         }
 
-        private void btnDepoListesi_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnDepoListesi_Click(object sender, RoutedEventArgs e)
         {
             MainHelper.SetWareHouseInformation(ref WareHouseId, txtDepo);
         }
@@ -280,9 +280,9 @@ namespace MaliyeHesaplama.userControls
             }
         }
 
-        private void MI_AcikSiparisler_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void MI_AcikSiparisler_Click(object sender, RoutedEventArgs e)
         {
-            string condition = $"R.ReceiptType = {Convert.ToInt32(Enums.Receipt.Siparis)}";
+            string condition = $"R.ReceiptType = {Convert.ToInt32(Enums.Receipt.Siparis)} and R.Approved = 1";
             var data = _orm.GetById<dynamic>("ProductionManagementParams", 1);
             if (Convert.ToBoolean(data.UretimGirisiDepoZorunlu) && WareHouseId == 0)
             {

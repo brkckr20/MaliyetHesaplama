@@ -65,9 +65,8 @@
                         </GroupBox>
                         <GroupBox Grid.Row="2" Header="Üretim Sipariş ve Girişleri" Foreground="Black">
                             <StackPanel>
-                                <DockPanel>
-                                    <CheckBox x:Name="chckUretimGirisiDepoZorunlu" Content="Sipariş aktarımında depo seçimi zorunlu olsun"/>
-                                </DockPanel>
+                                <CheckBox x:Name="chckUretimGirisiDepoZorunlu" Content="Sipariş aktarımında depo seçimi zorunlu olsun" VerticalContentAlignment="Bottom"/>
+                                <CheckBox x:Name="chckOnayliSiparisDegisiklik" Content="Onaylanmış sipariş üzerinde değişiklik yapılabilsin" Margin="0,2,0,0" VerticalContentAlignment="Bottom"/>
                             </StackPanel>
                         </GroupBox>
                     </Grid>

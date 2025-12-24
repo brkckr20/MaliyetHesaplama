@@ -168,6 +168,7 @@ public class MiniOrm
                             ISNULL(R.Maturity,'') [Maturity],
                             ISNULL(R.CustomerOrderNo,'') [CustomerOrderNo],
                             ISNULL(R.Explanation,'') [Explanation],
+                            ISNULL(R.Approved,0) [Approved],
                             ISNULL(RI.Id,'') [ReceiptItemId],
                             ISNULL(RI.OperationType,'') [OperationType],
                             ISNULL(RI.InventoryId,'') [InventoryId],
@@ -219,6 +220,7 @@ public class MiniOrm
 		R.Maturity                            AS Maturity,
 		ISNULL(R.CustomerOrderNo,'')          AS CustomerOrderNo,
 		ISNULL(R.Explanation,'')              AS Explanation,
+        ISNULL(R.Approved,0)                  AS Approved,
 
 		RI.Id                                 AS ReceiptItemId,
 		ISNULL(RI.OperationType,'')           AS OperationType,
@@ -262,6 +264,7 @@ public class MiniOrm
 		R.Maturity,
 		R.CustomerOrderNo,
 		R.Explanation,
+        R.Approved,
 		RI.Id,
 		RI.OperationType,
 		RI.InventoryId,

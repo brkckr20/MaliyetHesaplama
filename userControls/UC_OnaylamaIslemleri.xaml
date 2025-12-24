@@ -18,7 +18,7 @@
                     </Style.Triggers>
                 </Style>
             </TabControl.Resources>
-            <TabItem Header="Sipariş Onaylama" x:Name="sip" Loaded="sip_Loaded">
+            <TabItem Header="Genel" x:Name="sip" Loaded="sip_Loaded">
                 <control:FilterDataGrid
                             x:Name="gridSip" FontSize="12" VerticalContentAlignment="Center" 
                             IsReadOnly="True" GridLinesVisibility="All" 
@@ -38,18 +38,6 @@
                         </ContextMenu>
                     </control:FilterDataGrid.ContextMenu>
                 </control:FilterDataGrid>
-            </TabItem>
-            <TabItem Header="Aksesuar S.A. Onaylama" >
-
-            </TabItem>
-            <TabItem Header="Kumaş S.A. Onaylama" >
-
-            </TabItem>
-            <TabItem Header="İplik S.A. Onaylama" >
-
-            </TabItem>
-            <TabItem Header="Malzeme S.A. Onaylama" >
-
             </TabItem>
         </TabControl>
 

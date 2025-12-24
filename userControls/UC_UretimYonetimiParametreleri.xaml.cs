@@ -21,6 +21,7 @@ namespace MaliyeHesaplama.userControls
             txtOperasyonTipi.Text = data.ReceteOperasyonTipleri;
             chckReceteOlacak.IsChecked = Convert.ToBoolean(data.KumasRecetesiOlacak);
             chckUretimGirisiDepoZorunlu.IsChecked = Convert.ToBoolean(data.UretimGirisiDepoZorunlu);
+            chckOnayliSiparisDegisiklik.IsChecked = Convert.ToBoolean(data.OnayliSiparisDegisiklik);
             foreach (ComboBoxItem item in cmbKurSecimi.Items)
             {
                 if (item.Tag?.ToString() == data.BazAlinacakKur)
@@ -47,6 +48,7 @@ namespace MaliyeHesaplama.userControls
                 { "BazAlinacakKur", (cmbKurSecimi.SelectedItem as ComboBoxItem)?.Tag?.ToString() },
                 { "DovizKurlari", txtDovizKurlari.Text },
                 { "UretimGirisiDepoZorunlu", chckUretimGirisiDepoZorunlu.IsChecked },
+                { "OnayliSiparisDegisiklik", chckOnayliSiparisDegisiklik.IsChecked },
             };
             _orm.Save("ProductionManagementParams", dict);
             Bildirim.Bilgilendirme2("Kayıt işlemi başarıyla gerçekleştirildi.");
