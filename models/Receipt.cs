@@ -109,5 +109,15 @@ namespace MaliyeHesaplama.models
         [NotMapped]
         [Display(Name = "Sipariş No Satır")]
         public string OrderNo { get; set; }
+        [NotMapped]
+        [Display(Name = "Birim Fiyat")]
+        public decimal UnitPrice { get; set; }
+        [NotMapped]
+        [Display(Name = "KDV %")]
+        public decimal Vat { get; set; }
+        [NotMapped]
+        [Display(Name = "Satır Tutarı")]
+        public decimal RowAmount { get; set; }
+
     }
 }

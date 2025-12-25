@@ -6,6 +6,8 @@ using System.Data;
 using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Data;
+//using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace MaliyeHesaplama.helpers
 {
@@ -183,6 +185,5 @@ namespace MaliyeHesaplama.helpers
             var attr = field.GetCustomAttribute<DisplayAttribute>();
             return attr?.Name ?? value.ToString();
         }
-
     }
 }

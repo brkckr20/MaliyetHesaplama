@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_malzemegiriscikis.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_malzemegiriscikis.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_malzemegiriscikis.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_malzemegiriscikis.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_uretimgirisi.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
       "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_uretimgirisi.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_malzemegiriscikis.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_malzemegiriscikis.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_uretimgirisi.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_uretimgirisi.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_malzemegiriscikis.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_malzemegiriscikis.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,20 +34,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "UC_UretimGirisi.xaml.cs",
               "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_UretimGirisi.xaml.cs",
               "RelativeDocumentMoniker": "userControls\\UC_UretimGirisi.xaml.cs",
               "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_UretimGirisi.xaml.cs",
               "RelativeToolTip": "userControls\\UC_UretimGirisi.xaml.cs",
-              "ViewState": "AgIAAFIBAAAAAAAAAIAwwHIBAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAcwKIAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-24T12:45:06.415Z",
+              "WhenOpened": "2025-12-25T14:56:45.394Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "UC_UretimGirisi.xaml",
               "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_UretimGirisi.xaml",
               "RelativeDocumentMoniker": "userControls\\UC_UretimGirisi.xaml",
@@ -59,20 +59,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UC_MalzemeGirisCikis.xaml.cs",
               "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_MalzemeGirisCikis.xaml.cs",
               "RelativeDocumentMoniker": "userControls\\UC_MalzemeGirisCikis.xaml.cs",
               "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_MalzemeGirisCikis.xaml.cs",
               "RelativeToolTip": "userControls\\UC_MalzemeGirisCikis.xaml.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAewEEAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAmwFsAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-24T12:40:56.466Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "UC_MalzemeGirisCikis.xaml",
               "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_MalzemeGirisCikis.xaml",
               "RelativeDocumentMoniker": "userControls\\UC_MalzemeGirisCikis.xaml",

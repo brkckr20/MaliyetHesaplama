@@ -76,6 +76,9 @@ namespace MaliyeHesaplama.wins
 
             switch (_inventoryType)
             {
+                case 0:
+                    Title = "Malzeme Kartı Listesi";
+                    break;
                 case 1:
                     Title = "Kumaş Kartı Listesi";
                     break;

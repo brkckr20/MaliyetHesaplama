@@ -71,24 +71,18 @@
     AlternationCount="2"
     AlternatingRowBackground="#FFF7F7F7"
     RowBackground="White"
+    CurrentCellChanged="dataGrid_CurrentCellChanged"
           >
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Satır Sil" x:Name="MI_SatirSil" Click="MI_SatirSil_Click"/>
-                        <Separator/>
+                        <!--<Separator/>-->
                         
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Visibility="Hidden" Binding="{Binding Id}" IsReadOnly="True"/>
-                    <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType}">
-                        <DataGridComboBoxColumn.ItemsSource>
-                            <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                <sys:String>Dolum</sys:String>
-                                <sys:String>Satın Alma</sys:String>
-                                <sys:String>Satın Alma İade</sys:String>
-                            </x:Array>
-                        </DataGridComboBoxColumn.ItemsSource>
+                    <DataGridComboBoxColumn Header="Kalem İşlem" SelectedItemBinding="{Binding OperationType}" x:Name="cmbKalemIslem">
                     </DataGridComboBoxColumn>
                     <DataGridTextColumn Header="Kumaş Id" Binding="{Binding InventoryId}" IsReadOnly="True" Visibility="Hidden" />
                     <DataGridTemplateColumn Header="Malzeme Kodu">
@@ -102,10 +96,12 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Width="200" Header="Malzeme Adı" Binding="{Binding InventoryName}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Miktar (Adet)" Binding="{Binding Piece, StringFormat={}{0:N2}, ConverterCulture=tr-TR}"/>
-                    <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice}"/>
-                    <DataGridTextColumn Header="Döviz" Binding="{Binding Forex}"/>
+                    <DataGridTextColumn Header="Miktar (Adet)" Binding="{Binding Piece, StringFormat={}{0:N4}, ConverterCulture=tr-TR}"/>
+                    <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice, StringFormat={}{0:N4}, ConverterCulture=tr-TR}"/>
+                    <!--<DataGridTextColumn Header="Döviz" Binding="{Binding Forex}"/>-->
+                    <DataGridTextColumn Header="KDV %" Binding="{Binding Vat, StringFormat={}{0:N4}, ConverterCulture=tr-TR}"/>
                     <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}"/>
+                    <DataGridTextColumn Header="Satır Tutarı" Binding="{Binding RowAmount, StringFormat={}{0:N4}, ConverterCulture=tr-TR}"/>
                     <DataGridTextColumn Header="Takip No" Binding="{Binding TrackingNumber}" IsReadOnly="True" Visibility="Hidden"/>
                 </DataGrid.Columns>
             </DataGrid>
