@@ -1,6 +1,5 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
@@ -23,6 +22,7 @@ namespace MaliyeHesaplama.userControls
             chckUretimGirisiDepoZorunlu.IsChecked = Convert.ToBoolean(data.UretimGirisiDepoZorunlu);
             chckOnayliSiparisDegisiklik.IsChecked = Convert.ToBoolean(data.OnayliSiparisDegisiklik);
             txtOperasyonTipiMG.Text = data.MalzemeGirisOperasyonTipleri;
+            txtOperasyonTipiMC.Text = data.MalzemeCikisOperasyonTipleri;
             foreach (ComboBoxItem item in cmbKurSecimi.Items)
             {
                 if (item.Tag?.ToString() == data.BazAlinacakKur)
@@ -51,6 +51,7 @@ namespace MaliyeHesaplama.userControls
                 { "UretimGirisiDepoZorunlu", chckUretimGirisiDepoZorunlu.IsChecked },
                 { "OnayliSiparisDegisiklik", chckOnayliSiparisDegisiklik.IsChecked },
                 { "MalzemeGirisOperasyonTipleri", txtOperasyonTipiMG.Text },
+                { "MalzemeCikisOperasyonTipleri", txtOperasyonTipiMC.Text },
             };
             _orm.Save("ProductionManagementParams", dict);
             Bildirim.Bilgilendirme2("Kayıt işlemi başarıyla gerçekleştirildi.");

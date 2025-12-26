@@ -54,28 +54,46 @@
     <Page1 Ref="3" type="Page" isKey="true">
       <Border>None;Black;2;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
-      <Components isList="true" count="1">
+      <Components isList="true" count="2">
         <Text1 Ref="4" type="Text" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>2.2,0.6,15,0.6</ClientRectangle>
+          <ClientRectangle>0,0,4.2,0.6</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Expressions isList="true" count="0" />
-          <Font>Arial,8</Font>
+          <Font>Bahnschrift,10</Font>
+          <HorAlignment>Center</HorAlignment>
           <Name>Text1</Name>
           <Page isRef="3" />
           <Parent isRef="3" />
-          <Text>Buraya toner tarih etiketi gelecek</Text>
+          <Text>Toner Giriş Tarihi</Text>
           <TextBrush>Black</TextBrush>
           <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
         </Text1>
+        <Text2 Ref="5" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.6,4.2,1</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Bahnschrift,10</Font>
+          <HorAlignment>Center</HorAlignment>
+          <Name>Text2</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+          <Text>{Fiş.ReceiptDate}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextFormat Ref="6" type="DateFormat" isKey="true" />
+          <Type>DataColumn</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text2>
       </Components>
       <Conditions isList="true" count="0" />
       <Expressions isList="true" count="0" />
       <Guid>730b7221d1d34383b671ab1f496cabdd</Guid>
-      <Margins>1,1,1,1</Margins>
+      <Margins>0.2,0.2,1,1</Margins>
       <Name>Page1</Name>
-      <PageHeight>29.7</PageHeight>
-      <PageWidth>21</PageWidth>
+      <PageHeight>3</PageHeight>
+      <PageWidth>4.5</PageWidth>
       <Report isRef="0" />
     </Page1>
   </Pages>
@@ -90,10 +108,10 @@
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>12/25/2025 6:17:10 PM</ReportChanged>
+  <ReportChanged>12/26/2025 11:15:02 AM</ReportChanged>
   <ReportCreated>11/10/2025 1:38:02 PM</ReportCreated>
   <ReportFile>C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net8.0-windows\reports\Toner Giriş Etiketi.mrt</ReportFile>
-  <ReportGuid>f0de1d41f11c4922b0ad38c4a279e378</ReportGuid>
+  <ReportGuid>349ff730ea1f48ca9460c535dd731184</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2025.4.1.0</ReportVersion>

@@ -45,7 +45,7 @@ namespace MaliyeHesaplama
         private void MalzemeYonetimi_Click(object sender, RoutedEventArgs e)
         {
             string title = "Malzeme Yönetimi";
-            string[] items = { "Mazeme Giriş İşlemleri" };
+            string[] items = { "Mazeme Giriş İşlemleri", "Mazeme Çıkış İşlemleri" };
             ShowMegaMenu(title, items);
         }
         private void MegaMenuItem_Click(object sender, RoutedEventArgs e)
@@ -82,6 +82,8 @@ namespace MaliyeHesaplama
                 /* Malzeme Yönetimi */
                 if (menuName == "Mazeme Giriş İşlemleri")
                     OpenTab(menuName, new userControls.UC_MalzemeGirisCikis(Enums.Receipt.MalzemeGiris));
+                if (menuName == "Mazeme Çıkış İşlemleri")
+                    OpenTab(menuName, new userControls.UC_MalzemeGirisCikis(Enums.Receipt.MalzemeCikis));
 
                 /* Ayarlar */
                 if (menuName == "Üretim Yönetimi Parametreleri")

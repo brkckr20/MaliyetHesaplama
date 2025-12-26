@@ -64,6 +64,9 @@
     <Compile Update="wins\winDepoListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="wins\winFasonaGidenler.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="wins\winFirmaListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

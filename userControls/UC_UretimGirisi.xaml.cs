@@ -30,7 +30,7 @@ namespace MaliyeHesaplama.userControls
             KayitlariGetir("Sonraki");
         }
 
-        public void Kaydet() // KAYIT İŞLEMLERİNE DEVAM EDİLDİ, DİĞER İŞLEMLERE DEVAM EDİLECEK
+        public void Kaydet() 
         {
             #region kontrol edilecek - ai verdi
             //var dict0 = new Dictionary<string, object>()

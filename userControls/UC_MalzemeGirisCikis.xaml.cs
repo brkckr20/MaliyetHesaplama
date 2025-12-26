@@ -14,6 +14,7 @@ namespace MaliyeHesaplama.userControls
         public int CompanyId = 0, Id, WareHouseId;
         private DataTable table;
         UtilityHelpers _uh = new UtilityHelpers();
+        string _screenNameForReport;
 
         public UC_MalzemeGirisCikis(Enums.Receipt receipt)
         {
@@ -21,11 +22,13 @@ namespace MaliyeHesaplama.userControls
             _receipt = receipt;
             ButtonBar.PageCommands = this;
             LoadData();
+            SetVisibleControls();
+            _screenNameForReport = receipt == Enums.Receipt.MalzemeGiris ? "Malzeme Giriş" : "Malzeme Çıkış";
         }
-
+        
         private void btnFirmaListesi_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            MainHelper.SetCompanyInformation(ref CompanyId,txtFirmaUnvan);
+            MainHelper.SetCompanyInformation(ref CompanyId, txtFirmaUnvan);
         }
 
         private void btnDepoListesi_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -84,22 +87,21 @@ namespace MaliyeHesaplama.userControls
             txtDepo.Text = string.Empty;
             txtAciklama.Text = string.Empty;
             table.Clear();
-
         }
 
         public void Yazdir()
         {
-            MainHelper.OpenReportWindow("Malzeme Giriş", Id);
+            MainHelper.OpenReportWindow(_screenNameForReport, Id);
         }
 
         public void Ileri()
         {
-            throw new NotImplementedException();
+            KayitlariGetir("Önceki");
         }
 
         public void Geri()
         {
-            throw new NotImplementedException();
+            KayitlariGetir("Sonraki");
         }
 
         public void Listele()
@@ -180,14 +182,86 @@ namespace MaliyeHesaplama.userControls
             table.Columns.Add("Vat", typeof(decimal));
             dataGrid.ItemsSource = table.DefaultView;
             //LoadCurrenciesFromDb();
-            _uh.GetOperationTypeList("MalzemeGirisOperasyonTipleri", cmbKalemIslem);
+            if (_receipt == Enums.Receipt.MalzemeGiris)
+            {
+                _uh.GetOperationTypeList("MalzemeGirisOperasyonTipleri", cmbKalemIslem);
+            }
+            else
+            {
+                _uh.GetOperationTypeList("MalzemeCikisOperasyonTipleri", cmbKalemIslem);
+            }
         }
-
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        public void KayitlariGetir(string KayitTipi)
         {
+            try
+            {
+                int id = this.Id;
+                int? istenenId = _orm.GetIdForAfterOrBeforeRecord(KayitTipi, "Receipt", id, "ReceiptItem", "ReceiptId", Convert.ToInt32(_receipt));
+                if (istenenId == null)
+                {
+                    Bildirim.Uyari2("Başka bir kayıt bulunamadı!");
+                    return;
+                }
 
+                string query = MainHelper.GetRecordStringQuery(Convert.ToInt32(_receipt));
+
+                var liste = _orm.GetAfterOrBeforeRecord(query, istenenId.Value);
+
+                if (liste != null && liste.Count > 0)
+                {
+                    // Üst bilgileri doldur
+                    var item = liste[0];
+                    this.Id = Convert.ToInt32(item.Id);
+                    this.CompanyId = Convert.ToInt32(item.CompanyId);
+                    dpTarih.SelectedDate = Convert.ToDateTime(item.ReceiptDate);
+                    //dpTermin.SelectedDate = Convert.ToDateTime(item.DuaDate);
+                    txtFirmaUnvan.Text = item.CompanyName.ToString();
+                    //txtYetkili.Text = item.Authorized.ToString();
+                    //txtVade.Text = item.Maturity.ToString();
+                    //txtMusteriOrderNo.Text = item.CustomerOrderNo.ToString();
+                    txtAciklama.Text = item.Explanation;
+                    txtFisNo.Text = item.ReceiptNo;
+                    txtBelgeNo.Text = item.InvoiceNo;
+
+                    table.Clear();
+                    foreach (var i in liste)
+                    {
+                        DataRow row = table.NewRow();
+                        row["Id"] = i.ReceiptItemId;
+                        row["OperationType"] = i.OperationType;
+                        row["InventoryId"] = i.InventoryId;
+                        row["NetMeter"] = i.NetMeter;
+                        //row["CashPayment"] = i.CashPayment;
+                        //row["DeferredPayment"] = i.DeferredPayment;
+                        row["RowExplanation"] = i.RowExplanation;
+                        //row["Forex"] = i.Forex;
+                        row["InventoryCode"] = i.InventoryCode;
+                        row["InventoryName"] = i.InventoryName;
+                        //row["VariantId"] = i.VariantId;
+                        //row["VariantCode"] = i.VariantCode;
+                        //row["Variant"] = i.Variant;
+                        row["CustomerOrderNo"] = i.CustomerOrderNo_; // alt çizgi eklendi çünkü çakışma vardı - ReceiptItem ve Receipt tablosunda aynı isimde alan var
+                        row["OrderNo"] = i.OrderNo_;
+                        row["TrackingNumber"] = i.TrackingNumber;
+                        row["NetWeight"] = i.NetWeight;
+                        row["Piece"] = i.Piece;
+                        table.Rows.Add(row);
+                    }
+
+                    // DataGrid artık DataTable üzerinden çalışıyor
+                    dataGrid.ItemsSource = table.DefaultView;
+                }
+                else
+                {
+                    Bildirim.Uyari2("Başka bir kayıt bulunamadı.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Bildirim.Uyari2("Hata: " + ex.Message);
+            }
+            //GetSumOrCount();
         }
-
         private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             if (e.Column.Header.ToString() == "Kalem İşlem")
@@ -235,9 +309,55 @@ namespace MaliyeHesaplama.userControls
             rowView["RowAmount"] = rowTotal;
         }
 
+        private void MI_FasonGidenler_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            string condition = $"R.ReceiptType = {Convert.ToInt32(Enums.Receipt.MalzemeCikis)}";
+            var data = _orm.GetById<dynamic>("ProductionManagementParams", 1);
+            if (Convert.ToBoolean(data.UretimGirisiDepoZorunlu) && WareHouseId == 0)
+            {
+                condition += $" AND WareHouseId = {WareHouseId}";
+                Bildirim.Uyari2("Lütfen bir depo seçimi yapınız.");
+                return;
+            }
+            if (Convert.ToBoolean(data.UretimGirisiDepoZorunlu))
+            {
+                condition += $" AND WareHouseId = {WareHouseId}";
+            }
+
+            wins.winFasonaGidenler win = new wins.winFasonaGidenler(condition, WareHouseId.ToString(),"Piece");
+            var result = win.ShowDialog();
+            if (result == true)
+            {
+                var selected = win.SelectedReceipts;
+                foreach (var r in selected)
+                {
+                    var row = table.NewRow();
+                    row["Id"] = 0;
+                    row["InventoryId"] = r.InventoryId;
+                    row["OperationType"] = r.OperationType;
+                    row["InventoryCode"] = r.InventoryCode ?? string.Empty;
+                    row["InventoryName"] = r.InventoryName ?? string.Empty;
+                    row["NetMeter"] = r.NetMeter;
+                    row["NetWeight"] = 0m;
+                    row["Piece"] = r.Piece;
+                    row["RowExplanation"] = r.RowExplanation ?? string.Empty;
+                    row["CustomerOrderNo"] = r.CustomerOrderNo ?? string.Empty;
+                    row["ReceiptNo"] = r.ReceiptNo ?? string.Empty;
+                    row["TrackingNumber"] = r.ReceiptItemId;
+                    row["OrderNo"] = r.OrderNo;
+                    table.Rows.Add(row);
+                }
+            }
+        }
+
         private void MI_SatirSil_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             _uh.RemoveRow(e, ref dataGrid);
+        }
+
+        private void stokSecimi_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            
         }
 
         private void UpdateTotals()
@@ -256,6 +376,20 @@ namespace MaliyeHesaplama.userControls
                 totalMeter += row["NetMeter"] != DBNull.Value ? Convert.ToDecimal(row["NetMeter"]) : 0;
             }
             txtTotals.Text = $"Toplam Adet: {totalPiece:N2}   Toplam Miktar: {totalMeter:N2}";
+        }
+        void SetVisibleControls()
+        {
+            if (_receipt == Enums.Receipt.MalzemeCikis)
+            {
+                dockSevkTarihi.Visibility = System.Windows.Visibility.Collapsed;
+                MI_AcikSiparisler.Visibility = System.Windows.Visibility.Collapsed;
+                fasGid.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                stokSecimi1.Visibility = System.Windows.Visibility.Collapsed;
+                stokSecimi2.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
     }

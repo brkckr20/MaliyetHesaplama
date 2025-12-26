@@ -202,13 +202,17 @@ public class MiniOrm
                         where {contition}";
         return _connection.Query<T>(sql);
     }
-    public IEnumerable<T> GetMovementListWithQuantities<T>(string contition)
+    public IEnumerable<T> GetMovementListWithQuantities<T>(string contition,string calculateZeroField = "NetMeter")
     {
         var sql = $@"	WITH UsedNetMeter AS
 	(
 		SELECT
 			RI1.TrackingNumber,
-			SUM(ISNULL(RI1.NetMeter, 0)) AS UsedMeter
+			SUM(ISNULL(RI1.GrossWeight, 0)) AS UsedGrossWeight,
+			SUM(ISNULL(RI1.NetWeight, 0)) AS UsedNetWeight,
+			SUM(ISNULL(RI1.GrossMeter, 0)) AS UsedGrossMeter,
+			SUM(ISNULL(RI1.NetMeter, 0)) AS UsedNetMeter,
+			SUM(ISNULL(RI1.Piece, 0)) AS UsedPiece
 		FROM ReceiptItem RI1
 		GROUP BY RI1.TrackingNumber
 	)
@@ -230,12 +234,15 @@ public class MiniOrm
 		RI.InventoryId                        AS InventoryId,
 		ISNULL(I.InventoryCode,'')            AS InventoryCode,
 		ISNULL(I.InventoryName,'')            AS InventoryName,
+		-- Miktarlar ve hesaplamalar
+		SUM(ISNULL(RI.GrossWeight,0)) - ISNULL(UNM.UsedGrossWeight,0) AS GrossWeight,
+		SUM(ISNULL(RI.NetWeight,0)) - ISNULL(UNM.UsedNetWeight,0) AS NetWeight,
+		SUM(ISNULL(RI.GrossMeter,0)) - ISNULL(UNM.UsedGrossMeter,0) AS GrossMeter,
+		SUM(ISNULL(RI.NetMeter,0)) - ISNULL(UNM.UsedNetMeter,0) AS NetMeter,
+		SUM(ISNULL(RI.Piece,0)) - ISNULL(UNM.UsedPiece,0) AS Piece,
 
-		SUM(ISNULL(RI.NetMeter,0)) 
-			- ISNULL(UNM.UsedMeter,0)          AS NetMeter,
-
-		ISNULL(RI.NetWeight,0)                AS NetWeight,
-		ISNULL(RI.Piece,0)                    AS Piece,
+		--ISNULL(RI.NetWeight,0)                AS NetWeight,
+		--ISNULL(RI.Piece,0)                    AS Piece,
 		ISNULL(RI.CashPayment,0)              AS CashPayment,
 		ISNULL(RI.DeferredPayment,0)          AS DeferredPayment,
 		ISNULL(RI.Forex,'')                   AS Forex,
@@ -254,7 +261,7 @@ public class MiniOrm
 	LEFT JOIN Color CO         WITH (NOLOCK) ON CO.Id = RI.VariantId
 	LEFT JOIN UsedNetMeter UNM                ON UNM.TrackingNumber = RI.Id
 
-	WHERE {contition}
+		WHERE {contition}
 
 	GROUP BY
 		R.Id,
@@ -283,10 +290,15 @@ public class MiniOrm
 		CO.Name,
 		RI.RowExplanation,
 		RI.TrackingNumber,
-		UNM.UsedMeter
+		UNM.UsedGrossWeight,
+		UNM.UsedNetWeight,
+		UNM.UsedGrossMeter,
+		UNM.UsedNetMeter,
+		UNM.UsedPiece
+
         having 
-		        SUM(ISNULL(RI.NetMeter,0)) 
-			        - ISNULL(UNM.UsedMeter,0) <>0
+		        SUM(ISNULL(RI.{calculateZeroField},0)) 
+			        - ISNULL(UNM.Used{calculateZeroField},0) <>0
 ";
         return _connection.Query<T>(sql);
     }

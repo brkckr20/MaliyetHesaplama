@@ -9,6 +9,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Fasona Gidenler" x:Name="MI_AcikSiparisler" Click="MI_FasonGidenler_Click"/>
+                <MenuItem x:Name="stokSecimi2" Header="Stok Seçimi" Click="stokSecimi_Click"/>
+            </ContextMenu>
+        </Grid.ContextMenu>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -33,7 +39,7 @@
                         <TextBlock VerticalAlignment="Center" Text="Tarih : " Width="100"/>
                         <DatePicker Width="200" x:Name="dpTarih"/>
                     </DockPanel>
-                    <DockPanel HorizontalAlignment="Left" Margin="0,2">
+                    <DockPanel x:Name="dockSevkTarihi" HorizontalAlignment="Left" Margin="0,2">
                         <TextBlock VerticalAlignment="Center" Text="Sevk Tarihi : " Width="100"/>
                         <DatePicker Width="200" x:Name="dpSevkTarih"/>
                     </DockPanel>
@@ -76,8 +82,9 @@
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Satır Sil" x:Name="MI_SatirSil" Click="MI_SatirSil_Click"/>
-                        <!--<Separator/>-->
-                        
+                        <Separator x:Name="s1"/>
+                        <MenuItem Name="fasGid" Header="Fasona Gidenler" Click="MI_FasonGidenler_Click"/>
+                        <MenuItem x:Name="stokSecimi1" Header="Stok Seçimi" Click="stokSecimi_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 <DataGrid.Columns>

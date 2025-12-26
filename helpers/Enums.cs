@@ -21,6 +21,8 @@ namespace MaliyeHesaplama.helpers
             UretimGirisi = 12,
             [Display(Name = "Malzeme Girişi")]
             MalzemeGiris = 13,
+            [Display(Name = "Malzeme Çıkışı")]
+            MalzemeCikis = 14,
         }
         public enum Depo
         {

@@ -3,7 +3,6 @@ using MaliyeHesaplama.models;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Forms;
 
 namespace MaliyeHesaplama.wins
 {
