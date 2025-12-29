@@ -7,6 +7,8 @@ using System.Data;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using FastReport;
+using System.Diagnostics;
 
 
 namespace MaliyeHesaplama.userControls
@@ -17,6 +19,7 @@ namespace MaliyeHesaplama.userControls
         MiniOrm _orm = new MiniOrm();
         private readonly IDbConnection _connection;
         string Rapor1;
+        Report report1 = new Report();
         public UC_RaporOlusturma()
         {
             InitializeComponent();
@@ -224,6 +227,12 @@ namespace MaliyeHesaplama.userControls
                 vkSorgu4.Text = win.DataSource4;
                 vkSorgu5.Text = win.DataSource5;
             }
+        }
+
+        private void frTest_Click(object sender, RoutedEventArgs e)
+        {
+            string exePath = "C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportDesigner\\bin\\Debug\\ReportDesigner.exe"; // buradan devam edilecek
+            Process.Start(exePath);
         }
     }
 }

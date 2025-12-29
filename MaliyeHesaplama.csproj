@@ -49,6 +49,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="FastReport">
+      <HintPath>fr\FastReport.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Bars">
+      <HintPath>fr\FastReport.Bars.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Editor">
+      <HintPath>fr\FastReport.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Stimulsoft.Base">
       <HintPath>..\..\..\asada\Stimulsoft.Base.dll</HintPath>
     </Reference>

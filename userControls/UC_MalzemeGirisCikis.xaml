@@ -110,12 +110,13 @@
                     <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}"/>
                     <DataGridTextColumn Header="Satır Tutarı" Binding="{Binding RowAmount, StringFormat={}{0:N4}, ConverterCulture=tr-TR}"/>
                     <DataGridTextColumn Header="Takip No" Binding="{Binding TrackingNumber}" IsReadOnly="True" Visibility="Hidden"/>
+                    <DataGridTextColumn x:Name="dgtcTeslimAlan" Header="Teslim Alan" Binding="{Binding Receiver}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
         <DockPanel Grid.Row="3" Margin="0,2,0,0" Background="#ececec">
             <StackPanel>
-                <Button x:Name="btnStok" Content="Stok Seçimi" Width="85" Height="34" Background="Transparent"/>
+                <Button x:Name="btnStok" Click="btnStok_Click" Content="Stok Seçimi" Width="85" Height="34" Background="Transparent"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock x:Name="txtTotals" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,2,10,0" Text=""/>

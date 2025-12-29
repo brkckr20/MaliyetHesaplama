@@ -8,17 +8,19 @@ namespace MaliyeHesaplama.wins
 {
     public partial class winFasonaGidenler : Window
     {
-        string _condition,_calculateField;
+        string _condition, _calculateField, _windowName;
         private IEnumerable<Receipt> _tumHareketler;
         MiniOrm _orm = new MiniOrm();
         private ICollectionView _collectionView;
         FilterGridHelpers fgh;
         public List<Receipt> SelectedReceipts { get; private set; } = new();
-        public winFasonaGidenler(string condition,string depoId,string calculateField)
+        public winFasonaGidenler(string condition, string depoId, string calculateField, string windowName)
         {
-            InitializeComponent(); 
+            InitializeComponent();
             _condition = condition;
             _calculateField = calculateField;
+            _windowName = windowName;
+            Title = _windowName;
             fgh = new FilterGridHelpers(gridFG, "Fasona Gidenler " + depoId, "gridFasonaGidenler_" + depoId);
         }
 

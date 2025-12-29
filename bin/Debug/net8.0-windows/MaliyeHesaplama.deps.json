@@ -24,6 +24,9 @@
           "System.Data.Odbc": "9.0.9",
           "System.Data.OleDb": "9.0.9",
           "Xceed.Products.Wpf.DataGrid.Full": "7.3.25458.6675",
+          "FastReport.Bars": "2015.1.2.0",
+          "FastReport": "2015.1.2.0",
+          "FastReport.Editor": "2015.1.2.0",
           "Stimulsoft.Base": "2025.4.1.0",
           "Stimulsoft.Blockly": "2025.4.1.0",
           "Stimulsoft.BlocklyEditor.Wpf": "2025.4.1.0",
@@ -1658,6 +1661,30 @@
           }
         }
       },
+      "FastReport.Bars/2015.1.2.0": {
+        "runtime": {
+          "FastReport.Bars.dll": {
+            "assemblyVersion": "2015.1.2.0",
+            "fileVersion": "2015.1.2.0"
+          }
+        }
+      },
+      "FastReport/2015.1.2.0": {
+        "runtime": {
+          "FastReport.dll": {
+            "assemblyVersion": "2015.1.2.0",
+            "fileVersion": "2015.1.2.0"
+          }
+        }
+      },
+      "FastReport.Editor/2015.1.2.0": {
+        "runtime": {
+          "FastReport.Editor.dll": {
+            "assemblyVersion": "2015.1.2.0",
+            "fileVersion": "2015.1.2.0"
+          }
+        }
+      },
       "Stimulsoft.Base/2025.4.1.0": {
         "runtime": {
           "Stimulsoft.Base.dll": {
@@ -2485,6 +2512,21 @@
       "sha512": "sha512-xbPiqMBqjlmptFO88lR5PMvrmMM7ms4D+Y+O9gPTxXOiA720Km2dL8mYdLWUckQtaGn+AhOMigNFyLqBqWsG3g==",
       "path": "xceed.wpf.datagrid.workbooks/7.3.25458.6675",
       "hashPath": "xceed.wpf.datagrid.workbooks.7.3.25458.6675.nupkg.sha512"
+    },
+    "FastReport.Bars/2015.1.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FastReport/2015.1.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FastReport.Editor/2015.1.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     },
     "Stimulsoft.Base/2025.4.1.0": {
       "type": "reference",

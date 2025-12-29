@@ -118,6 +118,9 @@ namespace MaliyeHesaplama.models
         [NotMapped]
         [Display(Name = "Satır Tutarı")]
         public decimal RowAmount { get; set; }
+        [NotMapped]
+        [Display(Name = "Teslim Alan")]
+        public string Receiver{ get; set; }
 
-    }
+        }
 }

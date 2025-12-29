@@ -192,7 +192,8 @@ public class MiniOrm
                             ISNULL(RI.TrackingNumber,'') [TrackingNumber],
                             ISNULL(RI.UnitPrice,0) [UnitPrice],
                             ISNULL(RI.Vat,0) [Vat],
-                            ISNULL(RI.RowAmount,0) [RowAmount]
+                            ISNULL(RI.RowAmount,0) [RowAmount],
+                            ISNULL(RI.Receiver,0) [Receiver]
                         from Receipt R
                         left join Company C with(nolock) on C.Id = R.CompanyId
                         left join ReceiptItem RI with(nolock) on RI.ReceiptId = R.Id
@@ -228,6 +229,9 @@ public class MiniOrm
 		ISNULL(R.CustomerOrderNo,'')          AS CustomerOrderNo,
 		ISNULL(R.Explanation,'')              AS Explanation,
         ISNULL(R.Approved,0)                  AS Approved,
+		ISNULL(R.WareHouseId,0)               AS WareHouseId,
+		ISNULL(W.Name,0)                      AS WareHouseName,
+		ISNULL(W.Code,0)                      AS WareHouseCode,
 
 		RI.Id                                 AS ReceiptItemId,
 		ISNULL(RI.OperationType,'')           AS OperationType,
@@ -252,7 +256,8 @@ public class MiniOrm
 		ISNULL(CO.Name,'')                    AS Variant,
 
 		ISNULL(RI.RowExplanation,'')          AS RowExplanation,
-		ISNULL(RI.TrackingNumber,'')          AS TrackingNumber
+		ISNULL(RI.TrackingNumber,'')          AS TrackingNumber,
+        ISNULL(RI.Receiver,'')          AS Receiver
 
 	FROM Receipt R
 	LEFT JOIN Company C        WITH (NOLOCK) ON C.Id = R.CompanyId
@@ -260,6 +265,7 @@ public class MiniOrm
 	LEFT JOIN Inventory I      WITH (NOLOCK) ON I.Id = RI.InventoryId
 	LEFT JOIN Color CO         WITH (NOLOCK) ON CO.Id = RI.VariantId
 	LEFT JOIN UsedNetMeter UNM                ON UNM.TrackingNumber = RI.Id
+	LEFT Join WareHouse W With(nolock) on W.Id = R.WareHouseId
 
 		WHERE {contition}
 
@@ -294,7 +300,11 @@ public class MiniOrm
 		UNM.UsedNetWeight,
 		UNM.UsedGrossMeter,
 		UNM.UsedNetMeter,
-		UNM.UsedPiece
+		UNM.UsedPiece,
+        ISNULL(RI.Receiver,'') ,
+		ISNULL(R.WareHouseId,0) ,
+		ISNULL(W.Code,0) ,
+		ISNULL(W.Name,0) 
 
         having 
 		        SUM(ISNULL(RI.{calculateZeroField},0)) 

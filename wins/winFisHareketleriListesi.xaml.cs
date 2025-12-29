@@ -1,10 +1,9 @@
 ﻿using MaliyeHesaplama.helpers;
+using MaliyeHesaplama.models;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Controls;
-using Stimulsoft.Report.Helpers;
-using MaliyeHesaplama.models;
+using System.Windows.Data;
 
 namespace MaliyeHesaplama.wins
 {

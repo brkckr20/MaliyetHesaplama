@@ -1,7 +1,6 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
 using System.Data;
-using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -49,7 +48,7 @@ namespace MaliyeHesaplama.userControls
                 {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(_receipt)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text},{"InvoiceDate", dpSevkTarih.SelectedDate.Value}
             };
             Id = _orm.Save("Receipt", dict0);
-            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Piece", "UnitPrice", "RowExplanation", "TrackingNumber", "Vat", "RowAmount" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
+            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Piece", "UnitPrice", "RowExplanation", "TrackingNumber", "Vat", "RowAmount","Receiver" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
             foreach (DataRow row in table.Rows)
             {
                 if (row.RowState == DataRowState.Deleted) continue;
@@ -149,6 +148,7 @@ namespace MaliyeHesaplama.userControls
                     row["UnitPrice"] = h.UnitPrice;
                     row["Vat"] = h.Vat;
                     row["RowAmount"] = h.RowAmount;
+                    row["Receiver"] = h.Receiver;
                     table.Rows.Add(row);
                 }
                 dataGrid.ItemsSource = table.DefaultView;
@@ -183,6 +183,7 @@ namespace MaliyeHesaplama.userControls
             //table.Columns.Add("VariantCode", typeof(string));
             table.Columns.Add("TrackingNumber", typeof(int));
             table.Columns.Add("Vat", typeof(decimal));
+            table.Columns.Add("Receiver", typeof(string));
             dataGrid.ItemsSource = table.DefaultView;
             //LoadCurrenciesFromDb();
             if (_receipt == Enums.Receipt.MalzemeGiris)
@@ -249,6 +250,7 @@ namespace MaliyeHesaplama.userControls
                         row["TrackingNumber"] = i.TrackingNumber;
                         row["NetWeight"] = i.NetWeight;
                         row["Piece"] = i.Piece;
+                        row["Receiver"] = i.Receiver;
                         table.Rows.Add(row);
                     }
 
@@ -330,7 +332,7 @@ namespace MaliyeHesaplama.userControls
                 condition += $" AND WareHouseId = {WareHouseId}";
             }
 
-            wins.winFasonaGidenler win = new wins.winFasonaGidenler(condition, WareHouseId.ToString(), "Piece");
+            wins.winFasonaGidenler win = new wins.winFasonaGidenler(condition, WareHouseId.ToString(), "Piece","Fason Gidenler");
             var result = win.ShowDialog();
             if (result == true)
             {
@@ -351,6 +353,7 @@ namespace MaliyeHesaplama.userControls
                     row["ReceiptNo"] = r.ReceiptNo ?? string.Empty;
                     row["TrackingNumber"] = r.ReceiptItemId;
                     row["OrderNo"] = r.OrderNo;
+                    row["Receiver"] = r.Receiver;
                     table.Rows.Add(row);
                 }
             }
@@ -364,7 +367,45 @@ namespace MaliyeHesaplama.userControls
 
         private void stokSecimi_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            StokSec();
+        }
+        void StokSec()
+        {
+            if (WareHouseId == 0)
+            {
+                Bildirim.Uyari2("Depodan stok alabilmek için lütfen depo seçimi yapınız.");
+                return;
+            }
+            string condition = $"R.ReceiptType = {Convert.ToInt32(Enums.Receipt.MalzemeGiris)} and R.WareHouseId = {WareHouseId}";
+            wins.winFasonaGidenler win = new wins.winFasonaGidenler(condition, WareHouseId.ToString(), "Piece", "Stok Seçimi");
+            var result = win.ShowDialog();
+            if (result == true)
+            {
+                var selected = win.SelectedReceipts;
+                foreach (var r in selected)
+                {
+                    var row = table.NewRow();
+                    row["Id"] = 0;
+                    row["InventoryId"] = r.InventoryId;
+                    row["OperationType"] = r.OperationType;
+                    row["InventoryCode"] = r.InventoryCode ?? string.Empty;
+                    row["InventoryName"] = r.InventoryName ?? string.Empty;
+                    row["NetMeter"] = r.NetMeter;
+                    row["NetWeight"] = 0m;
+                    row["Piece"] = r.Piece;
+                    row["RowExplanation"] = r.RowExplanation ?? string.Empty;
+                    row["CustomerOrderNo"] = r.CustomerOrderNo ?? string.Empty;
+                    row["ReceiptNo"] = r.ReceiptNo ?? string.Empty;
+                    row["TrackingNumber"] = r.ReceiptItemId;
+                    row["OrderNo"] = r.OrderNo;
+                    row["Receiver"] = r.Receiver;
+                    table.Rows.Add(row);
+                }
+            }
+        }
+        private void btnStok_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            StokSec();
         }
 
         private void UpdateTotals()
@@ -398,6 +439,7 @@ namespace MaliyeHesaplama.userControls
                 stokSecimi1.Visibility = System.Windows.Visibility.Collapsed;
                 stokSecimi2.Visibility = System.Windows.Visibility.Collapsed;
                 btnStok.Visibility = System.Windows.Visibility.Collapsed;
+                dgtcTeslimAlan.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
