@@ -18,5 +18,7 @@ namespace MaliyeHesaplama.models
         public string SubType { get; set; }
         [Display(Name = "Ön Ek?")]
         public bool IsPrefix{ get; set; }
+        [Display(Name = "Kullanımda")]
+        public bool IsUse { get; set; }
     }
 }

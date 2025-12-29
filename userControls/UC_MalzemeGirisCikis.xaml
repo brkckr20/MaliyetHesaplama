@@ -68,16 +68,16 @@
         </Border>
         <Border Grid.Row="2">
             <DataGrid x:Name="dataGrid" Grid.Row="0"
-    CanUserAddRows="True"
-    CanUserDeleteRows="True"
-    AutoGenerateColumns="False"
-    CellEditEnding="dataGrid_CellEditEnding" 
-    HorizontalGridLinesBrush="LightGray" 
-    VerticalGridLinesBrush="LightGray"
-    AlternationCount="2"
-    AlternatingRowBackground="#FFF7F7F7"
-    RowBackground="White"
-    CurrentCellChanged="dataGrid_CurrentCellChanged"
+            CanUserAddRows="True"
+            CanUserDeleteRows="True"
+            AutoGenerateColumns="False"
+            CellEditEnding="dataGrid_CellEditEnding" 
+            HorizontalGridLinesBrush="LightGray" 
+            VerticalGridLinesBrush="LightGray"
+            AlternationCount="2"
+            AlternatingRowBackground="#FFF7F7F7"
+            RowBackground="White"
+            CurrentCellChanged="dataGrid_CurrentCellChanged"
           >
                 <DataGrid.ContextMenu>
                     <ContextMenu>
@@ -113,9 +113,14 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
-        <StackPanel Grid.Row="3" Margin="0,2,0,0" Background="#ececec">
-            <TextBlock x:Name="txtTotals" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,2,10,0" Text="Toplam Adet: 0   Toplam Miktar: 0,00"/>
-            <TextBlock x:Name="txtTotal1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,2" Text="Toplam Adet: 0   Toplam Miktar: 0,00"/>
-        </StackPanel>
+        <DockPanel Grid.Row="3" Margin="0,2,0,0" Background="#ececec">
+            <StackPanel>
+                <Button x:Name="btnStok" Content="Stok Seçimi" Width="85" Height="34" Background="Transparent"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock x:Name="txtTotals" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,2,10,0" Text=""/>
+                <TextBlock x:Name="txtTotal1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,2" Text=""/>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

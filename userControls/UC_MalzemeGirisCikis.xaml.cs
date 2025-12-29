@@ -25,7 +25,7 @@ namespace MaliyeHesaplama.userControls
             SetVisibleControls();
             _screenNameForReport = receipt == Enums.Receipt.MalzemeGiris ? "Malzeme Giriş" : "Malzeme Çıkış";
         }
-        
+
         private void btnFirmaListesi_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             MainHelper.SetCompanyInformation(ref CompanyId, txtFirmaUnvan);
@@ -39,6 +39,7 @@ namespace MaliyeHesaplama.userControls
         public void Yeni()
         {
             Temizle();
+            UpdateTotals();
         }
 
         public void Kaydet()
@@ -65,6 +66,7 @@ namespace MaliyeHesaplama.userControls
                     row["Id"] = newId;
             }
             Bildirim.Bilgilendirme2("Kayıt işlemi başarılı bir şekilde gerçekleştirildi");
+            UpdateTotals();
         }
 
         public void Sil()
@@ -87,6 +89,7 @@ namespace MaliyeHesaplama.userControls
             txtDepo.Text = string.Empty;
             txtAciklama.Text = string.Empty;
             table.Clear();
+            UpdateTotals();
         }
 
         public void Yazdir()
@@ -150,7 +153,7 @@ namespace MaliyeHesaplama.userControls
                 }
                 dataGrid.ItemsSource = table.DefaultView;
             }
-            //GetSumOrCount();
+            UpdateTotals();
         }
         void LoadData()
         {
@@ -190,6 +193,7 @@ namespace MaliyeHesaplama.userControls
             {
                 _uh.GetOperationTypeList("MalzemeCikisOperasyonTipleri", cmbKalemIslem);
             }
+            UpdateTotals();
         }
         public void KayitlariGetir(string KayitTipi)
         {
@@ -250,6 +254,7 @@ namespace MaliyeHesaplama.userControls
 
                     // DataGrid artık DataTable üzerinden çalışıyor
                     dataGrid.ItemsSource = table.DefaultView;
+                    UpdateTotals();
                 }
                 else
                 {
@@ -261,6 +266,7 @@ namespace MaliyeHesaplama.userControls
                 Bildirim.Uyari2("Hata: " + ex.Message);
             }
             //GetSumOrCount();
+            UpdateTotals();
         }
         private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
@@ -324,7 +330,7 @@ namespace MaliyeHesaplama.userControls
                 condition += $" AND WareHouseId = {WareHouseId}";
             }
 
-            wins.winFasonaGidenler win = new wins.winFasonaGidenler(condition, WareHouseId.ToString(),"Piece");
+            wins.winFasonaGidenler win = new wins.winFasonaGidenler(condition, WareHouseId.ToString(), "Piece");
             var result = win.ShowDialog();
             if (result == true)
             {
@@ -348,6 +354,7 @@ namespace MaliyeHesaplama.userControls
                     table.Rows.Add(row);
                 }
             }
+            UpdateTotals();
         }
 
         private void MI_SatirSil_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -357,14 +364,14 @@ namespace MaliyeHesaplama.userControls
 
         private void stokSecimi_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            
+
         }
 
         private void UpdateTotals()
         {
             if (table == null || table.Rows.Count == 0)
             {
-                txtTotals.Text = $"Toplam Adet: 0   Toplam Miktar: 0,00";
+                txtTotals.Text = "";
                 return;
             }
 
@@ -375,7 +382,8 @@ namespace MaliyeHesaplama.userControls
                 totalPiece += row["Piece"] != DBNull.Value ? Convert.ToDecimal(row["Piece"]) : 0;
                 totalMeter += row["NetMeter"] != DBNull.Value ? Convert.ToDecimal(row["NetMeter"]) : 0;
             }
-            txtTotals.Text = $"Toplam Adet: {totalPiece:N2}   Toplam Miktar: {totalMeter:N2}";
+            txtTotals.Text = $"Toplam: {totalPiece:N2} Adet";//   Toplam : {totalMeter:N2} Metre
+            txtTotal1.Text = $"Toplam: {table.Rows.Count.ToString()} Satır (Kalem)";
         }
         void SetVisibleControls()
         {
@@ -389,6 +397,7 @@ namespace MaliyeHesaplama.userControls
             {
                 stokSecimi1.Visibility = System.Windows.Visibility.Collapsed;
                 stokSecimi2.Visibility = System.Windows.Visibility.Collapsed;
+                btnStok.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 

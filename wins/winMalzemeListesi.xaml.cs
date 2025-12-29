@@ -15,7 +15,7 @@ namespace MaliyeHesaplama.wins
     {
         public int _inventoryType, Id;
         public string Code, Name, RawWidth, RawHeight, ProdWidth, ProdHeight, RawGrammage, ProdGrammage, Explanation;
-        public bool YarnDyed;
+        public bool YarnDyed,IsUse;
 
         private readonly int CurrentUserId = Properties.Settings.Default.RememberUserId;
         private List<ColumnSelector> _savedColumnSettings;
@@ -29,12 +29,6 @@ namespace MaliyeHesaplama.wins
             InitializeComponent();
             _inventoryType = InventoryType;
             fgh = new FilterGridHelpers(grid, "Malzeme Listesi", "grid" + Title);
-        }
-        private void LoadData()
-        {
-            var data = _orm.GetAll<Inventory>("Inventory").Where(x => x.Type == _inventoryType && x.IsPrefix == false).ToList();
-            collectionView = CollectionViewSource.GetDefaultView(data);
-            grid.ItemsSource = collectionView;
         }
         private void FilterDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
@@ -62,6 +56,7 @@ namespace MaliyeHesaplama.wins
                 Id = record.Id;
                 Code = record.InventoryCode;
                 Name = record.InventoryName;
+                IsUse = record.IsUse;
                 this.DialogResult = true;
                 this.Close();
             }
