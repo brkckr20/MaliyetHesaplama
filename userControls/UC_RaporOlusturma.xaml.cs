@@ -20,6 +20,7 @@ namespace MaliyeHesaplama.userControls
         private readonly IDbConnection _connection;
         string Rapor1;
         Report report1 = new Report();
+        bool IsFastReport = true;
         public UC_RaporOlusturma()
         {
             InitializeComponent();
@@ -29,13 +30,13 @@ namespace MaliyeHesaplama.userControls
         {
             string reportName = txtRaporAdi.Text;
             string reportPath = $"reports/{reportName}.mrt";
+            //string reportPathFast = $"reports/{reportName}.frx";
             string destPath = $"reports/{reportName}.mrt";
-
+            //string destPathFast = $"reports/{reportName}.frx";
             var reports = _orm.GetReport<dynamic>(reportName);
             var config = DbConfig.Load();
             string connectionString = config.ConnectionString;
             DataSet dataSet = new DataSet();
-
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 FillDataSetWithQuery(reports.Query1, reports.DataSource1, connection, dataSet);
@@ -44,7 +45,6 @@ namespace MaliyeHesaplama.userControls
                 FillDataSetWithQuery(reports.Query4, reports.DataSource4, connection, dataSet);
                 FillDataSetWithQuery(reports.Query5, reports.DataSource5, connection, dataSet);
             }
-
             StiReport report = new StiReport();
             if (File.Exists(reportPath))
                 report.Load(reportPath);
@@ -89,6 +89,28 @@ namespace MaliyeHesaplama.userControls
                 report.RegData(reports.DataSource5, dataSet.Tables[reports.DataSource5]);
 
             report.Dictionary.Synchronize();
+        }
+        public void RegDataToReport1(dynamic reports, DataSet dataSet, Report report)
+        {
+            RegisterTable(report, dataSet, reports.DataSource1);
+            RegisterTable(report, dataSet, reports.DataSource2);
+            RegisterTable(report, dataSet, reports.DataSource3);
+            RegisterTable(report, dataSet, reports.DataSource4);
+            RegisterTable(report, dataSet, reports.DataSource5);
+        }
+        private void RegisterTable(Report report, DataSet dataSet, string tableName)
+        {
+            if (string.IsNullOrWhiteSpace(tableName))
+                return;
+
+            if (!dataSet.Tables.Contains(tableName))
+                return;
+
+            report.RegisterData(dataSet.Tables[tableName], tableName);
+
+            var ds = report.GetDataSource(tableName);
+            if (ds != null)
+                ds.Enabled = true;
         }
         bool IsDesign = true; // kayıt işlemi tamamlandı. command.Parameters.AddWithValue("@Id", 1); id alanı olmazsa hata verdi ve dizaynda default 1 verildi
         public int GoruntulenecekId = 7;
@@ -156,19 +178,39 @@ namespace MaliyeHesaplama.userControls
         {
             string reportName = txtRaporAdi.Text;
             string sourcePath = "reports/blank.mrt";
+            string sourcePathFast = "reports/blank.frx";
             string destPath = $"reports/{reportName}.mrt";
+            string destPathFast = $"reports/{reportName}.frx";
+
             if (this.Id == 0)
             {
-                if (File.Exists(sourcePath))
+                if (IsFastReport)
                 {
-                    if (!File.Exists(destPath))
-                        File.Copy(sourcePath, destPath);
-                    else
+                    if (File.Exists(sourcePathFast))
                     {
-                        Bildirim.Bilgilendirme2("Bu isimde bir rapor mevcut!");
-                        return;
+                        if (!File.Exists(destPathFast))
+                            File.Copy(sourcePathFast, destPathFast);
+                        else
+                        {
+                            Bildirim.Bilgilendirme2("Bu isimde bir rapor 'FastReport' dosyası mevcut!");
+                            return;
+                        }
                     }
                 }
+                else
+                {
+                    if (File.Exists(sourcePath))
+                    {
+                        if (!File.Exists(destPath))
+                            File.Copy(sourcePath, destPath);
+                        else
+                        {
+                            Bildirim.Bilgilendirme2("Bu isimde bir rapor mevcut!");
+                            return;
+                        }
+                    }
+                }
+
             }
             var dict = new Dictionary<string, object>
             {
@@ -231,8 +273,20 @@ namespace MaliyeHesaplama.userControls
 
         private void frTest_Click(object sender, RoutedEventArgs e)
         {
-            string exePath = "C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportDesigner\\bin\\Debug\\ReportDesigner.exe"; // buradan devam edilecek
-            Process.Start(exePath);
+            string reportName = txtRaporAdi.Text;
+            string exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ReportDesigner\\bin\\Debug\\ReportDesigner.exe");
+
+            if (!File.Exists(exePath))
+            {
+                MessageBox.Show("ReportDesigner.exe bulunamadı!");
+                return;
+            }
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = exePath,
+                Arguments = reportName,
+                UseShellExecute = true
+            });
         }
     }
 }

@@ -5,19 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_raporolusturma.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_raporolusturma.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\maliyehesaplama\\usercontrols\\uc_raporolusturma.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{45F20B06-3F19-4466-B208-119513C2876C}|MaliyeHesaplama.csproj|solutionrelative:usercontrols\\uc_raporolusturma.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2F552068-B89D-4D34-86C0-9E7F004823CE}|..\\ReportDesigner\\ReportDesigner.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\reportdesigner\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2F552068-B89D-4D34-86C0-9E7F004823CE}|..\\ReportDesigner\\ReportDesigner.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\reportdesigner\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2F552068-B89D-4D34-86C0-9E7F004823CE}|..\\ReportDesigner\\ReportDesigner.csproj|c:\\users\\casper\\desktop\\klas\u00F6rler\\z\\reportdesigner\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,49 +14,11 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{873151d0-cf2e-48cc-b4bf-ad0394f6a3c3}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\ReportDesigner\\Program.cs",
-              "RelativeDocumentMoniker": "..\\ReportDesigner\\Program.cs",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\ReportDesigner\\Program.cs",
-              "RelativeToolTip": "..\\ReportDesigner\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T15:08:44.365Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\ReportDesigner\\Form1.cs",
-              "RelativeDocumentMoniker": "..\\ReportDesigner\\Form1.cs",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\ReportDesigner\\Form1.cs",
-              "RelativeToolTip": "..\\ReportDesigner\\Form1.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T15:08:33.537Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\ReportDesigner\\Form1.cs",
-              "RelativeDocumentMoniker": "..\\ReportDesigner\\Form1.cs",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\ReportDesigner\\Form1.cs [Design]",
-              "RelativeToolTip": "..\\ReportDesigner\\Form1.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T15:08:10.683Z",
-              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -79,21 +28,9 @@
               "RelativeDocumentMoniker": "userControls\\UC_RaporOlusturma.xaml.cs",
               "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_RaporOlusturma.xaml.cs",
               "RelativeToolTip": "userControls\\UC_RaporOlusturma.xaml.cs",
-              "ViewState": "AgIAANcAAAAAAAAAAAAiwOkAAAB2AAAAAAAAAA==",
+              "ViewState": "AgIAAAYBAAAAAAAAAAAAACQBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T14:51:28.11Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UC_RaporOlusturma.xaml",
-              "DocumentMoniker": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_RaporOlusturma.xaml",
-              "RelativeDocumentMoniker": "userControls\\UC_RaporOlusturma.xaml",
-              "ToolTip": "C:\\Users\\casper\\Desktop\\Klas\u00F6rler\\z\\MaliyeHesaplama\\userControls\\UC_RaporOlusturma.xaml",
-              "RelativeToolTip": "userControls\\UC_RaporOlusturma.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-12-29T14:51:06.354Z",
+              "WhenOpened": "2025-12-30T08:18:30.048Z",
               "EditorCaption": ""
             }
           ]
