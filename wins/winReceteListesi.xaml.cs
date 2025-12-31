@@ -18,7 +18,7 @@ namespace MaliyeHesaplama.wins
             InitializeComponent();
             inventoryId = _inventoryId;
         }
-        void SearchWithTextboxValue(TextBox aranacakTextbox, string fieldAdi)
+        void SearchWithTextboxValue(System.Windows.Controls.TextBox aranacakTextbox, string fieldAdi)
         {
             string filterText = aranacakTextbox.Text.ToLower();
 

@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_Numarator : UserControl,IPageCommands
+    public partial class UC_Numarator : System.Windows.Controls.UserControl,IPageCommands
     {
         MiniOrm _orm = new MiniOrm();
         private int Id = 0;

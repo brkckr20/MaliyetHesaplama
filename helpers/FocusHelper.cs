@@ -24,11 +24,11 @@ namespace MaliyeHesaplama.helpers
 
         private static void OnSelectAllTextOnFocusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TextBox textBox && (bool)e.NewValue)
+            if (d is System.Windows.Controls.TextBox textBox && (bool)e.NewValue)
             {
                 textBox.GotFocus += TextBox_GotFocus;
             }
-            else if (d is TextBox textBox2)
+            else if (d is System.Windows.Controls.TextBox textBox2)
             {
                 textBox2.GotFocus -= TextBox_GotFocus;
             }
@@ -36,7 +36,7 @@ namespace MaliyeHesaplama.helpers
 
         private static void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            ((TextBox)sender).SelectAll();
+            ((System.Windows.Controls.TextBox)sender).SelectAll();
         }
     }
 }

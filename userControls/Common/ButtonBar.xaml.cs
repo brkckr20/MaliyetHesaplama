@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls.Common
 {
-    public partial class ButtonBar : UserControl
+    public partial class ButtonBar : System.Windows.Controls.UserControl
     {
         public IPageCommands CommandTarget { get; set; }
         public IPageCommands PageCommands { get; set; }

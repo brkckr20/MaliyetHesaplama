@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_ReceteTanimlama : UserControl, IPageCommands
+    public partial class UC_ReceteTanimlama : System.Windows.Controls.UserControl, IPageCommands
     {
         int _InventoryType, inventoryId, Id = 0;
         MiniOrm _orm = new MiniOrm();
@@ -99,7 +99,7 @@ namespace MaliyeHesaplama.userControls
             {
                 if (e.EditAction == DataGridEditAction.Commit)
                 {
-                    var editedCell = e.EditingElement as TextBox;
+                    var editedCell = e.EditingElement as System.Windows.Controls.TextBox;
                     if (editedCell != null)
                     {
                         string text = editedCell.Text;
@@ -123,7 +123,7 @@ namespace MaliyeHesaplama.userControls
 
         private void btnKumasListe_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Button btn = sender as Button;
+            System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
             if (btn == null) return;
 
             DataRowView rowView = btn.DataContext as DataRowView;
@@ -140,7 +140,7 @@ namespace MaliyeHesaplama.userControls
 
         private void btnVariantListe_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Button btn = sender as Button;
+            System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
             if (btn == null) return;
 
             DataRowView rowView = btn.DataContext as DataRowView;

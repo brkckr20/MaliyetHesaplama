@@ -248,7 +248,7 @@ namespace MaliyeHesaplama.wins
             {
                 if (showMessage)
                 {
-                    MessageBox.Show($"Ayarlar kaydedilirken hata oluştu: {ex.Message}",
+                    System.Windows.MessageBox.Show($"Ayarlar kaydedilirken hata oluştu: {ex.Message}",
                         "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }

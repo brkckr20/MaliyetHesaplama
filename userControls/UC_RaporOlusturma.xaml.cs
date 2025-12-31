@@ -1,19 +1,21 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
 using Microsoft.Data.SqlClient;
-using Stimulsoft.Client.Designer;
-using Stimulsoft.Report;
+//using Stimulsoft.Client.Designer;
+//using Stimulsoft.Report;
 using System.Data;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using FastReport;
 using System.Diagnostics;
+using FastReport;
+using System.Windows.Forms;
 
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_RaporOlusturma : UserControl, IPageCommands
+    public partial class UC_RaporOlusturma : System.Windows.Controls.UserControl, IPageCommands
     {
         int Id = 0;
         MiniOrm _orm = new MiniOrm();
@@ -45,51 +47,51 @@ namespace MaliyeHesaplama.userControls
                 FillDataSetWithQuery(reports.Query4, reports.DataSource4, connection, dataSet);
                 FillDataSetWithQuery(reports.Query5, reports.DataSource5, connection, dataSet);
             }
-            StiReport report = new StiReport();
-            if (File.Exists(reportPath))
-                report.Load(reportPath);
-            else
-            {
-                MessageBox.Show("Rapor dosyası bulunamadı.");
-                return;
-            }
-            RegDataToReport(reports, dataSet, report);
-            OpenReportDesigner(report);
-            report.Save(destPath);
+            //StiReport report = new StiReport();
+            //if (File.Exists(reportPath))
+            //    //report.Load(reportPath);
+            //else
+            //{
+            //    System.Windows.MessageBox.Show("Rapor dosyası bulunamadı.");
+            //    return;
+            //}
+            //RegDataToReport(reports, dataSet, report);
+            //OpenReportDesigner(report);
+            //report.Save(destPath);
         }
-        private void OpenReportDesigner(StiReport report)
-        {
-            var designer = new StiDesignerControl { Report = report };
-            var designerWindow = new Window
-            {
-                Title = "Rapor Tasarımı",
-                Content = designer,
-                Width = 1000,
-                Height = 700,
-                WindowState = WindowState.Maximized,
-            };
-            designerWindow.Closing += DesignerWindow_Closing;
-            designerWindow.ShowDialog();
-        }
-        public void RegDataToReport(dynamic reports, DataSet dataSet, StiReport report)
-        {
-            if (!string.IsNullOrWhiteSpace(reports.DataSource1) && dataSet.Tables.Contains(reports.DataSource1))
-                report.RegData(reports.DataSource1, dataSet.Tables[reports.DataSource1]);
+        //private void OpenReportDesigner(StiReport report)
+        //{
+        //    var designer = new StiDesignerControl { Report = report };
+        //    var designerWindow = new Window
+        //    {
+        //        Title = "Rapor Tasarımı",
+        //        Content = designer,
+        //        Width = 1000,
+        //        Height = 700,
+        //        WindowState = WindowState.Maximized,
+        //    };
+        //    designerWindow.Closing += DesignerWindow_Closing;
+        //    designerWindow.ShowDialog();
+        //}
+        //public void RegDataToReport(dynamic reports, DataSet dataSet, StiReport report)
+        //{
+        //    if (!string.IsNullOrWhiteSpace(reports.DataSource1) && dataSet.Tables.Contains(reports.DataSource1))
+        //        report.RegData(reports.DataSource1, dataSet.Tables[reports.DataSource1]);
 
-            if (!string.IsNullOrWhiteSpace(reports.DataSource2) && dataSet.Tables.Contains(reports.DataSource2))
-                report.RegData(reports.DataSource2, dataSet.Tables[reports.DataSource2]);
+        //    if (!string.IsNullOrWhiteSpace(reports.DataSource2) && dataSet.Tables.Contains(reports.DataSource2))
+        //        report.RegData(reports.DataSource2, dataSet.Tables[reports.DataSource2]);
 
-            if (!string.IsNullOrWhiteSpace(reports.DataSource3) && dataSet.Tables.Contains(reports.DataSource3))
-                report.RegData(reports.DataSource3, dataSet.Tables[reports.DataSource3]);
+        //    if (!string.IsNullOrWhiteSpace(reports.DataSource3) && dataSet.Tables.Contains(reports.DataSource3))
+        //        report.RegData(reports.DataSource3, dataSet.Tables[reports.DataSource3]);
 
-            if (!string.IsNullOrWhiteSpace(reports.DataSource4) && dataSet.Tables.Contains(reports.DataSource4))
-                report.RegData(reports.DataSource4, dataSet.Tables[reports.DataSource4]);
+        //    if (!string.IsNullOrWhiteSpace(reports.DataSource4) && dataSet.Tables.Contains(reports.DataSource4))
+        //        report.RegData(reports.DataSource4, dataSet.Tables[reports.DataSource4]);
 
-            if (!string.IsNullOrWhiteSpace(reports.DataSource5) && dataSet.Tables.Contains(reports.DataSource5))
-                report.RegData(reports.DataSource5, dataSet.Tables[reports.DataSource5]);
+        //    if (!string.IsNullOrWhiteSpace(reports.DataSource5) && dataSet.Tables.Contains(reports.DataSource5))
+        //        report.RegData(reports.DataSource5, dataSet.Tables[reports.DataSource5]);
 
-            report.Dictionary.Synchronize();
-        }
+        //    report.Dictionary.Synchronize();
+        //}
         public void RegDataToReport1(dynamic reports, DataSet dataSet, Report report)
         {
             RegisterTable(report, dataSet, reports.DataSource1);
@@ -129,29 +131,29 @@ namespace MaliyeHesaplama.userControls
         private void DesignerWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var window = sender as Window;
-            var designer = window.Content as StiDesignerControl;
+            //var designer = window.Content as StiDesignerControl;
 
-            if (designer.Report.IsModified)
-            {
-                var result = MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?",
-                                             "Kaydet", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            //if (designer.Report.IsModified)
+            //{
+            //    var result = System.Windows.MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?",
+            //                                 "Kaydet", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
 
-                if (result == MessageBoxResult.Yes)
-                {
-                    string mainWindowFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                    string reportsFolder = Path.Combine(mainWindowFolder, "reports");
-                    if (!Directory.Exists(reportsFolder))
-                        Directory.CreateDirectory(reportsFolder);
+            //    if (result == MessageBoxResult.Yes)
+            //    {
+            //        string mainWindowFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            //        string reportsFolder = Path.Combine(mainWindowFolder, "reports");
+            //        if (!Directory.Exists(reportsFolder))
+            //            Directory.CreateDirectory(reportsFolder);
 
-                    string reportFilePath = Path.Combine(reportsFolder, txtRaporAdi.Text + ".mrt");
+            //        string reportFilePath = Path.Combine(reportsFolder, txtRaporAdi.Text + ".mrt");
 
-                    designer.Report.Save(reportFilePath);
-                }
-                else if (result == MessageBoxResult.Cancel)
-                {
-                    e.Cancel = true;
-                }
-            }
+            //        //designer.Report.Save(reportFilePath);
+            //    }
+            //    else if (result == MessageBoxResult.Cancel)
+            //    {
+            //        e.Cancel = true;
+            //    }
+            //}
         }
         void Temizle()
         {
@@ -273,20 +275,15 @@ namespace MaliyeHesaplama.userControls
 
         private void frTest_Click(object sender, RoutedEventArgs e)
         {
-            string reportName = txtRaporAdi.Text;
-            string exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ReportDesigner\\bin\\Debug\\ReportDesigner.exe");
-
-            if (!File.Exists(exePath))
-            {
-                MessageBox.Show("ReportDesigner.exe bulunamadı!");
-                return;
-            }
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = exePath,
-                Arguments = reportName,
-                UseShellExecute = true
-            });
+            Report report = new Report();
+            report.Load("C:\\Users\\casper\\Desktop\\Klasörler\\z\\MaliyeHesaplama\\bin\\Debug\\net6.0-windows\\reports\\blank.frx");
+            report.Design();
+            //string exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ReportDesigner.Win.exe");
+            //if (!File.Exists(exePath))
+            //{
+            //    MessageBox.Show("ReportDesigner bulunamadı.");
+            //    return;
+            //}
         }
     }
 }

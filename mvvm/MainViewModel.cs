@@ -28,7 +28,7 @@ namespace MaliyeHesaplama.mvvm
         private void OnAcButon(object obj)
         {
             
-            MessageBox.Show($"Butona tıklandı: ");
+            //MessageBox.Show($"Butona tıklandı: ");
         }
 
         /********************************* ÜRETİM BİLGİLERİ - İPLİK BİLGİLERİ **********************************/

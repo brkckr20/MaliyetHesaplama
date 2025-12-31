@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_MalzemeKarti : UserControl, IPageCommands
+    public partial class UC_MalzemeKarti : System.Windows.Controls.UserControl, IPageCommands
     {
         private MiniOrm _orm;
         private int Id = 0, _Type = Convert.ToInt32(Enums.Inventory.Malzeme),_InventoryType = Convert.ToInt32(Enums.Inventory.Malzeme);

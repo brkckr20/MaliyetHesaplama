@@ -15,13 +15,13 @@ namespace MaliyeHesaplama.wins
 
         private void rName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var textBox = sender as TextBox;
+            var textBox = sender as System.Windows.Controls.TextBox;
             MainHelper.SearchWithColumnHeader(textBox, "ReportName", _collectionView, lblRecordCount);
         }
 
         private void rsName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var textBox = sender as TextBox;
+            var textBox = sender as System.Windows.Controls.TextBox;
             MainHelper.SearchWithColumnHeader(textBox, "FormName", _collectionView, lblRecordCount);
         }
 
@@ -61,7 +61,7 @@ namespace MaliyeHesaplama.wins
             _collectionView = CollectionViewSource.GetDefaultView(data);
             sfDataGrid.ItemsSource = _collectionView;
         }
-        void SearchWithTextboxValue(TextBox aranacakTextbox, string fieldAdi)
+        void SearchWithTextboxValue(System.Windows.Controls.TextBox aranacakTextbox, string fieldAdi)
         {
             string filterText = aranacakTextbox.Text.ToLower();
 

@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_UretimGirisi : UserControl, IPageCommands
+    public partial class UC_UretimGirisi : System.Windows.Controls.UserControl, IPageCommands
     {
         MiniOrm _orm = new MiniOrm();
         public int CompanyId = 0, Id, WareHouseId;

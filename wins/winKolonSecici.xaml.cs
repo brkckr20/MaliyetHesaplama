@@ -67,7 +67,7 @@ namespace MaliyeHesaplama.wins
             {
                 var displayName = displayNames.ContainsKey(col.ColumnName) ? displayNames[col.ColumnName] : col.ColumnName;
 
-                var chk = new CheckBox
+                var chk = new System.Windows.Controls.CheckBox
                 {
                     Content = displayName,
                     IsChecked = !col.Hidden,
@@ -82,7 +82,7 @@ namespace MaliyeHesaplama.wins
             int locationIndex = 0;
             foreach (var item in lstColumns.Items)
             {
-                if (item is CheckBox chk)
+                if (item is System.Windows.Controls.CheckBox chk)
                 {
                     if (chk.Tag is ColumnSelector col)
                     {

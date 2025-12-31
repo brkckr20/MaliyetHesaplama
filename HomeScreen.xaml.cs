@@ -16,7 +16,7 @@ namespace MaliyeHesaplama
         }
         private string _currentMainMenu = null;
         private bool _isDraggingFromMaximized = false;
-        private Point _restoreMousePosition;
+        private System.Drawing.Point _restoreMousePosition;
         private void Kartlar_Click(object sender, RoutedEventArgs e)
         {
             string title = "Kart İşlemleri";
@@ -50,7 +50,7 @@ namespace MaliyeHesaplama
         }
         private void MegaMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn)
+            if (sender is System.Windows.Controls.Button btn)
             {
                 string menuName = btn.Content.ToString();
                 /*Üretim Yönetimi*/
@@ -97,7 +97,7 @@ namespace MaliyeHesaplama
             }
 
         }
-        private void OpenTab(string title, UserControl view)
+        private void OpenTab(string title, System.Windows.Controls.UserControl view)
         {
             var existingTab = MainTabControl.Items
                 .OfType<TabItem>()
@@ -170,7 +170,7 @@ namespace MaliyeHesaplama
         }
         private void CloseTab_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn && btn.TemplatedParent is TabItem tab)
+            if (sender is System.Windows.Controls.Button btn && btn.TemplatedParent is TabItem tab)
             {
                 MainTabControl.Items.Remove(tab);
             }
@@ -185,7 +185,8 @@ namespace MaliyeHesaplama
             if (this.WindowState == WindowState.Maximized)
             {
                 _isDraggingFromMaximized = true;
-                _restoreMousePosition = e.GetPosition(this);
+                var pos = e.GetPosition(this);
+                _restoreMousePosition = new System.Drawing.Point((int)pos.X, (int)pos.Y);
                 return;
             }
 
@@ -195,7 +196,7 @@ namespace MaliyeHesaplama
         private void btnAppClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void btnAppMinimize_Click(object sender, RoutedEventArgs e)
@@ -217,7 +218,7 @@ namespace MaliyeHesaplama
             else
                 this.WindowState = WindowState.Maximized;
         }
-        private void TitleBar_MouseMove(object sender, MouseEventArgs e)
+        private void TitleBar_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (_isDraggingFromMaximized && e.LeftButton == MouseButtonState.Pressed)
             {

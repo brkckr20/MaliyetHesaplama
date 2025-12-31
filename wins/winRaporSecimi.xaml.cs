@@ -1,7 +1,7 @@
 ﻿using MaliyeHesaplama.userControls;
 using Microsoft.Data.SqlClient;
-using Stimulsoft.Report;
-using Stimulsoft.Report.Viewer;
+//using Stimulsoft.Report;
+//using Stimulsoft.Report.Viewer;
 using System.Data;
 using System.IO;
 using System.Windows;
@@ -39,8 +39,8 @@ namespace MaliyeHesaplama.wins
             string exePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             string reportPath = Path.Combine(exePath, "reports", $"{cmbRaporlar.SelectedValue}.mrt");
             ro.GoruntulenecekId = _kayitNo;
-            StiReport report = new StiReport();
-            report.Load(reportPath);
+            //StiReport report = new StiReport();
+            //report.Load(reportPath);
             var config = DbConfig.Load();
             string connectionString = config.ConnectionString;
             var reports = _orm.GetReport<dynamic>(cmbRaporlar.SelectedValue.ToString());
@@ -54,19 +54,19 @@ namespace MaliyeHesaplama.wins
                 ro.FillDataSetWithQuery(reports.Query5, reports.DataSource5, connection, dataSet);
             }
 
-            ro.RegDataToReport(reports, dataSet, report);
-            report.Dictionary.Synchronize();
-            report.Render();
+            //ro.RegDataToReport(reports, dataSet, report);
+            //report.Dictionary.Synchronize();
+            //report.Render();
 
-            var viewer = new StiWpfViewerControl
-            {
-                Report = report
-            };
+            //var viewer = new StiWpfViewerControl
+            //{
+            //    Report = report
+            //};
 
             var viewerWindow = new Window
             {
                 Title = "Rapor Önizleme [ " + cmbRaporlar.SelectedValue.ToString() + " ]",
-                Content = viewer,
+                //Content = viewer,
                 Width = 1000,
                 Height = 700
             };

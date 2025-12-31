@@ -6,7 +6,7 @@ using System.Windows.Threading;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_MalzemeGirisCikis : UserControl, IPageCommands
+    public partial class UC_MalzemeGirisCikis : System.Windows.Controls.UserControl, IPageCommands
     {
         Enums.Receipt _receipt;
         MiniOrm _orm = new MiniOrm();

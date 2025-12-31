@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_RenkKarti : UserControl, IPageCommands
+    public partial class UC_RenkKarti : System.Windows.Controls.UserControl, IPageCommands
     {
         MiniOrm _orm = new MiniOrm();
         int _colorType, Id = 0, CompanyId = 0;

@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_IplikKarti : UserControl, IPageCommands
+    public partial class UC_IplikKarti : System.Windows.Controls.UserControl, IPageCommands
     {
         int Id = 0, PrefixId, FCYarnNoId, FCYarnCinsiId, FCYarnCompositionId, CodeId;
         string YarnNo, YarnCinsi, YarnComposition, YarnName, CombinedCode;

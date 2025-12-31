@@ -19,24 +19,24 @@ namespace MaliyeHesaplama.helpers
 
         private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TextBox tb)
+            if (d is System.Windows.Controls.TextBox tb)
             {
                 if ((bool)e.NewValue)
                 {
                     tb.PreviewTextInput += Tb_PreviewTextInput;
-                    DataObject.AddPastingHandler(tb, OnPaste);
+                    //DataObject.AddPastingHandler(tb, OnPaste);
                 }
                 else
                 {
                     tb.PreviewTextInput -= Tb_PreviewTextInput;
-                    DataObject.RemovePastingHandler(tb, OnPaste);
+                    //DataObject.RemovePastingHandler(tb, OnPaste);
                 }
             }
         }
 
         private static void Tb_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            var tb = sender as TextBox;
+            var tb = sender as System.Windows.Controls.TextBox;
             string newText = tb.Text.Insert(tb.CaretIndex, e.Text);
 
             e.Handled = !IsValidSingleCommaNumber(newText);
@@ -44,10 +44,10 @@ namespace MaliyeHesaplama.helpers
 
         private static void OnPaste(object sender, DataObjectPastingEventArgs e)
         {
-            if (e.DataObject.GetDataPresent(DataFormats.Text))
+            if (e.DataObject.GetDataPresent(System.Windows.DataFormats.Text))
             {
-                string pasteText = e.DataObject.GetData(DataFormats.Text) as string;
-                var tb = sender as TextBox;
+                string pasteText = e.DataObject.GetData(System.Windows.DataFormats.Text) as string;
+                var tb = sender as System.Windows.Controls.TextBox;
                 string newText = tb.Text.Insert(tb.CaretIndex, pasteText);
 
                 if (!IsValidSingleCommaNumber(newText)) e.CancelCommand();

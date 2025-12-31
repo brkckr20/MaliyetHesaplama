@@ -10,21 +10,21 @@ using System.Windows.Media.Imaging;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class Uc_MaliyetHesaplama : UserControl, IPageCommands
+    public partial class Uc_MaliyetHesaplama : System.Windows.Controls.UserControl, IPageCommands
     {
         int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0, InventoryReceiptId;
         bool _receteOlacak = false;
         private byte[] imageBytes;
         MiniOrm _orm = new MiniOrm();
 
-        void SetControllerValues(TextBox tb, decimal val)
+        void SetControllerValues(System.Windows.Controls.TextBox tb, decimal val)
         {
             tb.Text = val.ToString("0.00", CultureInfo.InvariantCulture);
         }
 
         void FormVerileriniTemizle()
         {
-            MainHelper.SetControls(new Dictionary<Control, object>
+            MainHelper.SetControls(new Dictionary<System.Windows.Controls.Control, object>
             {
                 { txtCozgu1IpBilBolen,"1" },{ txtCozgu1IpBilBolunen,"1" },{ txtCozgu2IpBilBolen,"1" },{ txtCozgu2IpBilBolunen,"1" },{ txtAtki1IpBilBolen,"1" },{ txtAtki1IpBilBolunen,"1" },{ txtAtki2IpBilBolen,"1" },{ txtAtki2IpBilBolunen,"1" },{ txtAtki3IpBilBolen,"1" },{ txtAtki3IpBilBolunen,"1" },{ txtAtki4IpBilBolen,"1" },{ txtAtki4IpBilBolunen,"1" },{txtAtki1Siklik,"0" },{txtAtki2Siklik,"0" },{txtAtki3Siklik,"0" },{txtAtki4Siklik,"0" },{txtTarakNo1Carpan,"0" },{txtTarakNo1Carpim,"0" },{txtTarakNo2Carpan,"0" },{txtTarakNo2Carpim,"0" },{txtTarakEn,"0" },{txtHamBoy,"0" },{txtBoySacakText,"0" }, {txtEnSacakText,"0" },{txtMamulBoy,"0" }, {txtMamulEn,"0" }, {txtCozgu1IpBoyText,"0" }, {txtCozgu2IpBoyText,"0" }, {txtAtki1IpBoyText,"0" }, {txtAtki2IpBoyText,"0" }, {txtAtki3IpBoyText,"0" }, {txtAtki4IpBoyText,"0" }, {txtCozgu1IpFiyText,"0" }, {txtCozgu2IpFiyText,"0" }, {txtAtki1IpFiyText,"0" }, {txtAtki2IpFiyText,"0" }, {txtAtki3IpFiyText,"0" }, {txtAtki4IpFiyText,"0" }, {txtAtkiUrFiyText,"0" }, {txtCozguUrFiyText,"0" }, {txtParcaYikamaUrFiyText,"0" }, {txtKumasBoyamaUrFiyText,"0" }, {txtDokumaFiresiUrFiyText,"0" }, {txtBoyaFiresiUrFiyText,"0" },{txtKonfMaliyetiUrFiyText,"0" },{txtIkinciKaliyeMaliyetiUrFiyText,"0" },{txtKarUrFiyText,"0" },{txtKdvUrFiyText,"0" },{txtKurUrFiyText,_orm.GetEURCurrency()},{txtPariteUrFiyText,"0" },{txtEurUrFiyText,"0" },{txtBelirlenenFiyatText,"0" },
                 {txtFirmaKodu,"" },{txtFirmaUnvan,"" },{txtMalzemeKodu,"" },{lblMalzemeAdi,"" },{txtHamEn,"0"}
@@ -36,7 +36,7 @@ namespace MaliyeHesaplama.userControls
 
         private void selectImage_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tiff";
             if (openFileDialog.ShowDialog() == true)
             {
@@ -89,7 +89,7 @@ namespace MaliyeHesaplama.userControls
             }
         }
 
-        string R(TextBox tb) // kayıt esnasında hata alındığı için virgüllü değerler nokta ile değiştirildi. -- replace metodunu kullanıyor
+        string R(System.Windows.Controls.TextBox tb) // kayıt esnasında hata alındığı için virgüllü değerler nokta ile değiştirildi. -- replace metodunu kullanıyor
         {
             return tb.Text.Replace(',', '.');
         }

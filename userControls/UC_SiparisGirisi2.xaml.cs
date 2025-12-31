@@ -1,7 +1,7 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
 using MaliyeHesaplama.mvvm;
-using Stimulsoft.Report.Helpers;
+//using Stimulsoft.Report.Helpers;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Globalization;
@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_SiparisGirisi2 : UserControl, IPageCommands
+    public partial class UC_SiparisGirisi2 : System.Windows.Controls.UserControl, IPageCommands
     {
         MiniOrm _orm = new MiniOrm();
         public int CompanyId = 0, Id, WareHouseId = 0;
@@ -279,7 +279,7 @@ namespace MaliyeHesaplama.userControls
         }
         private void btnKumasListe_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
+            System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
             if (btn == null) return;
 
             DataRowView rowView = btn.DataContext as DataRowView;
@@ -296,7 +296,7 @@ namespace MaliyeHesaplama.userControls
 
         private void btnVariantListe_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
+            System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
             if (btn == null) return;
 
             DataRowView rowView = btn.DataContext as DataRowView;
@@ -313,19 +313,19 @@ namespace MaliyeHesaplama.userControls
 
         private void srcKalemIslem_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var tb = sender as TextBox;
+            var tb = sender as System.Windows.Controls.TextBox;
             MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, "OperationType", lblRecordCount, lblSumMeter);
         }
 
         private void srcCode_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var tb = sender as TextBox;
+            var tb = sender as System.Windows.Controls.TextBox;
             MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, "InventoryCode", lblRecordCount, lblSumMeter);
         }
 
         private void srcName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var tb = sender as TextBox;
+            var tb = sender as System.Windows.Controls.TextBox;
             MainHelper.SearchWithColumnHeaderNoCollectionView(tb, table, "InventoryName", lblRecordCount, lblSumMeter);
         }
         void GetSumOrCount()
@@ -366,7 +366,7 @@ namespace MaliyeHesaplama.userControls
             {
                 if (e.EditAction == DataGridEditAction.Commit)
                 {
-                    var editedCell = e.EditingElement as TextBox;
+                    var editedCell = e.EditingElement as System.Windows.Controls.TextBox;
                     if (editedCell != null)
                     {
                         string text = editedCell.Text;

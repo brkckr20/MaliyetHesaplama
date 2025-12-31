@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_UretimYonetimiParametreleri : UserControl, IPageCommands
+    public partial class UC_UretimYonetimiParametreleri : System.Windows.Controls.UserControl, IPageCommands
     {
         MiniOrm _orm = new MiniOrm();
         public UC_UretimYonetimiParametreleri()

@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
+	<UseWindowsForms>true</UseWindowsForms>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
@@ -43,13 +44,13 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.10" />
-    <PackageReference Include="Syncfusion.SfGrid.WPF" Version="31.1.18" />
     <PackageReference Include="System.Data.Odbc" Version="9.0.9" />
     <PackageReference Include="System.Data.OleDb" Version="9.0.9" />
     <PackageReference Include="Xceed.Products.Wpf.DataGrid.Full" Version="7.3.25458.6675" />
   </ItemGroup>
 
   <ItemGroup>
+	<FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
     <Reference Include="FastReport">
       <HintPath>fr\FastReport.dll</HintPath>
     </Reference>
@@ -59,7 +60,7 @@
     <Reference Include="FastReport.Editor">
       <HintPath>fr\FastReport.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Stimulsoft.Base">
+    <!-- <Reference Include="Stimulsoft.Base">
       <HintPath>..\..\..\asada\Stimulsoft.Base.dll</HintPath>
     </Reference>
     <Reference Include="Stimulsoft.Blockly">
@@ -103,7 +104,7 @@
     </Reference>
     <Reference Include="Stimulsoft.Svg">
       <HintPath>..\..\..\asada\Stimulsoft.Svg.dll</HintPath>
-    </Reference>
+    </Reference> -->
   </ItemGroup>
 
   <ItemGroup>
@@ -143,6 +144,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="helpers\controller\" />
   </ItemGroup>
 
 </Project>

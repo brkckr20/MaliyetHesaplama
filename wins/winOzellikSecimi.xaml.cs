@@ -1,5 +1,5 @@
 ﻿using MaliyeHesaplama.helpers;
-using Syncfusion.UI.Xaml.Grid;
+//using Syncfusion.UI.Xaml.Grid;
 using System.Windows;
 
 namespace MaliyeHesaplama.wins

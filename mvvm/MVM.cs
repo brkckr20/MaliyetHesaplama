@@ -27,7 +27,7 @@ namespace MaliyeHesaplama.mvvm
         {
             if (param is not ReceiptItem item)
             {
-                MessageBox.Show("Param ReceiptItem değil!");
+                System.Windows.MessageBox.Show("Param ReceiptItem değil!");
                 return;
             }
             var dialog = new wins.winMalzemeListesi(Convert.ToInt32(Enums.Inventory.Kumas));
@@ -72,12 +72,12 @@ namespace MaliyeHesaplama.mvvm
                     }, transaction: tran);
                 }
                 tran.Commit();
-                MessageBox.Show("Kayıt başarıyla tamamlandı.", "Bilgi", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.MessageBox.Show("Kayıt başarıyla tamamlandı.", "Bilgi", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
                 tran.Rollback();
-                MessageBox.Show($"Kayıt sırasında hata oluştu:\n{ex.Message}", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Kayıt sırasında hata oluştu:\n{ex.Message}", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

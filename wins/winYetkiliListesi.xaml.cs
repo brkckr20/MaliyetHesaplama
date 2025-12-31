@@ -1,6 +1,6 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.models;
-using Stimulsoft.Report.Helpers;
+//using Stimulsoft.Report.Helpers;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;

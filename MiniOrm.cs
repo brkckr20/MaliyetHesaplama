@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using MaliyeHesaplama.helpers;
-using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
 using Microsoft.Data.Sqlite;
 using System.Data;
 
@@ -598,6 +598,22 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @InventoryId, @WareHouseId, @Varia
             tran.Rollback();
             throw;
         }
+    }
+    public void TestQuery()
+    {
+        var sql = $"SELECT * FROM Users"; // tableName sabit burada test için
+        var data = _connection.Query(sql).ToList();
+
+        Console.WriteLine($"Rows returned: {data.Count}");
+
+        //foreach (var row in data)
+        //{
+        //    foreach (var kv in (IDictionary<string, object>)row)
+        //    {
+        //        Console.WriteLine($"{kv.Key} = {kv.Value}");
+        //    }
+        //    Console.WriteLine("----");
+        //}
     }
 
 }

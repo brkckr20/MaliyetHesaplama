@@ -11,7 +11,7 @@ namespace MaliyeHesaplama.wins
         public List<ColumnSetting> ColumnSettings { get; set; }
         public bool SettingsSaved { get; private set; } = false;
 
-        private List<CheckBox> checkBoxList = new List<CheckBox>();
+        private List<System.Windows.Controls.CheckBox> checkBoxList = new List<System.Windows.Controls.CheckBox>();
         private Window parentWindow;
 
         public winKolonAyarlari(List<ColumnSetting> currentSettings, Window parent)
@@ -32,7 +32,7 @@ namespace MaliyeHesaplama.wins
 
             foreach (var setting in ColumnSettings)
             {
-                var checkBox = new CheckBox
+                var checkBox = new System.Windows.Controls.CheckBox
                 {
                     Content = setting.ColumnName,
                     IsChecked = setting.IsVisible,
@@ -51,7 +51,7 @@ namespace MaliyeHesaplama.wins
 
         private void CheckBox_Changed(object sender, RoutedEventArgs e)
         {
-            var checkBox = sender as CheckBox;
+            var checkBox = sender as System.Windows.Controls.CheckBox;
             var setting = checkBox.Tag as ColumnSetting;
             setting.IsVisible = checkBox.IsChecked ?? false;
         }

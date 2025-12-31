@@ -13,35 +13,35 @@ namespace MaliyeHesaplama.helpers
 {
     public static class MainHelper
     {
-        public static void SetControls(Dictionary<Control, object> controlValues)
+        public static void SetControls(Dictionary<System.Windows.Controls.Control, object> controlValues)
         {
             foreach (var item in controlValues)
             {
-                if (item.Key is TextBox textBox)
+                if (item.Key is System.Windows.Controls.TextBox textBox)
                 {
                     textBox.Text = item.Value?.ToString() ?? "";
                 }
-                else if (item.Key is CheckBox checkBox)
+                else if (item.Key is System.Windows.Controls.CheckBox checkBox)
                 {
                     if (item.Value is bool b)
                         checkBox.IsChecked = b;
                 }
-                else if (item.Key is ComboBox comboBox)
+                else if (item.Key is System.Windows.Controls.ComboBox comboBox)
                 {
                     comboBox.SelectedIndex = item.Value is int index ? index : -1;
                 }
-                else if (item.Key is RadioButton radioButton)
+                else if (item.Key is System.Windows.Controls.RadioButton radioButton)
                 {
                     if (item.Value is bool b)
                         radioButton.IsChecked = b;
                 }
-                else if (item.Key is Label label)
+                else if (item.Key is System.Windows.Controls.Label label)
                 {
                     label.Content = item.Value?.ToString();
                 }
             }
         }
-        public static void SearchWithColumnHeader(TextBox aranacakTextbox, string fieldAdi, ICollectionView _collectionView, Label lblRecordCount)
+        public static void SearchWithColumnHeader(System.Windows.Controls.TextBox aranacakTextbox, string fieldAdi, ICollectionView _collectionView, System.Windows.Controls.Label lblRecordCount)
         {
             string filterText = aranacakTextbox.Text.ToLower();
 
@@ -63,13 +63,13 @@ namespace MaliyeHesaplama.helpers
                 lblRecordCount.Content = $"Toplam Kayıt: {visibleCount}";
             }
         }
-        public static void SetRecordCount(ICollectionView _collectionView, Label count)
+        public static void SetRecordCount(ICollectionView _collectionView, System.Windows.Controls.Label count)
         {
             int visibleCount = _collectionView.Cast<dynamic>().Count();
             count.Content = $"Satır Sayısı: {visibleCount}";
         }
 
-        public static void SearchWithColumnHeaderNoCollectionView(TextBox tb, DataTable table, string fieldName, Label lblCount, Label lblSumMeter)
+        public static void SearchWithColumnHeaderNoCollectionView(System.Windows.Controls.TextBox tb, DataTable table, string fieldName, System.Windows.Controls.Label lblCount, System.Windows.Controls.Label lblSumMeter)
         {
             string filterText = tb.Text.Replace("'", "''");
 
@@ -89,7 +89,7 @@ namespace MaliyeHesaplama.helpers
             }
             lblSumMeter.Content = $"Toplam Metre: {sum}";
         }
-        public static decimal SetFieldsSum(DataTable table, string field, Label lbl)
+        public static decimal SetFieldsSum(DataTable table, string field, System.Windows.Controls.Label lbl)
         {
             if (field == "KayıtNo")
             {
@@ -107,12 +107,12 @@ namespace MaliyeHesaplama.helpers
             lbl.Content = $"Toplam Metre: {sum}";
             return sum;
         }
-        public static void SearchWithCW(object sender, string fieldName, ICollectionView _collectionView, Label lblRecordCount)
+        public static void SearchWithCW(object sender, string fieldName, ICollectionView _collectionView, System.Windows.Controls.Label lblRecordCount)
         {
-            var tb = sender as TextBox;
+            var tb = sender as System.Windows.Controls.TextBox;
             SearchWithColumnHeader(tb, fieldName, _collectionView, lblRecordCount);
         }
-        public static void SetCompanyInformation(ref int CompanyId, TextBox textBox)
+        public static void SetCompanyInformation(ref int CompanyId, System.Windows.Controls.TextBox textBox)
         {
             wins.winFirmaListesi win = new wins.winFirmaListesi();
             win.ShowDialog();
@@ -122,7 +122,7 @@ namespace MaliyeHesaplama.helpers
                 textBox.Text = win.FirmaUnvan;
             }
         }
-        public static void SetWareHouseInformation(ref int CompanyId, TextBox textBox)
+        public static void SetWareHouseInformation(ref int CompanyId, System.Windows.Controls.TextBox textBox)
         {
             winDepoListesi win = new winDepoListesi();
             win.ShowDialog();
@@ -135,7 +135,7 @@ namespace MaliyeHesaplama.helpers
 
         public static void SetInventoryInformation(object sender, Enums.Inventory _inventory)
         {
-            Button btn = sender as Button;
+            System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
             if (btn == null) return;
             DataRowView rowView = btn.DataContext as DataRowView;
             if (rowView == null) return;

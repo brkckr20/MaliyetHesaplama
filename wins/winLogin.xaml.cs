@@ -3,6 +3,13 @@ using System.Windows;
 
 namespace MaliyeHesaplama.wins
 {
+    public class User
+    {
+        public int Id { get; set; }
+        public string? Code { get; set; }
+        public string? Name { get; set; }
+        public string? Surname { get; set; }
+    }
 
     public partial class winLogin : Window
     {
@@ -20,7 +27,7 @@ namespace MaliyeHesaplama.wins
         {
             if (cmbUsername.SelectedItem == null)
             {
-                MessageBox.Show("Lütfen kullanıcı seçiniz!");
+                System.Windows.MessageBox.Show("Lütfen kullanıcı seçiniz!");
                 return;
             }
             Id = Convert.ToInt32(cmbUsername.SelectedValue);
@@ -50,15 +57,16 @@ namespace MaliyeHesaplama.wins
         }
         void KullanicilariGetir()
         {
-            var list = _orm.GetAll<dynamic>("Users")
-                        .Select(x => new
-                        {
-                            x.Id,
-                            x.Code,
-                            x.Name,
-                            x.Surname,
-                            FullName = $"{x.Code} - {x.Name} {x.Surname}"
-                        }).ToList();
+            //_orm.TestQuery();
+            var list = _orm.GetAll<User>("Users")
+                .Select(x => new
+                {
+                    x.Id,
+                    x.Code,
+                    x.Name,
+                    x.Surname,
+                    FullName = $"{x.Code} - {x.Name} {x.Surname}"
+                }).ToList();
             cmbUsername.ItemsSource = list;
         }
         void LoadRememberMe()

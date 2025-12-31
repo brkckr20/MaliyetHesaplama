@@ -27,7 +27,7 @@ namespace MaliyeHesaplama.userControls
         [Display(Name = "Fiş Tipi Adı")]
         public string ReceiptTypeName { get; set; }
     }
-    public partial class UC_OnaylamaIslemleri : UserControl
+    public partial class UC_OnaylamaIslemleri : System.Windows.Controls.UserControl
     {
         FilterGridHelpers fgh1;
         MiniOrm _orm = new MiniOrm();

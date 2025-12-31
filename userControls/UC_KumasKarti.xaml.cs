@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
-    public partial class UC_KumasKarti : UserControl, IPageCommands
+    public partial class UC_KumasKarti : System.Windows.Controls.UserControl, IPageCommands
     {
         MiniOrm _orm = new MiniOrm();
         bool _receteOlacak = false;
@@ -19,7 +19,7 @@ namespace MaliyeHesaplama.userControls
         public UC_KumasKarti()
         {
             InitializeComponent();
-            ButtonBar.PageCommands = this;
+            //ButtonBar.PageCommands = this;
             this.DataContext = this;
             BaslangicVerileri();
         }

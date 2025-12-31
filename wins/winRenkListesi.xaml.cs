@@ -1,5 +1,4 @@
 ﻿using MaliyeHesaplama.helpers;
-using MaliyeHesaplama.models;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +25,7 @@ namespace MaliyeHesaplama.wins
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var data = _orm.GetColorList<Color>(IsParent);
+            var data = _orm.GetColorList<models.Color>(IsParent);
             _collectionView = CollectionViewSource.GetDefaultView(data);
             grid.ItemsSource = _collectionView;
             Dispatcher.BeginInvoke(new Action(() =>
