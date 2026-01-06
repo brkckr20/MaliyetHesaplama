@@ -275,7 +275,8 @@ namespace MaliyeHesaplama.userControls
 
         private void frTest_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportApp\\bin\\Debug\\ReportApp.exe", "Deneme.frx");
+            string reportName = $"\"{txtRaporAdi.Text}.frx\"";
+            Process.Start("C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportApp\\bin\\Debug\\ReportApp.exe", reportName);
         }
 
         private void frView_Click(object sender, RoutedEventArgs e)
