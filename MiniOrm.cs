@@ -267,7 +267,7 @@ public class MiniOrm
 	LEFT JOIN UsedNetMeter UNM                ON UNM.TrackingNumber = RI.Id
 	LEFT Join WareHouse W With(nolock) on W.Id = R.WareHouseId
 
-		WHERE {contition}
+		WHERE {contition} and RI.OperationType not in ('İşletme')
 
 	GROUP BY
 		R.Id,
