@@ -1,15 +1,16 @@
-﻿using MaliyeHesaplama.helpers;
+﻿using FastReport;
+using FastReport;
+using FastReport.Utils;
+using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
 using Microsoft.Data.SqlClient;
 //using Stimulsoft.Client.Designer;
 //using Stimulsoft.Report;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using FastReport;
-using System.Diagnostics;
-using FastReport;
 using System.Windows.Forms;
 
 
@@ -281,9 +282,87 @@ namespace MaliyeHesaplama.userControls
 
         private void frView_Click(object sender, RoutedEventArgs e)
         {
-            Report report = new Report();
-            report.Load("C:\\Users\\casper\\Desktop\\Klasörler\\z\\MaliyeHesaplama\\bin\\Debug\\net6.0-windows\\reports\\Deneme.frx");
-            report.Show();
+            int id = 1015;
+            DataSet ds = new DataSet();
+
+            var config = DbConfig.Load();
+            if (config == null)
+            {
+                System.Windows.MessageBox.Show("Config NULL");
+                return;
+            }
+            if (string.IsNullOrEmpty(config.ConnectionString))
+            {
+                System.Windows.MessageBox.Show("Connection string boş veya null");
+                return;
+            }
+
+            string reportPath = @"C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net6.0-windows\reports\Renk Kartı Formu.frx";
+
+            SqlConnection connection = null;
+            try
+            {
+                connection = new SqlConnection(config.ConnectionString);
+                System.Windows.MessageBox.Show("Connection nesnesi oluşturuldu");
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Connection oluşturulurken hata: " + ex.Message);
+                return;
+            }
+
+            try
+            {
+                connection.Open();
+                System.Windows.MessageBox.Show("Connection açık ✅");
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Connection açılırken hata: " + ex.Message);
+                return;
+            }
+
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("SELECT * FROM Color WHERE Id = @Id", connection);
+                System.Windows.MessageBox.Show("Command nesnesi oluşturuldu");
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Command oluşturulurken hata: " + ex.Message);
+                return;
+            }
+
+            cmd.Parameters.Add(new SqlParameter("@Id", id));
+
+            try
+            {
+                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                {
+                    adapter.Fill(ds, "Renk Kartı");
+                    System.Windows.MessageBox.Show($"DS dolduruldu, satır sayısı: {ds.Tables["Renk Kartı"].Rows.Count}");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Adapter.Fill hata: " + ex.Message);
+                return;
+            }
+
+            try
+            {
+                Report report = new Report();
+                report.Load(reportPath);
+                report.RegisterData(ds);
+                report.GetDataSource("Renk Kartı").Enabled = true;
+                report.Show();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Report açılırken hata: " + ex.Message);
+            }
         }
+
     }
 }
