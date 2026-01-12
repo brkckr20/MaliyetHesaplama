@@ -282,86 +282,124 @@ namespace MaliyeHesaplama.userControls
 
         private void frView_Click(object sender, RoutedEventArgs e)
         {
-            int id = 1015;
-            DataSet ds = new DataSet();
-
-            var config = DbConfig.Load();
-            if (config == null)
-            {
-                System.Windows.MessageBox.Show("Config NULL");
-                return;
-            }
-            if (string.IsNullOrEmpty(config.ConnectionString))
-            {
-                System.Windows.MessageBox.Show("Connection string boş veya null");
-                return;
-            }
-
             string reportPath = @"C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net6.0-windows\reports\Renk Kartı Formu.frx";
-
-            SqlConnection connection = null;
-            try
+            report1.Load(reportPath);
+            DataSet ds = new DataSet();
+            using (SqlConnection connection = new SqlConnection(@"Server=.;Database=Hesap;Trusted_Connection=True;TrustServerCertificate=True;"))
             {
-                connection = new SqlConnection(config.ConnectionString);
-                System.Windows.MessageBox.Show("Connection nesnesi oluşturuldu");
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("Connection oluşturulurken hata: " + ex.Message);
-                return;
-            }
-
-            try
-            {
-                connection.Open();
-                System.Windows.MessageBox.Show("Connection açık ✅");
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("Connection açılırken hata: " + ex.Message);
-                return;
-            }
-
-            SqlCommand cmd = null;
-            try
-            {
-                cmd = new SqlCommand("SELECT * FROM Color WHERE Id = @Id", connection);
-                System.Windows.MessageBox.Show("Command nesnesi oluşturuldu");
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("Command oluşturulurken hata: " + ex.Message);
-                return;
-            }
-
-            cmd.Parameters.Add(new SqlParameter("@Id", id));
-
-            try
-            {
-                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                using (SqlDataAdapter adapter = new SqlDataAdapter())
                 {
-                    adapter.Fill(ds, "Renk Kartı");
-                    System.Windows.MessageBox.Show($"DS dolduruldu, satır sayısı: {ds.Tables["Renk Kartı"].Rows.Count}");
+                    adapter.SelectCommand = new SqlCommand(
+                        "SELECT * FROM [Color] WHERE Id = 1015",
+                        connection
+                    );
+
+                    try
+                    {
+                        adapter.Fill(ds, "RenkKarti");
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Windows.MessageBox.Show(
+                            ex.GetType().FullName + "\n\n" +
+                            ex.Message + "\n\n" +
+                            ex.StackTrace
+                        );
+                        return;
+                    }
                 }
             }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("Adapter.Fill hata: " + ex.Message);
-                return;
-            }
+            report1.RegisterData(ds);
+            report1.GetDataSource("RenkKarti").Enabled = true;
+            report1.Show();
+            //int id = 1015;
+            //DataSet ds = new DataSet();
 
-            try
-            {
-                Report report = new Report();
-                report.Load(reportPath);
-                report.RegisterData(ds);
-                report.GetDataSource("Renk Kartı").Enabled = true;
-                report.Show();
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("Report açılırken hata: " + ex.Message);
-            }
+            //var config = DbConfig.Load();
+            //if (config == null)
+            //{
+            //    System.Windows.MessageBox.Show("Config NULL");
+            //    return;
+            //}
+            //if (string.IsNullOrEmpty(config.ConnectionString))
+            //{
+            //    System.Windows.MessageBox.Show("Connection string boş veya null");
+            //    return;
+            //}
+
+            //string reportPath = @"C:\Users\casper\Desktop\Klasörler\z\MaliyeHesaplama\bin\Debug\net6.0-windows\reports\Renk Kartı Formu.frx";
+
+            //SqlConnection connection = null;
+            //try
+            //{
+            //    connection = new SqlConnection(config.ConnectionString);
+            //    System.Windows.MessageBox.Show("Connection nesnesi oluşturuldu");
+            //}
+            //catch (Exception ex)
+            //{
+            //    System.Windows.MessageBox.Show("Connection oluşturulurken hata: " + ex.Message);
+            //    return;
+            //}
+
+            //try
+            //{
+            //    connection.Open();
+            //    System.Windows.MessageBox.Show("Connection açık ✅");
+            //}
+            //catch (Exception ex)
+            //{
+            //    System.Windows.MessageBox.Show("Connection açılırken hata: " + ex.Message);
+            //    return;
+            //}
+
+            //SqlCommand cmd = null;
+            //try
+            //{
+            //    cmd = new SqlCommand($"SELECT * FROM [Color] WHERE Id = {id}", connection);
+            //    System.Windows.MessageBox.Show("Command nesnesi oluşturuldu");
+            //    //cmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+            //}
+            //catch (Exception ex)
+            //{
+            //    System.Windows.MessageBox.Show("Command oluşturulurken hata: " + ex.Message);
+            //    return;
+            //}
+
+            //try
+            //{
+            //    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+            //    {
+            //        adapter.Fill(ds, "RenkKarti");
+
+            //        if (!ds.Tables.Contains("RenkKarti"))
+            //        {
+            //            System.Windows.MessageBox.Show("RenkKarti tablosu DataSet içinde YOK");
+            //            return;
+            //        }
+            //    }
+            //}
+            //catch (SqlException ex)
+            //{
+            //    System.Windows.MessageBox.Show(
+            //        "SQL Hatası:\n" +
+            //        ex.Message + "\n\n" +
+            //        "Hata No: " + ex.Number
+            //    );
+            //    return;
+            //}
+
+            //try
+            //{
+            //    Report report = new Report();
+            //    report.Load(reportPath);
+            //    report.RegisterData(ds);
+            //    report.GetDataSource("Renk Kartı").Enabled = true;
+            //    report.Show();
+            //}
+            //catch (Exception ex)
+            //{
+            //    System.Windows.MessageBox.Show("Report açılırken hata: " + ex.Message);
+            //}
         }
 
     }
