@@ -1,29 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="01/08/2026 11:45:36" ReportInfo.Modified="01/09/2026 09:58:00" ReportInfo.CreatorVersion="2015.1.2.0">
-  <Dictionary>
-    <TableDataSource Name="Renk Kartı" ReferenceName="Renk Kartı.Renk Kartı" DataType="System.Int32" Enabled="true">
-      <Column Name="Id" DataType="System.Int32"/>
-      <Column Name="Type" DataType="System.Int32"/>
-      <Column Name="Code" DataType="System.String"/>
-      <Column Name="Name" DataType="System.String"/>
-      <Column Name="CompanyId" DataType="System.Int32"/>
-      <Column Name="ParentId" DataType="System.Int32"/>
-      <Column Name="Date" DataType="System.DateTime"/>
-      <Column Name="RequestDate" DataType="System.DateTime"/>
-      <Column Name="ConfirmDate" DataType="System.DateTime"/>
-      <Column Name="PantoneNo" DataType="System.String"/>
-      <Column Name="Price" DataType="System.Decimal"/>
-      <Column Name="Forex" DataType="System.String"/>
-      <Column Name="IsParent" DataType="System.Boolean" BindableControl="CheckBox"/>
-      <Column Name="IsUse" DataType="System.Boolean" BindableControl="CheckBox"/>
-      <Column Name="Explanation" DataType="System.String"/>
-      <Column Name="EmployeeId" DataType="System.Int32"/>
-    </TableDataSource>
-  </Dictionary>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/28/2024 13:53:06" ReportInfo.Modified="01/05/2026 10:12:53" ReportInfo.CreatorVersion="2013.3.9.0">
+  <Dictionary/>
   <ReportPage Name="Page1">
-    <PageHeaderBand Name="PageHeader1" Width="718.2" Height="47.25">
-      <TextObject Name="Text1" Width="141.75" Height="18.9" Text="[Renk Kartı.Code]"/>
-      <TextObject Name="Text2" Top="18.9" Width="141.75" Height="18.9" Text="[Renk Kartı.Name]"/>
-    </PageHeaderBand>
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="38.4"/>
+    <PageHeaderBand Name="PageHeader1" Top="41.98" Width="718.2" Height="28.8"/>
+    <DataBand Name="Data1" Top="74.37" Width="718.2" Height="76.8">
+      
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="154.75" Width="718.2" Height="19.2"/>
   </ReportPage>
 </Report>
