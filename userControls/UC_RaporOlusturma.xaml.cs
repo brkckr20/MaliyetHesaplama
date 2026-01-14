@@ -181,9 +181,11 @@ namespace MaliyeHesaplama.userControls
         {
             string reportName = txtRaporAdi.Text;
             string sourcePath = "reports/blank.mrt";
-            string sourcePathFast = "reports/blank.frx";
+            //string sourcePathFast = "reports/blank.frx";
+            string sourcePathFast = "C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportApp\\bin\\Debug\\report\\blank.frx";
             string destPath = $"reports/{reportName}.mrt";
-            string destPathFast = $"reports/{reportName}.frx";
+            //string destPathFast = $"reports/{reportName}.frx";
+            string destPathFast = $"C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportApp\\bin\\Debug\\report\\{reportName}.frx";
 
             if (this.Id == 0)
             {
@@ -274,7 +276,7 @@ namespace MaliyeHesaplama.userControls
             }
         }
         string reportAppPath = @"C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportApp\\bin\\Debug\\ReportApp.exe";
-        private void frTest_Click(object sender, RoutedEventArgs e) // rapor kayıt işlemleri reportapp klasöründe olacak şekilde düzenlenecek - 13.01.2026
+        private void frTest_Click(object sender, RoutedEventArgs e)
         {
             string reportName = $"\"{txtRaporAdi.Text}\"";
             Process.Start(reportAppPath, reportName);
