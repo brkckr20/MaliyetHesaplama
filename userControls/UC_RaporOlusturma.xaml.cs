@@ -1,17 +1,8 @@
-﻿using FastReport;
-using FastReport;
-using FastReport.Utils;
-using MaliyeHesaplama.helpers;
+﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
-using Microsoft.Data.SqlClient;
-//using Stimulsoft.Client.Designer;
-//using Stimulsoft.Report;
-using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms;
 
 
 namespace MaliyeHesaplama.userControls
@@ -20,10 +11,8 @@ namespace MaliyeHesaplama.userControls
     {
         int Id = 0;
         MiniOrm _orm = new MiniOrm();
-        private readonly IDbConnection _connection;
-        string Rapor1;
-        Report report1 = new Report();
-        bool IsFastReport = true;
+        string reportAppPath = @"C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportApp\\bin\\Debug\\ReportApp.exe";
+        string sourceFilePath = @"C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportApp\\bin\\Debug\\report";
         public UC_RaporOlusturma()
         {
             InitializeComponent();
@@ -31,131 +20,11 @@ namespace MaliyeHesaplama.userControls
         }
         private void btnDizayn_Click(object sender, RoutedEventArgs e)
         {
-            string reportName = txtRaporAdi.Text;
-            string reportPath = $"reports/{reportName}.mrt";
-            //string reportPathFast = $"reports/{reportName}.frx";
-            string destPath = $"reports/{reportName}.mrt";
-            //string destPathFast = $"reports/{reportName}.frx";
-            var reports = _orm.GetReport<dynamic>(reportName);
-            var config = DbConfig.Load();
-            string connectionString = config.ConnectionString;
-            DataSet dataSet = new DataSet();
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                FillDataSetWithQuery(reports.Query1, reports.DataSource1, connection, dataSet);
-                FillDataSetWithQuery(reports.Query2, reports.DataSource2, connection, dataSet);
-                FillDataSetWithQuery(reports.Query3, reports.DataSource3, connection, dataSet);
-                FillDataSetWithQuery(reports.Query4, reports.DataSource4, connection, dataSet);
-                FillDataSetWithQuery(reports.Query5, reports.DataSource5, connection, dataSet);
-            }
-            //StiReport report = new StiReport();
-            //if (File.Exists(reportPath))
-            //    //report.Load(reportPath);
-            //else
-            //{
-            //    System.Windows.MessageBox.Show("Rapor dosyası bulunamadı.");
-            //    return;
-            //}
-            //RegDataToReport(reports, dataSet, report);
-            //OpenReportDesigner(report);
-            //report.Save(destPath);
+            string reportName = $"\"{txtRaporAdi.Text}\"";
+            Process.Start(reportAppPath, reportName);
         }
-        //private void OpenReportDesigner(StiReport report)
-        //{
-        //    var designer = new StiDesignerControl { Report = report };
-        //    var designerWindow = new Window
-        //    {
-        //        Title = "Rapor Tasarımı",
-        //        Content = designer,
-        //        Width = 1000,
-        //        Height = 700,
-        //        WindowState = WindowState.Maximized,
-        //    };
-        //    designerWindow.Closing += DesignerWindow_Closing;
-        //    designerWindow.ShowDialog();
-        //}
-        //public void RegDataToReport(dynamic reports, DataSet dataSet, StiReport report)
-        //{
-        //    if (!string.IsNullOrWhiteSpace(reports.DataSource1) && dataSet.Tables.Contains(reports.DataSource1))
-        //        report.RegData(reports.DataSource1, dataSet.Tables[reports.DataSource1]);
-
-        //    if (!string.IsNullOrWhiteSpace(reports.DataSource2) && dataSet.Tables.Contains(reports.DataSource2))
-        //        report.RegData(reports.DataSource2, dataSet.Tables[reports.DataSource2]);
-
-        //    if (!string.IsNullOrWhiteSpace(reports.DataSource3) && dataSet.Tables.Contains(reports.DataSource3))
-        //        report.RegData(reports.DataSource3, dataSet.Tables[reports.DataSource3]);
-
-        //    if (!string.IsNullOrWhiteSpace(reports.DataSource4) && dataSet.Tables.Contains(reports.DataSource4))
-        //        report.RegData(reports.DataSource4, dataSet.Tables[reports.DataSource4]);
-
-        //    if (!string.IsNullOrWhiteSpace(reports.DataSource5) && dataSet.Tables.Contains(reports.DataSource5))
-        //        report.RegData(reports.DataSource5, dataSet.Tables[reports.DataSource5]);
-
-        //    report.Dictionary.Synchronize();
-        //}
-        public void RegDataToReport1(dynamic reports, DataSet dataSet, Report report)
-        {
-            RegisterTable(report, dataSet, reports.DataSource1);
-            RegisterTable(report, dataSet, reports.DataSource2);
-            RegisterTable(report, dataSet, reports.DataSource3);
-            RegisterTable(report, dataSet, reports.DataSource4);
-            RegisterTable(report, dataSet, reports.DataSource5);
-        }
-        private void RegisterTable(Report report, DataSet dataSet, string tableName)
-        {
-            if (string.IsNullOrWhiteSpace(tableName))
-                return;
-
-            if (!dataSet.Tables.Contains(tableName))
-                return;
-
-            report.RegisterData(dataSet.Tables[tableName], tableName);
-
-            var ds = report.GetDataSource(tableName);
-            if (ds != null)
-                ds.Enabled = true;
-        }
-        bool IsDesign = true; // kayıt işlemi tamamlandı. command.Parameters.AddWithValue("@Id", 1); id alanı olmazsa hata verdi ve dizaynda default 1 verildi
         public int GoruntulenecekId = 7;
-        public void FillDataSetWithQuery(string query, string dataSource, SqlConnection connection, DataSet dataSet)
-        {
-            if (IsDesign)
-            {
-                if (!string.IsNullOrWhiteSpace(query))
-                {
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@Id", GoruntulenecekId);
-                    new SqlDataAdapter(command).Fill(dataSet, dataSource);
-                }
-            }
-        }
-        private void DesignerWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            var window = sender as Window;
-            //var designer = window.Content as StiDesignerControl;
 
-            //if (designer.Report.IsModified)
-            //{
-            //    var result = System.Windows.MessageBox.Show("Değişiklikleri kaydetmek istiyor musunuz?",
-            //                                 "Kaydet", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-
-            //    if (result == MessageBoxResult.Yes)
-            //    {
-            //        string mainWindowFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            //        string reportsFolder = Path.Combine(mainWindowFolder, "reports");
-            //        if (!Directory.Exists(reportsFolder))
-            //            Directory.CreateDirectory(reportsFolder);
-
-            //        string reportFilePath = Path.Combine(reportsFolder, txtRaporAdi.Text + ".mrt");
-
-            //        //designer.Report.Save(reportFilePath);
-            //    }
-            //    else if (result == MessageBoxResult.Cancel)
-            //    {
-            //        e.Cancel = true;
-            //    }
-            //}
-        }
         void Temizle()
         {
             txtRaporAdi.Text = string.Empty;
@@ -180,42 +49,20 @@ namespace MaliyeHesaplama.userControls
         public void Kaydet()
         {
             string reportName = txtRaporAdi.Text;
-            string sourcePath = "reports/blank.mrt";
-            //string sourcePathFast = "reports/blank.frx";
-            string sourcePathFast = "C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportApp\\bin\\Debug\\report\\blank.frx";
-            string destPath = $"reports/{reportName}.mrt";
-            //string destPathFast = $"reports/{reportName}.frx";
-            string destPathFast = $"C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportApp\\bin\\Debug\\report\\{reportName}.frx";
-
+            string sourcePath = sourceFilePath +"\\blank.frx";
+            string destPath = sourceFilePath + $"\\{reportName}.frx";
             if (this.Id == 0)
             {
-                if (IsFastReport)
+                if (File.Exists(sourcePath))
                 {
-                    if (File.Exists(sourcePathFast))
+                    if (!File.Exists(destPath))
+                        File.Copy(sourcePath, destPath);
+                    else
                     {
-                        if (!File.Exists(destPathFast))
-                            File.Copy(sourcePathFast, destPathFast);
-                        else
-                        {
-                            Bildirim.Bilgilendirme2("Bu isimde bir rapor 'FastReport' dosyası mevcut!");
-                            return;
-                        }
+                        Bildirim.Bilgilendirme2("Bu isimde bir rapor 'FastReport' dosyası mevcut!");
+                        return;
                     }
                 }
-                else
-                {
-                    if (File.Exists(sourcePath))
-                    {
-                        if (!File.Exists(destPath))
-                            File.Copy(sourcePath, destPath);
-                        else
-                        {
-                            Bildirim.Bilgilendirme2("Bu isimde bir rapor mevcut!");
-                            return;
-                        }
-                    }
-                }
-
             }
             var dict = new Dictionary<string, object>
             {
@@ -227,16 +74,16 @@ namespace MaliyeHesaplama.userControls
 
         public void Sil()
         {
-            if (_orm.Delete("Report", Id, true) > 0)
-            {
-                string reportName = txtRaporAdi.Text;
-                string destPath = $"reports/{reportName}.mrt";
-                if (File.Exists(destPath))
-                {
-                    File.Delete(destPath);
-                    Temizle();
-                }
-            }
+            //if (_orm.Delete("Report", Id, true) > 0)
+            //{
+            //    string reportName = txtRaporAdi.Text;
+            //    string destPath = $"reports/{reportName}.mrt";
+            //    if (File.Exists(destPath))
+            //    {
+            //        File.Delete(destPath);
+            //        Temizle();
+            //    }
+            //}
         }
 
         public void Yazdir()
@@ -275,13 +122,13 @@ namespace MaliyeHesaplama.userControls
                 vkSorgu5.Text = win.DataSource5;
             }
         }
-        string reportAppPath = @"C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportApp\\bin\\Debug\\ReportApp.exe";
+        //şuan için gizli
         private void frTest_Click(object sender, RoutedEventArgs e)
         {
             string reportName = $"\"{txtRaporAdi.Text}\"";
             Process.Start(reportAppPath, reportName);
         }
-
+        //şuan için gizli
         private void frView_Click(object sender, RoutedEventArgs e)
         {
             string reportName = $"\"{txtRaporAdi.Text}\"";

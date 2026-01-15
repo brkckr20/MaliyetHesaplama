@@ -22,7 +22,7 @@
           "Microsoft.Extensions.Configuration.Json": "9.0.10",
           "System.Data.Odbc": "9.0.9",
           "System.Data.OleDb": "9.0.9",
-          "Xceed.Products.Wpf.DataGrid.Full": "7.3.25458.6675",
+          "System.Data.SqlClient": "4.9.0",
           "FastReport.Bars": "2013.3.9.0",
           "FastReport": "2013.3.9.0",
           "FastReport.Editor": "2013.3.9.0"
@@ -132,22 +132,6 @@
           "lib/net6.0/DocumentFormat.OpenXml.Framework.dll": {
             "assemblyVersion": "3.1.1.0",
             "fileVersion": "3.1.1.0"
-          }
-        }
-      },
-      "EntityFramework/6.3.0": {
-        "dependencies": {
-          "System.Configuration.ConfigurationManager": "9.0.4",
-          "System.Data.SqlClient": "4.7.0"
-        },
-        "runtime": {
-          "lib/netstandard2.1/EntityFramework.SqlServer.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.300.19.46401"
-          },
-          "lib/netstandard2.1/EntityFramework.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.300.19.46401"
           }
         }
       },
@@ -958,7 +942,7 @@
           }
         }
       },
-      "runtime.native.System.Data.SqlClient.sni/4.6.0": {
+      "runtime.native.System.Data.SqlClient.sni/4.4.0": {
         "dependencies": {
           "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni": "4.4.0",
           "runtime.win-x64.runtime.native.System.Data.SqlClient.sni": "4.4.0",
@@ -1252,28 +1236,28 @@
           }
         }
       },
-      "System.Data.SqlClient/4.7.0": {
+      "System.Data.SqlClient/4.9.0": {
         "dependencies": {
-          "runtime.native.System.Data.SqlClient.sni": "4.6.0"
+          "runtime.native.System.Data.SqlClient.sni": "4.4.0"
         },
         "runtime": {
-          "lib/netcoreapp2.1/System.Data.SqlClient.dll": {
-            "assemblyVersion": "4.6.0.0",
-            "fileVersion": "4.700.19.46214"
+          "lib/net6.0/System.Data.SqlClient.dll": {
+            "assemblyVersion": "4.6.1.6",
+            "fileVersion": "4.900.24.56208"
           }
         },
         "runtimeTargets": {
-          "runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll": {
+          "runtimes/unix/lib/net6.0/System.Data.SqlClient.dll": {
             "rid": "unix",
             "assetType": "runtime",
-            "assemblyVersion": "4.6.0.0",
-            "fileVersion": "4.700.19.46214"
+            "assemblyVersion": "4.6.1.6",
+            "fileVersion": "4.900.24.56208"
           },
-          "runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll": {
+          "runtimes/win/lib/net6.0/System.Data.SqlClient.dll": {
             "rid": "win",
             "assetType": "runtime",
-            "assemblyVersion": "4.6.0.0",
-            "fileVersion": "4.700.19.46214"
+            "assemblyVersion": "4.6.1.6",
+            "fileVersion": "4.900.24.56208"
           }
         }
       },
@@ -1427,156 +1411,6 @@
           }
         }
       },
-      "Xceed.Products.Wpf.DataGrid.Full/7.3.25458.6675": {
-        "dependencies": {
-          "Xceed.Wpf.Controls": "7.3.25458.6675",
-          "Xceed.Wpf.DataGrid": "7.3.25458.6675",
-          "Xceed.Wpf.DataGrid.ThemePack.1": "7.3.25458.6675",
-          "Xceed.Wpf.DataGrid.ThemePack.2": "7.3.25458.6675",
-          "Xceed.Wpf.DataGrid.ThemePack.3": "7.3.25458.6675",
-          "Xceed.Wpf.DataGrid.ThemePack.4": "7.3.25458.6675",
-          "Xceed.Wpf.DataGrid.ThemePack.5": "7.3.25458.6675",
-          "Xceed.Wpf.DataGrid.ThemePack.6": "7.3.25458.6675",
-          "Xceed.Wpf.DataGrid.ThemePack.7": "7.3.25458.6675",
-          "Xceed.Wpf.DataGrid.Views3D": "7.3.25458.6675",
-          "Xceed.Wpf.DataGrid.Workbooks": "7.3.25458.6675"
-        }
-      },
-      "Xceed.Wpf.Controls/7.3.25458.6675": {
-        "runtime": {
-          "lib/net5.0/Xceed.Wpf.Controls.XmlSerializers.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          },
-          "lib/net5.0/Xceed.Wpf.Controls.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          }
-        }
-      },
-      "Xceed.Wpf.DataGrid/7.3.25458.6675": {
-        "dependencies": {
-          "EntityFramework": "6.3.0",
-          "Xceed.Wpf.Controls": "7.3.25458.6675"
-        },
-        "runtime": {
-          "lib/net5.0/Xceed.Wpf.DataGrid.XmlSerializers.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          },
-          "lib/net5.0/Xceed.Wpf.DataGrid.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          }
-        }
-      },
-      "Xceed.Wpf.DataGrid.ThemePack.1/7.3.25458.6675": {
-        "dependencies": {
-          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
-        },
-        "runtime": {
-          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.1.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          }
-        }
-      },
-      "Xceed.Wpf.DataGrid.ThemePack.2/7.3.25458.6675": {
-        "dependencies": {
-          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
-        },
-        "runtime": {
-          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.2.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          }
-        }
-      },
-      "Xceed.Wpf.DataGrid.ThemePack.3/7.3.25458.6675": {
-        "dependencies": {
-          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
-        },
-        "runtime": {
-          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.3.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          }
-        }
-      },
-      "Xceed.Wpf.DataGrid.ThemePack.4/7.3.25458.6675": {
-        "dependencies": {
-          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
-        },
-        "runtime": {
-          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.4.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          }
-        }
-      },
-      "Xceed.Wpf.DataGrid.ThemePack.5/7.3.25458.6675": {
-        "dependencies": {
-          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
-        },
-        "runtime": {
-          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.5.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          }
-        }
-      },
-      "Xceed.Wpf.DataGrid.ThemePack.6/7.3.25458.6675": {
-        "dependencies": {
-          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
-        },
-        "runtime": {
-          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.6.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          }
-        }
-      },
-      "Xceed.Wpf.DataGrid.ThemePack.7/7.3.25458.6675": {
-        "dependencies": {
-          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
-        },
-        "runtime": {
-          "lib/net5.0/Xceed.Wpf.DataGrid.ThemePack.7.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          }
-        }
-      },
-      "Xceed.Wpf.DataGrid.Views3D/7.3.25458.6675": {
-        "dependencies": {
-          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
-        },
-        "runtime": {
-          "lib/net5.0/Xceed.Wpf.DataGrid.Views3D.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          }
-        }
-      },
-      "Xceed.Wpf.DataGrid.Workbooks/7.3.25458.6675": {
-        "dependencies": {
-          "Xceed.Wpf.DataGrid": "7.3.25458.6675"
-        },
-        "runtime": {
-          "lib/net5.0/Xceed.SystemDrawingCommon.Fonts.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          },
-          "lib/net5.0/Xceed.SystemDrawingCommon.Images.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          },
-          "lib/net5.0/Xceed.Wpf.DataGrid.Workbooks.dll": {
-            "assemblyVersion": "7.3.25458.6675",
-            "fileVersion": "7.3.25458.6675"
-          }
-        }
-      },
       "FastReport.Bars/2013.3.9.0": {
         "runtime": {
           "FastReport.Bars.dll": {
@@ -1671,13 +1505,6 @@
       "sha512": "sha512-6APEp/ElZV58S/4v8mf4Ke3ONEDORs64MqdD64Z7wWpcHANB9oovQsGIwtqjnKihulOj7T0a6IxHIHOfMqKOng==",
       "path": "documentformat.openxml.framework/3.1.1",
       "hashPath": "documentformat.openxml.framework.3.1.1.nupkg.sha512"
-    },
-    "EntityFramework/6.3.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-mEvhoXscTyLFMcnbLzKlbWdx6N8fCY2IMe4drjUTMFqOqI4KThnTPXr1m50oXDJAn5PvCy2e90IcwN/OxkJUjg==",
-      "path": "entityframework/6.3.0",
-      "hashPath": "entityframework.6.3.0.nupkg.sha512"
     },
     "ExcelNumberFormat/1.1.0": {
       "type": "package",
@@ -1973,12 +1800,12 @@
       "path": "rbush/4.0.0",
       "hashPath": "rbush.4.0.0.nupkg.sha512"
     },
-    "runtime.native.System.Data.SqlClient.sni/4.6.0": {
+    "runtime.native.System.Data.SqlClient.sni/4.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-WRq11dBcJYyAbrUVguvv3BqNGl5ub60mZxUd+xaxNsSOb7tMLQxjbiyD/hF6FSl1akiom7GMttPDa3TW+UmnAQ==",
-      "path": "runtime.native.system.data.sqlclient.sni/4.6.0",
-      "hashPath": "runtime.native.system.data.sqlclient.sni.4.6.0.nupkg.sha512"
+      "sha512": "sha512-A8v6PGmk+UGbfWo5Ixup0lPM4swuSwOiayJExZwKIOjTlFFQIsu3QnDXECosBEyrWSPryxBVrdqtJyhK3BaupQ==",
+      "path": "runtime.native.system.data.sqlclient.sni/4.4.0",
+      "hashPath": "runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
     },
     "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni/4.4.0": {
       "type": "package",
@@ -2113,12 +1940,12 @@
       "path": "system.data.oledb/9.0.9",
       "hashPath": "system.data.oledb.9.0.9.nupkg.sha512"
     },
-    "System.Data.SqlClient/4.7.0": {
+    "System.Data.SqlClient/4.9.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-lV3ljZeFc01DYyjcEBSxK3sy8Ow2R6AWa6o+g0t7B4hoDcA6Kzv4bTB4E4T7C/pKuZzHeBFLxe6fD4Am4q939Q==",
-      "path": "system.data.sqlclient/4.7.0",
-      "hashPath": "system.data.sqlclient.4.7.0.nupkg.sha512"
+      "sha512": "sha512-j4KJO+vC62NyUtNHz854njEqXbT8OmAa5jb1nrGfYWBOcggyYUQE0w/snXeaCjdvkSKWuUD+hfvlbN8pTrJTXg==",
+      "path": "system.data.sqlclient/4.9.0",
+      "hashPath": "system.data.sqlclient.4.9.0.nupkg.sha512"
     },
     "System.Diagnostics.DiagnosticSource/9.0.4": {
       "type": "package",
@@ -2217,90 +2044,6 @@
       "sha512": "sha512-qmeeYNROMsONF6ndEZcIQ+VxR4Q/TX/7uIVLJqtwIWL7dDWeh0l1UIqgo4wYyjG//5lUNhwkLDSFl+pAWO6oiA==",
       "path": "system.threading.channels/7.0.0",
       "hashPath": "system.threading.channels.7.0.0.nupkg.sha512"
-    },
-    "Xceed.Products.Wpf.DataGrid.Full/7.3.25458.6675": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-oaU6SEN/zfS37RlSnlZQf6RsNks2+vRnbzxJh6cwykDsd6V68d4V0TfIH8oEaMHl39cs8my7Gx7vYk/Ha3NIdQ==",
-      "path": "xceed.products.wpf.datagrid.full/7.3.25458.6675",
-      "hashPath": "xceed.products.wpf.datagrid.full.7.3.25458.6675.nupkg.sha512"
-    },
-    "Xceed.Wpf.Controls/7.3.25458.6675": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-02u5SZRWrl/yXNikqgb98seFGg7QPWFgncykx8+P1NkGND3qHWi8f20MDKkZuPUfFrAL6Wl7Y6oM57TLNSXmtw==",
-      "path": "xceed.wpf.controls/7.3.25458.6675",
-      "hashPath": "xceed.wpf.controls.7.3.25458.6675.nupkg.sha512"
-    },
-    "Xceed.Wpf.DataGrid/7.3.25458.6675": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-sEYar9GvKyDnzSz4QdOl5TMZN3LRXafqeWvVMYMTVIX9jeyb5QleC4DvaKdDjOubnvW3Pm+Bmjwz419Ulk6n+w==",
-      "path": "xceed.wpf.datagrid/7.3.25458.6675",
-      "hashPath": "xceed.wpf.datagrid.7.3.25458.6675.nupkg.sha512"
-    },
-    "Xceed.Wpf.DataGrid.ThemePack.1/7.3.25458.6675": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-9h2WOLtTZtMjQh+sVOoNjzVk/YORN+0E0s/pD3xo+xhPgOnPdJUowigJQhaeqiUuSTrJQm1zIAhvKa4Mp+8urg==",
-      "path": "xceed.wpf.datagrid.themepack.1/7.3.25458.6675",
-      "hashPath": "xceed.wpf.datagrid.themepack.1.7.3.25458.6675.nupkg.sha512"
-    },
-    "Xceed.Wpf.DataGrid.ThemePack.2/7.3.25458.6675": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-mQQt3hffw8BpkHXaZ149+eL7dx3qcivLl20Uin7gN/v3DcQI4rMEZydRz5nqwt+2ubNw7dV1qtBr6LIuZ40m/w==",
-      "path": "xceed.wpf.datagrid.themepack.2/7.3.25458.6675",
-      "hashPath": "xceed.wpf.datagrid.themepack.2.7.3.25458.6675.nupkg.sha512"
-    },
-    "Xceed.Wpf.DataGrid.ThemePack.3/7.3.25458.6675": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-/Zo+TAPuaMAGCzBHrDNuV+crzC6tamnFxnSMg7/qpYbjpOxn3ZlkVUGMHjem9vDumcYfxYpCz+f3jP5ZcFAmiw==",
-      "path": "xceed.wpf.datagrid.themepack.3/7.3.25458.6675",
-      "hashPath": "xceed.wpf.datagrid.themepack.3.7.3.25458.6675.nupkg.sha512"
-    },
-    "Xceed.Wpf.DataGrid.ThemePack.4/7.3.25458.6675": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-o8B3SoCBWFdBOp2aUoGGZLj49K46uie1R3iubaGQgSP5R4OJrKAlM2NQrQ+lM7MSuD2sDRYlnGn5mI4n4YWhKQ==",
-      "path": "xceed.wpf.datagrid.themepack.4/7.3.25458.6675",
-      "hashPath": "xceed.wpf.datagrid.themepack.4.7.3.25458.6675.nupkg.sha512"
-    },
-    "Xceed.Wpf.DataGrid.ThemePack.5/7.3.25458.6675": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Iqyw8QOxSj2ENgEyY4FaBDtsGQuNbHobOUuycJLx/tt7bfI1e5exZ+gtDms4czWgTfGsjZqysHxymKXzaRYlxg==",
-      "path": "xceed.wpf.datagrid.themepack.5/7.3.25458.6675",
-      "hashPath": "xceed.wpf.datagrid.themepack.5.7.3.25458.6675.nupkg.sha512"
-    },
-    "Xceed.Wpf.DataGrid.ThemePack.6/7.3.25458.6675": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-w51CAxaTL+H/gNQ2TuUvIJITvu3J091WsSs5lPSkS3R6O12/GjMXWAVugqdqJ4EUA9S9MAamLXjGnRSwpy2F7Q==",
-      "path": "xceed.wpf.datagrid.themepack.6/7.3.25458.6675",
-      "hashPath": "xceed.wpf.datagrid.themepack.6.7.3.25458.6675.nupkg.sha512"
-    },
-    "Xceed.Wpf.DataGrid.ThemePack.7/7.3.25458.6675": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-+MSjPWrT11Ia/xJtDAypglMvmTvuJagTzkZJ0/4RLOD2hxPS3QjzoYpgfez1wqkO47VIFlLTFkZekBp+RCRBuA==",
-      "path": "xceed.wpf.datagrid.themepack.7/7.3.25458.6675",
-      "hashPath": "xceed.wpf.datagrid.themepack.7.7.3.25458.6675.nupkg.sha512"
-    },
-    "Xceed.Wpf.DataGrid.Views3D/7.3.25458.6675": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-rX04wLjcY2zl9dDFeCOWqcmY873cKKFiRVU1AyiZxzCClPPAvT35bEMij0pY1gZkuDX1igmDPvZfg1AqKAKT9w==",
-      "path": "xceed.wpf.datagrid.views3d/7.3.25458.6675",
-      "hashPath": "xceed.wpf.datagrid.views3d.7.3.25458.6675.nupkg.sha512"
-    },
-    "Xceed.Wpf.DataGrid.Workbooks/7.3.25458.6675": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-xbPiqMBqjlmptFO88lR5PMvrmMM7ms4D+Y+O9gPTxXOiA720Km2dL8mYdLWUckQtaGn+AhOMigNFyLqBqWsG3g==",
-      "path": "xceed.wpf.datagrid.workbooks/7.3.25458.6675",
-      "hashPath": "xceed.wpf.datagrid.workbooks.7.3.25458.6675.nupkg.sha512"
     },
     "FastReport.Bars/2013.3.9.0": {
       "type": "reference",

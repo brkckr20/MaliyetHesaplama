@@ -109,9 +109,9 @@
               "target": "Package",
               "version": "[9.0.9, )"
             },
-            "Xceed.Products.Wpf.DataGrid.Full": {
+            "System.Data.SqlClient": {
               "target": "Package",
-              "version": "[7.3.25458.6675, )"
+              "version": "[4.9.0, )"
             }
           },
           "imports": [
