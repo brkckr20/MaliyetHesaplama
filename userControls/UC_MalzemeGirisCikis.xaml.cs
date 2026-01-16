@@ -418,13 +418,16 @@ namespace MaliyeHesaplama.userControls
 
             decimal totalPiece = 0;
             decimal totalMeter = 0;
+            decimal sumPrice = 0;
             foreach (DataRow row in table.DefaultView.ToTable().Rows)
             {
                 totalPiece += row["Piece"] != DBNull.Value ? Convert.ToDecimal(row["Piece"]) : 0;
                 totalMeter += row["NetMeter"] != DBNull.Value ? Convert.ToDecimal(row["NetMeter"]) : 0;
+                sumPrice += row["RowAmount"] != DBNull.Value ? Convert.ToDecimal(row["RowAmount"]) : 0;
             }
             txtTotals.Text = $"Toplam: {totalPiece:N2} Adet";//   Toplam : {totalMeter:N2} Metre
-            txtTotal1.Text = $"Toplam: {table.Rows.Count.ToString()} Satır (Kalem)";
+            txtTotal1.Text = $"Toplam: {table.Rows.Count.ToString()} Satır";
+            txtTotal2.Text = $"Toplam Tutar: {sumPrice:N2}";
         }
         void SetVisibleControls()
         {

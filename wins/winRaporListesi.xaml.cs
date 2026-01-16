@@ -4,6 +4,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Controls;
 using MaliyeHesaplama.helpers;
+using MaliyeHesaplama.models;
 
 namespace MaliyeHesaplama.wins
 {
@@ -13,16 +14,22 @@ namespace MaliyeHesaplama.wins
         private ICollectionView _collectionView;
         public string ReportName, FormName, Query1, Query2, Query3, Query4, Query5, DataSource1, DataSource2, DataSource3, DataSource4, DataSource5;
 
-        private void rName_TextChanged(object sender, TextChangedEventArgs e)
+        private List<ColumnSetting> columnSettings;
+        private const string SCREEN_NAME = "Rapor Listesi";
+        private const string GRID_NAME = "gridRaporListesi";
+        private int currentUserId = Properties.Settings.Default.RememberUserId;
+        private winKolonAyarlari ayarlarWindow;
+        FilterGridHelpers fgh;
+
+        private void grid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            var textBox = sender as System.Windows.Controls.TextBox;
-            MainHelper.SearchWithColumnHeader(textBox, "ReportName", _collectionView, lblRecordCount);
+            var hiddenColumns = new[] { "Query1", "Query2", "Query3", "Query4", "Query5", "DataSource1", "DataSource2", "DataSource3", "DataSource4", "DataSource5", "FormGroup", "AppId" };
+            fgh.GridGeneratingColumn(e, grid, hiddenColumns);
         }
 
-        private void rsName_TextChanged(object sender, TextChangedEventArgs e)
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var textBox = sender as System.Windows.Controls.TextBox;
-            MainHelper.SearchWithColumnHeader(textBox, "FormName", _collectionView, lblRecordCount);
+
         }
 
         public int Id;
@@ -30,14 +37,15 @@ namespace MaliyeHesaplama.wins
         public winRaporListesi()
         {
             InitializeComponent();
+            fgh = new FilterGridHelpers(grid, "Form Listesi", "grid");
         }
 
         private void sfDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (sfDataGrid.SelectedItem != null)
+            if (grid.SelectedItem != null)
             {
                 IsSelectRow = true;
-                dynamic record = sfDataGrid.SelectedItem;
+                dynamic record = grid.SelectedItem;
                 Id = record.Id;
                 FormName = record.FormName;
                 ReportName = record.ReportName;
@@ -57,33 +65,27 @@ namespace MaliyeHesaplama.wins
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var data = _orm.GetAll<dynamic>("Report").Where(x => x.AppId == 2).ToList();
-            _collectionView = CollectionViewSource.GetDefaultView(data);
-            sfDataGrid.ItemsSource = _collectionView;
+            var source = _orm.GetAll<Report>("Report").Where(x => x.AppId == 2).ToList();
+            grid.ItemsSource = source;
+            //InitializeColumnSettings();
         }
-        void SearchWithTextboxValue(System.Windows.Controls.TextBox aranacakTextbox, string fieldAdi)
+        private void InitializeColumnSettings()
         {
-            string filterText = aranacakTextbox.Text.ToLower();
-
-            if (_collectionView != null)
+            columnSettings = new List<ColumnSetting>();
+            int location = 0;
+            foreach (var column in grid.Columns)
             {
-                _collectionView.Filter = item =>
+                columnSettings.Add(new ColumnSetting
                 {
-                    var dict = (IDictionary<string, object>)item;
-
-                    if (dict.ContainsKey(fieldAdi) && dict[fieldAdi] != null)
-                    {
-                        string companyName = dict[fieldAdi].ToString().ToLower();
-                        return companyName.Contains(filterText);
-                    }
-                    return false;
-                };
-                _collectionView.Refresh();
+                    ColumnName = column.Header.ToString(),
+                    Hidden = column.Visibility != Visibility.Visible,
+                    Width = (int)column.ActualWidth,
+                    Location = location++,
+                    UserId = currentUserId,
+                    ScreenName = SCREEN_NAME,
+                    GridName = GRID_NAME
+                });
             }
-        }
-        private void txtFirmaKodu_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            //SearchWithTextboxValue(txtFirmaKodu, "ReportName");
         }
     }
 }

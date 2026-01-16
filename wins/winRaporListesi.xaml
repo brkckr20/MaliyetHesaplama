@@ -4,58 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
+        xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
         mc:Ignorable="d"
-        Title="Rapor Listesi" Height="450" Width="500" Icon="/wins/News.png" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Loaded="Window_Loaded">
+        Title="Rapor Listesi" Height="450" Width="500" Icon="/wins/News.png" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" Loaded="Window_Loaded">
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0"
-              x:Name="sfDataGrid" 
-              CanUserAddRows="True" 
-              FontSize="11" RowHeight="24" 
-              VerticalContentAlignment="Center"
-              CanUserSortColumns="True"
-              IsReadOnly="True"
-              MouseDoubleClick="sfDataGrid_MouseDoubleClick"
-              AutoGenerateColumns="False"
-              GridLinesVisibility="All"
-              HorizontalGridLinesBrush="#ececec"
-              VerticalGridLinesBrush="#ececec"
-              >
-            <DataGrid.Resources>
-                <DataTemplate x:Key="RName">
-                    <StackPanel>
-                        <Label Content="Rapor Adı"/>
-                        <TextBox Width="105" Height="20" x:Name="rName" TextChanged="rName_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-                <DataTemplate x:Key="RSName">
-                    <StackPanel>
-                        <Label Content="Ekran Adı"/>
-                        <TextBox Width="105" Height="20" x:Name="rsName" TextChanged="rsName_TextChanged" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource RName}" Header="Rapor Adı" Binding="{Binding ReportName}"/>
-                <DataGridTextColumn HeaderTemplate="{StaticResource RSName}" Header="Ekran Adı" Binding="{Binding FormName}"/>
-                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 1" Binding="{Binding Query1}"/>
-                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 2" Binding="{Binding Query2}"/>
-                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 3" Binding="{Binding Query3}"/>
-                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 4" Binding="{Binding Query4}"/>
-                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding Query5}"/>
-                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding DataSource1}"/>
-                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding DataSource2}"/>
-                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding DataSource3}"/>
-                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding DataSource4}"/>
-                <DataGridTextColumn Visibility="Hidden" Header="Sorgu 5" Binding="{Binding DataSource5}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <DockPanel Grid.Row="1">
-            <Label x:Name="lblRecordCount" Content=""/>
-        </DockPanel>
+        <control:FilterDataGrid Grid.Column="0" FontSize="12"
+                        VerticalContentAlignment="Center" IsReadOnly="True" GridLinesVisibility="All"
+                        HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
+                        FilterLanguage="Turkish" ShowStatusBar="True" ShowRowsCount="True" ShowElapsedTime="True"
+                        AutoGenerateColumns="True" AutoGeneratingColumn="grid_AutoGeneratingColumn"
+                        x:Name="grid" MouseDoubleClick="sfDataGrid_MouseDoubleClick"
+                        >
+            <!--<control:FilterDataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Kolon Seçicisi" Click="MenuItem_Click"/>
+                </ContextMenu>
+            </control:FilterDataGrid.ContextMenu>-->
+        </control:FilterDataGrid>
     </Grid>
 </Window>

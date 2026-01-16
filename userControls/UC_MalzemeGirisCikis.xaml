@@ -19,7 +19,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="85"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Margin="0,0,0,2">
             <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
@@ -120,7 +120,8 @@
             </StackPanel>
             <StackPanel>
                 <TextBlock x:Name="txtTotals" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,2,10,0" Text=""/>
-                <TextBlock x:Name="txtTotal1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,2" Text=""/>
+                <TextBlock x:Name="txtTotal1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,2,10,2" Text=""/>
+                <TextBlock x:Name="txtTotal2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,10,0" Text=""/>
             </StackPanel>
         </DockPanel>
     </Grid>

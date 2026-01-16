@@ -17,6 +17,9 @@ namespace MaliyeHesaplama.userControls
         {
             InitializeComponent();
             ButtonBar.PageCommands = this;
+            ButtonBar.btnIleri.IsEnabled = false;
+            ButtonBar.btnGeri.IsEnabled = false;
+            ButtonBar.btnYazdir.IsEnabled = false;
         }
         private void btnDizayn_Click(object sender, RoutedEventArgs e)
         {
@@ -49,7 +52,7 @@ namespace MaliyeHesaplama.userControls
         public void Kaydet()
         {
             string reportName = txtRaporAdi.Text;
-            string sourcePath = sourceFilePath +"\\blank.frx";
+            string sourcePath = sourceFilePath + "\\blank.frx";
             string destPath = sourceFilePath + $"\\{reportName}.frx";
             if (this.Id == 0)
             {
