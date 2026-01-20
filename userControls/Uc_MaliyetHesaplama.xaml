@@ -209,7 +209,7 @@
                                             </DockPanel>
                                             <DockPanel Margin="0,0,0,2">
                                                 <TextBlock VerticalAlignment="Center" Width="60" Text="Ham En :"/>
-                                                <TextBox x:Name="txtHamEn" Text="{Binding HamEn,Mode=OneWay}" FontSize="11" TextAlignment="Center" Margin="2,0" IsEnabled="False"/>
+                                                <TextBox x:Name="txtHamEn" Text="{Binding HamEn,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" FontSize="11" TextAlignment="Center" Margin="2,0" IsEnabled="False"/>
                                             </DockPanel>
                                             <DockPanel Margin="0,0,0,2">
                                                 <TextBlock VerticalAlignment="Center" Width="60" Text="Mam. Boy :"/>
