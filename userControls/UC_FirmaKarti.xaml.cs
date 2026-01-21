@@ -9,11 +9,13 @@ namespace MaliyeHesaplama.userControls
     {
         private MiniOrm _orm;
         private int Id = 0;
-        public UC_FirmaKarti()
+        private bool IsOwnerCompany = false;
+        public UC_FirmaKarti(bool _isOwnerCompany)
         {
             InitializeComponent();
             ButtonBar.PageCommands = this;
             _orm = new MiniOrm();
+            IsOwnerCompany = _isOwnerCompany;
         }
         void KayitlariGetir(string tip)
         {
@@ -70,6 +72,7 @@ namespace MaliyeHesaplama.userControls
                     {"AddressLine1", txtAdres1.Text },
                     {"AddressLine2", txtAdres2.Text },
                     {"AddressLine3", txtAdres3.Text },
+                    {"IsOwner", IsOwnerCompany },
                 };
                 Id = _orm.Save("Company", dict);
                 Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi.");

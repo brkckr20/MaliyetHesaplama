@@ -20,5 +20,7 @@ namespace MaliyeHesaplama.models
         public string AddressLine2 { get; set; }
         [Display(Name = "Adres 3")]
         public string AddressLine3 { get; set; }
+        [Display(Name = "Şirket Mi?")]
+        public bool IsOwner{ get; set; }
     }
 }

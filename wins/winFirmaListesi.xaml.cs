@@ -29,7 +29,7 @@ namespace MaliyeHesaplama.wins
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var source = _orm.GetAll<Company>("Company");
+            var source = _orm.GetAll<Company>("Company").Where(z => z.IsOwner == false);// şirket kartlarına göre düzenlenecek - şuan için sadece IsOwner false olanlar listelendi
             grid.ItemsSource = source;
             InitializeColumnSettings();
             LoadColumnSettingsFromDatabase();
