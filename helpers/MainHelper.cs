@@ -114,7 +114,7 @@ namespace MaliyeHesaplama.helpers
         }
         public static void SetCompanyInformation(ref int CompanyId, System.Windows.Controls.TextBox textBox)
         {
-            wins.winFirmaListesi win = new wins.winFirmaListesi();
+            wins.winFirmaListesi win = new wins.winFirmaListesi(false);
             win.ShowDialog();
             if (win.SecimYapildi)
             {

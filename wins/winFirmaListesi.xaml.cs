@@ -14,7 +14,7 @@ namespace MaliyeHesaplama.wins
         private ICollectionView _collectionView;
         public int Id;
         public string FirmaKodu, FirmaUnvan, Adres1, Adres2, Adres3;
-        public bool SecimYapildi = false;
+        public bool SecimYapildi = false, IsOwner;
 
         private List<ColumnSetting> columnSettings;
         private const string SCREEN_NAME = "Firma Listesi";
@@ -22,14 +22,15 @@ namespace MaliyeHesaplama.wins
         private int currentUserId = Properties.Settings.Default.RememberUserId;
         private winKolonAyarlari ayarlarWindow;
 
-        public winFirmaListesi()
+        public winFirmaListesi(bool _isOwner)
         {
             InitializeComponent();
+            IsOwner = _isOwner;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var source = _orm.GetAll<Company>("Company").Where(z => z.IsOwner == false);// şirket kartlarına göre düzenlenecek - şuan için sadece IsOwner false olanlar listelendi
+            var source = _orm.GetAll<Company>("Company").Where(z => z.IsOwner == IsOwner);
             grid.ItemsSource = source;
             InitializeColumnSettings();
             LoadColumnSettingsFromDatabase();

@@ -1,7 +1,10 @@
-﻿using MaliyeHesaplama.helpers;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace MaliyeHesaplama.userControls
 {
@@ -10,12 +13,14 @@ namespace MaliyeHesaplama.userControls
         private MiniOrm _orm;
         private int Id = 0;
         private bool IsOwnerCompany = false;
+        private byte[] imageBytes;
         public UC_FirmaKarti(bool _isOwnerCompany)
         {
             InitializeComponent();
             ButtonBar.PageCommands = this;
             _orm = new MiniOrm();
             IsOwnerCompany = _isOwnerCompany;
+            grdResim.Visibility = IsOwnerCompany ? Visibility.Visible : Visibility.Collapsed;
         }
         void KayitlariGetir(string tip)
         {
@@ -74,6 +79,10 @@ namespace MaliyeHesaplama.userControls
                     {"AddressLine3", txtAdres3.Text },
                     {"IsOwner", IsOwnerCompany },
                 };
+                if (imageBytes != null && imageBytes.Length > 0)
+                {
+                    dict.Add("Image", imageBytes);
+                }
                 Id = _orm.Save("Company", dict);
                 Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi.");
             }
@@ -97,7 +106,7 @@ namespace MaliyeHesaplama.userControls
             }
             else
             {
-                wins.winRaporSecimi win = new wins.winRaporSecimi("Firma Kartı",Id);
+                wins.winRaporSecimi win = new wins.winRaporSecimi("Firma Kartı", Id);
                 win.ShowDialog();
             }
         }
@@ -114,7 +123,7 @@ namespace MaliyeHesaplama.userControls
 
         public void Listele()
         {
-            wins.winFirmaListesi win = new wins.winFirmaListesi();
+            wins.winFirmaListesi win = new wins.winFirmaListesi(IsOwnerCompany);
             win.ShowDialog();
             if (win.FirmaKodu != null)
             {
@@ -124,6 +133,19 @@ namespace MaliyeHesaplama.userControls
                 txtAdres1.Text = win.Adres1;
                 txtAdres2.Text = win.Adres2;
                 txtAdres3.Text = win.Adres3;
+            }
+        }
+
+        private void btnResimEkle_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tiff";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filePath = openFileDialog.FileName;
+                imageBytes = File.ReadAllBytes(filePath);
+                BitmapImage bitmap = new BitmapImage(new Uri(filePath));
+                imgSirketResmi.Source = bitmap;
             }
         }
     }

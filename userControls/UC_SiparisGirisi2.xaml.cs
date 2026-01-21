@@ -260,7 +260,7 @@ namespace MaliyeHesaplama.userControls
         }
         private void btnFirmaListesi_Click(object sender, RoutedEventArgs e)
         {
-            wins.winFirmaListesi win = new wins.winFirmaListesi();
+            wins.winFirmaListesi win = new wins.winFirmaListesi(false);
             win.ShowDialog();
             if (win.SecimYapildi)
             {
