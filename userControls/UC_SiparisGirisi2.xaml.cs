@@ -13,7 +13,7 @@ namespace MaliyeHesaplama.userControls
     public partial class UC_SiparisGirisi2 : System.Windows.Controls.UserControl, IPageCommands
     {
         MiniOrm _orm = new MiniOrm();
-        public int CompanyId = 0, Id, WareHouseId = 0;
+        public int CompanyId = 0, Id, WareHouseId = 0;int test = 00; int test1 = 00;
         MVM vm = new MVM();
         private DataTable table;
         FilterGridHelpers fgh;
