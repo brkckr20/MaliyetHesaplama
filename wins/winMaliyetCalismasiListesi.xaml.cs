@@ -10,9 +10,9 @@ namespace MaliyeHesaplama.wins
 {
     public partial class winMaliyetCalismasiListesi : Window
     {
-        public int Id, CompanyId, InventoryId;
+        public int Id, CompanyId, InventoryId, InsertedBy, UpdatedBy;
         public string CompanyName, InventoryName, OrderNo, CompanyCode, InventoryCode;
-        public DateTime Date;
+        public DateTime Date, InsertedDate, UpdatedDate;
         public bool secimYapildi = false;
         public byte[] ImageData;
         private ICollectionView _collectionView;
@@ -43,7 +43,7 @@ namespace MaliyeHesaplama.wins
         }
         private void grid_ColumnReordered(object sender, DataGridColumnEventArgs e)
         {
-            fgh.GridReOrdered(sender,e);
+            fgh.GridReOrdered(sender, e);
         }
         private void sfDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -60,6 +60,10 @@ namespace MaliyeHesaplama.wins
                 Date = record.Date;
                 CompanyCode = record.CompanyCode;
                 InventoryCode = record.InventoryCode;
+                InsertedBy = record.InsertedBy;
+                InsertedDate = record.InsertedDate;
+                UpdatedBy = record.UpdatedBy;
+                UpdatedDate = record.UpdatedDate;
                 ImageData = _orm.GetImage("Cost", "ProductImage", Id);
                 this.Close();
             }

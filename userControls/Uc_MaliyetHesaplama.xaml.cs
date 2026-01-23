@@ -16,6 +16,8 @@ namespace MaliyeHesaplama.userControls
         bool _receteOlacak = false;
         private byte[] imageBytes;
         MiniOrm _orm = new MiniOrm();
+        private DateTime _insertedDate, _updatedDate;
+        private int _insertedBy, _updatedBy;
 
         void SetControllerValues(System.Windows.Controls.TextBox tb, decimal val)
         {
@@ -112,10 +114,12 @@ namespace MaliyeHesaplama.userControls
             if (Id == 0) // bu alanlara kayıt eden güncelleyen vs diğer bilgiler eklenebilir
             {
                 dict1.Add("InsertedDate", DateTime.Now);
+                dict1.Add("InsertedBy", Properties.Settings.Default.RememberUserId);
             }
             else
             {
                 dict1.Add("UpdatedDate", DateTime.Now);
+                dict1.Add("UpdatedBy", Properties.Settings.Default.RememberUserId);
             }
             Id = _orm.Save("Cost", dict1);
             var dict2 = new Dictionary<string, object>
@@ -134,6 +138,12 @@ namespace MaliyeHesaplama.userControls
             };
             CCCId = _orm.Save("CostCostCalculate", dict4);
             Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi");
+        }
+
+        private void btnKayitBilgisi_Click(object sender, RoutedEventArgs e)
+        {
+            wins.winKayitBilgisi win = new wins.winKayitBilgisi(_insertedBy, _insertedDate, _updatedBy, _updatedDate);
+            win.ShowDialog();
         }
 
         private void btnReceteListesi_Click(object sender, RoutedEventArgs e)
@@ -196,6 +206,10 @@ namespace MaliyeHesaplama.userControls
                 this.InventoryId = win.InventoryId;
                 txtMalzemeKodu.Text = win.InventoryCode;
                 lblMalzemeAdi.Content = win.InventoryName;
+                _insertedBy = win.InsertedBy;
+                _updatedBy = win.UpdatedBy;
+                _insertedDate = win.InsertedDate;
+                _updatedDate = win.UpdatedDate;
                 if (win.ImageData != null)
                 {
                     using (var stream = new MemoryStream(win.ImageData))

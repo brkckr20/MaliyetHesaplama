@@ -148,7 +148,11 @@ public class MiniOrm
                     ,ISNULL(I.InventoryName,'') [InventoryName]
                     ,ISNULL(I.InventoryCode,'') [InventoryCode]
                     ,ISNULL(I.Id,'') [InventoryId]
-					--,ISNULL(CONVERT(varchar(max), C.ProductImage, 1), '') AS [ProductImage] 
+					--,ISNULL(CONVERT(varchar(max), C.ProductImage, 1), '') AS [ProductImage]
+					,ISNULL(C.InsertedBy,0) [InsertedBy]
+					,ISNULL(C.UpdatedBy,0) [UpdatedBy]
+					,ISNULL(C.InsertedDate,'') [InsertedDate]
+					,ISNULL(C.UpdatedDate,'') [UpdatedDate]
                     from Cost C 
                     left join Company CO on C.CompanyId = CO.Id
                     left join Inventory I on I.Id = C.InventoryId

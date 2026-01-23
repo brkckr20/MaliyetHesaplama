@@ -76,6 +76,9 @@
     <Compile Update="wins\winFisHareketleriListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="wins\winKayitBilgisi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="wins\winKolonAyarlari.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
