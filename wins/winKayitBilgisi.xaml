@@ -8,8 +8,8 @@
         Title="Kayıt Bilgisi" Height="150" 
         Width="382" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" 
         Icon="/wins/News.png"
-        Loaded="Window_Loaded">
-    <Grid Background="LightGray">
+        Loaded="Window_Loaded" ResizeMode="NoResize">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -23,9 +23,9 @@
         </GroupBox>
         <GroupBox Header="Güncelleyen : " Grid.Column="1">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Label x:Name="lbUpdateUser" Content="01 - Burak Çakır" HorizontalContentAlignment="Center"/>
-                <Label Content="15 Ekim 2025 Çarşamba" HorizontalContentAlignment="Center"/>
-                <Label Content="17:44:00" HorizontalContentAlignment="Center"/>
+                <Label x:Name="lbUpdateUser" HorizontalContentAlignment="Center"/>
+                <Label x:Name="lbUpdateDate" HorizontalContentAlignment="Center"/>
+                <Label x:Name="lbUpdateTime" HorizontalContentAlignment="Center"/>
             </StackPanel>
         </GroupBox>
     </Grid>

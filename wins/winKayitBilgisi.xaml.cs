@@ -15,6 +15,9 @@ namespace MaliyeHesaplama.wins
             lbInsertUser.Content = userInserted != null ? userInserted.Code + " - " + userInserted.Name + " " + userInserted.Surname : "Bilinmiyor";
             lbInsertDate.Content = _insertedDate.ToString("dd.MM.yyyy dddd", new CultureInfo("tr-TR"));
             lbInsertTime.Content = _insertedDate.ToString("HH:mm:ss");
+            lbUpdateUser.Content = userUpdated != null ? userUpdated.Code + " - " + userUpdated.Name + " " + userUpdated.Surname : "Bilinmiyor";
+            lbUpdateDate.Content = _updatedDate.ToString("dd.MM.yyyy dddd", new CultureInfo("tr-TR"));
+            lbUpdateTime.Content = _updatedDate.ToString("HH:mm:ss");
         }
 
         MiniOrm orm = new MiniOrm();

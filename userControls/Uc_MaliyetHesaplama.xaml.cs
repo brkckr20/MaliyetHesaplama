@@ -115,11 +115,13 @@ namespace MaliyeHesaplama.userControls
             {
                 dict1.Add("InsertedDate", DateTime.Now);
                 dict1.Add("InsertedBy", Properties.Settings.Default.RememberUserId);
+                _insertedDate = DateTime.Now;
             }
             else
             {
                 dict1.Add("UpdatedDate", DateTime.Now);
                 dict1.Add("UpdatedBy", Properties.Settings.Default.RememberUserId);
+                _updatedDate = DateTime.Now;
             }
             Id = _orm.Save("Cost", dict1);
             var dict2 = new Dictionary<string, object>

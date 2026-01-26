@@ -148,5 +148,10 @@ namespace MaliyeHesaplama.userControls
                 imgSirketResmi.Source = bitmap;
             }
         }
+
+        private void MI_SNA_Click(object sender, RoutedEventArgs e)
+        {
+            txtFirmaKodu.Text = _orm.GetLastCompanyCode();
+        }
     }
 }
