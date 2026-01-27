@@ -669,8 +669,9 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <GroupBox>
+                        <GroupBox Grid.Column="0" Header="">
                             <StackPanel>
                                 <DockPanel>
                                     <Label Content="Enden Çekmesi : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
@@ -704,6 +705,20 @@
                                     <Label Content="" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                             </StackPanel>
+                        </GroupBox>
+                        <GroupBox Grid.Column="1" Header="Kumaştaki Atkı Raporunu 1 Cm'e Dönüştürme">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <DockPanel>
+                                        <Label Content="1 Mt'de Atkı Sayısı"/>
+                                        <TextBox Width="50"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </Grid>
                         </GroupBox>
                     </Grid>
                 </TabItem>
