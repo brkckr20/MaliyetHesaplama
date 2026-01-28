@@ -266,7 +266,6 @@ namespace MaliyeHesaplama.userControls
                 SetControllerValues(txtKarUrFiyText, malHes.PP_Profit); SetControllerValues(txtKdvUrFiyText, malHes.PP_Vat);
                 SetControllerValues(txtKurUrFiyText, malHes.PP_Currency); SetControllerValues(txtPariteUrFiyText, malHes.PP_Parity); SetControllerValues(txtEurUrFiyText, malHes.PP_Euro);
                 SetControllerValues(txtBelirlenenFiyatText, malHes.PriceDeterminedForex); SetControllerValues(txtKarliTLDikUr, malHes.SP_Profitable);
-
             }
         }
     }

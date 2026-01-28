@@ -27,7 +27,7 @@ namespace MaliyeHesaplama.mvvm
         }
         private void OnAcButon(object obj)
         {
-            
+
             //MessageBox.Show($"Butona tıklandı: ");
         }
 
@@ -97,6 +97,7 @@ namespace MaliyeHesaplama.mvvm
             Atki2Gramaj = (Atki2Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki2IpBilSonuc) * 1.05) / 1000;
             Atki3Gramaj = (Atki3Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki3IpBilSonuc) * 1.05) / 1000;
             Atki4Gramaj = (Atki4Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki4IpBilSonuc) * 1.05) / 1000;
+            EndenCekmesi = TarakEn / MamulEn;
         }
         partial void OnHamBoyChanged(double value)
         {
@@ -150,6 +151,11 @@ namespace MaliyeHesaplama.mvvm
             Atki4TelSay = HamBoy * Atki4Siklik;
             Atki4Gramaj = (Atki4Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki4IpBilSonuc) * 1.05) / 1000;
             DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
+        }
+
+        partial void OnMamulEnChanged(double value) // bu changed çalışmadı - 28.01.2026
+        {
+            EndenCekmesi = TarakEn / MamulEn;
         }
 
         /********************************* ÜRETİM BİLGİLERİ - TEL SAYILARI **********************************/
@@ -399,7 +405,7 @@ namespace MaliyeHesaplama.mvvm
                 string s = value.Replace(',', '.');
                 if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
                 {
-                    ParcaYikamaUrFiy= d;
+                    ParcaYikamaUrFiy = d;
                 }
             }
         }
@@ -465,7 +471,7 @@ namespace MaliyeHesaplama.mvvm
                 string s = value.Replace(',', '.');
                 if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
                 {
-                    KarUrFiy= d;
+                    KarUrFiy = d;
                 }
             }
         }
@@ -476,7 +482,7 @@ namespace MaliyeHesaplama.mvvm
                 string s = value.Replace(',', '.');
                 if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
                 {
-                    KdvUrFiy= d;
+                    KdvUrFiy = d;
                 }
             }
         }
@@ -640,5 +646,9 @@ namespace MaliyeHesaplama.mvvm
         {
             KdvliBelirlenenFiyatTL = KdvliBelirlenFiyat * KurUrFiy;
         }
+
+        /********************************* BELİRLENMİŞ FİYATLAR  **********************************/
+        [ObservableProperty]
+        private double endenCekmesi;
     }
 }

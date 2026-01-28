@@ -665,9 +665,11 @@
                         <Border/>
                     </DockPanel>
                 </TabItem>
-                <TabItem Header="Detaylar">
+                <TabItem Header="Detaylar" HorizontalAlignment="Right" Width="56">
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
@@ -675,7 +677,7 @@
                             <StackPanel>
                                 <DockPanel>
                                     <Label Content="Enden Çekmesi : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <Label Content="" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <Label Content="{Binding EndenCekmesi,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="Boydan Çekmesi : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
@@ -712,18 +714,135 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <Label Content=""/>
+                                    <DockPanel>
+                                        <Label Background="LightBlue" Width="120" Content="1 Mt'de Atkı Sayısı"/>
+                                        <TextBox Width="50"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Background="LightBlue" Width="120" Content="Rapordaki Atkı Sayısı"/>
+                                        <TextBox Width="50"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Background="LightBlue" Width="120" Content="1. Atkı Sayısı"/>
+                                        <TextBox Width="50"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Background="LightBlue" Width="120" Content="2. Atkı Sayısı"/>
+                                        <TextBox Width="50"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Background="LightBlue" Width="120" Content="3. Atkı Sayısı"/>
+                                        <TextBox Width="50"/>
+                                    </DockPanel>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                    <Label Background="LightCoral" Content="Cm Sıklık"/>
+                                    <DockPanel>
+                                        <TextBox Height="25"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Content=""/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <TextBox Height="25"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <TextBox Height="25"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <TextBox Height="25"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Grid.Column="2" Header="Sipariş Göre İplik Hesaplama">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
                                 <StackPanel>
                                     <DockPanel>
-                                        <Label Content="1 Mt'de Atkı Sayısı"/>
-                                        <TextBox Width="50"/>
+                                        <Label Width="110" Content="Sipariş Metresi "/>
+                                        <TextBox Width="70"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="110" Content="Atkı 1 (Kg) "/>
+                                        <TextBox Width="70"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="110" Content="Atkı 2 (Kg) "/>
+                                        <TextBox Width="70"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="110" Content="Atkı 3 (Kg) "/>
+                                        <TextBox Width="70"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="110" Content="Atkı 4 (Kg) "/>
+                                        <TextBox Width="70"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="110" Content="Çözgü 1 (Kg) "/>
+                                        <TextBox Width="70"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="110" Content="Çözgü 2 (Kg) "/>
+                                        <TextBox Width="70"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="110" Content="Çözgü Çekmesi %"/>
+                                        <TextBox Width="70"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Grid.Column="3" Header="Tahar Maliyeti">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <DockPanel>
+                                        <Label Width="135" Background="LightCyan" Content="Tel Sayısı "/>
+                                        <TextBox />
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="135" Background="LightCyan" Content="Tahar Maliyeti "/>
+                                        <TextBox Width="70"/>
+                                        <TextBox Width="70"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="135" Background="LightCyan" Content="Lamel Maliyeti "/>
+                                        <TextBox Width="70"/>
+                                        <TextBox Width="70"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="135" Background="LightCyan" Content="Tezgah Yatış Gün Sayısı "/>
+                                        <TextBox Width="70"/>
+                                        <TextBox Width="70"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="135" Background="LightCyan" Content="Toplam Maliyet "/>
+                                        <TextBox />
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="135" Background="LightCyan" Content="Sipariş Metrajı "/>
+                                        <TextBox />
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Width="135" Background="LightCyan" Content="1 Mt Düşen Maliyet"/>
+                                        <TextBox Width="70" Background="Red" Foreground="White"/>
+                                        <TextBox Width="70" Background="Yellow"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
                     </Grid>
                 </TabItem>
-            </TabControl>
-            
+            </TabControl>            
         </StackPanel>
     </StackPanel>
 </UserControl>
