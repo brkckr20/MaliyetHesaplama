@@ -153,7 +153,7 @@ namespace MaliyeHesaplama.mvvm
             DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
         }
 
-        partial void OnMamulEnChanged(double value) // bu changed çalışmadı - 28.01.2026
+        partial void OnMamulEnChanged(double value)
         {
             EndenCekmesi = TarakEn / MamulEn;
         }
@@ -181,6 +181,7 @@ namespace MaliyeHesaplama.mvvm
         {
             ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
             Atki1IpMal = (Atki1IpBoy + Atki1IpFiy) * Atki1Gramaj;
+            AtkiGr = (Atki1Gramaj * BoydanCekmesi);
         }
         partial void OnAtki2GramajChanged(double value)
         {
@@ -441,6 +442,7 @@ namespace MaliyeHesaplama.mvvm
                     BoyaFiresiUrFiy = d;
                 }
             }
+            BoydanCekmesi = Convert.ToDouble(BoyaFiresiUrFiyText);
         }
         partial void OnKonfMaliyetiUrFiyTextChanged(string value)
         {
@@ -647,8 +649,12 @@ namespace MaliyeHesaplama.mvvm
             KdvliBelirlenenFiyatTL = KdvliBelirlenFiyat * KurUrFiy;
         }
 
-        /********************************* BELİRLENMİŞ FİYATLAR  **********************************/
+        /********************************* Açıklamasız  **********************************/
         [ObservableProperty]
-        private double endenCekmesi;
+        private double endenCekmesi,boydanCekmesi,atkiGr;
+        partial void OnBoydanCekmesiChanged(double value) // AtkiGr olmadı
+        {
+            AtkiGr = (Atki1Gramaj * BoydanCekmesi);
+        }
     }
 }
