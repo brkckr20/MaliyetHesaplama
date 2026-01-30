@@ -32,6 +32,7 @@ namespace MaliyeHesaplama.userControls
                 }
             }
             txtDovizKurlari.Text = data.DovizKurlari;
+            txtHasilDokmesi.Text = data.HasilDokmesi.ToString();
         }
 
         public void Yeni()
@@ -52,6 +53,7 @@ namespace MaliyeHesaplama.userControls
                 { "OnayliSiparisDegisiklik", chckOnayliSiparisDegisiklik.IsChecked },
                 { "MalzemeGirisOperasyonTipleri", txtOperasyonTipiMG.Text },
                 { "MalzemeCikisOperasyonTipleri", txtOperasyonTipiMC.Text },
+                { "HasilDokmesi", txtHasilDokmesi.Text },
             };
             _orm.Save("ProductionManagementParams", dict);
             Bildirim.Bilgilendirme2("Kayıt işlemi başarıyla gerçekleştirildi.");

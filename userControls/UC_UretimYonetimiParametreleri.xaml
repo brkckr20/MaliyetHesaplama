@@ -32,6 +32,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <GroupBox Grid.Row="0" Header="Reçete" Foreground="Black">
                             <StackPanel>
@@ -76,6 +77,14 @@
                                     <TextBlock VerticalAlignment="Center" Text="Malzeme Çıkışı Kalem İşlemler : "/>
                                     <TextBox x:Name="txtOperasyonTipiMC" VerticalContentAlignment="Center" Width="300" Height="22"/>
                                     <TextBlock Margin="4,0,0,0" VerticalAlignment="Center" Text="*(Her bir tip arasında , (virgül) konulmalıdır)" Foreground="Gray"/>
+                                </DockPanel>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Grid.Row="3" Header="Maliyet Hesaplama" Foreground="Black">
+                            <StackPanel>
+                                <DockPanel HorizontalAlignment="Left">
+                                    <Label Content="Haşıl Dökmesi : "/>
+                                    <TextBox x:Name="txtHasilDokmesi" Width="50" VerticalContentAlignment="Center"/>
                                 </DockPanel>
                             </StackPanel>
                         </GroupBox>

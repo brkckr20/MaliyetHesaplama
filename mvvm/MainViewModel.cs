@@ -24,6 +24,7 @@ namespace MaliyeHesaplama.mvvm
             atkiUrFiyText = "0.00"; CozguUrFiyText = "0.00"; ParcaYikamaUrFiyText = "0.00"; KumasBoyamaUrFiyText = "0.00"; DokumaFiresiUrFiyText = "0.00"; BoyaFiresiUrFiyText = "0.00"; KonfMaliyetiUrFiyText = "0.00"; IkinciKaliyeMaliyetiUrFiyText = "0.00"; KarUrFiyText = "0.00"; KdvUrFiyText = "0.00"; KurUrFiyText = _orm.GetEURCurrency(); PariteUrFiyText = "0.00"; EurUrFiyText = "0.00";
             BelirlenenFiyatText = "0.00";
             AcButtonCommand = new RelayCommand<object>(OnAcButon);
+            HasilDokmesi = Convert.ToDouble(_orm.GetById<dynamic>("ProductionManagementParams", 1).HasilDokmesi);
         }
         private void OnAcButon(object obj)
         {
@@ -156,6 +157,7 @@ namespace MaliyeHesaplama.mvvm
         partial void OnMamulEnChanged(double value)
         {
             EndenCekmesi = TarakEn / MamulEn;
+            M2Gr = (MtulGr / HasilDokmesi) / MamulEn * 100;
         }
 
         /********************************* ÜRETİM BİLGİLERİ - TEL SAYILARI **********************************/
@@ -171,6 +173,7 @@ namespace MaliyeHesaplama.mvvm
         {
             ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
             Cozgu1IpMal = (Cozgu1IpBoy + Cozgu1IpFiy) * Cozgu1Gramaj;
+            CozguGr = (Cozgu1Gramaj * (BoydanCekmesi / 100)) + Cozgu1Gramaj;
         }
         partial void OnCozgu2GramajChanged(double value)
         {
@@ -182,21 +185,25 @@ namespace MaliyeHesaplama.mvvm
             ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
             Atki1IpMal = (Atki1IpBoy + Atki1IpFiy) * Atki1Gramaj;
             AtkiGr = (Atki1Gramaj * BoydanCekmesi);
+            AtkiGr = (Atki1Gramaj * (BoydanCekmesi / 100)) + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
         }
         partial void OnAtki2GramajChanged(double value)
         {
             ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
             Atki2IpMal = (Atki2IpBoy + Atki2IpFiy) * Atki2Gramaj;
+            AtkiGr = (Atki1Gramaj * (BoydanCekmesi / 100)) + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
         }
         partial void OnAtki3GramajChanged(double value)
         {
             ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
             Atki3IpMal = (Atki3IpBoy + Atki3IpFiy) * Atki3Gramaj;
+            AtkiGr = (Atki1Gramaj * (BoydanCekmesi / 100)) + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
         }
         partial void OnAtki4GramajChanged(double value)
         {
             ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
             Atki4IpMal = (Atki4IpBoy + Atki4IpFiy) * Atki4Gramaj;
+            AtkiGr = (Atki1Gramaj * (BoydanCekmesi / 100)) + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
         }
         partial void OnToplamGramajChanged(double value)
         {
@@ -442,7 +449,7 @@ namespace MaliyeHesaplama.mvvm
                     BoyaFiresiUrFiy = d;
                 }
             }
-            BoydanCekmesi = Convert.ToDouble(BoyaFiresiUrFiyText);
+            BoydanCekmesi = BoyaFiresiUrFiy;
         }
         partial void OnKonfMaliyetiUrFiyTextChanged(string value)
         {
@@ -651,10 +658,24 @@ namespace MaliyeHesaplama.mvvm
 
         /********************************* Açıklamasız  **********************************/
         [ObservableProperty]
-        private double endenCekmesi,boydanCekmesi,atkiGr;
-        partial void OnBoydanCekmesiChanged(double value) // AtkiGr olmadı
+        private double endenCekmesi, boydanCekmesi, atkiGr, cozguGr, mtulGr, hasilDokmesi, m2Gr;
+        partial void OnBoydanCekmesiChanged(double value)
         {
-            AtkiGr = (Atki1Gramaj * BoydanCekmesi);
+            AtkiGr = (Atki1Gramaj * (BoydanCekmesi / 100)) + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
+            CozguGr = (Cozgu1Gramaj * (BoydanCekmesi / 100)) + Cozgu1Gramaj;
         }
+        partial void OnAtkiGrChanged(double value)
+        {
+            MtulGr = AtkiGr + CozguGr;
+        }
+        partial void OnCozguGrChanged(double value)
+        {
+            MtulGr = AtkiGr + CozguGr;
+        }
+        partial void OnMtulGrChanged(double value)
+        {
+            M2Gr = (MtulGr / HasilDokmesi) / MamulEn * 100;
+        }
+        //* tamamlandı - kumastaki atki raporunu 1cm ye cevirmeden devam edilecek - 30.01.2026*//
     }
 }

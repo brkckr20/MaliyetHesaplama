@@ -681,30 +681,30 @@
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="Boydan Çekmesi % : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <Label Content="{Binding BoydanCekmesi,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <TextBox Text="{Binding BoydanCekmesi,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="Mamül Gramaj" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="LightBlue"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="Atkı Gr : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <Label Content="" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <TextBox Text="{Binding AtkiGr,StringFormat={}{0:N3},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="Çözgü Gr : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <Label Content="" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <TextBox Text="{Binding CozguGr,StringFormat={}{0:N3},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="MTül Gr : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <Label Content="" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <TextBox Text="{Binding MtulGr,StringFormat={}{0:N3}}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="Haşıl Dökmesi : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <Label Content="" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <Label Content="{Binding HasilDokmesi,StringFormat={}{0:N3}}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="M² Gr : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <Label Content="" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <TextBox Text="{Binding M2Gr,StringFormat={}{0:N3}}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                             </StackPanel>
                         </GroupBox>
