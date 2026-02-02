@@ -718,7 +718,7 @@
                                     <Label Content=""/>
                                     <DockPanel>
                                         <Label Background="LightBlue" Width="120" Content="1 Mt'de Atkı Sayısı"/>
-                                        <TextBox Width="50"/>
+                                        <TextBox Text="{Binding BirMtAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Background="LightBlue" Width="120" Content="Rapordaki Atkı Sayısı"/>
@@ -740,7 +740,7 @@
                                 <StackPanel Grid.Column="1" Margin="10,0,0,0">
                                     <Label Background="LightCoral" Content="Cm Sıklık"/>
                                     <DockPanel>
-                                        <TextBox Height="25"/>
+                                        <TextBox Text="{Binding CmSiklik,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="25"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Content=""/>

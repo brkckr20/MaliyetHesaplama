@@ -676,6 +676,14 @@ namespace MaliyeHesaplama.mvvm
         {
             M2Gr = (MtulGr / HasilDokmesi) / MamulEn * 100;
         }
-        //* tamamlandı - kumastaki atki raporunu 1cm ye cevirmeden devam edilecek - 30.01.2026*//
+        /********************************* Kumaştaki Atkı Raporunu 1 Cm'e Dönüştürme  **********************************/
+        [ObservableProperty]
+        private double birMtAtkiSayisi,cmSiklik;
+        partial void OnCmSiklikChanged(double value)
+        {
+            BirMtAtkiSayisi = CmSiklik * 100;
+        }
+        
+
     }
 }
