@@ -57,6 +57,12 @@
                             <Button x:Name="btnReceteListesi" Click="btnReceteListesi_Click" Margin="0,.5,0,0" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
                             <Label Content=""/>
                         </DockPanel>
+                        <DockPanel x:Name="dckSiparisBilgileri" Margin="0,2,0,0">
+                            <TextBlock VerticalAlignment="Center" Width="70" Text="Sipariş No :"/>
+                            <TextBox x:Name="txtSiparisNo" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
+                            <Button x:Name="btnSiparisListesi" Click="btnSiparisListesi_Click" Margin="0,0,0,0.5" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
+                            <Label Content=""/>
+                        </DockPanel>
                     </StackPanel>
                 </Border>
                 <Border Grid.Column="1">
@@ -718,23 +724,23 @@
                                     <Label Content=""/>
                                     <DockPanel>
                                         <Label Background="LightBlue" Width="120" Content="1 Mt'de Atkı Sayısı"/>
-                                        <TextBox Text="{Binding BirMtAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                        <TextBox IsEnabled="False" Text="{Binding BirMtAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Background="LightBlue" Width="120" Content="Rapordaki Atkı Sayısı"/>
-                                        <TextBox Width="50"/>
+                                        <TextBox IsEnabled="False" Text="{Binding RapordakiAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Background="LightBlue" Width="120" Content="1. Atkı Sayısı"/>
-                                        <TextBox Width="50"/>
+                                        <TextBox Text="{Binding BirinciAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Background="LightBlue" Width="120" Content="2. Atkı Sayısı"/>
-                                        <TextBox Width="50"/>
+                                        <TextBox Text="{Binding IkinciAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Background="LightBlue" Width="120" Content="3. Atkı Sayısı"/>
-                                        <TextBox Width="50"/>
+                                        <TextBox Text="{Binding UcuncuAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                                     </DockPanel>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Margin="10,0,0,0">
@@ -746,13 +752,13 @@
                                         <Label Content=""/>
                                     </DockPanel>
                                     <DockPanel>
-                                        <TextBox Height="25"/>
+                                        <TextBox IsEnabled="False" Text="{Binding BirinciAtkiSayisiFormul,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:N3}}" Height="25"/>
                                     </DockPanel>
                                     <DockPanel>
-                                        <TextBox Height="25"/>
+                                        <TextBox IsEnabled="False" Text="{Binding IkinciAtkiSayisiFormul,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:N3}}" Height="25"/>
                                     </DockPanel>
                                     <DockPanel>
-                                        <TextBox Height="25"/>
+                                        <TextBox IsEnabled="False" Text="{Binding UcuncuAtkiSayisiFormul,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:N3}}" Height="25"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Grid>

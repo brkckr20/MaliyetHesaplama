@@ -12,7 +12,7 @@ namespace MaliyeHesaplama.userControls
 {
     public partial class Uc_MaliyetHesaplama : System.Windows.Controls.UserControl, IPageCommands
     {
-        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0, InventoryReceiptId;
+        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0, InventoryReceiptId, OrderReceiptId, OrderInventoryId;
         bool _receteOlacak = false;
         private byte[] imageBytes;
         MiniOrm _orm = new MiniOrm();
@@ -99,6 +99,13 @@ namespace MaliyeHesaplama.userControls
         public void Yeni()
         {
             FormVerileriniTemizle();
+        }
+
+        private void btnSiparisListesi_Click(object sender, RoutedEventArgs e)
+        {
+            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.Siparis);
+            win.ShowDialog();
+            txtSiparisNo.Text = win.OrderNo;// order no gelmedi - burdab ve diğer alanlardan devam edilecek
         }
 
         public void Kaydet()

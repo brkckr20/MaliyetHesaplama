@@ -678,12 +678,37 @@ namespace MaliyeHesaplama.mvvm
         }
         /********************************* Kumaştaki Atkı Raporunu 1 Cm'e Dönüştürme  **********************************/
         [ObservableProperty]
-        private double birMtAtkiSayisi,cmSiklik;
+        private double birMtAtkiSayisi, cmSiklik, rapordakiAtkiSayisi, birinciAtkiSayisi, ikinciAtkiSayisi, ucuncuAtkiSayisi, birinciAtkiSayisiFormul, ikinciAtkiSayisiFormul, ucuncuAtkiSayisiFormul;
         partial void OnCmSiklikChanged(double value)
         {
             BirMtAtkiSayisi = CmSiklik * 100;
         }
-        
-
+        partial void OnBirMtAtkiSayisiChanged(double value)
+        {
+            BirinciAtkiSayisiFormul = (BirMtAtkiSayisi / RapordakiAtkiSayisi) * BirinciAtkiSayisi / 100;
+            IkinciAtkiSayisiFormul = (BirMtAtkiSayisi / RapordakiAtkiSayisi) * IkinciAtkiSayisi / 100;
+            UcuncuAtkiSayisiFormul = (BirMtAtkiSayisi / RapordakiAtkiSayisi) * UcuncuAtkiSayisi / 100;
+        }
+        partial void OnRapordakiAtkiSayisiChanged(double value)
+        {
+            BirinciAtkiSayisiFormul = (BirMtAtkiSayisi / RapordakiAtkiSayisi) * BirinciAtkiSayisi / 100;
+            IkinciAtkiSayisiFormul = (BirMtAtkiSayisi / RapordakiAtkiSayisi) * IkinciAtkiSayisi / 100;
+            UcuncuAtkiSayisiFormul = (BirMtAtkiSayisi / RapordakiAtkiSayisi) * UcuncuAtkiSayisi / 100;
+        }
+        partial void OnBirinciAtkiSayisiChanged(double value)
+        {
+            BirinciAtkiSayisiFormul = (BirMtAtkiSayisi / RapordakiAtkiSayisi) * BirinciAtkiSayisi / 100;
+            RapordakiAtkiSayisi = BirinciAtkiSayisi + IkinciAtkiSayisi + UcuncuAtkiSayisi;
+        }
+        partial void OnIkinciAtkiSayisiChanged(double value)
+        {
+            RapordakiAtkiSayisi = BirinciAtkiSayisi + IkinciAtkiSayisi + UcuncuAtkiSayisi;
+            IkinciAtkiSayisiFormul = (BirMtAtkiSayisi / RapordakiAtkiSayisi) * IkinciAtkiSayisi / 100;
+            UcuncuAtkiSayisiFormul = (BirMtAtkiSayisi / RapordakiAtkiSayisi) * UcuncuAtkiSayisi / 100;
+        }
+        partial void OnUcuncuAtkiSayisiChanged(double value)
+        {
+            RapordakiAtkiSayisi = BirinciAtkiSayisi + IkinciAtkiSayisi + UcuncuAtkiSayisi;
+        }
     }
 }
