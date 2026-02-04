@@ -13,17 +13,19 @@ namespace MaliyeHesaplama.wins
         private int _receiptType;
         private ICollectionView _collectionView;
         public bool secimYapildi = false, _withWareHouse, _onayli;
-        public int Id, CompanyId, _depoId;
-        public string ReceiptNo, CompanyName, Authorized, Maturity, CustomerOrderNo, Explanation,WareHouseCode,WareHouseName,OrderNo;
+        public int Id, CompanyId, _depoId, _inventoryId, _receiptItemId; // inventoryId alanı maliyet hesaplama için eklendi
+        public string ReceiptNo, CompanyName, CompanyCode, Authorized, Maturity, CustomerOrderNo, Explanation, WareHouseCode, WareHouseName, OrderNo, _inventoryCode, _inventoryName;// _inventoryCode ve _inventoryName alanı maliyet hesaplama için eklendi
         FilterGridHelpers fgh;
+        string _condition;
 
-        public winFisHareketleriListesi(int depoId, Enums.Receipt receipt, bool withWarehouse = true)
+        public winFisHareketleriListesi(int depoId, Enums.Receipt receipt, bool withWarehouse = true, string condition = "")
         {
             InitializeComponent();
             this._receiptType = Convert.ToInt32(receipt);
             this._depoId = depoId;
             this._withWareHouse = withWarehouse;
             fgh = new FilterGridHelpers(grid, "Sipariş Listesi", "grid");
+            _condition = condition;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -52,7 +54,7 @@ namespace MaliyeHesaplama.wins
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            _tumHareketler = _orm.GetMovementList<Receipt>($"R.ReceiptType = {_receiptType}");
+            _tumHareketler = _orm.GetMovementList<Receipt>($"R.ReceiptType = {_receiptType} and {_condition}");
             _collectionView = CollectionViewSource.GetDefaultView(_tumHareketler);
             grid.ItemsSource = _collectionView;
 
@@ -74,6 +76,7 @@ namespace MaliyeHesaplama.wins
                 _Date = record.ReceiptDate;
                 CompanyId = record.CompanyId;
                 CompanyName = record.CompanyName;
+                CompanyCode = record.CompanyCode;
                 Authorized = record.Authorized;
                 DuaDate = record.DuaDate;
                 Maturity = record.Maturity.ToString();
@@ -84,6 +87,10 @@ namespace MaliyeHesaplama.wins
                 WareHouseName = record.WareHouseName;
                 OrderNo = record.OrderNo;
                 _onayli = record.Approved;
+                _inventoryId = record.InventoryId;
+                _inventoryCode = record.InventoryCode;
+                _inventoryName = record.InventoryName;
+                _receiptItemId = record.ReceiptItemId; // maliyet hesaplamada ilgili sipariş satırını MaliyetCalisildi = True yapmak için eklendi
                 HareketlerListesi = _tumHareketler.Where(x => x.Id == Id).ToList();
                 Close();
             }

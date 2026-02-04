@@ -1,10 +1,8 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
-using Microsoft.Win32;
 using System.Globalization;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 
@@ -12,7 +10,7 @@ namespace MaliyeHesaplama.userControls
 {
     public partial class Uc_MaliyetHesaplama : System.Windows.Controls.UserControl, IPageCommands
     {
-        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0, InventoryReceiptId, OrderReceiptId, OrderInventoryId;
+        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0, InventoryReceiptId, OrderReceiptId, OrderReceiptItemId;
         bool _receteOlacak = false;
         private byte[] imageBytes;
         MiniOrm _orm = new MiniOrm();
@@ -103,9 +101,17 @@ namespace MaliyeHesaplama.userControls
 
         private void btnSiparisListesi_Click(object sender, RoutedEventArgs e)
         {
-            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.Siparis);
+            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.Siparis,true, "ISNULL(RI.IsCostCalculated,0) = 0");
             win.ShowDialog();
-            txtSiparisNo.Text = win.OrderNo;// order no gelmedi - burdab ve diğer alanlardan devam edilecek
+            OrderReceiptId = win.Id;
+            txtSiparisNo.Text = win.ReceiptNo;
+            CompanyId = win.CompanyId;
+            txtFirmaUnvan.Content = win.CompanyName;
+            txtFirmaKodu.Text = win.CompanyCode;
+            InventoryId = win._inventoryId;
+            txtMalzemeKodu.Text = win._inventoryCode;
+            lblMalzemeAdi.Content = win._inventoryName;
+            OrderReceiptItemId = win._receiptItemId; // KAYIT SONRASI LİSTELEME TAMAMLANDI (YUKARIDAKİ CONDİTİON) - SİPARİŞ SEÇTİKTEN SONRA İLGİLİ BUTONLARIN PASİFİZE EDİLMESİNDEN DEVAM
         }
 
         public void Kaydet()
@@ -123,6 +129,7 @@ namespace MaliyeHesaplama.userControls
                 dict1.Add("InsertedDate", DateTime.Now);
                 dict1.Add("InsertedBy", Properties.Settings.Default.RememberUserId);
                 _insertedDate = DateTime.Now;
+                _orm.Save("ReceiptItem", new Dictionary<string, object> { { "IsCostCalculated", true }, { "Id", OrderReceiptItemId } });
             }
             else
             {

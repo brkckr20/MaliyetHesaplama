@@ -53,6 +53,9 @@ namespace MaliyeHesaplama.models
         [Display(Name = "Firma Adı")]
         public string CompanyName { get; set; }
         [NotMapped]
+        [Display(Name = "Firma Kodu")]
+        public string CompanyCode { get; set; }
+        [NotMapped]
         [Display(Name = "Kalem Kayıt No")]
         public int ReceiptItemId { get; set; }
         [NotMapped]
@@ -120,7 +123,7 @@ namespace MaliyeHesaplama.models
         public decimal RowAmount { get; set; }
         [NotMapped]
         [Display(Name = "Teslim Alan")]
-        public string Receiver{ get; set; }
+        public string Receiver { get; set; }
 
-        }
+    }
 }

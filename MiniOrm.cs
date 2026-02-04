@@ -167,6 +167,7 @@ public class MiniOrm
                             ISNULL(R.ReceiptDate,'') [ReceiptDate],	
                             ISNULL(C.Id,'') [CompanyId],
                             ISNULL(C.CompanyName,'') [CompanyName],
+                            ISNULL(C.CompanyCode,'') [CompanyCode],
                             ISNULL(R.Authorized,'') [Authorized],
                             ISNULL(R.DuaDate,'') [DuaDate],
                             ISNULL(R.Maturity,'') [Maturity],
