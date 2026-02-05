@@ -1,5 +1,6 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
+using MaliyeHesaplama.mvvm;
 using System.Globalization;
 using System.IO;
 using System.Windows;
@@ -101,7 +102,7 @@ namespace MaliyeHesaplama.userControls
 
         private void btnSiparisListesi_Click(object sender, RoutedEventArgs e)
         {
-            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.Siparis,true, "ISNULL(RI.IsCostCalculated,0) = 0");
+            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.Siparis, true, "ISNULL(RI.IsCostCalculated,0) = 0");
             win.ShowDialog();
             OrderReceiptId = win.Id;
             txtSiparisNo.Text = win.ReceiptNo;
@@ -111,7 +112,15 @@ namespace MaliyeHesaplama.userControls
             InventoryId = win._inventoryId;
             txtMalzemeKodu.Text = win._inventoryCode;
             lblMalzemeAdi.Content = win._inventoryName;
-            OrderReceiptItemId = win._receiptItemId; // KAYIT SONRASI LİSTELEME TAMAMLANDI (YUKARIDAKİ CONDİTİON) - SİPARİŞ SEÇTİKTEN SONRA İLGİLİ BUTONLARIN PASİFİZE EDİLMESİNDEN DEVAM
+            OrderReceiptItemId = win._receiptItemId;
+            /****/
+            txtFirmaKodu.IsEnabled = false;
+            btnFirmaListesi.IsEnabled = false;
+            txtMalzemeKodu.IsEnabled = false;
+            btnMalzemeListesi.IsEnabled = false;
+            //
+            ((MainViewModel)DataContext).SiparisMetresi = Convert.ToDouble(win._netMeter);
+
         }
 
         public void Kaydet()

@@ -50,7 +50,7 @@
                             <TextBox x:Name="txtFirmaKodu" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
                             <Button Click="btnFirmaListesi_Click" x:Name="btnFirmaListesi" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
                             <Label x:Name="txtFirmaUnvan" Content=""/>
-                        </DockPanel>                        
+                        </DockPanel>
                         <DockPanel Margin="0,2,0,0">
                             <TextBlock VerticalAlignment="Center" Width="70" Text="Ürün Kodu :"/>
                             <TextBox x:Name="txtMalzemeKodu" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
@@ -62,7 +62,7 @@
                             <TextBox x:Name="txtReceteNo" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
                             <Button x:Name="btnReceteListesi" Click="btnReceteListesi_Click" Margin="0,.5,0,0" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
                             <Label Content=""/>
-                        </DockPanel>                        
+                        </DockPanel>
                     </StackPanel>
                 </Border>
                 <Border Grid.Column="1">
@@ -289,11 +289,11 @@
                                                     <TextBlock Text="Gramaj Hesaplama" Background="LightGray" Margin="0,0,0,2"/>
                                                     <DockPanel Margin="0,0,0,2">
                                                         <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                                        <TextBox x:Name="txtCozgu1Gramaj" Text="{Binding Cozgu1Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                                        <TextBox x:Name="txtCozgu1Gramaj" Text="{Binding Cozgu1Gramaj,Mode=TwoWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
                                                     </DockPanel>
                                                     <DockPanel Margin="0,0,0,2">
                                                         <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
-                                                        <TextBox x:Name="txtCozgu2Gramaj" Text="{Binding Cozgu2Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                                        <TextBox x:Name="txtCozgu2Gramaj" Text="{Binding Cozgu2Gramaj,Mode=TwoWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
                                                     </DockPanel>
                                                     <DockPanel Margin="0,0,0,2">
                                                         <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 1 :"/>
@@ -301,19 +301,19 @@
                                                     </DockPanel>
                                                     <DockPanel Margin="0,0,0,2">
                                                         <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                                        <TextBox x:Name="txtAtki2Gramaj" Text="{Binding Atki2Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                                        <TextBox x:Name="txtAtki2Gramaj" Text="{Binding Atki2Gramaj,Mode=TwoWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
                                                     </DockPanel>
                                                     <DockPanel Margin="0,0,0,2">
                                                         <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
-                                                        <TextBox x:Name="txtAtki3Gramaj" Text="{Binding Atki3Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                                        <TextBox x:Name="txtAtki3Gramaj" Text="{Binding Atki3Gramaj,Mode=TwoWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
                                                     </DockPanel>
                                                     <DockPanel Margin="0,0,0,2">
                                                         <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 4 :"/>
-                                                        <TextBox x:Name="txtAtki4Gramaj" Text="{Binding Atki4Gramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                                        <TextBox x:Name="txtAtki4Gramaj" Text="{Binding Atki4Gramaj,Mode=TwoWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
                                                     </DockPanel>
                                                     <DockPanel Margin="0,0,0,2">
                                                         <TextBlock VerticalAlignment="Center" Width="60" Text="Toplam :"/>
-                                                        <TextBox x:Name="txtToplamGramaj" Text="{Binding ToplamGramaj,Mode=OneWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
+                                                        <TextBox x:Name="txtToplamGramaj" Text="{Binding ToplamGramaj,Mode=TwoWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" Margin="2,0"/>
                                                         <TextBlock FontSize="10" VerticalAlignment="Center" Text="M.Tül/Gr"/>
                                                     </DockPanel>
                                                 </StackPanel>
@@ -772,11 +772,11 @@
                                 <StackPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Sipariş Metresi "/>
-                                        <TextBox Width="70"/>
+                                        <TextBox x:Name="txtSiparisMetresi" Width="70" Text="{Binding SiparisMetresi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:N2}}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Atkı 1 (Kg) "/>
-                                        <TextBox Width="70"/>
+                                        <TextBox Width="70" Text="{Binding Atki1IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Atkı 2 (Kg) "/>

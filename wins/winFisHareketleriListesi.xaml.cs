@@ -17,6 +17,7 @@ namespace MaliyeHesaplama.wins
         public string ReceiptNo, CompanyName, CompanyCode, Authorized, Maturity, CustomerOrderNo, Explanation, WareHouseCode, WareHouseName, OrderNo, _inventoryCode, _inventoryName;// _inventoryCode ve _inventoryName alanı maliyet hesaplama için eklendi
         FilterGridHelpers fgh;
         string _condition;
+        public decimal _netMeter;
 
         public winFisHareketleriListesi(int depoId, Enums.Receipt receipt, bool withWarehouse = true, string condition = "")
         {
@@ -91,6 +92,7 @@ namespace MaliyeHesaplama.wins
                 _inventoryCode = record.InventoryCode;
                 _inventoryName = record.InventoryName;
                 _receiptItemId = record.ReceiptItemId; // maliyet hesaplamada ilgili sipariş satırını MaliyetCalisildi = True yapmak için eklendi
+                _netMeter = record.NetMeter;
                 HareketlerListesi = _tumHareketler.Where(x => x.Id == Id).ToList();
                 Close();
             }

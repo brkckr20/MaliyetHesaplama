@@ -186,6 +186,7 @@ namespace MaliyeHesaplama.mvvm
             Atki1IpMal = (Atki1IpBoy + Atki1IpFiy) * Atki1Gramaj;
             AtkiGr = (Atki1Gramaj * BoydanCekmesi);
             AtkiGr = (Atki1Gramaj * (BoydanCekmesi / 100)) + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
+            Atki1IplikHesabi = Atki1Gramaj * 1.07 * 1500;
         }
         partial void OnAtki2GramajChanged(double value)
         {
@@ -709,6 +710,13 @@ namespace MaliyeHesaplama.mvvm
         partial void OnUcuncuAtkiSayisiChanged(double value)
         {
             RapordakiAtkiSayisi = BirinciAtkiSayisi + IkinciAtkiSayisi + UcuncuAtkiSayisi;
+        }
+        /********************************* Siparişe Göre İplik Hesaplama  **********************************/
+        [ObservableProperty]
+        private double siparisMetresi, atki1IplikHesabi, atki2IplikHesabi, atki3IplikHesabi, atki4IplikHesabi;
+        partial void OnSiparisMetresiChanged(double value)
+        {
+            Atki1IplikHesabi = Atki1Gramaj * 1.07 * SiparisMetresi; // atki 2 - 3 - 4 'den devam edilecek - 05.02.2026
         }
     }
 }
