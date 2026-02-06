@@ -301,7 +301,7 @@
                                                     </DockPanel>
                                                     <DockPanel Margin="0,0,0,2">
                                                         <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 2 :"/>
-                                                        <TextBox x:Name="txtAtki2Gramaj" Text="{Binding Atki2Gramaj,Mode=TwoWay, StringFormat=N3}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
+                                                        <TextBox x:Name="txtAtki2Gramaj" Text="{Binding Atki2Gramaj,Mode=TwoWay, StringFormat=N3, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="44" HorizontalAlignment="Left" Margin="2,0"/>
                                                     </DockPanel>
                                                     <DockPanel Margin="0,0,0,2">
                                                         <TextBlock VerticalAlignment="Center" Width="60" Text="Atkı 3 :"/>
@@ -780,15 +780,15 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Atkı 2 (Kg) "/>
-                                        <TextBox Width="70"/>
+                                        <TextBox Width="70" Text="{Binding Atki2IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Atkı 3 (Kg) "/>
-                                        <TextBox Width="70"/>
+                                        <TextBox Width="70" Text="{Binding Atki3IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Atkı 4 (Kg) "/>
-                                        <TextBox Width="70"/>
+                                        <TextBox Width="70" Text="{Binding Atki4IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Çözgü 1 (Kg) "/>

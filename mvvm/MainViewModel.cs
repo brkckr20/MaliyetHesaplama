@@ -186,25 +186,28 @@ namespace MaliyeHesaplama.mvvm
             Atki1IpMal = (Atki1IpBoy + Atki1IpFiy) * Atki1Gramaj;
             AtkiGr = (Atki1Gramaj * BoydanCekmesi);
             AtkiGr = (Atki1Gramaj * (BoydanCekmesi / 100)) + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
-            Atki1IplikHesabi = Atki1Gramaj * 1.07 * 1500;
+            Atki1IplikHesabi = Atki1Gramaj * 1.07 * SiparisMetresi;
         }
         partial void OnAtki2GramajChanged(double value)
         {
             ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
             Atki2IpMal = (Atki2IpBoy + Atki2IpFiy) * Atki2Gramaj;
             AtkiGr = (Atki1Gramaj * (BoydanCekmesi / 100)) + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
+            Atki2IplikHesabi = Atki2Gramaj * 1.07 * SiparisMetresi;
         }
         partial void OnAtki3GramajChanged(double value)
         {
             ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
             Atki3IpMal = (Atki3IpBoy + Atki3IpFiy) * Atki3Gramaj;
             AtkiGr = (Atki1Gramaj * (BoydanCekmesi / 100)) + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
+            Atki3IplikHesabi = Atki3Gramaj * 1.07 * SiparisMetresi;
         }
         partial void OnAtki4GramajChanged(double value)
         {
             ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
             Atki4IpMal = (Atki4IpBoy + Atki4IpFiy) * Atki4Gramaj;
             AtkiGr = (Atki1Gramaj * (BoydanCekmesi / 100)) + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
+            Atki4IplikHesabi = Atki4Gramaj * 1.07 * SiparisMetresi;
         }
         partial void OnToplamGramajChanged(double value)
         {
@@ -716,7 +719,10 @@ namespace MaliyeHesaplama.mvvm
         private double siparisMetresi, atki1IplikHesabi, atki2IplikHesabi, atki3IplikHesabi, atki4IplikHesabi;
         partial void OnSiparisMetresiChanged(double value)
         {
-            Atki1IplikHesabi = Atki1Gramaj * 1.07 * SiparisMetresi; // atki 2 - 3 - 4 'den devam edilecek - 05.02.2026
+            Atki1IplikHesabi = Atki1Gramaj * 1.07 * SiparisMetresi; // Çözgü 1 - 2'den devam edilecek - 06.02.2026
+            Atki2IplikHesabi = Atki2Gramaj * 1.07 * SiparisMetresi;
+            Atki3IplikHesabi = Atki3Gramaj * 1.07 * SiparisMetresi;
+            Atki4IplikHesabi = Atki4Gramaj * 1.07 * SiparisMetresi;
         }
     }
 }
