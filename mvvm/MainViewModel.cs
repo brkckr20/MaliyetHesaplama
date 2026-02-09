@@ -723,6 +723,7 @@ namespace MaliyeHesaplama.mvvm
             Atki2IplikHesabi = Atki2Gramaj * 1.07 * SiparisMetresi;
             Atki3IplikHesabi = Atki3Gramaj * 1.07 * SiparisMetresi;
             Atki4IplikHesabi = Atki4Gramaj * 1.07 * SiparisMetresi;
+            string bos = "sirf github boş kalmasın diye eklendi - 06.02.2026"
         }
     }
 }
