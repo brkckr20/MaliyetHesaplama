@@ -240,7 +240,7 @@
                                                     <TextBlock Text="Tel Sayıları" Background="LightGray" Margin="0,0,0,2"/>
                                                     <DockPanel Margin="0,0,0,2">
                                                         <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 1 :"/>
-                                                        <TextBox x:Name="txtCozgu1TelSay" Text="{Binding Cozgu1TelSay, Mode=OneWay}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
+                                                        <TextBox x:Name="txtCozgu1TelSay" Text="{Binding Cozgu1TelSay, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" FontSize="11" TextAlignment="Center" Width="36" Margin="2,0"/>
                                                     </DockPanel>
                                                     <DockPanel Margin="0,0,0,2">
                                                         <TextBlock VerticalAlignment="Center" Width="60" Text="Çözgü 2 :"/>
@@ -792,15 +792,15 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Çözgü 1 (Kg) "/>
-                                        <TextBox Width="70"/>
+                                        <TextBox Width="70" Text="{Binding Cozgu1IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Çözgü 2 (Kg) "/>
-                                        <TextBox Width="70"/>
+                                        <TextBox Width="70" Text="{Binding Cozgu2IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Çözgü Çekmesi %"/>
-                                        <TextBox Width="70"/>
+                                        <TextBox Width="70" Text="{Binding CozguCekmesi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Grid>
@@ -813,12 +813,12 @@
                                 <StackPanel Grid.Column="0">
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Tel Sayısı "/>
-                                        <TextBox />
+                                        <TextBox Text="{Binding TelSayisi, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Tahar Maliyeti "/>
-                                        <TextBox Width="70"/>
-                                        <TextBox Width="70"/>
+                                        <TextBox Width="70" Text="{Binding TaharMaliyeti, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
+                                        <TextBox Width="70" Text="{Binding TaharMaliyetTutar, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Lamel Maliyeti "/>

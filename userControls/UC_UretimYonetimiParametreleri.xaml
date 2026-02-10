@@ -83,8 +83,12 @@
                         <GroupBox Grid.Row="3" Header="Maliyet Hesaplama" Foreground="Black">
                             <StackPanel>
                                 <DockPanel HorizontalAlignment="Left">
-                                    <Label Content="Haşıl Dökmesi : "/>
+                                    <Label Content="Haşıl Dökmesi : " Width="110"/>
                                     <TextBox x:Name="txtHasilDokmesi" Width="50" VerticalContentAlignment="Center"/>
+                                </DockPanel>
+                                <DockPanel HorizontalAlignment="Left">
+                                    <Label Content="Çözgü Çekmesi %: " Width="110"/>
+                                    <TextBox x:Name="txtCozguCekmesi" Width="50" VerticalContentAlignment="Center"/>
                                 </DockPanel>
                             </StackPanel>
                         </GroupBox>

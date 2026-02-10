@@ -33,6 +33,7 @@ namespace MaliyeHesaplama.userControls
             }
             txtDovizKurlari.Text = data.DovizKurlari;
             txtHasilDokmesi.Text = data.HasilDokmesi.ToString();
+            txtCozguCekmesi.Text = data.CozguCekmesi_.ToString();
         }
 
         public void Yeni()
@@ -54,6 +55,7 @@ namespace MaliyeHesaplama.userControls
                 { "MalzemeGirisOperasyonTipleri", txtOperasyonTipiMG.Text },
                 { "MalzemeCikisOperasyonTipleri", txtOperasyonTipiMC.Text },
                 { "HasilDokmesi", txtHasilDokmesi.Text },
+                //{ "CozguCekmesi_", txtCozguCekmesi.Text }, // bu alan için hata veriyor - kontrol edilecek 10.02.2026
             };
             _orm.Save("ProductionManagementParams", dict);
             Bildirim.Bilgilendirme2("Kayıt işlemi başarıyla gerçekleştirildi.");
@@ -61,27 +63,27 @@ namespace MaliyeHesaplama.userControls
 
         public void Sil()
         {
-            
+
         }
 
         public void Yazdir()
         {
-            
+
         }
 
         public void Ileri()
         {
-            
+
         }
 
         public void Geri()
         {
-            
+
         }
 
         public void Listele()
         {
-            
+
         }
     }
 }

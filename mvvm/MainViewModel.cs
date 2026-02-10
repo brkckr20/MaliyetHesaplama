@@ -25,6 +25,7 @@ namespace MaliyeHesaplama.mvvm
             BelirlenenFiyatText = "0.00";
             AcButtonCommand = new RelayCommand<object>(OnAcButon);
             HasilDokmesi = Convert.ToDouble(_orm.GetById<dynamic>("ProductionManagementParams", 1).HasilDokmesi);
+            CozguCekmesi = Convert.ToDouble(_orm.GetById<dynamic>("ProductionManagementParams", 1).CozguCekmesi_);
         }
         private void OnAcButon(object obj)
         {
@@ -163,7 +164,11 @@ namespace MaliyeHesaplama.mvvm
         /********************************* ÜRETİM BİLGİLERİ - TEL SAYILARI **********************************/
         [ObservableProperty] //değişkenler
         private double cozgu1TelSay, cozgu2TelSay, atki1TelSay, atki2TelSay, atki3TelSay, atki4TelSay;
-        partial void OnCozgu1TelSayChanged(double value) => Cozgu1Gramaj = ((HamBoy + BoySacak) * Cozgu1TelSay * (60 / Cozgu1IpBilSonuc) * 1.05 / 10000000);
+        partial void OnCozgu1TelSayChanged(double value)
+        {
+            Cozgu1Gramaj = ((HamBoy + BoySacak) * Cozgu1TelSay * (60 / Cozgu1IpBilSonuc) * 1.05 / 10000000);
+            TelSayisi = Cozgu1TelSay;
+        }
         partial void OnCozgu2TelSayChanged(double value) => Cozgu2Gramaj = (HamBoy * Cozgu2TelSay * (60 / Cozgu2IpBilSonuc) * 1.05 / 10000000);
 
         /********************************* ÜRETİM HESAPLAMA - GRAMAJ HESAPLAMA **********************************/
@@ -174,11 +179,14 @@ namespace MaliyeHesaplama.mvvm
             ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
             Cozgu1IpMal = (Cozgu1IpBoy + Cozgu1IpFiy) * Cozgu1Gramaj;
             CozguGr = (Cozgu1Gramaj * (BoydanCekmesi / 100)) + Cozgu1Gramaj;
+            Cozgu1IplikHesabi = (Cozgu1Gramaj * (CozguCekmesi / 100) + Cozgu1Gramaj) * SiparisMetresi;
+
         }
         partial void OnCozgu2GramajChanged(double value)
         {
             ToplamGramaj = Cozgu1Gramaj + Cozgu2Gramaj + Atki1Gramaj + Atki2Gramaj + Atki3Gramaj + Atki4Gramaj;
             Cozgu2IpMal = (Cozgu2IpBoy + Cozgu2IpFiy) * Cozgu2Gramaj;
+            Cozgu2IplikHesabi = (Cozgu2Gramaj * (CozguCekmesi / 100) + Cozgu2Gramaj) * SiparisMetresi;
         }
         partial void OnAtki1GramajChanged(double value)
         {
@@ -716,14 +724,24 @@ namespace MaliyeHesaplama.mvvm
         }
         /********************************* Siparişe Göre İplik Hesaplama  **********************************/
         [ObservableProperty]
-        private double siparisMetresi, atki1IplikHesabi, atki2IplikHesabi, atki3IplikHesabi, atki4IplikHesabi;
+        private double siparisMetresi, atki1IplikHesabi, atki2IplikHesabi, atki3IplikHesabi, atki4IplikHesabi, cozgu1IplikHesabi, cozgu2IplikHesabi, cozguCekmesi;
         partial void OnSiparisMetresiChanged(double value)
         {
             Atki1IplikHesabi = Atki1Gramaj * 1.07 * SiparisMetresi; // Çözgü 1 - 2'den devam edilecek - 06.02.2026
             Atki2IplikHesabi = Atki2Gramaj * 1.07 * SiparisMetresi;
             Atki3IplikHesabi = Atki3Gramaj * 1.07 * SiparisMetresi;
             Atki4IplikHesabi = Atki4Gramaj * 1.07 * SiparisMetresi;
-            string bos = "sirf github boş kalmasın diye eklendi - 06.02.2026"
+            Cozgu1IplikHesabi = (Cozgu1Gramaj * (CozguCekmesi / 100) + Cozgu1Gramaj) * SiparisMetresi;
+            Cozgu2IplikHesabi = (Cozgu2Gramaj * (CozguCekmesi / 100) + Cozgu2Gramaj) * SiparisMetresi;
         }
+        /********************************* Tahar Maliyeti  **********************************/
+        [ObservableProperty]
+        private double telSayisi, taharMaliyeti, taharMaliyetTutar;
+        private string taharMaliyetText;
+        partial void OnTaharMaliyetiChanged(double value)
+        {
+            TaharMaliyetTutar = TaharMaliyeti * TelSayisi; // virgül ile kayıt yapılamıyor - değiştirilmeli - 10.02.2026
+        }
+
     }
 }
