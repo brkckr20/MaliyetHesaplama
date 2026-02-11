@@ -737,11 +737,19 @@ namespace MaliyeHesaplama.mvvm
         /********************************* Tahar Maliyeti  **********************************/
         [ObservableProperty]
         private double telSayisi, taharMaliyeti, taharMaliyetTutar;
+        [ObservableProperty]
         private string taharMaliyetText;
-        partial void OnTaharMaliyetiChanged(double value)
+        partial void OnTaharMaliyetTextChanged(string value)
         {
-            TaharMaliyetTutar = TaharMaliyeti * TelSayisi; // virgül ile kayıt yapılamıyor - değiştirilmeli - 10.02.2026
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    TaharMaliyeti = d;
+                    TaharMaliyetTutar = TaharMaliyeti * TelSayisi; // lamel maliyetinden devam et
+                }
+            }
         }
-
     }
 }

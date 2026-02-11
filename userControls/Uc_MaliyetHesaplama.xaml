@@ -817,7 +817,7 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Tahar Maliyeti "/>
-                                        <TextBox Width="70" Text="{Binding TaharMaliyeti, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
+                                        <TextBox Width="70" Text="{Binding TaharMaliyetText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                                         <TextBox Width="70" Text="{Binding TaharMaliyetTutar, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
                                     </DockPanel>
                                     <DockPanel>
