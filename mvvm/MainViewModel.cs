@@ -135,24 +135,28 @@ namespace MaliyeHesaplama.mvvm
             Atki1TelSay = HamBoy * Atki1Siklik;
             Atki1Gramaj = (Atki1Siklik * (TarakEn + EnSacak) / 100 * (HamBoy / 100) * (60 / Atki1IpBilSonuc) * 1.05) / 1000;
             DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
+            TezgahYatisGunSayisiTutar = ((300 * 20 * 60) / ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 100) * KarliDikUr) * TezgahYatisGunSayisi;
         }
         partial void OnAtki2SiklikChanged(double value)
         {
             Atki2TelSay = HamBoy * Atki2Siklik;
             Atki2Gramaj = (Atki2Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki2IpBilSonuc) * 1.05) / 1000;
             DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
+            TezgahYatisGunSayisiTutar = ((300 * 20 * 60) / ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 100) * KarliDikUr) * TezgahYatisGunSayisi;
         }
         partial void OnAtki3SiklikChanged(double value)
         {
             Atki3TelSay = HamBoy * Atki3Siklik;
             Atki3Gramaj = (Atki3Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki3IpBilSonuc) * 1.05) / 1000;
             DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
+            TezgahYatisGunSayisiTutar = ((300 * 20 * 60) / ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 100) * KarliDikUr) * TezgahYatisGunSayisi;
         }
         partial void OnAtki4SiklikChanged(double value)
         {
             Atki4TelSay = HamBoy * Atki4Siklik;
             Atki4Gramaj = (Atki4Siklik * ((TarakEn + EnSacak) / 100) * (HamBoy / 100) * (60 / Atki4IpBilSonuc) * 1.05) / 1000;
             DokumaDokMal = (((HamBoy + BoySacak) / 100) * ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 1.05) * AtkiUrFiy) / KurUrFiy;
+            TezgahYatisGunSayisiTutar = ((300 * 20 * 60) / ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 100) * KarliDikUr) * TezgahYatisGunSayisi;
         }
 
         partial void OnMamulEnChanged(double value)
@@ -636,6 +640,7 @@ namespace MaliyeHesaplama.mvvm
         {
             KarliTLDikUr = KarliDikUr * KurUrFiy;
             KdvliDikUr = (KarliDikUr * (KdvUrFiy / 100)) + KarliDikUr;
+            TezgahYatisGunSayisiTutar = ((300 * 20 * 60) / ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 100) * KarliDikUr) * TezgahYatisGunSayisi;
         }
         partial void OnKdvliDikUrChanged(double value)
         {
@@ -736,9 +741,9 @@ namespace MaliyeHesaplama.mvvm
         }
         /********************************* Tahar Maliyeti  **********************************/
         [ObservableProperty]
-        private double telSayisi, taharMaliyeti, taharMaliyetTutar;
+        private double telSayisi, taharMaliyeti, taharMaliyetTutar, lamelMaliyeti, lamelMaliyetTutar, tezgahYatisGunSayisi, tezgahYatisGunSayisiTutar;
         [ObservableProperty]
-        private string taharMaliyetText;
+        private string taharMaliyetText, lamelMaliyetText;
         partial void OnTaharMaliyetTextChanged(string value)
         {
             if (!string.IsNullOrEmpty(value))
@@ -747,9 +752,25 @@ namespace MaliyeHesaplama.mvvm
                 if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
                 {
                     TaharMaliyeti = d;
-                    TaharMaliyetTutar = TaharMaliyeti * TelSayisi; // lamel maliyetinden devam et
+                    TaharMaliyetTutar = TaharMaliyeti * TelSayisi;
                 }
             }
+        }
+        partial void OnLamelMaliyetTextChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                string s = value.Replace(',', '.');
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
+                {
+                    LamelMaliyeti = d;
+                    LamelMaliyetTutar = LamelMaliyeti * TelSayisi;
+                }
+            }
+        }
+        partial void OnTezgahYatisGunSayisiChanged(double value)
+        {
+            TezgahYatisGunSayisiTutar = ((300 * 20 * 60) / ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 100) * KarliDikUr) * TezgahYatisGunSayisi; // hesaplamadı - diğer metotlardaki ile birlikte kontrol edilmelidir.
         }
     }
 }

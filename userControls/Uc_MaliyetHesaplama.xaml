@@ -822,13 +822,13 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Lamel Maliyeti "/>
-                                        <TextBox Width="70"/>
-                                        <TextBox Width="70"/>
+                                        <TextBox Width="70" Text="{Binding LamelMaliyetText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox Width="70" Text="{Binding LamelMaliyetTutar, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Tezgah Yatış Gün Sayısı "/>
-                                        <TextBox Width="70"/>
-                                        <TextBox Width="70"/>
+                                        <TextBox Width="70" Text="{Binding TezgahYatisGunSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox Width="70" Text="{Binding TezgahYatisGunSayisiTutar,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Toplam Maliyet "/>
