@@ -102,7 +102,7 @@ namespace MaliyeHesaplama.userControls
 
         private void btnSiparisListesi_Click(object sender, RoutedEventArgs e)
         {
-            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.Siparis, true, "ISNULL(RI.IsCostCalculated,0) = 0");
+            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.Siparis, true, " and ISNULL(RI.IsCostCalculated,0) = 0");
             win.ShowDialog();
             OrderReceiptId = win.Id;
             txtSiparisNo.Text = win.ReceiptNo;

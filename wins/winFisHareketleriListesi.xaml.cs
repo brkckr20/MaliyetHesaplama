@@ -55,7 +55,7 @@ namespace MaliyeHesaplama.wins
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            _tumHareketler = _orm.GetMovementList<Receipt>($"R.ReceiptType = {_receiptType} and {_condition}");
+            _tumHareketler = _orm.GetMovementList<Receipt>($"R.ReceiptType = {_receiptType} {_condition}");
             _collectionView = CollectionViewSource.GetDefaultView(_tumHareketler);
             grid.ItemsSource = _collectionView;
 

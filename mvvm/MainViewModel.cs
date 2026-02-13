@@ -521,6 +521,7 @@ namespace MaliyeHesaplama.mvvm
                     KurUrFiy = d;
                 }
             }
+            ToplamMaliyet = (((TaharMaliyeti + LamelMaliyeti) / KurUrFiy) + TezgahYatisGunSayisiTutar);
         }
         partial void OnPariteUrFiyTextChanged(string value)
         {
@@ -741,7 +742,7 @@ namespace MaliyeHesaplama.mvvm
         }
         /********************************* Tahar Maliyeti  **********************************/
         [ObservableProperty]
-        private double telSayisi, taharMaliyeti, taharMaliyetTutar, lamelMaliyeti, lamelMaliyetTutar, tezgahYatisGunSayisi, tezgahYatisGunSayisiTutar;
+        private double telSayisi, taharMaliyeti, taharMaliyetTutar, lamelMaliyeti, lamelMaliyetTutar, tezgahYatisGunSayisi, tezgahYatisGunSayisiTutar, toplamMaliyet;
         [ObservableProperty]
         private string taharMaliyetText, lamelMaliyetText;
         partial void OnTaharMaliyetTextChanged(string value)
@@ -770,7 +771,16 @@ namespace MaliyeHesaplama.mvvm
         }
         partial void OnTezgahYatisGunSayisiChanged(double value)
         {
-            TezgahYatisGunSayisiTutar = ((300 * 20 * 60) / ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 100) * KarliDikUr) * TezgahYatisGunSayisi; // hesaplamadı - diğer metotlardaki ile birlikte kontrol edilmelidir.
+            TezgahYatisGunSayisiTutar = ((300 * 20 * 60) / ((Atki1Siklik + Atki2Siklik + Atki3Siklik + Atki4Siklik) * 100) * KarliDikUr) * TezgahYatisGunSayisi;
+            ToplamMaliyet = (((TaharMaliyeti + LamelMaliyeti) / KurUrFiy) + TezgahYatisGunSayisiTutar);
+        }
+        partial void OnTaharMaliyetiChanged(double value)
+        {
+            ToplamMaliyet = (((TaharMaliyeti + LamelMaliyeti) / KurUrFiy) + TezgahYatisGunSayisiTutar);
+        }
+        partial void OnLamelMaliyetiChanged(double value)
+        {
+            ToplamMaliyet = (((TaharMaliyeti + LamelMaliyeti) / KurUrFiy) + TezgahYatisGunSayisiTutar); // toplam maliyet olmadı - kontrol edilecek
         }
     }
 }
