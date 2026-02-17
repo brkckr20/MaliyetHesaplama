@@ -743,7 +743,7 @@ namespace MaliyeHesaplama.mvvm
         }
         /********************************* Tahar Maliyeti  **********************************/
         [ObservableProperty]
-        private double telSayisi, taharMaliyeti, taharMaliyetTutar, lamelMaliyeti, lamelMaliyetTutar, tezgahYatisGunSayisi, tezgahYatisGunSayisiTutar, toplamMaliyet,siparisMetraji; // devam edilecek - 16.02.2025
+        private double telSayisi, taharMaliyeti, taharMaliyetTutar, lamelMaliyeti, lamelMaliyetTutar, tezgahYatisGunSayisi, tezgahYatisGunSayisiTutar, toplamMaliyet, siparisMetraji, birMtDusenMaliyet, birMtDusenMaliyetTL;
         [ObservableProperty]
         private string taharMaliyetText, lamelMaliyetText;
         partial void OnTaharMaliyetTextChanged(string value)
@@ -784,6 +784,18 @@ namespace MaliyeHesaplama.mvvm
         partial void OnLamelMaliyetiChanged(double value)
         {
             ToplamMaliyet = (((TaharMaliyetTutar + LamelMaliyetTutar) / KurUrFiy) + TezgahYatisGunSayisiTutar);
+        }
+        partial void OnToplamMaliyetChanged(double value)
+        {
+            BirMtDusenMaliyet = ToplamMaliyet / SiparisMetraji;
+        }
+        partial void OnSiparisMetrajiChanged(double value)
+        {
+            BirMtDusenMaliyet = ToplamMaliyet / SiparisMetraji;
+        }
+        partial void OnBirMtDusenMaliyetChanged(double value)
+        {
+            BirMtDusenMaliyetTL = BirMtDusenMaliyet * KurUrFiy;
         }
     }
 }

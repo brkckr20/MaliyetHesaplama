@@ -127,7 +127,7 @@ namespace MaliyeHesaplama.userControls
         {
             var dict1 = new Dictionary<string, object>
             {
-                { "Id", Id }, {"CompanyId",CompanyId}, {"Date",dpTarih.SelectedDate.Value}, {"InventoryId",this.InventoryId},{"OrderNo",txtFisNo.Text },{"RecipeId",InventoryReceiptId }
+                { "Id", Id }, {"CompanyId",CompanyId}, {"Date",dpTarih.SelectedDate.Value}, {"InventoryId",this.InventoryId},{"OrderNo",txtFisNo.Text },{"RecipeId",InventoryReceiptId }, {"ReceiptId", OrderReceiptId}
             };
             if (imageBytes != null && imageBytes.Length > 0)
             {
@@ -235,6 +235,8 @@ namespace MaliyeHesaplama.userControls
                 _updatedBy = win.UpdatedBy;
                 _insertedDate = win.InsertedDate;
                 _updatedDate = win.UpdatedDate;
+                OrderReceiptId = win.ReceiptId;
+                txtSiparisNo.Text = win.ReceiptNo; // listeleme yapıldı - diğer tablolar oluşturulmalı ve kayıt işlemlerine geçilmeli
                 if (win.ImageData != null)
                 {
                     using (var stream = new MemoryStream(win.ImageData))

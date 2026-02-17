@@ -836,12 +836,12 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Sipariş Metrajı "/>
-                                        <TextBox />
+                                        <TextBox Text="{Binding SiparisMetraji,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="1 Mt Düşen Maliyet"/>
-                                        <TextBox Width="70" Background="Red" Foreground="White"/>
-                                        <TextBox Width="70" Background="Yellow"/>
+                                        <TextBox Text="{Binding BirMtDusenMaliyet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=N2}" Width="70" Background="Red" Foreground="White"/>
+                                        <TextBox Text="{Binding BirMtDusenMaliyetTL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=N2}" Width="70" Background="Yellow"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Grid>

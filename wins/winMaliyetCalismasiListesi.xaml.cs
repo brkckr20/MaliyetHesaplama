@@ -10,8 +10,8 @@ namespace MaliyeHesaplama.wins
 {
     public partial class winMaliyetCalismasiListesi : Window
     {
-        public int Id, CompanyId, InventoryId, InsertedBy, UpdatedBy;
-        public string CompanyName, InventoryName, OrderNo, CompanyCode, InventoryCode;
+        public int Id, CompanyId, InventoryId, InsertedBy, UpdatedBy,ReceiptId;
+        public string CompanyName, InventoryName, OrderNo, CompanyCode, InventoryCode,ReceiptNo;
         public DateTime Date, InsertedDate, UpdatedDate;
         public bool secimYapildi = false;
         public byte[] ImageData;
@@ -64,6 +64,8 @@ namespace MaliyeHesaplama.wins
                 InsertedDate = record.InsertedDate;
                 UpdatedBy = record.UpdatedBy;
                 UpdatedDate = record.UpdatedDate;
+                ReceiptId = record.ReceiptId;
+                ReceiptNo = record.ReceiptNo;
                 ImageData = _orm.GetImage("Cost", "ProductImage", Id);
                 this.Close();
             }

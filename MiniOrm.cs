@@ -153,9 +153,12 @@ public class MiniOrm
 					,ISNULL(C.UpdatedBy,0) [UpdatedBy]
 					,ISNULL(C.InsertedDate,'') [InsertedDate]
 					,ISNULL(C.UpdatedDate,'') [UpdatedDate]
+					,ISNULL(C.ReceiptId,0) [ReceiptId]
+					,ISNULL(R.ReceiptNo,'') [ReceiptNo]
                     from Cost C 
                     left join Company CO on C.CompanyId = CO.Id
                     left join Inventory I on I.Id = C.InventoryId
+					left join Receipt R on R.Id = C.ReceiptId
                     order by ISNULL(C.OrderNo,'')";
         return _connection.Query<T>(sql);
     }

@@ -44,6 +44,12 @@ namespace MaliyeHesaplama.models
         [NotMapped]
         [Display(Name = "Malzeme Adı")]
         public string InventoryName { get; set; }
+        [NotMapped]
+        [Display(Name = "Order Id")]
+        public int ReceiptId { get; set; }
+        [NotMapped]
+        [Display(Name = "Sipariş_No")]
+        public string ReceiptNo { get; set; }
 
     }
 }
