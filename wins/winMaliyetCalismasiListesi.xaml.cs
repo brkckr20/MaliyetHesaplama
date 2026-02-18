@@ -17,8 +17,8 @@ namespace MaliyeHesaplama.wins
         public byte[] ImageData;
         private ICollectionView _collectionView;
         MiniOrm _orm = new MiniOrm();
-        private List<ColumnSetting> columnSettings;
-        private winKolonAyarlari ayarlarWindow;
+        //private List<ColumnSetting> columnSettings;
+        //private winKolonAyarlari ayarlarWindow;
 
         FilterGridHelpers fgh;
         public winMaliyetCalismasiListesi()

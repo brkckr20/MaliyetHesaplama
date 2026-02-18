@@ -18,11 +18,11 @@ namespace MaliyeHesaplama.wins
         public bool YarnDyed,IsUse;
 
         private readonly int CurrentUserId = Properties.Settings.Default.RememberUserId;
-        private List<ColumnSelector> _savedColumnSettings;
+        //private List<ColumnSelector> _savedColumnSettings;
         private ICollectionView collectionView;
         MiniOrm _orm = new MiniOrm();
-        private List<ColumnSetting> columnSettings;
-        private winKolonAyarlari ayarlarWindow;
+        //private List<ColumnSetting> columnSettings;
+        //private winKolonAyarlari ayarlarWindow;
         FilterGridHelpers fgh;
         public winMalzemeListesi(int InventoryType)
         {

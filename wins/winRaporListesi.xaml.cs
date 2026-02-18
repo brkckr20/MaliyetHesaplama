@@ -11,14 +11,14 @@ namespace MaliyeHesaplama.wins
     public partial class winRaporListesi : Window
     {
         MiniOrm _orm = new MiniOrm();
-        private ICollectionView _collectionView;
+        //private ICollectionView _collectionView;
         public string ReportName, FormName, Query1, Query2, Query3, Query4, Query5, DataSource1, DataSource2, DataSource3, DataSource4, DataSource5;
 
         private List<ColumnSetting> columnSettings;
         private const string SCREEN_NAME = "Rapor Listesi";
         private const string GRID_NAME = "gridRaporListesi";
         private int currentUserId = Properties.Settings.Default.RememberUserId;
-        private winKolonAyarlari ayarlarWindow;
+        //private winKolonAyarlari ayarlarWindow;
         FilterGridHelpers fgh;
 
         private void grid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

@@ -25,11 +25,11 @@ namespace MaliyeHesaplama.wins
         public string Kodu, Adi;
         public bool SecimYapildi = false, Kullanimda;
 
-        private List<ColumnSetting> columnSettings;
+        //private List<ColumnSetting> columnSettings;
         private const string SCREEN_NAME = "Depo Listesi";
         private const string GRID_NAME = "gridDepo";
         private int currentUserId = Properties.Settings.Default.RememberUserId;
-        private winKolonAyarlari ayarlarWindow;
+        //private winKolonAyarlari ayarlarWindow;
         FilterGridHelpers fgh;
         public winDepoListesi()
         {

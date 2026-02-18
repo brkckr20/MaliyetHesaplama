@@ -11,7 +11,7 @@ namespace MaliyeHesaplama.userControls
         MiniOrm _orm = new MiniOrm();
         public int CompanyId = 0, Id, WareHouseId;
         private DataTable table;
-        FilterGridHelpers fgh;
+        //FilterGridHelpers fgh;
         int _receiptType = Convert.ToInt32(Enums.Receipt.UretimGirisi);
         public UC_UretimGirisi()
         {

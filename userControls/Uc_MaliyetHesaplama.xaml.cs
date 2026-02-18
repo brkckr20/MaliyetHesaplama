@@ -236,7 +236,7 @@ namespace MaliyeHesaplama.userControls
                 _insertedDate = win.InsertedDate;
                 _updatedDate = win.UpdatedDate;
                 OrderReceiptId = win.ReceiptId;
-                txtSiparisNo.Text = win.ReceiptNo; // listeleme yapıldı - diğer tablolar oluşturulmalı ve kayıt işlemlerine geçilmeli
+                txtSiparisNo.Text = win.ReceiptNo; // listeleme yapıldı - diğer tablolar oluşturuldu - 18.02.2026
                 if (win.ImageData != null)
                 {
                     using (var stream = new MemoryStream(win.ImageData))

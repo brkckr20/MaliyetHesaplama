@@ -13,7 +13,7 @@ namespace MaliyeHesaplama.userControls
         bool _receteOlacak = false;
         string _iplikTurleri;
         int Id = 0, PrefixId, DokumaCinsiId, DesenId;
-        private DataTable table;
+        //private DataTable table;
         public List<string> KalemIslemler { get; set; }
 
         public UC_KumasKarti()

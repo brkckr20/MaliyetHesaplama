@@ -11,7 +11,7 @@ namespace MaliyeHesaplama.wins
     public partial class winFirmaListesi : Window
     {
         MiniOrm _orm = new MiniOrm();
-        private ICollectionView _collectionView;
+        //private ICollectionView _collectionView;
         public int Id;
         public string FirmaKodu, FirmaUnvan, Adres1, Adres2, Adres3;
         public bool SecimYapildi = false, IsOwner;
