@@ -11,7 +11,7 @@ namespace MaliyeHesaplama.userControls
 {
     public partial class Uc_MaliyetHesaplama : System.Windows.Controls.UserControl, IPageCommands
     {
-        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0, InventoryReceiptId, OrderReceiptId, OrderReceiptItemId;
+        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0, CDId, InventoryReceiptId, OrderReceiptId, OrderReceiptItemId;
         bool _receteOlacak = false;
         private byte[] imageBytes;
         MiniOrm _orm = new MiniOrm();
@@ -162,6 +162,10 @@ namespace MaliyeHesaplama.userControls
                 {"Id",CCCId },{"CostId",Id},{"PP_Scarf",R(txtAtkiUrFiyText)},{"PP_Warp",R(txtCozguUrFiyText)},{"PP_PartsWashing",R(txtParcaYikamaUrFiyText)},{"PP_FabricWashing",R(txtKumasBoyamaUrFiyText)},{"PP_WeavingWaste",R(txtDokumaFiresiUrFiyText)},{"PP_DyehouseWaster",R(txtBoyaFiresiUrFiyText)},{"PP_GarmentCost",R(txtKonfMaliyetiUrFiyText)},{"PP_2QualityCost",R(txtIkinciKaliyeMaliyetiUrFiyText)},{"PP_Profit",R(txtKarUrFiyText)},{"PP_Vat",R(txtKdvUrFiyText)},{"PP_Currency",R(txtKurUrFiyText)},{"PP_Parity",R(txtPariteUrFiyText)},{"PP_Euro",R(txtEurUrFiyText)},{"WC_Weaving",R(txtDokumaDokMal)},{"WC_Warp",R(txtCozguDokMal)},{"WC_YarnCost",R(txtIplikMaliyetDokMal)},{"PC_Total",R(txtToplamUrMal)},{"PC_Wasted",R(txtFireliUrMal)},{"RFC_ProfitableForex",R(txtKarliHamKumMal)},{"RFC_Profitable",R(txtKarliHamKumMalTL)},{"WDC_PartsWashing",R(txtParcaYikamaYBM)},{"WDC_DyedFabric",R(txtBoyanmisKumasYBM)},{"WDC_DyedFabricTL",R(txtBoyanmisKumasTlYBM)},{"WDC_Wasted",R(txtFireliYBM)},{"WDC_ProfitableForex",R(txtKarliYBM)},{"SP_DyedFabric",R(txtBoyaliKumasDikUr)},{"SP_GarmentCost",R(txtKonfMaliyetiDikUr)},{"SP_2QualityCost",R(txtIkinciKaliteMaliyetDikUr)},{"SP_ProfitableForex",R(txtKarliDikUr)},{"SP_Profitable",R(txtKarliTLDikUr)},{"SP_VatIncludeForex",R(txtKdvliDikUr)},{"SP_VatInclude",R(txtKdvliTLDikUr)},{"PriceDeterminedForex",R(txtBelirlenenFiyatText)},{"PriceDetermined",R(txtBelirlenenFiyatTL)},{"VatIncludedPriceForex",R(txtKdvliBelirlenFiyat)},{"VatIncluded",R(txtKdvliBelirlenenFiyatTL)}
             };
             CCCId = _orm.Save("CostCostCalculate", dict4);
+            var dict5 = new Dictionary<string, object>
+            {
+                {"Id",CDId },{"CostId",Id},{"CD_WidthPull",txtEndenCekmesi.Content},{"CD_HeightPull",txtBoydanCekmesi.Text} // diğer alanlar eklenmeli - 19-02-2026
+            };
             Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi");
         }
 
@@ -236,7 +240,7 @@ namespace MaliyeHesaplama.userControls
                 _insertedDate = win.InsertedDate;
                 _updatedDate = win.UpdatedDate;
                 OrderReceiptId = win.ReceiptId;
-                txtSiparisNo.Text = win.ReceiptNo; // listeleme yapıldı - diğer tablolar oluşturuldu - 18.02.2026
+                txtSiparisNo.Text = win.ReceiptNo;
                 if (win.ImageData != null)
                 {
                     using (var stream = new MemoryStream(win.ImageData))
@@ -292,6 +296,7 @@ namespace MaliyeHesaplama.userControls
                 SetControllerValues(txtKurUrFiyText, malHes.PP_Currency); SetControllerValues(txtPariteUrFiyText, malHes.PP_Parity); SetControllerValues(txtEurUrFiyText, malHes.PP_Euro);
                 SetControllerValues(txtBelirlenenFiyatText, malHes.PriceDeterminedForex); SetControllerValues(txtKarliTLDikUr, malHes.SP_Profitable);
             }
+            // detaylar da eklenecek
         }
     }
 }

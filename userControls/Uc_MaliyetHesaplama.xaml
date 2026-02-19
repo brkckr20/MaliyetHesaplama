@@ -683,11 +683,11 @@
                             <StackPanel>
                                 <DockPanel>
                                     <Label Content="Enden Çekmesi : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <Label Content="{Binding EndenCekmesi,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <Label x:Name="txtEndenCekmesi" Content="{Binding EndenCekmesi,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="Boydan Çekmesi % : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <TextBox Text="{Binding BoydanCekmesi,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <TextBox x:Name="txtBoydanCekmesi" Text="{Binding BoydanCekmesi,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="Mamül Gramaj" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="LightBlue"/>
