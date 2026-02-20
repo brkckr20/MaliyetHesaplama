@@ -11,7 +11,7 @@ namespace MaliyeHesaplama.userControls
 {
     public partial class Uc_MaliyetHesaplama : System.Windows.Controls.UserControl, IPageCommands
     {
-        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0, CDId, InventoryReceiptId, OrderReceiptId, OrderReceiptItemId;
+        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0, CDId = 0, InventoryReceiptId, OrderReceiptId, OrderReceiptItemId;
         bool _receteOlacak = false;
         private byte[] imageBytes;
         MiniOrm _orm = new MiniOrm();
@@ -164,8 +164,9 @@ namespace MaliyeHesaplama.userControls
             CCCId = _orm.Save("CostCostCalculate", dict4);
             var dict5 = new Dictionary<string, object>
             {
-                {"Id",CDId },{"CostId",Id},{"CD_WidthPull",txtEndenCekmesi.Content},{"CD_HeightPull",txtBoydanCekmesi.Text} // diğer alanlar eklenmeli - 19-02-2026
+                {"Id",CDId },{"CostId",Id},{"CD_WidthPull",txtEndenCekmesi.Content},{"CD_HeightPull",txtBoydanCekmesi.Text},{ "CD_ScarfGr", txtAtkiGr.Text },{ "CD_WarpGr", txtCozguGr.Text }, { "CD_MtulGr", txtMtTulGr.Text },{ "CD_HashPouring", txtHasilDokmesi.Content },{ "CD_M2Gr", txtM2Gr.Text } // Kumaştaki atki raporu kısmında devam edilecek - 20.02.2026
             };
+            CDId = _orm.Save("CostDetails",dict5);
             Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi");
         }
 

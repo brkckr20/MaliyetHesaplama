@@ -694,23 +694,23 @@
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="Atkı Gr : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <TextBox Text="{Binding AtkiGr,StringFormat={}{0:N3},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <TextBox x:Name="txtAtkiGr" Text="{Binding AtkiGr,StringFormat={}{0:N3},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="Çözgü Gr : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <TextBox Text="{Binding CozguGr,StringFormat={}{0:N3},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <TextBox x:Name="txtCozguGr" Text="{Binding CozguGr,StringFormat={}{0:N3},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="MTül Gr : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <TextBox Text="{Binding MtulGr,StringFormat={}{0:N3}}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <TextBox x:Name="txtMtTulGr" Text="{Binding MtulGr,StringFormat={}{0:N3}}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="Haşıl Dökmesi : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <Label Content="{Binding HasilDokmesi,StringFormat={}{0:N3}}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <Label Name="txtHasilDokmesi" Content="{Binding HasilDokmesi,StringFormat={}{0:N3}}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="M² Gr : " Width="120" VerticalContentAlignment="Center" Background="LightGray"/>
-                                    <TextBox Text="{Binding M2Gr,StringFormat={}{0:N3}}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
+                                    <TextBox x:Name="txtM2Gr" Text="{Binding M2Gr,StringFormat={}{0:N3}}" Width="50" BorderBrush="LightGray" BorderThickness="1"/>
                                 </DockPanel>
                             </StackPanel>
                         </GroupBox>
