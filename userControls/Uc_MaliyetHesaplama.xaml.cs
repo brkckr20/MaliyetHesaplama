@@ -164,9 +164,9 @@ namespace MaliyeHesaplama.userControls
             CCCId = _orm.Save("CostCostCalculate", dict4);
             var dict5 = new Dictionary<string, object>
             {
-                {"Id",CDId },{"CostId",Id},{"CD_WidthPull",txtEndenCekmesi.Content},{"CD_HeightPull",txtBoydanCekmesi.Text},{ "CD_ScarfGr", txtAtkiGr.Text },{ "CD_WarpGr", txtCozguGr.Text }, { "CD_MtulGr", txtMtTulGr.Text },{ "CD_HashPouring", txtHasilDokmesi.Content },{ "CD_M2Gr", txtM2Gr.Text } // Kumaştaki atki raporu kısmında devam edilecek - 20.02.2026
+                {"Id",CDId },{"CostId",Id},{"CD_WidthPull",txtEndenCekmesi.Content},{"CD_HeightPull",txtBoydanCekmesi.Text},{ "CD_ScarfGr", txtAtkiGr.Text },{ "CD_WarpGr", txtCozguGr.Text }, { "CD_MtulGr", txtMtTulGr.Text },{ "CD_HashPouring", txtHasilDokmesi.Content },{ "CD_M2Gr", txtM2Gr.Text }, { "CD_1MtScarfCount",txt1MtAtkiSayisi.Text }, { "CD_CmFreauency",txtCmSiklik.Text }, { "CD_ReportScarfCount", txtRapordakiAtkiSayisi.Text },{ "CD_1ScarfCount",txt1AtkiSayisi.Text },{ "CD_2ScarfCount",txt2AtkiSayisi.Text },{ "CD_3ScarfCount",txt3AtkiSayisi.Text }, {"CD_1ScarfFrequency",txt1AtkiSayisiSonuc.Text},{"CD_2ScarfFrequency",txt2AtkiSayisiSonuc.Text},{"CD_3ScarfFrequency",txt3AtkiSayisiSonuc.Text},{"CD_Scarf1Kg",txtAtki1IplikHesabi.Text},{"CD_Scarf2Kg",txtAtki2IplikHesabi.Text},{"CD_Scarf3Kg",txtAtki3IplikHesabi.Text},{"CD_Scarf4Kg",txtAtki4IplikHesabi.Text},{"CD_Warp1Kg",txtCozgu1IplikHesabi.Text},{"CD_Warp2Kg",txtCozgu2IplikHesabi.Text},{"CD_WarpPulling", txtCozguCekmesi.Text},{"CD_OrderMeter", txtSiparisMetresi.Text},{"CD_TC_WireCount", txtTelSayisi.Text},{"CD_TC_TaharCost", txtTaharMaliyeti.Text},{"CD_TC_TaharCostAmount", txtTaharMaliyetiSonuc.Text},{"CD_TC_LamelCost", txtLamelMaliyeti.Text},{"CD_TC_LamelCostAmount", txtLamelMaliyetiSonuc.Text},{"CD_TC_CounterRest", txtTYGS.Text},{"CD_TC_CounterRestAmount", txtTYGSSonuc.Text},{"CD_TC_TotalCost", txtToplamMaliyet.Text},{"CD_TC_OrderMetraj", txtSiparisMetraji.Text},{"CD_TC_1MtCost", txt1MtDusenMaliyet.Text},{"CD_TC_1MtCostAmount", txt1MtDusenMaliyetSonuc.Text} // kayıt için tahar maliyeti kısmı kontrol edilmeli - 23.02.2026
             };
-            CDId = _orm.Save("CostDetails",dict5);
+            CDId = _orm.Save("CostDetails", dict5);
             Bildirim.Bilgilendirme2("Veri kayıt işlemi başarıyla gerçekleştirildi");
         }
 

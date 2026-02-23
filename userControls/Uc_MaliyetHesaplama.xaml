@@ -724,41 +724,41 @@
                                     <Label Content=""/>
                                     <DockPanel>
                                         <Label Background="LightBlue" Width="120" Content="1 Mt'de Atkı Sayısı"/>
-                                        <TextBox IsEnabled="False" Text="{Binding BirMtAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                        <TextBox x:Name="txt1MtAtkiSayisi" IsEnabled="False" Text="{Binding BirMtAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Background="LightBlue" Width="120" Content="Rapordaki Atkı Sayısı"/>
-                                        <TextBox IsEnabled="False" Text="{Binding RapordakiAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                        <TextBox x:Name="txtRapordakiAtkiSayisi" IsEnabled="False" Text="{Binding RapordakiAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Background="LightBlue" Width="120" Content="1. Atkı Sayısı"/>
-                                        <TextBox Text="{Binding BirinciAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                        <TextBox x:Name="txt1AtkiSayisi" Text="{Binding BirinciAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Background="LightBlue" Width="120" Content="2. Atkı Sayısı"/>
-                                        <TextBox Text="{Binding IkinciAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                        <TextBox x:Name="txt2AtkiSayisi" Text="{Binding IkinciAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Background="LightBlue" Width="120" Content="3. Atkı Sayısı"/>
-                                        <TextBox Text="{Binding UcuncuAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                        <TextBox x:Name="txt3AtkiSayisi" Text="{Binding UcuncuAtkiSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                                     </DockPanel>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Margin="10,0,0,0">
                                     <Label Background="LightCoral" Content="Cm Sıklık"/>
                                     <DockPanel>
-                                        <TextBox Text="{Binding CmSiklik,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="25"/>
+                                        <TextBox x:Name="txtCmSiklik" Text="{Binding CmSiklik,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="25"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Content=""/>
                                     </DockPanel>
                                     <DockPanel>
-                                        <TextBox IsEnabled="False" Text="{Binding BirinciAtkiSayisiFormul,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:N3}}" Height="25"/>
+                                        <TextBox x:Name="txt1AtkiSayisiSonuc" IsEnabled="False" Text="{Binding BirinciAtkiSayisiFormul,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:N3}}" Height="25"/>
                                     </DockPanel>
                                     <DockPanel>
-                                        <TextBox IsEnabled="False" Text="{Binding IkinciAtkiSayisiFormul,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:N3}}" Height="25"/>
+                                        <TextBox x:Name="txt2AtkiSayisiSonuc" IsEnabled="False" Text="{Binding IkinciAtkiSayisiFormul,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:N3}}" Height="25"/>
                                     </DockPanel>
                                     <DockPanel>
-                                        <TextBox IsEnabled="False" Text="{Binding UcuncuAtkiSayisiFormul,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:N3}}" Height="25"/>
+                                        <TextBox x:Name="txt3AtkiSayisiSonuc" IsEnabled="False" Text="{Binding UcuncuAtkiSayisiFormul,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat={}{0:N3}}" Height="25"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Grid>
@@ -776,31 +776,31 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Atkı 1 (Kg) "/>
-                                        <TextBox Width="70" Text="{Binding Atki1IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
+                                        <TextBox x:Name="txtAtki1IplikHesabi" Width="70" Text="{Binding Atki1IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Atkı 2 (Kg) "/>
-                                        <TextBox Width="70" Text="{Binding Atki2IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
+                                        <TextBox x:Name="txtAtki2IplikHesabi" Width="70" Text="{Binding Atki2IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Atkı 3 (Kg) "/>
-                                        <TextBox Width="70" Text="{Binding Atki3IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
+                                        <TextBox x:Name="txtAtki3IplikHesabi" Width="70" Text="{Binding Atki3IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Atkı 4 (Kg) "/>
-                                        <TextBox Width="70" Text="{Binding Atki4IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
+                                        <TextBox x:Name="txtAtki4IplikHesabi" Width="70" Text="{Binding Atki4IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Çözgü 1 (Kg) "/>
-                                        <TextBox Width="70" Text="{Binding Cozgu1IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
+                                        <TextBox x:Name="txtCozgu1IplikHesabi" Width="70" Text="{Binding Cozgu1IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Çözgü 2 (Kg) "/>
-                                        <TextBox Width="70" Text="{Binding Cozgu2IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
+                                        <TextBox x:Name="txtCozgu2IplikHesabi" Width="70" Text="{Binding Cozgu2IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Çözgü Çekmesi %"/>
-                                        <TextBox Width="70" Text="{Binding CozguCekmesi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
+                                        <TextBox x:Name="txtCozguCekmesi" Width="70" Text="{Binding CozguCekmesi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Grid>
@@ -813,35 +813,35 @@
                                 <StackPanel Grid.Column="0">
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Tel Sayısı "/>
-                                        <TextBox Text="{Binding TelSayisi, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox x:Name="txtTelSayisi" Text="{Binding TelSayisi, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Tahar Maliyeti "/>
-                                        <TextBox Width="70" Text="{Binding TaharMaliyetText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                                        <TextBox Width="70" Text="{Binding TaharMaliyetTutar, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
+                                        <TextBox x:Name="txtTaharMaliyeti" Width="70" Text="{Binding TaharMaliyetText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox x:Name="txtTaharMaliyetiSonuc" Width="70" Text="{Binding TaharMaliyetTutar, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Lamel Maliyeti "/>
-                                        <TextBox Width="70" Text="{Binding LamelMaliyetText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                                        <TextBox Width="70" Text="{Binding LamelMaliyetTutar, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
+                                        <TextBox x:Name="txtLamelMaliyeti" Width="70" Text="{Binding LamelMaliyetText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox x:Name="txtLamelMaliyetiSonuc" Width="70" Text="{Binding LamelMaliyetTutar, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Tezgah Yatış Gün Sayısı "/>
-                                        <TextBox Width="70" Text="{Binding TezgahYatisGunSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                                        <TextBox Width="70" Text="{Binding TezgahYatisGunSayisiTutar,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged ,StringFormat=N2}"/>
+                                        <TextBox x:Name="txtTYGS" Width="70" Text="{Binding TezgahYatisGunSayisi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox x:Name="txtTYGSSonuc" Width="70" Text="{Binding TezgahYatisGunSayisiTutar,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged ,StringFormat=N2}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Toplam Maliyet "/>
-                                        <TextBox Text="{Binding ToplamMaliyet,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat=N2}"/>
+                                        <TextBox x:Name="txtToplamMaliyet" Text="{Binding ToplamMaliyet,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat=N2}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="Sipariş Metrajı "/>
-                                        <TextBox Text="{Binding SiparisMetraji,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox x:Name="txtSiparisMetraji" Text="{Binding SiparisMetraji,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="135" Background="LightCyan" Content="1 Mt Düşen Maliyet"/>
-                                        <TextBox Text="{Binding BirMtDusenMaliyet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=N2}" Width="70" Background="Red" Foreground="White"/>
-                                        <TextBox Text="{Binding BirMtDusenMaliyetTL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=N2}" Width="70" Background="Yellow"/>
+                                        <TextBox x:Name="txt1MtDusenMaliyet" Text="{Binding BirMtDusenMaliyet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=N2}" Width="70" Background="Red" Foreground="White"/>
+                                        <TextBox x:Name="txt1MtDusenMaliyetSonuc" Text="{Binding BirMtDusenMaliyetTL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=N2}" Width="70" Background="Yellow"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Grid>
