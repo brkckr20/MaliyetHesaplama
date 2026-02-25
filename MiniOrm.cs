@@ -31,7 +31,6 @@ public class MiniOrm
 
         if (id == 0)
         {
-            
             var insertColumns = data.Keys.Where(k => k != idColumn).ToList();
             var insertValues = insertColumns.Select(k => $"@{k}");
             string sql = $"INSERT INTO {tableName} ({string.Join(",", insertColumns)}) VALUES ({string.Join(",", insertValues)});";
