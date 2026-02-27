@@ -792,11 +792,11 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Çözgü 1 (Kg) "/>
-                                        <TextBox x:Name="txtCozgu1IplikHesabi" Width="70" Text="{Binding Cozgu1IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
+                                        <TextBox x:Name="txtCozgu1IplikHesabi" Width="70" Text="{Binding Cozgu1IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Çözgü 2 (Kg) "/>
-                                        <TextBox x:Name="txtCozgu2IplikHesabi" Width="70" Text="{Binding Cozgu2IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
+                                        <TextBox x:Name="txtCozgu2IplikHesabi" Width="70" Text="{Binding Cozgu2IplikHesabi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=N3}"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Width="110" Content="Çözgü Çekmesi %"/>
