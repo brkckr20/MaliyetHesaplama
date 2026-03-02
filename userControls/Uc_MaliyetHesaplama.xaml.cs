@@ -17,6 +17,7 @@ namespace MaliyeHesaplama.userControls
         MiniOrm _orm = new MiniOrm();
         private DateTime _insertedDate, _updatedDate;
         private int _insertedBy, _updatedBy;
+        private string xca = "aslindabusatirinolmasinagerekbileyokamamaksatgithubboskalmasinxD";
         void SetControllerValues(System.Windows.Controls.TextBox tb, decimal val)
         {
             tb.Text = val.ToString("0.00", CultureInfo.InvariantCulture);
