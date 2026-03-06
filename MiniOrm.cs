@@ -200,7 +200,9 @@ public class MiniOrm
                             ISNULL(RI.UnitPrice,0) [UnitPrice],
                             ISNULL(RI.Vat,0) [Vat],
                             ISNULL(RI.RowAmount,0) [RowAmount],
-                            ISNULL(RI.Receiver,0) [Receiver]
+                            ISNULL(RI.Receiver,0) [Receiver],
+                            ISNULL(R.Document,0) [Document],
+							ISNULL(R.DocumentName,0) [DocumentName]
                         from Receipt R
                         left join Company C with(nolock) on C.Id = R.CompanyId
                         left join ReceiptItem RI with(nolock) on RI.ReceiptId = R.Id

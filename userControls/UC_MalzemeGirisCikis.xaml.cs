@@ -1,8 +1,11 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
+using MaliyeHesaplama.wins;
 using System.Data;
+using System.IO;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using System.Windows;
 
 namespace MaliyeHesaplama.userControls
 {
@@ -14,6 +17,8 @@ namespace MaliyeHesaplama.userControls
         private DataTable table;
         UtilityHelpers _uh = new UtilityHelpers();
         string _screenNameForReport;
+        byte[] pdfData;
+        
 
         public UC_MalzemeGirisCikis(Enums.Receipt receipt)
         {
@@ -45,10 +50,10 @@ namespace MaliyeHesaplama.userControls
         {
             var dict0 = new Dictionary<string, object>()
             {
-                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(_receipt)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text},{"InvoiceDate", dpSevkTarih.SelectedDate.Value}
+                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(_receipt)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text},{"InvoiceDate", dpSevkTarih.SelectedDate.Value},{"DocumentName", txtBelgeAdi.Text},{"Document",pdfData}
             };
             Id = _orm.Save("Receipt", dict0);
-            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Piece", "UnitPrice", "RowExplanation", "TrackingNumber", "Vat", "RowAmount","Receiver" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
+            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Piece", "UnitPrice", "RowExplanation", "TrackingNumber", "Vat", "RowAmount", "Receiver" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
             foreach (DataRow row in table.Rows)
             {
                 if (row.RowState == DataRowState.Deleted) continue;
@@ -123,6 +128,8 @@ namespace MaliyeHesaplama.userControls
                 //txtVade.Text = win.Maturity;
                 //txtMusteriOrderNo.Text = win.CustomerOrderNo;
                 txtAciklama.Text = win.Explanation;
+                txtBelgeAdi.Text = win.DocumentName;
+                pdfData = win.Document;
                 table.Clear();
                 foreach (var h in win.HareketlerListesi)
                 {
@@ -332,7 +339,7 @@ namespace MaliyeHesaplama.userControls
                 condition += $" AND WareHouseId = {WareHouseId}";
             }
 
-            wins.winFasonaGidenler win = new wins.winFasonaGidenler(condition, WareHouseId.ToString(), "Piece","Fason Gidenler");
+            wins.winFasonaGidenler win = new wins.winFasonaGidenler(condition, WareHouseId.ToString(), "Piece", "Fason Gidenler");
             var result = win.ShowDialog();
             if (result == true)
             {
@@ -406,6 +413,31 @@ namespace MaliyeHesaplama.userControls
         private void btnStok_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             StokSec();
+        }
+
+        private void btnPdfSec_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "PDF Files (*.pdf)|*.pdf";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = dialog.FileName;
+                string fileName = Path.GetFileName(filePath);
+                pdfData = File.ReadAllBytes(filePath);
+                txtBelgeAdi.Text = fileName;
+            }
+        }
+
+        private void btnPdfGoruntule_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var data = _orm.GetById<dynamic>("Receipt", Id);
+            pdfData = data.Document;
+            string fileName = data.DocumentName.ToString();
+            string path = $@"C:\Temps\{Guid.NewGuid().ToString()} - {fileName}";
+            File.WriteAllBytes(path,pdfData);
+            winPDFGoruntule pDFGoruntule = new winPDFGoruntule(path);
+            pDFGoruntule.Owner = System.Windows.Application.Current.MainWindow;
+            pDFGoruntule.Show();
         }
 
         private void UpdateTotals()

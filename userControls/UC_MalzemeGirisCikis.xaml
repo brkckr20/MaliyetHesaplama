@@ -63,6 +63,12 @@
                         <TextBlock VerticalAlignment="Center" Text="Açıklama : " Width="100"/>
                         <TextBox x:Name="txtAciklama" Width="200" VerticalContentAlignment="Center"/>
                     </DockPanel>
+                    <DockPanel Height="24" Margin="0,2,0,0">
+                        <TextBlock VerticalAlignment="Center" Text="Belge Seçimi : " Width="100"/>
+                        <TextBox VerticalContentAlignment="Center" x:Name="txtBelgeAdi" Width="152"/>
+                        <Button x:Name="btnPdfSec" Click="btnPdfSec_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                        <Button x:Name="btnPdfGoruntule" Click="btnPdfGoruntule_Click" Width="24" Content="👁️" Background="Transparent" BorderBrush="LightGray"/>
+                    </DockPanel>
                 </StackPanel>
             </Grid>
         </Border>

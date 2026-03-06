@@ -130,23 +130,25 @@ namespace MaliyeHesaplama.userControls
         {
             wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(Convert.ToInt32(Enums.Depo.HamKumasDepo), Enums.Receipt.Siparis, true, " and ISNULL(RI.IsCostCalculated,0) = 0");
             win.ShowDialog();
-            OrderReceiptId = win.Id;
-            txtSiparisNo.Text = win.ReceiptNo;
-            CompanyId = win.CompanyId;
-            txtFirmaUnvan.Content = win.CompanyName;
-            txtFirmaKodu.Text = win.CompanyCode;
-            InventoryId = win._inventoryId;
-            txtMalzemeKodu.Text = win._inventoryCode;
-            lblMalzemeAdi.Content = win._inventoryName;
-            OrderReceiptItemId = win._receiptItemId;
-            /****/
-            txtFirmaKodu.IsEnabled = false;
-            btnFirmaListesi.IsEnabled = false;
-            txtMalzemeKodu.IsEnabled = false;
-            btnMalzemeListesi.IsEnabled = false;
-            //
-            ((MainViewModel)DataContext).SiparisMetresi = Convert.ToDouble(win._netMeter);
-
+            if (win.secimYapildi)
+            {
+                OrderReceiptId = win.Id;
+                txtSiparisNo.Text = win.ReceiptNo;
+                CompanyId = win.CompanyId;
+                txtFirmaUnvan.Content = win.CompanyName;
+                txtFirmaKodu.Text = win.CompanyCode;
+                InventoryId = win._inventoryId;
+                txtMalzemeKodu.Text = win._inventoryCode;
+                lblMalzemeAdi.Content = win._inventoryName;
+                OrderReceiptItemId = win._receiptItemId;
+                /****/
+                txtFirmaKodu.IsEnabled = false;
+                btnFirmaListesi.IsEnabled = false;
+                txtMalzemeKodu.IsEnabled = false;
+                btnMalzemeListesi.IsEnabled = false;
+                //
+                ((MainViewModel)DataContext).SiparisMetresi = Convert.ToDouble(win._netMeter);
+            }
         }
 
         public void Kaydet()

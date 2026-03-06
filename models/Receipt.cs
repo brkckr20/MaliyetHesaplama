@@ -124,6 +124,12 @@ namespace MaliyeHesaplama.models
         [NotMapped]
         [Display(Name = "Teslim Alan")]
         public string Receiver { get; set; }
+        [NotMapped]
+        [Display(Name ="Belge Adı")]
+        public string DocumentName { get; set; }
+        [NotMapped]
+        [Display(Name = "Belge")]
+        public byte[] Document { get; set; }
 
     }
 }
