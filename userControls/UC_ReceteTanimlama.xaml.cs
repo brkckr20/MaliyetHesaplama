@@ -52,7 +52,7 @@ namespace MaliyeHesaplama.userControls
 
         public void Yeni()
         {
-
+            Temizle();
         }
         void BaslangicVerileri()
         {
@@ -190,6 +190,23 @@ namespace MaliyeHesaplama.userControls
                     row["Id"] = newId;
             }
             Bildirim.Bilgilendirme2("Kayıt işlemi başarılı");
+        }
+
+        void Temizle()
+        {
+            this.Id = 0;
+            txtFisNo.Text = _orm.GetRecordNo("InventoryReceipt", "ReceiptNo", "InventoryType", _InventoryType);
+            txtHamEn.Text = string.Empty;
+            txtHamBoy.Text = string.Empty;
+            txtMamulEn.Text = string.Empty;
+            txtMamulBoy.Text = string.Empty;
+            txtHamGramaj.Text = string.Empty;
+            txtMamulGramaj.Text = string.Empty;
+            txtAciklama.Text = string.Empty;
+            inventoryId = 0;
+            dataGrid.ItemsSource = null;
+            txtKumasKodu.Text = string.Empty;
+            lblKumasAdi.Content = string.Empty;
         }
     }
 }
