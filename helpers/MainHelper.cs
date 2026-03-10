@@ -147,6 +147,16 @@ namespace MaliyeHesaplama.helpers
                 rowView["InventoryName"] = win.Name;
             }
         }
+
+        public static void SetAuthorizedInformation(ref int CompanyId, System.Windows.Controls.TextBox textBox)
+        {
+            wins.winYetkiliListesi win = new wins.winYetkiliListesi(CompanyId);
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                textBox.Text = win.Yetkili;
+            }
+        }
         public static void OpenReportWindow(string screenName, int recordId)
         {
             if (recordId == 0)

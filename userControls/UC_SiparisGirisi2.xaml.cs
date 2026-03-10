@@ -1,5 +1,6 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
+using MaliyeHesaplama.models;
 using MaliyeHesaplama.mvvm;
 //using Stimulsoft.Report.Helpers;
 using System.Collections.ObjectModel;
@@ -37,7 +38,7 @@ namespace MaliyeHesaplama.userControls
                 int? istenenId = _orm.GetIdForAfterOrBeforeRecord(KayitTipi, "Receipt", id, "ReceiptItem", "ReceiptId", Convert.ToInt32(Enums.Receipt.Siparis));
                 if (istenenId == null)
                 {
-                    Bildirim.Uyari2("Başka bir kayıt bulunamadı!");
+                    Bildirim.Uyari2(Enums.GetDisplayName(Enums.Messages.KayitBulunamadi));
                     return;
                 }
 
@@ -101,7 +102,7 @@ namespace MaliyeHesaplama.userControls
                 }
                 else
                 {
-                    Bildirim.Uyari2("Başka bir kayıt bulunamadı.");
+                    Bildirim.Uyari2(Enums.GetDisplayName(Enums.Messages.KayitBulunamadi));
                 }
             }
             catch (Exception ex)
@@ -131,7 +132,7 @@ namespace MaliyeHesaplama.userControls
             }
             if (_isApproved && !_onayliSiparsDegisiklik)
             {
-                Bildirim.Uyari2("Onaylanmış sipariş üzerinde değişiklik yapamazsınız.\nDeğişiklik yapabilmek için lütfen yetkili ile iletişime geçiniz!");
+                Bildirim.Uyari2(Enums.GetDisplayName(Enums.Messages.DegisiklikOnayi));
                 return;
             }
             Id = _orm.Save("Receipt", dict0);
@@ -151,7 +152,7 @@ namespace MaliyeHesaplama.userControls
                 if (Convert.ToInt32(dict["Id"]) == 0)
                     row["Id"] = newId;
             }
-            Bildirim.Bilgilendirme2("Kayıt işlemi başarılı bir şekilde gerçekleştirildi");
+            Bildirim.Bilgilendirme2(Enums.GetDisplayName(Enums.Messages.KayitBasarili));
             GetSumOrCount();
         }
 
@@ -208,8 +209,15 @@ namespace MaliyeHesaplama.userControls
 
         public void Yazdir()
         {
-            wins.winRaporSecimi win = new wins.winRaporSecimi("Sipariş Girişi", Id);
-            win.ShowDialog();
+            if (Id != 0)
+            {
+                wins.winRaporSecimi win = new wins.winRaporSecimi("Sipariş Girişi", Id);
+                win.ShowDialog();
+            }
+            else
+            {
+                Bildirim.Uyari2(Enums.GetDisplayName(Enums.Messages.RaporSeciniz));
+            }
 
         }
         void Temizle()
@@ -260,38 +268,47 @@ namespace MaliyeHesaplama.userControls
         }
         private void btnFirmaListesi_Click(object sender, RoutedEventArgs e)
         {
-            wins.winFirmaListesi win = new wins.winFirmaListesi(false);
-            win.ShowDialog();
-            if (win.SecimYapildi)
-            {
-                CompanyId = win.Id;
-                txtFirmaUnvan.Text = win.FirmaUnvan;
-            }
+            MainHelper.SetCompanyInformation(ref CompanyId,txtFirmaUnvan);
+            #region ESKİKOD
+            //wins.winFirmaListesi win = new wins.winFirmaListesi(false);
+            //win.ShowDialog();
+            //if (win.SecimYapildi)
+            //{
+            //    CompanyId = win.Id;
+            //    txtFirmaUnvan.Text = win.FirmaUnvan;
+            //}
+            #endregion
         }
         private void btnYetkiliListesi_Click(object sender, RoutedEventArgs e)
         {
-            wins.winYetkiliListesi win = new wins.winYetkiliListesi(CompanyId);
-            win.ShowDialog();
-            if (win.SecimYapildi)
-            {
-                txtYetkili.Text = win.Yetkili;
-            }
+            MainHelper.SetAuthorizedInformation(ref CompanyId,txtYetkili);
+            #region ESKİKOD
+            //wins.winYetkiliListesi win = new wins.winYetkiliListesi(CompanyId);
+            //win.ShowDialog();
+            //if (win.SecimYapildi)
+            //{
+            //    txtYetkili.Text = win.Yetkili;
+            //}
+            #endregion
         }
         private void btnKumasListe_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
-            if (btn == null) return;
+            MainHelper.SetInventoryInformation(sender, Enums.Inventory.Kumas);
+            #region ESKİKOD
+            //System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
+            //if (btn == null) return;
 
-            DataRowView rowView = btn.DataContext as DataRowView;
-            if (rowView == null) return;
+            //DataRowView rowView = btn.DataContext as DataRowView;
+            //if (rowView == null) return;
 
-            wins.winMalzemeListesi win = new wins.winMalzemeListesi(Convert.ToInt32(Enums.Inventory.Kumas));
-            if (win.ShowDialog() == true)
-            {
-                rowView["InventoryId"] = win.Id;
-                rowView["InventoryCode"] = win.Code;
-                rowView["InventoryName"] = win.Name;
-            }
+            //wins.winMalzemeListesi win = new wins.winMalzemeListesi(Convert.ToInt32(Enums.Inventory.Kumas));
+            //if (win.ShowDialog() == true)
+            //{
+            //    rowView["InventoryId"] = win.Id;
+            //    rowView["InventoryCode"] = win.Code;
+            //    rowView["InventoryName"] = win.Name;
+            //}
+            #endregion
         }
 
         private void btnVariantListe_Click(object sender, RoutedEventArgs e)
@@ -338,6 +355,11 @@ namespace MaliyeHesaplama.userControls
             fgh.InitializeColumnSettings();
             fgh.LoadColumnSettingsFromDatabase();
             GetSumOrCount();
+        }
+
+        private void txtFirmaUnvan_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
 
         private void btnDepoListesi_Click(object sender, RoutedEventArgs e)
