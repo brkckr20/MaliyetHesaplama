@@ -2,7 +2,6 @@
 using MaliyeHesaplama.Interfaces;
 using MaliyeHesaplama.models;
 using MaliyeHesaplama.mvvm;
-//using Stimulsoft.Report.Helpers;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Globalization;
@@ -14,7 +13,7 @@ namespace MaliyeHesaplama.userControls
     public partial class UC_SiparisGirisi2 : System.Windows.Controls.UserControl, IPageCommands
     {
         MiniOrm _orm = new MiniOrm();
-        public int CompanyId = 0, Id, WareHouseId = 0; //int test = 00; int test1 = 00;
+        public int CompanyId = 0, Id, WareHouseId = 0;
         MVM vm = new MVM();
         private DataTable table;
         FilterGridHelpers fgh;

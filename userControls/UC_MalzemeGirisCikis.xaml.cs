@@ -50,7 +50,7 @@ namespace MaliyeHesaplama.userControls
         {
             var dict0 = new Dictionary<string, object>()
             {
-                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(_receipt)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text},{"InvoiceDate", dpSevkTarih.SelectedDate.Value},{"DocumentName", txtBelgeAdi.Text},{"Document",pdfData}
+                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(_receipt)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text},{"InvoiceDate", dpSevkTarih.SelectedDate.Value},{"DocumentName", txtBelgeAdi.Text},{"Document", pdfData}
             };
             Id = _orm.Save("Receipt", dict0);
             var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Piece", "UnitPrice", "RowExplanation", "TrackingNumber", "Vat", "RowAmount", "Receiver" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
