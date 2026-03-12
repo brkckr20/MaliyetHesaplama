@@ -14,7 +14,7 @@ namespace MaliyeHesaplama.wins
         private ICollectionView _collectionView;
         public bool secimYapildi = false, _withWareHouse, _onayli;
         public int Id, CompanyId, _depoId, _inventoryId, _receiptItemId; // inventoryId alanı maliyet hesaplama için eklendi
-        public string ReceiptNo, CompanyName, CompanyCode, Authorized, Maturity, CustomerOrderNo, Explanation, WareHouseCode, WareHouseName, OrderNo, _inventoryCode, _inventoryName, DocumentName;// _inventoryCode ve _inventoryName alanı maliyet hesaplama için eklendi
+        public string ReceiptNo, CompanyName, CompanyCode, Authorized, Maturity, CustomerOrderNo, Explanation, WareHouseCode, WareHouseName, OrderNo, _inventoryCode, _inventoryName, DocumentName, InvoiceNo;// _inventoryCode ve _inventoryName alanı maliyet hesaplama için eklendi
         public byte[] Document;
         FilterGridHelpers fgh;
         string _condition;
@@ -40,7 +40,7 @@ namespace MaliyeHesaplama.wins
         }
         private void grid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            var hiddenColumns = new[] { "CompanyId", "Document", "DocumentName" };
+            var hiddenColumns = new[] { "CompanyId"};
             fgh.GridGeneratingColumn(e, grid, hiddenColumns);
         }
 
@@ -95,8 +95,8 @@ namespace MaliyeHesaplama.wins
                 _receiptItemId = record.ReceiptItemId; // maliyet hesaplamada ilgili sipariş satırını MaliyetCalisildi = True yapmak için eklendi
                 _netMeter = record.NetMeter;
                 HareketlerListesi = _tumHareketler.Where(x => x.Id == Id).ToList();
-                Document = record.Document;
                 DocumentName = record.DocumentName;
+                InvoiceNo = record.InvoiceNo;
                 Close();
             }
         }

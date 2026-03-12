@@ -32,52 +32,6 @@ namespace MaliyeHesaplama.userControls
 
         public void Kaydet() 
         {
-            #region kontrol edilecek - ai verdi
-            //var dict0 = new Dictionary<string, object>()
-            //{
-            //    {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.UretimGirisi)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text}
-            //};
-
-            //// DataGrid'den gelen satırları item dictionary listesine çevir
-            //var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "NetMeter", "NetWeight", "Piece", "RowExplanation", "VariantId", "BatchNo", "OrderNo" };
-            //var items = new List<Dictionary<string, object>>();
-            //foreach (DataRow row in table.Rows)
-            //{
-            //    if (row.RowState == DataRowState.Deleted) continue;
-            //    var dict = new Dictionary<string, object>();
-            //    foreach (var colName in dbColumns)
-            //    {
-            //        if (table.Columns.Contains(colName))
-            //        {
-            //            var value = row[colName];
-            //            dict[colName] = value == DBNull.Value ? null : value;
-            //        }
-            //        else
-            //        {
-            //            dict[colName] = null;
-            //        }
-            //    }
-            //    // garanti: Id null ise 0 yap
-            //    dict["Id"] = dict["Id"] ?? 0;
-            //    items.Add(dict);
-            //}
-
-            //try
-            //{
-            //    if (CompanyId == 0)
-            //    {
-            //        Bildirim.Uyari2("Kayıt sırasında hata:\nFirma seçilmeden kayıt işlemi yapılamaz!");
-            //        return;
-            //    }
-            //    int _userId = Properties.Settings.Default.RememberUserId;
-            //    Id = _orm.SaveReceiptWithStock(dict0, items, WareHouseId, _userId, "Receipt", "ReceiptItem");
-            //    Bildirim.Bilgilendirme2("Kayıt işlemi başarıyla gerçekleştirildi.");
-            //}
-            //catch (Exception ex)
-            //{
-            //    Bildirim.Uyari2("Kayıt sırasında hata: " + ex.Message);
-            //}
-            #endregion
             var dict0 = new Dictionary<string, object>()
             {
                 {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(Enums.Receipt.UretimGirisi)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text}
@@ -119,6 +73,7 @@ namespace MaliyeHesaplama.userControls
                 //dpTermin.SelectedDate = win.DuaDate;
                 //txtVade.Text = win.Maturity;
                 //txtMusteriOrderNo.Text = win.CustomerOrderNo;
+                txtBelgeNo.Text = win.InvoiceNo;
                 txtAciklama.Text = win.Explanation;
                 table.Clear();
                 foreach (var h in win.HareketlerListesi)

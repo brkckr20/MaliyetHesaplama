@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Windows;
+using MaliyeHesaplama.models;
 
 namespace MaliyeHesaplama.userControls
 {
@@ -17,7 +18,7 @@ namespace MaliyeHesaplama.userControls
         private DataTable table;
         UtilityHelpers _uh = new UtilityHelpers();
         string _screenNameForReport;
-        byte[] pdfData;
+        byte[] pdfData = null;
         
 
         public UC_MalzemeGirisCikis(Enums.Receipt receipt)
@@ -50,7 +51,7 @@ namespace MaliyeHesaplama.userControls
         {
             var dict0 = new Dictionary<string, object>()
             {
-                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(_receipt)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text},{"InvoiceDate", dpSevkTarih.SelectedDate.Value},{"DocumentName", txtBelgeAdi.Text},{"Document", pdfData}
+                {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(_receipt)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text},{"InvoiceDate", dpSevkTarih.SelectedDate.Value},{"DocumentName", txtBelgeAdi.Text},{"Document", pdfData == null ? new byte[0] : pdfData}
             };
             Id = _orm.Save("Receipt", dict0);
             var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Piece", "UnitPrice", "RowExplanation", "TrackingNumber", "Vat", "RowAmount", "Receiver" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
@@ -113,7 +114,7 @@ namespace MaliyeHesaplama.userControls
 
         public void Listele()
         {
-            wins.winFisHareketleriListesi win = new wins.winFisHareketleriListesi(WareHouseId, _receipt, false);
+            winFisHareketleriListesi win = new winFisHareketleriListesi(WareHouseId, _receipt, false);
             win.ShowDialog();
             if (win.secimYapildi)
             {
@@ -129,7 +130,7 @@ namespace MaliyeHesaplama.userControls
                 //txtMusteriOrderNo.Text = win.CustomerOrderNo;
                 txtAciklama.Text = win.Explanation;
                 txtBelgeAdi.Text = win.DocumentName;
-                pdfData = win.Document;
+                pdfData = _orm.GetById<Receipt>("Receipt",Id).Document;
                 table.Clear();
                 foreach (var h in win.HareketlerListesi)
                 {
@@ -292,7 +293,7 @@ namespace MaliyeHesaplama.userControls
             }
         }
 
-        private void btnKumasListe_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnKumasListe_Click(object sender, RoutedEventArgs e)
         {
             MainHelper.SetInventoryInformation(sender, Enums.Inventory.Malzeme);
         }
@@ -339,7 +340,7 @@ namespace MaliyeHesaplama.userControls
                 condition += $" AND WareHouseId = {WareHouseId}";
             }
 
-            wins.winFasonaGidenler win = new wins.winFasonaGidenler(condition, WareHouseId.ToString(), "Piece", "Fason Gidenler");
+            winFasonaGidenler win = new winFasonaGidenler(condition, WareHouseId.ToString(), "Piece", "Fason Gidenler");
             var result = win.ShowDialog();
             if (result == true)
             {
@@ -384,7 +385,7 @@ namespace MaliyeHesaplama.userControls
                 return;
             }
             string condition = $"R.ReceiptType = {Convert.ToInt32(Enums.Receipt.MalzemeGiris)} and R.WareHouseId = {WareHouseId}";
-            wins.winFasonaGidenler win = new wins.winFasonaGidenler(condition, WareHouseId.ToString(), "Piece", "Stok Seçimi");
+            winFasonaGidenler win = new winFasonaGidenler(condition, WareHouseId.ToString(), "Piece", "Stok Seçimi");
             var result = win.ShowDialog();
             if (result == true)
             {
@@ -428,7 +429,7 @@ namespace MaliyeHesaplama.userControls
             }
         }
 
-        private void btnPdfGoruntule_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnPdfGoruntule_Click(object sender, RoutedEventArgs e)
         {
             var data = _orm.GetById<dynamic>("Receipt", Id);
             pdfData = data.Document;
