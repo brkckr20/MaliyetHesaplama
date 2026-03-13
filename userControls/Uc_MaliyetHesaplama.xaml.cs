@@ -32,6 +32,11 @@ namespace MaliyeHesaplama.userControls
             Id = 0; InventoryId = 0; CompanyId = 0; CPIId = 0; CPCId = 0; CCCId = 0;
             txtFisNo.Text = _orm.GetRecordNo("Cost", "OrderNo", "Type", 1);
             productImage.Source = null;
+            txtSiparisNo.Text = string.Empty;
+            InventoryId = 0;
+            InventoryReceiptId = 0;
+            OrderReceiptId = 0;
+            OrderReceiptItemId = 0;
         }
 
         private void selectImage_Click(object sender, RoutedEventArgs e)

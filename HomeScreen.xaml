@@ -69,17 +69,17 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Maliyet Hesaplama" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="20"/>
-                <DockPanel Grid.Column="1" Margin="7,0">
-                    <Button x:Name="btnAppMinimize" Click="btnAppMinimize_Click" FontSize="20" Foreground="White" Content="━" Background="Transparent" Width="28" BorderBrush="Transparent" BorderThickness="0"/>
-                    <Button x:Name="btnAppMaximize" Click="btnAppMaximize_Click" Foreground="White" Content="🗖" Background="Transparent" Width="28" BorderBrush="Transparent" BorderThickness="0"/>
-                    <Button x:Name="btnAppClose"
+                <DockPanel Grid.Column="1" Margin="7,0" VerticalAlignment="Top">
+                    <Button Margin="0,7,0,0" x:Name="btnAppMinimize" Click="btnAppMinimize_Click" FontSize="20" Foreground="White" Content="━" Background="Transparent" Width="28" BorderBrush="Transparent" BorderThickness="0" Height="25"/>
+                    <Button Margin="0,7,0,0" x:Name="btnAppMaximize" Click="btnAppMaximize_Click" Foreground="White" Content="🗖" Background="Transparent" Width="28" BorderBrush="Transparent" BorderThickness="0" Height="25"/>
+                    <Button Margin="0,7,0,0" x:Name="btnAppClose"
                             Click="btnAppClose_Click"
                             Width="32"
                             Content="✖"
                             Foreground="White"
                             BorderThickness="0"
                             Background="Transparent"
-                            Cursor="Hand">
+                            Cursor="Hand" Height="25">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="border"
