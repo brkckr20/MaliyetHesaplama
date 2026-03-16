@@ -11,6 +11,7 @@ namespace MaliyeHesaplama.helpers
             Malzeme = 0,
             Kumas = 1,
             Iplik = 2,
+            Model = 3,
         }
         public enum Receipt
         {

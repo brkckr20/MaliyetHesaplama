@@ -48,6 +48,12 @@ namespace MaliyeHesaplama
             string[] items = { "Mazeme Giriş İşlemleri", "Mazeme Çıkış İşlemleri" };
             ShowMegaMenu(title, items);
         }
+        private void OrderYonetimi_Click(object sender, RoutedEventArgs e)
+        {
+            string title = "Order Yönetimi";
+            string[] items = { "Model Kartı"};
+            ShowMegaMenu(title, items);
+        }
         private void MegaMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (sender is System.Windows.Controls.Button btn)
@@ -88,6 +94,10 @@ namespace MaliyeHesaplama
                     OpenTab(menuName, new userControls.UC_MalzemeGirisCikis(Enums.Receipt.MalzemeGiris));
                 if (menuName == "Mazeme Çıkış İşlemleri")
                     OpenTab(menuName, new userControls.UC_MalzemeGirisCikis(Enums.Receipt.MalzemeCikis));
+
+                /* Order Yönetimi */
+                if (menuName == "Model Kartı")
+                    OpenTab(menuName, new userControls.UC_MalzemeKarti(Enums.Inventory.Model));
 
                 /* Ayarlar */
                 if (menuName == "Üretim Yönetimi Parametreleri")
@@ -243,5 +253,7 @@ namespace MaliyeHesaplama
                 this.DragMove(); // sürüklemeye devam et
             }
         }
+
+        
     }
 }

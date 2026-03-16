@@ -7,13 +7,20 @@ namespace MaliyeHesaplama.userControls
     public partial class UC_MalzemeKarti : System.Windows.Controls.UserControl, IPageCommands
     {
         private MiniOrm _orm;
-        private int Id = 0, _Type = Convert.ToInt32(Enums.Inventory.Malzeme),_InventoryType = Convert.ToInt32(Enums.Inventory.Malzeme);
+        private int Id = 0, _Type, _InventoryType;// = Convert.ToInt32(Enums.Inventory.Malzeme);
 
-        public UC_MalzemeKarti()
+        public UC_MalzemeKarti(Enums.Inventory _inventory = Enums.Inventory.Malzeme)
         {
             InitializeComponent(); 
             ButtonBar.PageCommands = this;
             _orm = new MiniOrm();
+            _Type = Convert.ToInt32(_inventory);
+            _InventoryType = Convert.ToInt32(_inventory);
+            if (_Type == 3)
+            {
+                gridModel.Visibility = System.Windows.Visibility.Collapsed;
+                //model kartı aşamalarına başlanı - hadi hayırlısı
+            }
         }
 
         public void Geri()

@@ -13,6 +13,9 @@
     <Compile Update="userControls\Common\ButtonBar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="userControls\OrderGirisi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="userControls\UC_DepoKarti.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
