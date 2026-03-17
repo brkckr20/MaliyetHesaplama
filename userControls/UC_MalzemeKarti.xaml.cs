@@ -16,7 +16,7 @@ namespace MaliyeHesaplama.userControls
             _orm = new MiniOrm();
             _Type = Convert.ToInt32(_inventory);
             _InventoryType = Convert.ToInt32(_inventory);
-            if (_Type == 3)
+            if (_Type != 3)
             {
                 gridModel.Visibility = System.Windows.Visibility.Collapsed;
                 //model kartı aşamalarına başlanı - hadi hayırlısı

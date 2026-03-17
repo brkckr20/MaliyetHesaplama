@@ -51,7 +51,7 @@ namespace MaliyeHesaplama
         private void OrderYonetimi_Click(object sender, RoutedEventArgs e)
         {
             string title = "Order Yönetimi";
-            string[] items = { "Model Kartı"};
+            string[] items = { "Model Kartı", "Deneme" };
             ShowMegaMenu(title, items);
         }
         private void MegaMenuItem_Click(object sender, RoutedEventArgs e)
@@ -98,6 +98,8 @@ namespace MaliyeHesaplama
                 /* Order Yönetimi */
                 if (menuName == "Model Kartı")
                     OpenTab(menuName, new userControls.UC_MalzemeKarti(Enums.Inventory.Model));
+                if (menuName == "Deneme")
+                    OpenTab(menuName, new userControls.OrderGirisi());
 
                 /* Ayarlar */
                 if (menuName == "Üretim Yönetimi Parametreleri")

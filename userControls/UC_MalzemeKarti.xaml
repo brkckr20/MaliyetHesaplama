@@ -16,17 +16,17 @@
             <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
         </Border>
         <TabControl Grid.Row="1">
-            <TabItem Header="Genel">
+            <TabItem Header="Genel" Height="24">
                 <DockPanel HorizontalAlignment="Left" Margin="0,0,5,0">
                     <Border>
                         <StackPanel>
                             <DockPanel Margin="0,1">
-                                <Label Content="Kodu :"  Width="95"/>
+                                <Label Content="Kodu :"  Width="86"/>
                                 <TextBox x:Name="txtKodu" Width="200" VerticalContentAlignment="Center"/>
-                                <CheckBox Content="Kullanımda" IsChecked="True" x:Name="chkKullanimda" VerticalContentAlignment="Center"/>
+                                <CheckBox Content="Kullanımda" IsChecked="True" x:Name="chkKullanimda" VerticalContentAlignment="Center" Margin="8,0,0,0"/>
                             </DockPanel>
                             <DockPanel Margin="0,0,0,1">
-                                <Label Content="Adı :" Width="95"/>
+                                <Label Content="Adı :" Width="86"/>
                                 <TextBox x:Name="txtAdi" VerticalContentAlignment="Center"/>
                             </DockPanel>
                             <Grid x:Name="gridModel" Tag="modelkarti">
@@ -38,17 +38,12 @@
                                     <StackPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <Label Content="Marka : " Width="80"/>
-                                            <TextBox Width="100"/>
+                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
                                             <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
-                                            <Label Content="Departman : " Width="80"/>
-                                            <TextBox Width="100"/>
-                                            <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
-                                        </DockPanel>
-                                        <DockPanel>
-                                            <Label Content="Grup Kodu : " Width="80"/>
-                                            <TextBox Width="100"/>
+                                            <Label Content="Sezon : " Width="80"/>
+                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
                                             <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
                                         </DockPanel>
                                     </StackPanel>
@@ -56,19 +51,50 @@
                                 <GroupBox Grid.Column="1" Padding="0,4,0,0">
                                     <StackPanel>
                                         <DockPanel Margin="0,0,0,2">
-                                            <Label Content="Sezon : " Width="80"/>
-                                            <TextBox Width="100"/>
-                                            <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
-                                        </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
                                             <Label Content="Cinsiyet : " Width="80"/>
-                                            <TextBox Width="100"/>
+                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
                                             <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
                                         </DockPanel>
                                         <DockPanel>
                                             <Label Content="Kategori : " Width="80"/>
-                                            <TextBox Width="100"/>
+                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
                                             <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </GroupBox>
+                            </Grid>
+                            <Grid x:Name="gridModel1">
+                                <GroupBox Grid.Column="0" Padding="0,4,0,0" Header=" Müşteri Bilgileri ">
+                                    <StackPanel>
+                                        <DockPanel Margin="0,0,0,2" HorizontalAlignment="Left">
+                                            <Label Content="Müşteri No: " Width="80"/>
+                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
+                                            <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                                            <TextBlock VerticalAlignment="Center" Margin="4,0,0,0" Text=""/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2">
+                                            <Label Content="M. Model No: " Width="80"/>
+                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
+                                            <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                                            <TextBlock VerticalAlignment="Center" Margin="4,0,0,0" Text=""/>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </GroupBox>
+                            </Grid>
+                            <Grid x:Name="gridModel2">
+                                <GroupBox Grid.Column="0" Padding="0,4,0,0" Header="">
+                                    <StackPanel>
+                                        <DockPanel Margin="0,0,0,2" HorizontalAlignment="Left">
+                                            <Label Content="GTIP No : " Width="80"/>
+                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
+                                            <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                                            <TextBlock VerticalAlignment="Center" Margin="4,0,0,0" Text=""/>
+                                        </DockPanel>
+                                        <DockPanel Margin="0,0,0,2" HorizontalAlignment="Left">
+                                            <Label Content="Rota : " Width="80"/>
+                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
+                                            <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                                            <TextBlock VerticalAlignment="Center" Margin="4,0,0,0" Text=""/>
                                         </DockPanel>
                                     </StackPanel>
                                 </GroupBox>
@@ -76,6 +102,45 @@
                         </StackPanel>
                     </Border>
                 </DockPanel>
+            </TabItem>
+            <TabItem Header="Ölçü Tablosu">
+                <Grid Margin="0,4,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0" Width="250" HorizontalAlignment="Left">
+                        <TextBox Background="AliceBlue" Width="150" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="20"/>
+                        <StackPanel>
+                            <Button Content="Beden Ekle" Margin="4,0,0,0" Background="Transparent"/>
+                            <Button Content="Beden Sil" Margin="4,2,0,0" Background="Transparent"/>
+                        </StackPanel>
+                    </DockPanel>
+                    <ListBox Grid.Row="1" Width="250" HorizontalAlignment="Left" Margin="0,4,0,0" FontFamily="Bahnschrift Light">
+                        <ListBoxItem Content="S"/>
+                        <ListBoxItem Content="M"/>
+                        <ListBoxItem Content="L"/>
+                        <ListBoxItem Content="XL"/>
+                        <ListBoxItem Content="XXL"/>
+                        <ListBoxItem Content="XXXL"/>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Reçete Detayı">
+                <TabControl>
+                    <TabItem Header="Kumaş"></TabItem>
+                    <TabItem Header="İplik"></TabItem>
+                    <TabItem Header="Aksesuar"></TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Renk/Beden Barkod">
+                <Label Content="renk beden bilgisine barkod bilgilerinin girileceği alan"></Label>
+            </TabItem>
+            <TabItem Header="Renk/Beden Açıklama">
+                <Label Content="renk beden bilgisine açıklama bilgilerinin girileceği alan"></Label>
+            </TabItem>
+            <TabItem Header="Renk/Beden Sticker">
+                <Label Content="renk beden bilgisine açıklama bilgilerinin girileceği alan"></Label>
             </TabItem>
         </TabControl>
         
