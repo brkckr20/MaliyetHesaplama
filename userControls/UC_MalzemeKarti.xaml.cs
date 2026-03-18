@@ -8,7 +8,7 @@ namespace MaliyeHesaplama.userControls
     {
         private MiniOrm _orm;
         private int Id = 0, _Type, _InventoryType;
-        int brandId = 0, seasonId = 0, genderId = 0, categoryId = 0;
+        int brandId = 0, seasonId = 0, genderId = 0, categoryId = 0, companyId = 0;
 
         public UC_MalzemeKarti(Enums.Inventory _inventory = Enums.Inventory.Malzeme)
         {
@@ -116,12 +116,18 @@ namespace MaliyeHesaplama.userControls
             {
                 id = win.Id;
                 tbox.Text = win.Explanation;
+                
             }
         }
 
         private void modelMarka_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             OzellikGetir("Marka", ref brandId, txtModelMarka);
+        }
+
+        private void btnFirmaSecimi_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MainHelper.SetCompanyInformation(ref companyId, txtFirma, tbFirma);
         }
 
         private void btnModelKategori_Click(object sender, System.Windows.RoutedEventArgs e)

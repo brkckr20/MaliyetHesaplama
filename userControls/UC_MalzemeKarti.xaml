@@ -71,16 +71,14 @@
                                     <StackPanel>
                                         <DockPanel Margin="0,0,0,2" HorizontalAlignment="Left">
                                             <Label Content="Müşteri No: " Width="80"/>
-                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
-                                            <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
-                                            <TextBlock VerticalAlignment="Center" Margin="4,0,0,0" Text=""/>
+                                            <TextBox x:Name="txtFirma" Width="100" VerticalContentAlignment="Center"/>
+                                            <Button x:Name="btnFirmaSecimi" Click="btnFirmaSecimi_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                                            <TextBlock x:Name="tbFirma" VerticalAlignment="Center" Margin="4,0,0,0" Text=""/>
                                         </DockPanel>
-                                        <DockPanel Margin="0,0,0,2">
+                                        <DockPanel Margin="0,0,0,2" HorizontalAlignment="Left">
                                             <Label Content="M. Model No: " Width="80"/>
-                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
-                                            <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
-                                            <TextBlock VerticalAlignment="Center" Margin="4,0,0,0" Text=""/>
-                                        </DockPanel>
+                                                <TextBox Width="100" VerticalContentAlignment="Center"/>
+                                            </DockPanel>
                                     </StackPanel>
                                 </GroupBox>
                             </Grid>
