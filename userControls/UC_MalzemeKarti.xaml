@@ -15,21 +15,24 @@
         <Border Grid.Row="0">
             <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
         </Border>
-        <TabControl Grid.Row="1">
+        <StackPanel Grid.Row="1">
+            <StackPanel>
+                <DockPanel Margin="0,1">
+                    <Label Content="Kodu :"  Width="86"/>
+                    <TextBox x:Name="txtKodu" Width="200" VerticalContentAlignment="Center"/>
+                    <CheckBox Content="Kullanımda" IsChecked="True" x:Name="chkKullanimda" VerticalContentAlignment="Center" Margin="8,0,0,0"/>
+                </DockPanel>
+                <DockPanel Margin="0,0,0,1">
+                    <Label Content="Adı :" Width="86"/>
+                    <TextBox x:Name="txtAdi" Width="300"  VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                </DockPanel>
+            </StackPanel>
+            <TabControl x:Name="tabControl1">
             <TabItem Header="Genel" Height="24">
                 <DockPanel HorizontalAlignment="Left" Margin="0,0,5,0">
                     <Border>
-                        <StackPanel>
-                            <DockPanel Margin="0,1">
-                                <Label Content="Kodu :"  Width="86"/>
-                                <TextBox x:Name="txtKodu" Width="200" VerticalContentAlignment="Center"/>
-                                <CheckBox Content="Kullanımda" IsChecked="True" x:Name="chkKullanimda" VerticalContentAlignment="Center" Margin="8,0,0,0"/>
-                            </DockPanel>
-                            <DockPanel Margin="0,0,0,1">
-                                <Label Content="Adı :" Width="86"/>
-                                <TextBox x:Name="txtAdi" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                            <Grid x:Name="gridModel" Tag="modelkarti">
+                            <StackPanel>
+                                <Grid Tag="modelkarti">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -37,14 +40,14 @@
                                 <GroupBox Grid.Column="0" Padding="0,4,0,0">
                                     <StackPanel>
                                         <DockPanel Margin="0,0,0,2">
-                                            <Label Content="Marka : " Width="80"/>
-                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
-                                            <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                                            <Label x:Name="asdasf" Content="Marka : " Width="80"/>
+                                            <TextBox x:Name="txtModelMarka" Width="100" VerticalContentAlignment="Center"/>
+                                            <Button x:Name="modelMarka" Click="modelMarka_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
                                         </DockPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <Label Content="Sezon : " Width="80"/>
-                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
-                                            <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                                            <TextBox x:Name="txtModelSezon" Width="100" VerticalContentAlignment="Center"/>
+                                            <Button x:Name="btnModelSezon" Click="btnModelSezon_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </GroupBox>
@@ -52,13 +55,13 @@
                                     <StackPanel>
                                         <DockPanel Margin="0,0,0,2">
                                             <Label Content="Cinsiyet : " Width="80"/>
-                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
-                                            <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                                            <TextBox x:Name="txtModelCinsiyet" Width="100" VerticalContentAlignment="Center"/>
+                                            <Button x:Name="btnModelCinsiyet" Click="btnModelCinsiyet_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
                                         </DockPanel>
                                         <DockPanel>
                                             <Label Content="Kategori : " Width="80"/>
-                                            <TextBox Width="100" VerticalContentAlignment="Center"/>
-                                            <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                                            <TextBox x:Name="txtModelKategori" Width="100" VerticalContentAlignment="Center"/>
+                                            <Button x:Name="btnModelKategori" Click="btnModelKategori_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </GroupBox>
@@ -126,11 +129,20 @@
                     </ListBox>
                 </Grid>
             </TabItem>
+            <TabItem Header="Fiyat">
+                
+            </TabItem>
             <TabItem Header="Reçete Detayı">
                 <TabControl>
-                    <TabItem Header="Kumaş"></TabItem>
-                    <TabItem Header="İplik"></TabItem>
-                    <TabItem Header="Aksesuar"></TabItem>
+                    <TabItem Header="Kumaş">
+                        <Label Content="Kumaş bilgileri gelecek"/>
+                    </TabItem>
+                    <TabItem Header="İplik">
+                        <Label Content="İplik bilgileri gelecek"/>
+                    </TabItem>
+                    <TabItem Header="Aksesuar">
+                        <Label Content="Aksesuar bilgileri gelecek"/>
+                    </TabItem>
                 </TabControl>
             </TabItem>
             <TabItem Header="Renk/Beden Barkod">
@@ -142,7 +154,12 @@
             <TabItem Header="Renk/Beden Sticker">
                 <Label Content="renk beden bilgisine açıklama bilgilerinin girileceği alan"></Label>
             </TabItem>
+            <TabItem Header="Ekler">
+                <Label Content="Siparişe bağlı eklerin girileceği tablo"></Label>
+            </TabItem>
         </TabControl>
+        </StackPanel>
+        
         
     </Grid>
 </UserControl>

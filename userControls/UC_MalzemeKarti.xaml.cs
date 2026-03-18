@@ -7,19 +7,19 @@ namespace MaliyeHesaplama.userControls
     public partial class UC_MalzemeKarti : System.Windows.Controls.UserControl, IPageCommands
     {
         private MiniOrm _orm;
-        private int Id = 0, _Type, _InventoryType;// = Convert.ToInt32(Enums.Inventory.Malzeme);
+        private int Id = 0, _Type, _InventoryType;
+        int brandId = 0, seasonId = 0, genderId = 0, categoryId = 0;
 
         public UC_MalzemeKarti(Enums.Inventory _inventory = Enums.Inventory.Malzeme)
         {
-            InitializeComponent(); 
+            InitializeComponent();
             ButtonBar.PageCommands = this;
             _orm = new MiniOrm();
             _Type = Convert.ToInt32(_inventory);
             _InventoryType = Convert.ToInt32(_inventory);
             if (_Type != 3)
             {
-                gridModel.Visibility = System.Windows.Visibility.Collapsed;
-                //model kartı aşamalarına başlanı - hadi hayırlısı
+                tabControl1.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
@@ -107,6 +107,38 @@ namespace MaliyeHesaplama.userControls
             txtKodu.Text = string.Empty;
             chkKullanimda.IsChecked = false;
         }
+
+        void OzellikGetir(string ozellik, ref int id, System.Windows.Controls.TextBox tbox)
+        {
+            wins.winOzellikSecimi win = new wins.winOzellikSecimi(ozellik, _InventoryType);
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                id = win.Id;
+                tbox.Text = win.Explanation;
+            }
+        }
+
+        private void modelMarka_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            OzellikGetir("Marka", ref brandId, txtModelMarka);
+        }
+
+        private void btnModelKategori_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            OzellikGetir("Kategori", ref categoryId, txtModelKategori);
+        }
+
+        private void btnModelCinsiyet_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            OzellikGetir("Cinsiyet", ref genderId, txtModelCinsiyet);
+        }
+
+        private void btnModelSezon_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            OzellikGetir("Sezon", ref seasonId, txtModelSezon);
+        }
+
         public void Yazdir()
         {
             if (this.Id == 0)
