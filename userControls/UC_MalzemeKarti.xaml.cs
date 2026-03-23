@@ -1,6 +1,5 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
-using System.Windows.Controls;
 
 namespace MaliyeHesaplama.userControls
 {
@@ -104,8 +103,15 @@ namespace MaliyeHesaplama.userControls
         {
             this.Id = 0;
             txtKodu.Text = string.Empty;
-            txtKodu.Text = string.Empty;
+            txtAdi.Text = string.Empty;
             chkKullanimda.IsChecked = false;
+            txtModelSezon.Text = string.Empty;
+            txtModelMarka.Text = string.Empty;
+            txtModelCinsiyet.Text = string.Empty;
+            txtModelKategori.Text = string.Empty;
+            companyId = 0;
+            txtFirma.Text = string.Empty;
+            tbFirma.Text = string.Empty;
         }
 
         void OzellikGetir(string ozellik, ref int id, System.Windows.Controls.TextBox tbox)
