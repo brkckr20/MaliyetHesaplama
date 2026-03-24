@@ -33,7 +33,7 @@ namespace MaliyeHesaplama
         private void Ayarlar_Click(object sender, RoutedEventArgs e)
         {
             string title = "Ayarlar";
-            string[] items = { "Üretim Yönetimi Parametreleri", "Numaratör", "Rapor Oluşturma" };
+            string[] items = { "Üretim Yönetimi Parametreleri", "Numaratör", "Rapor Oluşturma", "GTIP Tanımları" };
             ShowMegaMenu(title, items);
         }
         private void ReceteTanimlamalari_Click(object sender, RoutedEventArgs e)
@@ -108,6 +108,8 @@ namespace MaliyeHesaplama
                     OpenTab(menuName, new userControls.UC_Numarator());
                 if (menuName == "Rapor Oluşturma")
                     OpenTab(menuName, new userControls.UC_RaporOlusturma());
+                if (menuName == "GTIP Tanımları")
+                    OpenTab(menuName, new userControls.UC_GTIPTanimlari());
             }
 
         }

@@ -119,9 +119,7 @@ namespace MaliyeHesaplama.helpers
             if (win.SecimYapildi)
             {
                 CompanyId = win.Id;
-                textBox.Text = lbl != null ? win.FirmaKodu : win.FirmaUnvan;
-                lbl.Text = win.FirmaUnvan;
-                
+                textBox.Text = lbl != null ? win.FirmaKodu : win.FirmaUnvan;                
             }
         }
         public static void SetWareHouseInformation(ref int CompanyId, System.Windows.Controls.TextBox textBox)

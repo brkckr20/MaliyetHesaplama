@@ -87,9 +87,9 @@
                                         <StackPanel>
                                             <DockPanel Margin="0,0,0,2" HorizontalAlignment="Left">
                                                 <Label Content="GTIP No : " Width="80"/>
-                                                <TextBox Width="100" VerticalContentAlignment="Center"/>
-                                                <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
-                                                <TextBlock VerticalAlignment="Center" Margin="4,0,0,0" Text=""/>
+                                                <TextBox x:Name="txtGTIP" Width="100" VerticalContentAlignment="Center"/>
+                                                <Button x:Name="btnGTIP" Click="btnGTIP_Click" Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
+                                                <TextBlock x:Name="tbGTIP" VerticalAlignment="Center" Margin="4,0,0,0" Text=""/>
                                             </DockPanel>
                                             <DockPanel Margin="0,0,0,2" HorizontalAlignment="Left">
                                                 <Label Content="Rota : " Width="80"/>

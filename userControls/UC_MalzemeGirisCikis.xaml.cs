@@ -33,7 +33,7 @@ namespace MaliyeHesaplama.userControls
 
         private void btnFirmaListesi_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            MainHelper.SetCompanyInformation(ref CompanyId, txtFirmaUnvan);
+            MainHelper.SetCompanyInformation(ref CompanyId, txtFirmaUnvan, null);
         }
 
         private void btnDepoListesi_Click(object sender, System.Windows.RoutedEventArgs e)
