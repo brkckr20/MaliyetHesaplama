@@ -133,7 +133,14 @@ namespace MaliyeHesaplama.userControls
 
         private void btnGTIP_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            OzellikGetir("GTIP", ref gtipId, txtGTIP);
+            wins.winGTIPListesi win = new wins.winGTIPListesi();
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                gtipId = win.Id;
+                txtGTIP.Text = win.Kodu;
+                tbGTIP.Text = win.Adi;
+            }
         }
 
         private void btnFirmaSecimi_Click(object sender, System.Windows.RoutedEventArgs e)

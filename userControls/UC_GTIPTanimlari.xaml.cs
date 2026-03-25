@@ -11,6 +11,7 @@ namespace MaliyeHesaplama.userControls
         {
             InitializeComponent();
             ButtonBar.PageCommands = this;
+            ButtonBar.btnYazdir.IsEnabled = false;
             _orm = new MiniOrm();
         }
 
@@ -45,9 +46,18 @@ namespace MaliyeHesaplama.userControls
             }
         }
 
-        public void Listele() // buradan devam edilecek 24.03.2026
+        public void Listele()
         {
-            //throw new NotImplementedException();
+            wins.winGTIPListesi win = new wins.winGTIPListesi();
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                Id = win.Id;
+                txtKodu.Text = win.Kodu;
+                txtAdi.Text = win.Adi;
+                txtAciklama.Text = win.Aciklama;
+                chkAktif.IsChecked = win.Kullanimda;
+            }
         }
 
         public void Sil()
