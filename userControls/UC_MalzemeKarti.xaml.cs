@@ -130,17 +130,10 @@ namespace MaliyeHesaplama.userControls
         {
             OzellikGetir("Marka", ref brandId, txtModelMarka);
         }
-        private int asasd =122234;
+        
         private void btnGTIP_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            wins.winGTIPListesi win = new wins.winGTIPListesi();
-            win.ShowDialog();
-            if (win.SecimYapildi)
-            {
-                gtipId = win.Id;
-                txtGTIP.Text = win.Kodu;
-                tbGTIP.Text = win.Adi;
-            }
+            MainHelper.GetGTIP(ref this.gtipId,txtGTIP,tbGTIP);
         }
 
         private void btnFirmaSecimi_Click(object sender, System.Windows.RoutedEventArgs e)

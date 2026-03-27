@@ -92,12 +92,6 @@
                                                 <TextBlock x:Name="tbGTIP" VerticalAlignment="Center" Margin="4,0,0,0" Text=""/>
                                             </DockPanel>
                                             <DockPanel Margin="0,0,0,2" HorizontalAlignment="Left">
-                                                <Label Content="Rota : " Width="80"/>
-                                                <TextBox Width="100" VerticalContentAlignment="Center"/>
-                                                <Button Width="24" Content="🔎" Background="Transparent" BorderBrush="LightGray"/>
-                                                <TextBlock VerticalAlignment="Center" Margin="4,0,0,0" Text=""/>
-                                            </DockPanel>
-                                            <DockPanel Margin="0,0,0,2" HorizontalAlignment="Left">
                                                 <Label Content="Özel Kod : " Width="80"/>
                                                 <TextBox Width="100" VerticalContentAlignment="Center"/>
                                             </DockPanel>
@@ -117,9 +111,11 @@
                         <DockPanel Grid.Row="0" Width="250" HorizontalAlignment="Left">
                             <TextBox Background="AliceBlue" Width="150" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="20"/>
                             <StackPanel>
-                                <Button Content="Beden Ekle" Margin="4,0,0,0" Background="Transparent"/>
-                                <Button Content="Beden Sil" Margin="4,2,0,0" Background="Transparent"/>
+                                <Button x:Name="btnBedenEkle" Content="Beden Ekle" Margin="4,0,0,0" Background="Transparent"/>
+                                <Button x:Name="btnBedenSil" Content="Beden Sil" Margin="4,2,0,0" Background="Transparent"/>
+                                <Button x:Name="btnTumunuTemizle" Content="Tümünü Sil" Margin="4,2,0,0" Background="Transparent"/>
                             </StackPanel>
+                            <!--buradan devam 27.03.2026-->
                         </DockPanel>
                         <ListBox Grid.Row="1" Width="250" HorizontalAlignment="Left" Margin="0,4,0,0" FontFamily="Bahnschrift Light">
                             <ListBoxItem Content="S"/>

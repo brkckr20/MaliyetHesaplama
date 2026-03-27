@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using MaliyeHesaplama.models;
 using MaliyeHesaplama.wins;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -194,6 +195,18 @@ namespace MaliyeHesaplama.helpers
             var field = value.GetType().GetField(value.ToString());
             var attr = field.GetCustomAttribute<DisplayAttribute>();
             return attr?.Name ?? value.ToString();
+        }
+
+        public static void GetGTIP(ref int id, System.Windows.Controls.TextBox txt, TextBlock tb)
+        {
+            wins.winGTIPListesi win = new wins.winGTIPListesi();
+            win.ShowDialog();
+            if (win.SecimYapildi)
+            {
+                id = win.Id;
+                txt.Text = win.Kodu;
+                tb.Text = win.Adi;
+            }
         }
     }
 }
