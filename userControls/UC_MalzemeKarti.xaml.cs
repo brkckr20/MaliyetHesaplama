@@ -130,10 +130,43 @@ namespace MaliyeHesaplama.userControls
         {
             OzellikGetir("Marka", ref brandId, txtModelMarka);
         }
-        
+
+        private void btnBedenEkle_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (lstBedenler.Items.Contains(txtBeden.Text))
+            {
+                Bildirim.Uyari2($"{txtBeden.Text} beden daha önce eklenmiş");
+                return;
+            }
+            if (txtBeden.Text.Trim() == string.Empty)
+            {
+                Bildirim.Uyari2("Beden alanı boş bırakılamaz!");
+                return;
+            }
+            lstBedenler.Items.Add(txtBeden.Text);
+            txtBeden.Text = string.Empty;
+        }
+
+        private void btnBedenSil_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (lstBedenler.SelectedItem != null)
+            {
+                lstBedenler.Items.Remove(lstBedenler.SelectedItem);
+            }
+            else
+            {
+                Bildirim.Uyari2("Silmek için lütfen bir beden seçiniz");
+            }
+        }
+
+        private void btnTumunuTemizle_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            lstBedenler.Items.Clear();
+        }
+
         private void btnGTIP_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            MainHelper.GetGTIP(ref this.gtipId,txtGTIP,tbGTIP);
+            MainHelper.GetGTIP(ref this.gtipId, txtGTIP, tbGTIP);
         }
 
         private void btnFirmaSecimi_Click(object sender, System.Windows.RoutedEventArgs e)
