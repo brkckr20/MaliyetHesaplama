@@ -102,25 +102,42 @@
                         </Border>
                     </DockPanel>
                 </TabItem>
-                <TabItem Header="Ölçü Tablosu">
+                <TabItem Header="Renk / Beden">
                     <Grid Margin="0,4,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <DockPanel Grid.Row="0" Width="250" HorizontalAlignment="Left">
-                            <TextBox x:Name="txtBeden" Background="AliceBlue" Width="150" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="20"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition  Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <GroupBox Header="Renkler" Grid.Column="0" Margin="0,0,5,0">
                             <StackPanel>
-                                <Button Click="btnBedenEkle_Click" x:Name="btnBedenEkle" Content="Beden Ekle" Margin="4,0,0,0" Background="Transparent"/>
-                                <Button Click="btnBedenSil_Click" x:Name="btnBedenSil" Content="Beden Sil" Margin="4,2,0,0" Background="Transparent"/>
-                                <Button Click="btnTumunuTemizle_Click" x:Name="btnTumunuTemizle" Content="Tümünü Sil" Margin="4,2,0,0" Background="Transparent"/>
+                                <DockPanel Grid.Row="0" Width="250" HorizontalAlignment="Left">
+                                    <TextBox x:Name="tx1tBeden" Background="AliceBlue" Width="150" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="20"/>
+                                    <StackPanel>
+                                        <Button Click="btnBedenEkle_Click" x:Name="btnVaryantEkle" Content="Renk Ekle" Margin="4,0,0,0" Background="Transparent"/>
+                                        <Button Click="btnBedenSil_Click" x:Name="btnVaryantSil" Content="Renk Sil" Margin="4,2,0,0" Background="Transparent"/>
+                                        <Button Click="btnTumunuTemizle_Click" x:Name="btnVaryantTumunuTemizle" Content="Tümünü Sil" Margin="4,2,0,0" Background="Transparent"/>
+                                    </StackPanel>
+                                </DockPanel>
+                                <ListBox x:Name="lstRenkler" Grid.Row="1" Width="250" HorizontalAlignment="Left" Margin="0,4,0,0" FontFamily="Bahnschrift Light"/>
                             </StackPanel>
-                        </DockPanel>
-                        <ListBox x:Name="lstBedenler" Grid.Row="1" Width="250" HorizontalAlignment="Left" Margin="0,4,0,0" FontFamily="Bahnschrift Light"/>
+                        </GroupBox>
+                        <GroupBox Header="Bedenler" Grid.Column="1">
+                            <StackPanel  Margin="0,0,5,0">
+                                <DockPanel Grid.Row="0" Width="250" HorizontalAlignment="Left">
+                                    <TextBox x:Name="txtBeden" Background="AliceBlue" Width="150" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="20"/>
+                                    <StackPanel>
+                                        <Button Click="btnBedenEkle_Click" x:Name="btnBedenEkle" Content="Beden Ekle" Margin="4,0,0,0" Background="Transparent"/>
+                                        <Button Click="btnBedenSil_Click" x:Name="btnBedenSil" Content="Beden Sil" Margin="4,2,0,0" Background="Transparent"/>
+                                        <Button Click="btnTumunuTemizle_Click" x:Name="btnTumunuTemizle" Content="Tümünü Sil" Margin="4,2,0,0" Background="Transparent"/>
+                                    </StackPanel>
+                                </DockPanel>
+                                <ListBox x:Name="lstBedenler" Grid.Row="1" Width="250" HorizontalAlignment="Left" Margin="0,4,0,0" FontFamily="Bahnschrift Light"/>
+                            </StackPanel>
+                        </GroupBox>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Fiyat">
-<!--BURADAN DEVAM 31.03.2026-->
+                    
                 </TabItem>
                 <TabItem Header="Reçete Detayı">
                     <TabControl>
