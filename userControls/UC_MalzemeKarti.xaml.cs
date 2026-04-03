@@ -145,6 +145,7 @@ namespace MaliyeHesaplama.userControls
             }
             lstBedenler.Items.Add(txtBeden.Text);
             txtBeden.Text = string.Empty;
+            txtBeden.Focus();
         }
 
         private void btnBedenSil_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -162,6 +163,40 @@ namespace MaliyeHesaplama.userControls
         private void btnTumunuTemizle_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             lstBedenler.Items.Clear();
+        }
+
+        private void btnVaryantEkle_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (lstRenkler.Items.Contains(txtRenk.Text))
+            {
+                Bildirim.Uyari2($"{txtRenk.Text} rengi daha önce eklenmiş");
+                return;
+            }
+            if (txtRenk.Text.Trim() == string.Empty)
+            {
+                Bildirim.Uyari2("Renk alanı boş bırakılamaz!");
+                return;
+            }
+            lstRenkler.Items.Add(txtRenk.Text);
+            txtRenk.Text = string.Empty;
+            txtRenk.Focus();
+        }
+
+        private void btnVaryantSil_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (lstRenkler.SelectedItem != null)
+            {
+                lstRenkler.Items.Remove(lstRenkler.SelectedItem);
+            }
+            else
+            {
+                Bildirim.Uyari2("Silmek için lütfen bir beden seçiniz");
+            }
+        }
+
+        private void btnVaryantTumunuTemizle_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            lstRenkler.Items.Clear();
         }
 
         private void btnGTIP_Click(object sender, System.Windows.RoutedEventArgs e)

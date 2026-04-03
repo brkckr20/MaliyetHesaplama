@@ -15,7 +15,6 @@
         <Border Grid.Row="0">
             <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
         </Border>
-<!--lorem-->
         <StackPanel Grid.Row="1">
             <StackPanel>
                 <DockPanel Margin="0,1">
@@ -109,14 +108,14 @@
                             <ColumnDefinition  Width="Auto"/>
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <GroupBox Header="Renkler" Grid.Column="0" Margin="0,0,5,0">
+                        <GroupBox Header="Bileşenler" Grid.Column="0" Margin="0,0,5,0">
                             <StackPanel>
                                 <DockPanel Grid.Row="0" Width="250" HorizontalAlignment="Left">
-                                    <TextBox x:Name="tx1tBeden" Background="AliceBlue" Width="150" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="20"/>
+                                    <TextBox x:Name="txtRenk" Background="AliceBlue" Width="150" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="20"/>
                                     <StackPanel>
-                                        <Button Click="btnBedenEkle_Click" x:Name="btnVaryantEkle" Content="Renk Ekle" Margin="4,0,0,0" Background="Transparent"/>
-                                        <Button Click="btnBedenSil_Click" x:Name="btnVaryantSil" Content="Renk Sil" Margin="4,2,0,0" Background="Transparent"/>
-                                        <Button Click="btnTumunuTemizle_Click" x:Name="btnVaryantTumunuTemizle" Content="Tümünü Sil" Margin="4,2,0,0" Background="Transparent"/>
+                                        <Button Click="btnVaryantEkle_Click" x:Name="btnVaryantEkle" Content="Ekle" Margin="4,0,0,0" Background="Transparent"/>
+                                        <Button Click="btnVaryantSil_Click" x:Name="btnVaryantSil" Content="Sil" Margin="4,2,0,0" Background="Transparent"/>
+                                        <Button Click="btnVaryantTumunuTemizle_Click" x:Name="btnVaryantTumunuTemizle" Content="Tümünü Sil" Margin="4,2,0,0" Background="Transparent"/>
                                     </StackPanel>
                                 </DockPanel>
                                 <ListBox x:Name="lstRenkler" Grid.Row="1" Width="250" HorizontalAlignment="Left" Margin="0,4,0,0" FontFamily="Bahnschrift Light"/>
@@ -138,7 +137,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Fiyat">
-                    
+                    <!--burdan devam et - 03.04.2026-->
                 </TabItem>
                 <TabItem Header="Reçete Detayı">
                     <TabControl>
