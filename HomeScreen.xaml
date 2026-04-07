@@ -32,7 +32,28 @@
                                         BorderThickness="0"
                                         Foreground="Black"
                                         FontWeight="Bold"
-                                        ToolTip="Sekmeyi kapat"/>
+                                        ToolTip="Sekmeyi kapat">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="border"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="3">
+                                                    <ContentPresenter HorizontalAlignment="Center"
+                                                                      VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="Transparent"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="Transparent"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
                                 </DockPanel>
                             </Border>
                         </Grid>
@@ -70,8 +91,50 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Maliyet Hesaplama" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="20"/>
                 <DockPanel Grid.Column="1" Margin="7,0" VerticalAlignment="Top">
-                    <Button Margin="0,7,0,0" x:Name="btnAppMinimize" Click="btnAppMinimize_Click" FontSize="20" Foreground="White" Content="━" Background="Transparent" Width="28" BorderBrush="Transparent" BorderThickness="0" Height="25"/>
-                    <Button Margin="0,7,0,0" x:Name="btnAppMaximize" Click="btnAppMaximize_Click" Foreground="White" Content="🗖" Background="Transparent" Width="28" BorderBrush="Transparent" BorderThickness="0" Height="25"/>
+                    <Button Margin="0,7,0,0" x:Name="btnAppMinimize" Click="btnAppMinimize_Click" FontSize="20" Foreground="White" Content="━" Background="Transparent" Width="28" BorderBrush="Transparent" BorderThickness="0" Height="25">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="0">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#3d7a76"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#2a4d49"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Margin="0,7,0,0" x:Name="btnAppMaximize" Click="btnAppMaximize_Click" Foreground="White" Content="🗖" Background="Transparent" Width="28" BorderBrush="Transparent" BorderThickness="0" Height="25">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="0">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#3d7a76"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#2a4d49"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                     <Button Margin="0,7,0,0" x:Name="btnAppClose"
                             Click="btnAppClose_Click"
                             Width="32"
