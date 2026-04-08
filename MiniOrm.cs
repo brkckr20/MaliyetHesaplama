@@ -609,6 +609,58 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @InventoryId, @WareHouseId, @Varia
             throw;
         }
     }
+    public void ExecuteRaw(string sql)
+    {
+        _connection.Execute(sql);
+    }
+
+    public IEnumerable<T> QueryRaw<T>(string sql)
+    {
+        return _connection.Query<T>(sql);
+    }
+
+    public void CreateTablesIfNotExist()
+    {
+        var sql = @"
+        IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Renk')
+        BEGIN
+            CREATE TABLE Renk (
+                Id INT IDENTITY(1,1) PRIMARY KEY,
+                Kodu NVARCHAR(50) NOT NULL,
+                Adi NVARCHAR(100) NOT NULL,
+                Aktif BIT DEFAULT 1
+            );
+        END;
+
+        IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Beden')
+        BEGIN
+            CREATE TABLE Beden (
+                Id INT IDENTITY(1,1) PRIMARY KEY,
+                Kodu NVARCHAR(50) NOT NULL,
+                Adi NVARCHAR(100) NOT NULL,
+                Siralama INT DEFAULT 0
+            );
+        END;
+
+        IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Variant')
+        BEGIN
+            CREATE TABLE Variant (
+                Id INT IDENTITY(1,1) PRIMARY KEY,
+                InventoryId INT NOT NULL,
+                RenkId INT,
+                BedenId INT,
+                Barkod NVARCHAR(50),
+                Fiyat DECIMAL(18,2),
+                Aktif BIT DEFAULT 1,
+                FOREIGN KEY (InventoryId) REFERENCES Inventory(Id),
+                FOREIGN KEY (RenkId) REFERENCES Renk(Id),
+                FOREIGN KEY (BedenId) REFERENCES Beden(Id)
+            );
+        END;
+        ";
+        _connection.Execute(sql);
+    }
+
     public void TestQuery()
     {
         var sql = $"SELECT * FROM Users"; // tableName sabit burada test için

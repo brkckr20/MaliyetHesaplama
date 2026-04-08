@@ -104,35 +104,43 @@
                 </TabItem>
                 <TabItem Header="Renk / Beden">
                     <Grid Margin="0,4,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition  Width="Auto"/>
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <GroupBox Header="Bileşenler" Grid.Column="0" Margin="0,0,5,0">
-                            <StackPanel>
-                                <DockPanel Grid.Row="0" Width="250" HorizontalAlignment="Left">
-                                    <TextBox x:Name="txtRenk" Background="AliceBlue" Width="150" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="20"/>
-                                    <StackPanel>
-                                        <Button Click="btnVaryantEkle_Click" x:Name="btnVaryantEkle" Content="Ekle" Margin="4,0,0,0" Background="Transparent"/>
-                                        <Button Click="btnVaryantSil_Click" x:Name="btnVaryantSil" Content="Sil" Margin="4,2,0,0" Background="Transparent"/>
-                                        <Button Click="btnVaryantTumunuTemizle_Click" x:Name="btnVaryantTumunuTemizle" Content="Tümünü Sil" Margin="4,2,0,0" Background="Transparent"/>
-                                    </StackPanel>
-                                </DockPanel>
-                                <ListBox x:Name="lstRenkler" Grid.Row="1" Width="250" HorizontalAlignment="Left" Margin="0,4,0,0" FontFamily="Bahnschrift Light"/>
-                            </StackPanel>
-                        </GroupBox>
-                        <GroupBox Header="Bedenler" Grid.Column="1">
-                            <StackPanel  Margin="0,0,5,0">
-                                <DockPanel Grid.Row="0" Width="250" HorizontalAlignment="Left">
-                                    <TextBox x:Name="txtBeden" Background="AliceBlue" Width="150" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="20"/>
-                                    <StackPanel>
-                                        <Button Click="btnBedenEkle_Click" x:Name="btnBedenEkle" Content="Beden Ekle" Margin="4,0,0,0" Background="Transparent"/>
-                                        <Button Click="btnBedenSil_Click" x:Name="btnBedenSil" Content="Beden Sil" Margin="4,2,0,0" Background="Transparent"/>
-                                        <Button Click="btnTumunuTemizle_Click" x:Name="btnTumunuTemizle" Content="Tümünü Sil" Margin="4,2,0,0" Background="Transparent"/>
-                                    </StackPanel>
-                                </DockPanel>
-                                <ListBox x:Name="lstBedenler" Grid.Row="1" Width="250" HorizontalAlignment="Left" Margin="0,4,0,0" FontFamily="Bahnschrift Light"/>
-                            </StackPanel>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+                            <GroupBox Header="Renk Ekle" Margin="0,0,10,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox x:Name="cmbRenk" Width="150" DisplayMemberPath="Adi" SelectedValuePath="Id"/>
+                                    <Button x:Name="btnRenkEkle" Content="Ekle" Width="60" Margin="5,0,0,0" Click="btnRenkEkle_Click"/>
+                                    <Button x:Name="btnRenkYeni" Content="Yeni" Width="60" Margin="5,0,0,0" Click="btnRenkYeni_Click"/>
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Header="Beden Ekle" Margin="0,0,10,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox x:Name="cmbBeden" Width="150" DisplayMemberPath="Adi" SelectedValuePath="Id"/>
+                                    <Button x:Name="btnBedenEkle" Content="Ekle" Width="60" Margin="5,0,0,0" Click="btnBedenEkle_Click"/>
+                                    <Button x:Name="btnBedenYeni" Content="Yeni" Width="60" Margin="5,0,0,0" Click="btnBedenYeni_Click"/>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                        <GroupBox Grid.Row="1" Header="Renk / Beden Matrisi">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <DataGrid x:Name="dgMatris" Grid.Row="0" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                                          HeadersVisibility="Column" GridLinesVisibility="All" Background="White" RowHeaderWidth="0">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Renk" x:Name="colRenk" IsReadOnly="True" Width="120"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                                    <Button x:Name="btnMatrisKaydet" Content="Matrisi Kaydet" Width="120" Margin="0,0,10,0" Click="btnMatrisKaydet_Click"/>
+                                    <Button x:Name="btnMatrisSil" Content="Seçili Sil" Width="100" Click="btnMatrisSil_Click"/>
+                                </StackPanel>
+                            </Grid>
                         </GroupBox>
                     </Grid>
                 </TabItem>
