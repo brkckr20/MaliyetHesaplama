@@ -1,5 +1,8 @@
 ﻿using MaliyeHesaplama.helpers;
+using MaliyeHesaplama.helpers.StokIslemleri;
+using MaliyeHesaplama.helpers.StokIslemleri.DTO;
 using MaliyeHesaplama.Interfaces;
+using System.Globalization;
 using MaliyeHesaplama.wins;
 using System.Data;
 using System.IO;
@@ -49,12 +52,17 @@ namespace MaliyeHesaplama.userControls
 
         public void Kaydet()
         {
+            using var orm = new MiniOrm();
+            var stokHelper = new StokHelper(orm);
+
             var dict0 = new Dictionary<string, object>()
             {
                 {"Id", Id},{"ReceiptNo",txtFisNo.Text},{"ReceiptType", Convert.ToInt32(_receipt)},{"ReceiptDate", dpTarih.SelectedDate.Value},{"CompanyId",CompanyId},{"WareHouseId",WareHouseId},{"Explanation",txtAciklama.Text},{"InvoiceNo",txtBelgeNo.Text},{"InvoiceDate", dpSevkTarih.SelectedDate.Value},{"DocumentName", txtBelgeAdi.Text},{"Document", pdfData == null ? new byte[0] : pdfData}
             };
-            Id = _orm.Save("Receipt", dict0);
-            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Piece", "UnitPrice", "RowExplanation", "TrackingNumber", "Vat", "RowAmount", "Receiver" }; // db'ye kayıt edilecek tablo alanları - gridi doğrudan aldığı için
+            Id = orm.Save("Receipt", dict0);
+
+            var dbColumns = new List<string> { "Id", "OperationType", "InventoryId", "Piece", "NetMeter", "NetWeight", "UnitPrice", "RowExplanation", "TrackingNumber", "Vat", "RowAmount", "Receiver" };
+
             foreach (DataRow row in table.Rows)
             {
                 if (row.RowState == DataRowState.Deleted) continue;
@@ -65,10 +73,75 @@ namespace MaliyeHesaplama.userControls
                     dict[colName] = value == DBNull.Value ? null : value;
                 }
                 dict["ReceiptId"] = Id;
-                int newId = _orm.Save("ReceiptItem", dict, "Id");
+                int newId = orm.Save("ReceiptItem", dict, "Id");
 
                 if (Convert.ToInt32(dict["Id"]) == 0)
                     row["Id"] = newId;
+
+                // Stok giriş/çıkış işlemi
+                int inventoryId = Convert.ToInt32(dict["InventoryId"]);
+                decimal yeniKg = dict["NetWeight"] != null ? Convert.ToDecimal(dict["NetWeight"]) : 0;
+                decimal yeniMeter = dict["NetMeter"] != null ? Convert.ToDecimal(dict["NetMeter"]) : 0;
+                int yeniAdet = dict["Piece"] != null ? Convert.ToInt32(dict["Piece"]) : 0;
+
+                // Güncelleme durumunda eski değeri çek
+                decimal? oncekiAdet = null;
+                decimal? oncekiKg = null;
+                decimal? oncekiMeter = null;
+                
+                int satirId = Convert.ToInt32(dict["Id"]);
+                if (satirId > 0)
+                {
+                    // Eski değerleri DB'den çek
+                    dynamic eskiKalem = orm.GetById<dynamic>("ReceiptItem", satirId, "Id");
+                    if (eskiKalem != null)
+                    {
+                        oncekiAdet = eskiKalem.Piece;
+                        oncekiKg = eskiKalem.NetWeight;
+                        oncekiMeter = eskiKalem.NetMeter;
+                    }
+                }
+
+                // Farkı hesapla (yeni - eski)
+                decimal farkKg = oncekiKg.HasValue ? (yeniKg - oncekiKg.Value) : yeniKg;
+                decimal farkMeter = oncekiMeter.HasValue ? (yeniMeter - oncekiMeter.Value) : yeniMeter;
+                int farkAdet = oncekiAdet.HasValue ? (int)(yeniAdet - oncekiAdet.Value) : yeniAdet;
+
+                if (_receipt == Enums.Receipt.MalzemeGiris)
+                {
+                    // Stok giriş - farkı ekle
+                    var mevcutStok = stokHelper.GetirStok(inventoryId, WareHouseId, null, null, null);
+                    if (mevcutStok != null)
+                    {
+                        decimal sonKg = mevcutStok.QuantityKg + farkKg;
+                        decimal sonMeter = mevcutStok.QuantityMeter + farkMeter;
+                        int sonAdet = mevcutStok.QuantityPiece + farkAdet;
+                        string sonKgStr = sonKg.ToString("0.##", CultureInfo.InvariantCulture);
+                        string sonMeterStr = sonMeter.ToString("0.##", CultureInfo.InvariantCulture);
+                        orm.ExecuteRaw($"UPDATE Stock SET QuantityKg={sonKgStr}, QuantityMeter={sonMeterStr}, QuantityPiece={sonAdet} WHERE Id={mevcutStok.Id}");
+                    }
+                    else
+                    {
+                        string farkKgStr = farkKg.ToString("0.##", CultureInfo.InvariantCulture);
+                        string farkMeterStr = farkMeter.ToString("0.##", CultureInfo.InvariantCulture);
+                        orm.ExecuteRaw($"INSERT INTO Stock (InventoryId, WareHouseId, QuantityKg, QuantityMeter, QuantityPiece) VALUES ({inventoryId}, {WareHouseId}, {farkKgStr}, {farkMeterStr}, {farkAdet})");
+                    }
+                }
+                else
+                {
+                    // Stok çıkış - farkı çıkar
+                    var mevcutStok = stokHelper.GetirStok(inventoryId, WareHouseId, null, null, null);
+                    if (mevcutStok == null)
+                    {
+                        throw new Exception($"Stok bulunamadı! Malzeme: {inventoryId}");
+                    }
+                    decimal sonKg = mevcutStok.QuantityKg - farkKg;
+                    decimal sonMeter = mevcutStok.QuantityMeter - farkMeter;
+                    int sonAdet = mevcutStok.QuantityPiece - farkAdet;
+                    string sonKgStr = sonKg.ToString("0.##", CultureInfo.InvariantCulture);
+                    string sonMeterStr = sonMeter.ToString("0.##", CultureInfo.InvariantCulture);
+                    orm.ExecuteRaw($"UPDATE Stock SET QuantityKg={sonKgStr}, QuantityMeter={sonMeterStr}, QuantityPiece={sonAdet} WHERE Id={mevcutStok.Id}");
+                }
             }
             Bildirim.Bilgilendirme2("Kayıt işlemi başarılı bir şekilde gerçekleştirildi");
             UpdateTotals();

@@ -4,10 +4,11 @@ using System.Data.SqlClient;
 using Microsoft.Data.Sqlite;
 using System.Data;
 
-public class MiniOrm
+public class MiniOrm : IDisposable
 {
     private readonly IDbConnection _connection;
     private readonly string _dbType;
+    private bool _disposed;
 
     public MiniOrm()
     {
@@ -676,6 +677,25 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @InventoryId, @WareHouseId, @Varia
         //    }
         //    Console.WriteLine("----");
         //}
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                _connection?.Close();
+                _connection?.Dispose();
+            }
+            _disposed = true;
+        }
     }
 
 }
