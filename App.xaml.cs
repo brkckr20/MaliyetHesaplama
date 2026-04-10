@@ -1,4 +1,4 @@
-﻿using MaliyeHesaplama.wins;
+using MaliyeHesaplama.wins;
 using System.Windows;
 
 namespace MaliyeHesaplama
@@ -9,11 +9,9 @@ namespace MaliyeHesaplama
         {
             base.OnStartup(e);
             Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
-            // Splash
             var splash = new winSplashScreen();
             splash.ShowSplash(2000);
 
-            // Login
             var login = new winLogin();
             bool loginSuccess = login.ShowDialog() == true;
 
@@ -23,12 +21,9 @@ namespace MaliyeHesaplama
                 return;
             }
 
-            // Home
             var main = new HomeScreen();
             Current.MainWindow = main;
             main.Show();
-            
         }
     }
-
 }

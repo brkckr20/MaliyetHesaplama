@@ -1,5 +1,6 @@
 ﻿using MaliyeHesaplama.helpers;
 using System.Windows;
+using System.Windows.Input;
 
 namespace MaliyeHesaplama.wins
 {
@@ -69,6 +70,17 @@ namespace MaliyeHesaplama.wins
                 }).ToList();
             cmbUsername.ItemsSource = list;
         }
+        private void Header_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
+        }
+
         void LoadRememberMe()
         {
             if (Properties.Settings.Default.RememberMe)

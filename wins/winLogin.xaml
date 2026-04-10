@@ -1,37 +1,62 @@
-﻿<Window x:Class="MaliyeHesaplama.wins.winLogin"
+<Window x:Class="MaliyeHesaplama.wins.winLogin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Kullanıcı Giriş" Height="240" Width="400" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" ResizeMode="NoResize" Icon="/wins/Building.png">
-    <Grid Margin="20">
-        <StackPanel Width="320">
-            <TextBlock Text="Giriş Bilgileri"
-               FontSize="14"
-               FontWeight="SemiBold"
-               Foreground="#2C3E50"/>
-            <DockPanel VerticalAlignment="Center">
-                <Label Content="👥" FontSize="16" Width="30" VerticalAlignment="Center"/>
-                <ComboBox x:Name="cmbUsername" DisplayMemberPath="FullName" SelectedValuePath="Id"
-                      Margin="0,5,0,0" Height="30" Padding="6" Background="#F4F6F7"
-                      BorderBrush="#D0D3D4" BorderThickness="1" Foreground="#2C3E50"
-                      FontSize="14">
-                </ComboBox>
-            </DockPanel>
-            <DockPanel Margin="0,5,0,0">
-                <TextBlock Text="🔑"
-                            FontSize="16"
-                            FontWeight="SemiBold"
-                            Foreground="#2C3E50" Width="30" VerticalAlignment="Center"/>
-                <PasswordBox x:Name="txtPassword" Margin="0,2,0,0" Height="30" Padding="6"
-                            Background="#F4F6F7" BorderBrush="#D0D3D4" BorderThickness="1"
-                            Foreground="#2C3E50" FontSize="10"/>
-            </DockPanel>
-            <StackPanel HorizontalAlignment="Right" Margin="0,5,0,0">
-                <CheckBox Content="Beni Hatırla" VerticalContentAlignment="Center" x:Name="chkRememberMe"/>
-            </StackPanel>
-            <Button Content="Giriş" Margin="0,5,0,0" Height="40" Width="120" HorizontalAlignment="Right"
-                    Background="#3498DB" Foreground="White" FontSize="15" FontWeight="SemiBold"
-                    BorderThickness="0" Cursor="Hand" Click="BtnLogin_Click">
-            </Button>
-        </StackPanel>
+        Title="Maliye Hesaplama - Giriş" Height="270" Width="320" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
+        Background="#FAFAFA" WindowStyle="None" AllowsTransparency="True" FontFamily="Bahnschrift Light" >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#2d5a56" MouseLeftButtonDown="Header_MouseLeftButtonDown">
+            <Grid>
+                <TextBlock Text="Maliye Hesaplama" FontSize="12" Foreground="White" 
+                         VerticalAlignment="Center" Margin="12,0,0,0"/>
+                <Button Content="✕" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0"
+                        Background="Transparent" Foreground="White" BorderThickness="0"
+                        FontSize="14" Padding="8,4" Cursor="Hand" Click="BtnCancel_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="Transparent" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="25">
+            <Border Padding="10">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="2" Opacity="0.08" Color="Black"/>
+                </Border.Effect>
+
+                <StackPanel VerticalAlignment="Center">
+                    <ComboBox x:Name="cmbUsername" DisplayMemberPath="FullName" SelectedValuePath="Id"
+                             Padding="10,8" FontSize="13" Background="#F5F5F5" BorderBrush="#E0E0E0"/>
+
+                    <PasswordBox x:Name="txtPassword" Padding="10,8" FontSize="13" 
+                                 Background="#F5F5F5" BorderBrush="#E0E0E0" Margin="0,8,0,0"/>
+
+                    <CheckBox Content="Beni hatırla" Foreground="#B0BEC5" x:Name="chkRememberMe" 
+                             Margin="0,12,0,16" FontSize="12"/>
+
+                    <Button Content="Giriş" Padding="18,8" Background="#2d5a56" Foreground="White"
+                            BorderThickness="0" Cursor="Hand" Click="BtnLogin_Click" HorizontalAlignment="Right">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="3" Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Window>
