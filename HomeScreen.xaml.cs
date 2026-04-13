@@ -36,6 +36,13 @@ namespace MaliyeHesaplama
             string[] items = { "Üretim Yönetimi Parametreleri", "Numaratör", "Rapor Oluşturma", "GTIP Tanımları" };
             ShowMegaMenu(title, items);
         }
+
+        private void V2_Click(object sender, RoutedEventArgs e)
+        {
+            string title = "v2";
+            string[] items = { "Malzeme Kartı v2" };
+            ShowMegaMenu(title, items);
+        }
         private void ReceteTanimlamalari_Click(object sender, RoutedEventArgs e)
         {
             string title = "Reçete";
@@ -110,6 +117,10 @@ namespace MaliyeHesaplama
                     OpenTab(menuName, new userControls.UC_RaporOlusturma());
                 if (menuName == "GTIP Tanımları")
                     OpenTab(menuName, new userControls.UC_GTIPTanimlari());
+
+                /* v2 */
+                if (menuName == "Malzeme Kartı v2")
+                    OpenTab(menuName, new v2.Views.UC_MalzemeKartiV2());
             }
 
         }

@@ -183,6 +183,8 @@
                     <Button Content="📦 Malzeme Yönetimi" Style="{StaticResource MenuButtonStyle}" Click="MalzemeYonetimi_Click"/>
                     <Button Content="🛒 Order Yönetimi" Style="{StaticResource MenuButtonStyle}" Click="OrderYonetimi_Click"/>
                     <Button Content="⚙️ Ayarlar" Style="{StaticResource MenuButtonStyle}" Click="Ayarlar_Click"/>
+                    <Border Height="1" Background="#444" Margin="0,8"/>
+                    <Button Content="🚀 v2" Style="{StaticResource MenuButtonStyle}" Click="V2_Click"/>
                 </StackPanel>
             </Border>
             <Grid Grid.Column="1" Background="#FDFDF8" MouseDown="ContentArea_MouseDown">

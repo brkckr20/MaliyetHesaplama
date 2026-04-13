@@ -1,0 +1,78 @@
+<UserControl x:Class="MaliyeHesaplama.v2.Views.UC_MalzemeKartiV2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800" FontFamily="Bahnschrift Light">
+    <Grid Background="Transparent">
+        <Grid.Resources>
+            <Style TargetType="ComboBox">
+                <Setter Property="Background" Value="White"/>
+            </Style>
+            <Style TargetType="ComboBoxItem">
+                <Setter Property="Background" Value="White"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0">
+            <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0">
+                <DockPanel Margin="0,1">
+                    <Label Content="Kodu :" Width="86"/>
+                    <TextBox x:Name="txtKodu" Width="200" VerticalContentAlignment="Center"/>
+                    <Button x:Name="btnKoduListele" Content="🔍" Width="24" Click="btnKoduListele_Click" Background="Transparent" BorderBrush="LightGray" ToolTip="Listeden seç" Margin="2,0,0,0"/>
+                    <CheckBox Content="Kullanımda" IsChecked="True" x:Name="chkKullanimda" VerticalContentAlignment="Center" Margin="8,0,0,0"/>
+                </DockPanel>
+                <DockPanel Margin="0,0,0,1">
+                    <Label Content="Adı :" Width="86"/>
+                    <TextBox x:Name="txtAdi" Width="300" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                </DockPanel>
+                <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
+                    <Label Content="Tipi :" Width="86"/>
+                    <ComboBox x:Name="cmbTip" Width="200" VerticalContentAlignment="Center" Background="White" Foreground="Black">
+                        <ComboBoxItem Content="Ham Madde" Tag="1"/>
+                        <ComboBoxItem Content="Yarı Mamul" Tag="2"/>
+                        <ComboBoxItem Content="Mamul" Tag="3"/>
+                        <ComboBoxItem Content="Sarf Malzeme" Tag="4"/>
+                    </ComboBox>
+                </DockPanel>
+                <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
+                    <Label Content="Birim :" Width="86"/>
+                    <TextBox x:Name="txtBirim" Width="200" VerticalContentAlignment="Center"/>
+                </DockPanel>
+                <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
+                    <Label Content="Barkod :" Width="86"/>
+                    <TextBox x:Name="txtBarkod" Width="200" VerticalContentAlignment="Center"/>
+                </DockPanel>
+                <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
+                    <Label Content="KDV (%) :" Width="86"/>
+                    <ComboBox x:Name="cmbKDV" Width="200" VerticalContentAlignment="Center" Background="White" Foreground="Black">
+                        <ComboBoxItem Content="1" Tag="1"/>
+                        <ComboBoxItem Content="8" Tag="8"/>
+                        <ComboBoxItem Content="10" Tag="10"/>
+                        <ComboBoxItem Content="18" Tag="18" IsSelected="True"/>
+                        <ComboBoxItem Content="20" Tag="20"/>
+                    </ComboBox>
+                </DockPanel>
+                <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
+                    <Label Content="Min Stok :" Width="86"/>
+                    <TextBox x:Name="txtMinStok" Width="100" VerticalContentAlignment="Center"/>
+                    <Label Content="Max Stok :" Margin="20,0,0,0" Width="70"/>
+                    <TextBox x:Name="txtMaxStok" Width="100" VerticalContentAlignment="Center"/>
+                </DockPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
