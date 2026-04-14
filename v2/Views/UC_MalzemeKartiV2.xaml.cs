@@ -4,43 +4,68 @@ using System.Windows;
 using System.Windows.Controls;
 using MaliyeHesaplama.Interfaces;
 using MaliyeHesaplama.v2.Data;
+using MaliyeHesaplama.v2.Models;
 
 namespace MaliyeHesaplama.v2.Views
 {
     public partial class UC_MalzemeKartiV2 : System.Windows.Controls.UserControl, IPageCommands
     {
         private readonly MaterialRepository _repo;
+        private readonly UnitRepository _unitRepo;
         private int _currentId = 0;
 
         public UC_MalzemeKartiV2()
         {
             InitializeComponent();
             _repo = new MaterialRepository();
+            _unitRepo = new UnitRepository();
+            LoadBirimler();
             ButtonBar.PageCommands = this;
             Yeni();
         }
 
-        private void LoadRecord(dynamic record)
+        private void LoadBirimler()
+        {
+            var birimler = _unitRepo.GetActive().ToList();
+            foreach (var birim in birimler)
+            {
+                cmbBirim.Items.Add(new ComboBoxItem 
+                { 
+                    Content = birim.Name, 
+                    Tag = birim.Id 
+                });
+            }
+        }
+
+        private void LoadRecord(MaterialMaster record)
         {
             _currentId = record.Id;
             txtKodu.Text = record.Code ?? "";
             txtAdi.Text = record.Name ?? "";
-            cmbTip.SelectedIndex = (record.Type ?? 1) - 1;
-            txtBirim.Text = record.UnitId?.ToString() ?? "";
+            cmbTip.SelectedIndex = record.Type - 1;
             txtBarkod.Text = record.Barcode ?? "";
             
-            var kdv = record.VatRate ?? 18;
+            var kdv = record.VatRate;
             foreach (ComboBoxItem item in cmbKDV.Items)
             {
-                if (item.Tag?.ToString() == kdv.ToString())
+                if (item.Tag?.ToString() == ((int)kdv).ToString())
                 {
                     cmbKDV.SelectedItem = item;
                     break;
                 }
             }
 
-            txtMinStok.Text = record.MinStock?.ToString() ?? "";
-            txtMaxStok.Text = record.MaxStock?.ToString() ?? "";
+            foreach (ComboBoxItem item in cmbBirim.Items)
+            {
+                if (item.Tag?.ToString() == record.UnitId.ToString())
+                {
+                    cmbBirim.SelectedItem = item;
+                    break;
+                }
+            }
+
+            txtMinStok.Text = record.MinStock.ToString();
+            txtMaxStok.Text = record.MaxStock.ToString();
             chkKullanimda.IsChecked = record.IsActive;
         }
 
@@ -62,7 +87,7 @@ namespace MaliyeHesaplama.v2.Views
             txtKodu.Text = "";
             txtAdi.Text = "";
             cmbTip.SelectedIndex = 0;
-            txtBirim.Text = "";
+            cmbBirim.SelectedIndex = 0;
             txtBarkod.Text = "";
             cmbKDV.SelectedIndex = 3;
             txtMinStok.Text = "";
@@ -81,6 +106,7 @@ namespace MaliyeHesaplama.v2.Views
 
             var kdvItem = cmbKDV.SelectedItem as ComboBoxItem;
             var tipItem = cmbTip.SelectedItem as ComboBoxItem;
+            var birimItem = cmbBirim.SelectedItem as ComboBoxItem;
 
             decimal kdv = 18;
             if (kdvItem?.Tag != null)
@@ -91,7 +117,8 @@ namespace MaliyeHesaplama.v2.Views
                 int.TryParse(tipItem.Tag.ToString(), out tip);
 
             int birim = 0;
-            int.TryParse(txtBirim.Text, out birim);
+            if (birimItem?.Tag != null)
+                int.TryParse(birimItem.Tag.ToString(), out birim);
 
             decimal minStok = 0;
             decimal.TryParse(txtMinStok.Text, out minStok);
@@ -139,8 +166,18 @@ namespace MaliyeHesaplama.v2.Views
         public void Ileri()
         {
             var list = _repo.GetAll().ToList();
+            if (list.Count == 0)
+            {
+                System.Windows.MessageBox.Show("Kayıt bulunamadı!", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             var currentIndex = list.FindIndex(x => x.Id == _currentId);
-            if (currentIndex >= 0 && currentIndex < list.Count - 1)
+            if (currentIndex < 0)
+            {
+                System.Windows.MessageBox.Show("Kayıt bulunamadı!", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (currentIndex < list.Count - 1)
             {
                 LoadRecord(list[currentIndex + 1]);
             }
@@ -149,7 +186,17 @@ namespace MaliyeHesaplama.v2.Views
         public void Geri()
         {
             var list = _repo.GetAll().ToList();
+            if (list.Count == 0)
+            {
+                System.Windows.MessageBox.Show("Kayıt bulunamadı!", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             var currentIndex = list.FindIndex(x => x.Id == _currentId);
+            if (currentIndex < 0)
+            {
+                System.Windows.MessageBox.Show("Kayıt bulunamadı!", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             if (currentIndex > 0)
             {
                 LoadRecord(list[currentIndex - 1]);

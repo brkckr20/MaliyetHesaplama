@@ -27,6 +27,7 @@
     <None Remove="userControls\Common\print.png" />
     <None Remove="userControls\Common\remove.png" />
     <None Remove="userControls\Common\save1.png" />
+    <None Remove="v2\Views\News.png" />
     <None Remove="wins\Building.png" />
     <None Remove="wins\News.png" />
   </ItemGroup>
@@ -124,6 +125,7 @@
     <Resource Include="userControls\Common\print.png" />
     <Resource Include="userControls\Common\remove.png" />
     <Resource Include="userControls\Common\save1.png" />
+    <Resource Include="v2\Views\News.png" />
     <Resource Include="wins\Building.png" />
     <Resource Include="wins\News.png" />
   </ItemGroup>

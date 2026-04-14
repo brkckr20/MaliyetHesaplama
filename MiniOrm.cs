@@ -21,6 +21,7 @@ public class MiniOrm : IDisposable
         else
             throw new NotSupportedException($"{_dbType} desteklenmiyor.");
         _connection.Open();
+        CreateTablesIfNotExist();
     }
 
     public int Save(string tableName, Dictionary<string, object> data, string idColumn = "Id")
@@ -623,6 +624,20 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @InventoryId, @WareHouseId, @Varia
     public void CreateTablesIfNotExist()
     {
         var sql = @"
+        IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Unit')
+        BEGIN
+            CREATE TABLE Unit (
+                Id INT IDENTITY(1,1) PRIMARY KEY,
+                Code NVARCHAR(10),
+                Name NVARCHAR(50),
+                IsActive BIT DEFAULT 1
+            );
+            INSERT INTO Unit (Code, Name) VALUES ('AD', 'Adet');
+            INSERT INTO Unit (Code, Name) VALUES ('MT', 'Metre');
+            INSERT INTO Unit (Code, Name) VALUES ('KG', 'Kilogram');
+            INSERT INTO Unit (Code, Name) VALUES ('MT2', 'Metrekare');
+        END;
+
         IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Renk')
         BEGIN
             CREATE TABLE Renk (

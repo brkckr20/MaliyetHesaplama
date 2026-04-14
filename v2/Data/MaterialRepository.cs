@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MaliyeHesaplama.v2.Models;
 
 namespace MaliyeHesaplama.v2.Data
 {
@@ -16,14 +17,14 @@ namespace MaliyeHesaplama.v2.Data
             return _orm.Save("MaterialMaster", data);
         }
 
-        public IEnumerable<dynamic> GetAll()
+        public IEnumerable<MaterialMaster> GetAll()
         {
-            return _orm.GetAll<dynamic>("MaterialMaster");
+            return _orm.GetAll<MaterialMaster>("MaterialMaster");
         }
 
-        public dynamic GetById(int id)
+        public MaterialMaster GetById(int id)
         {
-            return _orm.GetById<dynamic>("MaterialMaster", id, "Id");
+            return _orm.GetById<MaterialMaster>("MaterialMaster", id, "Id");
         }
 
         public void Delete(int id)

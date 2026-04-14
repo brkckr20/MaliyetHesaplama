@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.v2.Data;
 
 namespace MaliyeHesaplama.v2.Views
@@ -12,6 +13,7 @@ namespace MaliyeHesaplama.v2.Views
     {
         private readonly MaterialRepository _repo;
         private ICollectionView _collectionView;
+        FilterGridHelpers fgh;
 
         public int SecilenId { get; private set; }
 
@@ -19,6 +21,13 @@ namespace MaliyeHesaplama.v2.Views
         {
             InitializeComponent();
             _repo = new MaterialRepository();
+            fgh = new FilterGridHelpers(grid, "Malzeme Listesi", "gridMalzemeListe");
+        }
+
+        private void grid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            var hiddenColumns = new[] { "CategoryId", "CreatedAt", "UpdatedAt" };
+            fgh.GridGeneratingColumn(e, grid, hiddenColumns);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -26,6 +35,11 @@ namespace MaliyeHesaplama.v2.Views
             var data = _repo.GetAll().ToList();
             _collectionView = CollectionViewSource.GetDefaultView(data);
             grid.ItemsSource = _collectionView;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                fgh.InitializeColumnSettings();
+                fgh.LoadColumnSettingsFromDatabase();
+            }), System.Windows.Threading.DispatcherPriority.Loaded);
         }
 
         private void sfDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -39,36 +53,9 @@ namespace MaliyeHesaplama.v2.Views
             }
         }
 
-        private void FilterDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            if (e.PropertyName == "Id")
-            {
-                e.Column.Header = "Id";
-                e.Column.Width = 50;
-            }
-            else if (e.PropertyName == "Code")
-                e.Column.Header = "Kodu";
-            else if (e.PropertyName == "Name")
-                e.Column.Header = "Adı";
-            else if (e.PropertyName == "Type")
-                e.Column.Header = "Tipi";
-            else if (e.PropertyName == "UnitId")
-                e.Column.Header = "Birim";
-            else if (e.PropertyName == "Barcode")
-                e.Column.Header = "Barkod";
-            else if (e.PropertyName == "VatRate")
-                e.Column.Header = "KDV (%)";
-            else if (e.PropertyName == "MinStock")
-                e.Column.Header = "Min Stok";
-            else if (e.PropertyName == "MaxStock")
-                e.Column.Header = "Max Stok";
-            else if (e.PropertyName == "IsActive")
-                e.Column.Header = "Aktif";
-        }
-
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            // Kolon seçici - gerekirse ekle
+            fgh.OpenColumnsForm(this);
         }
     }
 }

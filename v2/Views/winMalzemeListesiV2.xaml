@@ -7,8 +7,12 @@
         mc:Ignorable="d"
         Title="Malzeme Listesi" Height="450" Width="700" 
         WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" 
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded" Icon="/v2/Views/News.png">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="479*"/>
+            <ColumnDefinition Width="221*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -17,8 +21,8 @@
                                 VerticalContentAlignment="Center" IsReadOnly="True" GridLinesVisibility="All"
                                 HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
                                 FilterLanguage="Turkish" ShowStatusBar="True" ShowRowsCount="True" ShowElapsedTime="True"
-                                AutoGenerateColumns="True" AutoGeneratingColumn="FilterDataGrid_AutoGeneratingColumn"
-                                x:Name="grid" MouseDoubleClick="sfDataGrid_MouseDoubleClick">
+                                AutoGenerateColumns="True" AutoGeneratingColumn="grid_AutoGeneratingColumn"
+                                x:Name="grid" MouseDoubleClick="sfDataGrid_MouseDoubleClick" Grid.ColumnSpan="2">
             <control:FilterDataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Kolon Seçicisi" Click="MenuItem_Click"/>
