@@ -12,6 +12,7 @@ namespace MaliyeHesaplama.v2.Views
     {
         private readonly MaterialRepository _repo;
         private readonly UnitRepository _unitRepo;
+        private readonly CategoryRepository _categoryRepo;
         private int _currentId = 0;
 
         public UC_MalzemeKartiV2()
@@ -19,9 +20,27 @@ namespace MaliyeHesaplama.v2.Views
             InitializeComponent();
             _repo = new MaterialRepository();
             _unitRepo = new UnitRepository();
+            _categoryRepo = new CategoryRepository();
             LoadBirimler();
+            LoadKategoriler();
             ButtonBar.PageCommands = this;
             Yeni();
+        }
+
+        private void LoadKategoriler()
+        {
+            cmbKategori.Items.Clear();
+            cmbKategori.Items.Add(new ComboBoxItem { Content = "Seçiniz", Tag = null });
+            var kategoriler = _categoryRepo.GetActive().ToList();
+            foreach (var kat in kategoriler)
+            {
+                cmbKategori.Items.Add(new ComboBoxItem
+                {
+                    Content = kat.Name,
+                    Tag = kat.Id
+                });
+            }
+            cmbKategori.SelectedIndex = 0;
         }
 
         private void LoadBirimler()
@@ -57,9 +76,18 @@ namespace MaliyeHesaplama.v2.Views
 
             foreach (ComboBoxItem item in cmbBirim.Items)
             {
-                if (item.Tag?.ToString() == record.UnitId.ToString())
+                if (item.Tag != null && Convert.ToInt32(item.Tag) == record.UnitId)
                 {
                     cmbBirim.SelectedItem = item;
+                    break;
+                }
+            }
+
+            foreach (ComboBoxItem item in cmbKategori.Items)
+            {
+                if (item.Tag != null && record.CategoryId.HasValue && Convert.ToInt32(item.Tag) == record.CategoryId.Value)
+                {
+                    cmbKategori.SelectedItem = item;
                     break;
                 }
             }
@@ -88,6 +116,7 @@ namespace MaliyeHesaplama.v2.Views
             txtAdi.Text = "";
             cmbTip.SelectedIndex = 0;
             cmbBirim.SelectedIndex = 0;
+            cmbKategori.SelectedIndex = 0;
             txtBarkod.Text = "";
             cmbKDV.SelectedIndex = 3;
             txtMinStok.Text = "";
@@ -107,6 +136,7 @@ namespace MaliyeHesaplama.v2.Views
             var kdvItem = cmbKDV.SelectedItem as ComboBoxItem;
             var tipItem = cmbTip.SelectedItem as ComboBoxItem;
             var birimItem = cmbBirim.SelectedItem as ComboBoxItem;
+            var kategoriItem = cmbKategori.SelectedItem as ComboBoxItem;
 
             decimal kdv = 18;
             if (kdvItem?.Tag != null)
@@ -120,6 +150,10 @@ namespace MaliyeHesaplama.v2.Views
             if (birimItem?.Tag != null)
                 int.TryParse(birimItem.Tag.ToString(), out birim);
 
+            int? kategoriId = null;
+            if (kategoriItem?.Tag != null && int.TryParse(kategoriItem.Tag.ToString(), out int tempKat))
+                kategoriId = tempKat;
+
             decimal minStok = 0;
             decimal.TryParse(txtMinStok.Text, out minStok);
 
@@ -132,6 +166,7 @@ namespace MaliyeHesaplama.v2.Views
                 { "Code", txtKodu.Text },
                 { "Name", txtAdi.Text },
                 { "Type", tip },
+                { "CategoryId", kategoriId },
                 { "UnitId", birim },
                 { "Barcode", txtBarkod.Text ?? "" },
                 { "VatRate", kdv },

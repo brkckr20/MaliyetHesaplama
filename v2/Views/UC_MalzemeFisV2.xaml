@@ -1,0 +1,135 @@
+<UserControl x:Class="MaliyeHesaplama.v2.Views.UC_MalzemeFisV2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="1000" FontFamily="Bahnschrift Light">
+    <UserControl.Resources>
+        <Style x:Key="SearchButton" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+                            <TextBlock Text="🔍" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Button Bar -->
+        <Border Grid.Row="0">
+            <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top"/>
+        </Border>
+
+        <!-- Üst Bilgi ve Kalemler -->
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Başlık Bilgileri GroupBox - Tam Genişlik -->
+                <GroupBox Grid.Row="0" Header="Başlık Bilgileri" Margin="0,0,0,5">
+                    <StackPanel>
+                        <DockPanel Margin="0,0,0,2">
+                            <Label Content="Fiş No :" Width="120" FontSize="14"/>
+                            <TextBox HorizontalAlignment="Left" x:Name="txtFisNo" Width="150" FontSize="14" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel Margin="0,0,0,2">
+                            <Label Content="Tarih :" Width="120"/>
+                            <DatePicker HorizontalAlignment="Left" x:Name="dpTarih" Width="150"/>
+                        </DockPanel>
+                        <DockPanel Margin="0,0,0,2">
+                            <Label Content="İrsaliye Tarihi :" Width="120"/>
+                            <DatePicker HorizontalAlignment="Left" x:Name="dpIrsaliyeTarih" Width="150"/>
+                        </DockPanel>
+                        <DockPanel Margin="0,0,0,2">
+                            <Label Content="Belge No :" Width="120"/>
+                            <TextBox HorizontalAlignment="Left" x:Name="txtBelgeNo" Width="150" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel Margin="0,0,0,2">
+                            <Label Content="İrsaliye Belge No :" Width="120"/>
+                            <TextBox HorizontalAlignment="Left" x:Name="txtIrsaliyeBelgeNo" Width="150" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Firma Bilgileri GroupBox -->
+                <GroupBox Grid.Row="1" Header="Firma ve Depo Bilgileri" Margin="0,0,0,5">
+                    <StackPanel>
+                        <DockPanel Margin="0,0,0,2">
+                            <Label Content="Firma Kodu :" Width="120"/>
+                            <Grid HorizontalAlignment="Left">
+                                <TextBox x:Name="txtFirma" Width="150" VerticalContentAlignment="Center" Padding="0,0,22,0"/>
+                                <Button Style="{StaticResource SearchButton}" Width="20" Height="20" Click="btnFirma_Click" HorizontalAlignment="Left" Margin="128,2,0,2"/>
+                            </Grid>
+                            <TextBlock x:Name="lblFirmaAdi" Text="" VerticalAlignment="Center" Foreground="Gray"/>
+                        </DockPanel>
+                        <DockPanel Margin="0,0,0,2">
+                            <Label Content="Depo :" Width="120"/>
+                            <Grid HorizontalAlignment="Left">
+                                <TextBox x:Name="txtDepo" Width="150" VerticalContentAlignment="Center" Padding="0,0,22,0"/>
+                                <Button Style="{StaticResource SearchButton}" Width="20" Height="20" Click="btnDepo_Click" HorizontalAlignment="Left" Margin="128,2,0,2"/>
+                            </Grid>
+                            <TextBlock x:Name="lblDepoAdi" Text="" VerticalAlignment="Center" Foreground="Gray"/>
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Açıklama -->
+                <DockPanel Grid.Row="2" Margin="0,0,0,5">
+                    <Label Content="Açıklama :" Width="120"/>
+                    <TextBox x:Name="txtAciklama" Width="400" Height="40" TextWrapping="Wrap" HorizontalAlignment="Left" AcceptsReturn="True"/>
+                </DockPanel>
+            </Grid>
+
+            <!-- Kalemler DataGrid -->
+            <DataGrid Grid.Row="1" x:Name="gridKalemler" AutoGenerateColumns="False" 
+                     CanUserAddRows="False" CanUserDeleteRows="False"
+                     CellEditEnding="gridKalemler_CellEditEnding"
+                     CurrentCellChanged="gridKalemler_CurrentCellChanged"
+                     Margin="0,10,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50" IsReadOnly="True" Visibility="Hidden"/>
+                    <DataGridTextColumn Header="Malzeme Id" Binding="{Binding MaterialId}" Width="80" Visibility="Hidden"/>
+                    <DataGridTextColumn Header="Kodu" Binding="{Binding MaterialCode}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Malzeme Adı" Binding="{Binding MaterialName}" Width="200" IsReadOnly="True"/>
+                    <DataGridComboBoxColumn Header="İşlem Tipi" SelectedItemBinding="{Binding OperationType}" Width="120"/>
+                    <DataGridTextColumn Header="Adet" Binding="{Binding Piece, StringFormat=N2}" Width="80"/>
+                    <DataGridTextColumn Header="Metre" Binding="{Binding NetMeter, StringFormat=N2}" Width="80"/>
+                    <DataGridTextColumn Header="Kg" Binding="{Binding NetWeight, StringFormat=N2}" Width="80"/>
+                    <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice, StringFormat=N2}" Width="100"/>
+                    <DataGridTextColumn Header="KDV (%)" Binding="{Binding Vat, StringFormat=N2}" Width="70"/>
+                    <DataGridTextColumn Header="Satır Tutar" Binding="{Binding RowAmount, StringFormat=N2}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Alt Butonlar -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,5">
+            <Button Content="+ Malzeme Ekle" Width="100" Click="btnMalzemeEkle_Click" Margin="0,0,5,0"/>
+            <Button Content="- Satır Sil" Width="100" Click="btnSatirSil_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

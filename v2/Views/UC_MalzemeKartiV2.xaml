@@ -49,6 +49,10 @@
                     </ComboBox>
                 </DockPanel>
                 <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
+                    <Label Content=" Kategori :" Width="86"/>
+                    <ComboBox x:Name="cmbKategori" Width="200" VerticalContentAlignment="Center" Background="White" Foreground="Black"/>
+                </DockPanel>
+                <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
                     <Label Content="Birim :" Width="86"/>
                     <ComboBox x:Name="cmbBirim" Width="200" VerticalContentAlignment="Center" Background="White" Foreground="Black"/>
                 </DockPanel>

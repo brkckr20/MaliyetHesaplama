@@ -1,0 +1,70 @@
+-- ============================================
+-- v2 ERP Database Scripts
+-- ============================================
+
+-- Category Tablosu
+CREATE TABLE Category (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Code NVARCHAR(10),
+    Name NVARCHAR(100),
+    ParentId INT NULL,
+    IsActive BIT DEFAULT 1
+)
+
+-- Unit Tablosu (Birim)
+CREATE TABLE Unit (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Code NVARCHAR(10),
+    Name NVARCHAR(50),
+    IsActive BIT DEFAULT 1
+)
+
+-- Warehouse Tablosu (Depo)
+CREATE TABLE Warehouse (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Code NVARCHAR(20),
+    Name NVARCHAR(100),
+    WarehouseType INT,
+    IsActive BIT DEFAULT 1
+)
+
+-- StockMovement Tablosu (Stok Hareketleri)
+CREATE TABLE StockMovement (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    MaterialId INT NOT NULL,
+    WarehouseId INT NOT NULL,
+    LotId INT NULL,
+    ColorId INT NULL,
+    Quantity DECIMAL(18,3),
+    MovementType INT,
+    DocumentType INT,
+    DocumentId INT,
+    DocumentLineId INT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE()
+)
+
+
+-- Depolar
+INSERT INTO Warehouse (Code, Name, WarehouseType, IsActive) VALUES
+('DEP001', 'Ana Depo', 1, 1),
+('DEP002', 'Boyama Fason', 2, 1),
+('DEP003', 'Kesim Birimi', 3, 1),
+('DEP004', 'Üretim Birimi', 4, 1),
+('DEP005', 'Satış Depo', 5, 1)
+
+-- Kategoriler
+INSERT INTO Category (Code, Name, ParentId, IsActive) VALUES
+('KUM', 'Kumaş', NULL, 1),
+('BOY', 'Boyalı', NULL, 1),
+('AKS', 'Aksesuar', NULL, 1),
+('DOK', 'Dokuma', NULL, 1),
+('IPL', 'İplik', NULL, 1)
+
+-- ============================================
+-- Indexler
+-- ============================================
+
+CREATE INDEX IX_StockMovement_MaterialId ON StockMovement(MaterialId)
+CREATE INDEX IX_StockMovement_WarehouseId ON StockMovement(WarehouseId)
+CREATE INDEX IX_StockMovement_Document ON StockMovement(DocumentType, DocumentId)
+CREATE INDEX IX_StockMovement_CreatedAt ON StockMovement(CreatedAt)

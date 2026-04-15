@@ -23,6 +23,7 @@ namespace MaliyeHesaplama.v2.Models
         [Display(Name = "Tipi")]
         public int Type { get; set; }
 
+        [Display(Name = "Kategorisi")]
         public int? CategoryId { get; set; }
 
         [Display(Name = "Birim")]
@@ -47,8 +48,10 @@ namespace MaliyeHesaplama.v2.Models
         [Display(Name = "Aktif")]
         public bool IsActive { get; set; } = true;
 
+        [Display(Name = "Oluşturulma Tarihi")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
+        [Display(Name = "Güncelleme Tarihi")]
         public DateTime? UpdatedAt { get; set; }
     }
 

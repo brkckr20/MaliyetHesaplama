@@ -1,4 +1,4 @@
-﻿using MaliyeHesaplama.helpers;
+using MaliyeHesaplama.helpers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -40,7 +40,14 @@ namespace MaliyeHesaplama
         private void V2_Click(object sender, RoutedEventArgs e)
         {
             string title = "v2";
-            string[] items = { "Malzeme Kartı v2" };
+            string[] items = { "Malzeme Kartı" };
+            ShowMegaMenu(title, items);
+        }
+
+        private void MalzemeYonetimiV2_Click(object sender, RoutedEventArgs e)
+        {
+            string title = "Malzeme Yönetimi v2";
+            string[] items = { "Malzeme Giriş", "Malzeme Çıkış" };
             ShowMegaMenu(title, items);
         }
         private void ReceteTanimlamalari_Click(object sender, RoutedEventArgs e)
@@ -119,8 +126,15 @@ namespace MaliyeHesaplama
                     OpenTab(menuName, new userControls.UC_GTIPTanimlari());
 
                 /* v2 */
-                if (menuName == "Malzeme Kartı v2")
+                if (menuName == "Malzeme Kartı")
                     OpenTab(menuName, new v2.Views.UC_MalzemeKartiV2());
+
+                /* Malzeme Yönetimi v2 */
+                if (menuName == "Malzeme Giriş")
+                    OpenTab(menuName, new MaliyeHesaplama.v2.Views.UC_MalzemeFisV2(MaliyeHesaplama.v2.Models.ReceiptType.MalzemeGiris));
+
+                if (menuName == "Malzeme Çıkış")
+                    OpenTab(menuName, new MaliyeHesaplama.v2.Views.UC_MalzemeFisV2(MaliyeHesaplama.v2.Models.ReceiptType.MalzemeCikis));
             }
 
         }

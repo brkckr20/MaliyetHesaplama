@@ -26,13 +26,13 @@ namespace MaliyeHesaplama.v2.Views
 
         private void grid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            var hiddenColumns = new[] { "CategoryId", "CreatedAt", "UpdatedAt" };
+            var hiddenColumns = new[] { "CreatedAt", "UpdatedAt", "CategoryId", "UnitId" };
             fgh.GridGeneratingColumn(e, grid, hiddenColumns);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var data = _repo.GetAll().ToList();
+            var data = _repo.GetAllWithDetails().ToList();
             _collectionView = CollectionViewSource.GetDefaultView(data);
             grid.ItemsSource = _collectionView;
             Dispatcher.BeginInvoke(new Action(() =>
