@@ -21,12 +21,33 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="DataGridRow" TargetType="DataGridRow">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#ffe0b2"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DataGridCell" TargetType="DataGridCell">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#ffe0b2"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="IsEditing" Value="True">
+                    <Setter Property="Background" Value="#ffe0b2"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Button Bar -->
@@ -35,7 +56,7 @@
         </Border>
 
         <!-- Üst Bilgi ve Kalemler -->
-        <Grid Grid.Row="1" Margin="10">
+        <Grid Grid.Row="1" Margin="0,10,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -97,39 +118,49 @@
                 </GroupBox>
 
                 <!-- Açıklama -->
-                <DockPanel Grid.Row="2" Margin="0,0,0,5">
-                    <Label Content="Açıklama :" Width="120"/>
+                <DockPanel Grid.Row="2" Margin="0,0,0,0">
+                    <Label Content="Açıklama :" Width="125"/>
                     <TextBox x:Name="txtAciklama" Width="400" Height="40" TextWrapping="Wrap" HorizontalAlignment="Left" AcceptsReturn="True"/>
                 </DockPanel>
             </Grid>
 
             <!-- Kalemler DataGrid -->
-            <DataGrid Grid.Row="1" x:Name="gridKalemler" AutoGenerateColumns="False" 
-                     CanUserAddRows="False" CanUserDeleteRows="False"
+<DataGrid Grid.Row="1" x:Name="gridKalemler" AutoGenerateColumns="False" 
+                     RowStyle="{StaticResource DataGridRow}"
+                     CellStyle="{StaticResource DataGridCell}"
+                     CanUserAddRows="True" CanUserDeleteRows="False"
                      CellEditEnding="gridKalemler_CellEditEnding"
                      CurrentCellChanged="gridKalemler_CurrentCellChanged"
+                     SelectionMode="Single"
+                     SelectionUnit="FullRow"
+                     RowHeight="24"
+                     HorizontalGridLinesBrush="LightGray"
+                     VerticalGridLinesBrush="LightGray"
                      Margin="0,10,0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50" IsReadOnly="True" Visibility="Hidden"/>
                     <DataGridTextColumn Header="Malzeme Id" Binding="{Binding MaterialId}" Width="80" Visibility="Hidden"/>
+                    <DataGridComboBoxColumn Header="İşlem Tipi" 
+                                            SelectedItemBinding="{Binding OperationType}" 
+                                            Width="100">
+                        <DataGridComboBoxColumn.ItemsSource>
+                            <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                <sys:String>Giriş</sys:String>
+                                <sys:String>Çıkış</sys:String>
+                            </x:Array>
+                        </DataGridComboBoxColumn.ItemsSource>
+                    </DataGridComboBoxColumn>
                     <DataGridTextColumn Header="Kodu" Binding="{Binding MaterialCode}" Width="100" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Malzeme Adı" Binding="{Binding MaterialName}" Width="200" IsReadOnly="True"/>
-                    <DataGridComboBoxColumn Header="İşlem Tipi" SelectedItemBinding="{Binding OperationType}" Width="120"/>
-                    <DataGridTextColumn Header="Adet" Binding="{Binding Piece, StringFormat=N2}" Width="80"/>
-                    <DataGridTextColumn Header="Metre" Binding="{Binding NetMeter, StringFormat=N2}" Width="80"/>
+                    <DataGridTextColumn Header="Adı" Binding="{Binding MaterialName}" Width="180" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Kg" Binding="{Binding NetWeight, StringFormat=N2}" Width="80"/>
+                    <DataGridTextColumn Header="Metre" Binding="{Binding NetMeter, StringFormat=N2}" Width="80"/>
+                    <DataGridTextColumn Header="Adet" Binding="{Binding Piece, StringFormat=N2}" Width="80"/>
                     <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice, StringFormat=N2}" Width="100"/>
-                    <DataGridTextColumn Header="KDV (%)" Binding="{Binding Vat, StringFormat=N2}" Width="70"/>
-                    <DataGridTextColumn Header="Satır Tutar" Binding="{Binding RowAmount, StringFormat=N2}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="KDV (%)" Binding="{Binding Vat, StringFormat=N2}" Width="60"/>
+                    <DataGridTextColumn Header="Satır Tutarı" Binding="{Binding RowAmount, StringFormat=N2}" Width="100" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}" Width="150"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-
-        <!-- Alt Butonlar -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,5">
-            <Button Content="+ Malzeme Ekle" Width="100" Click="btnMalzemeEkle_Click" Margin="0,0,5,0"/>
-            <Button Content="- Satır Sil" Width="100" Click="btnSatirSil_Click"/>
-        </StackPanel>
     </Grid>
 </UserControl>

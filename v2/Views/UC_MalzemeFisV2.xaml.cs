@@ -60,6 +60,22 @@ namespace MaliyeHesaplama.v2.Views
             _table.Columns.Add("RowAmount", typeof(decimal));
             _table.Columns.Add("RowExplanation", typeof(string));
 
+            // Boş satır ekle - kullanıcı İşlem Tipi seçebilsin
+            var emptyRow = _table.NewRow();
+            emptyRow["Id"] = 0;
+            emptyRow["MaterialId"] = 0;
+            emptyRow["MaterialCode"] = "";
+            emptyRow["MaterialName"] = "";
+            emptyRow["OperationType"] = "";
+            emptyRow["Piece"] = 0m;
+            emptyRow["NetMeter"] = 0m;
+            emptyRow["NetWeight"] = 0m;
+            emptyRow["UnitPrice"] = 0m;
+            emptyRow["Vat"] = 0m;
+            emptyRow["RowAmount"] = 0m;
+            emptyRow["RowExplanation"] = "";
+            _table.Rows.Add(emptyRow);
+
             gridKalemler.ItemsSource = _table.DefaultView;
         }
 
@@ -86,6 +102,7 @@ namespace MaliyeHesaplama.v2.Views
                     row["MaterialId"] = material.Id;
                     row["MaterialCode"] = material.Code;
                     row["MaterialName"] = material.Name;
+                    row["OperationType"] = "Giriş";
                     row["Piece"] = 0m;
                     row["NetMeter"] = 0m;
                     row["NetWeight"] = 0m;
