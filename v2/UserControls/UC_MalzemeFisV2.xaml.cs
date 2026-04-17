@@ -1,16 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using MaliyeHesaplama.Interfaces;
 using MaliyeHesaplama.v2.Data;
 using MaliyeHesaplama.v2.Models;
+using MaliyeHesaplama.v2.Windows;
+using System;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using DataGrid = System.Windows.Controls.DataGrid;
 using MessageBox = System.Windows.MessageBox;
 
-namespace MaliyeHesaplama.v2.Views
+namespace MaliyeHesaplama.v2.UserControls
 {
     public partial class UC_MalzemeFisV2 : System.Windows.Controls.UserControl, IPageCommands
     {
@@ -24,7 +27,7 @@ namespace MaliyeHesaplama.v2.Views
         private int _firmaId = 0;
         private int _depoId = 0;
 
-        private DataTable _table;
+        private ObservableCollection<ReceiptItemViewModel> _items;
 
         public UC_MalzemeFisV2(ReceiptType fisTipi)
         {
@@ -35,8 +38,9 @@ namespace MaliyeHesaplama.v2.Views
             _materialRepo = new MaterialRepository();
             _warehouseRepo = new WarehouseRepository();
 
+            _items = new ObservableCollection<ReceiptItemViewModel>();
+
             ButtonBar.PageCommands = this;
-            LoadData();
             Yeni();
         }
 
@@ -45,48 +49,48 @@ namespace MaliyeHesaplama.v2.Views
             dpTarih.SelectedDate = DateTime.Now;
             dpIrsaliyeTarih.SelectedDate = DateTime.Now;
             txtFisNo.Text = _receiptRepo.GetRecordNo("Receipt", "ReceiptNo", "ReceiptType", (int)FisTipi);
+            gridKalemler.ItemsSource = _items;
+        }
 
-            _table = new DataTable();
-            _table.Columns.Add("Id", typeof(int));
-            _table.Columns.Add("MaterialId", typeof(int));
-            _table.Columns.Add("MaterialCode", typeof(string));
-            _table.Columns.Add("MaterialName", typeof(string));
-            _table.Columns.Add("OperationType", typeof(string));
-            _table.Columns.Add("Piece", typeof(decimal));
-            _table.Columns.Add("NetMeter", typeof(decimal));
-            _table.Columns.Add("NetWeight", typeof(decimal));
-            _table.Columns.Add("UnitPrice", typeof(decimal));
-            _table.Columns.Add("Vat", typeof(decimal));
-            _table.Columns.Add("RowAmount", typeof(decimal));
-            _table.Columns.Add("RowExplanation", typeof(string));
+        private void AddEmptyRow()
+        {
+            var emptyRow = new ReceiptItemViewModel();
+            _items.Add(emptyRow);
+        }
 
-            // Boş satır ekle - kullanıcı İşlem Tipi seçebilsin
-            var emptyRow = _table.NewRow();
-            emptyRow["Id"] = 0;
-            emptyRow["MaterialId"] = 0;
-            emptyRow["MaterialCode"] = "";
-            emptyRow["MaterialName"] = "";
-            emptyRow["OperationType"] = "";
-            emptyRow["Piece"] = 0m;
-            emptyRow["NetMeter"] = 0m;
-            emptyRow["NetWeight"] = 0m;
-            emptyRow["UnitPrice"] = 0m;
-            emptyRow["Vat"] = 0m;
-            emptyRow["RowAmount"] = 0m;
-            emptyRow["RowExplanation"] = "";
-            _table.Rows.Add(emptyRow);
-
-            gridKalemler.ItemsSource = _table.DefaultView;
+        private void CheckAndAddEmptyRow()
+        {
+            var lastItem = _items.LastOrDefault();
+            if (lastItem != null && !string.IsNullOrEmpty(lastItem.OperationType))
+            {
+                var hasEmpty = _items.Any(x => string.IsNullOrEmpty(x.OperationType));
+                if (!hasEmpty)
+                {
+                    AddEmptyRow();
+                }
+            }
         }
 
         private void btnFirma_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Firma seçim penceresi
+            var win = new winFirmaListesiV2();
+            if (win.ShowDialog() == true)
+            {
+                _firmaId = win.SecilenId;
+                txtFirma.Text = win.SecilenKodu;
+                lblFirmaAdi.Text = win.SecilenAdi;
+            }
         }
 
         private void btnDepo_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Depo seçim penceresi
+            var win = new winDepoListesiV2();
+            if (win.ShowDialog() == true)
+            {
+                _depoId = win.SecilenId;
+                txtDepo.Text = win.SecilenKodu;
+                lblDepoAdi.Text = win.SecilenAdi;
+            }
         }
 
         private void btnMalzemeEkle_Click(object sender, RoutedEventArgs e)
@@ -97,19 +101,21 @@ namespace MaliyeHesaplama.v2.Views
                 var material = _materialRepo.GetById(win.SecilenId);
                 if (material != null)
                 {
-                    var row = _table.NewRow();
-                    row["Id"] = 0;
-                    row["MaterialId"] = material.Id;
-                    row["MaterialCode"] = material.Code;
-                    row["MaterialName"] = material.Name;
-                    row["OperationType"] = "Giriş";
-                    row["Piece"] = 0m;
-                    row["NetMeter"] = 0m;
-                    row["NetWeight"] = 0m;
-                    row["UnitPrice"] = 0m;
-                    row["Vat"] = material.VatRate;
-                    row["RowAmount"] = 0m;
-                    _table.Rows.Add(row);
+                    var newItem = new ReceiptItemViewModel
+                    {
+                        Id = 0,
+                        MaterialId = material.Id,
+                        MaterialCode = material.Code,
+                        MaterialName = material.Name,
+                        OperationType = "Giriş",
+                        Piece = 0m,
+                        NetMeter = 0m,
+                        NetWeight = 0m,
+                        UnitPrice = 0m,
+                        Vat = material.VatRate,
+                        RowAmount = 0m
+                    };
+                    _items.Add(newItem);
                 }
             }
         }
@@ -118,19 +124,79 @@ namespace MaliyeHesaplama.v2.Views
         {
             if (gridKalemler.SelectedItem != null)
             {
-                var row = (DataRowView)gridKalemler.SelectedItem;
-                row.Delete();
+                var item = (ReceiptItemViewModel)gridKalemler.SelectedItem;
+                _items.Remove(item);
+            }
+        }
+
+        private void btnSelectMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new winMalzemeListesiV2();
+            if (win.ShowDialog() == true)
+            {
+                var material = _materialRepo.GetById(win.SecilenId);
+                if (material != null)
+                {
+                    var button = (System.Windows.Controls.Button)sender;
+                    var item = button.DataContext as ReceiptItemViewModel;
+                    if (item != null)
+                    {
+                        item.MaterialId = material.Id;
+                        item.MaterialCode = material.Code;
+                        item.MaterialName = material.Name;
+                        item.Vat = material.VatRate;
+                    }
+                }
             }
         }
 
         private void gridKalemler_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            // Auto-calculate RowAmount
+            if (e.Column.Header.ToString() == "İşlem Tipi" && e.EditAction == DataGridEditAction.Commit)
+            {
+                if (gridKalemler.SelectedItem is ReceiptItemViewModel item)
+                {
+                    item.Id = 0;
+                    var hasEmpty = _items.Any(x => string.IsNullOrEmpty(x.OperationType));
+                    if (!hasEmpty)
+                    {
+                        _items.Add(new ReceiptItemViewModel());
+                    }
+                }
+            }
         }
 
         private void gridKalemler_CurrentCellChanged(object sender, EventArgs e)
         {
-            // Auto-calculate RowAmount
+        }
+
+        private void gridKalemler_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                var currentCell = gridKalemler.CurrentCell;
+                int currentIndex = currentCell.Column.DisplayIndex;
+                int rowIndex = gridKalemler.Items.IndexOf(currentCell.Item);
+
+                if (currentIndex < gridKalemler.Columns.Count - 1)
+                {
+                    gridKalemler.CurrentCell = new DataGridCellInfo(
+                        gridKalemler.Items[rowIndex],
+                        gridKalemler.Columns[currentIndex + 1]);
+                }
+                else
+                {
+                    var row = currentCell.Item as ReceiptItemViewModel;
+                    if (row != null && !string.IsNullOrEmpty(row.OperationType))
+                    {
+                        AddEmptyRow();
+                        gridKalemler.CurrentCell = new DataGridCellInfo(
+                            _items[_items.Count - 1],
+                            gridKalemler.Columns[0]);
+                    }
+                }
+                e.Handled = true;
+            }
         }
 
         public void Yeni()
@@ -145,7 +211,9 @@ namespace MaliyeHesaplama.v2.Views
             txtAciklama.Text = "";
             dpTarih.SelectedDate = DateTime.Now;
             dpIrsaliyeTarih.SelectedDate = DateTime.Now;
-            _table.Clear();
+            _items.Clear();
+            _items.Add(new ReceiptItemViewModel());
+            gridKalemler.ItemsSource = _items;
         }
 
         public void Kaydet()
@@ -173,33 +241,34 @@ namespace MaliyeHesaplama.v2.Views
 
             _currentId = orm.Save("Receipt", receiptData);
 
-            foreach (DataRow row in _table.Rows)
+            foreach (var item in _items)
             {
-                if (row.RowState == DataRowState.Deleted) continue;
+                if (string.IsNullOrEmpty(item.OperationType)) continue;
 
                 var itemData = new Dictionary<string, object>
                 {
-                    { "Id", row["Id"] },
+                    { "Id", item.Id },
                     { "ReceiptId", _currentId },
-                    { "MaterialId", row["MaterialId"] },
-                    { "OperationType", row["OperationType"]?.ToString() ?? "" },
-                    { "Piece", row["Piece"] },
-                    { "NetMeter", row["NetMeter"] },
-                    { "NetWeight", row["NetWeight"] },
-                    { "UnitPrice", row["UnitPrice"] },
-                    { "Vat", row["Vat"] },
-                    { "RowAmount", row["RowAmount"] },
-                    { "RowExplanation", row["RowExplanation"]?.ToString() ?? "" }
+                    { "MaterialId", item.MaterialId },
+                    { "OperationType", item.OperationType },
+                    { "Piece", item.Piece },
+                    { "NetMeter", item.NetMeter },
+                    { "NetWeight", item.NetWeight },
+                    { "UnitPrice", item.UnitPrice },
+                    { "PriceUnit", item.PriceUnit },
+                    { "Vat", item.Vat },
+                    { "RowAmount", item.RowAmount },
+                    { "RowExplanation", item.RowExplanation ?? "" }
                 };
 
                 int itemId = orm.Save("ReceiptItem", itemData);
 
-                if (Convert.ToInt32(row["Id"]) == 0)
-                    row["Id"] = itemId;
+                if (item.Id == 0)
+                    item.Id = itemId;
 
                 // StockMovement oluştur
-                int materialId = Convert.ToInt32(row["MaterialId"]);
-                decimal quantity = Convert.ToDecimal(row["Piece"]);
+                int materialId = item.MaterialId;
+                decimal quantity = item.Piece;
 
                 if (quantity > 0)
                 {

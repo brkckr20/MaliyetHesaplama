@@ -3,7 +3,7 @@ using System.Windows.Input;
 using MaliyeHesaplama.v2.Data;
 using MaliyeHesaplama.v2.Models;
 
-namespace MaliyeHesaplama.v2.Views
+namespace MaliyeHesaplama.v2.Windows
 {
     public partial class winFisListesiV2 : Window
     {

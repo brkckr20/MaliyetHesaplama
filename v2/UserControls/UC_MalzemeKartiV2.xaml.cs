@@ -5,8 +5,9 @@ using System.Windows.Controls;
 using MaliyeHesaplama.Interfaces;
 using MaliyeHesaplama.v2.Data;
 using MaliyeHesaplama.v2.Models;
+using MaliyeHesaplama.v2.Windows;
 
-namespace MaliyeHesaplama.v2.Views
+namespace MaliyeHesaplama.v2.UserControls
 {
     public partial class UC_MalzemeKartiV2 : System.Windows.Controls.UserControl, IPageCommands
     {

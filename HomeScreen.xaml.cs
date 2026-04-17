@@ -127,14 +127,14 @@ namespace MaliyeHesaplama
 
                 /* v2 */
                 if (menuName == "Malzeme Kartı")
-                    OpenTab(menuName, new v2.Views.UC_MalzemeKartiV2());
+                    OpenTab(menuName, new v2.UserControls.UC_MalzemeKartiV2());
 
                 /* Malzeme Yönetimi v2 */
                 if (menuName == "Malzeme Giriş")
-                    OpenTab(menuName, new MaliyeHesaplama.v2.Views.UC_MalzemeFisV2(MaliyeHesaplama.v2.Models.ReceiptType.MalzemeGiris));
+                    OpenTab(menuName, new MaliyeHesaplama.v2.UserControls.UC_MalzemeFisV2(MaliyeHesaplama.v2.Models.ReceiptType.MalzemeGiris));
 
                 if (menuName == "Malzeme Çıkış")
-                    OpenTab(menuName, new MaliyeHesaplama.v2.Views.UC_MalzemeFisV2(MaliyeHesaplama.v2.Models.ReceiptType.MalzemeCikis));
+                    OpenTab(menuName, new MaliyeHesaplama.v2.UserControls.UC_MalzemeFisV2(MaliyeHesaplama.v2.Models.ReceiptType.MalzemeCikis));
             }
 
         }

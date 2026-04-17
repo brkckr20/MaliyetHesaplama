@@ -1,4 +1,4 @@
-<Window x:Class="MaliyeHesaplama.v2.Views.winMalzemeListesiV2"
+<Window x:Class="MaliyeHesaplama.v2.Windows.winMalzemeListesiV2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,20 +9,12 @@
         WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" 
         Loaded="Window_Loaded" Icon="/v2/Views/News.png">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="479*"/>
-            <ColumnDefinition Width="221*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
         <control:FilterDataGrid Grid.Column="0" FontSize="12"
-                                VerticalContentAlignment="Center" IsReadOnly="True" GridLinesVisibility="All"
-                                HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
-                                FilterLanguage="Turkish" ShowStatusBar="True" ShowRowsCount="True" ShowElapsedTime="True"
-                                AutoGenerateColumns="True" AutoGeneratingColumn="grid_AutoGeneratingColumn"
-                                x:Name="grid" MouseDoubleClick="sfDataGrid_MouseDoubleClick" Grid.ColumnSpan="2">
+                        VerticalContentAlignment="Center" IsReadOnly="True" GridLinesVisibility="All"
+                        HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
+                        FilterLanguage="Turkish" ShowStatusBar="True" ShowRowsCount="True" ShowElapsedTime="True"
+                        AutoGenerateColumns="True" AutoGeneratingColumn="grid_AutoGeneratingColumn"
+                        x:Name="grid" MouseDoubleClick="sfDataGrid_MouseDoubleClick" Grid.ColumnSpan="2">
             <control:FilterDataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Kolon Seçicisi" Click="MenuItem_Click"/>

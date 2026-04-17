@@ -6,33 +6,36 @@ using System.Windows.Data;
 using System.Windows.Input;
 using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.v2.Data;
+using MaliyeHesaplama.v2.Models;
 
-namespace MaliyeHesaplama.v2.Views
+namespace MaliyeHesaplama.v2.Windows
 {
-    public partial class winMalzemeListesiV2 : Window
+    public partial class winDepoListesiV2 : Window
     {
-        private readonly MaterialRepository _repo;
+        private readonly WarehouseRepository _repo;
         private ICollectionView _collectionView;
         FilterGridHelpers fgh;
 
         public int SecilenId { get; private set; }
+        public string SecilenKodu { get; private set; }
+        public string SecilenAdi { get; private set; }
 
-        public winMalzemeListesiV2()
+        public winDepoListesiV2()
         {
             InitializeComponent();
-            _repo = new MaterialRepository();
-            fgh = new FilterGridHelpers(grid, "Malzeme Listesi", "gridMalzemeListe");
+            _repo = new WarehouseRepository();
+            fgh = new FilterGridHelpers(grid, "Depo Listesi", "gridDepoListe");
         }
 
         private void grid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            var hiddenColumns = new[] { "CreatedAt", "UpdatedAt", "CategoryId", "UnitId" };
+            var hiddenColumns = new[] { "CreatedAt", "UpdatedAt" };
             fgh.GridGeneratingColumn(e, grid, hiddenColumns);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var data = _repo.GetAllWithDetails().ToList();
+            var data = _repo.GetActive().ToList();
             _collectionView = CollectionViewSource.GetDefaultView(data);
             grid.ItemsSource = _collectionView;
             Dispatcher.BeginInvoke(new Action(() =>
@@ -42,12 +45,14 @@ namespace MaliyeHesaplama.v2.Views
             }), System.Windows.Threading.DispatcherPriority.Loaded);
         }
 
-        private void sfDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void grid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (grid.SelectedItem != null)
             {
-                dynamic secilen = grid.SelectedItem;
+                var secilen = (Warehouse)grid.SelectedItem;
                 SecilenId = secilen.Id;
+                SecilenKodu = secilen.Code;
+                SecilenAdi = secilen.Name;
                 this.DialogResult = true;
                 this.Close();
             }
