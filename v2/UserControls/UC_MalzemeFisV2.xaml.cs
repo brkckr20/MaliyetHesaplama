@@ -164,6 +164,24 @@ namespace MaliyeHesaplama.v2.UserControls
                     }
                 }
             }
+            CalculateTotals();
+        }
+
+        private void CalculateTotals()
+        {
+            var validItems = _items.Where(x => !string.IsNullOrEmpty(x.OperationType)).ToList();
+
+            decimal totalKg = validItems.Sum(x => x.NetWeight);
+            decimal totalMt = validItems.Sum(x => x.NetMeter);
+            decimal totalAdet = validItems.Sum(x => x.Piece);
+            decimal totalBirimFiyat = validItems.Sum(x => x.UnitPrice);
+            decimal totalTutar = validItems.Sum(x => x.RowAmount);
+
+            txtToplamKg.Text = totalKg.ToString("N2");
+            //txtToplamMt.Text = totalMt.ToString("N2");
+            //txtToplamAdet.Text = totalAdet.ToString("N2");
+            //txtToplamBirimFiyat.Text = totalBirimFiyat.ToString("N2");
+            //txtToplamTutar.Text = totalTutar.ToString("N2");
         }
 
         private void gridKalemler_CurrentCellChanged(object sender, EventArgs e)
@@ -214,6 +232,7 @@ namespace MaliyeHesaplama.v2.UserControls
             _items.Clear();
             _items.Add(new ReceiptItemViewModel());
             gridKalemler.ItemsSource = _items;
+            CalculateTotals();
         }
 
         public void Kaydet()
@@ -249,13 +268,13 @@ namespace MaliyeHesaplama.v2.UserControls
                 {
                     { "Id", item.Id },
                     { "ReceiptId", _currentId },
-                    { "MaterialId", item.MaterialId },
+                    { "InventoryId", item.MaterialId },
                     { "OperationType", item.OperationType },
                     { "Piece", item.Piece },
                     { "NetMeter", item.NetMeter },
                     { "NetWeight", item.NetWeight },
                     { "UnitPrice", item.UnitPrice },
-                    { "PriceUnit", item.PriceUnit },
+                    { "MeasurementUnit", item.PriceUnit },
                     { "Vat", item.Vat },
                     { "RowAmount", item.RowAmount },
                     { "RowExplanation", item.RowExplanation ?? "" }

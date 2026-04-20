@@ -119,24 +119,36 @@
 
                 <!-- Açıklama -->
                 <GroupBox Grid.Row="2" Header="Fiş Açıklamaları ">
-                    
-               
-                <DockPanel Grid.Row="2" Margin="0,0,0,0">
-                    <Label Content="Açıklama :" Width="125"/>
-                    <TextBox x:Name="txtAciklama" Width="400" Height="40" TextWrapping="Wrap" HorizontalAlignment="Left" AcceptsReturn="True"/>
-                </DockPanel>
+
+
+                    <DockPanel Grid.Row="2" Margin="0,0,0,0">
+                        <Label Content="Açıklama :" Width="125"/>
+                        <TextBox x:Name="txtAciklama" Width="400" Height="40" TextWrapping="Wrap" HorizontalAlignment="Left" AcceptsReturn="True"/>
+                    </DockPanel>
                 </GroupBox>
             </Grid>
 
             <!-- Kalemler DataGrid -->
-            <Grid Grid.Row="1" Margin="0,10,0,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <DockPanel Grid.Row="1" Margin="0,10,0,0" LastChildFill="True">
+                <Border DockPanel.Dock="Bottom" Background="#f5f5f5" BorderBrush="LightGray" BorderThickness="0,1,0,0" Padding="5,8" Height="100">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <DockPanel HorizontalAlignment="Right" Grid.Row="0">
+                            <TextBlock Text="GENEL TOPLAM" FontWeight="Bold"  HorizontalAlignment="Right" />
+                            <TextBlock x:Name="txtToplamKg" Text="0" FontWeight="Bold"  HorizontalAlignment="Right" />
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Right" Grid.Row="1">
+                            <TextBlock Text="GENEL TOPLAM" FontWeight="Bold"  HorizontalAlignment="Right"/>
+                            <TextBlock x:Name="txtToplamKg1" Text="0" FontWeight="Bold"  HorizontalAlignment="Right"/>
+                        </DockPanel>
+                    </Grid>
+                </Border>
 
-                <DataGrid Grid.Row="1" x:Name="gridKalemler" AutoGenerateColumns="False" 
-                     RowStyle="{StaticResource DataGridRow}"
-                     CellStyle="{StaticResource DataGridCell}"
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <DataGrid x:Name="gridKalemler" AutoGenerateColumns="False" 
                      CanUserAddRows="False" CanUserDeleteRows="False"
                      CellEditEnding="gridKalemler_CellEditEnding"
                      CurrentCellChanged="gridKalemler_CurrentCellChanged"
@@ -145,82 +157,86 @@
                      SelectionUnit="FullRow"
                      RowHeight="24"
                      HorizontalGridLinesBrush="LightGray"
-                     VerticalGridLinesBrush="LightGray">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50" IsReadOnly="True" Visibility="Hidden"/>
-                    <DataGridTextColumn Header="Malzeme Id" Binding="{Binding MaterialId}" Width="80" Visibility="Hidden"/>
-                    <DataGridComboBoxColumn Header="İşlem Tipi" 
+                     VerticalGridLinesBrush="LightGray"
+                     FrozenColumnCount="2"
+                     RowStyle="{StaticResource DataGridRow}"
+                     CellStyle="{StaticResource DataGridCell}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50" IsReadOnly="True" Visibility="Hidden"/>
+                            <DataGridTextColumn Header="Malzeme Id" Binding="{Binding MaterialId}" Width="80" Visibility="Hidden"/>
+                            <DataGridComboBoxColumn Header="İşlem Tipi" 
                                             SelectedItemBinding="{Binding OperationType}" 
                                             Width="100">
-                        <DataGridComboBoxColumn.ElementStyle>
-                            <Style TargetType="ComboBox">
-                                <Setter Property="Height" Value="24"/>
-                            </Style>
-                        </DataGridComboBoxColumn.ElementStyle>
-                        <DataGridComboBoxColumn.EditingElementStyle>
-                            <Style TargetType="ComboBox">
-                                <Setter Property="Height" Value="24"/>
-                            </Style>
-                        </DataGridComboBoxColumn.EditingElementStyle>
-                        <DataGridComboBoxColumn.ItemsSource>
-                            <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                <sys:String>Giriş</sys:String>
-                                <sys:String>Çıkış</sys:String>
-                            </x:Array>
-                        </DataGridComboBoxColumn.ItemsSource>
-                    </DataGridComboBoxColumn>
-                    <DataGridTemplateColumn Header="Kodu" Width="120">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid x:Name="cellGrid" Background="White">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="24"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0" x:Name="txtKodu" 
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="ComboBox">
+                                        <Setter Property="Height" Value="24"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="ComboBox">
+                                        <Setter Property="Height" Value="24"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                                <DataGridComboBoxColumn.ItemsSource>
+                                    <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <sys:String>Giriş</sys:String>
+                                        <sys:String>Çıkış</sys:String>
+                                    </x:Array>
+                                </DataGridComboBoxColumn.ItemsSource>
+                            </DataGridComboBoxColumn>
+                            <DataGridTemplateColumn Header="Kodu" Width="120">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid x:Name="cellGrid" Background="White">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="24"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Grid.Column="0" x:Name="txtKodu" 
                                              Text="{Binding MaterialCode, UpdateSourceTrigger=PropertyChanged}" 
                                              VerticalContentAlignment="Center" BorderThickness="0"
                                              Background="Transparent"/>
-                                    <Button Grid.Column="1" x:Name="btnMalzemeSec" Content="..." 
+                                            <Button Grid.Column="1" x:Name="btnMalzemeSec" Content="..." 
                                             Click="btnSelectMaterial_Click"
                                             FontSize="10" Padding="0" Cursor="Hand" 
                                             Background="Transparent" BorderThickness="0"/>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Adı" Binding="{Binding MaterialName}" Width="180" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Kg" Binding="{Binding NetWeight, StringFormat=N2}" Width="80"/>
-                    <DataGridTextColumn Header="Metre" Binding="{Binding NetMeter, StringFormat=N2}" Width="80"/>
-                    <DataGridTextColumn Header="Adet" Binding="{Binding Piece, StringFormat=N2}" Width="80"/>
-                    <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice, StringFormat=N2}" Width="100"/>
-                    <DataGridComboBoxColumn Header="Fiyat Birimi" 
-                                            SelectedItemBinding="{Binding PriceUnit}" 
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Adı" Binding="{Binding MaterialName}" Width="180" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Kg" Binding="{Binding NetWeight, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+                            <DataGridTextColumn Header="Metre" Binding="{Binding NetMeter, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+                            <DataGridTextColumn Header="Adet" Binding="{Binding Piece, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+                            <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                            <DataGridComboBoxColumn Header="Fiyat Birimi" 
+                                            SelectedItemBinding="{Binding PriceUnit, UpdateSourceTrigger=PropertyChanged}" 
                                             Width="80">
-                        <DataGridComboBoxColumn.ElementStyle>
-                            <Style TargetType="ComboBox">
-                                <Setter Property="Height" Value="24"/>
-                            </Style>
-                        </DataGridComboBoxColumn.ElementStyle>
-                        <DataGridComboBoxColumn.EditingElementStyle>
-                            <Style TargetType="ComboBox">
-                                <Setter Property="Height" Value="24"/>
-                            </Style>
-                        </DataGridComboBoxColumn.EditingElementStyle>
-                        <DataGridComboBoxColumn.ItemsSource>
-                            <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                <sys:String>Kg</sys:String>
-                                <sys:String>Mt</sys:String>
-                                <sys:String>Adet</sys:String>
-                            </x:Array>
-                        </DataGridComboBoxColumn.ItemsSource>
-                    </DataGridComboBoxColumn>
-                    <DataGridTextColumn Header="KDV (%)" Binding="{Binding Vat, StringFormat=N2}" Width="60"/>
-                    <DataGridTextColumn Header="Satır Tutarı" Binding="{Binding RowAmount, StringFormat=N2}" Width="100" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}" Width="150"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            </Grid>
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="ComboBox">
+                                        <Setter Property="Height" Value="24"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="ComboBox">
+                                        <Setter Property="Height" Value="24"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                                <DataGridComboBoxColumn.ItemsSource>
+                                    <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <sys:String>Kg</sys:String>
+                                        <sys:String>Mt</sys:String>
+                                        <sys:String>Adet</sys:String>
+                                    </x:Array>
+                                </DataGridComboBoxColumn.ItemsSource>
+                            </DataGridComboBoxColumn>
+                            <DataGridTextColumn Header="KDV (%)" Binding="{Binding Vat, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" Width="60"/>
+                            <DataGridTextColumn Header="Satır Tutarı" Binding="{Binding RowAmount, StringFormat=N2}" Width="100" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}" Width="150"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </DockPanel>
         </Grid>
     </Grid>
 </UserControl>

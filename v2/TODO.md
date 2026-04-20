@@ -21,9 +21,9 @@
 
 ## Yapılacaklar
 
-### 1. Hesaplama Sorunu (Öncelikli)
+### 1. Hesaplama Sorunu (Çözüldü)
 **Problem:** Alt satıra inmeden (hücreden çıkmadan) hesaplama yapılmıyor
-**Çözüm:** XAML binding'lerine `UpdateSourceTrigger="PropertyChanged"` ekle
+**Çözüm:** XAML binding'lerine `UpdateSourceTrigger="PropertyChanged"` eklendi
 
 ### 2. Enter ile Navigasyon Testi
 - PreviewKeyDown eventi mevcut
