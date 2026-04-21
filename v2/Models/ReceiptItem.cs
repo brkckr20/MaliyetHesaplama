@@ -34,6 +34,13 @@ namespace MaliyeHesaplama.v2.Models
         [Display(Name = "Birim Fiyat")]
         public decimal UnitPrice { get; set; }
 
+        [Display(Name = "Fiyat Birimi")]
+        public string MeasurementUnit { get; set; }
+
+        public string MaterialCode { get; set; }
+
+        public string MaterialName { get; set; }
+
         [Display(Name = "Açıklama")]
         public string RowExplanation { get; set; }
 

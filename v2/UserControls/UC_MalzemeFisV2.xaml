@@ -150,9 +150,10 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <DataGrid x:Name="gridKalemler" AutoGenerateColumns="False" 
                      CanUserAddRows="False" CanUserDeleteRows="False"
-                     CellEditEnding="gridKalemler_CellEditEnding"
-                     CurrentCellChanged="gridKalemler_CurrentCellChanged"
-                     PreviewKeyDown="gridKalemler_PreviewKeyDown"
+CellEditEnding="gridKalemler_CellEditEnding"
+                      CurrentCellChanged="gridKalemler_CurrentCellChanged"
+                      PreparingCellForEdit="gridKalemler_PreparingCellForEdit"
+                      PreviewKeyDown="gridKalemler_PreviewKeyDown"
                      SelectionMode="Single"
                      SelectionUnit="FullRow"
                      RowHeight="24"
@@ -205,10 +206,10 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTextColumn Header="Adı" Binding="{Binding MaterialName}" Width="180" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Kg" Binding="{Binding NetWeight, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-                            <DataGridTextColumn Header="Metre" Binding="{Binding NetMeter, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-                            <DataGridTextColumn Header="Adet" Binding="{Binding Piece, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-                            <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                            <DataGridTextColumn Header="Kg" Binding="{Binding NetWeight, StringFormat={}{0:N2}, ConverterCulture=tr-TR}" Width="80"/>
+                            <DataGridTextColumn Header="Metre" Binding="{Binding NetMeter, StringFormat={}{0:N2}, ConverterCulture=tr-TR}" Width="80"/>
+                            <DataGridTextColumn Header="Adet" Binding="{Binding Piece, StringFormat={}{0:N2}, ConverterCulture=tr-TR}" Width="80"/>
+                            <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice, StringFormat={}{0:N2}, ConverterCulture=tr-TR}" Width="100"/>
                             <DataGridComboBoxColumn Header="Fiyat Birimi" 
                                             SelectedItemBinding="{Binding PriceUnit, UpdateSourceTrigger=PropertyChanged}" 
                                             Width="80">
@@ -230,8 +231,8 @@
                                     </x:Array>
                                 </DataGridComboBoxColumn.ItemsSource>
                             </DataGridComboBoxColumn>
-                            <DataGridTextColumn Header="KDV (%)" Binding="{Binding Vat, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" Width="60"/>
-                            <DataGridTextColumn Header="Satır Tutarı" Binding="{Binding RowAmount, StringFormat=N2}" Width="100" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="KDV (%)" Binding="{Binding Vat, StringFormat={}{0:N2}, ConverterCulture=tr-TR}" Width="60"/>
+                            <DataGridTextColumn Header="Satır Tutarı" Binding="{Binding RowAmount, StringFormat={}{0:N2}, ConverterCulture=tr-TR}" Width="100" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}" Width="150"/>
                         </DataGrid.Columns>
                     </DataGrid>

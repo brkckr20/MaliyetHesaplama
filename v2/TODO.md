@@ -17,6 +17,33 @@
 - Fiyat Birimi: ComboBox (Kg/Mt/Adet)
 - Enter tuşu ile navigasyon
 
+### 5. Otomatik Boş Satır Eklenmesi (Çözüldü)
+- Problem: İşlem Tipi dropdownundan seçim yapınca boş satır eklenmiyordu
+- Çözüm: `gridKalemler_CellEditEnding` ve `gridKalemler_CurrentCellChanged` event'leri eklendi
+- Logic:
+  - `CellEditEnding`: İşlem Tipi değişince `CommitEdit` + `CheckAndAddEmptyRow()` çağrılır
+  - `CurrentCellChanged`: Hücre değişince `CommitEdit` + `CheckAndAddEmptyRow()` çağrılır
+  - `PreviewKeyDown`: Enter tuşunda son sütundaysa yeni satır eklenir
+
+### 6. Kayıt Listeleme ve Yükleme (Devam Edilecek)
+- `Listele()`: Fiş listesi penceresi açılır, seçilen kayıt yüklenir
+- `LoadFromId()`: Receipt + ReceiptItem + Firma + Depo bilgileri yüklenir
+- `GetItemsByReceiptId()`: ReceiptItem + Malzeme bilgileri sorgulanır
+- Model güncellemeleri: `ReceiptItem.MeasurementUnit`, `ReceiptItem.MaterialCode`, `ReceiptItem.MaterialName`
+
+### 7. Fiş Listesi Boş Geliyor (Araştırılacak)
+- Problem: `winFisListesiV2` açılıyor ama grid boş geliyor
+- `GetByTypeList()` metodu çalışıyor ama veri dönmüyor olabilir
+- Veya `Window_Loaded` eventi tetiklenmiyor olabilir
+- Debug için label'a durum yazdırıldı ama hiçbirşey görünmedi
+- Yarın kontrol edilecek: Grid'in ItemsSource'u doğru set ediliyor mu?
+
+### 4. Sayı Formatı (Çözüldü)
+- Problem: Kg, Mt, Adet, Birim Fiyat, KDV alanlarında ondalık ayracı sorunu
+- Çözüm: XAML binding'lerine `ConverterCulture=tr-TR` eklendi
+- Örnek: `StringFormat={}{0:N2}, ConverterCulture=tr-TR`
+- Sonuç: 1035 yazınca 1.035,00 olarak görünür
+
 ---
 
 ## Yapılacaklar

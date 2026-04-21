@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using MaliyeHesaplama.helpers;
 using System.Data.SqlClient;
 using Microsoft.Data.Sqlite;
@@ -459,7 +459,7 @@ public class MiniOrm : IDisposable
             StockId = stockId,
             ReceiptId = receiptId,
             ReceiptItemId = receiptItemId,
-            InventoryId = inventoryId,
+            MaterialId = inventoryId,
             WareHouseId = wareHouseId,
             VariantId = variantId,
             BatchNo = batchNo,
@@ -474,13 +474,13 @@ public class MiniOrm : IDisposable
             BeforePiece = beforePiece,
             AfterPiece = beforePiece + deltaPiece,
             UserId = userId,
-            ReceiptNo = "" // optional, eklenmek istenirse parametre alabilirS
+            ReceiptNo = "" 
         };
 
         var insertMv = @"
-INSERT INTO StockMovement (StockId, ReceiptId, ReceiptItemId, InventoryId, WareHouseId, VariantId, BatchNo, OrderNo,
+INSERT INTO StockMovement (StockId, ReceiptId, ReceiptItemId, MaterialId, WareHouseId, VariantId, BatchNo, OrderNo,
     DeltaKg, DeltaMeter, DeltaPiece, BeforeKg, AfterKg, BeforeMeter, AfterMeter, BeforePiece, AfterPiece, UserId, CreatedAt)
-VALUES (@StockId, @ReceiptId, @ReceiptItemId, @InventoryId, @WareHouseId, @VariantId, @BatchNo, @OrderNo,
+VALUES (@StockId, @ReceiptId, @ReceiptItemId, @MaterialId, @WareHouseId, @VariantId, @BatchNo, @OrderNo,
     @DeltaKg, @DeltaMeter, @DeltaPiece, @BeforeKg, @AfterKg, @BeforeMeter, @AfterMeter, @BeforePiece, @AfterPiece, @UserId, GETDATE());";
 
         if (tx == null)
@@ -672,6 +672,104 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @InventoryId, @WareHouseId, @Varia
                 FOREIGN KEY (RenkId) REFERENCES Renk(Id),
                 FOREIGN KEY (BedenId) REFERENCES Beden(Id)
             );
+        END;
+
+        IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Stock')
+        BEGIN
+            CREATE TABLE Stock (
+                Id INT IDENTITY(1,1) PRIMARY KEY,
+                InventoryId INT NOT NULL,
+                WareHouseId INT NOT NULL,
+                VariantId INT,
+                BatchNo NVARCHAR(50),
+                OrderNo NVARCHAR(50),
+                QuantityKg DECIMAL(18,4) DEFAULT 0,
+                QuantityMeter DECIMAL(18,4) DEFAULT 0,
+                QuantityPiece INT DEFAULT 0,
+                FOREIGN KEY (InventoryId) REFERENCES Inventory(Id)
+            );
+        END
+        ELSE
+        BEGIN
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('Stock') AND name = 'QuantityKg')
+                ALTER TABLE Stock ADD QuantityKg DECIMAL(18,4) DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('Stock') AND name = 'QuantityMeter')
+                ALTER TABLE Stock ADD QuantityMeter DECIMAL(18,4) DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('Stock') AND name = 'QuantityPiece')
+                ALTER TABLE Stock ADD QuantityPiece INT DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('Stock') AND name = 'VariantId')
+                ALTER TABLE Stock ADD VariantId INT;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('Stock') AND name = 'BatchNo')
+                ALTER TABLE Stock ADD BatchNo NVARCHAR(50);
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('Stock') AND name = 'OrderNo')
+                ALTER TABLE Stock ADD OrderNo NVARCHAR(50);
+        END;
+
+        IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'StockMovement')
+        BEGIN
+            CREATE TABLE StockMovement (
+                Id INT IDENTITY(1,1) PRIMARY KEY,
+                StockId INT,
+                ReceiptId INT,
+                ReceiptItemId INT,
+                MaterialId INT NOT NULL,
+                WareHouseId INT,
+                VariantId INT,
+                BatchNo NVARCHAR(50),
+                OrderNo NVARCHAR(50),
+                DeltaKg DECIMAL(18,4) DEFAULT 0,
+                DeltaMeter DECIMAL(18,4) DEFAULT 0,
+                DeltaPiece INT DEFAULT 0,
+                BeforeKg DECIMAL(18,4) DEFAULT 0,
+                AfterKg DECIMAL(18,4) DEFAULT 0,
+                BeforeMeter DECIMAL(18,4) DEFAULT 0,
+                AfterMeter DECIMAL(18,4) DEFAULT 0,
+                BeforePiece INT DEFAULT 0,
+                AfterPiece INT DEFAULT 0,
+                UserId INT,
+                CreatedAt DATETIME DEFAULT GETDATE()
+            );
+        END
+        ELSE
+        BEGIN
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'DeltaKg')
+                ALTER TABLE StockMovement ADD DeltaKg DECIMAL(18,4) DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'DeltaMeter')
+                ALTER TABLE StockMovement ADD DeltaMeter DECIMAL(18,4) DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'DeltaPiece')
+                ALTER TABLE StockMovement ADD DeltaPiece INT DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'BeforeKg')
+                ALTER TABLE StockMovement ADD BeforeKg DECIMAL(18,4) DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'AfterKg')
+                ALTER TABLE StockMovement ADD AfterKg DECIMAL(18,4) DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'BeforeMeter')
+                ALTER TABLE StockMovement ADD BeforeMeter DECIMAL(18,4) DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'AfterMeter')
+                ALTER TABLE StockMovement ADD AfterMeter DECIMAL(18,4) DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'BeforePiece')
+                ALTER TABLE StockMovement ADD BeforePiece INT DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'AfterPiece')
+                ALTER TABLE StockMovement ADD AfterPiece INT DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'CreatedAt')
+                ALTER TABLE StockMovement ADD CreatedAt DATETIME DEFAULT GETDATE();
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'ReceiptId')
+                ALTER TABLE StockMovement ADD ReceiptId INT;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'ReceiptItemId')
+                ALTER TABLE StockMovement ADD ReceiptItemId INT;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'MaterialId')
+                ALTER TABLE StockMovement ADD MaterialId INT NOT NULL DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'WareHouseId')
+                ALTER TABLE StockMovement ADD WareHouseId INT;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'VariantId')
+                ALTER TABLE StockMovement ADD VariantId INT;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'BatchNo')
+                ALTER TABLE StockMovement ADD BatchNo NVARCHAR(50);
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'OrderNo')
+                ALTER TABLE StockMovement ADD OrderNo NVARCHAR(50);
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'UserId')
+                ALTER TABLE StockMovement ADD UserId INT;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'StockId')
+                ALTER TABLE StockMovement ADD StockId INT;
         END;
         ";
         _connection.Execute(sql);

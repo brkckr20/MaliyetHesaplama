@@ -42,6 +42,11 @@ namespace MaliyeHesaplama.v2.Data
             _orm.ExecuteRaw($"DELETE FROM Receipt WHERE Id = {id}");
         }
 
+        public IEnumerable<ReceiptItem> GetItemsByReceiptId(int receiptId)
+        {
+            return _orm.QueryRaw<ReceiptItem>($"SELECT * FROM ReceiptItem WHERE ReceiptId = {receiptId}");
+        }
+
         public string GetRecordNo(string tableName, string columnName, string typeColumn, int receiptType)
         {
             var sql = $"SELECT TOP 1 {columnName} FROM {tableName} WHERE {typeColumn} = {receiptType} ORDER BY Id DESC";

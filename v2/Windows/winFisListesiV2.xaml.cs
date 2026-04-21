@@ -20,8 +20,21 @@ namespace MaliyeHesaplama.v2.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var data = _repo.GetByTypeList(_receiptType, 100);
-            grid.ItemsSource = data;
+            try
+            {
+                lblBaslik.Content = $"Fiş Tipi: {_receiptType}";
+                var data = _repo.GetByTypeList(_receiptType, 100);
+                grid.ItemsSource = data;
+                
+                if (data == null || !data.Any())
+                {
+                    lblBaslik.Content += " (Veri yok!)";
+                }
+            }
+            catch (Exception ex)
+            {
+                lblBaslik.Content = $"Hata: {ex.Message}";
+            }
         }
 
         private void grid_MouseDoubleClick(object sender, MouseButtonEventArgs e)

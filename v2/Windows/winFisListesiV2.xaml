@@ -4,11 +4,14 @@
         Title="Fiş Listesi" Height="450" Width="800" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <DataGrid Grid.Row="0" x:Name="grid" AutoGenerateColumns="False" 
+        <Label Grid.Row="0" x:Name="lblBaslik" Content="" Margin="5" Foreground="Red" FontWeight="Bold"/>
+        
+        <DataGrid Grid.Row="1" x:Name="grid" AutoGenerateColumns="False" 
                  MouseDoubleClick="grid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50"/>
@@ -20,7 +23,7 @@
             </DataGrid.Columns>
         </DataGrid>
         
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
             <Button Content="Seç" Width="80" Click="btnSec_Click" Margin="0,0,5,0"/>
             <Button Content="İptal" Width="80" Click="btnIptal_Click"/>
         </StackPanel>
