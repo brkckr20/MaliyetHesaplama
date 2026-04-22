@@ -32,14 +32,21 @@ namespace MaliyeHesaplama.v2.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var data = _repo.GetAllWithDetails().ToList();
-            _collectionView = CollectionViewSource.GetDefaultView(data);
-            grid.ItemsSource = _collectionView;
-            Dispatcher.BeginInvoke(new Action(() =>
+            try
             {
-                fgh.InitializeColumnSettings();
-                fgh.LoadColumnSettingsFromDatabase();
-            }), System.Windows.Threading.DispatcherPriority.Loaded);
+                var data = _repo.GetAllWithDetails().ToList();
+                _collectionView = CollectionViewSource.GetDefaultView(data);
+                grid.ItemsSource = _collectionView;
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    fgh.InitializeColumnSettings();
+                    fgh.LoadColumnSettingsFromDatabase();
+                }), System.Windows.Threading.DispatcherPriority.Loaded);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show($"Hata: {ex.Message}", "Hata");
+            }
         }
 
         private void sfDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)

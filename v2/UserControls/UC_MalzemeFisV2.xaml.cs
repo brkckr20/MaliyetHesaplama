@@ -401,11 +401,9 @@ private void gridKalemler_CurrentCellChanged(object sender, EventArgs e)
 
         public void Listele()
         {
-            var win = new winFisListesiV2((int)FisTipi);
-            if (win.ShowDialog() == true)
-            {
-                LoadFromId(win.SecilenId);
-            }
+            winFisListesiV2 win = new winFisListesiV2((int)FisTipi);
+            win.ShowDialog();
+            
         }
 
         private void LoadFromId(int id)

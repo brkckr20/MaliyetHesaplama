@@ -1,31 +1,24 @@
 <Window x:Class="MaliyeHesaplama.v2.Windows.winFisListesiV2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Fiş Listesi" Height="450" Width="800" WindowStartupLocation="CenterOwner">
+        xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
+        Title="Fiş Listesi" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Icon="/News.png">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
-        <Label Grid.Row="0" x:Name="lblBaslik" Content="" Margin="5" Foreground="Red" FontWeight="Bold"/>
-        
-        <DataGrid Grid.Row="1" x:Name="grid" AutoGenerateColumns="False" 
-                 MouseDoubleClick="grid_MouseDoubleClick">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50"/>
-                <DataGridTextColumn Header="Fiş No" Binding="{Binding ReceiptNo}" Width="100"/>
-                <DataGridTextColumn Header="Tarih" Binding="{Binding ReceiptDate, StringFormat=d}" Width="100"/>
-                <DataGridTextColumn Header="Firma Id" Binding="{Binding CompanyId}" Width="80"/>
-                <DataGridTextColumn Header="Depo Id" Binding="{Binding WareHouseId}" Width="80"/>
-                <DataGridTextColumn Header="Açıklama" Binding="{Binding Explanation}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-            <Button Content="Seç" Width="80" Click="btnSec_Click" Margin="0,0,5,0"/>
-            <Button Content="İptal" Width="80" Click="btnIptal_Click"/>
-        </StackPanel>
+
+        <control:FilterDataGrid Grid.Row="0"
+            x:Name="grid" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"
+            GridLinesVisibility="All" HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
+            FilterLanguage="Turkish" ShowStatusBar="True" AutoGenerateColumns="True"
+            AutoGeneratingColumn="grid_AutoGeneratingColumn" MouseDoubleClick="grid_MouseDoubleClick"
+            ColumnReordered="grid_ColumnReordered">
+            <control:FilterDataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Kolon Seçicisi" Click="MenuItem_Click"/>
+                </ContextMenu>
+            </control:FilterDataGrid.ContextMenu>
+        </control:FilterDataGrid>
     </Grid>
 </Window>

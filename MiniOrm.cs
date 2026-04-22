@@ -168,6 +168,7 @@ public class MiniOrm : IDisposable
         var sql = $@"    select 
                             ISNULL(R.Id,0) [Id],
                             ISNULL(R.ReceiptNo,'') [ReceiptNo],
+                            ISNULL(R.ReceiptType,'') [ReceiptType],
                             ISNULL(R.ReceiptDate,'') [ReceiptDate],	
                             ISNULL(C.Id,'') [CompanyId],
                             ISNULL(C.CompanyName,'') [CompanyName],
@@ -680,6 +681,7 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @MaterialId, @WareHouseId, @Varian
                 Id INT IDENTITY(1,1) PRIMARY KEY,
                 InventoryId INT NOT NULL,
                 WareHouseId INT NOT NULL,
+                ColorId INT,
                 VariantId INT,
                 BatchNo NVARCHAR(50),
                 OrderNo NVARCHAR(50),
@@ -697,6 +699,8 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @MaterialId, @WareHouseId, @Varian
                 ALTER TABLE Stock ADD QuantityMeter DECIMAL(18,4) DEFAULT 0;
             IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('Stock') AND name = 'QuantityPiece')
                 ALTER TABLE Stock ADD QuantityPiece INT DEFAULT 0;
+            IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('Stock') AND name = 'ColorId')
+                ALTER TABLE Stock ADD ColorId INT;
             IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('Stock') AND name = 'VariantId')
                 ALTER TABLE Stock ADD VariantId INT;
             IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('Stock') AND name = 'BatchNo')

@@ -143,38 +143,7 @@
                             </Grid>
                         </GroupBox>
                     </Grid>
-                </TabItem>
-                <TabItem Header="Fiyat">
-                    <!--burdan devam et - 03.04.2026-->
-                </TabItem>
-                <TabItem Header="Reçete Detayı">
-                    <TabControl>
-                        <TabItem Header="Kumaş">
-                            <Label Content="Kumaş bilgileri gelecek"/>
-                        </TabItem>
-                        <TabItem Header="İplik">
-                            <Label Content="İplik bilgileri gelecek"/>
-                        </TabItem>
-                        <TabItem Header="Aksesuar">
-                            <Label Content="Aksesuar bilgileri gelecek"/>
-                        </TabItem>
-                    </TabControl>
-                </TabItem>
-                <TabItem Header="Renk/Beden Barkod">
-                    <Label Content="renk beden bilgisine barkod bilgilerinin girileceği alan"></Label>
-                </TabItem>
-                <TabItem Header="Renk/Beden Açıklama">
-                    <Label Content="renk beden bilgisine açıklama bilgilerinin girileceği alan"></Label>
-                </TabItem>
-                <TabItem Header="Renk/Beden Sticker">
-                    <Label Content="renk beden bilgisine açıklama bilgilerinin girileceği alan"></Label>
-                </TabItem>
-                <TabItem Header="Açıklamalar">
-                    <Label Content="Siparişe bağlı açıklamaların girileceği alan"></Label>
-                </TabItem>
-                <TabItem Header="Ekler">
-                    <Label Content="Siparişe bağlı eklerin girileceği tablo"></Label>
-                </TabItem>
+                </TabItem>                
             </TabControl>
         </StackPanel>
 
