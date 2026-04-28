@@ -1,12 +1,10 @@
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
 using MaliyeHesaplama.v2.Data;
 using MaliyeHesaplama.v2.Models;
 using MaliyeHesaplama.v2.Windows;
-using System;
+using MaliyeHesaplama.wins;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,6 +21,8 @@ namespace MaliyeHesaplama.v2.UserControls
         private readonly MaterialRepository _materialRepo;
         private readonly WarehouseRepository _warehouseRepo;
         private readonly CompanyRepository _companyRepo;
+        private readonly MiniOrm _orm;
+        private readonly UtilityHelpers _uh;
 
         public ReceiptType FisTipi { get; private set; }
         private int _currentId = 0;
@@ -30,6 +30,7 @@ namespace MaliyeHesaplama.v2.UserControls
         private int _depoId = 0;
 
         private ObservableCollection<ReceiptItemViewModel> _items;
+        public ObservableCollection<string> OperationTypes { get; private set; }
 
         public UC_MalzemeFisV2(ReceiptType fisTipi)
         {
@@ -40,11 +41,30 @@ namespace MaliyeHesaplama.v2.UserControls
             _materialRepo = new MaterialRepository();
             _warehouseRepo = new WarehouseRepository();
             _companyRepo = new CompanyRepository();
+            _orm = new MiniOrm();
+            _uh = new UtilityHelpers();
 
             _items = new ObservableCollection<ReceiptItemViewModel>();
+            OperationTypes = new ObservableCollection<string>();
+
+            LoadOperationTypes();
+
+            this.DataContext = this;
 
             ButtonBar.PageCommands = this;
             Yeni();
+        }
+
+        private void LoadOperationTypes()
+        {
+            if (FisTipi == ReceiptType.MalzemeGiris)
+            {
+                _uh.GetOperationTypeList("MalzemeGirisOperasyonTipleri", cmbKalemIslem);
+            }
+            else
+            {
+                _uh.GetOperationTypeList("MalzemeCikisOperasyonTipleri", cmbKalemIslem);
+            }
         }
 
         private void LoadData()
@@ -54,6 +74,12 @@ namespace MaliyeHesaplama.v2.UserControls
             txtFisNo.Text = _receiptRepo.GetRecordNo("Receipt", "ReceiptNo", "ReceiptType", (int)FisTipi);
             gridKalemler.ItemsSource = _items;
         }
+
+        private void gridKalemler_Loaded(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"[DEBUG] Loaded event - OperationTypes count: {OperationTypes.Count}");
+        }
+
 
         private void AddEmptyRow()
         {
@@ -132,6 +158,59 @@ namespace MaliyeHesaplama.v2.UserControls
             }
         }
 
+
+        private void MI_SatirSil_Click(object sender, RoutedEventArgs e)
+        {
+            if (gridKalemler.SelectedItem != null)
+            {
+                var item = (ReceiptItemViewModel)gridKalemler.SelectedItem;
+                _items.Remove(item);
+            }
+        }
+
+        private void MI_CikislardanGeriAl_Click(object sender, RoutedEventArgs e)
+        {
+            if (FisTipi != ReceiptType.MalzemeGiris)
+            {
+                MessageBox.Show("Bu özellik sadece Malzeme Giriş işlemlerinde kullanılabilir.", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            string condition = $"R.ReceiptType = {(int)ReceiptType.MalzemeCikis}";
+            if (_depoId > 0)
+            {
+                condition += $" AND WareHouseId = {_depoId}";
+            }
+
+            var win = new winFasonaGidenler(condition, _depoId.ToString(), "Piece", "Çıkış İşlemlerinden Geri Al");
+            if (win.ShowDialog() == true)
+            {
+                var selectedReceipts = win.SelectedReceipts;
+                foreach (var r in selectedReceipts)
+                {
+                    var receiptItems = _receiptRepo.GetItemsByReceiptId(r.Id);
+                    foreach (var item in receiptItems)
+                    {
+                        var newItem = new ReceiptItemViewModel
+                        {
+                            MaterialId = item.Id,
+                            MaterialCode = item.MaterialCode,
+                            MaterialName = item.MaterialName,
+                            NetWeight = item.NetWeight,
+                            NetMeter = item.NetMeter,
+                            Piece = item.Piece,
+                            UnitPrice = item.UnitPrice,
+                            PriceUnit = "Adet",
+                            Vat = item.Vat,
+                            RowExplanation = $"Geri Alınan - {r.ReceiptNo}",
+                            OperationType = OperationTypes.FirstOrDefault()
+                        };
+                        _items.Add(newItem);
+                    }
+                }
+            }
+        }
+
         private void btnSelectMaterial_Click(object sender, RoutedEventArgs e)
         {
             var win = new winMalzemeListesiV2();
@@ -187,8 +266,8 @@ namespace MaliyeHesaplama.v2.UserControls
             //txtToplamTutar.Text = totalTutar.ToString("N2");
         }
 
-private void gridKalemler_CurrentCellChanged(object sender, EventArgs e)
-{
+        private void gridKalemler_CurrentCellChanged(object sender, EventArgs e)
+        {
             var grid = sender as DataGrid;
             grid.CommitEdit(DataGridEditingUnit.Cell, true);
             grid.CommitEdit(DataGridEditingUnit.Row, true);
@@ -252,7 +331,7 @@ private void gridKalemler_CurrentCellChanged(object sender, EventArgs e)
                     {
                         int beforeCount = _items.Count;
                         CheckAndAddEmptyRow();
-                        
+
                         if (_items.Count > beforeCount)
                         {
                             gridKalemler.CurrentCell = new DataGridCellInfo(
@@ -294,175 +373,98 @@ private void gridKalemler_CurrentCellChanged(object sender, EventArgs e)
 
         public void Kaydet()
         {
-            if (_depoId == 0)
-            {
-                MessageBox.Show("Depo seçimi zorunludur!", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            var validItems = _items.Where(x => !string.IsNullOrEmpty(x.OperationType)).ToList();
-            if (!validItems.Any())
-            {
-                MessageBox.Show("En az bir kalem eklemelisiniz!", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            using var orm = new MiniOrm();
-
-            var receiptData = new Dictionary<string, object>
-            {
-                { "Id", _currentId },
-                { "ReceiptNo", txtFisNo.Text },
-                { "ReceiptType", (int)FisTipi },
-                { "ReceiptDate", dpTarih.SelectedDate.Value },
-                { "CompanyId", _firmaId },
-                { "WareHouseId", _depoId },
-                { "InvoiceNo", txtBelgeNo.Text },
-                { "InvoiceDate", dpIrsaliyeTarih.SelectedDate },
-                { "Explanation", txtAciklama.Text }
-            };
-
-            var itemsList = new List<Dictionary<string, object>>();
-            foreach (var item in _items)
-            {
-                if (string.IsNullOrEmpty(item.OperationType)) continue;
-
-                var itemData = new Dictionary<string, object>
-                {
-                    { "Id", item.Id },
-                    { "InventoryId", item.MaterialId },
-                    { "OperationType", item.OperationType },
-                    { "Piece", item.Piece },
-                    { "NetMeter", item.NetMeter },
-                    { "NetWeight", item.NetWeight },
-                    { "UnitPrice", item.UnitPrice },
-                    { "MeasurementUnit", item.PriceUnit },
-                    { "Vat", item.Vat },
-                    { "RowAmount", item.RowAmount },
-                    { "RowExplanation", item.RowExplanation ?? "" }
-                };
-
-                itemsList.Add(itemData);
-            }
-
-            _currentId = orm.SaveReceiptWithStock(receiptData, itemsList, _depoId, null, "Receipt", "ReceiptItem");
-
-            foreach (var item in validItems)
-            {
-                var savedItem = itemsList.FirstOrDefault(x => x.ContainsKey("Id") && Convert.ToInt32(x["Id"]) == 0);
-                if (savedItem != null && item.Id == 0)
-                {
-                    var matched = itemsList.FirstOrDefault(x => 
-                        x["InventoryId"]?.Equals(item.MaterialId) == true &&
-                        x["OperationType"]?.Equals(item.OperationType) == true);
-                    if (matched != null)
-                    {
-                        item.Id = Convert.ToInt32(matched["Id"]);
-                    }
-                }
-            }
-
-            MessageBox.Show("Kaydedildi!", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information);
+            throw new NotImplementedException();
         }
 
         public void Sil()
         {
-            if (_currentId == 0) return;
-
-            var result = MessageBox.Show("Kaydı silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {
-                // StockMovement sil
-                _stockMoveRepo.DeleteByDocument(1, _currentId);
-
-                // ReceiptItem sil
-                using var orm = new MiniOrm();
-                orm.ExecuteRaw($"DELETE FROM ReceiptItem WHERE ReceiptId = {_currentId}");
-                orm.ExecuteRaw($"DELETE FROM Receipt WHERE Id = {_currentId}");
-
-                Yeni();
-            }
+            throw new NotImplementedException();
         }
 
         public void Yazdir()
         {
-            MessageBox.Show("Yazdırma özelliği henüz eklenmedi.", "Bilgi", MessageBoxButton.OK, MessageBoxImage.Information);
+            throw new NotImplementedException();
         }
 
         public void Ileri()
         {
-            // Sonraki kayıt
+            throw new NotImplementedException();
         }
 
         public void Geri()
         {
-            // Önceki kayıt
+            throw new NotImplementedException();
         }
 
         public void Listele()
         {
-            winFisListesiV2 win = new winFisListesiV2((int)FisTipi);
-            win.ShowDialog();
-            
+            var win = new winFisListesiV2((int)FisTipi);
+            if (win.ShowDialog() == true)
+            {
+                _currentId = win.SecilenId;
+                if (_currentId > 0)
+                {
+                    LoadFromId(_currentId);
+                }
+            }
         }
 
         private void LoadFromId(int id)
         {
             var receipt = _receiptRepo.GetById(id);
-            if (receipt == null) return;
-
-            _currentId = receipt.Id;
-            txtFisNo.Text = receipt.ReceiptNo;
-            dpTarih.SelectedDate = receipt.ReceiptDate;
-            dpIrsaliyeTarih.SelectedDate = receipt.InvoiceDate;
-            _firmaId = receipt.CompanyId;
-            _depoId = receipt.WareHouseId;
-            txtBelgeNo.Text = receipt.InvoiceNo ?? "";
-            txtAciklama.Text = receipt.Explanation ?? "";
-
-            var company = _companyRepo.GetById(_firmaId);
-            if (company != null)
+            if (receipt != null)
             {
-                txtFirma.Text = company.CompanyCode;
-                lblFirmaAdi.Text = company.CompanyName;
-            }
+                _currentId = receipt.Id;
+                txtFisNo.Text = receipt.ReceiptNo;
+                dpTarih.SelectedDate = receipt.ReceiptDate;
+                //dpIrsaliyeTarih.SelectedDate = receipt.DuaDate;
+                //txtBelgeNo.Text = receipt.DocumentNo;
+                txtIrsaliyeBelgeNo.Text = receipt.InvoiceNo;
+                txtAciklama.Text = receipt.Explanation;
 
-            var warehouse = _warehouseRepo.GetById(_depoId);
-            if (warehouse != null)
-            {
-                txtDepo.Text = warehouse.Code;
-                lblDepoAdi.Text = warehouse.Name;
-            }
+                _firmaId = receipt.CompanyId;
+                var company = _companyRepo.GetById(receipt.CompanyId);
+                if (company != null)
+                {
+                    txtFirma.Text = company.CompanyCode;
+                    lblFirmaAdi.Text = company.CompanyName;
+                }
 
+                _depoId = receipt.WareHouseId;
+                var warehouse = _warehouseRepo.GetById(receipt.WareHouseId);
+                if (warehouse != null)
+                {
+                    //txtDepo.Text = warehouse.WareHouseCode;
+                    //lblDepoAdi.Text = warehouse.WareHouseName;
+                }
+
+                LoadItems(id);
+            }
+        }
+
+        private void LoadItems(int receiptId)
+        {
             _items.Clear();
-            var items = _receiptRepo.GetItemsByReceiptId(id);
+            var items = _receiptRepo.GetItemsByReceiptId(receiptId);
             foreach (var item in items)
             {
-                var material = _materialRepo.GetById(item.MaterialId);
-                var vm = new ReceiptItemViewModel
+                _items.Add(new ReceiptItemViewModel
                 {
                     Id = item.Id,
-                    MaterialId = item.MaterialId,
-                    MaterialCode = material?.Code ?? "",
-                    MaterialName = material?.Name ?? "",
+                    MaterialId = item.Id,
+                    MaterialCode = item.MaterialCode,
+                    MaterialName = item.MaterialName,
                     OperationType = item.OperationType,
-                    Piece = item.Piece,
-                    NetMeter = item.NetMeter,
                     NetWeight = item.NetWeight,
+                    NetMeter = item.NetMeter,
+                    Piece = item.Piece,
                     UnitPrice = item.UnitPrice,
-                    PriceUnit = item.MeasurementUnit ?? "Adet",
+                    PriceUnit = "Adet",
                     Vat = item.Vat,
                     RowAmount = item.RowAmount,
-                    RowExplanation = item.RowExplanation ?? ""
-                };
-                _items.Add(vm);
+                    RowExplanation = item.RowExplanation
+                });
             }
-
-            if (!_items.Any())
-            {
-                _items.Add(new ReceiptItemViewModel());
-            }
-
             gridKalemler.ItemsSource = _items;
             CalculateTotals();
         }

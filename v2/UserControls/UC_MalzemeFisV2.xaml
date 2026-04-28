@@ -148,12 +148,13 @@
                 </Border>
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <DataGrid x:Name="gridKalemler" AutoGenerateColumns="False" 
+<DataGrid x:Name="gridKalemler" AutoGenerateColumns="False" 
                      CanUserAddRows="False" CanUserDeleteRows="False"
-CellEditEnding="gridKalemler_CellEditEnding"
-                      CurrentCellChanged="gridKalemler_CurrentCellChanged"
-                      PreparingCellForEdit="gridKalemler_PreparingCellForEdit"
-                      PreviewKeyDown="gridKalemler_PreviewKeyDown"
+                     CellEditEnding="gridKalemler_CellEditEnding"
+                     CurrentCellChanged="gridKalemler_CurrentCellChanged"
+                     PreparingCellForEdit="gridKalemler_PreparingCellForEdit"
+                     PreviewKeyDown="gridKalemler_PreviewKeyDown"
+                     Loaded="gridKalemler_Loaded"
                      SelectionMode="Single"
                      SelectionUnit="FullRow"
                      RowHeight="24"
@@ -165,8 +166,8 @@ CellEditEnding="gridKalemler_CellEditEnding"
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50" IsReadOnly="True" Visibility="Hidden"/>
                             <DataGridTextColumn Header="Malzeme Id" Binding="{Binding MaterialId}" Width="80" Visibility="Hidden"/>
-                            <DataGridComboBoxColumn Header="İşlem Tipi" 
-                                            SelectedItemBinding="{Binding OperationType}" 
+                            <DataGridComboBoxColumn x:Name="cmbKalemIslem" Header="İşlem Tipi" 
+                                            SelectedItemBinding="{Binding OperationType, UpdateSourceTrigger=PropertyChanged}" 
                                             Width="100">
                                 <DataGridComboBoxColumn.ElementStyle>
                                     <Style TargetType="ComboBox">
@@ -178,12 +179,6 @@ CellEditEnding="gridKalemler_CellEditEnding"
                                         <Setter Property="Height" Value="24"/>
                                     </Style>
                                 </DataGridComboBoxColumn.EditingElementStyle>
-                                <DataGridComboBoxColumn.ItemsSource>
-                                    <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                        <sys:String>Giriş</sys:String>
-                                        <sys:String>Çıkış</sys:String>
-                                    </x:Array>
-                                </DataGridComboBoxColumn.ItemsSource>
                             </DataGridComboBoxColumn>
                             <DataGridTemplateColumn Header="Kodu" Width="120">
                                 <DataGridTemplateColumn.CellTemplate>

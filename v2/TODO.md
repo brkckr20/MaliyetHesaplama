@@ -60,6 +60,11 @@
 - winMalzemeListesiV2 çift tıklama ile seçim yapıyor
 - Veri aktarımı kontrol edilmeli
 
+### 4. İşlem Tiplerini Database'den Yükleme (Tamamlandı)
+- `UC_MalzemeFisV2.xaml.cs` için `LoadOperationTypes()` metodu `UtilityHelpers._uh.GetOperationTypeList` kullanıyor
+- DataGridComboBoxColumn ile çalışıyor
+- Diğer v2 pencereleri için de aynı yöntem kullanılabilir
+
 ---
 
 ## İlgili Dosyalar
