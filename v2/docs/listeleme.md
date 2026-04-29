@@ -79,3 +79,31 @@ private void Window_Loaded(object sender, RoutedEventArgs e)
 3. Liste ekranlarında `FilterGridHelpers` kullanılmalı
 4. Gizlenecek kolonlar model'de olmayanlar olmamalı
 5. Window_Loaded'da Dispatcher ile kolon ayarları yüklenmeli
+6. JOIN'lu SQL'ler için ayrı DTO kullanılmalı (NotMapped property'ler yeterli değil)
+
+## JOIN'lu SQL'ler İçin DTO Yaklaşımı
+
+MiniOrm.GetMovementList gibi JOIN'lu SQL'lerde, modelde NotMapped olan alanlar (CompanyName, WareHouseName vb.) dynamic erişimde hata verir. Bu durumda ayrı bir DTO oluşturulmalı:
+
+```csharp
+public class ReceiptListDto
+{
+    [Display(Name = "Fiş No")]
+    public string ReceiptNo { get; set; }
+
+    [Display(Name = "Firma Adı")]
+    public string CompanyName { get; set; }
+
+    [Display(Name = "Depo Adı")]
+    public string WareHouseName { get; set; }
+
+    // ... diğer alanlar
+}
+```
+
+Kullanım:
+```csharp
+var data = _orm.GetMovementList<ReceiptListDto>("R.ReceiptType = 'Malzeme'");
+```
+
+**Not:** Display attribute'ları Türkçe başlık için zorunludur.

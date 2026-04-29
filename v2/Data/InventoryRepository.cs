@@ -4,32 +4,32 @@ using MaliyeHesaplama.v2.Models;
 
 namespace MaliyeHesaplama.v2.Data
 {
-    public class MaterialRepository
+    public class InventoryRepository
     {
         private readonly MiniOrm _orm;
 
-        public MaterialRepository()
+        public InventoryRepository()
         {
             _orm = new MiniOrm();
         }
 
         public int Save(Dictionary<string, object> data)
         {
-            return _orm.Save("MaterialMaster", data);
+            return _orm.Save("Inventory", data);
         }
 
-        public IEnumerable<MaterialMaster> GetAll()
+        public IEnumerable<Inventory> GetAll()
         {
-            return _orm.GetAll<MaterialMaster>("MaterialMaster");
+            return _orm.GetAll<Inventory>("Inventory");
         }
 
-        public IEnumerable<MaterialMasterDto> GetAllWithDetails()
+        public IEnumerable<Inventory> GetAllWithDetails()
         {
             var sql = @"
                 SELECT 
-                    m.Id, m.Code, m.Name, m.Type, m.CategoryId, m.UnitId, m.Barcode,
-                    m.VatRate, m.MinStock, m.MaxStock, m.IsActive,
-                    CASE m.Type 
+                    i.Id, i.Code, i.Name, i.Type, i.CategoryId, i.UnitId, i.Barcode,
+                    i.VatRate, i.MinStock, i.MaxStock, i.IsActive,
+                    CASE i.Type 
                         WHEN 1 THEN 'Ham Madde'
                         WHEN 2 THEN 'Yarı Mamul'
                         WHEN 3 THEN 'Mamul'
@@ -37,21 +37,21 @@ namespace MaliyeHesaplama.v2.Data
                     END as TypeName,
                     COALESCE(c.Name, '') as CategoryName,
                     COALESCE(u.Name, '') as UnitName
-                FROM MaterialMaster m
-                LEFT JOIN Category c ON m.CategoryId = c.Id
-                LEFT JOIN Unit u ON m.UnitId = u.Id";
+                FROM Inventory i
+                LEFT JOIN Category c ON i.CategoryId = c.Id
+                LEFT JOIN Unit u ON i.UnitId = u.Id";
 
-            return _orm.QueryRaw<MaterialMasterDto>(sql);
+            return _orm.QueryRaw<Inventory>(sql);
         }
 
-        public MaterialMaster GetById(int id)
+        public Inventory GetById(int id)
         {
-            return _orm.GetById<MaterialMaster>("MaterialMaster", id, "Id");
+            return _orm.GetById<Inventory>("Inventory", id, "Id");
         }
 
         public void Delete(int id)
         {
-            _orm.ExecuteRaw($"DELETE FROM MaterialMaster WHERE Id = {id}");
+            _orm.ExecuteRaw($"DELETE FROM Inventory WHERE Id = {id}");
         }
 
         public IEnumerable<Receipt> GetMovementList(int receiptType)
@@ -69,9 +69,9 @@ namespace MaliyeHesaplama.v2.Data
                     ISNULL(R.Approved,0) [Approved],
                     ISNULL(RI.Id,'') [ReceiptItemId],
                     ISNULL(RI.OperationType,'') [OperationType],
-                    ISNULL(M.Id,'') [InventoryId],
-                    ISNULL(M.Code,'') [InventoryCode],
-                    ISNULL(M.Name,'') [InventoryName],
+                    ISNULL(I.Id,'') [InventoryId],
+                    ISNULL(I.Code,'') [InventoryCode],
+                    ISNULL(I.Name,'') [InventoryName],
                     ISNULL(RI.NetMeter,0) [NetMeter],
                     ISNULL(RI.NetWeight,0) [NetWeight],
                     ISNULL(RI.Piece,0) [Piece],
@@ -89,8 +89,8 @@ namespace MaliyeHesaplama.v2.Data
                 FROM Receipt R
                 LEFT JOIN Company C WITH(nolock) ON C.Id = R.CompanyId
                 LEFT JOIN ReceiptItem RI WITH(nolock) ON RI.ReceiptId = R.Id
-                LEFT JOIN MaterialMaster M WITH(nolock) ON M.Id = RI.InventoryId
-                LEFT JOIN WareHouse W ON R.WareHouseId = W.Id
+                LEFT JOIN Inventory I WITH(nolock) ON I.Id = RI.InventoryId
+                LEFT JOIN Warehouse W ON R.WareHouseId = W.Id
                 WHERE R.ReceiptType = {receiptType}";
 
             return _orm.QueryRaw<Receipt>(sql);

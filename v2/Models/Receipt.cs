@@ -34,31 +34,49 @@ namespace MaliyeHesaplama.v2.Models
         [Display(Name = "Belge Tarihi")]
         public DateTime? InvoiceDate { get; set; }
 
+        [Display(Name = "İrsaliye No")]
+        public string DispatchNo { get; set; }
+
+        [Display(Name = "İrsaliye Tarihi")]
+        public DateTime? DispatchDate { get; set; }
+
+        [Display(Name = "Düa Tarihi")]
+        public DateTime? DuaDate { get; set; }
+
+        [Display(Name = "Yetkili")]
+        public string Authorized { get; set; }
+
+        [Display(Name = "Onaylı")]
+        public bool? Approved { get; set; }
+
+        [Display(Name = "Tamamlandı")]
+        public bool? IsFinished { get; set; }
+
+        [Display(Name = "Ödeme Tipi")]
+        public string PaymentType { get; set; }
+
+        [Display(Name = "Kaydeden")]
+        public int? SavedUser { get; set; }
+
+        [Display(Name = "Kaydetme Tarihi")]
+        public DateTime? SavedDate { get; set; }
+
+        [Display(Name = "Güncelleyen")]
+        public int? UpdatedUser { get; set; }
+
+        [Display(Name = "Güncelleme Tarihi")]
+        public DateTime? UpdatedDate { get; set; }
+
+        [Display(Name = "Taşıyıcı")]
+        public int? CarrierId { get; set; }
+
+        [Display(Name = "Nakliyeci")]
+        public int? TransporterId { get; set; }
+
         [Display(Name = "Belge Adı")]
         public string DocumentName { get; set; }
 
         public byte[] Document { get; set; }
-
-        [Display(Name = "Aktif")]
-        public bool IsActive { get; set; } = true;
-
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        [NotMapped]
-        [Display(Name = "Firma Adı")]
-        public string CompanyName { get; set; }
-
-        [NotMapped]
-        [Display(Name = "Firma Kodu")]
-        public string CompanyCode { get; set; }
-
-        [NotMapped]
-        [Display(Name = "Depo Adı")]
-        public string WareHouseName { get; set; }
-
-        [NotMapped]
-        [Display(Name = "Depo Kodu")]
-        public string WareHouseCode { get; set; }
 
         [NotMapped]
         [Display(Name = "Kalem Id")]
@@ -125,19 +143,7 @@ namespace MaliyeHesaplama.v2.Models
         public string Receiver { get; set; }
 
         [NotMapped]
-        [Display(Name = "Onaylı")]
-        public string Approved { get; set; }
-
-        [NotMapped]
         [Display(Name = "Vade")]
         public string Maturity { get; set; }
-
-        [NotMapped]
-        [Display(Name = "Düa Tarihi")]
-        public string DuaDate { get; set; }
-
-        [NotMapped]
-        [Display(Name = "Yetkili")]
-        public string Authorized { get; set; }
     }
 }

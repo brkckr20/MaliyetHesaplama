@@ -8,7 +8,6 @@ using MaliyeHesaplama;
 using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.v2.Data;
 using MaliyeHesaplama.v2.Models;
-
 namespace MaliyeHesaplama.v2.Windows
 {
     public partial class winFisListesiV2 : Window
@@ -21,14 +20,13 @@ namespace MaliyeHesaplama.v2.Windows
         public bool SecimYapildi { get; private set; }
         private readonly int _receiptType;
 
-        public int Id, CompanyId, WareHouseId, ReceiptItemId, InventoryId;
+        public int Id, CompanyId, WareHouseId;
         public string ReceiptNo, CompanyName, CompanyCode, Authorized, Maturity, CustomerOrderNo, Explanation;
-        public string WareHouseCode, WareHouseName, InventoryCode, InventoryName, DocumentName, InvoiceNo;
+        public string WareHouseCode, WareHouseName, DocumentName, InvoiceNo;
         public byte[] Document;
         public DateTime ReceiptDate, DuaDate;
-        public decimal NetMeter, NetWeight, Piece, UnitPrice, Vat, RowAmount;
-        public string RowExplanation, TrackingNumber, OrderNo, Receiver, Approved;
-        public List<Receipt> HareketlerListesi { get; set; } = new List<Receipt>();
+        public string TrackingNumber, OrderNo;
+        public List<ReceiptItemViewModel> SecilenKalemler { get; private set; } = new List<ReceiptItemViewModel>();
 
         public winFisListesiV2(int receiptType)
         {
@@ -43,7 +41,7 @@ namespace MaliyeHesaplama.v2.Windows
         {
             try
             {
-                var data = _orm.GetMovementList<Receipt>($"R.ReceiptType = {_receiptType}");
+                var data = _orm.GetMovementList<ReceiptListDto>($"R.ReceiptType = {_receiptType}");
                 _collectionView = CollectionViewSource.GetDefaultView(data);
                 grid.ItemsSource = _collectionView;
 
@@ -72,37 +70,43 @@ namespace MaliyeHesaplama.v2.Windows
                 dynamic record = grid.SelectedItem;
                 this.SecimYapildi = true;
                 this.Id = record.Id;
-                this.ReceiptNo = record.ReceiptNo;
+                this.ReceiptNo = record.ReceiptNo ?? "";
                 this.ReceiptDate = record.ReceiptDate;
                 this.CompanyId = record.CompanyId;
-                this.CompanyName = record.CompanyName;
-                this.CompanyCode = record.CompanyCode;
-                this.Authorized = record.Authorized;
-                this.DuaDate = Convert.ToDateTime(record.DuaDate);
-                this.Maturity = record.Maturity;
-                this.CustomerOrderNo = record.CustomerOrderNo;
-                this.Explanation = record.Explanation;
+                this.CompanyName = record.CompanyName ?? "";
+                this.CompanyCode = record.CompanyCode ?? "";
+                this.Authorized = record.Authorized ?? "";
+                this.DuaDate = record.DuaDate != null ? Convert.ToDateTime(record.DuaDate) : DateTime.Now;
+                this.Maturity = record.Maturity ?? "";
+                this.CustomerOrderNo = record.CustomerOrderNo ?? "";
+                this.Explanation = record.Explanation ?? "";
                 this.WareHouseId = record.WareHouseId;
-                this.WareHouseCode = record.WareHouseCode;
-                this.WareHouseName = record.WareHouseName;
-                this.OrderNo = record.OrderNo;
-                this.Approved = record.Approved;
-                this.InventoryId = Convert.ToInt32(record.InventoryId);
-                this.InventoryCode = record.InventoryCode;
-                this.InventoryName = record.InventoryName;
-                this.ReceiptItemId = Convert.ToInt32(record.ReceiptItemId);
-                this.NetMeter = Convert.ToDecimal(record.NetMeter);
-                this.NetWeight = Convert.ToDecimal(record.NetWeight);
-                this.Piece = Convert.ToInt32(record.Piece);
-                this.UnitPrice = Convert.ToDecimal(record.UnitPrice);
-                this.Vat = Convert.ToInt32(record.Vat);
-                //this.RowAmount = record.RowAmount;
-                //this.RowExplanation = record.RowExplanation;
-                //this.TrackingNumber = record.TrackingNumber;
-                //this.Receiver = record.Receiver;
-                //this.DocumentName = record.DocumentName;
-                //this.InvoiceNo = record.InvoiceNo;
+                this.WareHouseCode = record.WareHouseCode ?? "";
+                this.WareHouseName = record.WareHouseName ?? "";
+                this.TrackingNumber = record.TrackingNumber ?? "";
+                this.OrderNo = record.OrderNo ?? "";
+                this.DocumentName = record.DocumentName ?? "";
+                this.InvoiceNo = record.InvoiceNo ?? "";
                 this.SecilenId = Id;
+
+                var items = _repo.GetItemsByReceiptId(Id);
+                SecilenKalemler = items.Select(x => new ReceiptItemViewModel
+                {
+                    Id = x.Id,
+                    InventoryId = x.InventoryId,
+                    InventoryCode = x.InventoryCode ?? "",
+                    InventoryName = x.InventoryName ?? "",
+                    OperationType = x.OperationType ?? "",
+                    NetMeter = x.NetMeter,
+                    NetWeight = x.NetWeight ?? 0,
+                    Piece = x.Piece,
+                    UnitPrice = x.UnitPrice,
+                    Vat = x.Vat,
+                    RowAmount = x.RowAmount,
+                    RowExplanation = x.RowExplanation ?? "",
+                    PriceUnit = x.MeasurementUnit ?? "Kg"
+                }).ToList();
+
                 this.DialogResult = true;
                 this.Close();
             }
@@ -110,45 +114,45 @@ namespace MaliyeHesaplama.v2.Windows
 
         private void btnSec_Click(object sender, RoutedEventArgs e)
         {
-            if (grid.SelectedItem != null)
-            {
-                dynamic record = grid.SelectedItem;
-                this.SecimYapildi = true;
-                this.Id = record.Id;
-                this.ReceiptNo = record.ReceiptNo;
-                this.ReceiptDate = record.ReceiptDate;
-                this.CompanyId = record.CompanyId;
-                this.CompanyName = record.CompanyName;
-                this.CompanyCode = record.CompanyCode;
-                this.Authorized = record.Authorized;
-                this.DuaDate = record.DuaDate;
-                this.Maturity = record.Maturity;
-                this.CustomerOrderNo = record.CustomerOrderNo;
-                this.Explanation = record.Explanation;
-                this.WareHouseId = record.WareHouseId;
-                this.WareHouseCode = record.WareHouseCode;
-                this.WareHouseName = record.WareHouseName;
-                this.OrderNo = record.OrderNo;
-                this.Approved = record.Approved;
-                this.InventoryId = record.InventoryId;
-                this.InventoryCode = record.InventoryCode;
-                this.InventoryName = record.InventoryName;
-                this.ReceiptItemId = record.ReceiptItemId;
-                this.NetMeter = record.NetMeter;
-                this.NetWeight = record.NetWeight;
-                this.Piece = record.Piece;
-                this.UnitPrice = record.UnitPrice;
-                this.Vat = record.Vat;
-                this.RowAmount = record.RowAmount;
-                this.RowExplanation = record.RowExplanation;
-                this.TrackingNumber = record.TrackingNumber;
-                this.Receiver = record.Receiver;
-                this.DocumentName = record.DocumentName;
-                this.InvoiceNo = record.InvoiceNo;
-                this.SecilenId = Id;
-                this.DialogResult = true;
-                this.Close();
-            }
+            //if (grid.SelectedItem != null)
+            //{
+            //    dynamic record = grid.SelectedItem;
+            //    this.SecimYapildi = true;
+            //    this.Id = record.Id;
+            //    this.ReceiptNo = record.ReceiptNo;
+            //    this.ReceiptDate = record.ReceiptDate;
+            //    this.CompanyId = record.CompanyId;
+            //    this.CompanyName = record.CompanyName;
+            //    this.CompanyCode = record.CompanyCode;
+            //    this.Authorized = record.Authorized;
+            //    this.DuaDate = record.DuaDate;
+            //    this.Maturity = record.Maturity;
+            //    this.CustomerOrderNo = record.CustomerOrderNo;
+            //    this.Explanation = record.Explanation;
+            //    this.WareHouseId = record.WareHouseId;
+            //    this.WareHouseCode = record.WareHouseCode;
+            //    this.WareHouseName = record.WareHouseName;
+            //    this.OrderNo = record.OrderNo;
+            //    this.Approved = record.Approved;
+            //    this.InventoryId = record.InventoryId;
+            //    this.InventoryCode = record.InventoryCode;
+            //    this.InventoryName = record.InventoryName;
+            //    this.ReceiptItemId = record.ReceiptItemId;
+            //    this.NetMeter = record.NetMeter;
+            //    this.NetWeight = record.NetWeight;
+            //    this.Piece = record.Piece;
+            //    this.UnitPrice = record.UnitPrice;
+            //    this.Vat = record.Vat;
+            //    this.RowAmount = record.RowAmount;
+            //    this.RowExplanation = record.RowExplanation;
+            //    this.TrackingNumber = record.TrackingNumber;
+            //    this.Receiver = record.Receiver;
+            //    this.DocumentName = record.DocumentName;
+            //    this.InvoiceNo = record.InvoiceNo;
+            //    this.SecilenId = Id;
+            //    this.DialogResult = true;
+            //    this.Close();
+            //}
         }
 
         private void btnIptal_Click(object sender, RoutedEventArgs e)

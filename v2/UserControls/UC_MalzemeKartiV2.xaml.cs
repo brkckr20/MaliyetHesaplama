@@ -11,7 +11,7 @@ namespace MaliyeHesaplama.v2.UserControls
 {
     public partial class UC_MalzemeKartiV2 : System.Windows.Controls.UserControl, IPageCommands
     {
-        private readonly MaterialRepository _repo;
+        private readonly InventoryRepository _repo;
         private readonly UnitRepository _unitRepo;
         private readonly CategoryRepository _categoryRepo;
         private int _currentId = 0;
@@ -19,7 +19,7 @@ namespace MaliyeHesaplama.v2.UserControls
         public UC_MalzemeKartiV2()
         {
             InitializeComponent();
-            _repo = new MaterialRepository();
+            _repo = new InventoryRepository();
             _unitRepo = new UnitRepository();
             _categoryRepo = new CategoryRepository();
             LoadBirimler();
@@ -49,53 +49,73 @@ namespace MaliyeHesaplama.v2.UserControls
             var birimler = _unitRepo.GetActive().ToList();
             foreach (var birim in birimler)
             {
-                cmbBirim.Items.Add(new ComboBoxItem 
-                { 
-                    Content = birim.Name, 
-                    Tag = birim.Id 
+                cmbBirim.Items.Add(new ComboBoxItem
+                {
+                    Content = birim.Name,
+                    Tag = birim.Id
                 });
             }
         }
 
-        private void LoadRecord(MaterialMaster record)
+        private void LoadRecord(Inventory record)
         {
             _currentId = record.Id;
-            txtKodu.Text = record.Code ?? "";
-            txtAdi.Text = record.Name ?? "";
-            cmbTip.SelectedIndex = record.Type - 1;
+            txtKodu.Text = record.InventoryCode ?? "";
+            txtAdi.Text = record.InventoryName ?? "";
+
+            if (record.Type.HasValue)
+            {
+                foreach (ComboBoxItem item in cmbTip.Items)
+                {
+                    if (item.Tag != null && int.TryParse(item.Tag.ToString(), out int tagVal) && tagVal == record.Type.Value)
+                    {
+                        cmbTip.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(record.Unit))
+            {
+                foreach (ComboBoxItem item in cmbBirim.Items)
+                {
+                    if (item.Content?.ToString() == record.Unit)
+                    {
+                        cmbBirim.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
+
+            if (record.CategoryId.HasValue)
+            {
+                foreach (ComboBoxItem item in cmbKategori.Items)
+                {
+                    if (item.Tag != null && int.TryParse(item.Tag.ToString(), out int tagVal) && tagVal == record.CategoryId.Value)
+                    {
+                        cmbKategori.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
+
             txtBarkod.Text = record.Barcode ?? "";
-            
-            var kdv = record.VatRate;
-            foreach (ComboBoxItem item in cmbKDV.Items)
+
+            if (record.VatRate.HasValue)
             {
-                if (item.Tag?.ToString() == ((int)kdv).ToString())
+                foreach (ComboBoxItem item in cmbKDV.Items)
                 {
-                    cmbKDV.SelectedItem = item;
-                    break;
+                    if (item.Tag != null && decimal.TryParse(item.Tag.ToString(), out decimal tagVal) && tagVal == record.VatRate.Value)
+                    {
+                        cmbKDV.SelectedItem = item;
+                        break;
+                    }
                 }
             }
 
-            foreach (ComboBoxItem item in cmbBirim.Items)
-            {
-                if (item.Tag != null && Convert.ToInt32(item.Tag) == record.UnitId)
-                {
-                    cmbBirim.SelectedItem = item;
-                    break;
-                }
-            }
-
-            foreach (ComboBoxItem item in cmbKategori.Items)
-            {
-                if (item.Tag != null && record.CategoryId.HasValue && Convert.ToInt32(item.Tag) == record.CategoryId.Value)
-                {
-                    cmbKategori.SelectedItem = item;
-                    break;
-                }
-            }
-
-            txtMinStok.Text = record.MinStock.ToString();
-            txtMaxStok.Text = record.MaxStock.ToString();
-            chkKullanimda.IsChecked = record.IsActive;
+            txtMinStok.Text = record.MinStock?.ToString() ?? "";
+            txtMaxStok.Text = record.MaxStock?.ToString() ?? "";
+            chkKullanimda.IsChecked = record.IsUse;
         }
 
         private void btnKoduListele_Click(object sender, RoutedEventArgs e)
@@ -134,46 +154,48 @@ namespace MaliyeHesaplama.v2.UserControls
                 return;
             }
 
-            var kdvItem = cmbKDV.SelectedItem as ComboBoxItem;
             var tipItem = cmbTip.SelectedItem as ComboBoxItem;
             var birimItem = cmbBirim.SelectedItem as ComboBoxItem;
             var kategoriItem = cmbKategori.SelectedItem as ComboBoxItem;
+            var kdvItem = cmbKDV.SelectedItem as ComboBoxItem;
 
-            decimal kdv = 18;
-            if (kdvItem?.Tag != null)
-                decimal.TryParse(kdvItem.Tag.ToString(), out kdv);
-
-            int tip = 1;
+            int? tip = null;
             if (tipItem?.Tag != null)
-                int.TryParse(tipItem.Tag.ToString(), out tip);
+                int.TryParse(tipItem.Tag.ToString(), out int tempTip);
 
-            int birim = 0;
-            if (birimItem?.Tag != null)
-                int.TryParse(birimItem.Tag.ToString(), out birim);
+            string birim = "";
+            if (birimItem?.Content != null)
+                birim = birimItem.Content.ToString();
 
             int? kategoriId = null;
             if (kategoriItem?.Tag != null && int.TryParse(kategoriItem.Tag.ToString(), out int tempKat))
                 kategoriId = tempKat;
 
-            decimal minStok = 0;
-            decimal.TryParse(txtMinStok.Text, out minStok);
+            decimal? kdv = null;
+            if (kdvItem?.Tag != null && decimal.TryParse(kdvItem.Tag.ToString(), out decimal kdvDeger))
+                kdv = kdvDeger;
 
-            decimal maxStok = 0;
-            decimal.TryParse(txtMaxStok.Text, out maxStok);
+            decimal? minStok = null;
+            if (!string.IsNullOrWhiteSpace(txtMinStok.Text) && decimal.TryParse(txtMinStok.Text, out decimal minStokDeger))
+                minStok = minStokDeger;
+
+            decimal? maxStok = null;
+            if (!string.IsNullOrWhiteSpace(txtMaxStok.Text) && decimal.TryParse(txtMaxStok.Text, out decimal maxStokDeger))
+                maxStok = maxStokDeger;
 
             var data = new System.Collections.Generic.Dictionary<string, object>
             {
                 { "Id", _currentId },
-                { "Code", txtKodu.Text },
-                { "Name", txtAdi.Text },
+                { "InventoryCode", txtKodu.Text.Trim() },
+                { "InventoryName", txtAdi.Text?.Trim() ?? "" },
                 { "Type", tip },
                 { "CategoryId", kategoriId },
-                { "UnitId", birim },
-                { "Barcode", txtBarkod.Text ?? "" },
+                { "Unit", birim },
+                { "Barcode", txtBarkod.Text?.Trim() ?? "" },
                 { "VatRate", kdv },
                 { "MinStock", minStok },
                 { "MaxStock", maxStok },
-                { "IsActive", chkKullanimda.IsChecked == true },
+                { "IsUse", chkKullanimda.IsChecked == true },
                 { "CreatedAt", DateTime.Now },
                 { "UpdatedAt", DateTime.Now }
             };
@@ -196,7 +218,13 @@ namespace MaliyeHesaplama.v2.UserControls
 
         public void Yazdir()
         {
-            System.Windows.MessageBox.Show("Yazdırma özelliği henüz eklenmedi.", "Bilgi", MessageBoxButton.OK, MessageBoxImage.Information);
+            wins.winRaporSecimi win = new wins.winRaporSecimi("Malzeme Kartı", _currentId);
+            if (_currentId == 0)
+            {
+                System.Windows.MessageBox.Show("Rapor alabilmek için lütfen kayıt seçiniz", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            win.ShowDialog();
         }
 
         public void Ileri()

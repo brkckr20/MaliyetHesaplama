@@ -7,9 +7,9 @@ namespace MaliyeHesaplama.v2.Models
     public class ReceiptItemViewModel : INotifyPropertyChanged
     {
         private int _id;
-        private int _materialId;
-        private string _materialCode = "";
-        private string _materialName = "";
+        private int _inventoryId;
+        private string _inventoryCode = "";
+        private string _inventoryName = "";
         private string _operationType = "";
         private decimal _piece;
         private decimal _netMeter;
@@ -25,20 +25,20 @@ namespace MaliyeHesaplama.v2.Models
             get => _id;
             set { _id = value; OnPropertyChanged(); }
         }
-        public int MaterialId
+        public int InventoryId
         {
-            get => _materialId;
-            set { _materialId = value; OnPropertyChanged(); }
+            get => _inventoryId;
+            set { _inventoryId = value; OnPropertyChanged(); }
         }
-        public string MaterialCode
+        public string InventoryCode
         {
-            get => _materialCode;
-            set { _materialCode = value; OnPropertyChanged(); }
+            get => _inventoryCode;
+            set { _inventoryCode = value; OnPropertyChanged(); }
         }
-        public string MaterialName
+        public string InventoryName
         {
-            get => _materialName;
-            set { _materialName = value; OnPropertyChanged(); }
+            get => _inventoryName;
+            set { _inventoryName = value; OnPropertyChanged(); }
         }
         public string OperationType
         {

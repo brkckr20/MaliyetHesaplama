@@ -165,7 +165,7 @@
                      CellStyle="{StaticResource DataGridCell}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50" IsReadOnly="True" Visibility="Hidden"/>
-                            <DataGridTextColumn Header="Malzeme Id" Binding="{Binding MaterialId}" Width="80" Visibility="Hidden"/>
+                            <DataGridTextColumn Header="Malzeme Id" Binding="{Binding InventoryId}" Width="80" Visibility="Hidden"/>
                             <DataGridComboBoxColumn x:Name="cmbKalemIslem" Header="İşlem Tipi" 
                                             SelectedItemBinding="{Binding OperationType, UpdateSourceTrigger=PropertyChanged}" 
                                             Width="100">
@@ -189,7 +189,7 @@
                                                 <ColumnDefinition Width="24"/>
                                             </Grid.ColumnDefinitions>
                                             <TextBox Grid.Column="0" x:Name="txtKodu" 
-                                             Text="{Binding MaterialCode, UpdateSourceTrigger=PropertyChanged}" 
+                                             Text="{Binding InventoryCode, UpdateSourceTrigger=PropertyChanged}" 
                                              VerticalContentAlignment="Center" BorderThickness="0"
                                              Background="Transparent"/>
                                             <Button Grid.Column="1" x:Name="btnMalzemeSec" Content="..." 
@@ -200,7 +200,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Adı" Binding="{Binding MaterialName}" Width="180" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Adı" Binding="{Binding InventoryName}" Width="180" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Kg" Binding="{Binding NetWeight, StringFormat={}{0:N2}, ConverterCulture=tr-TR}" Width="80"/>
                             <DataGridTextColumn Header="Metre" Binding="{Binding NetMeter, StringFormat={}{0:N2}, ConverterCulture=tr-TR}" Width="80"/>
                             <DataGridTextColumn Header="Adet" Binding="{Binding Piece, StringFormat={}{0:N2}, ConverterCulture=tr-TR}" Width="80"/>

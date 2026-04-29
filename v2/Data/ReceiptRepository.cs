@@ -42,9 +42,22 @@ namespace MaliyeHesaplama.v2.Data
             _orm.ExecuteRaw($"DELETE FROM Receipt WHERE Id = {id}");
         }
 
+        public void DeleteItems(int receiptId)
+        {
+            _orm.ExecuteRaw($"DELETE FROM ReceiptItem WHERE ReceiptId = {receiptId}");
+        }
+
+        public int SaveItem(Dictionary<string, object> data)
+        {
+            return _orm.Save("ReceiptItem", data);
+        }
+
         public IEnumerable<ReceiptItem> GetItemsByReceiptId(int receiptId)
         {
-            return _orm.QueryRaw<ReceiptItem>($"SELECT * FROM ReceiptItem WHERE ReceiptId = {receiptId}");
+            return _orm.QueryRaw<ReceiptItem>($@"SELECT RI.*, I.InventoryCode, I.InventoryName 
+                    FROM ReceiptItem RI
+                    LEFT JOIN Inventory I ON RI.InventoryId = I.Id
+                    WHERE RI.ReceiptId = {receiptId}");
         }
 
         public string GetRecordNo(string tableName, string columnName, string typeColumn, int receiptType)

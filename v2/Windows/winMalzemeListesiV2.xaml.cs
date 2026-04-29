@@ -11,16 +11,19 @@ namespace MaliyeHesaplama.v2.Windows
 {
     public partial class winMalzemeListesiV2 : Window
     {
-        private readonly MaterialRepository _repo;
+        private readonly InventoryRepository _repo;
         private ICollectionView _collectionView;
         FilterGridHelpers fgh;
 
         public int SecilenId { get; private set; }
+        public string SecilenKodu { get; private set; }
+        public string SecilenAdi { get; private set; }
+        public decimal SecilenVatRate { get; private set; }
 
         public winMalzemeListesiV2()
         {
             InitializeComponent();
-            _repo = new MaterialRepository();
+            _repo = new InventoryRepository();
             fgh = new FilterGridHelpers(grid, "Malzeme Listesi", "gridMalzemeListe");
         }
 
@@ -34,7 +37,7 @@ namespace MaliyeHesaplama.v2.Windows
         {
             try
             {
-                var data = _repo.GetAllWithDetails().ToList();
+                var data = _repo.GetAll().ToList();
                 _collectionView = CollectionViewSource.GetDefaultView(data);
                 grid.ItemsSource = _collectionView;
                 Dispatcher.BeginInvoke(new Action(() =>
@@ -55,6 +58,9 @@ namespace MaliyeHesaplama.v2.Windows
             {
                 dynamic secilen = grid.SelectedItem;
                 SecilenId = secilen.Id;
+                SecilenKodu = secilen.InventoryCode ?? "";
+                SecilenAdi = secilen.InventoryName ?? "";
+                SecilenVatRate = secilen.VatRate ?? 0;
                 this.DialogResult = true;
                 this.Close();
             }

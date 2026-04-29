@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MaliyeHesaplama.v2.Models
 {
-    public class MaterialMasterDto
+    public class InventoryDto
     {
         public int Id { get; set; }
 

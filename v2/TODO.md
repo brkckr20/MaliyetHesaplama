@@ -67,9 +67,46 @@
 
 ---
 
+---
+
+### 8. Receipt ve ReceiptItem Modelleri DB Uyumlu Güncelleme (Tamamlandı)
+- `Receipt.cs` güncellendi:
+  - DispatchNo, DispatchDate, DuaDate, Authorized, Approved, IsFinished, PaymentType
+  - SavedUser, SavedDate, UpdatedUser, UpdatedDate
+  - CarrierId, TransporterId eklendi
+  - Kalem alanları (OperationType, InventoryId, WareHouseId, NetMeter, NetWeight, Piece, UnitPrice, Vat, RowAmount, CashPayment, DeferredPayment, TrackingNumber, InvoiceNo, Receiver, DocumentName, OrderNo) NotMapped olarak eklendi
+- `ReceiptItem.cs` güncellendi:
+  - GrM2, GrossWeight, NetWeight, GrossMeter, ForexPrice, Forex
+  - VariantId, ColorId, Explanation, UUID, PatternId, ProcessId, Brand, Wastage, Quantity
+  - Variant, BatchNo, OrderNo, CustomerOrderNo, IsCostCalculated, ReceiptNo eklendi
+
+### 9. winFisListesiV2 Güncellemeleri (Tamamlandı)
+- `SecilenKalemler` property'si eklendi (List<ReceiptItemViewModel> döndürür)
+- `grid_MouseDoubleClick` metodu güncellendi:
+  - Seçilen fişin kalemlerini `_repo.GetItemsByReceiptId` ile yükler
+  - ReceiptItemViewModel'e dönüştürür
+  - `DialogResult = true` ve `Close()` ile pencereyi kapatır
+
+### 10. UC_MalzemeFisV2 Listele() Aktif Edildi (Tamamlandı)
+- `Listele()` metodu satır 461-500 arası aktif edildi (yorum satırı kaldırıldı)
+- `_items` ObservableCollection kullanılıyor (DataTable yerine)
+- Fiş seçildiğinde kalemler yükleniyor
+
+### 11. ReceiptListDto Oluşturuldu (Tamamlandı)
+- Problem: MiniOrm.GetMovementList JOIN ile CompanyName, WareHouseName gibi alanları döndürüyor
+- Receipt modelinde NotMapped olduğu için dynamic erişim hata veriyordu
+- Çözüm: `ReceiptListDto.cs` oluşturuldu
+- Türkçe Display attribute'ları eklendi (Fiş No, Firma Adı, Malzeme Kodu, vb.)
+
+---
+
 ## İlgili Dosyalar
 
 - `v2/Models/ReceiptItemViewModel.cs` - Satır ViewModel
 - `v2/UserControls/UC_MalzemeFisV2.xaml` - Fiş formu
 - `v2/UserControls/UC_MalzemeFisV2.xaml.cs` - Code-behind
 - `v2/Windows/winMalzemeListesiV2.xaml/cs` - Malzeme seçim penceresi
+- `v2/Windows/winFisListesiV2.xaml/cs` - Fiş listesi penceresi
+- `v2/Models/Receipt.cs` - Fiş modeli
+- `v2/Models/ReceiptItem.cs` - Kalem modeli
+- `v2/Models/ReceiptListDto.cs` - Liste için DTO (yeni)
