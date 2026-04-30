@@ -18,9 +18,10 @@ namespace MaliyeHesaplama.v2.UserControls
 {
     public partial class UC_MalzemeFisV2 : System.Windows.Controls.UserControl, IPageCommands
     {
-        private readonly ReceiptRepository _receiptRepo;
+private readonly ReceiptRepository _receiptRepo;
         private readonly StockMovementRepository _stockMoveRepo;
         private readonly InventoryRepository _materialRepo;
+        //private readonly InventoryRepository _materialRepo;
         private readonly WarehouseRepository _warehouseRepo;
         private readonly CompanyRepository _companyRepo;
         private readonly MiniOrm _orm;
@@ -41,6 +42,7 @@ namespace MaliyeHesaplama.v2.UserControls
             FisTipi = fisTipi;
             _receiptRepo = new ReceiptRepository();
             _stockMoveRepo = new StockMovementRepository();
+            //_stockRepo = new StockRepository();
             _materialRepo = new InventoryRepository();
             _warehouseRepo = new WarehouseRepository();
             _companyRepo = new CompanyRepository();
@@ -147,6 +149,65 @@ namespace MaliyeHesaplama.v2.UserControls
             {
                 var item = (ReceiptItemViewModel)gridKalemler.SelectedItem;
                 _items.Remove(item);
+            }
+        }
+
+        private void ctxFasonGidenler_Click(object sender, RoutedEventArgs e)
+        {
+            if (_firmaId <= 0)
+            {
+                MessageBox.Show("Lütfen önce firma seçin.", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var win = new winFasonGidenlerListesiV2(_firmaId, txtFirma.Text, lblFirmaAdi.Text);
+            if (win.ShowDialog() == true && win.SecilenSatirlar.Count > 0)
+            {
+                var emptyItem = _items.FirstOrDefault(x => string.IsNullOrEmpty(x.OperationType));
+                int startIndex = 0;
+
+                if (emptyItem != null)
+                {
+                    startIndex = _items.IndexOf(emptyItem);
+                }
+
+                foreach (dynamic item in win.SecilenSatirlar)
+                {
+                    if (startIndex < _items.Count)
+                    {
+                        var target = _items[startIndex];
+                        target.InventoryId = item.InventoryId;
+                        target.InventoryCode = item.InventoryCode;
+                        target.InventoryName = item.InventoryName;
+                        target.OperationType = item.OperationType;
+                        target.NetWeight = item.NetWeight;
+                        target.NetMeter = item.NetMeter;
+                        target.Piece = item.Piece;
+                        target.UnitPrice = item.UnitPrice;
+                        target.Vat = item.Vat;
+                        target.TrackingNumber = item.Id.ToString();
+                    }
+                    else
+                    {
+                        _items.Add(new ReceiptItemViewModel
+                        {
+                            Id = 0,
+                            InventoryId = item.InventoryId,
+                            InventoryCode = item.InventoryCode,
+                            InventoryName = item.InventoryName,
+                            OperationType = item.OperationType,
+                            NetWeight = item.NetWeight,
+                            NetMeter = item.NetMeter,
+                            Piece = item.Piece,
+                            UnitPrice = item.UnitPrice,
+                            Vat = item.Vat,
+                            TrackingNumber = item.Id.ToString()
+                        });
+                    }
+                    startIndex++;
+                }
+                CheckAndAddEmptyRow();
+                CalculateTotals();
             }
         }
 
@@ -358,6 +419,8 @@ namespace MaliyeHesaplama.v2.UserControls
             txtAciklama.Text = "";
             dpTarih.SelectedDate = DateTime.Now;
             dpIrsaliyeTarih.SelectedDate = DateTime.Now;
+            lblDepoAdi.Text = string.Empty;
+            lblFirmaAdi.Text = string.Empty;
             _items.Clear();
             _items.Add(new ReceiptItemViewModel());
             gridKalemler.ItemsSource = _items;
@@ -398,13 +461,54 @@ namespace MaliyeHesaplama.v2.UserControls
                 { "InvoiceDate", dpIrsaliyeTarih.SelectedDate },
             };
 
-            if (_currentId > 0)
+if (_currentId > 0)
             {
+                var oldMovements = _stockMoveRepo.GetByDocument((int)FisTipi, _currentId).ToList();
+                decimal totalOldKg = 0, totalOldMeter = 0;
+                int totalOldPiece = 0;
+                
+                foreach (var mov in oldMovements)
+                {
+                    totalOldKg += mov.DeltaKg;
+                    totalOldMeter += mov.DeltaMeter;
+                    totalOldPiece += mov.DeltaPiece;
+                }
+                
+                if (totalOldKg != 0 || totalOldMeter != 0 || totalOldPiece != 0)
+                {
+                    var isGiris = (int)FisTipi == 1;
+                    var beforeStock = _stockMoveRepo.GetStock(oldMovements.First().InventoryId, oldMovements.First().WarehouseId);
+                    
+                    var reverseMovementData = new Dictionary<string, object>
+                    {
+                        { "Id", 0 },
+                        { "InventoryId", oldMovements.First().InventoryId },
+                        { "WarehouseId", oldMovements.First().WarehouseId },
+                        { "MovementType", isGiris ? 2 : 1 },
+                        { "DocumentType", (int)FisTipi },
+                        { "DocumentId", _currentId },
+                        { "DeltaKg", -totalOldKg },
+                        { "DeltaMeter", -totalOldMeter },
+                        { "DeltaPiece", -totalOldPiece },
+                        { "BeforeKg", beforeStock.kg },
+                        { "AfterKg", beforeStock.kg - totalOldKg },
+                        { "BeforeMeter", beforeStock.meter },
+                        { "AfterMeter", beforeStock.meter - totalOldMeter },
+                        { "BeforePiece", beforeStock.piece },
+                        { "AfterPiece", beforeStock.piece - totalOldPiece },
+                        { "CreatedAt", DateTime.Now }
+                    };
+                    _stockMoveRepo.Save(reverseMovementData);
+                }
+                
+                _stockMoveRepo.DeleteByDocument((int)FisTipi, _currentId);
                 _receiptRepo.DeleteItems(_currentId);
             }
 
             _currentId = _receiptRepo.Save(receiptData);
             txtFisNo.Text = _currentId.ToString();
+
+            var hizmetTipi = "Hizmet";
 
             foreach (var item in validItems)
             {
@@ -421,9 +525,53 @@ namespace MaliyeHesaplama.v2.UserControls
                     { "MeasurementUnit", item.PriceUnit ?? "Adet" },
                     { "Vat", item.Vat },
                     { "RowAmount", item.RowAmount },
-                    { "RowExplanation", item.RowExplanation ?? "" }
+                    { "RowExplanation", item.RowExplanation ?? "" },
+                    { "TrackingNumber", item.TrackingNumber ?? "" }
                 };
-                _receiptRepo.SaveItem(itemData);
+                var itemId = _receiptRepo.SaveItem(itemData);
+
+                if (item.OperationType != hizmetTipi)
+                {
+                    var isGiris = (int)FisTipi == 1;
+                    
+                    var currentStock = _stockMoveRepo.GetStock(item.InventoryId, _depoId);
+                    var beforeKg = currentStock.kg;
+                    var beforeMeter = currentStock.meter;
+                    var beforePiece = currentStock.piece;
+                    
+                    var afterKg = beforeKg + (isGiris ? item.NetWeight : -item.NetWeight);
+                    var afterMeter = beforeMeter + (isGiris ? item.NetMeter : -item.NetMeter);
+                    var afterPiece = beforePiece + (isGiris ? (int)item.Piece : -(int)item.Piece);
+
+                    var movementData = new Dictionary<string, object>
+                    {
+                        { "Id", 0 },
+                        { "InventoryId", item.InventoryId },
+                        { "WarehouseId", _depoId },
+                        { "Quantity", 0 },
+                        { "MovementType", isGiris ? 1 : 2 },
+                        { "DocumentType", (int)FisTipi },
+                        { "DocumentId", _currentId },
+                        { "DocumentLineId", itemId },
+                        { "ReceiptId", _currentId },
+                        { "ReceiptItemId", itemId },
+                        { "DeltaKg", item.NetWeight },
+                        { "DeltaMeter", item.NetMeter },
+                        { "DeltaPiece", (int)item.Piece },
+                        { "BeforeKg", beforeKg },
+                        { "AfterKg", afterKg },
+                        { "BeforeMeter", beforeMeter },
+                        { "AfterMeter", afterMeter },
+                        { "BeforePiece", beforePiece },
+                        { "AfterPiece", afterPiece },
+                        { "CreatedAt", DateTime.Now }
+                    };
+                    _stockMoveRepo.Save(movementData);
+
+                    var deltaKg = isGiris ? item.NetWeight : -item.NetWeight;
+                    var deltaMeter = isGiris ? item.NetMeter : -item.NetMeter;
+                    var deltaPiece = isGiris ? (int)item.Piece : -(int)item.Piece;
+                }
             }
 
             MessageBox.Show("Kaydedildi!", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -436,6 +584,37 @@ namespace MaliyeHesaplama.v2.UserControls
             var result = MessageBox.Show("Fişi silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
+                var movements = _stockMoveRepo.GetByDocument((int)FisTipi, _currentId).ToList();
+                
+                foreach (var mov in movements)
+                {
+                    var currentStock = _stockMoveRepo.GetStock(mov.InventoryId, mov.WarehouseId);
+                    var reverseKg = -mov.DeltaKg;
+                    var reverseMeter = -mov.DeltaMeter;
+                    var reversePiece = -mov.DeltaPiece;
+                    
+                    var reverseMovementData = new Dictionary<string, object>
+                    {
+                        { "Id", 0 },
+                        { "InventoryId", mov.InventoryId },
+                        { "WarehouseId", mov.WarehouseId },
+                        { "MovementType", mov.MovementType == 1 ? 2 : 1 },
+                        { "DocumentType", mov.DocumentType },
+                        { "DocumentId", mov.DocumentId },
+                        { "DeltaKg", reverseKg },
+                        { "DeltaMeter", reverseMeter },
+                        { "DeltaPiece", reversePiece },
+                        { "BeforeKg", currentStock.kg },
+                        { "AfterKg", currentStock.kg + reverseKg },
+                        { "BeforeMeter", currentStock.meter },
+                        { "AfterMeter", currentStock.meter + reverseMeter },
+                        { "BeforePiece", currentStock.piece },
+                        { "AfterPiece", currentStock.piece + reversePiece },
+                        { "CreatedAt", DateTime.Now }
+                    };
+                    _stockMoveRepo.Save(reverseMovementData);
+                }
+
                 _stockMoveRepo.DeleteByDocument((int)FisTipi, _currentId);
                 _receiptRepo.DeleteItems(_currentId);
                 _receiptRepo.Delete(_currentId);

@@ -20,7 +20,7 @@ namespace MaliyeHesaplama.v2.Data
 
         public IEnumerable<StockMovement> GetByMaterial(int materialId)
         {
-            return _orm.QueryRaw<StockMovement>($"SELECT * FROM StockMovement WHERE MaterialId = {materialId}");
+            return _orm.QueryRaw<StockMovement>($"SELECT * FROM StockMovement WHERE InventoryId = {materialId}");
         }
 
         public IEnumerable<StockMovement> GetByWarehouse(int warehouseId)
@@ -35,11 +35,26 @@ namespace MaliyeHesaplama.v2.Data
 
         public decimal GetStockQuantity(int materialId, int warehouseId)
         {
-            var sql = $"SELECT ISNULL(SUM(Quantity), 0) as Total FROM StockMovement WHERE MaterialId = {materialId} AND WarehouseId = {warehouseId}";
+            string sql = $@"SELECT ISNULL(SUM(DeltaKg), 0) as TotalKg,
+                          ISNULL(SUM(DeltaMeter), 0) as TotalMeter,
+                          ISNULL(SUM(DeltaPiece), 0) as TotalPiece
+                          FROM StockMovement WHERE InventoryId = {materialId} AND WarehouseId = {warehouseId}";
+            var result = _orm.QueryRaw<dynamic>(sql);
+            return result.Any() ? (decimal)result.First().TotalKg : 0;
+        }
+
+        public (decimal kg, decimal meter, int piece) GetStock(int materialId, int warehouseId)
+        {
+            string sql = $@"SELECT ISNULL(SUM(DeltaKg), 0) as TotalKg,
+                          ISNULL(SUM(DeltaMeter), 0) as TotalMeter,
+                          ISNULL(SUM(DeltaPiece), 0) as TotalPiece
+                          FROM StockMovement WHERE InventoryId = {materialId} AND WarehouseId = {warehouseId}";
             var result = _orm.QueryRaw<dynamic>(sql);
             if (result.Any())
-                return (decimal)result.First().Total;
-            return 0;
+            {
+                return ((decimal)result.First().TotalKg, (decimal)result.First().TotalMeter, (int)result.First().TotalPiece);
+            }
+            return (0, 0, 0);
         }
 
         public void DeleteByDocument(int documentType, int documentId)

@@ -1,55 +1,80 @@
 USE [Hesap]
 GO
 
-/****** Object:  Table [dbo].[ReceiptItem]    Script Date: 29.04.2026 15:31:13 ******/
+/****** Object:  Table [dbo].[StockMovement]    Script Date: 30.04.2026 16:59:26 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[ReceiptItem](
+CREATE TABLE [dbo].[StockMovement](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[ReceiptId] [int] NULL,
-	[OperationType] [nvarchar](50) NULL,
-	[InventoryId] [int] NULL,
-	[GrM2] [int] NULL,
-	[GrossWeight] [decimal](18, 2) NULL,
-	[NetWeight] [decimal](18, 2) NULL,
-	[GrossMeter] [decimal](18, 2) NULL,
-	[NetMeter] [decimal](18, 2) NULL,
-	[Piece] [decimal](18, 4) NULL,
-	[ForexPrice] [decimal](18, 2) NULL,
-	[Forex] [nvarchar](10) NULL,
-	[UnitPrice] [decimal](18, 4) NULL,
-	[VariantId] [int] NULL,
+	[WarehouseId] [int] NOT NULL,
+	[LotId] [int] NULL,
 	[ColorId] [int] NULL,
-	[Explanation] [nvarchar](max) NULL,
-	[UUID] [nvarchar](50) NULL,
-	[TrackingNumber] [int] NULL,
-	[PatternId] [int] NULL,
-	[ProcessId] [int] NULL,
-	[RowAmount] [decimal](18, 4) NULL,
-	[Vat] [int] NULL,
-	[Receiver] [nvarchar](50) NULL,
-	[MeasurementUnit] [nvarchar](10) NULL,
-	[ReceiptNo] [nvarchar](8) NULL,
-	[Brand] [nvarchar](50) NULL,
-	[Wastage] [decimal](18, 4) NULL,
-	[Quantity] [int] NULL,
-	[Variant] [nvarchar](50) NULL,
-	[CashPayment] [decimal](18, 2) NULL,
-	[DeferredPayment] [decimal](18, 2) NULL,
-	[RowExplanation] [nvarchar](max) NULL,
+	[Quantity] [decimal](18, 3) NULL,
+	[MovementType] [int] NULL,
+	[DocumentType] [int] NULL,
+	[DocumentId] [int] NULL,
+	[DocumentLineId] [int] NULL,
+	[CreatedAt] [datetime] NULL,
+	[DeltaKg] [decimal](18, 4) NULL,
+	[DeltaMeter] [decimal](18, 4) NULL,
+	[DeltaPiece] [int] NULL,
+	[BeforeKg] [decimal](18, 4) NULL,
+	[AfterKg] [decimal](18, 4) NULL,
+	[BeforeMeter] [decimal](18, 4) NULL,
+	[AfterMeter] [decimal](18, 4) NULL,
+	[BeforePiece] [int] NULL,
+	[AfterPiece] [int] NULL,
+	[ReceiptId] [int] NULL,
+	[ReceiptItemId] [int] NULL,
+	[InventoryId] [int] NULL,
+	[VariantId] [int] NULL,
 	[BatchNo] [nvarchar](50) NULL,
 	[OrderNo] [nvarchar](50) NULL,
-	[CustomerOrderNo] [nvarchar](50) NULL,
-	[IsCostCalculated] [bit] NULL,
+	[UserId] [int] NULL,
+	[StockId] [int] NULL,
+	[MaterialId] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[StockMovement] ADD  DEFAULT (getdate()) FOR [CreatedAt]
+GO
+
+ALTER TABLE [dbo].[StockMovement] ADD  DEFAULT ((0)) FOR [DeltaKg]
+GO
+
+ALTER TABLE [dbo].[StockMovement] ADD  DEFAULT ((0)) FOR [DeltaMeter]
+GO
+
+ALTER TABLE [dbo].[StockMovement] ADD  DEFAULT ((0)) FOR [DeltaPiece]
+GO
+
+ALTER TABLE [dbo].[StockMovement] ADD  DEFAULT ((0)) FOR [BeforeKg]
+GO
+
+ALTER TABLE [dbo].[StockMovement] ADD  DEFAULT ((0)) FOR [AfterKg]
+GO
+
+ALTER TABLE [dbo].[StockMovement] ADD  DEFAULT ((0)) FOR [BeforeMeter]
+GO
+
+ALTER TABLE [dbo].[StockMovement] ADD  DEFAULT ((0)) FOR [AfterMeter]
+GO
+
+ALTER TABLE [dbo].[StockMovement] ADD  DEFAULT ((0)) FOR [BeforePiece]
+GO
+
+ALTER TABLE [dbo].[StockMovement] ADD  DEFAULT ((0)) FOR [AfterPiece]
+GO
+
+ALTER TABLE [dbo].[StockMovement] ADD  DEFAULT ((0)) FOR [MaterialId]
 GO
 
 

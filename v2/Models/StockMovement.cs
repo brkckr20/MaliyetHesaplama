@@ -11,7 +11,7 @@ namespace MaliyeHesaplama.v2.Models
         public int Id { get; set; }
 
         [Display(Name = "Malzeme")]
-        public int MaterialId { get; set; }
+        public int InventoryId { get; set; }
 
         [Display(Name = "Depo")]
         public int WarehouseId { get; set; }
@@ -38,6 +38,46 @@ namespace MaliyeHesaplama.v2.Models
 
         [Display(Name = "Oluşturulma Tarihi")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal DeltaKg { get; set; }
+
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal DeltaMeter { get; set; }
+
+        public int DeltaPiece { get; set; }
+
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal BeforeKg { get; set; }
+
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal AfterKg { get; set; }
+
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal BeforeMeter { get; set; }
+
+        [Column(TypeName = "decimal(18,4)")]
+        public decimal AfterMeter { get; set; }
+
+        public int BeforePiece { get; set; }
+
+        public int AfterPiece { get; set; }
+
+        public int ReceiptId { get; set; }
+
+        public int ReceiptItemId { get; set; }
+
+        public int VariantId { get; set; }
+
+        [MaxLength(50)]
+        public string BatchNo { get; set; }
+
+        [MaxLength(50)]
+        public string OrderNo { get; set; }
+
+        public int UserId { get; set; }
+
+        public int StockId { get; set; }
     }
 
     public enum MovementType

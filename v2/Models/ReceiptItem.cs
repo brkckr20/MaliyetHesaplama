@@ -130,5 +130,14 @@ namespace MaliyeHesaplama.v2.Models
 
         [NotMapped]
         public string InventoryName { get; set; }
+
+        [NotMapped]
+        public string CompanyCode { get; set; }
+
+        [NotMapped]
+        public string CompanyName { get; set; }
+
+        [NotMapped]
+        public decimal KalanAdet { get; set; }
     }
 }

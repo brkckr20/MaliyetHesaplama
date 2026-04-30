@@ -60,6 +60,27 @@ namespace MaliyeHesaplama.v2.Data
                     WHERE RI.ReceiptId = {receiptId}");
         }
 
+        public IEnumerable<ReceiptItem> GetFasonGidenler(int companyId)
+        {
+            string sql = @"
+                SELECT 
+                    RI.Id, RI.InventoryId, I.InventoryCode, I.InventoryName, 
+                    RI.OperationType, RI.NetWeight, RI.NetMeter, RI.Piece, RI.UnitPrice, RI.Vat,
+                    C.CompanyCode, C.CompanyName,
+                    RI.Piece - ISNULL((SELECT SUM(RI2.Piece) FROM ReceiptItem RI2 
+                        INNER JOIN Receipt R2 ON RI2.ReceiptId = R2.Id 
+                        WHERE RI2.TrackingNumber = CAST(RI.Id AS NVARCHAR(50)) AND R2.ReceiptType = 1), 0) AS KalanAdet
+                FROM ReceiptItem RI
+                INNER JOIN Receipt R ON RI.ReceiptId = R.Id
+                INNER JOIN Inventory I ON RI.InventoryId = I.Id
+                INNER JOIN Company C ON R.CompanyId = C.Id
+                WHERE R.ReceiptType = 2 AND R.CompanyId = " + companyId + @"
+                AND RI.Piece > ISNULL((SELECT SUM(RI2.Piece) FROM ReceiptItem RI2 
+                    INNER JOIN Receipt R2 ON RI2.ReceiptId = R2.Id 
+                    WHERE RI2.TrackingNumber = CAST(RI.Id AS NVARCHAR(50)) AND R2.ReceiptType = 1), 0)";
+            return _orm.QueryRaw<ReceiptItem>(sql);
+        }
+
         public string GetRecordNo(string tableName, string columnName, string typeColumn, int receiptType)
         {
             var sql = $"SELECT TOP 1 {columnName} FROM {tableName} WHERE {typeColumn} = {receiptType} ORDER BY Id DESC";

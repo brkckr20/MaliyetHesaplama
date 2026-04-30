@@ -1,25 +1,10 @@
--- Modelde olup DB'de olmayan kolonlar (ALTER TABLE scriptleri)
-
--- Barkod alanı
-ALTER TABLE [dbo].[Inventory] ADD [Barcode] [varchar](100) NULL;
+USE [Hesap]
 GO
 
--- KDV Oranı
-ALTER TABLE [dbo].[Inventory] ADD [VatRate] [decimal](5,2) NULL;
+-- Önce index'i sil
+DROP INDEX [IX_StockMovement_MaterialId] ON StockMovement;
 GO
 
--- Min Stok
-ALTER TABLE [dbo].[Inventory] ADD [MinStock] [decimal](18,3) NULL;
-GO
-
--- Max Stok
-ALTER TABLE [dbo].[Inventory] ADD [MaxStock] [decimal](18,3) NULL;
-GO
-
--- Oluşturulma Tarihi
-ALTER TABLE [dbo].[Inventory] ADD [CreatedAt] [datetime] NULL;
-GO
-
--- Güncelleme Tarihi
-ALTER TABLE [dbo].[Inventory] ADD [UpdatedAt] [datetime] NULL;
+-- Sonra kolonu sil
+ALTER TABLE StockMovement DROP COLUMN MaterialId;
 GO

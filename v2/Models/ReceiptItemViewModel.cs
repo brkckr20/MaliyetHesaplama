@@ -19,6 +19,7 @@ namespace MaliyeHesaplama.v2.Models
         private decimal _vat;
         private decimal _rowAmount;
         private string _rowExplanation = "";
+        private string _trackingNumber = "";
 
         public int Id
         {
@@ -48,32 +49,32 @@ namespace MaliyeHesaplama.v2.Models
         public decimal Piece
         {
             get => _piece;
-            set { _piece = value; OnPropertyChanged(); CalculateRowAmount(); }
+            set { _piece = value; OnPropertyChanged(); }
         }
         public decimal NetMeter
         {
             get => _netMeter;
-            set { _netMeter = value; OnPropertyChanged(); CalculateRowAmount(); }
+            set { _netMeter = value; OnPropertyChanged(); }
         }
         public decimal NetWeight
         {
             get => _netWeight;
-            set { _netWeight = value; OnPropertyChanged(); CalculateRowAmount(); }
+            set { _netWeight = value; OnPropertyChanged(); }
         }
         public decimal UnitPrice
         {
             get => _unitPrice;
-            set { _unitPrice = value; OnPropertyChanged(); CalculateRowAmount(); }
+            set { _unitPrice = value; OnPropertyChanged(); }
         }
         public string PriceUnit
         {
             get => _priceUnit;
-            set { _priceUnit = value; OnPropertyChanged(); CalculateRowAmount(); }
+            set { _priceUnit = value; OnPropertyChanged(); }
         }
         public decimal Vat
         {
             get => _vat;
-            set { _vat = value; OnPropertyChanged(); CalculateRowAmount(); }
+            set { _vat = value; OnPropertyChanged(); }
         }
         public decimal RowAmount
         {
@@ -85,17 +86,10 @@ namespace MaliyeHesaplama.v2.Models
             get => _rowExplanation;
             set { _rowExplanation = value; OnPropertyChanged(); }
         }
-
-        private void CalculateRowAmount()
+        public string TrackingNumber
         {
-            if (string.IsNullOrEmpty(PriceUnit)) return;
-
-            decimal quantity = 0;
-            if (PriceUnit == "Kg") quantity = NetWeight;
-            else if (PriceUnit == "Mt") quantity = NetMeter;
-            else if (PriceUnit == "Adet") quantity = Piece;
-
-            RowAmount = quantity * UnitPrice * (1 + Vat / 100);
+            get => _trackingNumber;
+            set { _trackingNumber = value; OnPropertyChanged(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
