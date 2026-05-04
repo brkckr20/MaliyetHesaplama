@@ -53,5 +53,16 @@ namespace MaliyeHesaplama.v2.Data
                 _orm.ExecuteRaw(sql);
             }
         }
+
+        public List<Stock> GetByWarehouseId(int warehouseId)
+        {
+            var sql = @"SELECT s.Id, i.Code AS InventoryCode, i.Name AS InventoryName, w.Code AS WarehouseCode, w.Name AS WarehouseName, 
+                        s.QuantityKg, s.QuantityMeter, s.QuantityPiece
+                        FROM Stock s 
+                        LEFT JOIN Inventory i ON i.Id = s.InventoryId
+                        LEFT JOIN Warehouse w ON w.Id = s.WareHouseId
+                        WHERE s.WareHouseId = " + warehouseId + " AND (s.QuantityKg > 0 OR s.QuantityMeter > 0 OR s.QuantityPiece > 0)";
+            return _orm.QueryRaw<Stock>(sql).ToList();
+        }
     }
 }

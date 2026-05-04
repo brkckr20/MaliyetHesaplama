@@ -40,6 +40,12 @@ private readonly ReceiptRepository _receiptRepo;
         {
             InitializeComponent();
             FisTipi = fisTipi;
+            menuFasonGidenler.Visibility = (fisTipi == ReceiptType.MalzemeGiris) 
+                ? Visibility.Visible 
+                : Visibility.Collapsed;
+            menuStokSecimi.Visibility = (fisTipi == ReceiptType.MalzemeCikis) 
+                ? Visibility.Visible 
+                : Visibility.Collapsed;
             _receiptRepo = new ReceiptRepository();
             _stockMoveRepo = new StockMovementRepository();
             //_stockRepo = new StockRepository();
@@ -211,6 +217,37 @@ private readonly ReceiptRepository _receiptRepo;
             }
         }
 
+        private void ctxStokSecimi_Click(object sender, RoutedEventArgs e)
+        {
+            if (_depoId <= 0)
+            {
+                MessageBox.Show("Lütfen önce depo seçin.", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var win = new winStokSecimiV2(_depoId);
+            win.Owner = Window.GetWindow(this);
+            if (win.ShowDialog() == true && win.SecilenSatirlar != null)
+            {
+                foreach (var item in win.SecilenSatirlar)
+                {
+                    _items.Add(new ReceiptItemViewModel
+                    {
+                        Id = 0,
+                        InventoryId = item.InventoryId,
+                        InventoryCode = item.InventoryCode,
+                        InventoryName = item.InventoryName,
+                        OperationType = "Çıkış",
+                        NetWeight = item.Quantity,
+                        NetMeter = 0,
+                        Piece = 0,
+                        UnitPrice = item.UnitPrice,
+                        Vat = item.Vat,
+                        PriceUnit = "Kg"
+                    });
+                }
+                CalculateTotals();
+            }
+        }
 
         private void MI_SatirSil_Click(object sender, RoutedEventArgs e)
         {
@@ -302,21 +339,46 @@ private readonly ReceiptRepository _receiptRepo;
             CalculateTotals();
         }
 
+private void CalculateRowAmount(ReceiptItemViewModel item)
+        {
+            if (string.IsNullOrEmpty(item.PriceUnit)) return;
+
+            decimal miktar = item.PriceUnit switch
+            {
+                "Kg" => item.NetWeight,
+                "Mt" => item.NetMeter,
+                "Adet" => item.Piece,
+                _ => 0
+            };
+
+            decimal tutar = miktar * item.UnitPrice;
+            decimal kdvTutari = tutar * (item.Vat / 100);
+            item.RowAmount = tutar + kdvTutari;
+        }
+
         private void CalculateTotals()
         {
-            var validItems = _items.Where(x => !string.IsNullOrEmpty(x.OperationType)).ToList();
+            decimal totalKg = 0;
+            decimal totalMt = 0;
+            decimal totalAdet = 0;
+            decimal totalTutar = 0;
 
-            decimal totalKg = validItems.Sum(x => x.NetWeight);
-            decimal totalMt = validItems.Sum(x => x.NetMeter);
-            decimal totalAdet = validItems.Sum(x => x.Piece);
-            decimal totalBirimFiyat = validItems.Sum(x => x.UnitPrice);
-            decimal totalTutar = validItems.Sum(x => x.RowAmount);
+            foreach (var item in _items)
+            {
+                if (!string.IsNullOrEmpty(item.OperationType))
+                {
+                    CalculateRowAmount(item);
+                    totalKg += item.NetWeight;
+                    totalMt += item.NetMeter;
+                    totalAdet += item.Piece;
+                    totalTutar += item.RowAmount;
+                }
+            }
 
             txtToplamKg.Text = totalKg.ToString("N2");
-            //txtToplamMt.Text = totalMt.ToString("N2");
-            //txtToplamAdet.Text = totalAdet.ToString("N2");
-            //txtToplamBirimFiyat.Text = totalBirimFiyat.ToString("N2");
-            //txtToplamTutar.Text = totalTutar.ToString("N2");
+            txtToplamMt.Text = totalMt.ToString("N2");
+            txtToplamAdet.Text = totalAdet.ToString("N0");
+            txtToplamTutar.Text = totalTutar.ToString("N2");
         }
 
         private void gridKalemler_CurrentCellChanged(object sender, EventArgs e)
@@ -675,6 +737,7 @@ if (_currentId > 0)
                     });
                 }
                 gridKalemler.ItemsSource = _items;
+                CalculateTotals();
             }
         }        
     }

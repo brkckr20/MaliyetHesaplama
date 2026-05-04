@@ -42,5 +42,29 @@ namespace MaliyeHesaplama.v2.Models
         public int? StockId { get; set; }
 
         public int? ColorId { get; set; }
+
+        [NotMapped]
+        public string InventoryCode { get; set; }
+
+        [NotMapped]
+        public string InventoryName { get; set; }
+
+        [NotMapped]
+        public string Unit { get; set; }
+
+        [NotMapped]
+        public decimal UnitPrice { get; set; }
+
+        [NotMapped]
+        public decimal Vat { get; set; }
+
+        [NotMapped]
+        public decimal Quantity => QuantityKg > 0 ? QuantityKg : (QuantityMeter > 0 ? QuantityMeter : QuantityPiece);
+
+        [NotMapped]
+        public string WarehouseCode { get; set; }
+
+        [NotMapped]
+        public string WarehouseName { get; set; }
     }
 }
