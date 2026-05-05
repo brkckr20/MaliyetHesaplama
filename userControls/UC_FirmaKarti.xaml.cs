@@ -39,6 +39,7 @@ namespace MaliyeHesaplama.userControls
                 Id = record.Id;
                 txtFirmaKodu.Text = record.CompanyCode;
                 txtFirmaUnvan.Text = record.CompanyName;
+                txtOzelKod.Text = record.SpecialCode;
                 txtAdres1.Text = record.AddressLine1;
                 txtAdres2.Text = record.AddressLine2;
                 txtAdres3.Text = record.AddressLine3;
@@ -53,6 +54,7 @@ namespace MaliyeHesaplama.userControls
             Id = 0;
             txtFirmaKodu.Text = string.Empty;
             txtFirmaUnvan.Text = string.Empty;
+            txtOzelKod.Text = string.Empty;
             txtAdres1.Text = string.Empty;
             txtAdres2.Text = string.Empty;
             txtAdres3.Text = string.Empty;
@@ -74,6 +76,7 @@ namespace MaliyeHesaplama.userControls
                     { "Id",Id },
                     {"CompanyCode", txtFirmaKodu.Text },
                     {"CompanyName", txtFirmaUnvan.Text },
+                    {"SpecialCode", txtOzelKod.Text },
                     {"AddressLine1", txtAdres1.Text },
                     {"AddressLine2", txtAdres2.Text },
                     {"AddressLine3", txtAdres3.Text },
@@ -130,6 +133,7 @@ namespace MaliyeHesaplama.userControls
                 Id = win.Id;
                 txtFirmaKodu.Text = win.FirmaKodu;
                 txtFirmaUnvan.Text = win.FirmaUnvan;
+                txtOzelKod.Text = win.OzelKod;
                 txtAdres1.Text = win.Adres1;
                 txtAdres2.Text = win.Adres2;
                 txtAdres3.Text = win.Adres3;

@@ -36,6 +36,10 @@
                         <TextBox x:Name="txtFirmaUnvan" VerticalContentAlignment="Center"/>
                     </DockPanel>
                     <DockPanel Margin="0,0,0,1">
+                        <Label Content="Özel Kod :" Width="95"/>
+                        <TextBox x:Name="txtOzelKod" VerticalContentAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,1">
                         <Label Content="Adres 1 :" Width="95"/>
                         <TextBox x:Name="txtAdres1" VerticalContentAlignment="Center"/>
                     </DockPanel>

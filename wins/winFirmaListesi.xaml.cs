@@ -13,7 +13,7 @@ namespace MaliyeHesaplama.wins
         MiniOrm _orm = new MiniOrm();
         //private ICollectionView _collectionView;
         public int Id;
-        public string FirmaKodu, FirmaUnvan, Adres1, Adres2, Adres3;
+        public string FirmaKodu, FirmaUnvan, OzelKod, Adres1, Adres2, Adres3;
         public bool SecimYapildi = false, IsOwner;
 
         private List<ColumnSetting> columnSettings;
@@ -92,6 +92,9 @@ namespace MaliyeHesaplama.wins
                     break;
                 case "CompanyName":
                     e.Column.Header = "Firma Ünvan";
+                    break;
+                case "SpecialCode":
+                    e.Column.Header = "Özel Kod";
                     break;
                 case "AddressLine1":
                     e.Column.Header = "Adres 1";
@@ -319,6 +322,7 @@ namespace MaliyeHesaplama.wins
                 Id = record.Id;
                 FirmaKodu = record.CompanyCode;
                 FirmaUnvan = record.CompanyName;
+                OzelKod = record.SpecialCode;
                 Adres1 = record.AddressLine1;
                 Adres2 = record.AddressLine2;
                 Adres3 = record.AddressLine3;

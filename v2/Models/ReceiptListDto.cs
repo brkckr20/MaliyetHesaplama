@@ -121,5 +121,14 @@ namespace MaliyeHesaplama.v2.Models
 
         [Display(Name = "Belge No")]
         public string InvoiceNo { get; set; }
+
+        [Display(Name = "Belge Tarihi")]
+        public DateTime? InvoiceDate { get; set; }
+
+        [Display(Name = "İrsaliye No")]
+        public string DispatchNo { get; set; }
+
+        [Display(Name = "İrsaliye Tarihi")]
+        public DateTime? DispatchDate { get; set; }
     }
 }

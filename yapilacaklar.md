@@ -1,34 +1,27 @@
 # Yapılacaklar
 
-## ✅ v2 Malzeme Kartı - FilterDataGrid Filtreleme (Çözüldü)
+## 📝 Loglama Hatası (Düzeltilecek)
 
 ### Sorun
-- `winMalzemeListesiV2` penceresinde FilterDataGrid filtreleme çalışmıyor
-- Sütun başlıklarına tıklanınca "Boş" ve "Hepsini Seç" seçenekleri geliyor ama veri filtrelenmiyor
+- Mevcut kalem güncellendiğinde (ör: 10-10-10 → 20-30-40) önceki kayıt "Silme" olarak kaydediliyor
+- Beklenen: Mevcut kalem güncellendiğinde "Güncelleme" olarak kaydedilmeli
 
-### Örnek (Çalışan)
-- `winDepoListesi` - FilterDataGrid doğru çalışıyor, `CollectionViewSource.GetDefaultView` kullanıyor
+### Örnek Akış
+1. Yeni kalem ekle (10 kg, 10 mt, 10 adet) → "Yeni Kayıt" ✓
+2. Aynı kalemi güncelle (20 kg, 30 mt, 40 adet) → "Güncelleme" olmalı
+3. Mevcut kayıt silik olarak görünüyor → "Silme" yazıyor ✗
 
-### Yapılacak
-- FilterDataGrid'in neden çalışmadığını analiz et
-- winDepoListesi ile karşılaştır (farklılıkları bul)
-- Çözüm uygula
+### Mantık Düzeltme
+- `item.Id > 0` (mevcut kalem) → "Güncelleme"
+- `item.Id == 0` (yeni kalem) → "Yeni Kayıt"
+- Silme işlemi → "Silme" (doğru)
 
 ---
 
-## ✅ Yapılanlar - Login Ekranı
-
-### winLogin.xaml İyileştirmeleri
-- Header (36px) eklendi - #2d5a56 rengi
-- Header üzerinden sürükleme özelliği eklendi
-- Kapatma (✕) butonu eklendi (hover efektsiz)
-- Giriş butonu rengi #2d5a56 yapıldı
-- Material Design tarzı modern görünüm
-- Border-radius ve gölge efektleri
-
-### winLogin.xaml.cs Değişiklikleri
-- `Header_MouseLeftButtonDown` eklendi (sürükleme)
-- `BtnCancel_Click` eklendi (kapatma)
+## 📝 Kaldırılacak Tablolar
+- Stock
+- StockMovement
+- StockTransaction
 
 ---
 

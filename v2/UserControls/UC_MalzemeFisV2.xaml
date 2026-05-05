@@ -81,9 +81,13 @@
                         <DockPanel Margin="0,0,0,2">
                             <Label Content="Tarih :" Width="120"/>
                             <DatePicker HorizontalAlignment="Left" x:Name="dpTarih" Width="150"/>
+                        </DockPanel>                        
+                        <DockPanel Margin="0,0,0,2">
+                            <Label Content="Belge Tarihi :" Width="120"/>
+                            <DatePicker HorizontalAlignment="Left" x:Name="dpBelgeTarih" Width="150"/>
                         </DockPanel>
                         <DockPanel Margin="0,0,0,2">
-                            <Label Content="İrsaliye Tarihi :" Width="120"/>
+                            <Label Content="Belge Tarihi :" Width="120"/>
                             <DatePicker HorizontalAlignment="Left" x:Name="dpIrsaliyeTarih" Width="150"/>
                         </DockPanel>
                         <DockPanel Margin="0,0,0,2">
@@ -91,7 +95,7 @@
                             <TextBox HorizontalAlignment="Left" x:Name="txtBelgeNo" Width="150" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel Margin="0,0,0,2">
-                            <Label Content="İrsaliye Belge No :" Width="120"/>
+                            <Label Content="İrsaliye No :" Width="120"/>
                             <TextBox HorizontalAlignment="Left" x:Name="txtIrsaliyeBelgeNo" Width="150" VerticalContentAlignment="Center"/>
                         </DockPanel>
                     </StackPanel>

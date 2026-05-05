@@ -14,6 +14,8 @@ namespace MaliyeHesaplama.models
         public string CompanyCode { get; set; }
         [Display(Name = "Malzeme Adı")]
         public string CompanyName { get; set; }
+        [Display(Name = "Özel Kod")]
+        public string SpecialCode { get; set; }
         [Display(Name = "Adres 1")]
         public string AddressLine1 { get; set; }
         [Display(Name = "Adres 2")]

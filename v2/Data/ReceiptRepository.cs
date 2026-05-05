@@ -94,5 +94,19 @@ namespace MaliyeHesaplama.v2.Data
             }
             return "1";
         }
+
+        public Receipt GetPrevious(int currentId, int receiptType)
+        {
+            var sql = $"SELECT TOP 1 * FROM Receipt WHERE ReceiptType = {receiptType} AND Id < {currentId} ORDER BY Id DESC";
+            var result = _orm.QueryRaw<Receipt>(sql);
+            return result.FirstOrDefault();
+        }
+
+        public Receipt GetNext(int currentId, int receiptType)
+        {
+            var sql = $"SELECT TOP 1 * FROM Receipt WHERE ReceiptType = {receiptType} AND Id > {currentId} ORDER BY Id ASC";
+            var result = _orm.QueryRaw<Receipt>(sql);
+            return result.FirstOrDefault();
+        }
     }
 }

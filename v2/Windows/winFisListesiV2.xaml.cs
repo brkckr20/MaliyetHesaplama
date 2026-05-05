@@ -22,9 +22,10 @@ namespace MaliyeHesaplama.v2.Windows
 
         public int Id, CompanyId, WareHouseId;
         public string ReceiptNo, CompanyName, CompanyCode, Authorized, Maturity, CustomerOrderNo, Explanation;
-        public string WareHouseCode, WareHouseName, DocumentName, InvoiceNo;
+        public string WareHouseCode, WareHouseName, DocumentName, InvoiceNo, DispatchNo;
         public byte[] Document;
         public DateTime ReceiptDate, DuaDate;
+        public DateTime? InvoiceDate, DispatchDate;
         public string TrackingNumber, OrderNo;
         public List<ReceiptItemViewModel> SecilenKalemler { get; private set; } = new List<ReceiptItemViewModel>();
 
@@ -87,6 +88,9 @@ namespace MaliyeHesaplama.v2.Windows
                 this.OrderNo = record.OrderNo ?? "";
                 this.DocumentName = record.DocumentName ?? "";
                 this.InvoiceNo = record.InvoiceNo ?? "";
+                this.InvoiceDate = record.InvoiceDate ?? DateTime.Now;
+                this.DispatchNo = record.DispatchNo ?? "";
+                this.DispatchDate = record.DispatchDate ?? DateTime.Now;
                 this.SecilenId = Id;
 
                 var items = _repo.GetItemsByReceiptId(Id);
@@ -99,6 +103,8 @@ namespace MaliyeHesaplama.v2.Windows
                     OperationType = x.OperationType ?? "",
                     NetMeter = x.NetMeter,
                     NetWeight = x.NetWeight ?? 0,
+                    GrossWeight = x.GrossWeight,
+                    GrossMeter = x.GrossMeter,
                     Piece = x.Piece,
                     UnitPrice = x.UnitPrice,
                     Vat = x.Vat,

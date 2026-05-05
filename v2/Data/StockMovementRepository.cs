@@ -28,38 +28,20 @@ namespace MaliyeHesaplama.v2.Data
             return _orm.QueryRaw<StockMovement>($"SELECT * FROM StockMovement WHERE WarehouseId = {warehouseId}");
         }
 
-        public IEnumerable<StockMovement> GetByDocument(int documentType, int documentId)
+        public IEnumerable<StockMovement> GetByReceiptId(int receiptId)
         {
-            return _orm.QueryRaw<StockMovement>($"SELECT * FROM StockMovement WHERE DocumentType = {documentType} AND DocumentId = {documentId}");
+            return _orm.QueryRaw<StockMovement>($"SELECT * FROM StockMovement WHERE ReceiptId = {receiptId}");
         }
 
-        public decimal GetStockQuantity(int materialId, int warehouseId)
+        public bool ExistsByReceiptItemId(int receiptItemId)
         {
-            string sql = $@"SELECT ISNULL(SUM(DeltaKg), 0) as TotalKg,
-                          ISNULL(SUM(DeltaMeter), 0) as TotalMeter,
-                          ISNULL(SUM(DeltaPiece), 0) as TotalPiece
-                          FROM StockMovement WHERE InventoryId = {materialId} AND WarehouseId = {warehouseId}";
-            var result = _orm.QueryRaw<dynamic>(sql);
-            return result.Any() ? (decimal)result.First().TotalKg : 0;
+            var result = _orm.QueryRaw<StockMovement>($"SELECT TOP 1 Id FROM StockMovement WHERE ReceiptItemId = {receiptItemId}");
+            return result.Any();
         }
 
-        public (decimal kg, decimal meter, int piece) GetStock(int materialId, int warehouseId)
+        public IEnumerable<StockMovement> GetByReceiptItemId(int receiptItemId)
         {
-            string sql = $@"SELECT ISNULL(SUM(DeltaKg), 0) as TotalKg,
-                          ISNULL(SUM(DeltaMeter), 0) as TotalMeter,
-                          ISNULL(SUM(DeltaPiece), 0) as TotalPiece
-                          FROM StockMovement WHERE InventoryId = {materialId} AND WarehouseId = {warehouseId}";
-            var result = _orm.QueryRaw<dynamic>(sql);
-            if (result.Any())
-            {
-                return ((decimal)result.First().TotalKg, (decimal)result.First().TotalMeter, (int)result.First().TotalPiece);
-            }
-            return (0, 0, 0);
-        }
-
-        public void DeleteByDocument(int documentType, int documentId)
-        {
-            _orm.ExecuteRaw($"DELETE FROM StockMovement WHERE DocumentType = {documentType} AND DocumentId = {documentId}");
+            return _orm.QueryRaw<StockMovement>($"SELECT * FROM StockMovement WHERE ReceiptItemId = {receiptItemId}");
         }
     }
 }

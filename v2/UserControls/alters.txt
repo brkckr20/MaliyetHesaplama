@@ -1,0 +1,62 @@
+USE [Hesap]
+GO
+
+-- Default constraint'leri otomatik bul ve sil
+DECLARE @sql NVARCHAR(MAX) = '';
+SELECT @sql += 'ALTER TABLE [dbo].[StockMovement] DROP CONSTRAINT ' + QUOTENAME(dc.name) + '; '
+FROM sys.default_constraints dc
+JOIN sys.columns c ON dc.parent_object_id = c.object_id AND dc.parent_column_id = c.column_id
+WHERE dc.parent_object_id = OBJECT_ID('StockMovement')
+AND c.name IN ('DeltaKg', 'DeltaMeter', 'DeltaPiece', 'BeforeKg', 'AfterKg', 'BeforeMeter', 'AfterMeter', 'BeforePiece', 'AfterPiece', 'MaterialId');
+
+IF LEN(@sql) > 0 EXEC sp_executesql @sql;
+GO
+
+-- Index varsa sil
+IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_StockMovement_Document' AND object_id = OBJECT_ID('StockMovement'))
+    DROP INDEX [IX_StockMovement_Document] ON [dbo].[StockMovement];
+GO
+
+-- Kolonları sil (IF EXISTS ile güvenli)
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'DeltaKg')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [DeltaKg];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'DeltaMeter')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [DeltaMeter];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'DeltaPiece')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [DeltaPiece];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'BeforeKg')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [BeforeKg];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'AfterKg')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [AfterKg];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'BeforeMeter')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [BeforeMeter];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'AfterMeter')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [AfterMeter];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'BeforePiece')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [BeforePiece];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'AfterPiece')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [AfterPiece];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'DocumentType')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [DocumentType];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'DocumentId')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [DocumentId];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'DocumentLineId')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [DocumentLineId];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'StockId')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [StockId];
+GO
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'MaterialId')
+    ALTER TABLE [dbo].[StockMovement] DROP COLUMN [MaterialId];
+GO

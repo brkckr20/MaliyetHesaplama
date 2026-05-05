@@ -20,6 +20,8 @@ namespace MaliyeHesaplama.v2.Models
         private decimal _rowAmount;
         private string _rowExplanation = "";
         private string _trackingNumber = "";
+        private decimal? _grossWeight;
+        private decimal? _grossMeter;
 
         public int Id
         {
@@ -86,10 +88,20 @@ namespace MaliyeHesaplama.v2.Models
             get => _rowExplanation;
             set { _rowExplanation = value; OnPropertyChanged(); }
         }
-        public string TrackingNumber
+public string TrackingNumber
         {
             get => _trackingNumber;
             set { _trackingNumber = value; OnPropertyChanged(); }
+        }
+        public decimal? GrossWeight
+        {
+            get => _grossWeight;
+            set { _grossWeight = value; OnPropertyChanged(); }
+        }
+        public decimal? GrossMeter
+        {
+            get => _grossMeter;
+            set { _grossMeter = value; OnPropertyChanged(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
