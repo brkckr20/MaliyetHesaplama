@@ -6,15 +6,27 @@
              xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800" FontFamily="Bahnschrift Light">
-    <Grid Background="Transparent">
-        <Grid.Resources>
-            <Style TargetType="ComboBox">
-                <Setter Property="Background" Value="White"/>
-            </Style>
-            <Style TargetType="ComboBoxItem">
-                <Setter Property="Background" Value="White"/>
-            </Style>
-        </Grid.Resources>
+<Grid Background="Transparent">
+            <Grid.Resources>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="BorderBrush" Value="LightGray"/>
+                </Style>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Style>
+                <Style TargetType="ComboBoxItem" x:Key="ComboBoxItemStyle">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter Property="Background" Value="#E3F2FD"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
