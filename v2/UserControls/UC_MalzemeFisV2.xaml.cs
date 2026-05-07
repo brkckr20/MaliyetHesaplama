@@ -18,21 +18,21 @@ namespace MaliyeHesaplama.v2.UserControls
 {
     public partial class UC_MalzemeFisV2 : System.Windows.Controls.UserControl, IPageCommands
     {
-private readonly ReceiptRepository _receiptRepo;
-        private readonly ReceiptLogRepository _receiptLogRepo;
+        private readonly ReceiptRepository _receiptRepo;
+        //private readonly ReceiptLogRepository _receiptLogRepo;
         private readonly InventoryRepository _materialRepo;
-        //private readonly InventoryRepository _materialRepo;
         private readonly WarehouseRepository _warehouseRepo;
         private readonly CompanyRepository _companyRepo;
         private readonly MiniOrm _orm;
         private readonly UtilityHelpers _uh;
         private DataTable table;
 
-public ReceiptType FisTipi { get; private set; }
+        public ReceiptType FisTipi { get; private set; }
         private int _currentId = 0;
         private int _firmaId = 0;
-        private int _depoId = 0;
+private int _depoId = 0;
         private string _screenNameForReport;
+        private List<int> _deletedItemIds = new List<int>();
 
         private ObservableCollection<ReceiptItemViewModel> _items;
         public ObservableCollection<string> OperationTypes { get; private set; }
@@ -41,14 +41,14 @@ public ReceiptType FisTipi { get; private set; }
         {
             InitializeComponent();
             FisTipi = fisTipi;
-            menuFasonGidenler.Visibility = (fisTipi == ReceiptType.MalzemeGiris) 
-                ? Visibility.Visible 
+            menuFasonGidenler.Visibility = (fisTipi == ReceiptType.MalzemeGiris)
+                ? Visibility.Visible
                 : Visibility.Collapsed;
-            menuStokSecimi.Visibility = (fisTipi == ReceiptType.MalzemeCikis) 
-                ? Visibility.Visible 
+            menuStokSecimi.Visibility = (fisTipi == ReceiptType.MalzemeCikis)
+                ? Visibility.Visible
                 : Visibility.Collapsed;
             _receiptRepo = new ReceiptRepository();
-            _receiptLogRepo = new ReceiptLogRepository();
+           // _receiptLogRepo = new ReceiptLogRepository();
             //_stockRepo = new StockRepository();
             _materialRepo = new InventoryRepository();
             _warehouseRepo = new WarehouseRepository();
@@ -65,10 +65,10 @@ public ReceiptType FisTipi { get; private set; }
             this.DataContext = this;
 
             ButtonBar.PageCommands = this;
-            
+
             // Rapor için ekran adını ayarla
             _screenNameForReport = FisTipi == ReceiptType.MalzemeGiris ? "Malzeme Giriş" : "Malzeme Çıkış";
-            
+
             Yeni();
         }
 
@@ -156,10 +156,39 @@ public ReceiptType FisTipi { get; private set; }
 
         private void btnSatirSil_Click(object sender, RoutedEventArgs e)
         {
-            if (gridKalemler.SelectedItem != null)
+            SilSatir();
+        }
+
+        private void ctxSatirSil_Click(object sender, RoutedEventArgs e)
+        {
+            SilSatir();
+        }
+
+        private void SilSatir()
+        {
+            if (gridKalemler.SelectedItem == null) return;
+
+            var item = (ReceiptItemViewModel)gridKalemler.SelectedItem;
+
+            if (item.Id > 0)
             {
-                var item = (ReceiptItemViewModel)gridKalemler.SelectedItem;
+                var result = MessageBox.Show(
+                    "Bu kalem veritabanında kayıtlıdır. Silmek istediğinize emin misiniz?\n\nSilme işlemi kaydedildiğinde veritabanından da silinecektir.",
+                    "Satır Silme Onayı",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    _deletedItemIds.Add(item.Id);
+                    _items.Remove(item);
+                    CalculateTotals();
+                }
+            }
+            else
+            {
                 _items.Remove(item);
+                CalculateTotals();
             }
         }
 
@@ -207,7 +236,7 @@ public ReceiptType FisTipi { get; private set; }
                             InventoryCode = item.InventoryCode,
                             InventoryName = item.InventoryName,
                             OperationType = item.OperationType,
-NetWeight = item.NetWeight ?? 0,
+                            NetWeight = item.NetWeight ?? 0,
                             NetMeter = item.NetMeter,
                             Piece = item.Piece,
                             UnitPrice = item.UnitPrice,
@@ -346,7 +375,7 @@ NetWeight = item.NetWeight ?? 0,
             CalculateTotals();
         }
 
-private void CalculateRowAmount(ReceiptItemViewModel item)
+        private void CalculateRowAmount(ReceiptItemViewModel item)
         {
             if (string.IsNullOrEmpty(item.PriceUnit)) return;
 
@@ -475,11 +504,12 @@ private void CalculateRowAmount(ReceiptItemViewModel item)
             }
         }
 
-        public void Yeni()
+public void Yeni()
         {
             _currentId = 0;
             _firmaId = 0;
             _depoId = 0;
+            _deletedItemIds.Clear();
             txtFisNo.Text = string.Empty;
             txtFirma.Text = "";
             txtDepo.Text = "";
@@ -540,6 +570,20 @@ private void CalculateRowAmount(ReceiptItemViewModel item)
                 deletedItemIds = existingItemIds.Except(currentItemIds).ToList();
             }
 
+            foreach (var deletedId in deletedItemIds)
+            {
+                _receiptRepo.DeleteItem(deletedId);
+            }
+
+            foreach (var deletedId in _deletedItemIds)
+            {
+                if (!deletedItemIds.Contains(deletedId))
+                {
+                    _receiptRepo.DeleteItem(deletedId);
+                }
+            }
+            _deletedItemIds.Clear();
+
             _currentId = _receiptRepo.Save(receiptData);
             txtFisNo.Text = _currentId.ToString();
 
@@ -586,35 +630,35 @@ private void CalculateRowAmount(ReceiptItemViewModel item)
                         { "NetMeter", item.NetMeter },
                         { "Piece", item.Piece }
                     };
-                    _receiptLogRepo.Save(logData);
+                    //_receiptLogRepo.Save(logData);
                 }
             }
 
-            foreach (var deletedId in deletedItemIds)
-            {
-                var existingLogs = _receiptLogRepo.GetByReceiptItemId(deletedId);
-                foreach (var log in existingLogs)
-                {
-                    var logData = new Dictionary<string, object>
-                    {
-                        { "Id", 0 },
-                        { "WareHouseId", log.WareHouseId },
-                        { "ReceiptType", log.ReceiptType },
-                        { "ReceiptId", log.ReceiptId },
-                        { "ReceiptItemId", log.ReceiptItemId },
-                        { "InventoryId", log.InventoryId },
-                        { "Operation", "Silme" },
-                        { "OperationDate", DateTime.Now },
-                        { "CompanyId", _firmaId },
-                        { "GrossKg", log.GrossKg },
-                        { "GrossMeter", log.GrossMeter },
-                        { "NetKg", log.NetKg },
-                        { "NetMeter", log.NetMeter },
-                        { "Piece", log.Piece }
-                    };
-                    _receiptLogRepo.Save(logData);
-                }
-            }
+            //foreach (var deletedId in deletedItemIds)
+            //{
+            //    var existingLogs = _receiptLogRepo.GetByReceiptItemId(deletedId);
+            //    foreach (var log in existingLogs)
+            //    {
+            //        var logData = new Dictionary<string, object>
+            //        {
+            //            { "Id", 0 },
+            //            { "WareHouseId", log.WareHouseId },
+            //            { "ReceiptType", log.ReceiptType },
+            //            { "ReceiptId", log.ReceiptId },
+            //            { "ReceiptItemId", log.ReceiptItemId },
+            //            { "InventoryId", log.InventoryId },
+            //            { "Operation", "Silme" },
+            //            { "OperationDate", DateTime.Now },
+            //            { "CompanyId", _firmaId },
+            //            { "GrossKg", log.GrossKg },
+            //            { "GrossMeter", log.GrossMeter },
+            //            { "NetKg", log.NetKg },
+            //            { "NetMeter", log.NetMeter },
+            //            { "Piece", log.Piece }
+            //        };
+            //        _receiptLogRepo.Save(logData);
+            //    }
+            //}
 
             MessageBox.Show("Kaydedildi!", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -626,30 +670,6 @@ private void CalculateRowAmount(ReceiptItemViewModel item)
             var result = MessageBox.Show("Fişi silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                var logs = _receiptLogRepo.GetByReceiptId(_currentId).ToList();
-
-                foreach (var log in logs)
-                {
-                    var logData = new Dictionary<string, object>
-                    {
-                        { "Id", 0 },
-                        { "WareHouseId", log.WareHouseId },
-                        { "ReceiptType", log.ReceiptType },
-                        { "ReceiptId", log.ReceiptId },
-                        { "ReceiptItemId", log.ReceiptItemId },
-                        { "InventoryId", log.InventoryId },
-                        { "Operation", "Silme" },
-                        { "OperationDate", DateTime.Now },
-                        { "CompanyId", log.CompanyId },
-                        { "GrossKg", log.GrossKg },
-                        { "GrossMeter", log.GrossMeter },
-                        { "NetKg", log.NetKg },
-                        { "NetMeter", log.NetMeter },
-                        { "Piece", log.Piece }
-                    };
-                    _receiptLogRepo.Save(logData);
-                }
-
                 _receiptRepo.DeleteItems(_currentId);
                 _receiptRepo.Delete(_currentId);
                 Yeni();
@@ -691,6 +711,7 @@ private void CalculateRowAmount(ReceiptItemViewModel item)
 
         private void LoadReceipt(int id)
         {
+            _deletedItemIds.Clear();
             var receipt = _receiptRepo.GetById(id);
             if (receipt == null) return;
 
@@ -770,7 +791,7 @@ private void CalculateRowAmount(ReceiptItemViewModel item)
                 _items.Clear();
                 foreach (var item in win.SecilenKalemler)
                 {
-_items.Add(new ReceiptItemViewModel
+                    _items.Add(new ReceiptItemViewModel
                     {
                         Id = item.Id,
                         InventoryId = item.InventoryId,
@@ -785,13 +806,13 @@ _items.Add(new ReceiptItemViewModel
                         UnitPrice = item.UnitPrice,
                         Vat = item.Vat,
                         RowAmount = item.RowAmount,
-                    RowExplanation = item.RowExplanation,
+                        RowExplanation = item.RowExplanation,
                         PriceUnit = item.PriceUnit ?? "Kg"
-                });
-            }
-            gridKalemler.ItemsSource = _items;
+                    });
+                }
+                gridKalemler.ItemsSource = _items;
                 CalculateTotals();
             }
-        }        
+        }
     }
 }

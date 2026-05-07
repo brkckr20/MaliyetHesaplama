@@ -157,7 +157,9 @@ RowStyle="{StaticResource DataGridRow}"
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Fason Gidenler" Click="ctxFasonGidenler_Click" x:Name="menuFasonGidenler"/>
-                                <MenuItem Header="Stok Seçimi" Click="ctxStokSecimi_Click" x:Name="menuStokSecimi"/>
+                            <MenuItem Header="Stok Seçimi" Click="ctxStokSecimi_Click" x:Name="menuStokSecimi"/>
+                            <Separator/>
+                            <MenuItem Header="Satır Sil" Click="ctxSatirSil_Click"/>
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                         <DataGrid.Columns>
@@ -225,7 +227,8 @@ RowStyle="{StaticResource DataGridRow}"
                             </DataGridComboBoxColumn>
                             <DataGridTextColumn Header="KDV (%)" Binding="{Binding Vat, StringFormat={}{0:N2}, ConverterCulture=tr-TR}" Width="60"/>
                             <DataGridTextColumn Header="Satır Tutarı" Binding="{Binding RowAmount, StringFormat={}{0:N2}, ConverterCulture=tr-TR}" Width="100" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}" Width="150"/>
+                            <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}" Width="100"/>
+                            <DataGridTextColumn Header="Takip No" Binding="{Binding TrackingNumber}" Width="80" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>

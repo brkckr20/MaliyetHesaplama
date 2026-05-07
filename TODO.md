@@ -39,3 +39,30 @@ Stock:   InventoryId, ColorId, VariantId, WareHouseId, QuantityKg, QuantityMeter
 ## Notlar
 - MiniOrm.cs → Stock tablosuna ColorId eklendi (satır 684, 702)
 - Renk ve Beden tabloları database'de mevcut
+
+---
+
+# UC_MalzemeFisV2 - Boş Satır Sorunu
+
+## Sorun
+`LoadReceipt()` metodunda kayıt yüklenirken boş satır eklenmiyor. İleri/Geri navigasyon sonrası grid'de boş satır kayboluyor.
+
+## Çözüm
+`LoadReceipt()` ve `Listele()` metodlarında foreach döngüsü **biter bitmez** değil, tüm kalemler eklendikten **sonra** en alta boş satır eklenmeli.
+
+### Örnek Düzeltme:
+```csharp
+// Mevcut (hatalı - her iteration'da ekliyor)
+foreach (var item in items)
+{
+    _items.Add(...);
+    _items.Add(new ReceiptItemViewModel()); // ❌ Yanlış
+}
+
+// Doğru
+foreach (var item in items)
+{
+    _items.Add(...);
+}
+_items.Add(new ReceiptItemViewModel()); // ✓ Doğru - döngü sonunda
+```
