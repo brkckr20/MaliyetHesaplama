@@ -110,7 +110,8 @@ namespace MaliyeHesaplama.v2.Windows
                     Vat = x.Vat,
                     RowAmount = x.RowAmount,
                     RowExplanation = x.RowExplanation ?? "",
-                    PriceUnit = x.MeasurementUnit ?? "Kg"
+                    PriceUnit = x.MeasurementUnit ?? "Kg",
+                    TrackingNumber = x.TrackingNumber ?? ""
                 }).ToList();
 
                 this.DialogResult = true;

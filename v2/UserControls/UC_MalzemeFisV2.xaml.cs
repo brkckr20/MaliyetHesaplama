@@ -262,22 +262,34 @@ private int _depoId = 0;
             win.Owner = Window.GetWindow(this);
             if (win.ShowDialog() == true && win.SecilenSatirlar != null)
             {
+                var firstEmpty = _items.FirstOrDefault(x => string.IsNullOrEmpty(x.OperationType) && x.InventoryId == 0);
+                int itemIndex = 0;
+
                 foreach (var item in win.SecilenSatirlar)
                 {
-                    _items.Add(new ReceiptItemViewModel
+                    ReceiptItemViewModel target;
+                    if (firstEmpty != null && itemIndex == 0)
                     {
-                        Id = 0,
-                        InventoryId = item.InventoryId,
-                        InventoryCode = item.InventoryCode,
-                        InventoryName = item.InventoryName,
-                        OperationType = "Çıkış",
-                        NetWeight = item.Quantity,
-                        NetMeter = 0,
-                        Piece = 0,
-                        UnitPrice = item.UnitPrice,
-                        Vat = item.Vat,
-                        PriceUnit = "Kg"
-                    });
+                        target = firstEmpty;
+                        itemIndex++;
+                    }
+                    else
+                    {
+                        target = new ReceiptItemViewModel();
+                        _items.Add(target);
+                    }
+
+                    target.InventoryId = item.InventoryId;
+                    target.InventoryCode = item.InventoryCode;
+                    target.InventoryName = item.InventoryName;
+                    target.OperationType = "Çıkış";
+                    target.NetWeight = 0;
+                    target.NetMeter = 0;
+                    target.Piece = item.Quantity;
+                    target.UnitPrice = item.UnitPrice;
+                    target.Vat = item.Vat;
+                    target.PriceUnit = "Adet";
+                    target.TrackingNumber = item.Id.ToString();
                 }
                 CalculateTotals();
             }
@@ -761,7 +773,8 @@ public void Yeni()
                     Vat = item.Vat,
                     RowAmount = item.RowAmount,
                     RowExplanation = item.RowExplanation,
-                    PriceUnit = string.IsNullOrEmpty(item.MeasurementUnit) ? "Kg" : item.MeasurementUnit
+                    PriceUnit = string.IsNullOrEmpty(item.MeasurementUnit) ? "Kg" : item.MeasurementUnit,
+                    TrackingNumber = item.TrackingNumber ?? ""
                 });
             }
             gridKalemler.ItemsSource = _items;
@@ -807,7 +820,8 @@ public void Yeni()
                         Vat = item.Vat,
                         RowAmount = item.RowAmount,
                         RowExplanation = item.RowExplanation,
-                        PriceUnit = item.PriceUnit ?? "Kg"
+                        PriceUnit = item.PriceUnit ?? "Kg",
+                        TrackingNumber = item.TrackingNumber ?? ""
                     });
                 }
                 gridKalemler.ItemsSource = _items;

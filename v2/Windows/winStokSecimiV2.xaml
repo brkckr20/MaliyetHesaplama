@@ -12,12 +12,15 @@
                   CanUserAddRows="False" IsReadOnly="True" SelectionMode="Extended"
                   GridLinesVisibility="All" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Takip No" Binding="{Binding Id}" Width="70"/>
                 <DataGridTextColumn Header="Kodu" Binding="{Binding InventoryCode}" Width="100"/>
-                <DataGridTextColumn Header="Adı" Binding="{Binding InventoryName}" Width="200"/>
-                <DataGridTextColumn Header="Miktar" Binding="{Binding Quantity, StringFormat={}{0:N2}}" Width="100"/>
-                <DataGridTextColumn Header="Birim" Binding="{Binding Unit}" Width="80"/>
-                <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice, StringFormat={}{0:N2}}" Width="100"/>
-                <DataGridTextColumn Header="KDV (%)" Binding="{Binding Vat}" Width="80"/>
+                <DataGridTextColumn Header="Adı" Binding="{Binding InventoryName}" Width="150"/>
+                <DataGridTextColumn Header="Giriş Adet" Binding="{Binding GirisAdet, StringFormat={}{0:N0}}" Width="80"/>
+                <DataGridTextColumn Header="Kalan" Binding="{Binding Quantity, StringFormat={}{0:N0}}" Width="80"/>
+                <DataGridTextColumn Header="Tarih" Binding="{Binding ReceiptDate, StringFormat={}{0:dd.MM.yyyy}}" Width="90"/>
+                <DataGridTextColumn Header="Birim" Binding="{Binding Unit}" Width="60"/>
+                <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding UnitPrice, StringFormat={}{0:N2}}" Width="80"/>
+                <DataGridTextColumn Header="KDV (%)" Binding="{Binding Vat}" Width="60"/>
                 <DataGridTextColumn Header="Depo Id" Binding="{Binding WarehouseId}" Width="60" Visibility="Hidden"/>
                 <DataGridTextColumn Header="Malzeme Id" Binding="{Binding InventoryId}" Width="60" Visibility="Hidden"/>
             </DataGrid.Columns>

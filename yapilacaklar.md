@@ -1,5 +1,23 @@
 # Yapılacaklar
 
+## ✅ Stok Seçimi (Tamamlandı - 08.05.2026)
+
+### Yapılan İşlemler
+- StockRepository.GetByWarehouseId güncellendi
+- Giriş-Çıkış takibi eklendi (TrackingNumber ile)
+- Kalan hesaplama: Giriş Adet - Çıkış Toplamı
+- Tarih (ReceiptDate) eklendi
+- FIFO sıralama (ORDER BY Id ASC)
+- 0 kalan stoklar filtrelendi
+
+### Dosyalar
+- `v2/Data/StockRepository.cs`
+- `v2/Models/Stock.cs`
+- `v2/Windows/winStokSecimiV2.xaml.cs`
+- `v2/Windows/winStokSecimiV2.xaml`
+
+---
+
 ## 📝 Loglama Hatası (Düzeltilecek)
 
 ### Sorun

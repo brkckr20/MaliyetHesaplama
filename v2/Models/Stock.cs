@@ -66,5 +66,11 @@ namespace MaliyeHesaplama.v2.Models
 
         [NotMapped]
         public string WarehouseName { get; set; }
+
+        [NotMapped]
+        public DateTime? ReceiptDate { get; set; }
+
+        [NotMapped]
+        public int GirisAdet { get; set; }
     }
 }

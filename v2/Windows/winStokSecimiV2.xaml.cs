@@ -31,6 +31,7 @@ public partial class winStokSecimiV2 : Window
             {
                 Stoklar.Add(new StockSelectViewModel
                 {
+                    Id = stok.Id,
                     InventoryId = stok.InventoryId,
                     InventoryCode = stok.InventoryCode,
                     InventoryName = stok.InventoryName,
@@ -38,7 +39,9 @@ public partial class winStokSecimiV2 : Window
                     Unit = stok.Unit,
                     UnitPrice = stok.UnitPrice,
                     Vat = stok.Vat,
-                    WarehouseId = depoId
+                    WarehouseId = depoId,
+                    ReceiptDate = stok.ReceiptDate,
+                    GirisAdet = stok.GirisAdet
                 });
             }
             grid.ItemsSource = Stoklar;
@@ -66,6 +69,7 @@ public partial class winStokSecimiV2 : Window
 
     public class StockSelectViewModel
     {
+        public int Id { get; set; }
         public int InventoryId { get; set; }
         public string InventoryCode { get; set; }
         public string InventoryName { get; set; }
@@ -74,5 +78,7 @@ public partial class winStokSecimiV2 : Window
         public decimal UnitPrice { get; set; }
         public decimal Vat { get; set; }
         public int WarehouseId { get; set; }
+        public DateTime? ReceiptDate { get; set; }
+        public int GirisAdet { get; set; }
     }
 }

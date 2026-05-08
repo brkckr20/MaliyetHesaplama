@@ -56,12 +56,40 @@ namespace MaliyeHesaplama.v2.Data
 
         public List<Stock> GetByWarehouseId(int warehouseId)
         {
-            var sql = @"SELECT s.Id, i.Code AS InventoryCode, i.Name AS InventoryName, w.Code AS WarehouseCode, w.Name AS WarehouseName, 
-                        s.QuantityKg, s.QuantityMeter, s.QuantityPiece
-                        FROM Stock s 
-                        LEFT JOIN Inventory i ON i.Id = s.InventoryId
-                        LEFT JOIN Warehouse w ON w.Id = s.WareHouseId
-                        WHERE s.WareHouseId = " + warehouseId + " AND (s.QuantityKg > 0 OR s.QuantityMeter > 0 OR s.QuantityPiece > 0)";
+            var sql = $@"
+SELECT 
+    giris.Id AS Id,
+    giris.InventoryId,
+    i.InventoryCode,
+    i.InventoryName,
+    w.Code AS WarehouseCode,
+    w.Name AS WarehouseName,
+    giris.Piece AS GirisAdet,
+    rec.ReceiptDate AS ReceiptDate,
+    ISNULL(giris.Piece, 0) - ISNULL((
+        SELECT SUM(cikis.Piece) 
+        FROM ReceiptItem cikis
+        INNER JOIN Receipt r2 ON cikis.ReceiptId = r2.Id 
+        WHERE cikis.TrackingNumber = CAST(giris.Id AS NVARCHAR(50)) 
+        AND r2.ReceiptType = 2
+    ), 0) AS QuantityPiece,
+    giris.NetWeight AS QuantityKg,
+    rec.WareHouseId
+FROM ReceiptItem giris
+INNER JOIN Receipt rec ON giris.ReceiptId = rec.Id
+INNER JOIN Inventory i ON giris.InventoryId = i.Id
+LEFT JOIN Warehouse w ON w.Id = rec.WareHouseId
+WHERE rec.ReceiptType = 1
+AND rec.WareHouseId = {warehouseId}
+AND giris.Piece > 0
+AND (ISNULL(giris.Piece, 0) - ISNULL((
+    SELECT SUM(cikis.Piece) 
+    FROM ReceiptItem cikis
+    INNER JOIN Receipt r2 ON cikis.ReceiptId = r2.Id 
+    WHERE cikis.TrackingNumber = CAST(giris.Id AS NVARCHAR(50)) 
+    AND r2.ReceiptType = 2
+), 0)) > 0
+ORDER BY giris.Id ASC";
             return _orm.QueryRaw<Stock>(sql).ToList();
         }
     }
