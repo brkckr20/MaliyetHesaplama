@@ -72,5 +72,20 @@ namespace MaliyeHesaplama.v2.Models
 
         [NotMapped]
         public int GirisAdet { get; set; }
+
+        [NotMapped]
+        public string Ids { get; set; }
+
+        [NotMapped]
+        public string Tarihler { get; set; }
+
+        [NotMapped]
+        public string FirstId { get; set; }
+
+        //[NotMapped]
+        //public decimal UnitPrice { get; set; }
+
+        //[NotMapped]
+        //public decimal Vat { get; set; }
     }
 }

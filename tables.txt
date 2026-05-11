@@ -1,2 +1,60 @@
-System.Data.SqlClient.SqlException: 'Column 'ReceiptItem.Id' is invalid in the HAVING clause because it is not contained in either an aggregate function or the GROUP BY clause.
-Cannot perform an aggregate function on an expression containing an aggregate or a subquery.'
+=== STOK SEÇİMİ SORGUSU (winStokSecimiV2 - StockRepository.GetByWarehouseId) ===
+
+;WITH StokData AS (
+    SELECT 
+        giris.Id,
+        giris.InventoryId,
+        i.InventoryCode,
+        i.InventoryName,
+        giris.Piece AS GirisAdet,
+        rec.WareHouseId,
+        rec.ReceiptDate,
+        ISNULL(giris.Piece, 0) - ISNULL((
+            SELECT SUM(cikis.Piece)
+            FROM ReceiptItem cikis
+            INNER JOIN Receipt r2 ON cikis.ReceiptId = r2.Id
+            WHERE cikis.TrackingNumber = CAST(giris.Id AS NVARCHAR(50))
+            AND r2.ReceiptType = 2
+        ), 0) AS Kalan
+    FROM ReceiptItem giris
+    INNER JOIN Receipt rec ON giris.ReceiptId = rec.Id
+    INNER JOIN Inventory i ON giris.InventoryId = i.Id
+    WHERE rec.ReceiptType = 1
+        AND giris.Piece > 0
+)
+SELECT 
+    sd.InventoryId,
+    sd.InventoryCode,
+    sd.InventoryName,
+    SUM(sd.GirisAdet) AS GirisAdet,
+    SUM(sd.Kalan) AS Kalan,
+    (
+        SELECT STUFF((
+            SELECT ', ' + CAST(Id AS NVARCHAR(20))
+            FROM StokData sd2
+            WHERE sd2.InventoryId = sd.InventoryId AND sd2.WareHouseId = sd.WareHouseId
+            ORDER BY Id
+            FOR XML PATH(''), TYPE
+        ).value('.', 'NVARCHAR(MAX)'), 1, 2, '')
+    ) AS Ids,
+    (
+        SELECT STUFF((
+            SELECT ', ' + CONVERT(NVARCHAR(10), ReceiptDate, 104)
+            FROM StokData sd2
+            WHERE sd2.InventoryId = sd.InventoryId AND sd2.WareHouseId = sd.WareHouseId
+            ORDER BY Id
+            FOR XML PATH(''), TYPE
+        ).value('.', 'NVARCHAR(MAX)'), 1, 2, '')
+    ) AS Tarihler
+FROM StokData sd
+WHERE sd.WareHouseId = @depoId
+GROUP BY sd.InventoryId, sd.InventoryCode, sd.InventoryName, sd.WareHouseId
+HAVING SUM(sd.Kalan) > 0
+ORDER BY sd.InventoryCode ASC
+
+---
+AÇIKLAMA:
+- CTE (StokData) ile önce Kalan hesaplanıyor
+- Sonra CTE üzerinden GROUP BY yapılıyor
+- Ids: "8424, 8496, 8505" formatında
+- Tarihler: "12.09.2025, 04.05.2026, 29.05.2025" formatında
