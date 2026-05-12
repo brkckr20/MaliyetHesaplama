@@ -17,5 +17,6 @@ namespace MaliyeHesaplama.v2.Models
         public decimal Vat { get; set; }
         public decimal RowAmount { get; set; }
         public string RowExplanation { get; set; }
+        public bool IsWithChip { get; set; }
     }
 }

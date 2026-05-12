@@ -139,5 +139,7 @@ namespace MaliyeHesaplama.v2.Models
 
         [NotMapped]
         public decimal KalanAdet { get; set; }
+
+        public bool IsWithChip { get; set; }
     }
 }

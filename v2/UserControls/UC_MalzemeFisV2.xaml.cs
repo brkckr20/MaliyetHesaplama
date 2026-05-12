@@ -226,6 +226,7 @@ private int _depoId = 0;
                         target.UnitPrice = item.UnitPrice;
                         target.Vat = item.Vat;
                         target.TrackingNumber = item.Id.ToString();
+                        target.IsWithChip = item.IsWithChip == true;
                     }
                     else
                     {
@@ -241,7 +242,8 @@ private int _depoId = 0;
                             Piece = item.Piece,
                             UnitPrice = item.UnitPrice,
                             Vat = item.Vat,
-                            TrackingNumber = item.Id.ToString()
+                            TrackingNumber = item.Id.ToString(),
+IsWithChip = item.IsWithChip == true
                         });
                     }
                     startIndex++;
@@ -529,6 +531,7 @@ public void Yeni()
             txtIrsaliyeBelgeNo.Text = "";
             txtAciklama.Text = "";
             dpTarih.SelectedDate = DateTime.Now;
+            dpBelgeTarih.SelectedDate = DateTime.Now;
             dpIrsaliyeTarih.SelectedDate = DateTime.Now;
             lblDepoAdi.Text = string.Empty;
             lblFirmaAdi.Text = string.Empty;
@@ -617,7 +620,8 @@ public void Yeni()
                     { "Vat", item.Vat },
                     { "RowAmount", item.RowAmount },
                     { "RowExplanation", item.RowExplanation ?? "" },
-                    { "TrackingNumber", item.TrackingNumber ?? "" }
+                    { "TrackingNumber", item.TrackingNumber ?? "" },
+                    { "IsWithChip", item.IsWithChip }
                 };
                 var itemId = _receiptRepo.SaveItem(itemData);
 
@@ -774,7 +778,8 @@ public void Yeni()
                     RowAmount = item.RowAmount,
                     RowExplanation = item.RowExplanation,
                     PriceUnit = string.IsNullOrEmpty(item.MeasurementUnit) ? "Kg" : item.MeasurementUnit,
-                    TrackingNumber = item.TrackingNumber ?? ""
+                    TrackingNumber = item.TrackingNumber ?? "",
+                    IsWithChip = item.IsWithChip
                 });
             }
             gridKalemler.ItemsSource = _items;
@@ -821,7 +826,8 @@ public void Yeni()
                         RowAmount = item.RowAmount,
                         RowExplanation = item.RowExplanation,
                         PriceUnit = item.PriceUnit ?? "Kg",
-                        TrackingNumber = item.TrackingNumber ?? ""
+                        TrackingNumber = item.TrackingNumber ?? "",
+                        IsWithChip = item.IsWithChip
                     });
                 }
                 gridKalemler.ItemsSource = _items;

@@ -23,6 +23,11 @@ namespace MaliyeHesaplama.v2.Data
             return _orm.GetAll<Inventory>("Inventory");
         }
 
+        public IEnumerable<Inventory> GetAll(string whereClause)
+        {
+            return _orm.QueryRaw<Inventory>($"SELECT * FROM Inventory WHERE {whereClause}");
+        }
+
         public IEnumerable<Inventory> GetAllWithDetails()
         {
             var sql = @"

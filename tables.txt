@@ -58,3 +58,9 @@ AÇIKLAMA:
 - Sonra CTE üzerinden GROUP BY yapılıyor
 - Ids: "8424, 8496, 8505" formatında
 - Tarihler: "12.09.2025, 04.05.2026, 29.05.2025" formatında
+
+---
+
+=== KALEMLER TABLOSU - IsWithChip Alanı ===
+
+ALTER TABLE Kalemler ADD IsWithChip BIT NOT NULL DEFAULT 0;

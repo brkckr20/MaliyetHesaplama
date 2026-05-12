@@ -87,7 +87,7 @@
                             <DatePicker HorizontalAlignment="Left" x:Name="dpBelgeTarih" Width="150"/>
                         </DockPanel>
                         <DockPanel Margin="0,0,0,2">
-                            <Label Content="Belge Tarihi :" Width="120"/>
+                            <Label Content="İrsaliye Tarihi :" Width="120"/>
                             <DatePicker HorizontalAlignment="Left" x:Name="dpIrsaliyeTarih" Width="150"/>
                         </DockPanel>
                         <DockPanel Margin="0,0,0,2">
@@ -229,6 +229,7 @@ RowStyle="{StaticResource DataGridRow}"
                             <DataGridTextColumn Header="Satır Tutarı" Binding="{Binding RowAmount, StringFormat={}{0:N2}, ConverterCulture=tr-TR}" Width="100" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}" Width="100"/>
                             <DataGridTextColumn Header="Takip No" Binding="{Binding TrackingNumber}" Width="80" IsReadOnly="True"/>
+                            <DataGridCheckBoxColumn Header="Chip" Binding="{Binding IsWithChip, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>

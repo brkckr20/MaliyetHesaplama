@@ -70,7 +70,7 @@ namespace MaliyeHesaplama.v2.Data
             string sql = @"
                 SELECT 
                     RI.Id, RI.InventoryId, I.InventoryCode, I.InventoryName, 
-                    RI.OperationType, RI.NetWeight, RI.NetMeter, RI.Piece, RI.UnitPrice, RI.Vat, RI.TrackingNumber,
+                    RI.OperationType, RI.NetWeight, RI.NetMeter, RI.Piece, RI.UnitPrice, RI.Vat, RI.TrackingNumber, RI.IsWithChip,
                     C.CompanyCode, C.CompanyName,
                     RI.Piece - ISNULL((SELECT SUM(RI2.Piece) FROM ReceiptItem RI2 
                         INNER JOIN Receipt R2 ON RI2.ReceiptId = R2.Id 

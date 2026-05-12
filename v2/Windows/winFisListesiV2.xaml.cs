@@ -111,7 +111,8 @@ namespace MaliyeHesaplama.v2.Windows
                     RowAmount = x.RowAmount,
                     RowExplanation = x.RowExplanation ?? "",
                     PriceUnit = x.MeasurementUnit ?? "Kg",
-                    TrackingNumber = x.TrackingNumber ?? ""
+                    TrackingNumber = x.TrackingNumber ?? "",
+                    IsWithChip = x.IsWithChip
                 }).ToList();
 
                 this.DialogResult = true;

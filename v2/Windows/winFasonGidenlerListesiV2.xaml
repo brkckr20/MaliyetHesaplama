@@ -25,6 +25,7 @@
                 <DataGridTextColumn Header="KDV" Binding="{Binding Vat}" Width="50"/>
                 <DataGridTextColumn Header="ReceiptItemId" Binding="{Binding Id}" Width="60" Visibility="Hidden"/>
                 <DataGridTextColumn Header="InventoryId" Binding="{Binding InventoryId}" Width="60" Visibility="Hidden"/>
+                <DataGridCheckBoxColumn Header="Chip" Binding="{Binding IsWithChip}" Width="50"/>
             </DataGrid.Columns>
         </DataGrid>
         

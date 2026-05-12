@@ -37,7 +37,7 @@ namespace MaliyeHesaplama.v2.Windows
         {
             try
             {
-                var data = _repo.GetAll().ToList();
+                var data = _repo.GetAll("ISNULL(IsPrefix, 0) = 0").ToList();
                 _collectionView = CollectionViewSource.GetDefaultView(data);
                 grid.ItemsSource = _collectionView;
                 Dispatcher.BeginInvoke(new Action(() =>
