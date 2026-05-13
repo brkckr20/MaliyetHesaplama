@@ -29,6 +29,8 @@ namespace MaliyeHesaplama.mvvm
             SelectMaterialCommand = new RelayCommand<object>(OpenMaterialSelectionExecute);
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         private void AddNewItem()
         {
             var item = new Dictionary<string, object>
@@ -98,6 +100,6 @@ namespace MaliyeHesaplama.mvvm
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        //public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

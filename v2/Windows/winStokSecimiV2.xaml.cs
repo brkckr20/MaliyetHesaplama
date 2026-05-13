@@ -64,7 +64,7 @@ public partial class winStokSecimiV2 : Window
                     InventoryCode = stok.InventoryCode,
                     InventoryName = stok.InventoryName,
                     GirisAdet = stok.GirisAdet,
-                    Quantity = stok.QuantityPiece,
+                    Quantity = (int)stok.QuantityPiece,
                     UnitPrice = stok.UnitPrice,
                     Vat = stok.Vat,
                     Ids = stok.Ids,

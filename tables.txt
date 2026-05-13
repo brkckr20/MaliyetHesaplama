@@ -1,7 +1,66 @@
+=== FİŞ LİSTESİ SORGUSU (winFisListesiV2 - MiniOrm.GetMovementList) ===
+
+select
+    ISNULL(R.Id,0) [Id],
+    ISNULL(R.ReceiptNo,'') [ReceiptNo],
+    ISNULL(R.ReceiptType,'') [ReceiptType],
+    ISNULL(R.ReceiptDate,'') [ReceiptDate],
+    ISNULL(C.Id,'') [CompanyId],
+    ISNULL(C.CompanyName,'') [CompanyName],
+    ISNULL(C.CompanyCode,'') [CompanyCode],
+    ISNULL(R.Authorized,'') [Authorized],
+    ISNULL(R.DuaDate,'') [DuaDate],
+    ISNULL(R.Maturity,'') [Maturity],
+    ISNULL(R.CustomerOrderNo,'') [CustomerOrderNo],
+    ISNULL(R.Explanation,'') [Explanation],
+    ISNULL(R.Approved,0) [Approved],
+    ISNULL(RI.Id,'') [ReceiptItemId],
+    ISNULL(RI.OperationType,'') [OperationType],
+    ISNULL(RI.InventoryId,'') [InventoryId],
+    ISNULL(I.InventoryCode,'') [InventoryCode],
+    ISNULL(I.InventoryName,'') [InventoryName],
+    ISNULL(RI.NetMeter,0) [NetMeter],
+    ISNULL(RI.NetWeight,0) [NetWeight],
+    ISNULL(RI.Piece,0) [Piece],
+    ISNULL(RI.CashPayment,0) [CashPayment],
+    ISNULL(RI.DeferredPayment,0) [DeferredPayment],
+    ISNULL(RI.Forex,'') [Forex],
+    ISNULL(RI.VariantId,'') [VariantId],
+    ISNULL(CO.Code,'') [VariantCode],
+    ISNULL(CO.Name,'') [Variant],
+    ISNULL(RI.RowExplanation,'') [RowExplanation],
+    ISNULL(W.Id,'') [WareHouseId],
+    ISNULL(W.Code,'') [WareHouseCode],
+    ISNULL(W.Name,'') [WareHouseName],
+    ISNULL(RI.CustomerOrderNo,'') [CustomerOrderNo],
+    ISNULL(RI.OrderNo,'') [OrderNo],
+    ISNULL(RI.TrackingNumber,'') [TrackingNumber],
+    ISNULL(RI.UnitPrice,0) [UnitPrice],
+    ISNULL(RI.Vat,0) [Vat],
+    ISNULL(RI.RowAmount,0) [RowAmount],
+    ISNULL(RI.Receiver,0) [Receiver],
+    ISNULL(R.DocumentName,0) [DocumentName],
+    ISNULL(R.InvoiceNo,'') [InvoiceNo]
+from Receipt R
+left join Company C with(nolock) on C.Id = R.CompanyId
+left join ReceiptItem RI with(nolock) on RI.ReceiptId = R.Id
+left join Inventory I with(nolock) on I.Id = RI.InventoryId
+LEFT JOIN Color CO with(nolock) on CO.Id = RI.VariantId
+left join WareHouse W on R.WareHouseId = W.Id
+where R.ReceiptType = 2 -- MalzemeCikis
+
+---
+AÇIKLAMA:
+- ReceiptType = 1 ise MalzemeGiriş, 2 ise MalzemeÇıkış
+- LEFT JOIN kullanıldığı için çok satırlı sonuç döner (her kalem için bir satır)
+- Performance için Indexed View veya doğrudan Receipt sorgusu düşünülebilir
+
+---
+
 === STOK SEÇİMİ SORGUSU (winStokSecimiV2 - StockRepository.GetByWarehouseId) ===
 
 ;WITH StokData AS (
-    SELECT 
+    SELECT
         giris.Id,
         giris.InventoryId,
         i.InventoryCode,
@@ -22,7 +81,7 @@
     WHERE rec.ReceiptType = 1
         AND giris.Piece > 0
 )
-SELECT 
+SELECT
     sd.InventoryId,
     sd.InventoryCode,
     sd.InventoryName,
@@ -53,14 +112,19 @@ HAVING SUM(sd.Kalan) > 0
 ORDER BY sd.InventoryCode ASC
 
 ---
-AÇIKLAMA:
-- CTE (StokData) ile önce Kalan hesaplanıyor
-- Sonra CTE üzerinden GROUP BY yapılıyor
-- Ids: "8424, 8496, 8505" formatında
-- Tarihler: "12.09.2025, 04.05.2026, 29.05.2025" formatında
-
----
 
 === KALEMLER TABLOSU - IsWithChip Alanı ===
 
 ALTER TABLE Kalemler ADD IsWithChip BIT NOT NULL DEFAULT 0;
+
+---
+
+--- KALDIRILAN TABLOLAR (v2 Stock Sistemi Basitleştirme) ---
+--- Stock ve StockMovement tabloları artık kullanılmamaktadır
+--- Stok hareketleri Receipt/ReceiptItem tablolarından hesaplanmaktadır
+
+IF OBJECT_ID('Stock', 'U') IS NOT NULL
+    DROP TABLE Stock;
+
+IF OBJECT_ID('StockMovement', 'U') IS NOT NULL
+    DROP TABLE StockMovement;

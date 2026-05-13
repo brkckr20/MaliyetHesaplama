@@ -178,5 +178,10 @@ namespace MaliyeHesaplama.v2.Windows
         {
             fgh.GridReOrdered(sender, e);
         }
+
+        private void ExportToExcel_Click(object sender, RoutedEventArgs e)
+        {
+            fgh.ExportToExcel();
+        }
     }
 }

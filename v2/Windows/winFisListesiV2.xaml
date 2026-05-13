@@ -5,8 +5,13 @@
         Title="Fiş Listesi" Height="450" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Icon="/News.png">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+            <Button Content="Excel Aktar" Width="100" Click="ExportToExcel_Click" Padding="5"/>
+        </StackPanel>
 
         <control:FilterDataGrid Grid.Row="0"
             x:Name="grid" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"
@@ -16,6 +21,8 @@
             ColumnReordered="grid_ColumnReordered">
             <control:FilterDataGrid.ContextMenu>
                 <ContextMenu>
+                    <MenuItem Header="Excel Aktar" Click="ExportToExcel_Click"/>
+                    <Separator/>
                     <MenuItem Header="Kolon Seçicisi" Click="MenuItem_Click"/>
                 </ContextMenu>
             </control:FilterDataGrid.ContextMenu>
