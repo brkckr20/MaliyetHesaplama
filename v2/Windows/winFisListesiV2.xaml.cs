@@ -183,5 +183,10 @@ namespace MaliyeHesaplama.v2.Windows
         {
             fgh.ExportToExcel();
         }
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

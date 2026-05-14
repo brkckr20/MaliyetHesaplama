@@ -9,23 +9,22 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-            <Button Content="Excel Aktar" Width="100" Click="ExportToExcel_Click" Padding="5"/>
-        </StackPanel>
+        
 
-        <control:FilterDataGrid Grid.Row="0"
-            x:Name="grid" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"
-            GridLinesVisibility="All" HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
-            FilterLanguage="Turkish" ShowStatusBar="True" AutoGenerateColumns="True"
-            AutoGeneratingColumn="grid_AutoGeneratingColumn" MouseDoubleClick="grid_MouseDoubleClick"
-            ColumnReordered="grid_ColumnReordered">
-            <control:FilterDataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Excel Aktar" Click="ExportToExcel_Click"/>
-                    <Separator/>
-                    <MenuItem Header="Kolon Seçicisi" Click="MenuItem_Click"/>
-                </ContextMenu>
-            </control:FilterDataGrid.ContextMenu>
-        </control:FilterDataGrid>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" PanningMode="Both" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+            <control:FilterDataGrid x:Name="grid" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"
+                GridLinesVisibility="All" HorizontalGridLinesBrush="#ececec" VerticalGridLinesBrush="#ececec"
+                FilterLanguage="Turkish" ShowStatusBar="True" AutoGenerateColumns="True"
+                AutoGeneratingColumn="grid_AutoGeneratingColumn" MouseDoubleClick="grid_MouseDoubleClick"
+                ColumnReordered="grid_ColumnReordered">
+                <control:FilterDataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Excel Aktar" Click="ExportToExcel_Click"/>
+                        <Separator/>
+                        <MenuItem Header="Kolon Seçicisi" Click="MenuItem_Click"/>
+                    </ContextMenu>
+                </control:FilterDataGrid.ContextMenu>
+            </control:FilterDataGrid>
+        </ScrollViewer>
     </Grid>
 </Window>
