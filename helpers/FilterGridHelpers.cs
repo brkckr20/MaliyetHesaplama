@@ -40,6 +40,22 @@ namespace MaliyeHesaplama.helpers
         {
             columnSettings = settings;
         }
+        private readonly Dictionary<string, string> _headerMapping = new Dictionary<string, string>
+        {
+            { "CompanyCode", "Cari Kodu" },
+            { "CompanyName", "Cari Adı" },
+            { "OperationType", "İşlem Tipi" },
+            { "InventoryCode", "Kodu" },
+            { "InventoryName", "Adı" },
+            { "NetWeight", "Kg" },
+            { "NetMeter", "Mt" },
+            { "Piece", "Adet" },
+            { "KalanAdet", "Kalan" },
+            { "UnitPrice", "Fiyat" },
+            { "Vat", "KDV" },
+            { "IsWithChip", "Chip" }
+        };
+
         public void GridGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e, FilterDataGrid.FilterDataGrid grid, string[] hiddenCols)
         {
             var hiddenColumns = new[] { "InsertedBy", "InsertedDate", "UpdatedBy", "UpdatedDate", "RecipeId", "Type", "ProductImage", "CompanyId", "InventoryId" };
@@ -47,6 +63,13 @@ namespace MaliyeHesaplama.helpers
             {
                 e.Cancel = true;
             }
+
+            if (_headerMapping.TryGetValue(e.PropertyName, out var trHeader))
+            {
+                e.Column.Header = trHeader;
+                return;
+            }
+
             var itemType = grid.ItemsSource?.Cast<object>()?.FirstOrDefault()?.GetType();
             if (itemType == null)
                 return;

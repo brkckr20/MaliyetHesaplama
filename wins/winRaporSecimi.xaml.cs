@@ -30,9 +30,21 @@ namespace MaliyeHesaplama.wins
         }
         private void btnTamam_Click(object sender, RoutedEventArgs e)
         {
-            string reportName = $"\"{cmbRaporlar.SelectedValue.ToString()}\"";
-            string reportAppPath = @"C:\\Users\\casper\\Desktop\\Klasörler\\z\\ReportApp\\bin\\Debug\\ReportApp.exe";
-            Process.Start(reportAppPath, $"{reportName} {_kayitNo}");
+            if (cmbRaporlar.SelectedItem == null)
+            {
+                System.Windows.MessageBox.Show("Lütfen bir rapor seçin.", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            string reportAppPath = @"C:\\Users\\casper\Desktop\Klasörler\z\ReportApp\bin\Debug\ReportApp.exe";
+            try
+            {
+                Process.Start(reportAppPath, $"{cmbRaporlar.SelectedItem} {_kayitNo}");
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show($"Rapor açılırken hata: {ex.Message}", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
