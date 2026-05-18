@@ -80,7 +80,7 @@ namespace MaliyeHesaplama.v2.Models
         [Display(Name = "KDV (%)")]
         public decimal Vat { get; set; }
 
-        [Display(Name = "Teslim Alan")]
+[Display(Name = "Teslim Alan")]
         public string Receiver { get; set; }
 
         [Display(Name = "Fiyat Birimi")]

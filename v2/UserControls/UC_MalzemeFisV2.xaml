@@ -230,6 +230,7 @@ RowStyle="{StaticResource DataGridRow}"
                             <DataGridTextColumn Header="Açıklama" Binding="{Binding RowExplanation}" Width="100"/>
                             <DataGridTextColumn Header="Takip No" Binding="{Binding TrackingNumber}" Width="80" IsReadOnly="True"/>
                             <DataGridCheckBoxColumn Header="Chip" Binding="{Binding IsWithChip, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                            <DataGridTextColumn Header="Teslim Alan" Binding="{Binding Received}" Width="100"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>

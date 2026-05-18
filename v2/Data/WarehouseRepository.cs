@@ -24,7 +24,7 @@ namespace MaliyeHesaplama.v2.Data
 
         public IEnumerable<Warehouse> GetActive()
         {
-            return _orm.GetAll<Warehouse>("Warehouse").Where(x => x.IsActive);
+            return _orm.GetAll<Warehouse>("Warehouse").Where(x => x.IsUse);
         }
 
         public Warehouse GetById(int id)

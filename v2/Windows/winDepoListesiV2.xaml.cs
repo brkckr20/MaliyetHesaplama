@@ -31,6 +31,20 @@ namespace MaliyeHesaplama.v2.Windows
         {
             var hiddenColumns = new[] { "CreatedAt", "UpdatedAt" };
             fgh.GridGeneratingColumn(e, grid, hiddenColumns);
+
+            var headerMap = new System.Collections.Generic.Dictionary<string, string>
+            {
+                { "Address1", "Adres 1" },
+                { "Address2", "Adres 2" },
+                { "District", "İlçe" },
+                { "City", "İl" },
+                { "PostalCode", "Posta Kodu" },
+                { "Phone", "Telefon" },
+                { "Email", "E-posta" }
+            };
+
+            if (headerMap.ContainsKey(e.PropertyName))
+                e.Column.Header = headerMap[e.PropertyName];
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

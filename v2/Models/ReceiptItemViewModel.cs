@@ -23,6 +23,7 @@ namespace MaliyeHesaplama.v2.Models
         private decimal? _grossWeight;
 private decimal? _grossMeter;
         private bool _isWithChip;
+        private string _received = "";
 
         public int Id
         {
@@ -108,6 +109,11 @@ public string TrackingNumber
         {
             get => _isWithChip;
             set { _isWithChip = value; OnPropertyChanged(); }
+        }
+        public string Received
+        {
+            get => _received;
+            set { _received = value; OnPropertyChanged(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

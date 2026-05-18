@@ -40,7 +40,7 @@ namespace MaliyeHesaplama
         private void V2_Click(object sender, RoutedEventArgs e)
         {
             string title = "v2";
-            string[] items = { "Malzeme Kartı V2"};
+            string[] items = { "Malzeme Kartı V2", "Depo Kartı V2" };
             ShowMegaMenu(title, items);
         }
 
@@ -128,6 +128,8 @@ namespace MaliyeHesaplama
                 /* v2 */
                 if (menuName == "Malzeme Kartı V2")
                     OpenTab(menuName, new v2.UserControls.UC_MalzemeKartiV2());
+                if (menuName == "Depo Kartı V2")
+                    OpenTab(menuName, new v2.UserControls.UC_DepoKartiV2());
                 /* Malzeme Yönetimi v2 */
                 if (menuName == "Malzeme Giriş")
                     OpenTab(menuName, new v2.UserControls.UC_MalzemeFisV2(v2.Models.ReceiptType.MalzemeGiris));

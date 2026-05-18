@@ -621,7 +621,8 @@ public void Yeni()
                     { "RowAmount", item.RowAmount },
                     { "RowExplanation", item.RowExplanation ?? "" },
                     { "TrackingNumber", item.TrackingNumber ?? "" },
-                    { "IsWithChip", item.IsWithChip }
+                    { "IsWithChip", item.IsWithChip },
+                    { "Receiver", item.Received ?? "" }
                 };
                 var itemId = _receiptRepo.SaveItem(itemData);
 
@@ -779,7 +780,8 @@ public void Yeni()
                     RowExplanation = item.RowExplanation,
                     PriceUnit = string.IsNullOrEmpty(item.MeasurementUnit) ? "Kg" : item.MeasurementUnit,
                     TrackingNumber = item.TrackingNumber ?? "",
-                    IsWithChip = item.IsWithChip
+                    IsWithChip = item.IsWithChip,
+                    Received = item.Receiver ?? ""
                 });
             }
             gridKalemler.ItemsSource = _items;
@@ -805,7 +807,6 @@ public void Yeni()
                 _depoId = win.WareHouseId;
                 txtDepo.Text = win.WareHouseCode;
                 lblDepoAdi.Text = win.WareHouseName;
-
                 _items.Clear();
                 foreach (var item in win.SecilenKalemler)
                 {
@@ -827,7 +828,8 @@ public void Yeni()
                         RowExplanation = item.RowExplanation,
                         PriceUnit = item.PriceUnit ?? "Kg",
                         TrackingNumber = item.TrackingNumber ?? "",
-                        IsWithChip = item.IsWithChip
+                        IsWithChip = item.IsWithChip,
+                        Received = item.Received ?? ""
                     });
                 }
                 gridKalemler.ItemsSource = _items;

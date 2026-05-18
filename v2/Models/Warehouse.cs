@@ -21,7 +21,28 @@ namespace MaliyeHesaplama.v2.Models
         public int WarehouseType { get; set; }
 
         [Display(Name = "Aktif")]
-        public bool IsActive { get; set; } = true;
+        public bool IsUse { get; set; } = true;
+
+        [MaxLength(200)]
+        public string Address1 { get; set; }
+
+        [MaxLength(200)]
+        public string Address2 { get; set; }
+
+        [MaxLength(50)]
+        public string District { get; set; }
+
+        [MaxLength(50)]
+        public string City { get; set; }
+
+        [MaxLength(10)]
+        public string PostalCode { get; set; }
+
+        [MaxLength(20)]
+        public string Phone { get; set; }
+
+        [MaxLength(100)]
+        public string Email { get; set; }
     }
 
     public enum WarehouseType
