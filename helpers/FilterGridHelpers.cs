@@ -17,7 +17,6 @@ namespace MaliyeHesaplama.helpers
         private DataGrid dataGrid;
         private string screenName;
         private string gridName;
-        MiniOrm _orm;
         private System.Windows.Threading.DispatcherTimer _saveTimer;
         public FilterGridHelpers(DataGrid grid, string screen, string gridNameParam)
         {
@@ -25,7 +24,6 @@ namespace MaliyeHesaplama.helpers
             screenName = screen;
             gridName = gridNameParam;
             columnSettings = new List<ColumnSetting>();
-            _orm = new MiniOrm();
 
             // Timer oluştur - genişlik değişikliklerini toplu kaydetmek için
             _saveTimer = new System.Windows.Threading.DispatcherTimer();
@@ -181,20 +179,14 @@ namespace MaliyeHesaplama.helpers
 
             try
             {
-                var orm = new MiniOrm();
                 var userId = Properties.Settings.Default.RememberUserId;
-
-                var savedSettings = orm.GetAll<ColumnSetting>("ColumnSelector")
-                    .Where(s => s.ScreenName == screenName && 
-                                s.GridName == gridName && 
-                                s.UserId == userId)
-                    .ToList();
+                var savedSettings = ColumnSettingsManager.Load(screenName, gridName, userId);
 
                 if (savedSettings.Any())
                 {
                     foreach (var setting in columnSettings)
                     {
-                        var savedSetting = savedSettings.FirstOrDefault(s => 
+                        var savedSetting = savedSettings.FirstOrDefault(s =>
                             s.ColumnName == setting.ColumnName);
 
                         if (savedSetting != null)
@@ -217,49 +209,16 @@ namespace MaliyeHesaplama.helpers
         {
             try
             {
-                // Önce bu kullanıcı ve ekran için mevcut kayıtları al
-                var existingSettings = _orm.GetAll<ColumnSetting>("ColumnSelector")
-                    .Where(s => s.UserId == Properties.Settings.Default.RememberUserId
-                             && s.ScreenName == screenName
-                             && s.GridName == gridName)
-                    .ToList();
+                var userId = Properties.Settings.Default.RememberUserId;
 
                 foreach (var setting in columnSettings)
                 {
-                    // Bu kolon için kayıt var mı kontrol et
-                    var existing = existingSettings
-                        .FirstOrDefault(e => e.ColumnName == setting.ColumnName);
-
-                    var data = new Dictionary<string, object>
-                    {
-                        { "ColumnName", setting.ColumnName },
-                        { "Width", setting.Width },
-                        { "Hidden", setting.Hidden },
-                        { "Location", setting.Location },
-                        { "UserId", setting.UserId },
-                        { "ScreenName", setting.ScreenName },
-                        { "GridName", setting.GridName }
-                    };
-
-                    if (existing != null)
-                    {
-                        // Güncelleme - Id'yi ekle
-                        data["Id"] = existing.Id;
-                    }
-                    else
-                    {
-                        // Yeni kayıt - Id = 0 (IDENTITY için)
-                        data["Id"] = 0;
-                    }
-
-                    _orm.Save("ColumnSelector", data);
+                    setting.UserId = userId;
+                    setting.ScreenName = screenName;
+                    setting.GridName = gridName;
                 }
 
-                //if (showMessage)
-                //{
-                //    MessageBox.Show("Kolon ayarları başarıyla kaydedildi!", "Bilgi",
-                //        MessageBoxButton.OK, MessageBoxImage.Information);
-                //}
+                ColumnSettingsManager.Save(screenName, gridName, userId, columnSettings);
             }
             catch (System.Exception ex)
             {

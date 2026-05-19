@@ -6,27 +6,27 @@
              xmlns:common="clr-namespace:MaliyeHesaplama.userControls.Common"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800" FontFamily="Bahnschrift Light">
-<Grid Background="Transparent">
-            <Grid.Resources>
-                <Style TargetType="ComboBox">
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="Black"/>
-                    <Setter Property="BorderBrush" Value="LightGray"/>
-                </Style>
-                <Style TargetType="ComboBoxItem">
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="Black"/>
-                </Style>
-                <Style TargetType="ComboBoxItem" x:Key="ComboBoxItemStyle">
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="Black"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsHighlighted" Value="True">
-                            <Setter Property="Background" Value="#E3F2FD"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Resources>
+    <Grid Background="Transparent">
+        <Grid.Resources>
+            <Style TargetType="ComboBox">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="BorderBrush" Value="LightGray"/>
+            </Style>
+            <Style TargetType="ComboBoxItem">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Style>
+            <Style TargetType="ComboBoxItem" x:Key="ComboBoxItemStyle">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Style.Triggers>
+                    <Trigger Property="IsHighlighted" Value="True">
+                        <Setter Property="Background" Value="#E3F2FD"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -34,63 +34,100 @@
         <Border Grid.Row="0">
             <common:ButtonBar x:Name="ButtonBar" DockPanel.Dock="Top" />
         </Border>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            
-            <StackPanel Grid.Column="0" Background="White">
-                <DockPanel Margin="0,1">
-                    <Label Content="Kodu :" Width="86"/>
-                    <TextBox x:Name="txtKodu" Width="200" VerticalContentAlignment="Center"/>
-                    <!--<Button x:Name="btnKoduListele" Content="🔍" Width="24" Click="btnKoduListele_Click" Background="Transparent" BorderBrush="LightGray" ToolTip="Listeden seç" Margin="2,0,0,0"/>-->
-                    <CheckBox Content="Kullanımda" IsChecked="True" x:Name="chkKullanimda" VerticalContentAlignment="Center" Margin="8,0,0,0"/>
-                </DockPanel>
-                <DockPanel Margin="0,0,0,1">
-                    <Label Content="Adı :" Width="86"/>
-                    <TextBox x:Name="txtAdi" Width="300" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
-                </DockPanel>
-                <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
-                    <Label Content="Tipi :" Width="86"/>
-                    <ComboBox x:Name="cmbTip" Width="200" VerticalContentAlignment="Center" Background="White" Foreground="Black">
-                        <ComboBoxItem Content="Ham Madde" Tag="1"/>
-                        <ComboBoxItem Content="Yarı Mamul" Tag="2"/>
-                        <ComboBoxItem Content="Mamul" Tag="3"/>
-                        <ComboBoxItem Content="Sarf Malzeme" Tag="4"/>
-                    </ComboBox>
-                </DockPanel>
-                <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
-                    <Label Content=" Kategori :" Width="86"/>
-                    <ComboBox x:Name="cmbKategori" Width="200" VerticalContentAlignment="Center" Background="White" Foreground="Black"/>
-                </DockPanel>
-                <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
-                    <Label Content="Birim :" Width="86"/>
-                    <ComboBox x:Name="cmbBirim" Width="200" VerticalContentAlignment="Center" Background="White" Foreground="Black"/>
-                </DockPanel>
-                <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
-                    <Label Content="Barkod :" Width="86"/>
-                    <TextBox x:Name="txtBarkod" Width="200" VerticalContentAlignment="Center"/>
-                </DockPanel>
-                <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
-                    <Label Content="KDV (%) :" Width="86"/>
-                    <ComboBox x:Name="cmbKDV" Width="200" VerticalContentAlignment="Center" Background="White" Foreground="Black">
-                        <ComboBoxItem Content="1" Tag="1"/>
-                        <ComboBoxItem Content="8" Tag="8"/>
-                        <ComboBoxItem Content="10" Tag="10"/>
-                        <ComboBoxItem Content="18" Tag="18" IsSelected="True"/>
-                        <ComboBoxItem Content="20" Tag="20"/>
-                    </ComboBox>
-                </DockPanel>
-                <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
-                    <Label Content="Min Stok :" Width="86"/>
-                    <TextBox x:Name="txtMinStok" Width="100" VerticalContentAlignment="Center"/>
-                </DockPanel>
-                <DockPanel Margin="0,0,0,0" HorizontalAlignment="Left">
-                    <Label Content="Max Stok :" Margin="0,0,0,0" Width="86"/>
-                    <TextBox x:Name="txtMaxStok" Width="100" VerticalContentAlignment="Center"/>
-                </DockPanel>
-            </StackPanel>
-        </Grid>
+        <TabControl Grid.Row="1" Background="White">
+            <TabItem Header="Genel">
+                <StackPanel Background="White">
+                    <DockPanel Margin="0,1">
+                        <Label Content="Kodu :" Width="86"/>
+                        <TextBox x:Name="txtKodu" Width="200" VerticalContentAlignment="Center"/>
+                        <CheckBox Content="Kullanımda" IsChecked="True" x:Name="chkKullanimda" VerticalContentAlignment="Center" Margin="8,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,1">
+                        <Label Content="Adı :" Width="86"/>
+                        <TextBox x:Name="txtAdi" Width="300" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
+                        <Label Content="Tipi :" Width="86"/>
+                        <ComboBox x:Name="cmbTip" Width="200" VerticalContentAlignment="Center" Background="White" Foreground="Black">
+                            <ComboBoxItem Content="Ham Madde" Tag="1"/>
+                            <ComboBoxItem Content="Yarı Mamul" Tag="2"/>
+                            <ComboBoxItem Content="Mamul" Tag="3"/>
+                            <ComboBoxItem Content="Sarf Malzeme" Tag="4"/>
+                        </ComboBox>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
+                        <Label Content="Kategori :" Width="86"/>
+                        <ComboBox x:Name="cmbKategori" Width="200" VerticalContentAlignment="Center" Background="White" Foreground="Black"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
+                        <Label Content="Birim :" Width="86"/>
+                        <ComboBox x:Name="cmbBirim" Width="200" VerticalContentAlignment="Center" Background="White" Foreground="Black"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
+                        <Label Content="Barkod :" Width="86"/>
+                        <TextBox x:Name="txtBarkod" Width="200" VerticalContentAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
+                        <Label Content="KDV (%) :" Width="86"/>
+                        <ComboBox x:Name="cmbKDV" Width="200" VerticalContentAlignment="Center" Background="White" Foreground="Black">
+                            <ComboBoxItem Content="1" Tag="1"/>
+                            <ComboBoxItem Content="8" Tag="8"/>
+                            <ComboBoxItem Content="10" Tag="10"/>
+                            <ComboBoxItem Content="18" Tag="18" IsSelected="True"/>
+                            <ComboBoxItem Content="20" Tag="20"/>
+                        </ComboBox>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,1" HorizontalAlignment="Left">
+                        <Label Content="Min Stok :" Width="86"/>
+                        <TextBox x:Name="txtMinStok" Width="100" VerticalContentAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,0" HorizontalAlignment="Left">
+                        <Label Content="Max Stok :" Margin="0,0,0,0" Width="86"/>
+                        <TextBox x:Name="txtMaxStok" Width="100" VerticalContentAlignment="Center"/>
+                    </DockPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Renk / Beden">
+                <Grid Margin="0,4,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+                        <GroupBox Header="Renk Ekle" Margin="0,0,10,0">
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox x:Name="cmbRenk" Width="150" DisplayMemberPath="Adi" SelectedValuePath="Id"/>
+                                <Button x:Name="btnRenkEkle" Content="Ekle" Width="60" Margin="5,0,0,0" Click="btnRenkEkle_Click"/>
+                                <Button x:Name="btnRenkYeni" Content="Yeni" Width="60" Margin="5,0,0,0" Click="btnRenkYeni_Click"/>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="Beden Ekle" Margin="0,0,10,0">
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox x:Name="cmbBeden" Width="150" DisplayMemberPath="Adi" SelectedValuePath="Id"/>
+                                <Button x:Name="btnBedenEkle" Content="Ekle" Width="60" Margin="5,0,0,0" Click="btnBedenEkle_Click"/>
+                                <Button x:Name="btnBedenYeni" Content="Yeni" Width="60" Margin="5,0,0,0" Click="btnBedenYeni_Click"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                    <GroupBox Grid.Row="1" Header="Renk / Beden Matrisi">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <DataGrid x:Name="dgMatris" Grid.Row="0" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                                      HeadersVisibility="Column" GridLinesVisibility="All" Background="White" RowHeaderWidth="0">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Renk" Binding="{Binding RenkAdi}" IsReadOnly="True" Width="120"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                                <Button x:Name="btnMatrisSil" Content="Seçili Sil" Width="100" Click="btnMatrisSil_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>
