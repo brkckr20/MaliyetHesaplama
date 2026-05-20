@@ -45,3 +45,27 @@
 
 ## 📝 MiniOrm Notu
 MiniOrm dosyası hiç bozulmamıştı (kullanıcı isteği), ama ileride transaction desteği gerekebilir.
+
+---
+
+## ✅ UC_DepoKartiV2 İyileştirmeleri (Tamamlandı - 20.05.2026)
+
+### Yapılan İşlemler
+- Duplicate kod kontrolü eklendi (`CodeExists` metodu)
+- `Kaydet()` ve `Sil()` metodlarına try-catch eklendi
+- Hata durumlarında kullanıcıya mesaj gösteriliyor
+
+### Dosyalar
+- `v2/Data/WarehouseRepository.cs` — `CodeExists` metodu eklendi
+- `v2/UserControls/UC_DepoKartiV2.xaml.cs` — duplicate check + exception handling
+
+---
+
+## ✅ Menü Sırası Düzenlemesi (Tamamlandı - 20.05.2026)
+
+### Yapılan İşlemler
+- `⚙️ Ayarlar` butonu, `🚀 v2` bölümünün altına taşındı
+- v2 butonları kendi ayracına alındı, Ayarlar ayrı ayraçla ayrıldı
+
+### Dosyalar
+- `HomeScreen.xaml` — menü buton sırası değiştirildi

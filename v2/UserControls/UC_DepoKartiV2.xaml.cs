@@ -61,23 +61,38 @@ namespace MaliyeHesaplama.v2.UserControls
                 return;
             }
 
-            var data = new System.Collections.Generic.Dictionary<string, object>
-            {
-                { "Id", _currentId },
-                { "Code", txtKodu.Text.Trim() },
-                { "Name", txtAdi.Text?.Trim() ?? "" },
-                { "IsUse", chkKullanimda.IsChecked == true },
-                { "Address1", txtAdres1.Text?.Trim() ?? "" },
-                { "Address2", txtAdres2.Text?.Trim() ?? "" },
-                { "District", txtIlce.Text?.Trim() ?? "" },
-                { "City", txtIl.Text?.Trim() ?? "" },
-                { "PostalCode", txtPostaKodu.Text?.Trim() ?? "" },
-                { "Phone", txtTelefon.Text?.Trim() ?? "" },
-                { "Email", txtEmail.Text?.Trim() ?? "" }
-            };
+            var code = txtKodu.Text.Trim();
 
-            _currentId = _repo.Save(data);
-            System.Windows.MessageBox.Show("Kaydedildi!", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (_repo.CodeExists(code, _currentId))
+            {
+                System.Windows.MessageBox.Show("Bu kod ile tanımlı bir depo zaten var!", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            try
+            {
+                var data = new System.Collections.Generic.Dictionary<string, object>
+                {
+                    { "Id", _currentId },
+                    { "Code", code },
+                    { "Name", txtAdi.Text?.Trim() ?? "" },
+                    { "IsUse", chkKullanimda.IsChecked == true },
+                    { "Address1", txtAdres1.Text?.Trim() ?? "" },
+                    { "Address2", txtAdres2.Text?.Trim() ?? "" },
+                    { "District", txtIlce.Text?.Trim() ?? "" },
+                    { "City", txtIl.Text?.Trim() ?? "" },
+                    { "PostalCode", txtPostaKodu.Text?.Trim() ?? "" },
+                    { "Phone", txtTelefon.Text?.Trim() ?? "" },
+                    { "Email", txtEmail.Text?.Trim() ?? "" }
+                };
+
+                _currentId = _repo.Save(data);
+                System.Windows.MessageBox.Show("Kaydedildi!", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show($"Kayıt sırasında bir hata oluştu:\n{ex.Message}", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void Sil()
@@ -87,8 +102,15 @@ namespace MaliyeHesaplama.v2.UserControls
             var result = System.Windows.MessageBox.Show("Kaydı silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                _repo.Delete(_currentId);
-                Yeni();
+                try
+                {
+                    _repo.Delete(_currentId);
+                    Yeni();
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show($"Silme sırasında bir hata oluştu:\n{ex.Message}", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

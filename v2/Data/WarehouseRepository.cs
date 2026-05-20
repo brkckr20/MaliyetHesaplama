@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using MaliyeHesaplama.v2.Models;
 
 namespace MaliyeHesaplama.v2.Data
@@ -35,6 +37,12 @@ namespace MaliyeHesaplama.v2.Data
         public void Delete(int id)
         {
             _orm.ExecuteRaw($"DELETE FROM Warehouse WHERE Id = {id}");
+        }
+
+        public bool CodeExists(string code, int excludeId = 0)
+        {
+            return _orm.GetAll<Warehouse>("Warehouse")
+                .Any(w => w.Code.Equals(code, StringComparison.OrdinalIgnoreCase) && w.Id != excludeId);
         }
     }
 }
