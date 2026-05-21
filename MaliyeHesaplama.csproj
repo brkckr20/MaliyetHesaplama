@@ -151,8 +151,5 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="helpers\controller\" />
-  </ItemGroup>
 
 </Project>

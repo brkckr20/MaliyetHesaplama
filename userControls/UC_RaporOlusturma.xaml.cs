@@ -23,8 +23,7 @@ namespace MaliyeHesaplama.userControls
         }
         private void btnDizayn_Click(object sender, RoutedEventArgs e)
         {
-            string reportName = $"\"{txtRaporAdi.Text}\"";
-            Process.Start(reportAppPath, reportName);
+            Process.Start(reportAppPath, $"\"{txtRaporAdi.Text}\"");
         }
         public int GoruntulenecekId = 7;
 
@@ -128,14 +127,12 @@ namespace MaliyeHesaplama.userControls
         //şuan için gizli
         private void frTest_Click(object sender, RoutedEventArgs e)
         {
-            string reportName = $"\"{txtRaporAdi.Text}\"";
-            Process.Start(reportAppPath, reportName);
+            Process.Start(reportAppPath, $"\"{txtRaporAdi.Text}\"");
         }
         //şuan için gizli
         private void frView_Click(object sender, RoutedEventArgs e)
         {
-            string reportName = $"\"{txtRaporAdi.Text}\"";
-            Process.Start(reportAppPath, $"{reportName} 1015");
+            Process.Start(reportAppPath, $"\"{txtRaporAdi.Text}\" 1015");
         }
 
     }

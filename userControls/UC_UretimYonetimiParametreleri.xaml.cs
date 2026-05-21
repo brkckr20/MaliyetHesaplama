@@ -54,8 +54,8 @@ namespace MaliyeHesaplama.userControls
                 { "OnayliSiparisDegisiklik", chckOnayliSiparisDegisiklik.IsChecked },
                 { "MalzemeGirisOperasyonTipleri", txtOperasyonTipiMG.Text },
                 { "MalzemeCikisOperasyonTipleri", txtOperasyonTipiMC.Text },
-                { "HasilDokmesi", txtHasilDokmesi.Text },
-                //{ "CozguCekmesi_", txtCozguCekmesi.Text }, // bu alan için hata veriyor - kontrol edilecek 10.02.2026
+                { "HasilDokmesi", Convert.ToDecimal(txtHasilDokmesi.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture) },
+                { "CozguCekmesi_", Convert.ToDecimal(txtCozguCekmesi.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture) },
             };
             _orm.Save("ProductionManagementParams", dict);
             Bildirim.Bilgilendirme2("Kayıt işlemi başarıyla gerçekleştirildi.");

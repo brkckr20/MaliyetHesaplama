@@ -38,7 +38,7 @@ namespace MaliyeHesaplama.wins
             string reportAppPath = @"C:\\Users\\casper\Desktop\Klasörler\z\ReportApp\bin\Debug\ReportApp.exe";
             try
             {
-                Process.Start(reportAppPath, $"{cmbRaporlar.SelectedItem} {_kayitNo}");
+                Process.Start(reportAppPath, $"\"{cmbRaporlar.SelectedItem}\" {_kayitNo}");
                 this.Close();
             }
             catch (Exception ex)
