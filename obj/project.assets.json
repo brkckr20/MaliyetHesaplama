@@ -1,7 +1,7 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
-    "net6.0-windows7.0": {
+    "net6.0-windows": {
       "AvalonEdit/6.3.1.120": {
         "type": "package",
         "compile": {
@@ -5873,7 +5873,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net6.0-windows7.0": [
+    "net6.0-windows": [
       "AvalonEdit >= 6.3.1.120",
       "ClosedXML >= 0.104.2",
       "CommunityToolkit.Mvvm >= 8.4.0",
@@ -5924,7 +5924,8 @@
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0-windows7.0": {
+        "net6.0-windows": {
+          "framework": "net6.0-windows7.0",
           "targetAlias": "net6.0-windows",
           "projectReferences": {}
         }
@@ -5939,10 +5940,11 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "10.0.300"
     },
     "frameworks": {
-      "net6.0-windows7.0": {
+      "net6.0-windows": {
+        "framework": "net6.0-windows7.0",
         "targetAlias": "net6.0-windows",
         "dependencies": {
           "AvalonEdit": {
@@ -6028,7 +6030,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }
