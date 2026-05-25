@@ -1,6 +1,5 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.helpers.StokIslemleri;
-using MaliyeHesaplama.helpers.StokIslemleri.DTO;
 using MaliyeHesaplama.Interfaces;
 using System.Globalization;
 using MaliyeHesaplama.wins;
