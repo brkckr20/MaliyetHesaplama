@@ -11,15 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Building.png" />
-    <None Remove="Filter_1.png" />
     <None Remove="Group of Projects.ico" />
-    <None Remove="Libre Office Calc.png" />
     <None Remove="News.png" />
     <None Remove="numerator.ico" />
     <None Remove="Purchase Order.png" />
     <None Remove="report.ico" />
-    <None Remove="Towel.png" />
     <None Remove="userControls\Common\back.png" />
     <None Remove="userControls\Common\list.png" />
     <None Remove="userControls\Common\new.png" />
@@ -112,15 +108,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Building.png" />
-    <Resource Include="Filter_1.png" />
     <Resource Include="Group of Projects.ico" />
-    <Resource Include="Libre Office Calc.png" />
     <Resource Include="News.png" />
     <Resource Include="numerator.ico" />
     <Resource Include="Purchase Order.png" />
     <Resource Include="report.ico" />
-    <Resource Include="Towel.png" />
     <Resource Include="userControls\Common\back.png" />
     <Resource Include="userControls\Common\list.png" />
     <Resource Include="userControls\Common\new.png" />

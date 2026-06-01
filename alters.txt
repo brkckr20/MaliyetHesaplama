@@ -42,7 +42,7 @@ GO
 IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'BeforePiece')
     ALTER TABLE [dbo].[StockMovement] DROP COLUMN [BeforePiece];
 GO
-IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'AfterPiece')
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') and name = 'AfterPiece')
     ALTER TABLE [dbo].[StockMovement] DROP COLUMN [AfterPiece];
 GO
 IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('StockMovement') AND name = 'DocumentType')
