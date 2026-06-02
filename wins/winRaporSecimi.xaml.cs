@@ -35,7 +35,7 @@ namespace MaliyeHesaplama.wins
                 System.Windows.MessageBox.Show("Lütfen bir rapor seçin.", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            string reportAppPath = @"C:\\Users\\casper\Desktop\Klasörler\z\ReportApp\bin\Debug\ReportApp.exe";
+            string reportAppPath = @"C:\Users\casper\Desktop\Klasörler\z\ReportApp\bin\Debug\ReportApp.exe";
             try
             {
                 Process.Start(reportAppPath, $"\"{cmbRaporlar.SelectedItem}\" {_kayitNo}");

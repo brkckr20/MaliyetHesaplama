@@ -34,9 +34,6 @@
     <Compile Update="userControls\Uc_MaliyetHesaplama.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="userControls\UC_MalzemeGirisCikis.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="userControls\UC_Numarator.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

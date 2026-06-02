@@ -1,5 +1,15 @@
 # Yapılacaklar
 
+## ✅ Düzenlemeler (02.06.2026)
+
+- [x] "📦 Malzeme Yönetimi" menüsü kaldırıldı (XAML + code-behind)
+- [x] `UC_MalzemeGirisCikis.xaml` ve `.xaml.cs` silindi (artık referans edilmiyor)
+- [x] `winRaporSecimi.xaml.cs` — ReportApp.exe yolu düzeltildi (`\\` → `\`)
+- [x] `ReportApp/Program.cs` — try-catch eklendi, null + dosya kontrolleri eklendi
+- [x] `Toner Çıkış Formu.frx` — FastReport IIF ifadesinde `''` → `""` düzeltildi
+- [x] "🚀 v2" menü adı "🚀 v2 Kartlar" olarak güncellendi (XAML + code-behind)
+- [x] "Firma Kartı" Kartlar menüsünden çıkarılıp v2 Kartlar altına taşındı
+
 ## ✅ Temizlik (01.06.2026)
 
 - [x] `csproj`'dan silinmiş resim referansları temizlendi (Building.png, Filter_1.png, Libre Office Calc.png, Purchase Order.png, Towel.png)

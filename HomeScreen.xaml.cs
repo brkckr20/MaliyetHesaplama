@@ -20,7 +20,7 @@ namespace MaliyeHesaplama
         private void Kartlar_Click(object sender, RoutedEventArgs e)
         {
             string title = "Kart İşlemleri";
-            string[] items = { "Firma Kartı", "Kumaş Kartı", "İplik Kartı", "Renk Kartı", "Depo Kartı", "Şirket Kartı" };
+            string[] items = { "Kumaş Kartı", "İplik Kartı", "Renk Kartı", "Depo Kartı", "Şirket Kartı" };
             ShowMegaMenu(title, items);
 
         }
@@ -39,8 +39,8 @@ namespace MaliyeHesaplama
 
         private void V2_Click(object sender, RoutedEventArgs e)
         {
-            string title = "v2";
-            string[] items = { "Malzeme Kartı V2", "Depo Kartı V2" };
+            string title = "v2 Kartlar";
+            string[] items = { "Firma Kartı", "Malzeme Kartı V2", "Depo Kartı V2" };
             ShowMegaMenu(title, items);
         }
 
@@ -54,12 +54,6 @@ namespace MaliyeHesaplama
         {
             string title = "Reçete";
             string[] items = { "Kumaş Reçetesi Tanımlama" };
-            ShowMegaMenu(title, items);
-        }
-        private void MalzemeYonetimi_Click(object sender, RoutedEventArgs e)
-        {
-            string title = "Malzeme Yönetimi";
-            string[] items = { "Mazeme Giriş İşlemleri", "Mazeme Çıkış İşlemleri" };
             ShowMegaMenu(title, items);
         }
         private void OrderYonetimi_Click(object sender, RoutedEventArgs e)
@@ -86,8 +80,6 @@ namespace MaliyeHesaplama
                 /* Kartlar */
                 if (menuName == "Kumaş Kartı")
                     OpenTab(menuName, new userControls.UC_KumasKarti());
-                if (menuName == "Firma Kartı")
-                    OpenTab(menuName, new userControls.UC_FirmaKarti(false));
                 if (menuName == "İplik Kartı")
                     OpenTab(menuName, new userControls.UC_IplikKarti());
                 if (menuName == "Renk Kartı")
@@ -100,12 +92,6 @@ namespace MaliyeHesaplama
                 /* Reçete */
                 if (menuName == "Kumaş Reçetesi Tanımlama")
                     OpenTab(menuName, new userControls.UC_ReceteTanimlama(1));
-
-                /* Malzeme Yönetimi */
-                if (menuName == "Mazeme Giriş İşlemleri")
-                    OpenTab(menuName, new userControls.UC_MalzemeGirisCikis(Enums.Receipt.MalzemeGiris));
-                if (menuName == "Mazeme Çıkış İşlemleri")
-                    OpenTab(menuName, new userControls.UC_MalzemeGirisCikis(Enums.Receipt.MalzemeCikis));
 
                 /* Order Yönetimi */
                 if (menuName == "Model Kartı")
@@ -124,6 +110,8 @@ namespace MaliyeHesaplama
                     OpenTab(menuName, new userControls.UC_GTIPTanimlari());
 
                 /* v2 */
+                if (menuName == "Firma Kartı")
+                    OpenTab(menuName, new userControls.UC_FirmaKarti(false));
                 if (menuName == "Malzeme Kartı V2")
                     OpenTab(menuName, new v2.UserControls.UC_MalzemeKartiV2());
                 if (menuName == "Depo Kartı V2")
