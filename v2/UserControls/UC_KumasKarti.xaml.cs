@@ -1,11 +1,11 @@
-﻿using MaliyeHesaplama.helpers;
+using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
 using MaliyeHesaplama.models;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MaliyeHesaplama.userControls
+namespace MaliyeHesaplama.v2.UserControls
 {
     public partial class UC_KumasKarti : System.Windows.Controls.UserControl, IPageCommands
     {

@@ -20,7 +20,7 @@ namespace MaliyeHesaplama
         private void Kartlar_Click(object sender, RoutedEventArgs e)
         {
             string title = "Kart İşlemleri";
-            string[] items = { "Kumaş Kartı", "İplik Kartı", "Renk Kartı", "Depo Kartı", "Şirket Kartı" };
+            string[] items = { "İplik Kartı", "Renk Kartı", "Depo Kartı", "Şirket Kartı" };
             ShowMegaMenu(title, items);
 
         }
@@ -40,7 +40,7 @@ namespace MaliyeHesaplama
         private void V2_Click(object sender, RoutedEventArgs e)
         {
             string title = "v2 Kartlar";
-            string[] items = { "Firma Kartı", "Malzeme Kartı V2", "Depo Kartı V2" };
+            string[] items = { "Kumaş Kartı", "Firma Kartı", "Malzeme Kartı V2", "Depo Kartı V2" };
             ShowMegaMenu(title, items);
         }
 
@@ -79,7 +79,7 @@ namespace MaliyeHesaplama
 
                 /* Kartlar */
                 if (menuName == "Kumaş Kartı")
-                    OpenTab(menuName, new userControls.UC_KumasKarti());
+                    OpenTab(menuName, new v2.UserControls.UC_KumasKarti());
                 if (menuName == "İplik Kartı")
                     OpenTab(menuName, new userControls.UC_IplikKarti());
                 if (menuName == "Renk Kartı")

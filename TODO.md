@@ -19,6 +19,17 @@
 - [ ] `obj/` — 243 adet `*_wpftmp.csproj*` build artığı temizlenecek
 - [ ] `MaliyeHesaplama.csproj.Backup.tmp` silinecek
 
+## 🔄 Kumaş Kartı (v2) Düzenlemeleri
+
+- [ ] **KayitlariGetir düzeltilecek** — İleri/Geri butonları UI alanlarını doldurmalı
+- [ ] **ButtonBar aktifleştirilecek** — `ButtonBar.PageCommands = this` bağlanacak
+- [ ] **try-catch + validation eklenecek** — Kaydet/Sil'de hata yönetimi ve boş alan kontrolü
+- [ ] **CombinedCode kontrolü düzeltilecek** — Güncelleme yaparken kendi Id'sini hesaba katacak
+- [ ] **Ölü kod temizlenecek** — `_receteOlacak`, `KalemIslemler`, `firstRow` kaldırılacak
+- [ ] **Repository'e geçilecek** — `MiniOrm` yerine `InventoryRepository` kullanılacak
+- [ ] **Temizle metodu genişletilecek** — Eksik alanlar sıfırlanacak
+- [ ] **XAML stili güncellenecek** — v2 standardına uygun hale getirilecek
+
 ## 🔄 UC_MalzemeKartiV2 - Renk / Beden Sekmesi
 
 - [ ] XAML'deki boş `<TabItem Header="Renk / Beden">` içeriği sıfırdan düzenlenecek
