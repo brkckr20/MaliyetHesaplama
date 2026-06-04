@@ -59,6 +59,14 @@ namespace MaliyeHesaplama.v2.Data
             _orm.ExecuteRaw($"DELETE FROM Inventory WHERE Id = {id}");
         }
 
+        public string GetInventoryCodeByCombinedCode(string code, int? excludeId = null)
+        {
+            var sql = "SELECT InventoryCode FROM Inventory WHERE CombinedCode = @Code";
+            if (excludeId.HasValue)
+                sql += " AND Id != @ExcludeId";
+            return _orm.QueryFirstOrDefault<string>(sql, new { Code = code, ExcludeId = excludeId });
+        }
+
         public IEnumerable<Receipt> GetMovementList(int receiptType)
         {
             var sql = $@"

@@ -19,16 +19,19 @@
 - [ ] `obj/` — 243 adet `*_wpftmp.csproj*` build artığı temizlenecek
 - [ ] `MaliyeHesaplama.csproj.Backup.tmp` silinecek
 
-## 🔄 Kumaş Kartı (v2) Düzenlemeleri
+## ✅ Kumaş Kartı (v2) Revizyonu (04.06.2026)
 
-- [ ] **KayitlariGetir düzeltilecek** — İleri/Geri butonları UI alanlarını doldurmalı
-- [ ] **ButtonBar aktifleştirilecek** — `ButtonBar.PageCommands = this` bağlanacak
-- [ ] **try-catch + validation eklenecek** — Kaydet/Sil'de hata yönetimi ve boş alan kontrolü
-- [ ] **CombinedCode kontrolü düzeltilecek** — Güncelleme yaparken kendi Id'sini hesaba katacak
-- [ ] **Ölü kod temizlenecek** — `_receteOlacak`, `KalemIslemler`, `firstRow` kaldırılacak
-- [ ] **Repository'e geçilecek** — `MiniOrm` yerine `InventoryRepository` kullanılacak
-- [ ] **Temizle metodu genişletilecek** — Eksik alanlar sıfırlanacak
-- [ ] **XAML stili güncellenecek** — v2 standardına uygun hale getirilecek
+- [x] **XAML stili güncellendi** — FontFamily, Background, Border, Label width v2 standardına çekildi
+- [x] **Ölü kod temizlendi** — `_receteOlacak`, `KalemIslemler`, `firstRow`, syncfusion namespace kaldırıldı
+- [x] **Repository'e geçildi** — `MiniOrm` → `InventoryRepository` (CRUD + CombinedCode sorgusu)
+- [x] **ButtonBar aktifleştirildi** — `ButtonBar.PageCommands = this` bağlandı
+- [x] **KayitlariGetir → LoadRecord** — CombinedCode parse edilerek tüm UI alanları dolduruluyor
+- [x] **CombinedCode kontrolü düzeltildi** — Güncellemede kendi Id'sini hariç tutan `excludeId` parametresi
+- [x] **Temizle metodu genişletildi** — PrefixId, DokumaCinsiId, DesenId, lblCinsi sıfırlanıyor
+- [x] **try-catch + validation eklendi** — Kaydet/Sil/İleri/Geri'de hata yönetimi ve boş alan kontrolü
+- [x] **İleri/Geri düzeltildi** — `GetAll(Type=1)` ile tip bazlı sıralı gezinme
+- [x] **Listele güncellendi** — `winMalzemeListesiV2`'ye `typeFilter` parametresi eklendi, Kumaş Kartı sadece Type=1 gösteriyor
+- [x] **MiniOrm'e QueryFirstOrDefault eklendi** — Parametreli tekil sorgu desteği
 
 ## 🔄 UC_MalzemeKartiV2 - Renk / Beden Sekmesi
 

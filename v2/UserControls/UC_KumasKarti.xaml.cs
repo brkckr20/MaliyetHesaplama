@@ -1,82 +1,83 @@
-using MaliyeHesaplama.helpers;
-using MaliyeHesaplama.Interfaces;
-using MaliyeHesaplama.models;
-using System.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using MaliyeHesaplama.helpers;
+using MaliyeHesaplama.Interfaces;
+using MaliyeHesaplama.v2.Data;
+using MaliyeHesaplama.v2.Models;
+using MaliyeHesaplama.v2.Windows;
 
 namespace MaliyeHesaplama.v2.UserControls
 {
     public partial class UC_KumasKarti : System.Windows.Controls.UserControl, IPageCommands
     {
-        MiniOrm _orm = new MiniOrm();
-        bool _receteOlacak = false;
-        string _iplikTurleri;
+        private readonly InventoryRepository _repo;
+        private readonly MiniOrm _orm;
         int Id = 0, PrefixId, DokumaCinsiId, DesenId;
-        //private DataTable table;
-        public List<string> KalemIslemler { get; set; }
 
         public UC_KumasKarti()
         {
             InitializeComponent();
-            //ButtonBar.PageCommands = this;
+            _repo = new InventoryRepository();
+            _orm = new MiniOrm();
+            ButtonBar.PageCommands = this;
             this.DataContext = this;
-            BaslangicVerileri();
+            Temizle();
         }
-        void BaslangicVerileri()
-        {
-            var _parametreler = _orm.GetById<dynamic>("ProductionManagementParams", 1);
-            _receteOlacak = _parametreler.KumasRecetesiOlacak;
-            _iplikTurleri = _parametreler.ReceteOperasyonTipleri;
-            KalemIslemler = _iplikTurleri
-            .Split(',', StringSplitOptions.RemoveEmptyEntries)
-            .Select(s => s.Trim())
-            .ToList();
-            var firstRow = new InventoryReceipt();
-        }
-        void KayitlariGetir(string tip)
-        {
-            dynamic record = null;
-            if (tip == "Önceki")
-            {
-                record = _orm.GetBeforeRecord<dynamic>("Inventory", Id);
-            }
-            else
-            {
-                record = _orm.GetNextRecord<dynamic>("Inventory", Id);
-            }
 
-            if (record != null)
-            {
-                Id = record.Id;
-                //txtFirmaKodu.Text = record.CompanyCode;
-                //txtFirmaUnvan.Text = record.CompanyName;
-                //txtAdres1.Text = record.AddressLine1;
-                //txtAdres2.Text = record.AddressLine2;
-                //txtAdres3.Text = record.AddressLine3;
-            }
-            else
-            {
-                Bildirim.Bilgilendirme2("Gösterilecek başka bir kayıt bulunamadı!");
-            }
-        }
-        private void btnKumasKodu_Click(object sender, RoutedEventArgs e)
+        void LoadRecord(Inventory record)
         {
-            wins.winNumaratorListesi win = new wins.winNumaratorListesi(Enums.Inventory.Kumas);
-            win.ShowDialog();
-            string number = (win.Number + 1).ToString("D3");
-            txtKodu.Text = win.Prefix + number;
-            lblKumasAdi.Text = win.NameX;
-            PrefixId = win.Id;
+            Id = record.Id;
+            txtKodu.Text = record.InventoryCode ?? "";
+            lblKumasAdi.Text = record.InventoryName ?? "";
+            txtAciklama.Text = record.Explanation ?? "";
+            chckKullanimda.IsChecked = record.IsUse;
+
+            if (!string.IsNullOrEmpty(record.CombinedCode))
+            {
+                var parts = record.CombinedCode.Split('-');
+                if (parts.Length == 4)
+                {
+                    if (int.TryParse(parts[0], out int prefix))
+                        PrefixId = prefix;
+                    if (int.TryParse(parts[1], out int cinsi))
+                    {
+                        DokumaCinsiId = cinsi;
+                        var feature = _orm.GetById<dynamic>("FeatureCoding", cinsi);
+                        if (feature != null)
+                        {
+                            txtDokumaCinsi.Text = feature.Explanation ?? "";
+                            lblCinsi.Text = feature.Explanation ?? "";
+                        }
+                    }
+                    if (int.TryParse(parts[2], out int desen))
+                    {
+                        DesenId = desen;
+                        var feature = _orm.GetById<dynamic>("FeatureCoding", desen);
+                        if (feature != null)
+                            txtKumasDesen.Text = feature.Explanation ?? "";
+                    }
+                    chckIpBoyali.IsChecked = parts[3] == "1";
+                }
+            }
         }
 
         void Temizle()
         {
-            this.Id = 0;
-            txtKodu.Text = string.Empty;
-            lblKumasAdi.Text = string.Empty;
+            Id = 0;
+            PrefixId = 0;
+            DokumaCinsiId = 0;
+            DesenId = 0;
+            txtKodu.Text = "";
+            lblKumasAdi.Text = "";
+            txtDokumaCinsi.Text = "";
+            lblCinsi.Text = "";
+            txtKumasDesen.Text = "";
             chckIpBoyali.IsChecked = false;
-            txtAciklama.Text = string.Empty;
+            txtAciklama.Text = "";
+            chckKullanimda.IsChecked = true;
         }
 
         public void Yeni()
@@ -86,49 +87,79 @@ namespace MaliyeHesaplama.v2.UserControls
 
         public void Kaydet()
         {
-            string combinedCode = PrefixId.ToString() + DokumaCinsiId.ToString() + DesenId.ToString() + (chckIpBoyali.IsChecked == true ? "1" : "0");
-            string inventoryName = $"{txtDokumaCinsi.Text} {lblKumasAdi.Text} {txtKumasDesen.Text} {(chckIpBoyali.IsChecked.HasValue && chckIpBoyali.IsChecked.Value ? "İpliği Boyalı" : "")}";
-            var dict = new Dictionary<string, object>
+            if (string.IsNullOrWhiteSpace(txtKodu.Text))
             {
-                { "Id",Id },
-                { "InventoryCode",txtKodu.Text},
-                { "InventoryName",inventoryName },
-                { "CombinedCode",combinedCode },
-                { "IsPrefix",false},
-                { "Explanation",txtAciklama.Text},
-                { "IsUse",chckKullanimda.IsChecked},
-                { "Unit",string.Empty},
-                { "IsStock",true},
-                { "Type",Convert.ToInt32(Enums.Inventory.Kumas)},
-            };
-            var inventoryCode = _orm.GetInventoryCodeByCombinedCode(combinedCode);
-            if (!string.IsNullOrEmpty(inventoryCode)/* && this.Id == 0*/) // burası daha sonra kontrol edilecek, ilk seferde kayıt ettirmezse 2. seferde güncelleme de izin veriyor - eğer bir alan güncellenecekse kayıt kontrolü yapılmalıdır.
-            {
-                Bildirim.Uyari2($"Belirtmiş olduğunuz özelliklere göre daha önceden bir kumaş kartı kayıt edilmiş.\nLütfen: {inventoryCode}' nolu kaydı kontrol ediniz!");
+                Bildirim.Uyari2("Lütfen bir kumaş kodu seçiniz!");
                 return;
             }
-            else
+            if (DokumaCinsiId == 0)
             {
-                Id = _orm.Save("Inventory", dict);
-                var savedInventoryName = _orm.GetById<dynamic>("Inventory", Id);
-                inventoryName = savedInventoryName.InventoryName;
-                lblKumasAdi.Text = savedInventoryName.InventoryName;
-                Bildirim.Bilgilendirme2("Kumaş kayıt işlemi başarılı bir şekilde gerçekleştirildi.");
+                Bildirim.Uyari2("Lütfen kumaş cinsi seçiniz!");
+                return;
+            }
+
+            try
+            {
+                string combinedCode = $"{PrefixId:D3}-{DokumaCinsiId:D3}-{DesenId:D3}-{(chckIpBoyali.IsChecked == true ? "1" : "0")}";
+                string inventoryName = $"{txtDokumaCinsi.Text} {lblKumasAdi.Text} {txtKumasDesen.Text} {(chckIpBoyali.IsChecked == true ? "İpliği Boyalı" : "")}";
+
+                var existingCode = _repo.GetInventoryCodeByCombinedCode(combinedCode, Id > 0 ? Id : null);
+                if (!string.IsNullOrEmpty(existingCode))
+                {
+                    Bildirim.Uyari2($"Belirtmiş olduğunuz özelliklere göre daha önceden bir kumaş kartı kayıt edilmiş.\nLütfen: {existingCode} nolu kaydı kontrol ediniz!");
+                    return;
+                }
+
+                var dict = new Dictionary<string, object>
+                {
+                    { "Id", Id },
+                    { "InventoryCode", txtKodu.Text },
+                    { "InventoryName", inventoryName },
+                    { "CombinedCode", combinedCode },
+                    { "IsPrefix", false },
+                    { "Explanation", txtAciklama.Text },
+                    { "IsUse", chckKullanimda.IsChecked },
+                    { "Unit", string.Empty },
+                    { "IsStock", true },
+                    { "Type", Convert.ToInt32(Enums.Inventory.Kumas) },
+                };
+
+                Id = _repo.Save(dict);
                 _orm.Save("Numerator", new Dictionary<string, object> { { "Id", PrefixId }, { "Number", Convert.ToInt32(txtKodu.Text.Substring(3, 3)) } });
+                Bildirim.Bilgilendirme2("Kumaş kayıt işlemi başarılı bir şekilde gerçekleştirildi.");
+            }
+            catch (Exception ex)
+            {
+                Bildirim.Uyari2($"Kayıt sırasında bir hata oluştu: {ex.Message}");
             }
         }
 
         public void Sil()
         {
-            if (_orm.Delete("Inventory", Id, true) > 0)
+            if (Id == 0)
             {
-                Temizle();
+                Bildirim.Uyari2("Silmek için bir kayıt seçiniz!");
+                return;
+            }
+
+            if (Bildirim.SilmeOnayi2())
+            {
+                try
+                {
+                    _repo.Delete(Id);
+                    Bildirim.SilmeBasarili2();
+                    Temizle();
+                }
+                catch (Exception ex)
+                {
+                    Bildirim.Uyari2($"Silme sırasında bir hata oluştu: {ex.Message}");
+                }
             }
         }
 
         public void Yazdir()
         {
-            if (this.Id == 0)
+            if (Id == 0)
             {
                 Bildirim.Uyari2("Form görüntüleyebilmek için bir kayıt seçiniz!");
             }
@@ -137,17 +168,78 @@ namespace MaliyeHesaplama.v2.UserControls
                 wins.winRaporSecimi win = new wins.winRaporSecimi("Kumaş Kartı", Id);
                 win.ShowDialog();
             }
-
         }
 
         public void Ileri()
         {
-            KayitlariGetir("Sonraki");
+            try
+            {
+                var list = _repo.GetAll("Type = " + Convert.ToInt32(Enums.Inventory.Kumas)).ToList();
+                if (list.Count == 0)
+                {
+                    Bildirim.Bilgilendirme2("Gösterilecek başka bir kayıt bulunamadı!");
+                    return;
+                }
+                var currentIndex = list.FindIndex(x => x.Id == Id);
+                if (currentIndex < 0)
+                {
+                    LoadRecord(list.First());
+                    return;
+                }
+                if (currentIndex < list.Count - 1)
+                    LoadRecord(list[currentIndex + 1]);
+            }
+            catch (Exception ex)
+            {
+                Bildirim.Uyari2($"Hata: {ex.Message}");
+            }
         }
 
         public void Geri()
         {
-            KayitlariGetir("Önceki");
+            try
+            {
+                var list = _repo.GetAll("Type = " + Convert.ToInt32(Enums.Inventory.Kumas)).ToList();
+                if (list.Count == 0)
+                {
+                    Bildirim.Bilgilendirme2("Gösterilecek başka bir kayıt bulunamadı!");
+                    return;
+                }
+                var currentIndex = list.FindIndex(x => x.Id == Id);
+                if (currentIndex < 0)
+                {
+                    LoadRecord(list.Last());
+                    return;
+                }
+                if (currentIndex > 0)
+                    LoadRecord(list[currentIndex - 1]);
+            }
+            catch (Exception ex)
+            {
+                Bildirim.Uyari2($"Hata: {ex.Message}");
+            }
+        }
+
+        public void Listele()
+        {
+            var pencere = new winMalzemeListesiV2(Convert.ToInt32(Enums.Inventory.Kumas));
+            pencere.Owner = Window.GetWindow(this);
+            if (pencere.ShowDialog() == true)
+            {
+                var record = _repo.GetById(pencere.SecilenId);
+                if (record != null)
+                    LoadRecord(record);
+            }
+        }
+
+        private void btnKumasKodu_Click(object sender, RoutedEventArgs e)
+        {
+            wins.winNumaratorListesi win = new wins.winNumaratorListesi(Enums.Inventory.Kumas);
+            win.ShowDialog();
+            string number = (win.Number + 1).ToString("D3");
+            txtKodu.Text = win.Prefix + number;
+            lblKumasAdi.Text = win.NameX;
+            PrefixId = win.Id;
         }
 
         private void btnDesen_Click(object sender, RoutedEventArgs e)
@@ -169,20 +261,7 @@ namespace MaliyeHesaplama.v2.UserControls
             {
                 DokumaCinsiId = win.Id;
                 txtDokumaCinsi.Text = win.Explanation;
-            }
-        }
-
-        public void Listele()
-        {
-            wins.winMalzemeListesi win = new wins.winMalzemeListesi(Convert.ToInt32(Enums.Inventory.Kumas));
-            win.ShowDialog();
-            if (win.Code != null)
-            {
-                this.Id = win.Id;
-                txtKodu.Text = win.Code;
-                lblKumasAdi.Text = win.Name;
-                chckIpBoyali.IsChecked = win.YarnDyed;
-                txtAciklama.Text = win.Explanation;
+                lblCinsi.Text = win.Explanation;
             }
         }
     }

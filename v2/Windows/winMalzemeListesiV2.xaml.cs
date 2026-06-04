@@ -12,6 +12,7 @@ namespace MaliyeHesaplama.v2.Windows
     public partial class winMalzemeListesiV2 : Window
     {
         private readonly InventoryRepository _repo;
+        private readonly int? _typeFilter;
         private ICollectionView _collectionView;
         FilterGridHelpers fgh;
 
@@ -20,10 +21,11 @@ namespace MaliyeHesaplama.v2.Windows
         public string SecilenAdi { get; private set; }
         public decimal SecilenVatRate { get; private set; }
 
-        public winMalzemeListesiV2()
+        public winMalzemeListesiV2(int? typeFilter = null)
         {
             InitializeComponent();
             _repo = new InventoryRepository();
+            _typeFilter = typeFilter;
             fgh = new FilterGridHelpers(grid, "Malzeme Listesi", "gridMalzemeListe");
         }
 
@@ -37,7 +39,10 @@ namespace MaliyeHesaplama.v2.Windows
         {
             try
             {
-                var data = _repo.GetAll("ISNULL(IsPrefix, 0) = 0").ToList();
+                var where = "ISNULL(IsPrefix, 0) = 0";
+                if (_typeFilter.HasValue)
+                    where += $" AND Type = {_typeFilter.Value}";
+                var data = _repo.GetAll(where).ToList();
                 _collectionView = CollectionViewSource.GetDefaultView(data);
                 grid.ItemsSource = _collectionView;
                 Dispatcher.BeginInvoke(new Action(() =>

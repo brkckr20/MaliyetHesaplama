@@ -622,6 +622,11 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @MaterialId, @WareHouseId, @Varian
         return _connection.Query<T>(sql);
     }
 
+    public T QueryFirstOrDefault<T>(string sql, object parameters = null)
+    {
+        return _connection.QueryFirstOrDefault<T>(sql, parameters);
+    }
+
     public void CreateTablesIfNotExist()
     {
         var sql = @"
