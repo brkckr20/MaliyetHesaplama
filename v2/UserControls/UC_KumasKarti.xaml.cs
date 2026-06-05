@@ -236,10 +236,13 @@ namespace MaliyeHesaplama.v2.UserControls
         {
             wins.winNumaratorListesi win = new wins.winNumaratorListesi(Enums.Inventory.Kumas);
             win.ShowDialog();
-            string number = (win.Number + 1).ToString("D3");
-            txtKodu.Text = win.Prefix + number;
-            lblKumasAdi.Text = win.NameX;
-            PrefixId = win.Id;
+            if (win.SatirSecildi)
+            {
+                string number = (win.Number + 1).ToString("D3");
+                txtKodu.Text = win.Prefix + number;
+                lblKumasAdi.Text = win.NameX;
+                PrefixId = win.Id;
+            }
         }
 
         private void btnDesen_Click(object sender, RoutedEventArgs e)

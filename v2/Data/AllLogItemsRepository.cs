@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using MaliyeHesaplama.v2.Models;
 
 namespace MaliyeHesaplama.v2.Data
@@ -50,9 +49,5 @@ namespace MaliyeHesaplama.v2.Data
             return _orm.QueryRaw<AllLogItems>($"SELECT * FROM AllLogItems WHERE LogId = {logId}");
         }
 
-        public void DeleteByLogId(int logId)
-        {
-           // _orm.Execute($"DELETE FROM AllLogItems WHERE LogId = {logId}");
-        }
     }
 }

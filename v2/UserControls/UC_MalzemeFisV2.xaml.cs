@@ -647,35 +647,7 @@ public void Yeni()
                         { "NetMeter", item.NetMeter },
                         { "Piece", item.Piece }
                     };
-                    //_receiptLogRepo.Save(logData);
-                }
-            }
 
-            //foreach (var deletedId in deletedItemIds)
-            //{
-            //    var existingLogs = _receiptLogRepo.GetByReceiptItemId(deletedId);
-            //    foreach (var log in existingLogs)
-            //    {
-            //        var logData = new Dictionary<string, object>
-            //        {
-            //            { "Id", 0 },
-            //            { "WareHouseId", log.WareHouseId },
-            //            { "ReceiptType", log.ReceiptType },
-            //            { "ReceiptId", log.ReceiptId },
-            //            { "ReceiptItemId", log.ReceiptItemId },
-            //            { "InventoryId", log.InventoryId },
-            //            { "Operation", "Silme" },
-            //            { "OperationDate", DateTime.Now },
-            //            { "CompanyId", _firmaId },
-            //            { "GrossKg", log.GrossKg },
-            //            { "GrossMeter", log.GrossMeter },
-            //            { "NetKg", log.NetKg },
-            //            { "NetMeter", log.NetMeter },
-            //            { "Piece", log.Piece }
-            //        };
-            //        _receiptLogRepo.Save(logData);
-            //    }
-            //}
 
             MessageBox.Show("Kaydedildi!", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information);
         }

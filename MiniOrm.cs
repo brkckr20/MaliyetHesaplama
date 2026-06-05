@@ -149,7 +149,7 @@ public class MiniOrm : IDisposable
                     ,ISNULL(I.InventoryName,'') [InventoryName]
                     ,ISNULL(I.InventoryCode,'') [InventoryCode]
                     ,ISNULL(I.Id,'') [InventoryId]
-					--,ISNULL(CONVERT(varchar(max), C.ProductImage, 1), '') AS [ProductImage]
+
 					,ISNULL(C.InsertedBy,0) [InsertedBy]
 					,ISNULL(C.UpdatedBy,0) [UpdatedBy]
 					,ISNULL(C.InsertedDate,'') [InsertedDate]
@@ -782,23 +782,6 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @MaterialId, @WareHouseId, @Varian
         END;
         ";
         _connection.Execute(sql);
-    }
-
-    public void TestQuery()
-    {
-        var sql = $"SELECT * FROM Users"; // tableName sabit burada test için
-        var data = _connection.Query(sql).ToList();
-
-        Console.WriteLine($"Rows returned: {data.Count}");
-
-        //foreach (var row in data)
-        //{
-        //    foreach (var kv in (IDictionary<string, object>)row)
-        //    {
-        //        Console.WriteLine($"{kv.Key} = {kv.Value}");
-        //    }
-        //    Console.WriteLine("----");
-        //}
     }
 
     public void Dispose()
