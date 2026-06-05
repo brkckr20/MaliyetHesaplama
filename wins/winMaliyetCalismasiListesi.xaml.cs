@@ -28,7 +28,7 @@ namespace MaliyeHesaplama.wins
         }
         private void grid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            var hiddenColumns = new[] { "InsertedBy", "InsertedDate", "UpdatedBy", "UpdatedDate", "RecipeId", "Type", "ProductImage", "CompanyId", "InventoryId" };
+            var hiddenColumns = new[] { "InsertedBy", "InsertedDate", "UpdatedBy", "UpdatedDate", "Type", "ProductImage", "CompanyId", "InventoryId" };
             fgh.GridGeneratingColumn(e, grid, hiddenColumns);
         }
 

@@ -57,12 +57,6 @@
                             <Button Click="btnMalzemeListesi_Click" x:Name="btnMalzemeListesi" Margin="0,1,0,0" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
                             <Label x:Name="lblMalzemeAdi" Content=""/>
                         </DockPanel>
-                        <DockPanel x:Name="dckRecete" Margin="0,2,0,0">
-                            <TextBlock VerticalAlignment="Center" Width="70" Text="Reçete No :"/>
-                            <TextBox x:Name="txtReceteNo" Width="124" HorizontalAlignment="Left" Height="24" VerticalContentAlignment="Center"/>
-                            <Button x:Name="btnReceteListesi" Click="btnReceteListesi_Click" Margin="0,.5,0,0" Content="🔎" Background="Transparent" Width="24" HorizontalAlignment="Left"/>
-                            <Label Content=""/>
-                        </DockPanel>
                     </StackPanel>
                 </Border>
                 <Border Grid.Column="1">

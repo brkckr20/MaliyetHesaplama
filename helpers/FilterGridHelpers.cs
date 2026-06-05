@@ -56,7 +56,7 @@ namespace MaliyeHesaplama.helpers
 
         public void GridGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e, FilterDataGrid.FilterDataGrid grid, string[] hiddenCols)
         {
-            var hiddenColumns = new[] { "InsertedBy", "InsertedDate", "UpdatedBy", "UpdatedDate", "RecipeId", "Type", "ProductImage", "CompanyId", "InventoryId" };
+            var hiddenColumns = new[] { "InsertedBy", "InsertedDate", "UpdatedBy", "UpdatedDate", "Type", "ProductImage", "CompanyId", "InventoryId" };
             if (hiddenCols.Contains(e.PropertyName))
             {
                 e.Cancel = true;

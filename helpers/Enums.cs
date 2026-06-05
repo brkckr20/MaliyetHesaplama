@@ -17,8 +17,6 @@ namespace MaliyeHesaplama.helpers
         {
             [Display(Name = "Sipariş")]
             Siparis = 10,
-            [Display(Name = "Kumaş Reçetesi")]
-            KumasRecetesi = 11,
             [Display(Name = "Üretim Girişi")]
             UretimGirisi = 12,
             [Display(Name = "Malzeme Girişi")]

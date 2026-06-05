@@ -57,9 +57,7 @@
                     </DockPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Reçete Bilgileri">
-                
-            </TabItem>
+
         </TabControl>
     </Grid>
 </UserControl>

@@ -50,18 +50,13 @@ namespace MaliyeHesaplama
             string[] items = { "Malzeme Giriş", "Malzeme Çıkış" };
             ShowMegaMenu(title, items);
         }
-        private void ReceteTanimlamalari_Click(object sender, RoutedEventArgs e)
-        {
-            string title = "Reçete";
-            string[] items = { "Kumaş Reçetesi Tanımlama" };
-            ShowMegaMenu(title, items);
-        }
         private void OrderYonetimi_Click(object sender, RoutedEventArgs e)
         {
             string title = "Order Yönetimi";
             string[] items = { "Model Kartı", "Deneme" };
             ShowMegaMenu(title, items);
         }
+
         private void MegaMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (sender is System.Windows.Controls.Button btn)
@@ -88,10 +83,6 @@ namespace MaliyeHesaplama
                     OpenTab(menuName, new userControls.UC_DepoKarti());
                 if (menuName == "Şirket Kartı")
                     OpenTab(menuName, new userControls.UC_FirmaKarti(true));
-
-                /* Reçete */
-                if (menuName == "Kumaş Reçetesi Tanımlama")
-                    OpenTab(menuName, new userControls.UC_ReceteTanimlama(1));
 
                 /* Order Yönetimi */
                 if (menuName == "Model Kartı")

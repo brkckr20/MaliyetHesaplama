@@ -17,8 +17,6 @@ namespace MaliyeHesaplama.userControls
         void GetDatas()
         {
             var data = _orm.GetById<dynamic>("ProductionManagementParams", 1);
-            txtOperasyonTipi.Text = data.ReceteOperasyonTipleri;
-            chckReceteOlacak.IsChecked = Convert.ToBoolean(data.KumasRecetesiOlacak);
             chckUretimGirisiDepoZorunlu.IsChecked = Convert.ToBoolean(data.UretimGirisiDepoZorunlu);
             chckOnayliSiparisDegisiklik.IsChecked = Convert.ToBoolean(data.OnayliSiparisDegisiklik);
             txtOperasyonTipiMG.Text = data.MalzemeGirisOperasyonTipleri;
@@ -46,8 +44,6 @@ namespace MaliyeHesaplama.userControls
             var dict = new Dictionary<string, object>()
             {
                 { "Id", 1},
-                { "ReceteOperasyonTipleri", txtOperasyonTipi.Text },
-                { "KumasRecetesiOlacak", chckReceteOlacak.IsChecked },
                 { "BazAlinacakKur", (cmbKurSecimi.SelectedItem as ComboBoxItem)?.Tag?.ToString() },
                 { "DovizKurlari", txtDovizKurlari.Text },
                 { "UretimGirisiDepoZorunlu", chckUretimGirisiDepoZorunlu.IsChecked },

@@ -11,8 +11,7 @@ namespace MaliyeHesaplama.userControls
 {
     public partial class Uc_MaliyetHesaplama : System.Windows.Controls.UserControl, IPageCommands
     {
-        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0, CDId = 0, InventoryReceiptId, OrderReceiptId, OrderReceiptItemId;
-        bool _receteOlacak = false;
+        int Id, InventoryId = 0, CompanyId = 0, CPIId = 0, CPCId = 0, CCCId = 0, CDId = 0, OrderReceiptId, OrderReceiptItemId;
         private byte[] imageBytes;
         MiniOrm _orm = new MiniOrm();
         private DateTime _insertedDate, _updatedDate;
@@ -34,7 +33,6 @@ namespace MaliyeHesaplama.userControls
             productImage.Source = null;
             txtSiparisNo.Text = string.Empty;
             InventoryId = 0;
-            InventoryReceiptId = 0;
             OrderReceiptId = 0;
             OrderReceiptItemId = 0;
         }
@@ -62,9 +60,6 @@ namespace MaliyeHesaplama.userControls
             InitializeComponent();
             ButtonBar.PageCommands = this;
             dpTarih.SelectedDate = DateTime.Now;
-            var _parametreler = _orm.GetById<dynamic>("ProductionManagementParams", 1);
-            _receteOlacak = _parametreler.KumasRecetesiOlacak;
-            dckRecete.Visibility = _receteOlacak ? Visibility.Visible : Visibility.Collapsed;
             txtFisNo.Text = _orm.GetRecordNo("Cost", "OrderNo", "Type", 1);
             ButtonBar.btnIleri.IsEnabled = false;
             ButtonBar.btnGeri.IsEnabled = false;
@@ -159,7 +154,7 @@ namespace MaliyeHesaplama.userControls
         {
             var dict1 = new Dictionary<string, object>
             {
-                { "Id", Id }, {"CompanyId",CompanyId}, {"Date",dpTarih.SelectedDate.Value}, {"InventoryId",this.InventoryId},{"OrderNo",R(txtFisNo) },{"RecipeId",InventoryReceiptId }, {"ReceiptId", OrderReceiptId}
+                { "Id", Id }, {"CompanyId",CompanyId}, {"Date",dpTarih.SelectedDate.Value}, {"InventoryId",this.InventoryId},{"OrderNo",R(txtFisNo) }, {"ReceiptId", OrderReceiptId}
             };
             if (imageBytes != null && imageBytes.Length > 0)
             {
@@ -206,17 +201,6 @@ namespace MaliyeHesaplama.userControls
         {
             wins.winKayitBilgisi win = new wins.winKayitBilgisi(_insertedBy, _insertedDate, _updatedBy, _updatedDate);
             win.ShowDialog();
-        }
-
-        private void btnReceteListesi_Click(object sender, RoutedEventArgs e)
-        {
-            wins.winReceteListesi win = new wins.winReceteListesi(InventoryId);
-            win.ShowDialog();
-            if (win.SecimYapildi)
-            {
-                InventoryReceiptId = win.Id;
-                txtReceteNo.Text = win.ReceiptNo;
-            }
         }
 
         public void Sil()

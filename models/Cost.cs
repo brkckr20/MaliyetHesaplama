@@ -12,8 +12,6 @@ namespace MaliyeHesaplama.models
         public DateTime? Date { get; set; }
         [Display(Name = "Malzeme Id")]
         public int? InventoryId { get; set; }
-        [Display(Name = "Reçete Id")]
-        public int? RecipeId { get; set; }
         [Display(Name = "Sipariş No")]
         public string OrderNo { get; set; }
         [Display(Name = "Ürün Görseli")]
