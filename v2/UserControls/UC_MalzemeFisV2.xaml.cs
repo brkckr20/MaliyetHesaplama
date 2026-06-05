@@ -647,7 +647,8 @@ public void Yeni()
                         { "NetMeter", item.NetMeter },
                         { "Piece", item.Piece }
                     };
-
+                }
+            }
 
             MessageBox.Show("Kaydedildi!", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information);
         }
