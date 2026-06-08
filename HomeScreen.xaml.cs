@@ -17,13 +17,6 @@ namespace MaliyeHesaplama
         private string _currentMainMenu = null;
         private bool _isDraggingFromMaximized = false;
         private System.Drawing.Point _restoreMousePosition;
-        private void Kartlar_Click(object sender, RoutedEventArgs e)
-        {
-            string title = "Kart İşlemleri";
-            string[] items = { "İplik Kartı", "Renk Kartı", "Depo Kartı", "Şirket Kartı" };
-            ShowMegaMenu(title, items);
-
-        }
         private void UretimYonetimi_Click(object sender, RoutedEventArgs e)
         {
             string title = "Üretim Yönetimi";
@@ -50,13 +43,6 @@ namespace MaliyeHesaplama
             string[] items = { "Malzeme Giriş", "Malzeme Çıkış" };
             ShowMegaMenu(title, items);
         }
-        private void OrderYonetimi_Click(object sender, RoutedEventArgs e)
-        {
-            string title = "Order Yönetimi";
-            string[] items = { "Model Kartı", "Deneme" };
-            ShowMegaMenu(title, items);
-        }
-
         private void MegaMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (sender is System.Windows.Controls.Button btn)
@@ -71,24 +57,6 @@ namespace MaliyeHesaplama
                     OpenTab(menuName, new userControls.UC_UretimGirisi());
                 if (menuName == "Onaylama İşlemleri")
                     OpenTab(menuName, new userControls.UC_OnaylamaIslemleri());
-
-                /* Kartlar */
-                if (menuName == "Kumaş Kartı")
-                    OpenTab(menuName, new v2.UserControls.UC_KumasKarti());
-                if (menuName == "İplik Kartı")
-                    OpenTab(menuName, new userControls.UC_IplikKarti());
-                if (menuName == "Renk Kartı")
-                    OpenTab(menuName, new userControls.UC_RenkKarti(false));
-                if (menuName == "Depo Kartı")
-                    OpenTab(menuName, new userControls.UC_DepoKarti());
-                if (menuName == "Şirket Kartı")
-                    OpenTab(menuName, new userControls.UC_FirmaKarti(true));
-
-                /* Order Yönetimi */
-                if (menuName == "Model Kartı")
-                    OpenTab(menuName, new v2.UserControls.UC_MalzemeKartiV2());
-                if (menuName == "Deneme")
-                    OpenTab(menuName, new userControls.OrderGirisi());
 
                 /* Ayarlar */
                 if (menuName == "Üretim Yönetimi Parametreleri")

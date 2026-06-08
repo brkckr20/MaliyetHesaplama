@@ -13,12 +13,6 @@
     <Compile Update="userControls\Common\ButtonBar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="userControls\OrderGirisi.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="userControls\UC_DepoKarti.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="userControls\UC_FirmaKarti.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -38,12 +32,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="userControls\UC_RaporOlusturma.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="userControls\UC_ReceteTanimlama.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="userControls\UC_RenkKarti.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="userControls\UC_SiparisGirisi2.xaml.cs">
@@ -100,16 +88,10 @@
     <Compile Update="wins\winOzellikSecimi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="wins\winPDFGoruntule.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="wins\winRaporListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="wins\winRaporSecimi.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="wins\winReceteListesi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="wins\winRenkListesi.xaml.cs">
@@ -145,12 +127,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\UC_RaporOlusturma.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="userControls\UC_ReceteTanimlama.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="userControls\UC_RenkKarti.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="userControls\UC_SiparisGirisi2.xaml">
@@ -193,9 +169,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winRaporSecimi.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="wins\winReceteListesi.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="wins\winRenkListesi.xaml">
