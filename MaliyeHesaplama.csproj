@@ -8,24 +8,20 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <SignAssembly>True</SignAssembly>
+    <ApplicationIcon>assets\icons\app.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Group of Projects.ico" />
-    <None Remove="News.png" />
-    <None Remove="numerator.ico" />
-    <None Remove="Purchase Order.png" />
-    <None Remove="report.ico" />
-    <None Remove="userControls\Common\back.png" />
-    <None Remove="userControls\Common\list.png" />
-    <None Remove="userControls\Common\new.png" />
-    <None Remove="userControls\Common\nexr.png" />
-    <None Remove="userControls\Common\print.png" />
-    <None Remove="userControls\Common\remove.png" />
-    <None Remove="userControls\Common\save1.png" />
-    <None Remove="v2\Views\News.png" />
-    <None Remove="wins\Building.png" />
-    <None Remove="wins\News.png" />
+    <None Remove="assets\icons\back.png" />
+    <None Remove="assets\icons\Building.png" />
+    <None Remove="assets\icons\list.png" />
+    <None Remove="assets\icons\new.png" />
+    <None Remove="assets\icons\News.png" />
+    <None Remove="assets\icons\nexr.png" />
+    <None Remove="assets\icons\print.png" />
+    <None Remove="assets\icons\remove.png" />
+    <None Remove="assets\icons\Square44x44Logo.scale-400.png" />
+    <None Remove="assets\icons\save1.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,21 +51,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Group of Projects.ico" />
-    <Resource Include="News.png" />
-    <Resource Include="numerator.ico" />
-    <Resource Include="Purchase Order.png" />
-    <Resource Include="report.ico" />
-    <Resource Include="userControls\Common\back.png" />
-    <Resource Include="userControls\Common\list.png" />
-    <Resource Include="userControls\Common\new.png" />
-    <Resource Include="userControls\Common\nexr.png" />
-    <Resource Include="userControls\Common\print.png" />
-    <Resource Include="userControls\Common\remove.png" />
-    <Resource Include="userControls\Common\save1.png" />
-    <Resource Include="v2\Views\News.png" />
-    <Resource Include="wins\Building.png" />
-    <Resource Include="wins\News.png" />
+    <Resource Include="assets\icons\back.png" />
+    <Resource Include="assets\icons\Building.png" />
+    <Resource Include="assets\icons\list.png" />
+    <Resource Include="assets\icons\new.png" />
+    <Resource Include="assets\icons\News.png" />
+    <Resource Include="assets\icons\nexr.png" />
+    <Resource Include="assets\icons\print.png" />
+    <Resource Include="assets\icons\remove.png" />
+    <Resource Include="assets\icons\Square44x44Logo.scale-400.png" />
+    <Resource Include="assets\icons\save1.png" />
   </ItemGroup>
 
   <ItemGroup>

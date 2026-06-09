@@ -33,7 +33,6 @@
 - [x] **Listele güncellendi** — `winMalzemeListesiV2`'ye `typeFilter` parametresi eklendi, Kumaş Kartı sadece Type=1 gösteriyor
 - [x] **MiniOrm'e QueryFirstOrDefault eklendi** — Parametreli tekil sorgu desteği
 
-## 🔄 UC_MalzemeKartiV2 - Renk / Beden Sekmesi
+## ❌ UC_MalzemeKartiV2 - Renk / Beden Sekmesi (İptal)
 
-- [ ] XAML'deki boş `<TabItem Header="Renk / Beden">` içeriği sıfırdan düzenlenecek
-- [ ] Code-behind sıfırlandı (22.05.2026), yeniden yazılacak
+- [x] Boş tab kaldırıldı — ilgili kodlar silindi

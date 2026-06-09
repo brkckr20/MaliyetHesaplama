@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         mc:Ignorable="d"
         xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
-        Title="Yetkilisi Listesi" FontFamily="Bahnschrift" Height="450" Width="450" Icon="/wins/News.png" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
+        Title="Yetkilisi Listesi" FontFamily="Bahnschrift" Height="450" Width="450" Icon="/assets/icons/News.png" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Grid>
         <control:FilterDataGrid
     x:Name="mygrid" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"

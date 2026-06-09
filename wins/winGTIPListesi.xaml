@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
         mc:Ignorable="d"
-        Title="GTIP Tanımları Listesi" Loaded="Window_Loaded" FontFamily="Bahnschrift Light" Height="450" Width="500" Icon="/wins/News.png" WindowStartupLocation="CenterScreen">
+        Title="GTIP Tanımları Listesi" Loaded="Window_Loaded" FontFamily="Bahnschrift Light" Height="450" Width="500" Icon="/assets/icons/News.png" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

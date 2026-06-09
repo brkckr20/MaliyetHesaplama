@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         mc:Ignorable="d"
-        Title="Fasona Gidenler" Height="550" Width="900" Icon="/wins/News.png"
+        Title="Fasona Gidenler" Height="550" Width="900" Icon="/assets/icons/News.png"
                 xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
         WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light"
         Loaded="Window_Loaded">

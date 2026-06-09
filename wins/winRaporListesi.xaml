@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
         mc:Ignorable="d"
-        Title="Rapor Listesi" Height="450" Width="500" Icon="/wins/News.png" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" Loaded="Window_Loaded">
+        Title="Rapor Listesi" Height="450" Width="500" Icon="/assets/icons/News.png" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" Loaded="Window_Loaded">
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

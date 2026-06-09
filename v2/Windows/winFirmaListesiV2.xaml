@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Firma Listesi" Height="450" Width="700" 
         WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" 
-        Loaded="Window_Loaded" Icon="/News.png">
+        Loaded="Window_Loaded" Icon="/assets/icons/News.png">
     <Grid>
         <control:FilterDataGrid FontSize="12"
                                 VerticalContentAlignment="Center" IsReadOnly="True" GridLinesVisibility="All"

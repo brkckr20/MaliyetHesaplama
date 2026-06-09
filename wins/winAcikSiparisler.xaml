@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         mc:Ignorable="d"
         xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
-        Title="Açık Siparişler" Height="550" Width="900" Icon="/wins/News.png"
+        Title="Açık Siparişler" Height="550" Width="900" Icon="/assets/icons/News.png"
         WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light"
         Loaded="Window_Loaded">
     <Grid>

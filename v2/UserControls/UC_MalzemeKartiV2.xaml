@@ -87,9 +87,6 @@
                     </DockPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Renk / Beden">
-                
-            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

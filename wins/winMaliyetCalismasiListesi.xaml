@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
         mc:Ignorable="d"
-        Title="Maliyet Çalışmaları Listesi" Height="450" Width="800" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" Loaded="Window_Loaded" Icon="/wins/News.png">
+        Title="Maliyet Çalışmaları Listesi" Height="450" Width="800" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" Loaded="Window_Loaded" Icon="/assets/icons/News.png">
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition/>

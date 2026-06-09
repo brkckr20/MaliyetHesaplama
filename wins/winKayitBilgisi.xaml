@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Kayıt Bilgisi" Height="150" 
         Width="382" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" 
-        Icon="/wins/News.png"
+        Icon="/assets/icons/News.png"
         Loaded="Window_Loaded" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>

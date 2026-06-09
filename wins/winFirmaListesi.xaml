@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
         mc:Ignorable="d"
-        Title="Firma Listesi" Height="450" Width="700" Icon="/wins/Building.png" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" Loaded="Window_Loaded">
+        Title="Firma Listesi" Height="450" Width="700" Icon="/assets/icons/Building.png" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
         mc:Ignorable="d"
-        Title="Depo Listesi" Height="450" Width="400" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" Loaded="Window_Loaded" Icon="/wins/News.png">
+        Title="Depo Listesi" Height="450" Width="400" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" Loaded="Window_Loaded" Icon="/assets/icons/News.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

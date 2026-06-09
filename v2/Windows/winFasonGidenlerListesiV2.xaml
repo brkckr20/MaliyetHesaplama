@@ -2,7 +2,7 @@
          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
-         Title="Fason Gidenler Listesi" Height="500" Width="900" WindowStartupLocation="CenterScreen" Icon="/News.png"
+         Title="Fason Gidenler Listesi" Height="500" Width="900" WindowStartupLocation="CenterScreen" Icon="/assets/icons/News.png"
          Loaded="Window_Loaded">
     <Grid Margin="5">
         <Grid.RowDefinitions>

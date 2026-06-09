@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         mc:Ignorable="d"
-        Title="Rapor Seçim Ekranı" Height="120" Width="320" Icon="/wins/News.png" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontFamily="Bahnschrift">
+        Title="Rapor Seçim Ekranı" Height="120" Width="320" Icon="/assets/icons/News.png" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontFamily="Bahnschrift">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

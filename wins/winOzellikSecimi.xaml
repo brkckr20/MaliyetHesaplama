@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         mc:Ignorable="d"
-        Title="Özellik Seçimi" Height="450" Width="400" Icon="/wins/News.png" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen">
+        Title="Özellik Seçimi" Height="450" Width="400" Icon="/assets/icons/News.png" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="36"/>

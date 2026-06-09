@@ -26,14 +26,14 @@ namespace MaliyeHesaplama
         private void Ayarlar_Click(object sender, RoutedEventArgs e)
         {
             string title = "Ayarlar";
-            string[] items = { "Üretim Yönetimi Parametreleri", "Numaratör", "Rapor Oluşturma", "GTIP Tanımları" };
+            string[] items = { "Rapor Oluşturma" };
             ShowMegaMenu(title, items);
         }
 
         private void V2_Click(object sender, RoutedEventArgs e)
         {
             string title = "v2 Kartlar";
-            string[] items = { "Kumaş Kartı", "Firma Kartı", "Malzeme Kartı V2", "Depo Kartı V2" };
+            string[] items = { "Firma Kartı", "Malzeme Kartı V2", "Depo Kartı V2" };
             ShowMegaMenu(title, items);
         }
 
@@ -59,14 +59,8 @@ namespace MaliyeHesaplama
                     OpenTab(menuName, new userControls.UC_OnaylamaIslemleri());
 
                 /* Ayarlar */
-                if (menuName == "Üretim Yönetimi Parametreleri")
-                    OpenTab(menuName, new userControls.UC_UretimYonetimiParametreleri());
-                if (menuName == "Numaratör")
-                    OpenTab(menuName, new userControls.UC_Numarator());
                 if (menuName == "Rapor Oluşturma")
                     OpenTab(menuName, new userControls.UC_RaporOlusturma());
-                if (menuName == "GTIP Tanımları")
-                    OpenTab(menuName, new userControls.UC_GTIPTanimlari());
 
                 /* v2 */
                 if (menuName == "Firma Kartı")

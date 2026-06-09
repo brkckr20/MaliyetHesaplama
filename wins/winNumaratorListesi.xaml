@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
-        Title="Numaratör Listesi" Height="450" Width="650" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Icon="/wins/News.png">
+        Title="Numaratör Listesi" Height="450" Width="650" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Icon="/assets/icons/News.png">
     <Grid Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>

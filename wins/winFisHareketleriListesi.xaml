@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
                 xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGrid"
         mc:Ignorable="d"
-        Title="İşlem Listesi" Height="450" Width="800" WindowStartupLocation="CenterScreen" Icon="/wins/News.png" Loaded="Window_Loaded">
+        Title="İşlem Listesi" Height="450" Width="800" WindowStartupLocation="CenterScreen" Icon="/assets/icons/News.png" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

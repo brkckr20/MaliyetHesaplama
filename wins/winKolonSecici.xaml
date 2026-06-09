@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaliyeHesaplama.wins"
         mc:Ignorable="d"
-        Title="Kolon Seçicisi" Height="450" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/wins/News.png">
+        Title="Kolon Seçicisi" Height="450" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/assets/icons/News.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height=" *"/>
