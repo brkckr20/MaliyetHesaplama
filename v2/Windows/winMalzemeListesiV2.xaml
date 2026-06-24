@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Malzeme Listesi" Height="450" Width="700" 
         WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift Light" 
-        Loaded="Window_Loaded" Icon="/v2/Views/assets/icons/News.png">
+        Loaded="Window_Loaded" Icon="/assets/icons/News.png">
     <Grid>
         <control:FilterDataGrid Grid.Column="0" FontSize="12"
                         VerticalContentAlignment="Center" IsReadOnly="True" GridLinesVisibility="All"
