@@ -8,9 +8,8 @@ using System.Windows.Data;
 
 namespace MaliyeHesaplama.userControls
 {
-    class ReceiptVM // sadece bu alanları göstermek için ViewModel - başka bir yerde kullanılmıyor
+    class ReceiptVM
     {
-        [Display(Name = "Kayıt No")]
         public int Id { get; set; }
         [Display(Name = "Fiş No")]
         public string ReceiptNo { get; set; }
@@ -26,6 +25,7 @@ namespace MaliyeHesaplama.userControls
         public decimal NetMeter { get; set; }
         [Display(Name = "Fiş Tipi Adı")]
         public string ReceiptTypeName { get; set; }
+        public int ReceiptType { get; set; }
     }
     public partial class UC_OnaylamaIslemleri : System.Windows.Controls.UserControl
     {
@@ -77,7 +77,7 @@ namespace MaliyeHesaplama.userControls
 
         private void gridSip_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            var hiddenColumns = new[] { "Id" };
+            var hiddenColumns = new[] { "Id", "ReceiptType" };
             fgh1.GridGeneratingColumn(e, gridSip, hiddenColumns);
         }
 
@@ -94,30 +94,32 @@ namespace MaliyeHesaplama.userControls
         }
         void LoadGridData(FilterDataGrid.FilterDataGrid grid)
         {
-            var companies = _orm.GetAll<Company>("Company")
-                    .ToDictionary(c => c.Id, c => c.CompanyName);
-            var wh = _orm.GetAll<WareHouse>("WareHouse")
-                    .ToDictionary(c => c.Id, c => c.Name);
-            var items = _orm.GetAll<ReceiptItem>("ReceiptItem");
-            var totals = items
-                        .GroupBy(i => i.ReceiptId)
-                        .ToDictionary(g => g.Key, g => g.Sum(i => i.NetMeter));
+            var sql = @"SELECT 
+    R.Id, R.ReceiptNo, R.ReceiptDate, R.Approved, R.ReceiptType,
+    ISNULL(C.CompanyName, '') AS CompanyName,
+    ISNULL(W.Name, '') AS WarehouseName,
+    ISNULL(T.NetMeter, 0) AS NetMeter
+FROM Receipt R
+LEFT JOIN Company C ON C.Id = R.CompanyId
+LEFT JOIN WareHouse W ON W.Id = R.WareHouseId
+LEFT JOIN (
+    SELECT ReceiptId, SUM(NetMeter) AS NetMeter
+    FROM ReceiptItem
+    GROUP BY ReceiptId
+) T ON T.ReceiptId = R.Id
+WHERE R.ReceiptType = @ReceiptType AND R.Approved = @Approved
+ORDER BY R.Id";
 
-            var data = (from r in _orm.GetAll<Receipt>("Receipt")
-                        where r.ReceiptType == (int)Enums.Receipt.Siparis && r.Approved == approvedFilter
-                        join ri in _orm.GetAll<ReceiptItem>("ReceiptItem")
-                            on r.Id equals ri.ReceiptId into receiptItems
-                        select new ReceiptVM
-                        {
-                            Id = r.Id,
-                            ReceiptNo = r.ReceiptNo,
-                            ReceiptDate = r.ReceiptDate,
-                            CompanyName = companies.ContainsKey(r.CompanyId) ? companies[r.CompanyId] : "",
-                            WarehouseName = wh.ContainsKey(r.WareHouseId) ? wh[r.WareHouseId] : "",
-                            Approved = r.Approved ? "Evet" : "Hayır",
-                            NetMeter = receiptItems.Sum(x => x.NetMeter),
-                            ReceiptTypeName = MainHelper.GetEnumDisplayName((Enums.Receipt)r.ReceiptType)
-                        }).ToList();
+            var data = _orm.Query<ReceiptVM>(sql, new
+            {
+                ReceiptType = (int)Enums.Receipt.Siparis,
+                Approved = approvedFilter
+            }).Select(r =>
+            {
+                r.ReceiptTypeName = MainHelper.GetEnumDisplayName((Enums.Receipt)r.ReceiptType);
+                r.Approved = r.Approved == "True" ? "Evet" : "Hayır";
+                return r;
+            }).ToList();
 
             _collectionView = CollectionViewSource.GetDefaultView(data);
             grid.ItemsSource = _collectionView;

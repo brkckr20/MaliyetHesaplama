@@ -622,6 +622,11 @@ VALUES (@StockId, @ReceiptId, @ReceiptItemId, @MaterialId, @WareHouseId, @Varian
         return _connection.Query<T>(sql);
     }
 
+    public IEnumerable<T> Query<T>(string sql, object parameters = null)
+    {
+        return _connection.Query<T>(sql, parameters);
+    }
+
     public T QueryFirstOrDefault<T>(string sql, object parameters = null)
     {
         return _connection.QueryFirstOrDefault<T>(sql, parameters);
