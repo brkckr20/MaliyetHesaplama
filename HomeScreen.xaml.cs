@@ -17,12 +17,6 @@ namespace MaliyeHesaplama
         private string _currentMainMenu = null;
         private bool _isDraggingFromMaximized = false;
         private System.Drawing.Point _restoreMousePosition;
-        private void UretimYonetimi_Click(object sender, RoutedEventArgs e)
-        {
-            string title = "Üretim Yönetimi";
-            string[] items = { "Maliyet Hesaplama", "Sipariş Girişi", "Üretim Girişi", "Onaylama İşlemleri" };
-            ShowMegaMenu(title, items);
-        }
         private void Ayarlar_Click(object sender, RoutedEventArgs e)
         {
             string title = "Ayarlar";

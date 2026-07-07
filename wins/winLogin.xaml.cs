@@ -58,7 +58,6 @@ namespace MaliyeHesaplama.wins
         }
         void KullanicilariGetir()
         {
-            //_orm.TestQuery();
             var list = _orm.GetAll<User>("Users")
                 .Select(x => new
                 {

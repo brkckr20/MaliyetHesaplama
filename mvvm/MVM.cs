@@ -13,14 +13,14 @@ namespace MaliyeHesaplama.mvvm
     public class MVM : IPageCommands
     {
         public ObservableCollection<ReceiptItem> ReceiptItems { get; } = new ObservableCollection<ReceiptItem>();
-        public RelayyCommand SelectMaterialCommand { get; }
+        public RelayCommand<object> SelectMaterialCommand { get; }
         public ICommand SaveCommand { get; }
 
         public models.Receipt Receipt { get; set; } = new();
         public MVM()
         {
             ReceiptItems = new ObservableCollection<ReceiptItem>();
-            SelectMaterialCommand = new RelayyCommand(OpenMaterialSelectionExecute);
+            SelectMaterialCommand = new RelayCommand<object>(OpenMaterialSelectionExecute);
             SaveCommand = new RelayCommand(SaveToDatabase);
         }
         private void OpenMaterialSelectionExecute(object param)

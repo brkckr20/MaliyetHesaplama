@@ -242,11 +242,7 @@ namespace MaliyeHesaplama.wins
                     _orm.Save("ColumnSelector", data);
                 }
 
-                //if (showMessage)
-                //{
-                //    MessageBox.Show("Kolon ayarları başarıyla kaydedildi!", "Bilgi",
-                //        MessageBoxButton.OK, MessageBoxImage.Information);
-                //}
+
             }
             catch (System.Exception ex)
             {

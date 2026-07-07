@@ -1,19 +1,10 @@
 ﻿using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MaliyeHesaplama.wins
 {
@@ -25,11 +16,9 @@ namespace MaliyeHesaplama.wins
         public string Kodu, Adi;
         public bool SecimYapildi = false, Kullanimda;
 
-        //private List<ColumnSetting> columnSettings;
         private const string SCREEN_NAME = "Depo Listesi";
         private const string GRID_NAME = "gridDepo";
         private int currentUserId = Properties.Settings.Default.RememberUserId;
-        //private winKolonAyarlari ayarlarWindow;
         FilterGridHelpers fgh;
         public winDepoListesi()
         {

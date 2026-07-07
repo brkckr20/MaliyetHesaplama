@@ -177,8 +177,7 @@
             <Border Background="#212121" Grid.Column="0" Panel.ZIndex="10" Padding="16,0">
                 <StackPanel>
                     <TextBlock Text="Menü" Foreground="White" FontSize="16" Margin="0,8,0,4"/>
-                    <!--<Button Content="🧣 Üretim Yönetimi" Style="{StaticResource MenuButtonStyle}" Click="UretimYonetimi_Click"/>-->
-                    <!--<Border Height="1" Background="#444" Margin="0,8"/>-->
+
                     <Button Content="🚀 v2 Kartlar" Style="{StaticResource MenuButtonStyle}" Click="V2_Click"/>
                     <Button Content="📦 Malzeme Yönetimi v2" Style="{StaticResource MenuButtonStyle}" Click="MalzemeYonetimiV2_Click"/>
                     <Button Content="⚙️ Ayarlar" Style="{StaticResource MenuButtonStyle}" Click="Ayarlar_Click"/>

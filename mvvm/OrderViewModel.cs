@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Drawing.Charts;
-using MaliyeHesaplama.models;
+﻿using MaliyeHesaplama.models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;

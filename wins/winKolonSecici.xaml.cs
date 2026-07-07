@@ -103,7 +103,6 @@ namespace MaliyeHesaplama.wins
                     }
                 }
             }
-            //this.DialogResult = true;
             this.Close();
         }
     }

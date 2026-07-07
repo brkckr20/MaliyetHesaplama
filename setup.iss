@@ -2,7 +2,7 @@
 ; Derlemek için: iscc setup.iss
 
 #define MyAppName "MaliyeHesaplama"
-#define MyAppVersion "1.1"
+#define MyAppVersion "1.2"
 #define MyAppPublisher "MaliyeHesaplama"
 #define MyAppURL ""
 #define MyAppExeName "MaliyeHesaplama.exe"

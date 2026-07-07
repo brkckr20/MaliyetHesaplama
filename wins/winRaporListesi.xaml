@@ -19,11 +19,7 @@
                         AutoGenerateColumns="True" AutoGeneratingColumn="grid_AutoGeneratingColumn"
                         x:Name="grid" MouseDoubleClick="sfDataGrid_MouseDoubleClick"
                         >
-            <!--<control:FilterDataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Kolon Seçicisi" Click="MenuItem_Click"/>
-                </ContextMenu>
-            </control:FilterDataGrid.ContextMenu>-->
+
         </control:FilterDataGrid>
     </Grid>
 </Window>

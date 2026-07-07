@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
-using MaliyeHesaplama.models;
+﻿using MaliyeHesaplama.models;
 using MaliyeHesaplama.wins;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;

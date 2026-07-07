@@ -1,4 +1,3 @@
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using MaliyeHesaplama.helpers;
 using MaliyeHesaplama.Interfaces;
 using MaliyeHesaplama.v2.Data;
@@ -19,7 +18,6 @@ namespace MaliyeHesaplama.v2.UserControls
     public partial class UC_MalzemeFisV2 : System.Windows.Controls.UserControl, IPageCommands
     {
         private readonly ReceiptRepository _receiptRepo;
-        //private readonly ReceiptLogRepository _receiptLogRepo;
         private readonly InventoryRepository _materialRepo;
         private readonly WarehouseRepository _warehouseRepo;
         private readonly CompanyRepository _companyRepo;
@@ -48,8 +46,6 @@ private int _depoId = 0;
                 ? Visibility.Visible
                 : Visibility.Collapsed;
             _receiptRepo = new ReceiptRepository();
-           // _receiptLogRepo = new ReceiptLogRepository();
-            //_stockRepo = new StockRepository();
             _materialRepo = new InventoryRepository();
             _warehouseRepo = new WarehouseRepository();
             _companyRepo = new CompanyRepository();
@@ -626,28 +622,7 @@ public void Yeni()
                 };
                 var itemId = _receiptRepo.SaveItem(itemData);
 
-                if (item.OperationType != hizmetTipi)
-                {
-                    var operation = item.Id > 0 ? "Güncelleme" : "Yeni Kayıt";
 
-                    var logData = new Dictionary<string, object>
-                    {
-                        { "Id", 0 },
-                        { "WareHouseId", _depoId },
-                        { "ReceiptType", (int)FisTipi },
-                        { "ReceiptId", _currentId },
-                        { "ReceiptItemId", itemId },
-                        { "InventoryId", item.InventoryId },
-                        { "Operation", operation },
-                        { "OperationDate", DateTime.Now },
-                        { "CompanyId", _firmaId },
-                        { "GrossKg", item.GrossWeight ?? 0 },
-                        { "GrossMeter", item.GrossMeter ?? 0 },
-                        { "NetKg", item.NetWeight },
-                        { "NetMeter", item.NetMeter },
-                        { "Piece", item.Piece }
-                    };
-                }
             }
 
             MessageBox.Show("Kaydedildi!", "Başarılı", MessageBoxButton.OK, MessageBoxImage.Information);

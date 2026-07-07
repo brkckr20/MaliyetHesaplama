@@ -6,7 +6,6 @@ namespace MaliyeHesaplama.userControls.Common
 {
     public partial class ButtonBar : System.Windows.Controls.UserControl
     {
-        public IPageCommands CommandTarget { get; set; }
         public IPageCommands PageCommands { get; set; }
 
         public ButtonBar()
@@ -76,12 +75,6 @@ namespace MaliyeHesaplama.userControls.Common
             get => btnYazdir.IsEnabled;
             set => btnYazdir.IsEnabled = value;
         }
-        //private void Yeni_Click(object sender, RoutedEventArgs e) => CommandTarget?.Yeni();
-        //private void Kaydet_Click(object sender, RoutedEventArgs e) => CommandTarget?.Kaydet();
-        //private void Sil_Click(object sender, RoutedEventArgs e) => CommandTarget?.Sil();
-        //private void Yazdir_Click(object sender, RoutedEventArgs e) => CommandTarget?.Yazdir();
-        //private void Geri_Click(object sender, RoutedEventArgs e) => CommandTarget?.Geri();
-        //private void Ileri_Click(object sender, RoutedEventArgs e) => CommandTarget?.Ileri();
-        //private void Listele_Click(object sender, RoutedEventArgs e) => CommandTarget?.Listele();
+
     }
 }

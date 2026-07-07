@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using MaliyeHesaplama.models;
+﻿using MaliyeHesaplama.models;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -119,11 +118,7 @@ namespace MaliyeHesaplama.wins
                     _orm.Save("ColumnSelector", data);
                 }
 
-                //if (showMessage)
-                //{
-                //    MessageBox.Show("Kolon ayarları başarıyla kaydedildi!", "Bilgi",
-                //        MessageBoxButton.OK, MessageBoxImage.Information);
-                //}
+
             }
             catch (System.Exception ex)
             {

@@ -122,45 +122,6 @@ namespace MaliyeHesaplama.v2.Windows
 
         private void btnSec_Click(object sender, RoutedEventArgs e)
         {
-            //if (grid.SelectedItem != null)
-            //{
-            //    dynamic record = grid.SelectedItem;
-            //    this.SecimYapildi = true;
-            //    this.Id = record.Id;
-            //    this.ReceiptNo = record.ReceiptNo;
-            //    this.ReceiptDate = record.ReceiptDate;
-            //    this.CompanyId = record.CompanyId;
-            //    this.CompanyName = record.CompanyName;
-            //    this.CompanyCode = record.CompanyCode;
-            //    this.Authorized = record.Authorized;
-            //    this.DuaDate = record.DuaDate;
-            //    this.Maturity = record.Maturity;
-            //    this.CustomerOrderNo = record.CustomerOrderNo;
-            //    this.Explanation = record.Explanation;
-            //    this.WareHouseId = record.WareHouseId;
-            //    this.WareHouseCode = record.WareHouseCode;
-            //    this.WareHouseName = record.WareHouseName;
-            //    this.OrderNo = record.OrderNo;
-            //    this.Approved = record.Approved;
-            //    this.InventoryId = record.InventoryId;
-            //    this.InventoryCode = record.InventoryCode;
-            //    this.InventoryName = record.InventoryName;
-            //    this.ReceiptItemId = record.ReceiptItemId;
-            //    this.NetMeter = record.NetMeter;
-            //    this.NetWeight = record.NetWeight;
-            //    this.Piece = record.Piece;
-            //    this.UnitPrice = record.UnitPrice;
-            //    this.Vat = record.Vat;
-            //    this.RowAmount = record.RowAmount;
-            //    this.RowExplanation = record.RowExplanation;
-            //    this.TrackingNumber = record.TrackingNumber;
-            //    this.Receiver = record.Receiver;
-            //    this.DocumentName = record.DocumentName;
-            //    this.InvoiceNo = record.InvoiceNo;
-            //    this.SecilenId = Id;
-            //    this.DialogResult = true;
-            //    this.Close();
-            //}
         }
 
         private void btnIptal_Click(object sender, RoutedEventArgs e)
